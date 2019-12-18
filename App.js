@@ -8,9 +8,9 @@
 
 import React from 'react'
 import { SafeAreaView, StatusBar } from 'react-native'
-import NavigationRoutes from './src/navigation'
+import NavigationRoutes from 'navigation'
 
-const App: () => React$Node = () => {
+export default function App(): React$Node {
   const container = {
     flex: 1,
   }
@@ -24,5 +24,3 @@ const App: () => React$Node = () => {
     </>
   )
 }
-
-export default App

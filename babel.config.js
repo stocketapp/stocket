@@ -4,12 +4,13 @@ module.exports = {
     [
       'module-resolver',
       {
-        root: ['./src/'],
+        cwd: 'babelrc',
         alias: {
-          views: './views',
-          components: './components',
-          utils: './utils',
-          navigation: './navigation',
+          stocket: './',
+          views: './src/views',
+          components: './src/components',
+          utils: './src/utils',
+          navigation: './src/navigation',
           // hooks: './hooks',
         },
       },
