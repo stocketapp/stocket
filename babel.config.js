@@ -4,11 +4,12 @@ module.exports = {
     [
       'module-resolver',
       {
-        views: './src/views',
-        components: './src/components',
-        utils: './src/utils',
-        navigation: './src/navigation',
-        // hooks: './src/hooks',
+        root: ['./src/'],
+        views: './views',
+        components: './components',
+        utils: './utils',
+        navigation: './navigation',
+        // hooks: './hooks',
       },
     ],
   ],
