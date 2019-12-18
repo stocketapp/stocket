@@ -1,0 +1,5 @@
+export const GREEN = '#8cd782'
+export const GRAY = '#ebebeb'
+export const BLACK = '#222222'
+export const PURPLE_DARK = '#261c3f'
+export const NAVY = '#1e2d3f'
