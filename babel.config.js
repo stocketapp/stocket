@@ -5,11 +5,13 @@ module.exports = {
       'module-resolver',
       {
         root: ['./src/'],
-        views: './views',
-        components: './components',
-        utils: './utils',
-        navigation: './navigation',
-        // hooks: './hooks',
+        alias: {
+          views: './views',
+          components: './components',
+          utils: './utils',
+          navigation: './navigation',
+          // hooks: './hooks',
+        },
       },
     ],
   ],

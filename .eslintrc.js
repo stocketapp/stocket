@@ -2,6 +2,7 @@ module.exports = {
   root: true,
   extends: '@react-native-community',
   rules: {
-    semi: 'off'
+    semi: 'off',
+    'no-bracket-spacing': 'off'
   }
 };
