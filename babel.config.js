@@ -11,7 +11,7 @@ module.exports = {
           components: './src/components',
           utils: './src/utils',
           navigation: './src/navigation',
-          // hooks: './hooks',
+          'stocket-hooks': './src/hooks',
         },
       },
     ],
