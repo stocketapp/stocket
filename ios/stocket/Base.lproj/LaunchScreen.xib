@@ -12,18 +12,18 @@
             <rect key="frame" x="0.0" y="0.0" width="871" height="1454"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Image" translatesAutoresizingMaskIntoConstraints="NO" id="2Kk-uk-RCB">
-                    <rect key="frame" x="285.66666666666669" y="502" width="300.00000000000028" height="450"/>
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="BootSplashLogo" translatesAutoresizingMaskIntoConstraints="NO" id="Nf2-QK-SeH">
+                    <rect key="frame" x="375.66666666666669" y="649.66666666666663" width="120" height="155"/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="300" id="ImD-Ld-2C5"/>
-                        <constraint firstAttribute="height" constant="450" id="XHj-rN-zs9"/>
+                        <constraint firstAttribute="width" constant="120" id="d09-PD-oFt"/>
+                        <constraint firstAttribute="height" constant="155" id="qk6-gU-gcD"/>
                     </constraints>
                 </imageView>
             </subviews>
             <color key="backgroundColor" red="0.13333333333333333" green="0.13333333333333333" blue="0.13333333333333333" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
-                <constraint firstItem="2Kk-uk-RCB" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="1Ua-7a-HWD"/>
-                <constraint firstItem="2Kk-uk-RCB" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="8Dx-VY-XUi"/>
+                <constraint firstItem="Nf2-QK-SeH" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="inW-sc-Pw9"/>
+                <constraint firstItem="Nf2-QK-SeH" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="yFY-G6-V83"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
@@ -31,6 +31,6 @@
         </view>
     </objects>
     <resources>
-        <image name="Image" width="1236.3333740234375" height="1666.6666259765625"/>
+        <image name="BootSplashLogo" width="100" height="135"/>
     </resources>
 </document>

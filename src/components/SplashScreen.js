@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react'
 import { View, Text } from 'react-native'
 import { useSelector } from 'react-redux'
+import RNBootSplash from 'react-native-bootsplash'
 
 export default function SplashScreen({ navigation }) {
   const { isAuth } = useSelector(({ user }) => user)
@@ -12,13 +13,17 @@ export default function SplashScreen({ navigation }) {
   }
 
   useEffect(() => {
-    console.log(isAuth)
-    const timer = setTimeout(() => {
+    async function redirect() {
       navigation.navigate(!isAuth ? 'AuthStack' : 'MainStack')
-    }, 2000)
+    }
+    console.log(isAuth)
 
-    return () => clearTimeout(timer)
-  }, [isAuth])
+    redirect().finally(() => RNBootSplash.hide({ duration: 250 }))
+    // const timer = setTimeout(() => {
+    // }, 2000)
+
+    // return () => clearTimeout(timer)
+  }, [isAuth, navigation])
 
   return (
     <View style={container}>

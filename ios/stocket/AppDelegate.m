@@ -10,6 +10,7 @@
 #import <React/RCTBridge.h>
 #import <React/RCTBundleURLProvider.h>
 #import <React/RCTRootView.h>
+#import "RNBootSplash.h"
 @import Firebase;
 
 @implementation AppDelegate
@@ -28,6 +29,7 @@
   rootViewController.view = rootView;
   self.window.rootViewController = rootViewController;
   [self.window makeKeyAndVisible];
+  [RNBootSplash show:@"LaunchScreen" inView:rootView];
   [FIRApp configure];
   return YES;
 }
