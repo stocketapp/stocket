@@ -8,7 +8,7 @@ module.exports = {
         alias: {
           stocket: './',
           views: './src/views',
-          components: './src/components',
+          'stocket-components': './src/components',
           utils: './src/utils',
           navigation: './src/navigation',
           'stocket-hooks': './src/hooks',

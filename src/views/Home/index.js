@@ -1,17 +1,23 @@
 import React, { useEffect } from 'react'
-import { View, Text } from 'react-native'
+import { View, Text, StyleSheet } from 'react-native'
 import { useSelector } from 'react-redux'
+import { BLACK } from 'utils/colors'
+import { Balance, BalanceGraph, PortfolioList } from 'stocket-components'
 
 export default function Home() {
-  const container = {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  }
-
   return (
-    <View style={container}>
-      <Text>Home</Text>
+    <View style={styles.container}>
+      <Balance />
+      <BalanceGraph />
+      <PortfolioList />
     </View>
   )
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    paddingTop: 20,
+    backgroundColor: BLACK,
+  },
+})
