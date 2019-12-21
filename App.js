@@ -7,11 +7,12 @@
  */
 
 import React, { useEffect } from 'react'
-import { SafeAreaView, StatusBar } from 'react-native'
+import { SafeAreaView, StatusBar, View } from 'react-native'
 import switchNavigator from 'navigation'
 import { useAuthState } from 'stocket-hooks'
 import { createAppContainer } from 'react-navigation'
 import RNBootSplash from 'react-native-bootsplash'
+import { BLACK } from 'utils/colors'
 
 export default function App(): React$Node {
   const { isAuth } = useAuthState()
@@ -25,13 +26,17 @@ export default function App(): React$Node {
 
   const container = {
     flex: 1,
+    backgroundColor: BLACK,
+    paddingHorizontal: 16,
   }
 
   return (
     <>
-      <StatusBar barStyle="dark-content" />
+      <StatusBar barStyle="light-content" />
       <SafeAreaView style={container}>
-        <NavigationRoutes />
+        <View style={container}>
+          <NavigationRoutes />
+        </View>
       </SafeAreaView>
     </>
   )

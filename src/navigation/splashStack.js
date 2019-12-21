@@ -1,5 +1,5 @@
 import { createStackNavigator } from 'react-navigation-stack'
-import SplashScreen from 'components/SplashScreen'
+import { SplashScreen } from 'stocket-components'
 
 export default createStackNavigator(
   {
