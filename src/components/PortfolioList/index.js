@@ -1,15 +1,16 @@
 import React, { useMemo } from 'react'
 import { View, FlatList, StyleSheet } from 'react-native'
+import { useSelector } from 'react-redux'
 import Text from '../Text'
 import PortfolioItem from './PortfolioItem'
 import PortfolioEmpty from './PortfolioEmpty'
-import { useSelector } from 'react-redux'
+import Container from '../Container'
 
 export default function PortfolioList() {
   const { portfolioData } = useSelector(({ portfolio }) => portfolio)
 
   return (
-    <View style={styles.container}>
+    <Container style={styles.container}>
       <Text type="title" style={styles.title}>
         Portfolio
       </Text>
@@ -22,14 +23,13 @@ export default function PortfolioList() {
           renderItem={({ item }) => <PortfolioItem portfolio={item} />}
         />
       )}
-    </View>
+    </Container>
   )
 }
 
 const styles = StyleSheet.create({
   container: {
     marginTop: 40,
-    paddingHorizontal: 20,
   },
   title: {
     marginBottom: 10,

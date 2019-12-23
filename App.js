@@ -27,16 +27,13 @@ export default function App(): React$Node {
   const container = {
     flex: 1,
     backgroundColor: BLACK,
-    paddingHorizontal: 16,
   }
 
   return (
     <>
       <StatusBar barStyle="light-content" />
       <SafeAreaView style={container}>
-        <View style={container}>
-          <NavigationRoutes />
-        </View>
+        <NavigationRoutes />
       </SafeAreaView>
     </>
   )
