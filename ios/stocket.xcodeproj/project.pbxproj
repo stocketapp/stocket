@@ -18,6 +18,8 @@
 		2DCD954D1E0B4F2C00145EB5 /* stocketTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* stocketTests.m */; };
 		2E89AA8A2320590A08197597 /* libPods-stocket.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7312D136DA091DCF2D58CC64 /* libPods-stocket.a */; };
 		AEBB66F5F784A7D07ABA8447 /* libPods-stocket-dev.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AF067DA840C9079E01BFA6E /* libPods-stocket-dev.a */; };
+		BA11394323B0F1090076AE78 /* AppCenter-Config.plist in Resources */ = {isa = PBXBuildFile; fileRef = BA11394223B0F1090076AE78 /* AppCenter-Config.plist */; };
+		BA11394423B0F1090076AE78 /* AppCenter-Config.plist in Resources */ = {isa = PBXBuildFile; fileRef = BA11394223B0F1090076AE78 /* AppCenter-Config.plist */; };
 		BA3D549223AA4466006651B4 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = BA3D549123AA4466006651B4 /* GoogleService-Info.plist */; };
 		BA3D54A923AA45B1006651B4 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
 		BA3D54AA23AA45B1006651B4 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
@@ -61,6 +63,7 @@
 		3AF067DA840C9079E01BFA6E /* libPods-stocket-dev.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-stocket-dev.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5A43A371B72A109464F9373C /* Pods-stocket.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-stocket.debug.xcconfig"; path = "Target Support Files/Pods-stocket/Pods-stocket.debug.xcconfig"; sourceTree = "<group>"; };
 		7312D136DA091DCF2D58CC64 /* libPods-stocket.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-stocket.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		BA11394223B0F1090076AE78 /* AppCenter-Config.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "AppCenter-Config.plist"; sourceTree = "<group>"; };
 		BA3D549123AA4466006651B4 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		BA3D54B523AA45B1006651B4 /* stocket-dev.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "stocket-dev.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BA3D54B623AA45B1006651B4 /* stocket-dev-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "stocket-dev-Info.plist"; path = "/Users/henry/Projects/stocket/ios/stocket-dev-Info.plist"; sourceTree = "<absolute>"; };
@@ -179,6 +182,7 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
+				BA11394223B0F1090076AE78 /* AppCenter-Config.plist */,
 				BABC5FA523AA5DB3002A831D /* stocket-dev.entitlements */,
 				13B07FAE1A68108700A75B9A /* stocket */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
@@ -395,6 +399,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
+				BA11394323B0F1090076AE78 /* AppCenter-Config.plist in Resources */,
 				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
 				BA3D549223AA4466006651B4 /* GoogleService-Info.plist in Resources */,
 			);
@@ -420,6 +425,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BA3D54AE23AA45B1006651B4 /* Images.xcassets in Resources */,
+				BA11394423B0F1090076AE78 /* AppCenter-Config.plist in Resources */,
 				BA3D54AF23AA45B1006651B4 /* LaunchScreen.xib in Resources */,
 				BA3D54BA23AA492D006651B4 /* GoogleService-Info.plist in Resources */,
 			);
