@@ -19,6 +19,7 @@ const Text = ({
   positive = false,
   negative = false,
   children,
+  style,
   ...props
 }: TextProps) => {
   const selectFontSize = () => {
@@ -36,33 +37,19 @@ const Text = ({
     }
   }
 
-  const selectStatus = () => {
-    if (positive) {
-      return GREEN
-    } else if (negative) {
-      return '#eb455a'
-    } else {
-      return color
-    }
-  }
-
   const statusColor = (positive && GREEN) || (negative && '#eb455a')
-  const style = {
+  const customStyle = {
     fontFamily: 'Futura',
     fontSize: selectFontSize(),
-    color: !statusColor ? color : statusColor,
     ...(cap && {
       textTransform: 'capitalize',
       letterSpacing: 0.3,
     }),
-    ...props.style,
+    ...style,
+    color: !statusColor ? color : statusColor,
   }
 
-  return (
-    <RNText style={style} {...props}>
-      {children}
-    </RNText>
-  )
+  return <RNText style={customStyle}>{children}</RNText>
 }
 
 export default Text
