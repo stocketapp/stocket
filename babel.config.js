@@ -12,6 +12,7 @@ module.exports = {
           utils: './src/utils',
           navigation: './src/navigation',
           'stocket-hooks': './src/hooks',
+          'stocket-api': './src/api',
         },
       },
     ],
