@@ -21,6 +21,7 @@
     "react-native-bootsplash": "^1.2.1",
     "react-native-gesture-handler": "^1.5.2",
     "react-native-reanimated": "^1.4.0",
+    "react-native-svg": "^9.13.6",
     "react-navigation": "^4.0.10",
     "react-navigation-stack": "^1.10.3",
     "react-redux": "^7.1.3",
