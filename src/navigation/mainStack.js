@@ -1,11 +1,22 @@
 import { createStackNavigator } from 'react-navigation-stack'
 import Home from 'views/Home'
+import Trade from 'views/Trade'
+import { BLACK } from 'utils/colors'
 
 export default createStackNavigator(
   {
-    screen: Home,
+    Home: {
+      screen: Home,
+    },
+    Trade: {
+      screen: Trade,
+    },
   },
   {
+    initialRouteName: 'Trade',
+    cardStyle: {
+      backgroundColor: BLACK,
+    },
     defaultNavigationOptions: {
       header: null,
     },

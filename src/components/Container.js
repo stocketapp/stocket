@@ -1,13 +1,7 @@
 // @flow
 import React from 'react'
 import { View } from 'react-native'
-
-type ContainerProps = {
-  children: React$Node,
-  style?: View.propTypes.style,
-  justifyContent?: 'center' | 'flex-start' | 'flex-end' | 'space-between',
-  alignItems?: 'center' | 'flex-start' | 'flex-end',
-}
+import type { ContainerProps } from './Types'
 
 export default function Container(props: ContainerProps): React$Node {
   const {
@@ -15,11 +9,16 @@ export default function Container(props: ContainerProps): React$Node {
     style,
     justifyContent = 'flex-start',
     alignItems = 'flex-start',
+    horizontal = false,
+    separate = false,
+    noPh = false,
   } = props
   const defaultStyles = {
-    paddingHorizontal: 20,
-    justifyContent,
+    width: '100%',
+    paddingHorizontal: noPh ? 0 : 20,
+    justifyContent: separate ? 'space-between' : justifyContent,
     alignItems,
+    flexDirection: horizontal ? 'row' : 'column',
   }
 
   return <View style={[defaultStyles, style]}>{children}</View>

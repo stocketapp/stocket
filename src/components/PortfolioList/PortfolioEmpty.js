@@ -2,16 +2,20 @@ import React from 'react'
 import { View, TouchableOpacity } from 'react-native'
 import Text from '../Text'
 import { BLUE } from 'utils/colors'
+import { useNavigation } from 'stocket-hooks'
 
-const PortfolioEmpty = () => (
-  <View style={styles.container}>
-    <Text cap>Portfolio is empty</Text>
+export default function PortfolioEmpty() {
+  const { navigate } = useNavigation()
+  return (
+    <View style={styles.container}>
+      <Text cap>Portfolio is empty</Text>
 
-    <TouchableOpacity style={styles.btn}>
-      <Text>Start Trading</Text>
-    </TouchableOpacity>
-  </View>
-)
+      <TouchableOpacity style={styles.btn} onPress={() => navigate('Trade')}>
+        <Text>Start Trading</Text>
+      </TouchableOpacity>
+    </View>
+  )
+}
 
 const styles = {
   container: {
@@ -28,5 +32,3 @@ const styles = {
     marginTop: 20,
   },
 }
-
-export default PortfolioEmpty

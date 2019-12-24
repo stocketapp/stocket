@@ -2,15 +2,7 @@
 import React from 'react'
 import { Text as RNText } from 'react-native'
 import { GREEN } from 'utils/colors'
-
-type TextProps = {
-  type?: string,
-  cap?: boolean,
-  color?: string,
-  positive?: boolean,
-  negative?: boolean,
-  children?: Text.propTypes.children,
-}
+import type { TextProps } from 'ComponentsTypes'
 
 const Text = ({
   type,
