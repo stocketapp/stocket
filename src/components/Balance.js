@@ -1,9 +1,10 @@
+// @flow
 import React from 'react'
 import { GRAY_DARKER } from 'utils/colors'
 import Text from './Text'
 import Container from './Container'
 
-const Balance = () => (
+const Balance = (): React$Node => (
   <Container>
     <Text color={GRAY_DARKER} type="subtitle">
       Balance
