@@ -33,4 +33,11 @@ export type TradeInfoProps = {
     name: string,
     price: string,
   } | null,
+  loading: boolean,
+}
+
+export type SearchSymbolsProps = {
+  value: string,
+  setvalue: () => void,
+  onSearch: () => void,
 }

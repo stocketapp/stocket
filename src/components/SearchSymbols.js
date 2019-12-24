@@ -1,59 +1,27 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { View, TextInput, StyleSheet, TouchableOpacity } from 'react-native'
-import { useDebounce } from 'stocket-hooks'
-import { getStock } from 'stocket-api'
-import { Container, Text } from 'stocket-components'
+import Container from './Container'
 import { SearchIcon } from 'stocket-icons'
+import type { SearchSymbolProps } from 'ComponentsTypes'
 
-export default function SearchSymbol() {
-  const [search, setSearch] = useState('')
-  const [data, setData] = useState(null)
-  const [loading, setLoading] = useState(false)
-
-  const getStockData = async () => {
-    try {
-      if (search) {
-        setLoading(true)
-        const res = await getStock(search)
-        setData(res[0])
-      }
-    } catch (err) {
-      console.log(err)
-    } finally {
-      setLoading(false)
-    }
-  }
-
+const SearchSymbol = (props: SearchSymbolProps): React$Node => {
+  const { value, setValue, onSearch } = props
   return (
     <Container noPh>
       <View style={styles.searchContainer}>
         <TextInput
-          value={search}
-          onChangeText={setSearch}
+          value={value}
+          onChangeText={setValue}
           style={styles.searchInput}
           placeholder="Symbol e.g AAPL"
           placeholderTextColor="#afafaf"
           autoCapitalize="characters"
         />
 
-        <TouchableOpacity style={styles.searchBtn} onPress={getStockData}>
+        <TouchableOpacity style={styles.searchBtn} onPress={onSearch}>
           <SearchIcon size={30} />
         </TouchableOpacity>
       </View>
-
-      {loading && <Text>Loading...</Text>}
-
-      {data && (
-        <Container horizontal separate>
-          <View>
-            <Text type="title">{data?.symbol}</Text>
-            <Text>{data?.name}</Text>
-          </View>
-          <View>
-            <Text type="title">${data?.price}</Text>
-          </View>
-        </Container>
-      )}
     </Container>
   )
 }
@@ -80,3 +48,5 @@ const styles = StyleSheet.create({
     paddingHorizontal: 3,
   },
 })
+
+export default SearchSymbol
