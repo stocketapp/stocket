@@ -13,6 +13,8 @@ module.exports = {
           navigation: './src/navigation',
           'stocket-hooks': './src/hooks',
           'stocket-api': './src/api',
+          'stocket-icons': './src/components/Icons',
+          ComponentsTypes: './src/components/Types',
         },
       },
     ],
