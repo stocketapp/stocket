@@ -99,7 +99,6 @@ const styles = {
     width: '100%',
     marginTop: 50,
     height: '100%',
-    // position: 'absolute',
     bottom: 0,
   },
 }
