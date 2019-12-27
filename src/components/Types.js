@@ -14,17 +14,18 @@ export type ContainerProps = {
   alignItems?: 'center' | 'flex-start' | 'flex-end',
   horizontal?: boolean,
   separate?: boolean,
-  noPh?: boolean,
+  ph?: boolean,
+  top?: number,
+  width?: string | number,
 }
 
 export type TextProps = {
-  type?: string,
+  type?: 'heading' | 'title' | 'label',
   cap?: boolean,
   color?: string,
-  positive?: boolean,
-  negative?: boolean,
   children?: Text.propTypes.children,
   style?: Text.propTypes.style,
+  status?: 'negative' | 'positive',
 }
 
 export type TradeInfoProps = {
@@ -32,7 +33,11 @@ export type TradeInfoProps = {
     symbol: string,
     name: string,
     price: string,
-  } | null,
+    change_pct: string,
+    day_change: string,
+    eps: string,
+    price_open: string,
+  },
   loading: boolean,
 }
 
@@ -40,4 +45,11 @@ export type SearchSymbolsProps = {
   value: string,
   setvalue: () => void,
   onSearch: () => void,
+}
+
+export type LabelProps = {
+  title?: string,
+  value?: string,
+  children: React$Node,
+  style?: View.propTypes.style,
 }

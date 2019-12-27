@@ -6,7 +6,7 @@ import Container from './Container'
 
 const Balance = (): React$Node => (
   <Container>
-    <Text color={GRAY_DARKER} type="subtitle">
+    <Text color={GRAY_DARKER} type="label">
       Balance
     </Text>
     <Text type="heading">$2,084.86</Text>
