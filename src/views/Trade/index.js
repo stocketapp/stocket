@@ -23,7 +23,7 @@ export default function Trade() {
   }
 
   return (
-    <Container>
+    <Container ph>
       <SearchSymbols
         value={search}
         setValue={setSearch}
