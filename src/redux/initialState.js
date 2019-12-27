@@ -5,4 +5,7 @@ export default {
   portfolio: {
     portfolioData: [],
   },
+  trade: {
+    selectedTradeAction: 'BUY',
+  },
 }
