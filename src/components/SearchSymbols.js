@@ -7,7 +7,7 @@ import type { SearchSymbolProps } from 'ComponentsTypes'
 const SearchSymbol = (props: SearchSymbolProps): React$Node => {
   const { value, setValue, onSearch } = props
   return (
-    <Container noPh>
+    <Container top={20}>
       <View style={styles.searchContainer}>
         <TextInput
           value={value}

@@ -1,13 +1,22 @@
 // @flow
-import React from 'react'
-import { View } from 'react-native'
+import React, { useMemo } from 'react'
+import { View, TouchableOpacity } from 'react-native'
 import { Container, Text, Label } from 'stocket-components'
 import type { TradeInfoProps } from 'ComponentsTypes'
-import { GRAY_DARKER } from 'utils/colors'
+import { useSelector } from 'react-redux'
+import { GRAY_DARKER, GREEN_STOCKET, GREEN } from 'utils/colors'
+import { formatCurrency } from 'utils/functions'
 import TradeAction from './TradeAction'
+import StockQuantity from './StockQuantity'
 
 export default function TradeInfo({ data, loading }: TradeInfoProps) {
   const status = parseFloat(data?.change_pct) > 0 ? 'positive' : 'negative'
+  const { stockQuantity } = useSelector(({ trade }) => trade)
+
+  const orderValue = useMemo(() => {
+    const price = parseFloat(data?.price) * stockQuantity
+    return formatCurrency(price) || formatCurrency(0)
+  }, [stockQuantity, data])
 
   return (
     <Container ph>
@@ -49,6 +58,17 @@ export default function TradeInfo({ data, loading }: TradeInfoProps) {
           </Container>
 
           <TradeAction />
+          <StockQuantity />
+
+          <View style={styles.bottom}>
+            {orderValue && <Text type="title">Order value: {orderValue}</Text>}
+
+            <View style={styles.btnContainer}>
+              <TouchableOpacity style={styles.btn}>
+                <Text type="title">Done</Text>
+              </TouchableOpacity>
+            </View>
+          </View>
         </Container>
       )}
     </Container>
@@ -61,5 +81,25 @@ const styles = {
   },
   label: {
     paddingLeft: '15%',
+  },
+  btnContainer: {
+    width: '100%',
+    alignItems: 'center',
+    marginTop: 60,
+  },
+  btn: {
+    width: '100%',
+    backgroundColor: GREEN,
+    paddingVertical: 12,
+    alignItems: 'center',
+    borderRadius: 4,
+  },
+  bottom: {
+    alignItems: 'flex-end',
+    width: '100%',
+    marginTop: 50,
+    height: '100%',
+    // position: 'absolute',
+    bottom: 0,
   },
 }

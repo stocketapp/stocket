@@ -23,7 +23,10 @@ export default function Trade() {
   }
 
   return (
-    <Container ph>
+    <Container ph style={{ flex: 1 }}>
+      <Container width="100%" alignItems="center">
+        <Text type="title">Trade</Text>
+      </Container>
       <SearchSymbols
         value={search}
         setValue={setSearch}

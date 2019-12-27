@@ -13,15 +13,16 @@ export default function Container(props: ContainerProps): React$Node {
     separate = false,
     ph = false,
     top = 0,
-    width,
+    width = '100%',
   } = props
   const defaultStyles = {
     width,
-    paddingHorizontal: ph ? '6%' : 0,
+    paddingHorizontal: ph ? 20 : 0,
     justifyContent: separate ? 'space-between' : justifyContent,
     alignItems,
     flexDirection: horizontal ? 'row' : 'column',
     paddingTop: top,
+
   }
 
   return <View style={[defaultStyles, style]}>{children}</View>

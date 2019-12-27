@@ -13,7 +13,6 @@ export default function TradeAction() {
     dispatch({
       type: 'SELECTED_TRADE_ACTION',
       selectedTradeAction: type,
-      // selectedTradeAction: !action || type !== action ? type : null,
     })
   }
 
@@ -23,16 +22,18 @@ export default function TradeAction() {
   })
 
   return (
-    <Container horizontal justifyContent="center" width="100%" top={30}>
+    <Container horizontal justifyContent="center" width="100%" top={40}>
       <TouchableOpacity
         style={{ ...styles.btn, ...selectedStyles('BUY') }}
-        onPress={() => selectType('BUY')}>
+        onPress={() => selectType('BUY')}
+      >
         <Text type="label">BUY</Text>
       </TouchableOpacity>
 
       <TouchableOpacity
         style={{ ...styles.btn, ...selectedStyles('SELL') }}
-        onPress={() => selectType('SELL')}>
+        onPress={() => selectType('SELL')}
+      >
         <Text type="label">SELL</Text>
       </TouchableOpacity>
     </Container>
@@ -43,7 +44,6 @@ const styles = StyleSheet.create({
   btn: {
     paddingHorizontal: '20%',
     paddingVertical: 8,
-    // borderBottomWidth: 1.5,
     borderBottomColor: BLUE, // '#777777',
   },
 })
