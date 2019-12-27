@@ -8,6 +8,8 @@ export default function user(state = userState, action) {
       return { ...state, isAuth: action.isAuth }
     case 'SET_USER':
       return { ...state, currentUser: action.currentUser }
+    case 'SET_USER_INFO':
+      return { ...state, userInfo: action.userInfo }
     default:
       return state
   }
