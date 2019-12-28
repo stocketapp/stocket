@@ -1,12 +1,10 @@
 import { useEffect, useState } from 'react'
 import firestore from '@react-native-firebase/firestore'
 import { useDispatch } from 'react-redux'
-import useAuthState from './useAuthState'
 
 const UsersRef = firestore().collection('Users')
 
-export default function useSetUserInfo() {
-  const { currentUser } = useAuthState()
+export default function useSetUserInfo(currentUser: CurrentUser) {
   const [userInfo, setUserInfo] = useState(null)
   const [loading, setLoading] = useState(false)
   const dispatch = useDispatch()
@@ -30,7 +28,14 @@ export default function useSetUserInfo() {
     }
 
     getUserInfo()
-  }, [currentUser])
+  }, [currentUser, dispatch])
 
   return { loading, userInfo }
+}
+
+type CurrentUser = {
+  currentUser: {
+    uid: string,
+    email: string,
+  } | null,
 }

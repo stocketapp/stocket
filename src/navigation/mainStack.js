@@ -13,7 +13,7 @@ export default createStackNavigator(
     },
   },
   {
-    initialRouteName: 'Trade',
+    initialRouteName: 'Home',
     cardStyle: {
       backgroundColor: BLACK,
     },
