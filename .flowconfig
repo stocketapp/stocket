@@ -47,7 +47,7 @@ module.name_mapper='stocket-hooks' -> '<PROJECT_ROOT>/src/hooks'
 module.name_mapper='utils' -> '<PROJECT_ROOT>/src/utils'
 module.name_mapper='navigation' -> '<PROJECT_ROOT>/src/navigation'
 module.name_mapper='views' -> '<PROJECT_ROOT>/src/views'
-module.name_mapper='StocketTypes' -> '<PROJECT_ROOT>/src/components/Types'
+module.name_mapper='StocketTypes' -> '<PROJECT_ROOT>/src/Types'
 
 suppress_type=$FlowIssue
 suppress_type=$FlowFixMe
