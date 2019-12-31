@@ -4,7 +4,7 @@ import { View, StyleSheet } from 'react-native'
 import { GRAY_DARKER } from 'utils/colors'
 import { formatCurrency } from 'utils/functions'
 import type { PositionType } from 'StocketTypes'
-import { Container } from 'stocket-components'
+import Container from '../Container'
 import Text from '../Text'
 
 const PortfolioItem = ({ item }: { item: PositionType }): React$Node => (

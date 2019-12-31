@@ -1,18 +1,17 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { View, StyleSheet } from 'react-native'
 import { BLACK } from 'utils/colors'
 import { Balance, BalanceGraph, PortfolioList } from 'stocket-components'
 import { useGetPortfolio } from 'stocket-hooks'
-// import { useSelector, useDispatch } from 'react-redux'
 
 export default function Home() {
-  const positions = useGetPortfolio()
+  const { positions, loading } = useGetPortfolio()
 
   return (
     <View style={styles.container}>
       <Balance />
       <BalanceGraph />
-      <PortfolioList data={positions} />
+      <PortfolioList data={positions} loading={loading} />
     </View>
   )
 }

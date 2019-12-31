@@ -5,28 +5,34 @@ import { useSelector, useDispatch } from 'react-redux'
 
 const UsersRef = firestore().collection('Users')
 
-export default function useGetPortfolio(): Array<any> {
+export default function useGetPortfolio(): {} {
+  const { uid } = useSelector(({ user }) => user.currentUser)
+  const { positions, loading } = useSelector(({ portfolio }) => portfolio)
   const dispatch = useDispatch()
-  const { currentUser } = useSelector(({ user }) => user)
-  const { positions } = useSelector(({ portfolio }) => portfolio)
 
   useEffect(() => {
     async function getPortfolios() {
+      const setLoading = payload => {
+        dispatch({ type: 'SET_PORTFOLIO_LOADING', payload })
+      }
+
       try {
-        const ref = await UsersRef.doc(currentUser?.uid)
+        setLoading(true)
+        const ref = await UsersRef.doc(uid)
           .collection('positions')
           .get()
         const arr = ref.docs.map(doc => doc.data())
-        dispatch({
-          type: 'SET_PORTFOLIO',
-          positions: arr,
-        })
+        if (arr.length > 0) {
+          dispatch({ type: 'SET_PORTFOLIO', payload: arr })
+        }
       } catch (err) {
         console.log(err)
+      } finally {
+        setLoading(false)
       }
     }
     getPortfolios()
   }, [])
 
-  return positions
+  return { positions, loading }
 }

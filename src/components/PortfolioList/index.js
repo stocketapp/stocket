@@ -1,11 +1,11 @@
 // @flow
 import React, { useMemo } from 'react'
 import { FlatList, StyleSheet, View } from 'react-native'
-import { Loader } from 'stocket-components'
 import Text from '../Text'
 import PortfolioItem from './PortfolioItem'
 import PortfolioEmpty from './PortfolioEmpty'
 import Container from '../Container'
+import Loader from '../Loader'
 
 type PortfolioListProps = {
   data: Array<any>,
@@ -30,13 +30,13 @@ export default function PortfolioList({ data, loading }: PortfolioListProps) {
           contentContainerStyle={styles.listContent}
           ListEmptyComponent={() => (
             <View style={styles.listLoader}>
-              <Loader />
+              {loading ? <Loader /> : <PortfolioEmpty />}
             </View>
           )}
         />
       </Container>
     ),
-    [data],
+    [data, loading],
   )
 }
 
