@@ -13,7 +13,7 @@ const Balance = (): React$Node => {
       <Text color={GRAY_DARKER} type="label">
         Balance
       </Text>
-      <Text type="heading">{formatCurrency(userInfo?.combinedValue)}</Text>
+      <Text type="heading">{formatCurrency(userInfo?.combinedValue || 0)}</Text>
     </Container>
   )
 }
