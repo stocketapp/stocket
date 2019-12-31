@@ -2,7 +2,7 @@ import React from 'react'
 import { View, TextInput, StyleSheet, TouchableOpacity } from 'react-native'
 import Container from './Container'
 import { SearchIcon } from 'stocket-icons'
-import type { SearchSymbolProps } from 'ComponentsTypes'
+import type { SearchSymbolProps } from 'StocketTypes'
 
 const SearchSymbol = (props: SearchSymbolProps): React$Node => {
   const { value, setValue, onSearch } = props
