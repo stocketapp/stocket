@@ -20,7 +20,7 @@ export type ContainerProps = {
 }
 
 export type TextProps = {
-  type?: 'heading' | 'title' | 'label',
+  type?: 'heading' | 'title' | 'label' | 'subtext',
   cap?: boolean,
   color?: string,
   children?: Text.propTypes.children,
@@ -52,4 +52,13 @@ export type LabelProps = {
   value?: string,
   children: React$Node,
   style?: View.propTypes.style,
+}
+
+export type PositionType = {
+  gains: number,
+  name: string,
+  percentage: number,
+  symbol: string,
+  uid: string,
+  value: number,
 }

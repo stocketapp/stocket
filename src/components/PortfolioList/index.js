@@ -1,6 +1,7 @@
 // @flow
 import React, { useMemo } from 'react'
-import { FlatList, StyleSheet } from 'react-native'
+import { FlatList, StyleSheet, View } from 'react-native'
+import { Loader } from 'stocket-components'
 import Text from '../Text'
 import PortfolioItem from './PortfolioItem'
 import PortfolioEmpty from './PortfolioEmpty'
@@ -12,22 +13,27 @@ type PortfolioListProps = {
 }
 
 export default function PortfolioList({ data, loading }: PortfolioListProps) {
+  const renderItem = ({ item }) => <PortfolioItem item={item} />
+
   return useMemo(
     () => (
-      <Container style={styles.container}>
+      <Container style={styles.container} ph>
         <Text type="title" style={styles.title}>
-          Portfolioo
+          Portfolio
         </Text>
 
-        {!data || data.length === 0 ? (
-          <PortfolioEmpty />
-        ) : (
-          <FlatList
-            data={data}
-            renderItem={({ item }) => <PortfolioItem portfolio={item} />}
-            keyExtractor={(index, key) => key.toString()}
-          />
-        )}
+        <FlatList
+          data={data}
+          renderItem={renderItem}
+          keyExtractor={(index, key) => key.toString()}
+          style={styles.list}
+          contentContainerStyle={styles.listContent}
+          ListEmptyComponent={() => (
+            <View style={styles.listLoader}>
+              <Loader />
+            </View>
+          )}
+        />
       </Container>
     ),
     [data],
@@ -40,5 +46,15 @@ const styles = StyleSheet.create({
   },
   title: {
     marginBottom: 10,
+  },
+  list: {
+    minHeight: 200,
+  },
+  listContent: {
+    paddingTop: 10,
+  },
+  listLoader: {
+    width: '100%',
+    alignItems: 'center',
   },
 })

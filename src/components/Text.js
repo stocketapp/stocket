@@ -21,6 +21,8 @@ const Text = ({
         return 20
       case 'label':
         return 16
+      case 'subtext':
+        return 12
       default:
         return 14
     }

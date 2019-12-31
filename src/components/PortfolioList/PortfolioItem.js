@@ -1,33 +1,48 @@
+// @flow
 import React from 'react'
 import { View, StyleSheet } from 'react-native'
-import Text from '../Text'
 import { GRAY_DARKER } from 'utils/colors'
+import { formatCurrency } from 'utils/functions'
+import type { PositionType } from 'StocketTypes'
+import { Container } from 'stocket-components'
+import Text from '../Text'
 
-const PortfolioItem = () => (
-  <View style={styles.container}>
+const PortfolioItem = ({ item }: { item: PositionType }): React$Node => (
+  <Container style={styles.container}>
     <View>
-      <Text>MSFT</Text>
-      <Text color={GRAY_DARKER} style={styles.bottomRow}>
-        Microsoft
+      <Text type="label">{item?.symbol}</Text>
+      <Text type="subtext" color={GRAY_DARKER} style={styles.bottomRow}>
+        {item?.name}
       </Text>
     </View>
-    <View>
-      <Text>$2,780.54</Text>
-      <Text positive style={styles.bottomRow}>
-        $469.67 (16%)
+    <View style={styles.right}>
+      <Text type="label">{formatCurrency(item?.value)}</Text>
+      <Text
+        positive
+        style={styles.bottomRow}
+        status={item?.gains > 0 ? 'positive' : 'negative'}
+        type="subtext"
+      >
+        {formatCurrency(item?.gains)} ({item?.percentage.toFixed(2)}%)
       </Text>
     </View>
-  </View>
+  </Container>
 )
 
 const styles = StyleSheet.create({
   container: {
+    width: '100%',
     flexDirection: 'row',
     justifyContent: 'space-between',
-    paddingVertical: 10,
+    paddingVertical: 20,
+    borderBottomColor: '#303030',
+    borderBottomWidth: 1,
   },
   bottomRow: {
     marginTop: 3,
+  },
+  right: {
+    alignItems: 'flex-end',
   },
 })
 

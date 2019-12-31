@@ -8,7 +8,6 @@ export default function Container(props: ContainerProps): React$Node {
     children,
     style,
     justifyContent = 'flex-start',
-    alignItems = 'flex-start',
     horizontal = false,
     separate = false,
     ph = false,
@@ -19,10 +18,8 @@ export default function Container(props: ContainerProps): React$Node {
     width,
     paddingHorizontal: ph ? 20 : 0,
     justifyContent: separate ? 'space-between' : justifyContent,
-    alignItems,
     flexDirection: horizontal ? 'row' : 'column',
     paddingTop: top,
-
   }
 
   return <View style={[defaultStyles, style]}>{children}</View>
