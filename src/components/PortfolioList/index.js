@@ -1,29 +1,36 @@
+// @flow
 import React, { useMemo } from 'react'
-import { View, FlatList, StyleSheet } from 'react-native'
-import { useSelector } from 'react-redux'
+import { FlatList, StyleSheet } from 'react-native'
 import Text from '../Text'
 import PortfolioItem from './PortfolioItem'
 import PortfolioEmpty from './PortfolioEmpty'
 import Container from '../Container'
 
-export default function PortfolioList() {
-  const { portfolioData } = useSelector(({ portfolio }) => portfolio)
+type PortfolioListProps = {
+  data: Array<any>,
+  loading: boolean,
+}
 
-  return (
-    <Container style={styles.container}>
-      <Text type="title" style={styles.title}>
-        Portfolio
-      </Text>
+export default function PortfolioList({ data, loading }: PortfolioListProps) {
+  return useMemo(
+    () => (
+      <Container style={styles.container}>
+        <Text type="title" style={styles.title}>
+          Portfolioo
+        </Text>
 
-      {!portfolioData || portfolioData.length === 0 ? (
-        <PortfolioEmpty />
-      ) : (
-        <FlatList
-          portfolioData={portfolioData}
-          renderItem={({ item }) => <PortfolioItem portfolio={item} />}
-        />
-      )}
-    </Container>
+        {!data || data.length === 0 ? (
+          <PortfolioEmpty />
+        ) : (
+          <FlatList
+            data={data}
+            renderItem={({ item }) => <PortfolioItem portfolio={item} />}
+            keyExtractor={(index, key) => key.toString()}
+          />
+        )}
+      </Container>
+    ),
+    [data],
   )
 }
 

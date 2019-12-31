@@ -1,21 +1,23 @@
 import { useEffect, useState } from 'react'
 import firestore from '@react-native-firebase/firestore'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 
 const UsersRef = firestore().collection('Users')
 
-export default function useSetUserInfo(currentUser: CurrentUser) {
+export default function useSetUserInfo() {
   const [userInfo, setUserInfo] = useState(null)
   const [loading, setLoading] = useState(false)
   const dispatch = useDispatch()
+  // const { currentUser } = useSelector(({ user }) => user)
 
   useEffect(() => {
-    const uid = currentUser?.uid
+    let isCancelled = false
+    // const uid = currentUser?.uid
     async function getUserInfo() {
       try {
         setLoading(true)
-        const info = await UsersRef.doc(uid).get()
-        setUserInfo(info.data())
+        const info = await UsersRef.doc('tubkakDAXaa1rPLf7IkaWPpKz5y1').get()
+        // setUserInfo(info.data())
         dispatch({
           type: 'SET_USER_INFO',
           userInfo: info.data(),
@@ -28,14 +30,11 @@ export default function useSetUserInfo(currentUser: CurrentUser) {
     }
 
     getUserInfo()
-  }, [currentUser, dispatch])
+
+    return () => {
+      isCancelled = true
+    }
+  }, [])
 
   return { loading, userInfo }
-}
-
-type CurrentUser = {
-  currentUser: {
-    uid: string,
-    email: string,
-  } | null,
 }

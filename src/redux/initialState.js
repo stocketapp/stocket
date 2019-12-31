@@ -5,7 +5,7 @@ export default {
     userInfo: null,
   },
   portfolio: {
-    portfolioData: [],
+    positions: [],
   },
   trade: {
     selectedTradeAction: 'BUY',

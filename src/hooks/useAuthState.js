@@ -1,40 +1,28 @@
 // @flow
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import auth from '@react-native-firebase/auth'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 
-type AuthState = {
-  isAuth: boolean,
-  currentUser: { uid: string, email: string } | null,
-}
-
-export default function useAuthState(): AuthState {
+export default function useAuthState() {
   const dispatch = useDispatch()
-  const [isAuth, setIsAuth] = useState(false)
-  const [currentUser, setCurrentUser] = useState(null)
-
-  const onAuthenticated = () => {
-    dispatch({
-      type: 'IS_AUTHENTICATED',
-      isAuth,
-    })
-    dispatch({
-      type: 'SET_USER',
-      currentUser,
-    })
-  }
+  const { isAuth, currentUser } = useSelector(({ user }) => user)
 
   useEffect(() => {
     const authSubscription = auth().onAuthStateChanged(user => {
       if (user) {
-        setIsAuth(true)
-        setCurrentUser(user)
-        onAuthenticated()
+        dispatch({
+          type: 'SET_USER',
+          currentUser: user,
+        })
+        dispatch({
+          type: 'IS_AUTHENTICATED',
+          isAuth: true,
+        })
       }
     })
 
-    return authSubscription
-  })
+    return () => authSubscription()
+  }, [])
 
   return { isAuth, currentUser }
 }
