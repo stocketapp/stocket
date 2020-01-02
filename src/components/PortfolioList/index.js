@@ -1,37 +1,60 @@
+// @flow
 import React, { useMemo } from 'react'
-import { View, FlatList, StyleSheet } from 'react-native'
+import { FlatList, StyleSheet, View } from 'react-native'
 import Text from '../Text'
 import PortfolioItem from './PortfolioItem'
 import PortfolioEmpty from './PortfolioEmpty'
-import { useSelector } from 'react-redux'
+import Container from '../Container'
+import Loader from '../Loader'
 
-export default function PortfolioList() {
-  const { portfolioData } = useSelector(({ portfolio }) => portfolio)
+type PortfolioListProps = {
+  data: Array<any>,
+  loading: boolean,
+}
 
-  return (
-    <View style={styles.container}>
-      <Text type="title" style={styles.title}>
-        Portfolio
-      </Text>
+export default function PortfolioList({ data, loading }: PortfolioListProps) {
+  const renderItem = ({ item }) => <PortfolioItem item={item} />
 
-      {!portfolioData || portfolioData.length === 0 ? (
-        <PortfolioEmpty />
-      ) : (
+  return useMemo(
+    () => (
+      <Container style={styles.container} ph>
+        <Text type="title" style={styles.title}>
+          Portfolio
+        </Text>
+
         <FlatList
-          portfolioData={portfolioData}
-          renderItem={({ item }) => <PortfolioItem portfolio={item} />}
+          data={data}
+          renderItem={renderItem}
+          keyExtractor={(index, key) => key.toString()}
+          style={styles.list}
+          contentContainerStyle={styles.listContent}
+          ListEmptyComponent={() => (
+            <View style={styles.listLoader}>
+              {loading ? <Loader /> : <PortfolioEmpty />}
+            </View>
+          )}
         />
-      )}
-    </View>
+      </Container>
+    ),
+    [data, loading],
   )
 }
 
 const styles = StyleSheet.create({
   container: {
     marginTop: 40,
-    paddingHorizontal: 20,
   },
   title: {
     marginBottom: 10,
+  },
+  list: {
+    minHeight: 200,
+  },
+  listContent: {
+    paddingTop: 10,
+  },
+  listLoader: {
+    width: '100%',
+    alignItems: 'center',
   },
 })

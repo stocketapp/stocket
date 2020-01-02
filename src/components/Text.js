@@ -1,23 +1,14 @@
 // @flow
 import React from 'react'
 import { Text as RNText } from 'react-native'
-import { GREEN } from 'utils/colors'
-
-type TextProps = {
-  type?: string,
-  cap?: boolean,
-  color?: string,
-  positive?: boolean,
-  negative?: boolean,
-  children?: Text.propTypes.children,
-}
+import { GREEN, RED } from 'utils/colors'
+import type { TextProps } from 'types'
 
 const Text = ({
   type,
   color = '#fff',
   cap = false,
-  positive = false,
-  negative = false,
+  status,
   children,
   style,
   ...props
@@ -28,16 +19,25 @@ const Text = ({
         return 24
       case 'title':
         return 20
-      case 'subtitle':
-        return 18
-      case 'subtitleGray':
-        return 18
+      case 'label':
+        return 16
+      case 'subtext':
+        return 12
       default:
         return 14
     }
   }
 
-  const statusColor = (positive && GREEN) || (negative && '#eb455a')
+  const setStatus = () => {
+    if (status === 'positive') {
+      return GREEN
+    } else if (status === 'negative') {
+      return RED
+    } else {
+      return '#fff'
+    }
+  }
+
   const customStyle = {
     fontFamily: 'Futura',
     fontSize: selectFontSize(),
@@ -46,7 +46,7 @@ const Text = ({
       letterSpacing: 0.3,
     }),
     ...style,
-    color: !statusColor ? color : statusColor,
+    color: !status ? color : setStatus(),
   }
 
   return <RNText style={customStyle}>{children}</RNText>
