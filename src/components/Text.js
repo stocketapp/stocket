@@ -2,7 +2,7 @@
 import React from 'react'
 import { Text as RNText } from 'react-native'
 import { GREEN, RED } from 'utils/colors'
-import type { TextProps } from 'StocketTypes'
+import type { TextProps } from 'types'
 
 const Text = ({
   type,

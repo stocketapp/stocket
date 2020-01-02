@@ -1,8 +1,8 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { View, StyleSheet } from 'react-native'
 import { BLACK } from 'utils/colors'
-import { Balance, BalanceGraph, PortfolioList } from 'stocket-components'
-import { useGetPortfolio } from 'stocket-hooks'
+import { Balance, BalanceGraph, PortfolioList } from 'components'
+import { useGetPortfolio } from 'hooks'
 
 export default function Home() {
   const { positions, loading } = useGetPortfolio()

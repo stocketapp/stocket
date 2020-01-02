@@ -10,5 +10,7 @@ export default {
   },
   trade: {
     selectedTradeAction: 'BUY',
+    stockQuantity: null,
+    stockPrice: null,
   },
 }

@@ -2,7 +2,7 @@ import React from 'react'
 import { View, TouchableOpacity } from 'react-native'
 import Text from '../Text'
 import { BLUE } from 'utils/colors'
-import { useNavigation } from 'stocket-hooks'
+import { useNavigation } from 'hooks'
 
 export default function PortfolioEmpty() {
   const { navigate } = useNavigation()

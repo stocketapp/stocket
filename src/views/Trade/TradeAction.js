@@ -1,7 +1,7 @@
 // @flow
 import React from 'react'
 import { TouchableOpacity, StyleSheet } from 'react-native'
-import { Container, Text } from 'stocket-components'
+import { Container, Text } from 'components'
 import { useDispatch, useSelector } from 'react-redux'
 import { BLUE } from 'utils/colors'
 

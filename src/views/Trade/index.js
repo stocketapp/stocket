@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
-import { Container, SearchSymbols, Text } from 'stocket-components'
-import { getStock } from 'stocket-api'
+import { Container, SearchSymbols, Text } from 'components'
+import { getStock } from 'api'
 import TradeInfo from './TradeInfo'
 
 export default function Trade() {

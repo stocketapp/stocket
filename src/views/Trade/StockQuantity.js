@@ -1,6 +1,6 @@
 import React from 'react'
 import { TextInput, StyleSheet } from 'react-native'
-import { Container, Text } from 'stocket-components'
+import { Container, Text } from 'components'
 import { useDispatch, useSelector } from 'react-redux'
 import { GRAY_DARKER } from 'utils/colors'
 

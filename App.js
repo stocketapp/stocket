@@ -7,10 +7,10 @@
  */
 
 import React, { useEffect } from 'react'
-import { SafeAreaView, StatusBar } from 'react-native'
+import { StatusBar } from 'react-native'
 import switchNavigator from 'navigation'
-import { useAuthState, useSetUserInfo } from 'stocket-hooks'
-import { createAppContainer } from 'react-navigation'
+import { useAuthState, useSetUserInfo } from 'hooks'
+import { createAppContainer, SafeAreaView } from 'react-navigation'
 import RNBootSplash from 'react-native-bootsplash'
 import { BLACK } from 'utils/colors'
 
@@ -37,7 +37,10 @@ export default function App(): React$Node {
   return (
     <>
       <StatusBar barStyle="light-content" />
-      <SafeAreaView style={container}>
+      <SafeAreaView
+        style={container}
+        forceInset={{ top: 'always', bottom: 'never' }}
+      >
         <NavigationRoutes />
       </SafeAreaView>
     </>

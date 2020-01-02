@@ -1,7 +1,7 @@
 // @flow
 import React from 'react'
 import { View } from 'react-native'
-import type { ContainerProps } from './Types'
+import type { ContainerProps } from '../Types'
 
 export default function Container(props: ContainerProps): React$Node {
   const {

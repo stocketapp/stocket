@@ -4,7 +4,7 @@ import { View } from 'react-native'
 import Container from './Container'
 import Text from './Text'
 import { GRAY_DARKER } from 'utils/colors'
-import type { LabelProps } from 'StocketTypes'
+import type { LabelProps } from 'types'
 
 const styles = {
   flex: 0.5,
