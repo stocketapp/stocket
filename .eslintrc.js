@@ -9,6 +9,7 @@ module.exports = {
       selfClosing: 'tag-aligned'
     }],
     'react-hooks/rules-of-hooks': 'error',
-    'react-hooks/exhaustive-deps': 'warn'
+    'react-hooks/exhaustive-deps': 'warn',
+    'react-native/no-inline-styles': 'off'
   }
 };
