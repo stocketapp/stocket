@@ -13,6 +13,8 @@ import { useAuthState, useSetUserInfo } from 'hooks'
 import { createAppContainer, SafeAreaView } from 'react-navigation'
 import RNBootSplash from 'react-native-bootsplash'
 import { BLACK } from 'utils/colors'
+import messaging from '@react-native-firebase/messaging'
+import { getFcmToken, requestNotificationPermission } from 'utils/functions'
 
 export default function App(): React$Node {
   const { isAuth } = useAuthState()
@@ -26,13 +28,22 @@ export default function App(): React$Node {
     }
   }, [isAuth, loading])
 
+  useEffect(() => {
+    async function checkNotificationPermission() {
+      const isEnabled = await messaging().hasPermission()
+
+      if (isEnabled) {
+        getFcmToken()
+      } else {
+        requestNotificationPermission()
+      }
+    }
+
+    checkNotificationPermission()
+  }, [])
+
   const navigator = switchNavigator(!isAuth ? 'AuthStack' : 'MainStack')
   const NavigationRoutes = createAppContainer(navigator)
-
-  const container = {
-    flex: 1,
-    backgroundColor: BLACK,
-  }
 
   return (
     <>
@@ -45,4 +56,9 @@ export default function App(): React$Node {
       </SafeAreaView>
     </>
   )
+}
+
+const container = {
+  flex: 1,
+  backgroundColor: BLACK,
 }
