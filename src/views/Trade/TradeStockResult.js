@@ -1,23 +1,35 @@
 // @flow
 import React, { useMemo } from 'react'
 import { View, TouchableOpacity } from 'react-native'
-import { Container, Text, Label } from 'components'
+import { Container, Text } from 'components'
 import type { TradeInfoProps } from 'types'
 import { useSelector } from 'react-redux'
 import { GRAY_DARKER, GREEN } from 'utils/colors'
 import { formatCurrency } from 'utils/functions'
-import TradeAction from './TradeAction'
-import StockQuantity from './StockQuantity'
+import StockDetails from './StockDetails'
+import { createTrade } from 'api'
 
 export default function TradeInfo({ data, loading }: TradeInfoProps) {
-  const status = parseFloat(data?.change_pct) > 0 ? 'positive' : 'negative'
-  const { stockQuantity } = useSelector(({ trade }) => trade)
   const price = data?.price
-
+  const { uid } = useSelector(({ user }) => user.currentUser)
+  const { stockQuantity, selectedTradeAction } = useSelector(
+    ({ trade }) => trade,
+  )
   const orderValue = useMemo(() => {
     const total = (parseFloat(price) || 0) * stockQuantity
     return formatCurrency(total)
   }, [stockQuantity, price])
+
+  const createTradeTransaction = () => {
+    createTrade(uid, {
+      value: parseFloat(orderValue),
+      price: parseFloat(data?.price),
+      name: data?.name,
+      symbol: data?.symbol,
+      quantity: stockQuantity,
+      action: selectedTradeAction,
+    })
+  }
 
   return (
     <Container ph>
@@ -32,41 +44,28 @@ export default function TradeInfo({ data, loading }: TradeInfoProps) {
             </Container>
           </Container>
 
-          <Container width="100%">
-            <Container horizontal separate width="100%" top={15}>
-              <Label title="Price" value={formatCurrency(price)} />
-
-              <Label title="Change" style={styles.label}>
-                <Container horizontal width="100%">
-                  <Text type="label" status={status}>
-                    {formatCurrency(data?.day_change)}{' '}
-                  </Text>
-                  <Text type="label" status={status}>
-                    ({formatCurrency(data?.change_pct)}%)
-                  </Text>
-                </Container>
-              </Label>
-            </Container>
-
-            <Container horizontal separate width="100%" top={15}>
-              <Label title="EPS" value={formatCurrency(data?.eps)} />
-              <Label
-                title="Open"
-                value={formatCurrency(data?.price_open)}
-                style={styles.label}
-              />
-            </Container>
-          </Container>
-
-          <TradeAction />
-          <StockQuantity />
+          <StockDetails data={data} />
 
           <View style={styles.bottom}>
             <Text type="title">Order value: {orderValue}</Text>
 
-            <View style={styles.btnContainer}>
-              <TouchableOpacity style={styles.btn}>
-                <Text type="title">Done</Text>
+            <View
+              style={[
+                styles.btnContainer,
+                { opacity: !stockQuantity ? 0.5 : 1 },
+              ]}
+            >
+              <TouchableOpacity
+                style={[styles.btn]}
+                disabled={!stockQuantity}
+                onPress={createTradeTransaction}
+              >
+                <Text
+                  type="title"
+                  style={{ fontWeight: '800', letterSpacing: 0.7 }}
+                >
+                  {selectedTradeAction === 'BUY' ? 'BUY' : 'SELL'}
+                </Text>
               </TouchableOpacity>
             </View>
           </View>
@@ -79,9 +78,6 @@ export default function TradeInfo({ data, loading }: TradeInfoProps) {
 const styles = {
   symbol: {
     marginTop: 5,
-  },
-  label: {
-    paddingLeft: '15%',
   },
   btnContainer: {
     width: '100%',
@@ -98,7 +94,7 @@ const styles = {
   bottom: {
     alignItems: 'flex-end',
     width: '100%',
-    marginTop: 50,
+    marginTop: 30,
     height: '100%',
     bottom: 0,
   },

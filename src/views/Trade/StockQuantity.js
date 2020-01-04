@@ -21,11 +21,12 @@ export default function StockAmount() {
         Quantity
       </Text>
       <TextInput
-        // placeholder="Quantity"
         placeholderTextColor="#afafaf"
         value={stockQuantity}
         onChangeText={setQuantity}
         style={styles.input}
+        keyboardType="number-pad"
+        returnKeyType="done"
       />
       <Text style={styles.maxShares} color={GRAY_DARKER}>
         Max shares 0
