@@ -17,16 +17,17 @@ export default function TradeInfo({ data, loading }: TradeInfoProps) {
   )
   const orderValue = useMemo(() => {
     const total = (parseFloat(price) || 0) * stockQuantity
-    return formatCurrency(total)
+    return total
   }, [stockQuantity, price])
 
   const createTradeTransaction = () => {
     createTrade(uid, {
-      value: parseFloat(orderValue),
+      uid,
+      value: orderValue,
       price: parseFloat(data?.price),
       name: data?.name,
       symbol: data?.symbol,
-      quantity: stockQuantity,
+      quantity: parseInt(stockQuantity, 10),
       action: selectedTradeAction,
     })
   }
@@ -47,7 +48,7 @@ export default function TradeInfo({ data, loading }: TradeInfoProps) {
           <StockDetails data={data} />
 
           <View style={styles.bottom}>
-            <Text type="title">Order value: {orderValue}</Text>
+            <Text type="title">Order value: {formatCurrency(orderValue)}</Text>
 
             <View
               style={[
