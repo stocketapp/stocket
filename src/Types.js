@@ -1,5 +1,6 @@
 // @flow
 import { View, Text } from 'react-native'
+import { FirebaseFirestoreTypes } from '@react-native-firebase/firestore'
 
 export type IconProps = {
   size?: number,
@@ -38,7 +39,7 @@ export type TradeInfoProps = {
     eps: string,
     price_open: string,
   },
-  loading: boolean,
+  loading?: boolean,
 }
 
 export type SearchSymbolsProps = {
@@ -62,3 +63,13 @@ export type PositionType = {
   uid: string,
   value: number,
 }
+
+export type TradeDataType = {
+  symbol: string,
+  action: string,
+  quantity: number,
+  price: number,
+  value: number,
+}
+
+export type DocReference = FirebaseFirestoreTypes.DocumentReference

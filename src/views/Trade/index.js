@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Container, SearchSymbols, Text } from 'components'
 import { getStock } from 'api'
-import TradeInfo from './TradeInfo'
+import TradeStockResult from './TradeStockResult'
 
 export default function Trade() {
   const [search, setSearch] = useState('')
@@ -33,7 +33,7 @@ export default function Trade() {
         onSearch={getStockData}
       />
       {!loading ? (
-        <TradeInfo data={data} loading={loading} />
+        <TradeStockResult data={data} loading={loading} />
       ) : (
         <Text>Loading...</Text>
       )}

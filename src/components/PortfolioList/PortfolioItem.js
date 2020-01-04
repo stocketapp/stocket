@@ -23,7 +23,8 @@ const PortfolioItem = ({ item }: { item: PositionType }): React$Node => (
         status={item?.gains > 0 ? 'positive' : 'negative'}
         type="subtext"
       >
-        {formatCurrency(item?.gains)} ({item?.percentage.toFixed(2)}%)
+        {formatCurrency(item?.gains || 0)} ({item?.percentage?.toFixed(2) || 0}
+        %)
       </Text>
     </View>
   </Container>

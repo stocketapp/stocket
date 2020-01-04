@@ -1,5 +1,6 @@
 // @flow
-// import { useEffect, useState } from 'react'
+import firestore from '@react-native-firebase/firestore'
+import type { TradeDataType, DocReference } from 'types'
 import { WTD_API_KEY } from '../../config'
 
 async function get(query: string) {
@@ -19,26 +20,19 @@ export async function getStock(symbols: string | Array<string>) {
   return data
 }
 
-// export async function useGetStock(symbols: string | Array<string>) {
-//   const [stocks, setStocks] = useState(null)
-//   const [loading, setLoading] = useState(false)
+export async function createTrade(uid: string, data: TradeDataType) {
+  const ref: DocReference = firestore().doc(`Users/${uid}`)
 
-//   useEffect(() => {
-//     async function getStocks() {
-//       try {
-//         setLoading(true)
-//         const res = await get(`stock?symbol=${symbols}`)
-//         const { data } = await res.json()
-//         setStocks(data)
-//       } catch (err) {
-//         console.log(err)
-//       } finally {
-//         setLoading(false)
-//       }
-//     }
-
-//     getStocks()
-//   }, [symbols])
-
-//   return { stocks, loading }
-// }
+  try {
+    await ref.collection('trades').add({
+      uid,
+      symbol: data?.symbol,
+      action: data?.action,
+      quantity: data?.quantity,
+      price: data?.price,
+      value: data?.value,
+    })
+  } catch (err) {
+    console.log('createTrade: Function -', err)
+  }
+}

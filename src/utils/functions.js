@@ -11,7 +11,6 @@ export function formatCurrency(num: number | string) {
 
 export async function getFcmToken() {
   let fcmToken = await AsyncStorage.getItem('fcmToken')
-  console.log('fcmToken', fcmToken)
   if (!fcmToken) {
     fcmToken = await messaging().getToken()
     if (fcmToken) {
