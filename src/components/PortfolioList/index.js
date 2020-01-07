@@ -18,9 +18,11 @@ export default function PortfolioList({ data, loading }: PortfolioListProps) {
   return useMemo(
     () => (
       <Container style={styles.container} ph>
-        <Text type="title" style={styles.title}>
-          Portfolio
-        </Text>
+        <Container horizontal separate>
+          <Text type="title" style={styles.title}>
+            Portfolio
+          </Text>
+        </Container>
 
         <FlatList
           data={data}

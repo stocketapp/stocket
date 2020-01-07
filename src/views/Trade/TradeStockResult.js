@@ -22,7 +22,6 @@ export default function TradeInfo({ data, loading }: TradeInfoProps) {
 
   const createTradeTransaction = () => {
     createTrade(uid, {
-      uid,
       value: orderValue,
       price: parseFloat(data?.price),
       name: data?.name,

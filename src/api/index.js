@@ -24,14 +24,7 @@ export async function createTrade(uid: string, data: TradeDataType) {
   const ref: DocReference = firestore().doc(`Users/${uid}`)
 
   try {
-    await ref.collection('trades').add({
-      uid,
-      symbol: data?.symbol,
-      action: data?.action,
-      quantity: data?.quantity,
-      price: data?.price,
-      value: data?.value,
-    })
+    await ref.collection('trades').add(data)
   } catch (err) {
     console.log('createTrade: Function -', err)
   }
