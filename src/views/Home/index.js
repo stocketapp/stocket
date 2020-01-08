@@ -1,8 +1,9 @@
 import React from 'react'
 import { View, StyleSheet } from 'react-native'
 import { BLACK } from 'utils/colors'
-import { Balance, BalanceGraph, PortfolioList } from 'components'
+import { Balance, BalanceGraph } from 'components'
 import { useGetPortfolio } from 'hooks'
+import PortfolioList from './PortfolioList'
 
 export default function Home() {
   const { positions, loading } = useGetPortfolio()

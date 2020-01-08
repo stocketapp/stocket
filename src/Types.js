@@ -58,7 +58,7 @@ export type LabelProps = {
 export type PositionType = {
   gains: number,
   name: string,
-  percentage: number,
+  gainsPercentage: number,
   symbol: string,
   uid: string,
   value: number,
