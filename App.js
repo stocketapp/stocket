@@ -15,6 +15,8 @@ import RNBootSplash from 'react-native-bootsplash'
 import { BLACK } from 'utils/colors'
 import messaging from '@react-native-firebase/messaging'
 import { getFcmToken, requestNotificationPermission } from 'utils/functions'
+import OneSignal from 'react-native-onesignal'
+import { ONESIGNAL_APPID } from './config'
 
 export default function App(): React$Node {
   const { isAuth, currentUser } = useAuthState()
@@ -37,6 +39,7 @@ export default function App(): React$Node {
       }
     }
 
+    OneSignal.init(ONESIGNAL_APPID)
     checkNotificationPermission()
   }, [])
 
