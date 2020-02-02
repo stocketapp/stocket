@@ -34,13 +34,19 @@ def stocket_pods
   pod 'Folly', :podspec => '../node_modules/react-native/third-party-podspecs/Folly.podspec'
 end
 
-target 'stocket' do
+target 'Production' do
   # Pods for stocket
   stocket_pods
   use_native_modules!
 end
 
-target 'stocket-dev' do
+target 'Development' do
+  # Pods for stocket
+  stocket_pods
+  use_native_modules!
+end
+
+target 'Staging' do
   # Pods for stocket
   stocket_pods
   use_native_modules!

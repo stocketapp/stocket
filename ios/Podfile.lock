@@ -368,6 +368,7 @@ PODS:
     - nanopb/encode (= 0.3.9011)
   - nanopb/decode (0.3.9011)
   - nanopb/encode (0.3.9011)
+  - OneSignal (2.12.6)
   - Protobuf (3.11.2)
   - RCTRequired (0.61.5)
   - RCTTypeSafety (0.61.5):
@@ -532,6 +533,9 @@ PODS:
     - React-cxxreact (= 0.61.5)
     - React-jsi (= 0.61.5)
   - React-jsinspector (0.61.5)
+  - react-native-onesignal (3.6.4):
+    - OneSignal (= 2.12.6)
+    - React (< 1.0.0, >= 0.13.0)
   - React-RCTActionSheet (0.61.5):
     - React-Core/RCTActionSheetHeaders (= 0.61.5)
   - React-RCTAnimation (0.61.5):
@@ -635,6 +639,7 @@ DEPENDENCIES:
   - React-jsi (from `../node_modules/react-native/ReactCommon/jsi`)
   - React-jsiexecutor (from `../node_modules/react-native/ReactCommon/jsiexecutor`)
   - React-jsinspector (from `../node_modules/react-native/ReactCommon/jsinspector`)
+  - react-native-onesignal (from `../node_modules/react-native-onesignal`)
   - React-RCTActionSheet (from `../node_modules/react-native/Libraries/ActionSheetIOS`)
   - React-RCTAnimation (from `../node_modules/react-native/Libraries/NativeAnimation`)
   - React-RCTBlob (from `../node_modules/react-native/Libraries/Blob`)
@@ -695,6 +700,7 @@ SPEC REPOS:
     - GTMSessionFetcher
     - leveldb-library
     - nanopb
+    - OneSignal
     - Protobuf
 
 EXTERNAL SOURCES:
@@ -736,6 +742,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/ReactCommon/jsiexecutor"
   React-jsinspector:
     :path: "../node_modules/react-native/ReactCommon/jsinspector"
+  react-native-onesignal:
+    :path: "../node_modules/react-native-onesignal"
   React-RCTActionSheet:
     :path: "../node_modules/react-native/Libraries/ActionSheetIOS"
   React-RCTAnimation:
@@ -828,6 +836,7 @@ SPEC CHECKSUMS:
   lottie-ios: 496ac5cea1bbf1a7bd1f1f472f3232eb1b8d744b
   lottie-react-native: 2a1a82bb326ae51331a5520de0cf706733c6db69
   nanopb: 18003b5e52dab79db540fe93fe9579f399bd1ccd
+  OneSignal: a6df91542d1cf133b9dd19d89f2b533d8f2d3163
   Protobuf: dd1aaea7140debfe4dd0683fb8ef208e527ae153
   RCTRequired: b153add4da6e7dbc44aebf93f3cf4fcae392ddf1
   RCTTypeSafety: 9aa1b91d7f9310fc6eadc3cf95126ffe818af320
@@ -838,6 +847,7 @@ SPEC CHECKSUMS:
   React-jsi: cb2cd74d7ccf4cffb071a46833613edc79cdf8f7
   React-jsiexecutor: d5525f9ed5f782fdbacb64b9b01a43a9323d2386
   React-jsinspector: fa0ecc501688c3c4c34f28834a76302233e29dc0
+  react-native-onesignal: 80fc3683083d23b17a2aba180f965dc83bd77efd
   React-RCTActionSheet: 600b4d10e3aea0913b5a92256d2719c0cdd26d76
   React-RCTAnimation: 791a87558389c80908ed06cc5dfc5e7920dfa360
   React-RCTBlob: d89293cc0236d9cb0933d85e430b0bbe81ad1d72
@@ -863,6 +873,6 @@ SPEC CHECKSUMS:
   RNSVG: 8ba35cbeb385a52fd960fd28db9d7d18b4c2974f
   Yoga: f2a7cd4280bfe2cca5a7aed98ba0eb3d1310f18b
 
-PODFILE CHECKSUM: 603deeea274b911326511be1bf3c0facb88feeac
+PODFILE CHECKSUM: b148c15666053b3e27b938fc8dfb8bb5cd497335
 
 COCOAPODS: 1.8.4
