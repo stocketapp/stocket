@@ -12,7 +12,7 @@ import { createTrade } from 'api'
 export default function TradeInfo({ data, loading }: TradeInfoProps) {
   const price = data?.price
   const { uid } = useSelector(({ user }) => user.currentUser)
-  const { stockQuantity, selectedTradeAction } = useSelector(
+  const { stockQuantity, selectedTradeAction, maxShares } = useSelector(
     ({ trade }) => trade,
   )
   const orderValue = useMemo(() => {
@@ -57,7 +57,7 @@ export default function TradeInfo({ data, loading }: TradeInfoProps) {
             >
               <TouchableOpacity
                 style={[styles.btn]}
-                disabled={!stockQuantity}
+                disabled={!stockQuantity && stockQuantity <= maxShares}
                 onPress={createTradeTransaction}
               >
                 <Text

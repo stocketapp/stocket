@@ -1,14 +1,23 @@
 // @flow
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Container, Text, Label } from 'components'
 import type { TradeInfoProps } from 'types'
 import { formatCurrency } from 'utils/functions'
 import TradeAction from './TradeAction'
 import StockQuantity from './StockQuantity'
+import { useDispatch } from 'react-redux'
 
 export default function({ data }: TradeInfoProps): React$Node {
   const status = parseFloat(data?.change_pct) > 0 ? 'positive' : 'negative'
   const price = data?.price
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    dispatch({
+      type: 'STOCK_PRICE',
+      stockPrice: price,
+    })
+  }, [price, dispatch])
 
   return (
     <>

@@ -1,11 +1,17 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { TextInput, StyleSheet } from 'react-native'
 import { Container, Text } from 'components'
 import { useDispatch, useSelector } from 'react-redux'
 import { GRAY_DARKER } from 'utils/colors'
 
 export default function StockAmount() {
-  const { stockQuantity } = useSelector(({ trade }) => trade)
+  const {
+    stockQuantity,
+    stockPrice,
+    maxShares,
+    selectedTradeAction,
+  } = useSelector(({ trade }) => trade)
+  const { cash } = useSelector(({ user }) => user.userInfo)
   const dispatch = useDispatch()
 
   const setQuantity = (quantity: string) => {
@@ -14,6 +20,13 @@ export default function StockAmount() {
       stockQuantity: quantity,
     })
   }
+
+  useEffect(() => {
+    dispatch({
+      type: 'MAX_SHARES',
+      maxShares: Math.floor(cash / stockPrice),
+    })
+  }, [cash, stockPrice, dispatch])
 
   return (
     <Container width="100%" top={30}>
@@ -28,9 +41,11 @@ export default function StockAmount() {
         keyboardType="number-pad"
         returnKeyType="done"
       />
-      <Text style={styles.maxShares} color={GRAY_DARKER}>
-        Max shares 0
-      </Text>
+      {selectedTradeAction !== 'SELL' && (
+        <Text style={styles.maxShares} color={GRAY_DARKER}>
+          Max shares {maxShares}
+        </Text>
+      )}
     </Container>
   )
 }

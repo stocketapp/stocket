@@ -12,5 +12,6 @@ export default {
     selectedTradeAction: 'BUY',
     stockQuantity: null,
     stockPrice: null,
+    maxShares: null,
   },
 }

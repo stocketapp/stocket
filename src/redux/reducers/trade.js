@@ -8,6 +8,8 @@ export default function(state = initialState.trade, action) {
       return { ...state, stockQuantity: action.stockQuantity }
     case 'STOCK_PRICE':
       return { ...state, stockPrice: action.stockPrice }
+    case 'MAX_SHARES':
+      return { ...state, maxShares: action.maxShares }
     default:
       return state
   }
