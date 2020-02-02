@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "BA9A7DF623E67A1A0062EEB4"
-               BuildableName = "Staging.app"
+               BuildableName = "Stocket.app"
                BlueprintName = "Staging"
                ReferencedContainer = "container:stocket.xcodeproj">
             </BuildableReference>
@@ -45,7 +45,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "BA9A7DF623E67A1A0062EEB4"
-            BuildableName = "Stocket Staging.app"
+            BuildableName = "Stocket.app"
             BlueprintName = "Staging"
             ReferencedContainer = "container:stocket.xcodeproj">
          </BuildableReference>
@@ -62,7 +62,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "BA9A7DF623E67A1A0062EEB4"
-            BuildableName = "Staging.app"
+            BuildableName = "Stocket.app"
             BlueprintName = "Staging"
             ReferencedContainer = "container:stocket.xcodeproj">
          </BuildableReference>

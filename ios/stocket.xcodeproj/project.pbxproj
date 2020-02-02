@@ -16,8 +16,8 @@
 		2D02E4BD1E0B4A84006451C7 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		2D02E4BF1E0B4AB3006451C7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		2DCD954D1E0B4F2C00145EB5 /* stocketTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* stocketTests.m */; };
-		74E4F16792461F3BF4C15DA7 /* libPods-stocket-dev.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5AD339400D7675A6DA11C62F /* libPods-stocket-dev.a */; };
-		B418C2E88FBE574F5F5EBCF8 /* libPods-stocket.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3684FA2FD1DB893FDAE669BE /* libPods-stocket.a */; };
+		9158B3CEEAEA4A27CFDFAA1C /* libPods-Staging.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CB38D724732835839592EC1A /* libPods-Staging.a */; };
+		ABBF1EE0F07E3D8EF7DDAE11 /* libPods-Production.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E3638367DA2FA755B72D654 /* libPods-Production.a */; };
 		BA11394323B0F1090076AE78 /* AppCenter-Config.plist in Resources */ = {isa = PBXBuildFile; fileRef = BA11394223B0F1090076AE78 /* AppCenter-Config.plist */; };
 		BA11394423B0F1090076AE78 /* AppCenter-Config.plist in Resources */ = {isa = PBXBuildFile; fileRef = BA11394223B0F1090076AE78 /* AppCenter-Config.plist */; };
 		BA21948E23BB77F600A77A16 /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA21948D23BB77F600A77A16 /* File.swift */; };
@@ -30,12 +30,12 @@
 		BA9A7DFA23E67A1A0062EEB4 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
 		BA9A7DFB23E67A1A0062EEB4 /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA21948D23BB77F600A77A16 /* File.swift */; };
 		BA9A7DFC23E67A1A0062EEB4 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
-		BA9A7DFE23E67A1A0062EEB4 /* libPods-stocket.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3684FA2FD1DB893FDAE669BE /* libPods-stocket.a */; };
 		BA9A7E0023E67A1A0062EEB4 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		BA9A7E0123E67A1A0062EEB4 /* AppCenter-Config.plist in Resources */ = {isa = PBXBuildFile; fileRef = BA11394223B0F1090076AE78 /* AppCenter-Config.plist */; };
 		BA9A7E0223E67A1A0062EEB4 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB11A68108700A75B9A /* LaunchScreen.xib */; };
 		BA9A7E0E23E67BBF0062EEB4 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = BA9A7E0D23E67BBF0062EEB4 /* GoogleService-Info.plist */; };
 		BA9A7E1023E67EBF0062EEB4 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = BA9A7E0F23E67EBF0062EEB4 /* GoogleService-Info.plist */; };
+		D8659CBC7C4B2A8C67F0F9DD /* libPods-Development.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DDF13AA7CFB4FA7FBDB73D9C /* libPods-Development.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -60,6 +60,7 @@
 		00E356EE1AD99517003FC87E /* stocketTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = stocketTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		00E356F11AD99517003FC87E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		00E356F21AD99517003FC87E /* stocketTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = stocketTests.m; sourceTree = "<group>"; };
+		13242E458141231BA04ED26C /* Pods-Staging.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Staging.release.xcconfig"; path = "Target Support Files/Pods-Staging/Pods-Staging.release.xcconfig"; sourceTree = "<group>"; };
 		13B07F961A680F5B00A75B9A /* Stocket.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Stocket.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = stocket/AppDelegate.h; sourceTree = "<group>"; };
 		13B07FB01A68108700A75B9A /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = stocket/AppDelegate.m; sourceTree = "<group>"; };
@@ -69,9 +70,11 @@
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = stocket/main.m; sourceTree = "<group>"; };
 		2D02E47B1E0B4A5D006451C7 /* stocket-tvOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "stocket-tvOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D02E4901E0B4A5D006451C7 /* stocket-tvOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "stocket-tvOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		3684FA2FD1DB893FDAE669BE /* libPods-stocket.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-stocket.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		346E6B1749A220A5F562CCDA /* Pods-Development.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Development.debug.xcconfig"; path = "Target Support Files/Pods-Development/Pods-Development.debug.xcconfig"; sourceTree = "<group>"; };
+		4E3638367DA2FA755B72D654 /* libPods-Production.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Production.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		523EA51712A3452E99FA230E /* Pods-stocket.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-stocket.release.xcconfig"; path = "Target Support Files/Pods-stocket/Pods-stocket.release.xcconfig"; sourceTree = "<group>"; };
-		5AD339400D7675A6DA11C62F /* libPods-stocket-dev.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-stocket-dev.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		626F567077F89264D1A3D677 /* Pods-Production.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Production.debug.xcconfig"; path = "Target Support Files/Pods-Production/Pods-Production.debug.xcconfig"; sourceTree = "<group>"; };
+		8F81C9492FC1FA216E0D2F7C /* Pods-Staging.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Staging.debug.xcconfig"; path = "Target Support Files/Pods-Staging/Pods-Staging.debug.xcconfig"; sourceTree = "<group>"; };
 		9CABE3AD26C57D0CC0112E34 /* Pods-stocket-dev.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-stocket-dev.debug.xcconfig"; path = "Target Support Files/Pods-stocket-dev/Pods-stocket-dev.debug.xcconfig"; sourceTree = "<group>"; };
 		AC3467912E587E2C37C70675 /* Pods-stocket-dev.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-stocket-dev.release.xcconfig"; path = "Target Support Files/Pods-stocket-dev/Pods-stocket-dev.release.xcconfig"; sourceTree = "<group>"; };
 		BA11394223B0F1090076AE78 /* AppCenter-Config.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "AppCenter-Config.plist"; sourceTree = "<group>"; };
@@ -86,6 +89,10 @@
 		BA9A7E0F23E67EBF0062EEB4 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		BABC5FA423AA5130002A831D /* stocket.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = stocket.entitlements; path = stocket/stocket.entitlements; sourceTree = "<group>"; };
 		BABC5FA523AA5DB3002A831D /* stocket-dev.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "stocket-dev.entitlements"; sourceTree = "<group>"; };
+		C124437318C8C4B259A825FF /* Pods-Development.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Development.release.xcconfig"; path = "Target Support Files/Pods-Development/Pods-Development.release.xcconfig"; sourceTree = "<group>"; };
+		C259499DD6E3D4C034B8DAE7 /* Pods-Production.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Production.release.xcconfig"; path = "Target Support Files/Pods-Production/Pods-Production.release.xcconfig"; sourceTree = "<group>"; };
+		CB38D724732835839592EC1A /* libPods-Staging.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Staging.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		DDF13AA7CFB4FA7FBDB73D9C /* libPods-Development.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Development.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		EBB646B227DC53A30BACCDFE /* Pods-stocket.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-stocket.debug.xcconfig"; path = "Target Support Files/Pods-stocket/Pods-stocket.debug.xcconfig"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		ED2971642150620600B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS12.0.sdk/System/Library/Frameworks/JavaScriptCore.framework; sourceTree = DEVELOPER_DIR; };
@@ -103,7 +110,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B418C2E88FBE574F5F5EBCF8 /* libPods-stocket.a in Frameworks */,
+				ABBF1EE0F07E3D8EF7DDAE11 /* libPods-Production.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -125,7 +132,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				74E4F16792461F3BF4C15DA7 /* libPods-stocket-dev.a in Frameworks */,
+				D8659CBC7C4B2A8C67F0F9DD /* libPods-Development.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -133,7 +140,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BA9A7DFE23E67A1A0062EEB4 /* libPods-stocket.a in Frameworks */,
+				9158B3CEEAEA4A27CFDFAA1C /* libPods-Staging.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -181,8 +188,9 @@
 			children = (
 				ED297162215061F000B7C4FE /* JavaScriptCore.framework */,
 				ED2971642150620600B7C4FE /* JavaScriptCore.framework */,
-				3684FA2FD1DB893FDAE669BE /* libPods-stocket.a */,
-				5AD339400D7675A6DA11C62F /* libPods-stocket-dev.a */,
+				DDF13AA7CFB4FA7FBDB73D9C /* libPods-Development.a */,
+				4E3638367DA2FA755B72D654 /* libPods-Production.a */,
+				CB38D724732835839592EC1A /* libPods-Staging.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -194,6 +202,12 @@
 				523EA51712A3452E99FA230E /* Pods-stocket.release.xcconfig */,
 				9CABE3AD26C57D0CC0112E34 /* Pods-stocket-dev.debug.xcconfig */,
 				AC3467912E587E2C37C70675 /* Pods-stocket-dev.release.xcconfig */,
+				346E6B1749A220A5F562CCDA /* Pods-Development.debug.xcconfig */,
+				C124437318C8C4B259A825FF /* Pods-Development.release.xcconfig */,
+				626F567077F89264D1A3D677 /* Pods-Production.debug.xcconfig */,
+				C259499DD6E3D4C034B8DAE7 /* Pods-Production.release.xcconfig */,
+				8F81C9492FC1FA216E0D2F7C /* Pods-Staging.debug.xcconfig */,
+				13242E458141231BA04ED26C /* Pods-Staging.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -542,7 +556,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-stocket/Pods-stocket-resources.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-Production/Pods-Production-resources.sh",
 				"${PODS_CONFIGURATION_BUILD_DIR}/gRPC-C++/gRPCCertificates-Cpp.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
@@ -551,7 +565,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-stocket/Pods-stocket-resources.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Production/Pods-Production-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		1468B8297585CD65ADF3EA63 /* [CP-User] [RNFB] Crashlytics Configuration */ = {
@@ -570,7 +584,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-stocket-dev/Pods-stocket-dev-resources.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-Development/Pods-Development-resources.sh",
 				"${PODS_CONFIGURATION_BUILD_DIR}/gRPC-C++/gRPCCertificates-Cpp.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
@@ -579,7 +593,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-stocket-dev/Pods-stocket-dev-resources.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Development/Pods-Development-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		2D02E4CB1E0B4B27006451C7 /* Bundle React Native Code And Images */ = {
@@ -674,7 +688,7 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-stocket-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-Staging-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -720,7 +734,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-stocket/Pods-stocket-resources.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-Staging/Pods-Staging-resources.sh",
 				"${PODS_CONFIGURATION_BUILD_DIR}/gRPC-C++/gRPCCertificates-Cpp.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
@@ -729,7 +743,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-stocket/Pods-stocket-resources.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Staging/Pods-Staging-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		BA9A7E0623E67A1A0062EEB4 /* [CP-User] [RNFB] Core Configuration */ = {
@@ -767,7 +781,7 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-stocket-dev-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-Development-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -789,7 +803,7 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-stocket-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-Production-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -973,7 +987,7 @@
 		};
 		13B07F941A680F5B00A75B9A /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = EBB646B227DC53A30BACCDFE /* Pods-stocket.debug.xcconfig */;
+			baseConfigurationReference = 626F567077F89264D1A3D677 /* Pods-Production.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -1000,7 +1014,7 @@
 		};
 		13B07F951A680F5B00A75B9A /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 523EA51712A3452E99FA230E /* Pods-stocket.release.xcconfig */;
+			baseConfigurationReference = C259499DD6E3D4C034B8DAE7 /* Pods-Production.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -1232,7 +1246,7 @@
 		};
 		BA3D54B323AA45B1006651B4 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 9CABE3AD26C57D0CC0112E34 /* Pods-stocket-dev.debug.xcconfig */;
+			baseConfigurationReference = 346E6B1749A220A5F562CCDA /* Pods-Development.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -1259,7 +1273,7 @@
 		};
 		BA3D54B423AA45B1006651B4 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = AC3467912E587E2C37C70675 /* Pods-stocket-dev.release.xcconfig */;
+			baseConfigurationReference = C124437318C8C4B259A825FF /* Pods-Development.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -1284,7 +1298,7 @@
 		};
 		BA9A7E0923E67A1A0062EEB4 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = EBB646B227DC53A30BACCDFE /* Pods-stocket.debug.xcconfig */;
+			baseConfigurationReference = 8F81C9492FC1FA216E0D2F7C /* Pods-Staging.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -1311,7 +1325,7 @@
 		};
 		BA9A7E0A23E67A1A0062EEB4 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 523EA51712A3452E99FA230E /* Pods-stocket.release.xcconfig */;
+			baseConfigurationReference = 13242E458141231BA04ED26C /* Pods-Staging.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
