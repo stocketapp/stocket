@@ -33,8 +33,8 @@
 		BA9A7E0023E67A1A0062EEB4 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		BA9A7E0123E67A1A0062EEB4 /* AppCenter-Config.plist in Resources */ = {isa = PBXBuildFile; fileRef = BA11394223B0F1090076AE78 /* AppCenter-Config.plist */; };
 		BA9A7E0223E67A1A0062EEB4 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB11A68108700A75B9A /* LaunchScreen.xib */; };
-		BA9A7E0E23E67BBF0062EEB4 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = BA9A7E0D23E67BBF0062EEB4 /* GoogleService-Info.plist */; };
-		BA9A7E1023E67EBF0062EEB4 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = BA9A7E0F23E67EBF0062EEB4 /* GoogleService-Info.plist */; };
+		BA9A7E1623E692F60062EEB4 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = BA9A7E1523E692F60062EEB4 /* GoogleService-Info.plist */; };
+		BA9A7E1A23E693350062EEB4 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = BA9A7E1923E693350062EEB4 /* GoogleService-Info.plist */; };
 		D8659CBC7C4B2A8C67F0F9DD /* libPods-Development.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DDF13AA7CFB4FA7FBDB73D9C /* libPods-Development.a */; };
 /* End PBXBuildFile section */
 
@@ -85,8 +85,8 @@
 		BA3D54B523AA45B1006651B4 /* Stocket Dev.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Stocket Dev.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BA9A7DF423E67A0E0062EEB4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = "Resources-iPad/stocket/Base.lproj/LaunchScreen.xib"; sourceTree = "<group>"; };
 		BA9A7E0B23E67A1A0062EEB4 /* Stocket.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Stocket.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		BA9A7E0D23E67BBF0062EEB4 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		BA9A7E0F23E67EBF0062EEB4 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
+		BA9A7E1523E692F60062EEB4 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		BA9A7E1923E693350062EEB4 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		BABC5FA423AA5130002A831D /* stocket.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = stocket.entitlements; path = stocket/stocket.entitlements; sourceTree = "<group>"; };
 		BABC5FA523AA5DB3002A831D /* stocket-dev.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "stocket-dev.entitlements"; sourceTree = "<group>"; };
 		C124437318C8C4B259A825FF /* Pods-Development.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Development.release.xcconfig"; path = "Target Support Files/Pods-Development/Pods-Development.release.xcconfig"; sourceTree = "<group>"; };
@@ -263,7 +263,7 @@
 		BA3D548D23AA442A006651B4 /* Dev */ = {
 			isa = PBXGroup;
 			children = (
-				BA9A7E0F23E67EBF0062EEB4 /* GoogleService-Info.plist */,
+				BA9A7E1523E692F60062EEB4 /* GoogleService-Info.plist */,
 			);
 			path = Dev;
 			sourceTree = "<group>";
@@ -279,7 +279,7 @@
 		BA9A7DDA23E679CE0062EEB4 /* Staging */ = {
 			isa = PBXGroup;
 			children = (
-				BA9A7E0D23E67BBF0062EEB4 /* GoogleService-Info.plist */,
+				BA9A7E1923E693350062EEB4 /* GoogleService-Info.plist */,
 			);
 			path = Staging;
 			sourceTree = "<group>";
@@ -516,7 +516,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BA3D54AE23AA45B1006651B4 /* Images.xcassets in Resources */,
-				BA9A7E1023E67EBF0062EEB4 /* GoogleService-Info.plist in Resources */,
+				BA9A7E1623E692F60062EEB4 /* GoogleService-Info.plist in Resources */,
 				BA11394423B0F1090076AE78 /* AppCenter-Config.plist in Resources */,
 				BA3D54AF23AA45B1006651B4 /* LaunchScreen.xib in Resources */,
 			);
@@ -527,8 +527,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				BA9A7E0023E67A1A0062EEB4 /* Images.xcassets in Resources */,
+				BA9A7E1A23E693350062EEB4 /* GoogleService-Info.plist in Resources */,
 				BA9A7E0123E67A1A0062EEB4 /* AppCenter-Config.plist in Resources */,
-				BA9A7E0E23E67BBF0062EEB4 /* GoogleService-Info.plist in Resources */,
 				BA9A7E0223E67A1A0062EEB4 /* LaunchScreen.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1314,7 +1314,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.corasan.stocket-staging";
+				PRODUCT_BUNDLE_IDENTIFIER = com.corasan.stocket;
 				PRODUCT_NAME = Stocket;
 				SWIFT_OBJC_BRIDGING_HEADER = "stocket-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -1340,7 +1340,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.corasan.stocket-staging";
+				PRODUCT_BUNDLE_IDENTIFIER = com.corasan.stocket;
 				PRODUCT_NAME = Stocket;
 				SWIFT_OBJC_BRIDGING_HEADER = "stocket-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;

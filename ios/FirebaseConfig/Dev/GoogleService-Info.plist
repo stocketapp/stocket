@@ -3,9 +3,9 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>1072088358272-mt4tu8f479b53nbm28ab702oc4v1tkig.apps.googleusercontent.com</string>
+	<string>1072088358272-64on08fdsq3r9c3n3a0the9hgftnsvrt.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.1072088358272-mt4tu8f479b53nbm28ab702oc4v1tkig</string>
+	<string>com.googleusercontent.apps.1072088358272-64on08fdsq3r9c3n3a0the9hgftnsvrt</string>
 	<key>API_KEY</key>
 	<string>AIzaSyB-mkjQGfIqRBpAfRjbtYZklfcUaqbI4HI</string>
 	<key>GCM_SENDER_ID</key>
@@ -13,23 +13,23 @@
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.corasan.stocket</string>
+	<string>com.corasan.stocket-dev</string>
 	<key>PROJECT_ID</key>
 	<string>stocket-dev</string>
 	<key>STORAGE_BUCKET</key>
 	<string>stocket-dev.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
-	<false></false>
+	<false/>
 	<key>IS_ANALYTICS_ENABLED</key>
-	<false></false>
+	<false/>
 	<key>IS_APPINVITE_ENABLED</key>
-	<true></true>
+	<true/>
 	<key>IS_GCM_ENABLED</key>
-	<true></true>
+	<true/>
 	<key>IS_SIGNIN_ENABLED</key>
-	<true></true>
+	<true/>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:1072088358272:ios:a270dffd359bbda8eaf565</string>
+	<string>1:1072088358272:ios:b6c4bdc58312355deaf565</string>
 	<key>DATABASE_URL</key>
 	<string>https://stocket-dev.firebaseio.com</string>
 </dict>
