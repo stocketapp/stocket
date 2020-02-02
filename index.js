@@ -8,6 +8,7 @@ import App from './App'
 import { name as appName } from './app.json'
 import { Provider } from 'react-redux'
 import configureStore from './src/redux/configureStore'
+import '@react-native-firebase/crashlytics'
 
 const store = configureStore()
 
