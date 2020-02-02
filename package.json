@@ -29,6 +29,7 @@
     "react-native": "0.61.5",
     "react-native-bootsplash": "^1.2.1",
     "react-native-gesture-handler": "^1.5.2",
+    "react-native-onesignal": "^3.6.4",
     "react-native-reanimated": "^1.4.0",
     "react-native-svg": "^9.13.6",
     "react-navigation": "^4.0.10",
