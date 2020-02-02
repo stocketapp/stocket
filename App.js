@@ -7,37 +7,56 @@
  */
 
 import React, { useEffect } from 'react'
-import { SafeAreaView, StatusBar, View } from 'react-native'
+import { StatusBar } from 'react-native'
 import switchNavigator from 'navigation'
-import { useAuthState } from 'stocket-hooks'
-import { createAppContainer } from 'react-navigation'
+import { useAuthState, useSetUserInfo } from 'hooks'
+import { createAppContainer, SafeAreaView } from 'react-navigation'
 import RNBootSplash from 'react-native-bootsplash'
 import { BLACK } from 'utils/colors'
+import messaging from '@react-native-firebase/messaging'
+import { getFcmToken, requestNotificationPermission } from 'utils/functions'
 
 export default function App(): React$Node {
-  const { isAuth } = useAuthState()
+  const { isAuth, currentUser } = useAuthState()
+  const { loading } = useSetUserInfo(currentUser)
 
   useEffect(() => {
-    RNBootSplash.hide({ duration: 250 })
+    if (!loading) {
+      RNBootSplash.hide({ duration: 250 })
+    }
+  }, [loading])
+
+  useEffect(() => {
+    async function checkNotificationPermission() {
+      const isEnabled = await messaging().hasPermission()
+
+      if (isEnabled) {
+        getFcmToken()
+      } else {
+        requestNotificationPermission()
+      }
+    }
+
+    checkNotificationPermission()
   }, [])
 
   const navigator = switchNavigator(!isAuth ? 'AuthStack' : 'MainStack')
   const NavigationRoutes = createAppContainer(navigator)
 
-  const container = {
-    flex: 1,
-    backgroundColor: BLACK,
-    paddingHorizontal: 16,
-  }
-
   return (
     <>
       <StatusBar barStyle="light-content" />
-      <SafeAreaView style={container}>
-        <View style={container}>
-          <NavigationRoutes />
-        </View>
+      <SafeAreaView
+        style={container}
+        forceInset={{ top: 'always', bottom: 'never' }}
+      >
+        <NavigationRoutes />
       </SafeAreaView>
     </>
   )
+}
+
+const container = {
+  flex: 1,
+  backgroundColor: BLACK,
 }

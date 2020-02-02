@@ -1,14 +1,13 @@
 import React from 'react'
 import { View, Text, StyleSheet } from 'react-native'
-import { firebase } from '@react-native-firebase/auth'
+import auth from '@react-native-firebase/auth'
+import firestore from '@react-native-firebase/firestore'
 import appleAuth, {
   AppleButton,
   AppleAuthRequestScope,
   AppleAuthRequestOperation,
 } from '@invertase/react-native-apple-authentication'
 import { GRAY } from 'utils/colors'
-
-const { auth } = firebase
 
 export default function SignIn() {
   async function onAppleButtonPress() {
@@ -20,13 +19,21 @@ export default function SignIn() {
       ],
     })
 
-    const { identityToken, nonce } = appleAuthRequestResponse
+    const { identityToken, nonce, fullName } = appleAuthRequestResponse
     if (identityToken) {
       const appleCredential = auth.AppleAuthProvider.credential(
         identityToken,
         nonce,
       )
       await auth().signInWithCredential(appleCredential)
+      const currentUser = auth().currentUser
+      const displayName = `${fullName?.givenName} ${fullName?.familyName}`
+      currentUser.updateProfile({ displayName })
+      await firestore()
+        .doc(`Users/${currentUser?.uid}`)
+        .update({
+          name: displayName,
+        })
     }
   }
 

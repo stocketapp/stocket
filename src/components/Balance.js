@@ -1,18 +1,20 @@
+// @flow
 import React from 'react'
-import { View } from 'react-native'
 import { GRAY_DARKER } from 'utils/colors'
+import { useSelector } from 'react-redux'
+import { formatCurrency } from 'utils/functions'
 import Text from './Text'
+import Container from './Container'
 
-const Balance = () => {
-  const container = { paddingHorizontal: 18 }
-
+const Balance = (): React$Node => {
+  const { userInfo } = useSelector(({ user }) => user)
   return (
-    <View style={container}>
-      <Text color={GRAY_DARKER} type="subtitle">
+    <Container ph>
+      <Text color={GRAY_DARKER} type="label">
         Balance
       </Text>
-      <Text type="heading">$2,084.86</Text>
-    </View>
+      <Text type="heading">{formatCurrency(userInfo?.combinedValue || 0)}</Text>
+    </Container>
   )
 }
 
