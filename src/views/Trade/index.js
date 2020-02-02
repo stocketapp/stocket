@@ -2,11 +2,13 @@ import React, { useState } from 'react'
 import { Container, SearchSymbols, Text } from 'components'
 import { getStock } from 'api'
 import TradeStockResult from './TradeStockResult'
+import { useDispatch } from 'react-redux'
 
 export default function Trade() {
   const [search, setSearch] = useState('')
   const [data, setData] = useState(null)
   const [loading, setLoading] = useState(false)
+  const dispatch = useDispatch()
 
   const getStockData = async () => {
     try {
@@ -14,6 +16,10 @@ export default function Trade() {
         setLoading(true)
         const res = await getStock(search)
         setData(res[0])
+        dispatch({
+          type: 'SET_TRADE_DATA',
+          tradeData: res[0],
+        })
       }
     } catch (err) {
       console.log(err)

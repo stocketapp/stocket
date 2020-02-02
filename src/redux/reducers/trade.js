@@ -10,6 +10,10 @@ export default function(state = initialState.trade, action) {
       return { ...state, stockPrice: action.stockPrice }
     case 'MAX_SHARES':
       return { ...state, maxShares: action.maxShares }
+    case 'SHARES_OWNED':
+      return { ...state, sharesOwned: action.sharesOwned }
+    case 'SET_TRADE_DATA':
+      return { ...state, tradeData: action.tradeData }
     default:
       return state
   }

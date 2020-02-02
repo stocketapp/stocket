@@ -13,5 +13,6 @@ export default {
     stockQuantity: null,
     stockPrice: null,
     maxShares: null,
+    sharesOwned: null,
   },
 }

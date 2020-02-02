@@ -9,12 +9,16 @@ import { formatCurrency } from 'utils/functions'
 import StockDetails from './StockDetails'
 import { createTrade } from 'api'
 
-export default function TradeInfo({ data, loading }: TradeInfoProps) {
-  const price = data?.price
+export default function TradeInfo({ loading }: TradeInfoProps) {
   const { uid } = useSelector(({ user }) => user.currentUser)
-  const { stockQuantity, selectedTradeAction, maxShares } = useSelector(
-    ({ trade }) => trade,
-  )
+  const {
+    stockQuantity,
+    selectedTradeAction,
+    maxShares,
+    tradeData: data,
+    sharesOwned,
+  } = useSelector(({ trade }) => trade)
+  const price = data?.price
   const orderValue = useMemo(() => {
     const total = (parseFloat(price) || 0) * stockQuantity
     return total
@@ -30,6 +34,15 @@ export default function TradeInfo({ data, loading }: TradeInfoProps) {
       action: selectedTradeAction,
     })
   }
+
+  const btnDisabled = useMemo(() => {
+    return (
+      stockQuantity &&
+      (selectedTradeAction === 'BUY'
+        ? stockQuantity <= maxShares
+        : stockQuantity <= sharesOwned)
+    )
+  }, [stockQuantity, selectedTradeAction, maxShares, sharesOwned])
 
   return (
     <Container ph>
@@ -50,14 +63,11 @@ export default function TradeInfo({ data, loading }: TradeInfoProps) {
             <Text type="title">Order value: {formatCurrency(orderValue)}</Text>
 
             <View
-              style={[
-                styles.btnContainer,
-                { opacity: !stockQuantity ? 0.5 : 1 },
-              ]}
+              style={[styles.btnContainer, { opacity: !btnDisabled ? 0.5 : 1 }]}
             >
               <TouchableOpacity
                 style={[styles.btn]}
-                disabled={!stockQuantity && stockQuantity <= maxShares}
+                disabled={!btnDisabled}
                 onPress={createTradeTransaction}
               >
                 <Text
