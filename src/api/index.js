@@ -1,15 +1,22 @@
 // @flow
 import firestore from '@react-native-firebase/firestore'
+import perf from '@react-native-firebase/perf'
 import type { TradeDataType, DocReference } from 'types'
 import { WTD_API_KEY } from '../../config'
 
 async function get(query: string) {
   const url = `https://api.worldtradingdata.com/api/v1/${query}&api_token=${WTD_API_KEY}`
+  const metric = await perf().newHttpMetric(url, 'GET')
+  metric.putAttribute('user', 'abcd')
   const res = await fetch(url, {
     method: 'GET',
     Accept: 'applicatiion/json',
   })
+  metric.setHttpResponseCode(res.status)
+  metric.setResponseContentType(res.headers.get('Content-Type'))
+  metric.setResponsePayloadSize(res.headers.get('Content-Length'))
 
+  await metric.stop()
   return res
 }
 
@@ -24,14 +31,7 @@ export async function createTrade(uid: string, data: TradeDataType) {
   const ref: DocReference = firestore().doc(`Users/${uid}`)
 
   try {
-    await ref.collection('trades').add({
-      uid,
-      symbol: data?.symbol,
-      action: data?.action,
-      quantity: data?.quantity,
-      price: data?.price,
-      value: data?.value,
-    })
+    await ref.collection('trades').add(data)
   } catch (err) {
     console.log('createTrade: Function -', err)
   }

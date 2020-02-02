@@ -1,6 +1,6 @@
 import React from 'react'
 import { View, TouchableOpacity } from 'react-native'
-import Text from '../Text'
+import { Text } from 'components'
 import { BLUE } from 'utils/colors'
 import { useNavigation } from 'hooks'
 

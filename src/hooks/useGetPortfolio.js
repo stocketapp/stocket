@@ -1,7 +1,9 @@
 // @flow
 import { useEffect } from 'react'
 import firestore from '@react-native-firebase/firestore'
+import functions from '@react-native-firebase/functions'
 import { useSelector, useDispatch } from 'react-redux'
+import { getStock } from 'api'
 
 const UsersRef = firestore().collection('Users')
 
@@ -11,28 +13,27 @@ export default function useGetPortfolio(): {} {
   const dispatch = useDispatch()
 
   useEffect(() => {
-    async function getPortfolios() {
-      const setLoading = payload => {
-        dispatch({ type: 'SET_PORTFOLIO_LOADING', payload })
-      }
-
-      try {
-        setLoading(true)
-        const ref = await UsersRef.doc(uid)
-          .collection('positions')
-          .get()
-        const arr = ref.docs.map(doc => doc.data())
-        if (arr.length > 0) {
-          dispatch({ type: 'SET_PORTFOLIO', payload: arr })
-        }
-      } catch (err) {
-        console.log(err)
-      } finally {
-        setLoading(false)
-      }
+    const setLoading = (payload: boolean) => {
+      dispatch({ type: 'SET_PORTFOLIO_LOADING', payload })
     }
-    getPortfolios()
-  }, [])
+
+    return UsersRef.doc(uid)
+      .collection('positions')
+      .onSnapshot(snapshot => {
+        const list = []
+        snapshot.forEach(doc => {
+          const arr = doc.data()
+          list.push(arr)
+        })
+        if (list.length > 0) {
+          dispatch({ type: 'SET_PORTFOLIO', payload: list })
+        }
+
+        if (loading) {
+          setLoading(false)
+        }
+      })
+  }, [dispatch, loading, uid])
 
   return { positions, loading }
 }

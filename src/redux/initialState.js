@@ -6,11 +6,13 @@ export default {
   },
   portfolio: {
     positions: [],
-    loading: false,
+    loading: true,
   },
   trade: {
     selectedTradeAction: 'BUY',
     stockQuantity: null,
     stockPrice: null,
+    maxShares: null,
+    sharesOwned: null,
   },
 }

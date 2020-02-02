@@ -4,24 +4,23 @@ import { useDispatch, useSelector } from 'react-redux'
 
 const UsersRef = firestore().collection('Users')
 
-export default function useSetUserInfo() {
-  const [userInfo, setUserInfo] = useState(null)
+export default function useSetUserInfo(currentUser) {
   const [loading, setLoading] = useState(false)
   const dispatch = useDispatch()
-  // const { currentUser } = useSelector(({ user }) => user)
+  const { userInfo } = useSelector(({ user }) => user)
 
   useEffect(() => {
-    let isCancelled = false
-    // const uid = currentUser?.uid
     async function getUserInfo() {
       try {
         setLoading(true)
-        const info = await UsersRef.doc('tubkakDAXaa1rPLf7IkaWPpKz5y1').get()
-        // setUserInfo(info.data())
-        dispatch({
-          type: 'SET_USER_INFO',
-          userInfo: info.data(),
-        })
+        const info = await UsersRef.doc(currentUser?.uid).get()
+        const data = info.data()
+        if (data) {
+          dispatch({
+            type: 'SET_USER_INFO',
+            userInfo: data,
+          })
+        }
       } catch (err) {
         console.log(err)
       } finally {
@@ -30,11 +29,7 @@ export default function useSetUserInfo() {
     }
 
     getUserInfo()
-
-    return () => {
-      isCancelled = true
-    }
-  }, [])
+  }, [currentUser, dispatch])
 
   return { loading, userInfo }
 }

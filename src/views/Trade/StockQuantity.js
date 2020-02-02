@@ -1,11 +1,21 @@
-import React from 'react'
+import React, { useEffect, useMemo } from 'react'
 import { TextInput, StyleSheet } from 'react-native'
 import { Container, Text } from 'components'
 import { useDispatch, useSelector } from 'react-redux'
 import { GRAY_DARKER } from 'utils/colors'
+import { find } from 'lodash'
 
 export default function StockAmount() {
-  const { stockQuantity } = useSelector(({ trade }) => trade)
+  const {
+    stockQuantity,
+    stockPrice,
+    maxShares,
+    selectedTradeAction,
+    sharesOwned,
+    tradeData: { symbol },
+  } = useSelector(({ trade }) => trade)
+  const { cash } = useSelector(({ user }) => user?.userInfo)
+  const { positions } = useSelector(({ portfolio }) => portfolio)
   const dispatch = useDispatch()
 
   const setQuantity = (quantity: string) => {
@@ -14,6 +24,21 @@ export default function StockAmount() {
       stockQuantity: quantity,
     })
   }
+
+  useEffect(() => {
+    dispatch({
+      type: 'MAX_SHARES',
+      maxShares: Math.floor(cash / stockPrice),
+    })
+  }, [cash, stockPrice, dispatch])
+
+  useEffect(() => {
+    const result = find(positions, ['symbol', symbol])
+    dispatch({
+      type: 'SHARES_OWNED',
+      sharesOwned: result?.shares.length,
+    })
+  }, [symbol, positions, dispatch])
 
   return (
     <Container width="100%" top={30}>
@@ -29,7 +54,9 @@ export default function StockAmount() {
         returnKeyType="done"
       />
       <Text style={styles.maxShares} color={GRAY_DARKER}>
-        Max shares 0
+        {selectedTradeAction !== 'SELL'
+          ? `Max shares ${maxShares < 0 ? 0 : maxShares}`
+          : `Shares owned ${!sharesOwned ? 0 : sharesOwned}`}
       </Text>
     </Container>
   )

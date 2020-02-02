@@ -1,11 +1,11 @@
 // @flow
 import React, { useMemo } from 'react'
-import { FlatList, StyleSheet, View } from 'react-native'
-import Text from '../Text'
+import { FlatList, StyleSheet, View, TouchableOpacity } from 'react-native'
+import functions from '@react-native-firebase/functions'
+import { Text, Container, Loader } from 'components'
+import { RefreshIcon } from 'icons'
 import PortfolioItem from './PortfolioItem'
 import PortfolioEmpty from './PortfolioEmpty'
-import Container from '../Container'
-import Loader from '../Loader'
 
 type PortfolioListProps = {
   data: Array<any>,
@@ -14,13 +14,24 @@ type PortfolioListProps = {
 
 export default function PortfolioList({ data, loading }: PortfolioListProps) {
   const renderItem = ({ item }) => <PortfolioItem item={item} />
+  const onUpdateGainsCall = functions().httpsCallable('onUpdateGainsCall')
+
+  const refreshGains = () => {
+    onUpdateGainsCall()
+  }
 
   return useMemo(
     () => (
       <Container style={styles.container} ph>
-        <Text type="title" style={styles.title}>
-          Portfolio
-        </Text>
+        <Container horizontal separate>
+          <Text type="title" style={styles.title}>
+            Portfolio
+          </Text>
+
+          <TouchableOpacity onPress={() => refreshGains()}>
+            <RefreshIcon />
+          </TouchableOpacity>
+        </Container>
 
         <FlatList
           data={data}

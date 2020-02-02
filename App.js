@@ -17,16 +17,14 @@ import messaging from '@react-native-firebase/messaging'
 import { getFcmToken, requestNotificationPermission } from 'utils/functions'
 
 export default function App(): React$Node {
-  const { isAuth } = useAuthState()
-  const { loading } = useSetUserInfo()
+  const { isAuth, currentUser } = useAuthState()
+  const { loading } = useSetUserInfo(currentUser)
 
   useEffect(() => {
-    if (isAuth && !loading) {
-      RNBootSplash.hide({ duration: 250 })
-    } else {
+    if (!loading) {
       RNBootSplash.hide({ duration: 250 })
     }
-  }, [isAuth, loading])
+  }, [loading])
 
   useEffect(() => {
     async function checkNotificationPermission() {

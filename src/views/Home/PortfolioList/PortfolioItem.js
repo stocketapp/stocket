@@ -4,8 +4,7 @@ import { View, StyleSheet } from 'react-native'
 import { GRAY_DARKER } from 'utils/colors'
 import { formatCurrency } from 'utils/functions'
 import type { PositionType } from 'types'
-import Container from '../Container'
-import Text from '../Text'
+import { Container, Text } from 'components'
 
 const PortfolioItem = ({ item }: { item: PositionType }): React$Node => (
   <Container style={styles.container}>
@@ -23,7 +22,7 @@ const PortfolioItem = ({ item }: { item: PositionType }): React$Node => (
         status={item?.gains > 0 ? 'positive' : 'negative'}
         type="subtext"
       >
-        {formatCurrency(item?.gains || 0)} ({item?.percentage?.toFixed(2) || 0}
+        {formatCurrency(item?.gains || 0)} ({item?.gainsPercentage?.toFixed(2) || 0}
         %)
       </Text>
     </View>
