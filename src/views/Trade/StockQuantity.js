@@ -55,8 +55,8 @@ export default function StockAmount() {
       />
       <Text style={styles.maxShares} color={GRAY_DARKER}>
         {selectedTradeAction !== 'SELL'
-          ? `Max shares ${maxShares}`
-          : `Shares owned ${sharesOwned}`}
+          ? `Max shares ${maxShares < 0 ? 0 : maxShares}`
+          : `Shares owned ${!sharesOwned ? 0 : sharesOwned}`}
       </Text>
     </Container>
   )
