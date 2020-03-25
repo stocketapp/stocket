@@ -7,3 +7,5 @@ export const PURPLE_DARK = '#261c3f'
 export const NAVY = '#1e2d3f'
 export const BLUE = '#4089d7'
 export const RED = '#eb455a'
+
+export const BACKGROUND = '#020808'

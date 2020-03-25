@@ -1,6 +1,6 @@
 import React from 'react'
 import { View, StyleSheet } from 'react-native'
-import { BLACK } from 'utils/colors'
+import { BACKGROUND } from 'utils/colors'
 import { Balance, BalanceGraph } from 'components'
 import { useGetPortfolio } from 'hooks'
 import PortfolioList from './PortfolioList'
@@ -21,6 +21,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     paddingTop: 20,
-    backgroundColor: BLACK,
+    backgroundColor: BACKGROUND,
   },
 })
