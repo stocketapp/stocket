@@ -12,8 +12,9 @@ import MainStack from './src/navigation/MainStack'
 import AuthStack from './src/navigation/AuthStack'
 import { useAuthState, useSetUserInfo } from 'hooks'
 // import RNBootSplash from 'react-native-bootsplash'
-import { BLACK } from 'utils/colors'
+import { BACKGROUND } from 'utils/colors'
 import OneSignal from 'react-native-onesignal'
+import { SafeAreaView } from 'react-native-safe-area-context';
 import { ONESIGNAL_APPID } from './config'
 
 export default function App(): React$Node {
@@ -35,14 +36,14 @@ export default function App(): React$Node {
   }
 
   return (
-    <>
+    <SafeAreaView style={container}>
       <StatusBar barStyle="light-content" />
       <MainStack />
-    </>
+    </SafeAreaView>
   )
 }
 
 const container = {
   flex: 1,
-  backgroundColor: BLACK,
+  backgroundColor: BACKGROUND,
 }
