@@ -8,13 +8,11 @@
 
 import React, { useEffect } from 'react'
 import { StatusBar } from 'react-native'
-import switchNavigator from 'navigation'
+import MainStack from './src/navigation/MainStack'
+import AuthStack from './src/navigation/AuthStack'
 import { useAuthState, useSetUserInfo } from 'hooks'
-import { createAppContainer, SafeAreaView } from 'react-navigation'
-import RNBootSplash from 'react-native-bootsplash'
+// import RNBootSplash from 'react-native-bootsplash'
 import { BLACK } from 'utils/colors'
-import messaging from '@react-native-firebase/messaging'
-import { getFcmToken, requestNotificationPermission } from 'utils/functions'
 import OneSignal from 'react-native-onesignal'
 import { ONESIGNAL_APPID } from './config'
 
@@ -22,39 +20,24 @@ export default function App(): React$Node {
   const { isAuth, currentUser } = useAuthState()
   const { loading } = useSetUserInfo(currentUser)
 
-  useEffect(() => {
-    if (!loading) {
-      RNBootSplash.hide({ duration: 250 })
-    }
-  }, [loading])
+  // useEffect(() => {
+  //   if (!loading) {
+  //     RNBootSplash.hide({ duration: 250 })
+  //   }
+  // }, [loading])
 
   useEffect(() => {
-    async function checkNotificationPermission() {
-      const isEnabled = await messaging().hasPermission()
-
-      if (isEnabled) {
-        getFcmToken()
-      } else {
-        requestNotificationPermission()
-      }
-    }
-
     OneSignal.init(ONESIGNAL_APPID)
-    checkNotificationPermission()
   }, [])
 
-  const navigator = switchNavigator(!isAuth ? 'AuthStack' : 'MainStack')
-  const NavigationRoutes = createAppContainer(navigator)
+  if (!isAuth) {
+    return <AuthStack />
+  }
 
   return (
     <>
       <StatusBar barStyle="light-content" />
-      <SafeAreaView
-        style={container}
-        forceInset={{ top: 'always', bottom: 'never' }}
-      >
-        <NavigationRoutes />
-      </SafeAreaView>
+      <MainStack />
     </>
   )
 }

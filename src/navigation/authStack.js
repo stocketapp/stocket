@@ -1,16 +1,15 @@
-// import { create } from 'react-navigation'
+import React from 'react'
 import SignIn from 'views/SignIn'
-import { createStackNavigator } from 'react-navigation-stack'
+import { createStackNavigator } from '@react-navigation/stack'
 
-export default createStackNavigator(
-  {
-    SignIn: {
-      screen: SignIn,
-    },
-  },
-  {
-    defaultNavigationOptions: {
-      header: null,
-    },
-  },
+const Stack = createStackNavigator()
+
+export default () => (
+  <Stack.Navigator>
+    <Stack.Screen
+      name="Login"
+      component={SignIn}
+      options={{ headerShown: false }}
+    />
+  </Stack.Navigator>
 )

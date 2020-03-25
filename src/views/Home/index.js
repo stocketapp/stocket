@@ -6,13 +6,13 @@ import { useGetPortfolio } from 'hooks'
 import PortfolioList from './PortfolioList'
 
 export default function Home() {
-  const { positions, loading } = useGetPortfolio()
+  // const { positions, loading } = useGetPortfolio()
 
   return (
     <View style={styles.container}>
-      <Balance />
+      {/* <Balance />
       <BalanceGraph />
-      <PortfolioList data={positions} loading={loading} />
+      <PortfolioList data={positions} loading={loading} /> */}
     </View>
   )
 }
