@@ -27,6 +27,17 @@ export type TextProps = {
   children?: Text.propTypes.children,
   style?: Text.propTypes.style,
   status?: 'negative' | 'positive',
+  weight?:
+    | '100'
+    | '200'
+    | '300'
+    | '400'
+    | '500'
+    | '600'
+    | '700'
+    | '800'
+    | '900'
+    | 'bold',
 }
 
 export type TradeInfoProps = {
