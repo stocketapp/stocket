@@ -2,7 +2,6 @@
 import React from 'react'
 import { TouchableOpacity, StyleSheet } from 'react-native'
 import { GREEN, SUB_BACKGROUND, GRAY_DARKER } from 'utils/colors'
-import { formatCurrency } from 'utils/functions'
 import type { PositionType } from 'types'
 import { Container, Text } from 'components'
 
