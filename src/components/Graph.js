@@ -55,11 +55,6 @@ export default function Graph() {
             borderRadius: 16,
             left: -100,
           },
-          // propsForDots: {
-          //   r: '6',
-          //   strokeWidth: '2',
-          //   stroke: '#ffa726',
-          // },
         }}
         bezier
       />
