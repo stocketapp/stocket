@@ -4,16 +4,17 @@ import { FlatList, StyleSheet, View, TouchableOpacity } from 'react-native'
 import functions from '@react-native-firebase/functions'
 import { Text, Container, Loader } from 'components'
 import { RefreshIcon } from 'icons'
-import PortfolioItem from './PortfolioItem'
-import PortfolioEmpty from './PortfolioEmpty'
+import StockItem from './StockItem'
+import StockEmpty from './StockEmpty'
 
-type PortfolioListProps = {
+type StockHorizontalListProps = {
   data: Array<any>,
   loading: boolean,
 }
 
-export default function PortfolioList({ data, loading }: PortfolioListProps) {
-  const renderItem = ({ item }) => <PortfolioItem item={item} />
+export default function StockHorizontalList(props: StockHorizontalListProps) {
+  const { data, loading } = props
+  const renderItem = ({ item }) => <StockItem item={item} />
   const onUpdateGainsCall = functions().httpsCallable('onUpdateGainsCall')
 
   const refreshGains = () => {
@@ -42,7 +43,7 @@ export default function PortfolioList({ data, loading }: PortfolioListProps) {
           contentContainerStyle={styles.listContent}
           ListEmptyComponent={() => (
             <View style={styles.listLoader}>
-              {loading ? <Loader /> : <PortfolioEmpty />}
+              {loading ? <Loader /> : <StockEmpty />}
             </View>
           )}
         />
