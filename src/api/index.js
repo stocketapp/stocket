@@ -36,3 +36,9 @@ export async function createTrade(uid: string, data: TradeDataType) {
     console.log('createTrade: Function -', err)
   }
 }
+
+export async function searchTerm(term: string, params?: string = '') {
+  const res = await get(`stock_search?search_term=${term}&${params}`)
+  const { data } = await res.json()
+  return data
+}

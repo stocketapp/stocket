@@ -44,7 +44,7 @@ const Text = ({
     fontSize: selectFontSize(),
     ...(cap && {
       textTransform: 'capitalize',
-      letterSpacing: 0.3,
+      letterSpacing: 0.5,
     }),
     fontWeight: weight,
     color: !status ? color : setStatus(),

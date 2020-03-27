@@ -9,7 +9,7 @@ const PortfolioItem = ({ item }: { item: PositionType }): React$Node => (
   <TouchableOpacity>
     <Container style={styles.container}>
       <Text color={GREEN} type="heading" weight="700">
-        +1.6%
+        {item?.gainsPercentage?.toFixed(2) || 0}%
       </Text>
 
       <Text type="subtext" color="#fff" style={styles.bottomRow}>
@@ -18,24 +18,6 @@ const PortfolioItem = ({ item }: { item: PositionType }): React$Node => (
       <Text type="subtext" color={GRAY_DARKER}>
         {item?.symbol}
       </Text>
-      {/* <View>
-      <Text type="label">{item?.symbol}</Text>
-      <Text type="subtext" color={GRAY_DARKER} style={styles.bottomRow}>
-        {item?.name}
-      </Text>
-    </View>
-    <View style={styles.right}>
-      <Text type="label">{formatCurrency(item?.value)}</Text>
-      <Text
-        positive
-        style={styles.bottomRow}
-        status={item?.gains > 0 ? 'positive' : 'negative'}
-        type="subtext"
-      >
-        {formatCurrency(item?.gains || 0)} ({item?.gainsPercentage?.toFixed(2) || 0}
-        %)
-      </Text>
-    </View> */}
     </Container>
   </TouchableOpacity>
 )
