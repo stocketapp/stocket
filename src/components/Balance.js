@@ -14,7 +14,7 @@ const Balance = (): React$Node => {
         Invested
       </Text>
       <Text type="heading" style={{ fontWeight: '900' }}>
-        {formatCurrency(userInfo?.combinedValue || 0)}
+        {userInfo?.combinedValue || '0'}
       </Text>
       <Text color={GREEN} style={{ fontWeight: '600' }}>
         34.6

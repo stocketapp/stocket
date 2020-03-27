@@ -8,8 +8,12 @@ import { Container, Text } from 'components'
 const PortfolioItem = ({ item }: { item: PositionType }): React$Node => (
   <TouchableOpacity>
     <Container style={styles.container}>
-      <Text color={GREEN} type="heading" weight="700">
-        {item?.gainsPercentage?.toFixed(2) || 0}%
+      <Text
+        type="heading"
+        weight="700"
+        status={Number(item?.gains) > 0 ? 'positive' : 'negative'}
+      >
+        {Number(item?.gainsPercentage).toFixed(2) || '0'}%
       </Text>
 
       <Text type="subtext" color="#fff" style={styles.bottomRow}>

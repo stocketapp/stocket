@@ -18,7 +18,6 @@ export default function Search(): React$Node {
       try {
         const res = await searchTerm(debounced)
         setResults(res)
-        console.log(res)
       } catch (err) {
         console.log(err)
       }
