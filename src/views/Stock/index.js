@@ -1,13 +1,7 @@
 import React from 'react'
 import { View, TouchableOpacity } from 'react-native'
-import { Container, Text, Graph } from 'components'
-import {
-  GREEN,
-  SUB_BACKGROUND,
-  BACKGROUND,
-  GRAY_DARKER,
-  DARK_TEXT,
-} from 'utils/colors'
+import { Text, Graph } from 'components'
+import { GREEN, BACKGROUND, DARK_TEXT } from 'utils/colors'
 
 export default function Stock() {
   return (
