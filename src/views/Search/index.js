@@ -3,14 +3,15 @@ import React, { useState, useEffect } from 'react'
 import { FlatList, View, TouchableOpacity } from 'react-native'
 import { Container, SearchSymbols, Text } from 'components'
 import { BACKGROUND, GRAY_DARKER, GREEN } from 'utils/colors'
-import { useDebounce } from 'hooks'
-import { searchTerm } from 'api'
+import { useDebounce, useUser } from 'hooks'
+import { searchTerm, addToWatchlist } from 'api'
 // import { useDispatch } from 'react-redux'
 
 export default function Search(): React$Node {
   const [search, setSearch] = useState(null)
   const [results, setResults] = useState([])
   const debounced = useDebounce(search)
+  const { currentUser } = useUser()
 
   useEffect(() => {
     const getResults = async () => {
@@ -39,7 +40,10 @@ export default function Search(): React$Node {
         </Text>
       </View>
 
-      <TouchableOpacity style={{ padding: 6 }}>
+      <TouchableOpacity
+        style={{ padding: 6 }}
+        onPress={() => addToWatchlist(currentUser?.uid, { symbol })}
+      >
         <View style={styles.plus}>
           <Text
             type="title"
