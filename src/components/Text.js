@@ -11,6 +11,7 @@ const Text = ({
   status,
   children,
   style,
+  weight = '500',
   ...props
 }: TextProps) => {
   const selectFontSize = () => {
@@ -39,14 +40,15 @@ const Text = ({
   }
 
   const customStyle = {
-    fontFamily: 'Futura',
+    // fontFamily: 'SF Pro Text',
     fontSize: selectFontSize(),
     ...(cap && {
       textTransform: 'capitalize',
-      letterSpacing: 0.3,
+      letterSpacing: 0.5,
     }),
-    ...style,
+    fontWeight: weight,
     color: !status ? color : setStatus(),
+    ...style,
   }
 
   return <RNText style={customStyle}>{children}</RNText>

@@ -1,42 +1,43 @@
 // @flow
 import React from 'react'
-import { View, StyleSheet } from 'react-native'
-import { GRAY_DARKER } from 'utils/colors'
-import { formatCurrency } from 'utils/functions'
+import { TouchableOpacity, StyleSheet } from 'react-native'
+import { GREEN, SUB_BACKGROUND, GRAY_DARKER } from 'utils/colors'
 import type { PositionType } from 'types'
 import { Container, Text } from 'components'
 
 const PortfolioItem = ({ item }: { item: PositionType }): React$Node => (
-  <Container style={styles.container}>
-    <View>
-      <Text type="label">{item?.symbol}</Text>
-      <Text type="subtext" color={GRAY_DARKER} style={styles.bottomRow}>
+  <TouchableOpacity>
+    <Container style={styles.container}>
+      <Text
+        type="heading"
+        weight="700"
+        status={Number(item?.gains) > 0 ? 'positive' : 'negative'}
+      >
+        {Number(item?.gainsPercentage).toFixed(2) || '0'}%
+      </Text>
+
+      <Text type="subtext" color="#fff" style={styles.bottomRow}>
         {item?.name}
       </Text>
-    </View>
-    <View style={styles.right}>
-      <Text type="label">{formatCurrency(item?.value)}</Text>
-      <Text
-        positive
-        style={styles.bottomRow}
-        status={item?.gains > 0 ? 'positive' : 'negative'}
-        type="subtext"
-      >
-        {formatCurrency(item?.gains || 0)} ({item?.gainsPercentage?.toFixed(2) || 0}
-        %)
+      <Text type="subtext" color={GRAY_DARKER}>
+        {item?.symbol}
       </Text>
-    </View>
-  </Container>
+    </Container>
+  </TouchableOpacity>
 )
 
 const styles = StyleSheet.create({
   container: {
-    width: '100%',
-    flexDirection: 'row',
+    width: 130,
+    height: 110,
+    flexDirection: 'column',
     justifyContent: 'space-between',
-    paddingVertical: 20,
-    borderBottomColor: '#303030',
-    borderBottomWidth: 1,
+    paddingHorizontal: 15,
+    paddingTop: 10,
+    paddingBottom: 10,
+    backgroundColor: SUB_BACKGROUND,
+    borderRadius: 6,
+    marginRight: 20,
   },
   bottomRow: {
     marginTop: 3,

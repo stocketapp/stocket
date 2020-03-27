@@ -24,8 +24,8 @@ export default function PortfolioList({ data, loading }: PortfolioListProps) {
     () => (
       <Container style={styles.container} ph>
         <Container horizontal separate>
-          <Text type="title" style={styles.title}>
-            Portfolio
+          <Text type="title" style={styles.title} weight="bold">
+            Stocks
           </Text>
 
           <TouchableOpacity onPress={() => refreshGains()}>
@@ -38,6 +38,7 @@ export default function PortfolioList({ data, loading }: PortfolioListProps) {
           renderItem={renderItem}
           keyExtractor={(index, key) => key.toString()}
           style={styles.list}
+          horizontal
           contentContainerStyle={styles.listContent}
           ListEmptyComponent={() => (
             <View style={styles.listLoader}>
@@ -56,13 +57,13 @@ const styles = StyleSheet.create({
     marginTop: 40,
   },
   title: {
-    marginBottom: 10,
+    paddingBottom: 10,
   },
   list: {
-    minHeight: 200,
+    minHeight: 100,
   },
   listContent: {
-    paddingTop: 10,
+    paddingVertical: 10,
   },
   listLoader: {
     width: '100%',

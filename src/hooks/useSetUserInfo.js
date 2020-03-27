@@ -13,14 +13,16 @@ export default function useSetUserInfo(currentUser) {
     async function getUserInfo() {
       try {
         setLoading(true)
-        const info = await UsersRef.doc(currentUser?.uid).get()
-        const data = info.data()
-        if (data) {
-          dispatch({
-            type: 'SET_USER_INFO',
-            userInfo: data,
-          })
-        }
+        const ref = UsersRef.doc(currentUser?.uid)
+        await ref.onSnapshot(snapshot => {
+          const data = snapshot.data()
+          if (data) {
+            dispatch({
+              type: 'SET_USER_INFO',
+              userInfo: data,
+            })
+          }
+        })
       } catch (err) {
         console.log(err)
       } finally {

@@ -9,3 +9,4 @@ export const BLUE = '#4089d7'
 export const RED = '#eb455a'
 
 export const BACKGROUND = '#020808'
+export const SUB_BACKGROUND = 'rgba(92,92,92, 0.22)'

@@ -33,6 +33,22 @@ export async function createTrade(uid: string, data: TradeDataType) {
   try {
     await ref.collection('trades').add(data)
   } catch (err) {
-    console.log('createTrade: Function -', err)
+    console.log('[API] createTrade', err)
+  }
+}
+
+export async function searchTerm(term: string, params?: string = '') {
+  const res = await get(`stock_search?search_term=${term}&${params}`)
+  const { data } = await res.json()
+  return data
+}
+
+export async function addToWatchlist(uid: string, data: { symbol: string }) {
+  const ref: DocReference = firestore().doc(`Users/${uid}`)
+
+  try {
+    await ref.collection('watchlist').add(data)
+  } catch (err) {
+    console.log('[API] addToWatchlist', err)
   }
 }
