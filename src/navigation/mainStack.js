@@ -13,9 +13,7 @@ const Tab = createBottomTabNavigator()
 export default () => (
   <Tab.Navigator
     tabBar={props => <TabBarComponent {...props} />}
-    tabBarOptions={{ activeTintColor: GREEN }}
-    activeColor="blue"
-    inactiveColor={GRAY_DARKER}
+    tabBarOptions={{ activeTintColor: GREEN, inactiveTintColor: '#4a5a5a' }}
   >
     <Tab.Screen
       name="Home"
