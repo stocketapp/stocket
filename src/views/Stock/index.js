@@ -1,27 +1,16 @@
-import React, { useEffect } from 'react'
+import React, { useMemo } from 'react'
 import { View, TouchableOpacity } from 'react-native'
 import { Text, Graph } from 'components'
 import { GREEN, BACKGROUND, DARK_TEXT, GRAY_DARKER } from 'utils/colors'
-import { useDispatch, useSelector } from 'react-redux'
-import { getStock } from 'api'
+import { useSelector } from 'react-redux'
 import StockDetails from './StockDetails'
 
 export default function Stock() {
-  const { selectedStock, stockData } = useSelector(({ stock }) => stock)
-  const dispatch = useDispatch()
-
-  useEffect(() => {
-    const getStockData = async () => {
-      const res = await getStock(selectedStock?.symbol)
-      console.log(res[0])
-      dispatch({
-        type: 'SET_SELECTED_STOCK_DATA',
-        stockData: res[0],
-      })
-    }
-
-    getStockData()
-  }, [selectedStock, dispatch])
+  const { selectedStock, positionsMktData } = useSelector(({ stock }) => stock)
+  const position = useMemo(
+    () => positionsMktData.find(el => el.symbol === selectedStock.symbol),
+    [selectedStock, positionsMktData],
+  )
 
   return (
     <View style={styles.container} ph>
@@ -34,8 +23,8 @@ export default function Stock() {
         </View>
 
         <Graph />
-        
-        <StockDetails data={stockData} />
+
+        <StockDetails data={position} />
       </View>
 
       <View style={styles.bottom}>
@@ -43,10 +32,10 @@ export default function Stock() {
           <Text color={GRAY_DARKER}>Day change </Text>
           <Text
             weight="900"
-            status={Number(stockData?.day_change) < 0 ? 'positive' : 'negative'}
+            status={Number(position?.day_change) < 0 ? 'positive' : 'negative'}
             style={{ paddingTop: 2, fontSize: 15 }}
           >
-            {stockData?.day_change}
+            {position?.day_change}
           </Text>
         </View>
 
