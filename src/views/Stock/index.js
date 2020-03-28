@@ -50,7 +50,7 @@ export default function Stock() {
 
         <TouchableOpacity>
           <View style={styles.button}>
-            <Text color={DARK_TEXT} weight="700">
+            <Text color={DARK_TEXT} weight="800">
               Trade
             </Text>
           </View>
