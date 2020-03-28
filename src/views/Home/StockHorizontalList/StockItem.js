@@ -5,11 +5,22 @@ import { SUB_BACKGROUND, GRAY_DARKER } from 'utils/colors'
 import type { PositionType } from 'types'
 import { Container, Text } from 'components'
 import { useNavigation } from '@react-navigation/native'
+import { useDispatch } from 'react-redux'
 
 const PortfolioItem = ({ item }: { item: PositionType }): React$Node => {
   const { navigate } = useNavigation()
+  const dispatch = useDispatch()
+
+  const goToStock = () => {
+    dispatch({
+      type: 'SET_SELECTED_STOCK',
+      stock: item,
+    })
+    navigate('Stock')
+  }
+
   return (
-    <TouchableOpacity onPress={() => navigate('Stock')}>
+    <TouchableOpacity onPress={goToStock}>
       <Container style={styles.container}>
         <Text
           type="heading"
