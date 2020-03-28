@@ -29,6 +29,7 @@
     "lodash": "^4.17.15",
     "lottie-ios": "3.1.6",
     "lottie-react-native": "^3.3.2",
+    "numeral": "^2.0.6",
     "react": "16.13.1",
     "react-native": "0.61.5",
     "react-native-bootsplash": "^2.1.0",

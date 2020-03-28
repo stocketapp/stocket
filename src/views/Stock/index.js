@@ -4,6 +4,7 @@ import { Text, Graph } from 'components'
 import { GREEN, BACKGROUND, DARK_TEXT, GRAY_DARKER } from 'utils/colors'
 import { useDispatch, useSelector } from 'react-redux'
 import { getStock } from 'api'
+import StockDetails from './StockDetails'
 
 export default function Stock() {
   const { selectedStock, stockData } = useSelector(({ stock }) => stock)
@@ -12,7 +13,7 @@ export default function Stock() {
   useEffect(() => {
     const getStockData = async () => {
       const res = await getStock(selectedStock?.symbol)
-      // console.log(res[0].day_change)
+      console.log(res[0])
       dispatch({
         type: 'SET_SELECTED_STOCK_DATA',
         stockData: res[0],
@@ -33,7 +34,8 @@ export default function Stock() {
         </View>
 
         <Graph />
-        <View />
+        
+        <StockDetails data={stockData} />
       </View>
 
       <View style={styles.bottom}>
