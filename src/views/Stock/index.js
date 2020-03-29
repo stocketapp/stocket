@@ -1,31 +1,51 @@
 import React, { useMemo } from 'react'
-import { View, TouchableOpacity } from 'react-native'
+import { View, TouchableOpacity, ScrollView } from 'react-native'
 import { Text, Graph } from 'components'
 import { GREEN, BACKGROUND, DARK_TEXT, GRAY_DARKER } from 'utils/colors'
+import { ArrowLeftIcon } from 'components/Icons'
 import { useSelector } from 'react-redux'
 import StockDetails from './StockDetails'
+import { useNavigation } from '@react-navigation/native'
+import StockPosition from './StockPosition'
 
 export default function Stock() {
+  const { goBack } = useNavigation()
   const { selectedStock, positionsMktData } = useSelector(({ stock }) => stock)
   const position = useMemo(
     () => positionsMktData.find(el => el.symbol === selectedStock.symbol),
     [selectedStock, positionsMktData],
   )
+  const currentData = positionsMktData.find(
+    el => el.symbol === selectedStock?.symbol,
+  )
 
   return (
     <View style={styles.container} ph>
-      <View>
-        <View style={{ paddingHorizontal: 16 }}>
-          <Text type="heading" weight="900">
-            {selectedStock?.name}
-          </Text>
-          <Text style={{ paddingTop: 5 }}>{selectedStock?.symbol}</Text>
+      <TouchableOpacity
+        style={{ paddingLeft: 15, paddingVertical: 5 }}
+        onPress={goBack}
+      >
+        <ArrowLeftIcon size={30} color={GREEN} />
+      </TouchableOpacity>
+      <ScrollView
+        contentContainerStyle={{ paddingBottom: 70 }}
+        showsVerticalScrollIndicator={false}
+      >
+        <View>
+          <View style={{ paddingHorizontal: 16, paddingTop: 30 }}>
+            <Text weight="900" style={{ fontSize: 30 }}>
+              {currentData?.name}
+            </Text>
+            <Text style={{ paddingTop: 5 }}>{selectedStock?.symbol}</Text>
+          </View>
+
+          <Graph />
+
+          <StockDetails data={position} />
+
+          <StockPosition data={selectedStock} />
         </View>
-
-        <Graph />
-
-        <StockDetails data={position} />
-      </View>
+      </ScrollView>
 
       <View style={styles.bottom}>
         <View style={{ flexDirection: 'column' }}>
@@ -41,7 +61,7 @@ export default function Stock() {
 
         <TouchableOpacity>
           <View style={styles.button}>
-            <Text color={DARK_TEXT} weight="800">
+            <Text color={DARK_TEXT} weight="800" style={{ fontSize: 18 }}>
               Trade
             </Text>
           </View>
@@ -56,7 +76,6 @@ const styles = {
     flex: 1,
     backgroundColor: BACKGROUND,
     justifyContent: 'space-between',
-    paddingTop: 40,
   },
   bottom: {
     flexDirection: 'row',
@@ -64,11 +83,15 @@ const styles = {
     paddingHorizontal: 16,
     alignItems: 'center',
     justifyContent: 'space-between',
+    position: 'absolute',
+    bottom: 0,
+    backgroundColor: BACKGROUND,
+    width: '100%',
   },
   button: {
     backgroundColor: GREEN,
-    paddingHorizontal: 24,
-    paddingVertical: 6,
+    paddingHorizontal: 30,
+    paddingVertical: 7,
     borderRadius: 100,
   },
 }

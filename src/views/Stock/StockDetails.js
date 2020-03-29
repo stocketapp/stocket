@@ -12,7 +12,7 @@ type DetailItemProps = {
 
 const StockDetailItem = ({ label, value }: DetailItemProps): React$Node => (
   <View style={styles.detailItemContainer}>
-    <Text type="subtext" color={GRAY_DARKER} style={{ fontSize: 12 }}>
+    <Text color={GRAY_DARKER} style={{ fontSize: 13 }}>
       {label}
     </Text>
     <Text weight="700">{value}</Text>

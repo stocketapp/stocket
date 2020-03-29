@@ -19,21 +19,21 @@ export default () => (
       name="Home"
       component={Home}
       options={{
-        tabBarIcon: ({ color }) => <TrendingUpIcon size={36} color={color} />,
+        tabBarIcon: ({ color }) => <TrendingUpIcon size={50} color={color} />,
       }}
     />
     {/* <Tab.Screen
       name="Trade"
       component={Trade}
       options={{
-        tabBarIcon: ({ color }) => <TradeIcon size={36} color={color} />,
+        tabBarIcon: ({ color }) => <TradeIcon size={50} color={color} />,
       }}
     /> */}
     <Tab.Screen
       name="Search"
       component={Search}
       options={{
-        tabBarIcon: ({ color }) => <SearchIcon size={36} color={color} />,
+        tabBarIcon: ({ color }) => <SearchIcon size={45} color={color} />,
       }}
     />
   </Tab.Navigator>
