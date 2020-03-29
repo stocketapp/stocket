@@ -40,7 +40,6 @@ const Text = ({
   }
 
   const customStyle = {
-    // fontFamily: 'SF Pro Text',
     fontSize: selectFontSize(),
     ...(cap && {
       textTransform: 'capitalize',
