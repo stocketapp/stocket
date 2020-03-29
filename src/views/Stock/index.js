@@ -1,7 +1,13 @@
 import React, { useMemo } from 'react'
 import { View, TouchableOpacity, ScrollView } from 'react-native'
 import { Text, Graph } from 'components'
-import { GREEN, BACKGROUND, DARK_TEXT, GRAY_DARKER } from 'utils/colors'
+import {
+  GREEN,
+  BACKGROUND,
+  DARK_TEXT,
+  GRAY_DARKER,
+  SUB_BACKGROUND,
+} from 'utils/colors'
 import { ArrowLeftIcon } from 'components/Icons'
 import { useSelector } from 'react-redux'
 import StockDetails from './StockDetails'
@@ -36,14 +42,21 @@ export default function Stock() {
             <Text weight="900" style={{ fontSize: 30 }}>
               {currentData?.name}
             </Text>
-            <Text style={{ paddingTop: 5 }}>{selectedStock?.symbol}</Text>
+            <Text
+              style={{ paddingTop: 5 }}
+              color={GRAY_DARKER}
+              weight="700"
+              type="label"
+            >
+              {selectedStock?.symbol}
+            </Text>
           </View>
 
           <Graph />
 
           <StockDetails data={position} />
 
-          <StockPosition data={selectedStock} />
+          {currentData && <StockPosition data={selectedStock} />}
         </View>
       </ScrollView>
 
@@ -90,8 +103,8 @@ const styles = {
   },
   button: {
     backgroundColor: GREEN,
-    paddingHorizontal: 30,
-    paddingVertical: 7,
+    paddingHorizontal: 35,
+    paddingVertical: 8,
     borderRadius: 100,
   },
 }
