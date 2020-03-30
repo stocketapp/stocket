@@ -40,18 +40,21 @@ const Text = ({
   }
 
   const customStyle = {
-    // fontFamily: 'SF Pro Text',
     fontSize: selectFontSize(),
     ...(cap && {
       textTransform: 'capitalize',
-      letterSpacing: 0.5,
+      letterSpacing: 1,
     }),
     fontWeight: weight,
     color: !status ? color : setStatus(),
     ...style,
   }
 
-  return <RNText style={customStyle}>{children}</RNText>
+  return (
+    <RNText style={customStyle} {...props}>
+      {children}
+    </RNText>
+  )
 }
 
 export default Text

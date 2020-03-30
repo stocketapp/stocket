@@ -13,7 +13,7 @@ const Balance = (): React$Node => {
       <Text color={GRAY_DARKER} type="label">
         Invested
       </Text>
-      <Text type="heading" style={{ fontWeight: '900' }}>
+      <Text style={{ fontWeight: '900', fontSize: 34, paddingTop: 10 }}>
         {userInfo?.combinedValue || '0'}
       </Text>
       <Text color={GREEN} style={{ fontWeight: '600' }}>

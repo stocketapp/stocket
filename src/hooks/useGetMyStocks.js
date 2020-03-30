@@ -9,7 +9,7 @@ const UsersRef = firestore().collection('Users')
 
 export default function useGetPortfolio(): {} {
   const { uid } = useSelector(({ user }) => user.currentUser)
-  const { positions, loading } = useSelector(({ portfolio }) => portfolio)
+  const { positions, loading } = useSelector(({ stock }) => stock)
   const dispatch = useDispatch()
 
   useEffect(() => {
@@ -19,14 +19,14 @@ export default function useGetPortfolio(): {} {
 
     return UsersRef.doc(uid)
       .collection('positions')
-      .onSnapshot(snapshot => {
+      .onSnapshot(async snapshot => {
         const list = []
-        snapshot.forEach(doc => {
-          const arr = doc.data()
-          list.push(arr)
-        })
+        snapshot.forEach(doc => list.push(doc.data()))
         if (list.length > 0) {
-          dispatch({ type: 'SET_PORTFOLIO', payload: list })
+          dispatch({ type: 'ALL_MY_STOCKS', positions: list })
+          const syms = list.map(el => el.symbol)
+          const positionsMktData = await getStock(syms.join(','))
+          dispatch({ type: 'MY_STOCKS_MKT_DATA', positionsMktData })
         }
 
         if (loading) {
@@ -35,5 +35,5 @@ export default function useGetPortfolio(): {} {
       })
   }, [dispatch, loading, uid])
 
-  return { positions, loading }
+  return { positions, loading: true }
 }

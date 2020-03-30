@@ -7,7 +7,7 @@ type TabBarProps = {
   state: { routes: any, index: number },
   descriptors: [],
   activeTintColor: string,
-  inactiveColor: string,
+  inactiveTintColor: string,
   navigation: {
     navigate: (route: string) => void,
     state: { routes: Array<any>, index: number },
@@ -20,7 +20,7 @@ export default function TabBarComponent(props: TabBarProps): React$Node {
     state,
     descriptors,
     activeTintColor,
-    inactiveColor,
+    inactiveTintColor,
   } = props
   const routesLength: number = state.routes.length
   const tabWidth: number = Dimensions.get('screen').width / routesLength
@@ -30,7 +30,7 @@ export default function TabBarComponent(props: TabBarProps): React$Node {
     <Container style={styles.container} horizontal>
       {state.routes.map((route, routeIndex) => {
         const focused: boolean = activeRoute === routeIndex
-        const tintColor: string = focused ? activeTintColor : inactiveColor
+        const tintColor: string = focused ? activeTintColor : inactiveTintColor
         const { options } = descriptors[route.key]
         const { tabBarIcon } = options
 

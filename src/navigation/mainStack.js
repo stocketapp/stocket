@@ -13,29 +13,27 @@ const Tab = createBottomTabNavigator()
 export default () => (
   <Tab.Navigator
     tabBar={props => <TabBarComponent {...props} />}
-    tabBarOptions={{ activeTintColor: GREEN }}
-    activeColor="blue"
-    inactiveColor={GRAY_DARKER}
+    tabBarOptions={{ activeTintColor: GREEN, inactiveTintColor: '#4a5a5a' }}
   >
     <Tab.Screen
       name="Home"
       component={Home}
       options={{
-        tabBarIcon: ({ color }) => <TrendingUpIcon size={36} color={color} />,
+        tabBarIcon: ({ color }) => <TrendingUpIcon size={50} color={color} />,
       }}
     />
     {/* <Tab.Screen
       name="Trade"
       component={Trade}
       options={{
-        tabBarIcon: ({ color }) => <TradeIcon size={36} color={color} />,
+        tabBarIcon: ({ color }) => <TradeIcon size={50} color={color} />,
       }}
     /> */}
     <Tab.Screen
       name="Search"
       component={Search}
       options={{
-        tabBarIcon: ({ color }) => <SearchIcon size={36} color={color} />,
+        tabBarIcon: ({ color }) => <SearchIcon size={45} color={color} />,
       }}
     />
   </Tab.Navigator>
