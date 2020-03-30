@@ -3,6 +3,7 @@ import { View, TextInput, StyleSheet, TouchableOpacity } from 'react-native'
 import Container from './Container'
 import { SearchIcon } from 'icons'
 import type { SearchSymbolProps } from 'types'
+import { SUB_BACKGROUND, GRAY_DARKER } from 'utils/colors'
 
 const SearchSymbol = (props: SearchSymbolProps): React$Node => {
   const { value, setValue, onSearch } = props
@@ -13,8 +14,8 @@ const SearchSymbol = (props: SearchSymbolProps): React$Node => {
           value={value}
           onChangeText={setValue}
           style={styles.searchInput}
-          placeholder="Symbol e.g AAPL"
-          placeholderTextColor="#afafaf"
+          placeholder="Search"
+          placeholderTextColor={GRAY_DARKER}
           autoCapitalize="characters"
           returnKeyType="search"
           onSubmitEditing={({ text }) => onSearch(text)}
@@ -30,20 +31,20 @@ const SearchSymbol = (props: SearchSymbolProps): React$Node => {
 
 const styles = StyleSheet.create({
   searchContainer: {
-    paddingVertical: 8,
-    paddingHorizontal: 16,
-    backgroundColor: '#3F3F3F',
+    paddingVertical: 3,
+    paddingHorizontal: 18,
+    backgroundColor: SUB_BACKGROUND, // '#3F3F3F',
     width: '100%',
-    borderRadius: 100,
+    borderRadius: 1000,
     flexDirection: 'row',
     justifyContent: 'space-between',
   },
   searchInput: {
     color: '#fff',
-    fontSize: 18,
-    fontFamily: 'Futura',
+    fontSize: 16,
     flex: 1,
-    letterSpacing: -0.3,
+    letterSpacing: 0.5,
+    fontWeight: '600',
   },
   searchBtn: {
     paddingVertical: 3,

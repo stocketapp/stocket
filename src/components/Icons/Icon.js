@@ -1,7 +1,7 @@
 // @flow
 import React from 'react'
 import Svg, { Rect } from 'react-native-svg'
-import type { IconProps } from '../Types'
+import type { IconProps } from '../../Types'
 
 const Icon = ({ size = 24, children }: IconProps): React$Node => (
   <Svg width={size} height={size} viewBox="0 0 26 26">

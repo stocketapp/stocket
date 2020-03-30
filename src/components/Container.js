@@ -16,7 +16,7 @@ export default function Container(props: ContainerProps): React$Node {
   } = props
   const defaultStyles = {
     width,
-    paddingHorizontal: ph ? 20 : 0,
+    paddingHorizontal: ph ? 16 : 0,
     justifyContent: separate ? 'space-between' : justifyContent,
     flexDirection: horizontal ? 'row' : 'column',
     paddingTop: top,

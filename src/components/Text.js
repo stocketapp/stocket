@@ -11,6 +11,7 @@ const Text = ({
   status,
   children,
   style,
+  weight = '500',
   ...props
 }: TextProps) => {
   const selectFontSize = () => {
@@ -39,17 +40,21 @@ const Text = ({
   }
 
   const customStyle = {
-    fontFamily: 'Futura',
     fontSize: selectFontSize(),
     ...(cap && {
       textTransform: 'capitalize',
-      letterSpacing: 0.3,
+      letterSpacing: 1,
     }),
-    ...style,
+    fontWeight: weight,
     color: !status ? color : setStatus(),
+    ...style,
   }
 
-  return <RNText style={customStyle}>{children}</RNText>
+  return (
+    <RNText style={customStyle} {...props}>
+      {children}
+    </RNText>
+  )
 }
 
 export default Text

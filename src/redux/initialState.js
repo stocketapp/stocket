@@ -15,4 +15,8 @@ export default {
     maxShares: null,
     sharesOwned: null,
   },
+  stock: {
+    selectedStock: {},
+    stockData: {},
+  },
 }
