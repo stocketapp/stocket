@@ -1,29 +1,41 @@
-import React, { useMemo } from 'react'
+import React, { useMemo, useEffect, useState } from 'react'
 import { View, TouchableOpacity, ScrollView } from 'react-native'
 import { Text, Graph } from 'components'
-import {
-  GREEN,
-  BACKGROUND,
-  DARK_TEXT,
-  GRAY_DARKER,
-  SUB_BACKGROUND,
-} from 'utils/colors'
+import { GREEN, BACKGROUND, DARK_TEXT, GRAY_DARKER } from 'utils/colors'
 import { ArrowLeftIcon } from 'components/Icons'
 import { useSelector } from 'react-redux'
 import StockDetails from './StockDetails'
 import { useNavigation } from '@react-navigation/native'
 import StockPosition from './StockPosition'
+import StockNews from './StockNews'
+import { getNewsArticle } from 'api'
 
 export default function Stock() {
   const { goBack } = useNavigation()
   const { selectedStock, positionsMktData } = useSelector(({ stock }) => stock)
+  const [articles, setArticles] = useState([])
+
   const position = useMemo(
     () => positionsMktData.find(el => el.symbol === selectedStock.symbol),
     [selectedStock, positionsMktData],
   )
-  const currentData = positionsMktData.find(
-    el => el.symbol === selectedStock?.symbol,
+
+  const currentData = useMemo(
+    () => positionsMktData.find(el => el.symbol === selectedStock?.symbol),
+    [positionsMktData, selectedStock],
   )
+
+  useEffect(() => {
+    const getArticles = async () => {
+      const res = await getNewsArticle(selectedStock?.symbol)
+      console.log(res)
+      setArticles(res.filter(el => el.lang === 'en'))
+    }
+
+    if (selectedStock) {
+      getArticles()
+    }
+  }, [selectedStock])
 
   return (
     <View style={styles.container} ph>
@@ -57,6 +69,8 @@ export default function Stock() {
           <StockDetails data={position} />
 
           {currentData && <StockPosition data={selectedStock} />}
+
+          <StockNews articles={articles} />
         </View>
       </ScrollView>
 

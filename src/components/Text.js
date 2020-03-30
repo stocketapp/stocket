@@ -50,7 +50,11 @@ const Text = ({
     ...style,
   }
 
-  return <RNText style={customStyle}>{children}</RNText>
+  return (
+    <RNText style={customStyle} {...props}>
+      {children}
+    </RNText>
+  )
 }
 
 export default Text

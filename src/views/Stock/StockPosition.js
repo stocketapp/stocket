@@ -6,7 +6,7 @@ import { formatCurrency } from 'utils/functions'
 
 export default ({ data }) => (
   <Container ph style={{ paddingTop: 40 }}>
-    <Text type="heading" weight="bold">
+    <Text type="heading" weight="900">
       Position
     </Text>
 
@@ -18,14 +18,14 @@ export default ({ data }) => (
       }}
     >
       <View style={styles.posData}>
-        <View style={{ paddingTop: 10 }}>
+        <View style={{ paddingTop: 15 }}>
           <Text color={GRAY_DARKER}>Today's Return</Text>
           <Text style={styles.postDataValue} weight="500">
             $35.87
           </Text>
         </View>
 
-        <View style={{ paddingTop: 10 }}>
+        <View style={{ paddingTop: 15 }}>
           <Text color={GRAY_DARKER}>Total Return</Text>
           <Text style={styles.postDataValue} weight="500">
             {formatCurrency(data?.gains)}
@@ -34,13 +34,13 @@ export default ({ data }) => (
       </View>
 
       <View style={styles.posData}>
-        <View style={{ paddingTop: 10 }}>
+        <View style={{ paddingTop: 15 }}>
           <Text color={GRAY_DARKER}>Shares</Text>
           <Text style={styles.postDataValue} weight="500">
             {data?.shares.length}
           </Text>
         </View>
-        <View style={{ paddingTop: 10 }}>
+        <View style={{ paddingTop: 15 }}>
           <Text color={GRAY_DARKER}>Equity</Text>
           <Text style={styles.postDataValue} weight="500">
             {formatCurrency(data?.value)}
@@ -60,6 +60,6 @@ const styles = {
   },
   postDataValue: {
     paddingTop: 2,
-    fontSize: 20,
+    fontSize: 22,
   },
 }
