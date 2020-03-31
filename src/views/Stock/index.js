@@ -15,13 +15,8 @@ export default function Stock() {
   const { selectedStock, positionsMktData } = useSelector(({ stock }) => stock)
   const [articles, setArticles] = useState([])
 
-  const position = useMemo(
-    () => positionsMktData.find(el => el.symbol === selectedStock.symbol),
-    [selectedStock, positionsMktData],
-  )
-
   const currentData = useMemo(
-    () => positionsMktData.find(el => el.symbol === selectedStock?.symbol),
+    () => positionsMktData?.find(el => el.symbol === selectedStock?.symbol),
     [positionsMktData, selectedStock],
   )
 
@@ -66,7 +61,7 @@ export default function Stock() {
 
           <Graph />
 
-          <StockDetails data={position} />
+          <StockDetails data={currentData} />
 
           {currentData && <StockPosition data={selectedStock} />}
 
@@ -79,10 +74,12 @@ export default function Stock() {
           <Text color={GRAY_DARKER}>Day change </Text>
           <Text
             weight="900"
-            status={Number(position?.day_change) < 0 ? 'positive' : 'negative'}
+            status={
+              Number(currentData?.day_change) < 0 ? 'positive' : 'negative'
+            }
             style={{ paddingTop: 2, fontSize: 15 }}
           >
-            {position?.day_change}
+            {currentData?.day_change}
           </Text>
         </View>
 

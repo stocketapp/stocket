@@ -2,6 +2,7 @@
 import React from 'react'
 import { TouchableOpacity, Dimensions, StyleSheet } from 'react-native'
 import { Container } from 'components'
+import { BACKGROUND } from 'utils/colors'
 
 type TabBarProps = {
   state: { routes: any, index: number },
@@ -41,7 +42,6 @@ export default function TabBarComponent(props: TabBarProps): React$Node {
             style={{
               width: tabWidth,
               alignItems: 'center',
-              paddingVertical: 10,
             }}
           >
             {tabBarIcon({ color: tintColor })}
@@ -54,8 +54,8 @@ export default function TabBarComponent(props: TabBarProps): React$Node {
 
 const styles = StyleSheet.create({
   container: {
-    shadowOffset: { height: -4, width: 0 },
     shadowRadius: 3,
     shadowOpacity: 0.3,
+    backgroundColor: BACKGROUND,
   },
 })

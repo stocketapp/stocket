@@ -18,5 +18,6 @@ export default {
   stock: {
     selectedStock: {},
     stockData: {},
+    positionsMktData: {},
   },
 }
