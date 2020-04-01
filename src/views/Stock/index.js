@@ -33,7 +33,7 @@ export default function Stock() {
         showsVerticalScrollIndicator={false}
       >
         <View>
-          <View style={{ paddingHorizontal: 16, paddingTop: 30 }}>
+          <View style={{ paddingHorizontal: 16, paddingTop: 20 }}>
             <Text weight="900" style={{ fontSize: 30 }}>
               {stockData?.quote.companyName}
             </Text>

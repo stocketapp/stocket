@@ -1,4 +1,4 @@
-import React, { useRef, forwardRef } from 'react'
+import React, { useRef } from 'react'
 import { View, Image, TouchableOpacity } from 'react-native'
 import { Text, ModalWebview } from 'components'
 import { GRAY_DARKER } from 'utils/colors'

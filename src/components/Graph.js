@@ -33,7 +33,7 @@ export default function Graph() {
   }
 
   return (
-    <View style={{ left: -62 }}>
+    <View style={{ left: -62, paddingTop: 30 }}>
       <LineChart
         data={data}
         width={Dimensions.get('window').width}
