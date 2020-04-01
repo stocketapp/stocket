@@ -3,7 +3,7 @@ import { useEffect } from 'react'
 import firestore from '@react-native-firebase/firestore'
 import functions from '@react-native-firebase/functions'
 import { useSelector, useDispatch } from 'react-redux'
-import { getStock } from 'api'
+import { getBatchStockData } from 'api'
 
 const UsersRef = firestore().collection('Users')
 
@@ -25,8 +25,10 @@ export default function useGetPortfolio(): {} {
         if (list.length > 0) {
           dispatch({ type: 'ALL_MY_STOCKS', positions: list })
           const syms = list.map(el => el.symbol)
-          const positionsMktData = await getStock(syms.join(','))
-          dispatch({ type: 'MY_STOCKS_MKT_DATA', positionsMktData })
+          const positionsMktData = await getBatchStockData(syms.join(','))
+          if (positionsMktData) {
+            dispatch({ type: 'MY_STOCKS_MKT_DATA', positionsMktData })
+          }
         }
 
         if (loading) {

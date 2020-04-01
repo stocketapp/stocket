@@ -1,4 +1,4 @@
-import React, { useMemo, useEffect, useState } from 'react'
+import React, { useMemo } from 'react'
 import { View, TouchableOpacity, ScrollView } from 'react-native'
 import { Text, Graph } from 'components'
 import { GREEN, BACKGROUND, DARK_TEXT, GRAY_DARKER } from 'utils/colors'
@@ -8,29 +8,17 @@ import StockDetails from './StockDetails'
 import { useNavigation } from '@react-navigation/native'
 import StockPosition from './StockPosition'
 import StockNews from './StockNews'
-import { getNewsArticle } from 'api'
+import find from 'lodash.find'
 
 export default function Stock() {
   const { goBack } = useNavigation()
   const { selectedStock, positionsMktData } = useSelector(({ stock }) => stock)
-  const [articles, setArticles] = useState([])
 
-  const currentData = useMemo(
-    () => positionsMktData?.find(el => el.symbol === selectedStock?.symbol),
+  const stockData = useMemo(
+    () =>
+      find(positionsMktData, el => el.quote.symbol === selectedStock?.symbol),
     [positionsMktData, selectedStock],
   )
-
-  useEffect(() => {
-    const getArticles = async () => {
-      const res = await getNewsArticle(selectedStock?.symbol)
-      console.log(res)
-      setArticles(res.filter(el => el.lang === 'en'))
-    }
-
-    if (selectedStock) {
-      getArticles()
-    }
-  }, [selectedStock])
 
   return (
     <View style={styles.container} ph>
@@ -45,9 +33,9 @@ export default function Stock() {
         showsVerticalScrollIndicator={false}
       >
         <View>
-          <View style={{ paddingHorizontal: 16, paddingTop: 30 }}>
+          <View style={{ paddingHorizontal: 16, paddingTop: 20 }}>
             <Text weight="900" style={{ fontSize: 30 }}>
-              {currentData?.name}
+              {stockData?.quote.companyName}
             </Text>
             <Text
               style={{ paddingTop: 5 }}
@@ -55,17 +43,17 @@ export default function Stock() {
               weight="700"
               type="label"
             >
-              {selectedStock?.symbol}
+              {stockData?.quote.symbol}
             </Text>
           </View>
 
           <Graph />
 
-          <StockDetails data={currentData} />
+          <StockDetails data={stockData?.quote} />
 
-          {currentData && <StockPosition data={selectedStock} />}
+          {stockData && <StockPosition data={selectedStock} />}
 
-          <StockNews articles={articles} />
+          <StockNews articles={stockData?.news} />
         </View>
       </ScrollView>
 
@@ -74,12 +62,10 @@ export default function Stock() {
           <Text color={GRAY_DARKER}>Day change </Text>
           <Text
             weight="900"
-            status={
-              Number(currentData?.day_change) < 0 ? 'positive' : 'negative'
-            }
+            status={Number(stockData?.day_change) < 0 ? 'positive' : 'negative'}
             style={{ paddingTop: 2, fontSize: 15 }}
           >
-            {currentData?.day_change}
+            {stockData?.quote.change}
           </Text>
         </View>
 
