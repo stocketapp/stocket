@@ -8,6 +8,6 @@ export const NAVY = '#1e2d3f'
 export const BLUE = '#4089d7'
 export const RED = '#eb455a'
 
-export const BACKGROUND = '#021107'
+export const BACKGROUND = '#010107'
 export const SUB_BACKGROUND = 'rgba(92,92,92, 0.22)'
 export const DARK_TEXT = '#020607'

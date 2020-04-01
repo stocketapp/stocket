@@ -54,8 +54,6 @@ export default function TabBarComponent(props: TabBarProps): React$Node {
 
 const styles = StyleSheet.create({
   container: {
-    shadowRadius: 3,
-    shadowOpacity: 0.3,
     backgroundColor: BACKGROUND,
   },
 })

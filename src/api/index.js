@@ -22,10 +22,10 @@ async function get(query: string) {
 
 async function iexGet(query: string) {
   const iexUrl =
-    process.env.NODE_ENV !== 'development'
+    process.env.NODE_ENV === 'development'
       ? 'https://sandbox.iexapis.com/stable'
       : 'https://cloud.iexapis.com/v1'
-  const url = `${iexUrl}/${query}token=${IEX_CLOUD_KEY}`
+  const url = `${iexUrl}/${query}&token=${IEX_CLOUD_KEY}`
   const metric = await perf().newHttpMetric(url, 'GET')
   const res = await fetch(url, {
     method: 'GET',
@@ -74,6 +74,19 @@ export async function addToWatchlist(uid: string, data: { symbol: string }) {
 
 export async function getNewsArticle(stock: string, last: number = 5) {
   const res = await iexGet(`stock/${stock}/news/last/${last}?`)
+  const result = await res.json()
+  return result
+}
+
+export async function getBatchStockData(
+  symbols: string,
+  range?: string = '1m',
+  last?: number = 5,
+) {
+  const typeQuery = '&types=quote,news,chart'
+  const rangeQuery = `${range && `&range=${range}`}`
+  const url = `stock/market/batch?symbols=${symbols}${typeQuery}${rangeQuery}&last=${last}`
+  const res = await iexGet(url)
   const result = await res.json()
   return result
 }
