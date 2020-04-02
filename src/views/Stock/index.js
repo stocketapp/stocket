@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react'
 import { View, TouchableOpacity, ScrollView } from 'react-native'
-import { Text, Graph } from 'components'
+import { Text, StockGraph } from 'components'
 import { GREEN, BACKGROUND, DARK_TEXT, GRAY_DARKER } from 'utils/colors'
 import { ArrowLeftIcon } from 'components/Icons'
 import { useSelector } from 'react-redux'
@@ -18,6 +18,11 @@ export default function Stock() {
     () =>
       find(positionsMktData, el => el.quote.symbol === selectedStock?.symbol),
     [positionsMktData, selectedStock],
+  )
+
+  const graphData = useMemo(
+    () => stockData?.chart.map(el => ({ value: el.close, label: el.label })),
+    [stockData],
   )
 
   return (
@@ -47,7 +52,8 @@ export default function Stock() {
             </Text>
           </View>
 
-          <Graph />
+          {/* {graphData.datasets && <Graph data={graphData} />} */}
+          <StockGraph data={graphData} />
 
           <StockDetails data={stockData?.quote} />
 

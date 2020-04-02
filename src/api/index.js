@@ -77,12 +77,12 @@ export async function getNewsArticle(stock: string, last: number = 5) {
 
 export async function getBatchStockData(
   symbols: string,
-  range?: string = '1m',
+  range?: string = '1d',
   last?: number = 5,
 ) {
   const typeQuery = '&types=quote,news,chart'
   const rangeQuery = `${range && `&range=${range}`}`
-  const url = `stock/market/batch?symbols=${symbols}${typeQuery}${rangeQuery}&last=${last}`
+  const url = `stock/market/batch?symbols=${symbols}${typeQuery}${rangeQuery}&last=${last}&chartInterval=5`
   const res = await iexGet(url)
   const result = await res.json()
   return result

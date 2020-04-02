@@ -14,7 +14,7 @@ import { useAuthState, useSetUserInfo } from 'hooks'
 // import RNBootSplash from 'react-native-bootsplash'
 import { BACKGROUND } from 'utils/colors'
 import OneSignal from 'react-native-onesignal'
-import { SafeAreaView } from 'react-native-safe-area-context';
+import { SafeAreaView } from 'react-native-safe-area-context'
 import { ONESIGNAL_APPID } from './config'
 
 export default function App(): React$Node {
