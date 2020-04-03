@@ -22,6 +22,7 @@ async function get(query: string) {
 
 async function iexGet(query: string) {
   const iexUrl = 'https://cloud.iexapis.com/v1'
+  // const iexUrl = 'https://sandbox.iexapis.com/stable'
   const url = `${iexUrl}/${query}&token=${IEX_CLOUD_KEY}`
   const metric = await perf().newHttpMetric(url, 'GET')
   const res = await fetch(url, {
@@ -80,9 +81,9 @@ export async function getBatchStockData(
   range?: string = '1d',
   last?: number = 5,
 ) {
-  const typeQuery = '&types=quote,news,chart'
+  const typeQuery = '&types=quote,news,chart,intraday-prices'
   const rangeQuery = `${range && `&range=${range}`}`
-  const url = `stock/market/batch?symbols=${symbols}${typeQuery}${rangeQuery}&last=${last}&chartInterval=5`
+  const url = `stock/market/batch?symbols=${symbols}${typeQuery}${rangeQuery}&last=${last}&chartInterval=5&chartIEXWhenNull=true`
   const res = await iexGet(url)
   const result = await res.json()
   return result

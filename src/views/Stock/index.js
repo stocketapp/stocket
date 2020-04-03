@@ -21,7 +21,12 @@ export default function Stock() {
   )
 
   const graphData = useMemo(
-    () => stockData?.chart.map(el => ({ value: el.close, label: el.label })),
+    () =>
+      stockData?.chart.map((el, index) => ({
+        value: el.close,
+        label: el.label,
+        index,
+      })),
     [stockData],
   )
 
