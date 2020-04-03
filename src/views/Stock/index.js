@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react'
 import { View, TouchableOpacity, ScrollView } from 'react-native'
-import { Text, StockGraph } from 'components'
+import { Text, LineChart } from 'components'
 import { GREEN, BACKGROUND, DARK_TEXT, GRAY_DARKER } from 'utils/colors'
 import { ArrowLeftIcon } from 'components/Icons'
 import { useSelector } from 'react-redux'
@@ -58,7 +58,7 @@ export default function Stock() {
           </View>
 
           {/* {graphData.datasets && <Graph data={graphData} />} */}
-          <StockGraph data={graphData} />
+          <LineChart data={graphData} />
 
           <StockDetails data={stockData?.quote} />
 
