@@ -9,11 +9,12 @@ import Animated, {
   decay,
 } from 'react-native-reanimated'
 import { GREEN, SUB_BACKGROUND } from 'utils/colors'
+import { scaleQuantile } from 'd3-scale'
 
 const { Value } = Animated
 const { width } = Dimensions.get('window')
 
-export default ({ d }) => {
+export default ({ d, scaleY }) => {
   const translationX = new Value(0)
   const velocityX = new Value(0)
   const state = new Value(State.UNDETERMINED)
@@ -26,7 +27,6 @@ export default ({ d }) => {
       },
     },
   ])
-  const cx = decay(translationX, state, velocityX)
   const path = parsePath(d)
   const length = interpolate(translationX, {
     inputRange: [0, width],

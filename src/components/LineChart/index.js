@@ -1,6 +1,6 @@
-import React, { useState, useRef } from 'react'
-import { View, StyleSheet, Dimensions, PanResponder } from 'react-native'
-import { Svg, Path, Line } from 'react-native-svg'
+import React from 'react'
+import { View, StyleSheet, Dimensions } from 'react-native'
+import { Svg, Path } from 'react-native-svg'
 import * as scale from 'd3-scale'
 import * as shape from 'd3-shape'
 import * as format from 'd3-format'
@@ -8,6 +8,8 @@ import * as axis from 'd3-axis'
 import { scaleLinear, scaleTime } from 'd3-scale'
 import Cursor from './Cursor'
 import { GREEN } from 'utils/colors'
+import maxBy from 'lodash.maxby'
+import minBy from 'lodash.minby'
 
 const d3 = {
   scale,
@@ -34,15 +36,17 @@ const arr = [
   { at: new Date(2020, 12, 1), value: 90100 },
 ]
 
-const scaleX = scaleTime()
-  .domain([new Date(2020, 1, 1), new Date(2020, 12, 1)])
-  .range([0, width])
-
-const scaleY = scaleLinear()
-  .domain([0, 90100])
-  .range([height - verticalPadding, verticalPadding])
-
 export default function LineChart({ data = arr }) {
+  const minX = minBy(data, el => el.at)
+  const maxX = maxBy(data, el => el.at)
+  const minY = minBy(data, el => el.value)
+  const maxY = maxBy(data, el => el.value)
+  const scaleX = scaleTime()
+    .domain([minX.at, maxX.at])
+    .range([0, width])
+  const scaleY = scaleLinear()
+    .domain([minY.value, maxY.value])
+    .range([height - verticalPadding, verticalPadding])
   const line = d3.shape
     .line()
     .x(d => scaleX(d.at))
@@ -55,7 +59,7 @@ export default function LineChart({ data = arr }) {
         <Path d={line} fill="transparent" stroke={GREEN} strokeWidth="2" />
       </Svg>
       <View style={{ ...StyleSheet.absoluteFill, width }}>
-        <Cursor d={line} />
+        <Cursor d={line} scaleY={scaleY} />
       </View>
     </View>
   )
