@@ -2,12 +2,7 @@ import React from 'react'
 import { Dimensions } from 'react-native'
 import { getPointAtLength, parsePath } from 'react-native-redash'
 import { PanGestureHandler, State } from 'react-native-gesture-handler'
-import Animated, {
-  event,
-  interpolate,
-  sub,
-  decay,
-} from 'react-native-reanimated'
+import Animated, { event, interpolate, sub } from 'react-native-reanimated'
 import { GREEN, SUB_BACKGROUND } from 'utils/colors'
 import { scaleQuantile } from 'd3-scale'
 
@@ -33,8 +28,8 @@ export default ({ d, scaleY }) => {
     outputRange: [0, path.totalLength],
   })
   const { x, y } = getPointAtLength(path, length)
-  const translateX = sub(x, 5)
-  const cursorX = sub(x, 8)
+  const translateX = x
+  const cursorX = sub(x, 4)
   const cursorY = sub(y, 4)
 
   return (

@@ -25,7 +25,7 @@ export default function Stock() {
       stockData?.chart.map((el, index) => ({
         value: el.close,
         label: el.label,
-        index,
+        date: el.date,
       })),
     [stockData],
   )
@@ -58,13 +58,13 @@ export default function Stock() {
           </View>
 
           {/* {graphData.datasets && <Graph data={graphData} />} */}
-          <LineChart data={graphData} />
+          {graphData && <LineChart data={graphData} />}
 
           <StockDetails data={stockData?.quote} />
 
           {stockData && <StockPosition data={selectedStock} />}
 
-          <StockNews articles={stockData?.news} />
+          {stockData.news && <StockNews articles={stockData?.news} />}
         </View>
       </ScrollView>
 
