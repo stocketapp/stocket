@@ -1,43 +1,48 @@
-import React from 'react'
-import { Dimensions } from 'react-native'
+import React, { useRef } from 'react'
+import { Dimensions, TextInput } from 'react-native'
 import { getPointAtLength, parsePath } from 'react-native-redash'
-import { PanGestureHandler, State } from 'react-native-gesture-handler'
-import Animated, { event, interpolate, sub } from 'react-native-reanimated'
+import { PanGestureHandler } from 'react-native-gesture-handler'
+import Animated, { event, interpolate, sub, set } from 'react-native-reanimated'
 import { GREEN, SUB_BACKGROUND } from 'utils/colors'
 import { scaleQuantile } from 'd3-scale'
 
 const { Value } = Animated
 const { width } = Dimensions.get('window')
 
-export default ({ d, scaleY }) => {
+export default ({ d, scaleY, minY, maxY, values }) => {
   const translationX = new Value(0)
-  const velocityX = new Value(0)
-  const state = new Value(State.UNDETERMINED)
-  const onGestureEvent = event([
-    {
-      nativeEvent: {
-        x: translationX,
-        velocityX,
-        state,
-      },
-    },
-  ])
+  const label = useRef('')
   const path = parsePath(d)
   const length = interpolate(translationX, {
     inputRange: [0, width],
     outputRange: [0, path.totalLength],
   })
+  const scaleLabel = scaleQuantile()
+    .domain([minY.value, maxY.value])
+    .range(values)
   const { x, y } = getPointAtLength(path, length)
   const translateX = x
   const cursorX = sub(x, 4)
   const cursorY = sub(y, 4)
+  const onGestureEvent = event([
+    {
+      nativeEvent: {
+        x: _x => {
+          const txt = String(scaleLabel(scaleY.invert(cursorY.__getValue())))
+          console.log(txt)
+          // label?.context?.setNativeProps({ text: txt })
+          return set(translationX, _x)
+        },
+      },
+    },
+  ])
 
   return (
-    <PanGestureHandler
-      onGestureEvent={onGestureEvent}
-      onHandlerStateChange={onGestureEvent}
-    >
+    <PanGestureHandler onGestureEvent={onGestureEvent}>
       <Animated.View>
+        <Animated.View style={{ transform: [{ translateX }], ...styles.label }}>
+          <TextInput style={{ color: 'white' }} ref={label} />
+        </Animated.View>
         <Animated.View style={[styles.line, { transform: [{ translateX }] }]} />
         <Animated.View
           style={[
@@ -52,9 +57,10 @@ export default ({ d, scaleY }) => {
 
 const styles = {
   line: {
-    height: '100%',
+    height: '96%',
     width: 2,
     backgroundColor: SUB_BACKGROUND,
+    top: '4%',
   },
   cursor: {
     height: 10,
@@ -62,5 +68,11 @@ const styles = {
     borderRadius: 5,
     backgroundColor: GREEN,
     position: 'absolute',
+  },
+  label: {
+    position: 'absolute',
+    top: -12,
+    left: 0,
+    width: 100,
   },
 }

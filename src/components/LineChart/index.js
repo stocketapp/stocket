@@ -39,6 +39,7 @@ export default function LineChart({ data = exampleData }) {
     .x(d => scaleX(moment(d.label, 'LT')))
     .y(d => scaleY(d.value))
     .curve(d3.shape.curveBasis)(data)
+  const values = data.map(el => el.value)
 
   return (
     <View style={styles.container}>
@@ -46,7 +47,13 @@ export default function LineChart({ data = exampleData }) {
         <Path d={line} fill="transparent" stroke={GREEN} strokeWidth="2" />
       </Svg>
       <View style={{ ...StyleSheet.absoluteFill, width }}>
-        <Cursor d={line} scaleY={scaleY} />
+        <Cursor
+          d={line}
+          scaleY={scaleY}
+          minY={minY}
+          maxY={maxY}
+          values={values}
+        />
       </View>
     </View>
   )
