@@ -1,5 +1,5 @@
 import React, { useRef } from 'react'
-import { Dimensions, TextInput } from 'react-native'
+import { Dimensions, TextInput, Text } from 'react-native'
 import { getPointAtLength, parsePath } from 'react-native-redash'
 import { PanGestureHandler } from 'react-native-gesture-handler'
 import Animated, { event, interpolate, sub, set } from 'react-native-reanimated'
@@ -10,6 +10,7 @@ const { Value } = Animated
 const { width } = Dimensions.get('window')
 
 export default ({ d, scaleY, minY, maxY, values }) => {
+  console.log(values)
   const translationX = new Value(0)
   const label = useRef('')
   const path = parsePath(d)
@@ -24,15 +25,11 @@ export default ({ d, scaleY, minY, maxY, values }) => {
   const translateX = x
   const cursorX = sub(x, 4)
   const cursorY = sub(y, 4)
+  const txt = String(scaleLabel(scaleY.invert(cursorY.__getValue())))
   const onGestureEvent = event([
     {
       nativeEvent: {
-        x: _x => {
-          const txt = String(scaleLabel(scaleY.invert(cursorY.__getValue())))
-          console.log(txt)
-          // label?.context?.setNativeProps({ text: txt })
-          return set(translationX, _x)
-        },
+        x: translationX,
       },
     },
   ])
@@ -41,7 +38,8 @@ export default ({ d, scaleY, minY, maxY, values }) => {
     <PanGestureHandler onGestureEvent={onGestureEvent}>
       <Animated.View>
         <Animated.View style={{ transform: [{ translateX }], ...styles.label }}>
-          <TextInput style={{ color: 'white' }} ref={label} />
+          {/* <TextInput style={{ color: 'white' }} ref={label} /> */}
+          <Text>{txt}</Text>
         </Animated.View>
         <Animated.View style={[styles.line, { transform: [{ translateX }] }]} />
         <Animated.View

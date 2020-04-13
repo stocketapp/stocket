@@ -9,6 +9,7 @@ import { useNavigation } from '@react-navigation/native'
 import StockPosition from './StockPosition'
 import StockNews from './StockNews'
 import find from 'lodash.find'
+import filter from 'lodash.filter'
 
 export default function Stock() {
   const { goBack } = useNavigation()
@@ -20,15 +21,14 @@ export default function Stock() {
     [positionsMktData, selectedStock],
   )
 
-  const graphData = useMemo(
-    () =>
-      stockData?.chart.map((el, index) => ({
-        value: el.close,
-        label: el.label,
-        date: el.date,
-      })),
-    [stockData],
-  )
+  const graphData = useMemo(() => {
+    const arr = filter(stockData?.chart, el => el?.close !== null)
+    return arr.map(el => ({
+      value: el.close,
+      label: el.label,
+      date: el.date,
+    }))
+  }, [stockData])
 
   return (
     <View style={styles.container} ph>
