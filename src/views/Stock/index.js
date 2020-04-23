@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react'
 import { View, TouchableOpacity, ScrollView } from 'react-native'
-import { Text, Graph } from 'components'
+import { Text, LineChart } from 'components'
 import { GREEN, BACKGROUND, DARK_TEXT, GRAY_DARKER } from 'utils/colors'
 import { ArrowLeftIcon } from 'components/Icons'
 import { useSelector } from 'react-redux'
@@ -9,6 +9,7 @@ import { useNavigation } from '@react-navigation/native'
 import StockPosition from './StockPosition'
 import StockNews from './StockNews'
 import find from 'lodash.find'
+import filter from 'lodash.filter'
 
 export default function Stock() {
   const { goBack } = useNavigation()
@@ -19,6 +20,15 @@ export default function Stock() {
       find(positionsMktData, el => el.quote.symbol === selectedStock?.symbol),
     [positionsMktData, selectedStock],
   )
+
+  const graphData = useMemo(() => {
+    const arr = filter(stockData?.chart, el => el?.close !== null)
+    return arr.map(el => ({
+      value: el.close,
+      label: el.label,
+      date: el.date,
+    }))
+  }, [stockData])
 
   return (
     <View style={styles.container} ph>
@@ -47,13 +57,14 @@ export default function Stock() {
             </Text>
           </View>
 
-          <Graph />
+          {/* {graphData.datasets && <Graph data={graphData} />} */}
+          {graphData && <LineChart data={graphData} />}
 
           <StockDetails data={stockData?.quote} />
 
           {stockData && <StockPosition data={selectedStock} />}
 
-          <StockNews articles={stockData?.news} />
+          {stockData.news && <StockNews articles={stockData?.news} />}
         </View>
       </ScrollView>
 
