@@ -12,8 +12,11 @@ import { name as appName } from './app.json'
 import { Provider } from 'react-redux'
 import configureStore from './src/redux/configureStore'
 import '@react-native-firebase/crashlytics'
+import RNAsyncStorageFlipper from 'rn-async-storage-flipper'
+import AsyncStorage from '@react-native-community/async-storage'
 
 const store = configureStore()
+RNAsyncStorageFlipper(AsyncStorage)
 
 const AppRoot = () => (
   <Provider store={store}>
