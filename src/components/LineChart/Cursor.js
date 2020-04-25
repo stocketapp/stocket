@@ -1,6 +1,6 @@
 import React, { useRef, useEffect } from 'react'
 import { Dimensions } from 'react-native'
-import { getPointAtLength, parsePath, getLengthAtX } from 'react-native-redash'
+import { getPointAtLength, parsePath } from 'react-native-redash'
 import { PanGestureHandler, TextInput } from 'react-native-gesture-handler'
 import Animated, {
   event,
@@ -14,14 +14,14 @@ import { GREEN, SUB_BACKGROUND } from 'utils/colors'
 const { Value } = Animated
 const { width } = Dimensions.get('window')
 
-export default ({ d, scaleY, scaleX, data, minY, maxY }) => {
+export default ({ d, scaleY, scaleX, data, scaleLabel }) => {
   const textRef = useRef()
-
   const translationX = new Value(0)
   const path = parsePath(d)
   const length = interpolate(translationX, {
     inputRange: [0, width],
     outputRange: [0, path.totalLength],
+    extrapolate: 'clamp',
   })
   const { x, y } = getPointAtLength(path, length)
   const translateX = x
@@ -46,9 +46,9 @@ export default ({ d, scaleY, scaleX, data, minY, maxY }) => {
   }, [translationX])
 
   function updateText(xValue) {
-    const { x: cX, y: cY } = getPointAtLength(path, xValue)
-    const updated = scaleY.invert(cY.__getValue())
-    textRef.current.setNativeProps({ text: `${updated.toFixed(2)}` })
+    const { y: cY } = getPointAtLength(path, xValue)
+    const updated = scaleLabel(scaleY.invert(cY.__getValue()))
+    textRef.current.setNativeProps({ text: `${updated}` })
   }
 
   return (
@@ -86,7 +86,6 @@ const styles = {
   label: {
     position: 'absolute',
     top: -12,
-    left: 0,
     width: 100,
   },
 }
