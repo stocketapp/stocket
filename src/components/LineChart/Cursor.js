@@ -1,14 +1,22 @@
-import React from 'react'
+import React, { useRef, useEffect } from 'react'
 import { Dimensions } from 'react-native'
-import { getPointAtLength, parsePath } from 'react-native-redash'
-import { PanGestureHandler } from 'react-native-gesture-handler'
-import Animated, { event, interpolate, sub } from 'react-native-reanimated'
+import { getPointAtLength, parsePath, getLengthAtX } from 'react-native-redash'
+import { PanGestureHandler, TextInput } from 'react-native-gesture-handler'
+import Animated, {
+  event,
+  interpolate,
+  sub,
+  useCode,
+  call,
+} from 'react-native-reanimated'
 import { GREEN, SUB_BACKGROUND } from 'utils/colors'
 
 const { Value } = Animated
 const { width } = Dimensions.get('window')
 
-export default ({ d, scaleY, scaleX, data }) => {
+export default ({ d, scaleY, scaleX, data, minY, maxY }) => {
+  const textRef = useRef()
+
   const translationX = new Value(0)
   const path = parsePath(d)
   const length = interpolate(translationX, {
@@ -19,7 +27,6 @@ export default ({ d, scaleY, scaleX, data }) => {
   const translateX = x
   const cursorX = sub(x, 4)
   const cursorY = sub(y, 4)
-  const text = scaleY.invert(cursorX.__getValue())
   const onGestureEvent = event([
     {
       nativeEvent: {
@@ -28,11 +35,27 @@ export default ({ d, scaleY, scaleX, data }) => {
     },
   ])
 
+  useEffect(() => {
+    updateText(0)
+  }, [])
+
+  useCode(() => {
+    return call([translationX], value => {
+      updateText(value)
+    })
+  }, [translationX])
+
+  function updateText(xValue) {
+    const { x: cX, y: cY } = getPointAtLength(path, xValue)
+    const updated = scaleY.invert(cY.__getValue())
+    textRef.current.setNativeProps({ text: `${updated.toFixed(2)}` })
+  }
+
   return (
     <PanGestureHandler onGestureEvent={onGestureEvent}>
       <Animated.View>
         <Animated.View style={{ transform: [{ translateX }], ...styles.label }}>
-          <Animated.Text style={{ color: 'white' }}>{text}</Animated.Text>
+          <TextInput ref={textRef} style={{ color: 'white' }} />
         </Animated.View>
         <Animated.View style={[styles.line, { transform: [{ translateX }] }]} />
         <Animated.View

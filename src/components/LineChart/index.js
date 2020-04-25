@@ -42,7 +42,14 @@ export default function LineChart({ data = exampleData }) {
         <Path d={line} fill="transparent" stroke={GREEN} strokeWidth="2" />
       </Svg>
       <View style={{ ...StyleSheet.absoluteFill, width }}>
-        <Cursor d={line} scaleY={scaleY} scaleX={scaleX} data={data} />
+        <Cursor
+          d={line}
+          scaleY={scaleY}
+          scaleX={scaleX}
+          data={data}
+          minY={minY}
+          maxY={maxY}
+        />
       </View>
     </View>
   )

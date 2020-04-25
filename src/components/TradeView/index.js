@@ -1,9 +1,8 @@
-import React, { forwardRef } from 'react'
-import { Dimensions } from 'react-native'
-import { WebView } from 'react-native-webview'
+import React from 'react'
+import { View, Dimensions } from 'react-native'
 import Sheet from 'react-native-raw-bottom-sheet'
 
-export default forwardRef(({ uri }, ref) => {
+export default (props, ref) => {
   return (
     <Sheet
       height={Dimensions.get('window').height - 40}
@@ -12,7 +11,7 @@ export default forwardRef(({ uri }, ref) => {
       closeOnDragDown
       dragFromTop
     >
-      <WebView source={{ uri }} style={{ flex: 1 }} />
+      <View style={{ flex: 1 }} />
     </Sheet>
   )
-})
+}
