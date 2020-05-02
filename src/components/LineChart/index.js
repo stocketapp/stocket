@@ -37,7 +37,7 @@ export default function LineChart({ data = exampleData }) {
     .curve(d3.shape.curveBasis)(data)
   const scaleLabel = scaleQuantile()
     .domain([minY.value, maxY.value])
-    .range(data.map(el => el.value).sort())
+    .range(data.map(el => el.value))
 
   return (
     <View style={styles.container}>
