@@ -14,6 +14,7 @@ export default {
     stockPrice: null,
     maxShares: null,
     sharesOwned: null,
+    tradeViewIsOpen: false,
   },
   stock: {
     selectedStock: {},

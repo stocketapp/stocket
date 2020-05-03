@@ -3,7 +3,7 @@ import { View, TouchableOpacity, ScrollView } from 'react-native'
 import { Text, LineChart } from 'components'
 import { GREEN, BACKGROUND, DARK_TEXT, GRAY_DARKER } from 'utils/colors'
 import { ArrowLeftIcon } from 'components/Icons'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import StockDetails from './StockDetails'
 import { useNavigation } from '@react-navigation/native'
 import StockPosition from './StockPosition'
@@ -14,6 +14,7 @@ import filter from 'lodash.filter'
 export default function Stock() {
   const { goBack } = useNavigation()
   const { selectedStock, positionsMktData } = useSelector(({ stock }) => stock)
+  const dispatch = useDispatch()
 
   const stockData = useMemo(
     () =>
@@ -29,6 +30,13 @@ export default function Stock() {
       date: el.date,
     }))
   }, [stockData])
+
+  const openTradeView = () => {
+    dispatch({
+      type: 'TRADE_VIEW_IS_OPEN',
+      tradeViewIsOpen: true,
+    })
+  }
 
   return (
     <View style={styles.container} ph>
@@ -80,7 +88,7 @@ export default function Stock() {
           </Text>
         </View>
 
-        <TouchableOpacity>
+        <TouchableOpacity onPress={openTradeView}>
           <View style={styles.button}>
             <Text color={DARK_TEXT} weight="800" style={{ fontSize: 18 }}>
               Trade
