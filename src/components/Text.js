@@ -17,7 +17,7 @@ const Text = ({
   const selectFontSize = () => {
     switch (type) {
       case 'heading':
-        return 24
+        return 22
       case 'title':
         return 20
       case 'label':
@@ -47,6 +47,7 @@ const Text = ({
     }),
     fontWeight: weight,
     color: !status ? color : setStatus(),
+    fontFamily: 'Futura',
     ...style,
   }
 
