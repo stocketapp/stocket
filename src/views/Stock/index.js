@@ -51,17 +51,22 @@ export default function Stock() {
         showsVerticalScrollIndicator={false}
       >
         <View>
-          <View style={{ paddingHorizontal: 16, paddingTop: 20 }}>
-            <Text weight="900" style={{ fontSize: 30 }}>
-              {stockData?.quote.companyName}
-            </Text>
-            <Text
-              style={{ paddingTop: 5 }}
-              color={GRAY_DARKER}
-              weight="700"
-              type="label"
-            >
-              {stockData?.quote.symbol}
+          <View style={{ paddingHorizontal: 16, paddingBottom: 15 }}>
+            <View style={styles.header}>
+              <Text weight="900" style={{ fontSize: 30 }}>
+                {stockData?.quote.companyName}
+              </Text>
+              <Text
+                style={{ paddingBottom: 4, left: 10 }}
+                color={GRAY_DARKER}
+                weight="500"
+                type="label"
+              >
+                {stockData?.quote.symbol}
+              </Text>
+            </View>
+            <Text type="heading" weight="bold" style={{ paddingTop: 6 }}>
+              {stockData?.quote.iexRealtimePrice}
             </Text>
           </View>
 
@@ -72,7 +77,7 @@ export default function Stock() {
 
           {stockData && <StockPosition data={selectedStock} />}
 
-          {stockData.news && <StockNews articles={stockData?.news} />}
+          {stockData?.news && <StockNews articles={stockData?.news} />}
         </View>
       </ScrollView>
 
@@ -122,5 +127,10 @@ const styles = {
     paddingHorizontal: 35,
     paddingVertical: 8,
     borderRadius: 100,
+  },
+  header: {
+    paddingTop: 20,
+    flexDirection: 'row',
+    alignItems: 'flex-end',
   },
 }
