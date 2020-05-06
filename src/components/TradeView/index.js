@@ -4,11 +4,12 @@ import Sheet from 'react-native-raw-bottom-sheet'
 import { useSelector, useDispatch } from 'react-redux'
 import { SUB_BACKGROUND } from 'utils/colors'
 import TradeHeader from './TradeHeader'
-import Text from '../Text'
+// import Text from '../Text'
+import TradeDetails from './TradeDetails'
 
 export default forwardRef((props, ref) => {
   const { trade, stock } = useSelector(state => state)
-  const { tradeViewIsOpen } = trade
+  const { tradeViewIsOpen, stockQuantity } = trade
   const { selectedStock } = stock
   const dispatch = useDispatch()
 
@@ -29,7 +30,11 @@ export default forwardRef((props, ref) => {
     <Sheet
       height={Dimensions.get('window').height - 50}
       customStyles={{
-        container: { borderRadius: 14, backgroundColor: SUB_BACKGROUND },
+        container: {
+          borderRadius: 14,
+          backgroundColor: SUB_BACKGROUND,
+          paddingHorizontal: 16,
+        },
       }}
       ref={ref}
       onClose={closeTradeView}
@@ -37,12 +42,9 @@ export default forwardRef((props, ref) => {
       dragFromTop
     >
       <View style={{ flex: 1 }}>
-        {/* <TouchableOpacity style={styles.btn}>
-          <Text type="label" status="positive">
-            X
-          </Text>
-        </TouchableOpacity> */}
         <TradeHeader symbol={selectedStock?.symbol} />
+
+        <TradeDetails selectedStock={selectedStock} quantity={stockQuantity} />
       </View>
     </Sheet>
   )

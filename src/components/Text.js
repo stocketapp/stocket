@@ -17,13 +17,15 @@ const Text = ({
   const selectFontSize = () => {
     switch (type) {
       case 'heading':
-        return 22
-      case 'title':
         return 20
+      case 'title':
+        return 18
       case 'label':
         return 16
       case 'subtext':
         return 12
+      case 'big':
+        return 24
       default:
         return 14
     }

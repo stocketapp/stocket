@@ -21,7 +21,7 @@ export type ContainerProps = {
 }
 
 export type TextProps = {
-  type?: 'heading' | 'title' | 'label' | 'subtext',
+  type?: 'heading' | 'title' | 'label' | 'subtext' | 'big',
   cap?: boolean,
   color?: string,
   children?: Text.propTypes.children,
