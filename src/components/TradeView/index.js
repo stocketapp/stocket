@@ -1,10 +1,9 @@
 import React, { forwardRef, useEffect } from 'react'
-import { View, Dimensions, TouchableOpacity } from 'react-native'
+import { View, Dimensions } from 'react-native'
 import Sheet from 'react-native-raw-bottom-sheet'
 import { useSelector, useDispatch } from 'react-redux'
 import { SUB_BACKGROUND } from 'utils/colors'
 import TradeHeader from './TradeHeader'
-// import Text from '../Text'
 import TradeDetails from './TradeDetails'
 
 export default forwardRef((props, ref) => {
@@ -29,13 +28,7 @@ export default forwardRef((props, ref) => {
   return (
     <Sheet
       height={Dimensions.get('window').height - 50}
-      customStyles={{
-        container: {
-          borderRadius: 14,
-          backgroundColor: SUB_BACKGROUND,
-          paddingHorizontal: 16,
-        },
-      }}
+      customStyles={styles.container}
       ref={ref}
       onClose={closeTradeView}
       closeOnDragDown
@@ -51,11 +44,9 @@ export default forwardRef((props, ref) => {
 })
 
 const styles = {
-  btn: {
-    position: 'absolute',
-    left: 30,
-    top: 5,
-    paddingVertical: 2,
-    paddingHorizontal: 7,
+  container: {
+    borderRadius: 14,
+    backgroundColor: SUB_BACKGROUND,
+    paddingHorizontal: 16,
   },
 }

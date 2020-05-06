@@ -1,6 +1,7 @@
 // @flow
-import { View, Text } from 'react-native'
+import { Text } from 'react-native'
 import { FirebaseFirestoreTypes } from '@react-native-firebase/firestore'
+import type { ViewStyleProp } from 'react-native/Libraries/StyleSheet/StyleSheet'
 
 export type IconProps = {
   size?: number,
@@ -10,7 +11,6 @@ export type IconProps = {
 
 export type ContainerProps = {
   children: React$Node,
-  style?: View.propTypes.style,
   justifyContent?: 'center' | 'flex-start' | 'flex-end' | 'space-between',
   alignItems?: 'center' | 'flex-start' | 'flex-end',
   horizontal?: boolean,
@@ -18,9 +18,10 @@ export type ContainerProps = {
   ph?: boolean,
   top?: number,
   width?: string | number,
+  style?: ViewStyleProp,
 }
 
-export type TextProps = {
+export type TextProps = Text.propTypes & {
   type?: 'heading' | 'title' | 'label' | 'subtext' | 'big',
   cap?: boolean,
   color?: string,
@@ -63,7 +64,7 @@ export type LabelProps = {
   title?: string,
   value?: string,
   children: React$Node,
-  style?: View.propTypes.style,
+  style?: ViewStyleProp,
 }
 
 export type PositionType = {

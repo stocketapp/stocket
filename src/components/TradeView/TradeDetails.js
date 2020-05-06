@@ -7,7 +7,7 @@ import { formatCurrency } from 'utils/functions'
 
 type TradeDetailProps = {
   label: string,
-  value: string,
+  value: string | number,
 }
 
 const TradeDetail = ({ label, value }: TradeDetailProps) => (
