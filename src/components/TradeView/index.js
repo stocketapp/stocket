@@ -28,7 +28,7 @@ export default forwardRef((props, ref) => {
   return (
     <Sheet
       height={Dimensions.get('window').height - 50}
-      customStyles={styles.container}
+      customStyles={{ container: styles.container }}
       ref={ref}
       onClose={closeTradeView}
       closeOnDragDown
