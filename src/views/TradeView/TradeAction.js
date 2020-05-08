@@ -17,7 +17,7 @@ export default ({ onActionChange, action }: TradeActionPropTypes) => (
       </Text>
     </TouchableOpacity>
 
-    <Divider vertical />
+    <Divider vertical width={4} />
 
     <TouchableOpacity onPress={() => onActionChange('SELL')}>
       <Text color={action === 'SELL' ? GREEN : LABEL} weight="900" type="label">

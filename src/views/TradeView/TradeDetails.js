@@ -28,7 +28,7 @@ type TradeDetailsProps = {
 
 export default ({ selectedStock, quantity }: TradeDetailsProps) => {
   return (
-    <View style={{ paddingTop: 40 }}>
+    <View style={{ paddingTop: 10 }}>
       <TradeDetail label="Price" value={formatCurrency(selectedStock?.price)} />
       <TradeDetail label="Shares" value={quantity} />
     </View>

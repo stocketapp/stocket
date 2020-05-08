@@ -7,10 +7,10 @@ type DividerPropTypes = {
   width?: number,
 }
 
-export default ({ vertical = false, number = 0.5 }: DividerPropTypes) => {
+export default ({ vertical = false, width = 0.5 }: DividerPropTypes) => {
   const styles = {
-    width: vertical ? number : '100%',
-    height: vertical ? '100%' : number,
+    width: vertical ? width : '100%',
+    height: vertical ? '100%' : width,
     backgroundColor: GRAY_DARKER,
     ...(vertical ? { marginHorizontal: 15 } : { marginVertical: 15 }),
   }
