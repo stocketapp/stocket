@@ -3,10 +3,11 @@ import { View, Dimensions } from 'react-native'
 import Sheet from 'react-native-raw-bottom-sheet'
 import { useSelector, useDispatch } from 'react-redux'
 import { SUB_BACKGROUND } from 'utils/colors'
+import { VirtualNumPad } from 'components'
 import TradeHeader from './TradeHeader'
 import TradeDetails from './TradeDetails'
 import TradeTotal from './TradeTotal'
-import { VirtualNumPad } from 'components'
+import TradeAction from './TradeAction'
 
 export default forwardRef((props, ref) => {
   const { trade, stock } = useSelector(state => state)
@@ -41,6 +42,13 @@ export default forwardRef((props, ref) => {
     })
   }
 
+  const setAction = action => {
+    dispatch({
+      type: 'SELECTED_TRADE_ACTION',
+      selectedTradeAction: action,
+    })
+  }
+
   const total = useMemo(() => stockQuantity * selectedStock.price, [
     stockQuantity,
     selectedStock,
@@ -62,6 +70,11 @@ export default forwardRef((props, ref) => {
           <TradeDetails
             selectedStock={selectedStock}
             quantity={stockQuantity}
+          />
+
+          <TradeAction
+            onActionChange={setAction}
+            action={trade.selectedTradeAction}
           />
         </View>
 
