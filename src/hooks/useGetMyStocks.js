@@ -35,7 +35,7 @@ export default function useGetPortfolio(): {} {
           setLoading(false)
         }
       })
-  }, [dispatch, loading, uid])
+  }, [])
 
   return { positions, loading: true }
 }

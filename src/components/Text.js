@@ -17,15 +17,15 @@ const Text = ({
   const selectFontSize = () => {
     switch (type) {
       case 'heading':
-        return 20
+        return 24
       case 'title':
-        return 18
+        return 20
       case 'label':
-        return 16
+        return 18
       case 'subtext':
         return 12
       case 'big':
-        return 24
+        return 26
       default:
         return 14
     }
@@ -49,7 +49,7 @@ const Text = ({
     }),
     fontWeight: weight,
     color: !status ? color : setStatus(),
-    fontFamily: 'Futura',
+    // fontFamily: 'Futura',
     ...style,
   }
 

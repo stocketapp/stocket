@@ -36,6 +36,10 @@ export default function Stock() {
       type: 'TRADE_VIEW_IS_OPEN',
       tradeViewIsOpen: true,
     })
+    dispatch({
+      type: 'STOCK_PRICE',
+      stockPrice: selectedStock?.price,
+    })
   }
 
   return (

@@ -1,10 +1,12 @@
-import React, { forwardRef, useEffect } from 'react'
+import React, { forwardRef, useEffect, useMemo } from 'react'
 import { View, Dimensions } from 'react-native'
 import Sheet from 'react-native-raw-bottom-sheet'
 import { useSelector, useDispatch } from 'react-redux'
 import { SUB_BACKGROUND } from 'utils/colors'
 import TradeHeader from './TradeHeader'
 import TradeDetails from './TradeDetails'
+import TradeTotal from './TradeTotal'
+import { VirtualNumPad } from 'components'
 
 export default forwardRef((props, ref) => {
   const { trade, stock } = useSelector(state => state)
@@ -25,6 +27,25 @@ export default forwardRef((props, ref) => {
     })
   }
 
+  const setQuantity = quantity => {
+    dispatch({
+      type: 'SET_QUANTITY',
+      stockQuantity: trade.stockQuantity.concat(quantity),
+    })
+  }
+
+  const remove = () => {
+    dispatch({
+      type: 'SET_QUANTITY',
+      stockQuantity: trade.stockQuantity.slice(0, -1),
+    })
+  }
+
+  const total = useMemo(() => stockQuantity * selectedStock.price, [
+    stockQuantity,
+    selectedStock,
+  ])
+
   return (
     <Sheet
       height={Dimensions.get('window').height - 50}
@@ -34,10 +55,20 @@ export default forwardRef((props, ref) => {
       closeOnDragDown
       dragFromTop
     >
-      <View style={{ flex: 1 }}>
-        <TradeHeader symbol={selectedStock?.symbol} />
+      <View style={{ flex: 1, justifyContent: 'space-between' }}>
+        <View style={{ paddingHorizontal: 16 }}>
+          <TradeHeader symbol={selectedStock?.symbol} />
 
-        <TradeDetails selectedStock={selectedStock} quantity={stockQuantity} />
+          <TradeDetails
+            selectedStock={selectedStock}
+            quantity={stockQuantity}
+          />
+        </View>
+
+        <View style={{ paddingBottom: 60 }}>
+          <TradeTotal total={total} />
+          <VirtualNumPad onKeyPress={setQuantity} onDelete={remove} />
+        </View>
       </View>
     </Sheet>
   )
@@ -47,6 +78,5 @@ const styles = {
   container: {
     borderRadius: 14,
     backgroundColor: SUB_BACKGROUND,
-    paddingHorizontal: 16,
   },
 }
