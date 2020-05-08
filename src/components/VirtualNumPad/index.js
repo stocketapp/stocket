@@ -1,6 +1,5 @@
 import React from 'react'
 import { View, Dimensions, TouchableOpacity } from 'react-native'
-import { useSelector, useDispatch } from 'react-redux'
 import Text from '../Text'
 
 const { width } = Dimensions.get('window')
@@ -12,9 +11,11 @@ const PadButton = ({ value, onPress, onDelete }) => {
     <TouchableOpacity onPress={isDelete ? onDelete : onPress}>
       <View style={styles.padBtn}>
         {!isDelete ? (
-          <Text style={styles.numText}>{value}</Text>
+          <Text style={styles.numText} status="positive">
+            {value}
+          </Text>
         ) : (
-          <Text style={styles.numText}>X</Text>
+          <Text style={styles.numText} status="positive">X</Text>
         )}
       </View>
     </TouchableOpacity>

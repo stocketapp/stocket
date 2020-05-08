@@ -1,10 +1,11 @@
-import React, { forwardRef, useEffect } from 'react'
+import React, { forwardRef, useEffect, useMemo } from 'react'
 import { View, Dimensions } from 'react-native'
 import Sheet from 'react-native-raw-bottom-sheet'
 import { useSelector, useDispatch } from 'react-redux'
 import { SUB_BACKGROUND } from 'utils/colors'
 import TradeHeader from './TradeHeader'
 import TradeDetails from './TradeDetails'
+import TradeTotal from './TradeTotal'
 import { VirtualNumPad } from 'components'
 
 export default forwardRef((props, ref) => {
@@ -40,6 +41,11 @@ export default forwardRef((props, ref) => {
     })
   }
 
+  const total = useMemo(() => stockQuantity * selectedStock.price, [
+    stockQuantity,
+    selectedStock,
+  ])
+
   return (
     <Sheet
       height={Dimensions.get('window').height - 50}
@@ -60,6 +66,7 @@ export default forwardRef((props, ref) => {
         </View>
 
         <View style={{ paddingBottom: 60 }}>
+          <TradeTotal total={total} />
           <VirtualNumPad onKeyPress={setQuantity} onDelete={remove} />
         </View>
       </View>

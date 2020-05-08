@@ -1,6 +1,6 @@
 import React from 'react'
 import { View } from 'react-native'
-import Text from '../Text'
+import Text from '../../components/Text'
 
 export default ({ symbol }: { symbol: string }) => (
   <View style={styles.container}>
