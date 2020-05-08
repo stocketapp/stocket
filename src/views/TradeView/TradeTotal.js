@@ -10,7 +10,7 @@ export default ({ total }) => (
       <Text type="title" color={LABEL}>
         Total
       </Text>
-      <Text type="title" weight="bold">
+      <Text type="title" weight="900">
         {formatCurrency(total)}
       </Text>
     </View>

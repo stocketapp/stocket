@@ -12,10 +12,10 @@ type TradeDetailProps = {
 
 const TradeDetail = ({ label, value }: TradeDetailProps) => (
   <View style={styles.detail}>
-    <Text type="title" weight="300" color={LABEL}>
+    <Text type="title" weight="400" color={LABEL}>
       {label}
     </Text>
-    <Text weight="bold" type="title">
+    <Text weight="900" type="title">
       {value}
     </Text>
   </View>

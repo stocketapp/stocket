@@ -59,6 +59,6 @@ const styles = {
   },
   numText: {
     fontSize: 24,
-    fontWeight: '700',
+    fontWeight: '300',
   },
 }

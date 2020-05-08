@@ -4,7 +4,7 @@ import Text from '../../components/Text'
 
 export default ({ symbol }: { symbol: string }) => (
   <View style={styles.container}>
-    <Text type="heading" weight="bold">
+    <Text type="heading" weight="900">
       Buy {symbol}
     </Text>
   </View>
