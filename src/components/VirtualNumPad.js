@@ -1,12 +1,11 @@
 import React from 'react'
 import { View, Dimensions, TouchableOpacity } from 'react-native'
-import Text from '../Text'
+import Text from './Text'
 
 const { width } = Dimensions.get('window')
 
 const PadButton = ({ value, onPress, onDelete }) => {
   const isDelete = value === 'delete'
-
   return (
     <TouchableOpacity onPress={isDelete ? onDelete : onPress}>
       <View style={styles.padBtn}>
