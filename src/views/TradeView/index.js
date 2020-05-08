@@ -12,9 +12,12 @@ import TradeAction from './TradeAction'
 
 export default forwardRef((props, ref) => {
   const { trade, stock, user } = useSelector(state => state)
-  const { tradeViewIsOpen, stockQuantity } = trade
+  const { tradeViewIsOpen, stockQuantity, selectedTradeAction } = trade
   const { selectedStock } = stock
+  const { currentUser } = user
   const dispatch = useDispatch()
+  const sharesOwned = selectedStock?.shares?.length
+  const maxShares = Math.floor(user?.userInfo?.cash / selectedStock?.price)
 
   useEffect(() => {
     if (tradeViewIsOpen) {
@@ -32,14 +35,14 @@ export default forwardRef((props, ref) => {
   const setQuantity = quantity => {
     dispatch({
       type: 'SET_QUANTITY',
-      stockQuantity: trade?.stockQuantity.concat(quantity),
+      stockQuantity: stockQuantity.concat(quantity),
     })
   }
 
   const remove = () => {
     dispatch({
       type: 'SET_QUANTITY',
-      stockQuantity: trade?.stockQuantity.slice(0, -1),
+      stockQuantity: stockQuantity.slice(0, -1),
     })
   }
 
@@ -56,15 +59,24 @@ export default forwardRef((props, ref) => {
   ])
 
   const createTradeTransaction = () => {
-    createTrade(user?.currentUser?.uid, {
+    createTrade(currentUser?.uid, {
       value: total,
       price: selectedStock?.price,
       name: selectedStock?.name,
       symbol: selectedStock?.symbol,
-      quantity: trade?.stockQuantity,
-      action: trade?.selectedTradeAction,
+      quantity: stockQuantity,
+      action: selectedTradeAction,
     })
   }
+
+  const btnDisabled = useMemo(() => {
+    return (
+      stockQuantity &&
+      (selectedTradeAction === 'BUY'
+        ? stockQuantity <= maxShares
+        : stockQuantity <= sharesOwned)
+    )
+  }, [stockQuantity, selectedTradeAction, maxShares, sharesOwned])
 
   return (
     <Sheet
@@ -86,7 +98,7 @@ export default forwardRef((props, ref) => {
 
           <TradeAction
             onActionChange={setAction}
-            action={trade?.selectedTradeAction}
+            action={selectedTradeAction}
           />
         </View>
 
@@ -94,9 +106,15 @@ export default forwardRef((props, ref) => {
           <TradeTotal total={total} />
           <VirtualNumPad onKeyPress={setQuantity} onDelete={remove} />
 
-          <TouchableOpacity style={styles.touchable}>
-            <View style={styles.actionBtn}>
-              <Text type="title" color={DARK_TEXT}>
+          <TouchableOpacity
+            style={styles.touchable}
+            onPress={createTradeTransaction}
+            disabled={!btnDisabled}
+          >
+            <View
+              style={[styles.actionBtn, { opacity: !btnDisabled ? 0.5 : 1 }]}
+            >
+              <Text type="title" color={DARK_TEXT} weight="900">
                 {trade.selectedTradeAction}
               </Text>
             </View>
@@ -113,8 +131,8 @@ const styles = {
     backgroundColor: SUB_BACKGROUND,
   },
   actionBtn: {
-    width: '80%',
-    paddingVertical: 8,
+    width: '78%',
+    paddingVertical: 9,
     backgroundColor: GREEN,
     justifyContent: 'center',
     alignItems: 'center',
