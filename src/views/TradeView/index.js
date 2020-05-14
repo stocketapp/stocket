@@ -14,10 +14,10 @@ export default forwardRef((props, ref) => {
   const { trade, stock, user } = useSelector(state => state)
   const { tradeViewIsOpen, stockQuantity, selectedTradeAction } = trade
   const { selectedStock } = stock
-  const { currentUser } = user
+  const { currentUser, userInfo } = user
   const dispatch = useDispatch()
   const sharesOwned = selectedStock?.shares?.length
-  const maxShares = Math.floor(user?.userInfo?.cash / selectedStock?.price)
+  const maxShares = Math.floor(userInfo?.cash / selectedStock?.price)
 
   useEffect(() => {
     if (tradeViewIsOpen) {
@@ -74,7 +74,7 @@ export default forwardRef((props, ref) => {
       stockQuantity &&
       (selectedTradeAction === 'BUY'
         ? stockQuantity <= maxShares
-        : stockQuantity <= sharesOwned)
+        : stockQuantity >= sharesOwned)
     )
   }, [stockQuantity, selectedTradeAction, maxShares, sharesOwned])
 
