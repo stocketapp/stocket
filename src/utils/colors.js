@@ -9,6 +9,6 @@ export const BLUE = '#4089d7'
 export const RED = '#eb455a'
 
 export const BACKGROUND = '#020808'
-export const SUB_BACKGROUND = '#070909'
+export const SUB_BACKGROUND = '#081010'
 export const DARK_TEXT = '#020607'
-export const LABEL = '#BABABA'
+export const LABEL = '#a0a0a0'
