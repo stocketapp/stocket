@@ -105,7 +105,7 @@ export default forwardRef((props, ref) => {
           />
         </View>
 
-        <View style={{ paddingBottom: 60 }}>
+        <View style={{ paddingBottom: 40 }}>
           <TradeTotal total={total} />
           <VirtualNumPad onKeyPress={setQuantity} onDelete={remove} />
 
@@ -145,6 +145,6 @@ const styles = {
     width: '100%',
     paddingHorizontal: 16,
     alignItems: 'center',
-    marginVertical: 5,
+    // marginVertical: 5,
   },
 }
