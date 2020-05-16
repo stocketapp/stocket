@@ -74,7 +74,6 @@ export default function Stock() {
             </Text>
           </View>
 
-          {/* {graphData.datasets && <Graph data={graphData} />} */}
           {graphData && <LineChart data={graphData} />}
 
           <StockDetails data={stockData?.quote} />

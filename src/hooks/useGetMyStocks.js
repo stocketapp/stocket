@@ -1,7 +1,6 @@
 // @flow
 import { useEffect } from 'react'
 import firestore from '@react-native-firebase/firestore'
-import functions from '@react-native-firebase/functions'
 import { useSelector, useDispatch } from 'react-redux'
 import { getBatchStockData } from 'api'
 
