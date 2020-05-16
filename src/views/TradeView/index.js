@@ -94,6 +94,9 @@ export default forwardRef((props, ref) => {
           <TradeDetails
             selectedStock={selectedStock}
             quantity={stockQuantity}
+            maxShares={maxShares}
+            isSell={selectedTradeAction === 'BUY'}
+            owned={sharesOwned}
           />
 
           <TradeAction
