@@ -89,7 +89,10 @@ export default forwardRef((props, ref) => {
     >
       <View style={{ flex: 1, justifyContent: 'space-between' }}>
         <View style={{ paddingHorizontal: 16 }}>
-          <TradeHeader symbol={selectedStock?.symbol} />
+          <TradeHeader
+            symbol={selectedStock?.symbol}
+            isSell={trade.selectedTradeAction === 'SELL'}
+          />
 
           <TradeDetails
             selectedStock={selectedStock}
@@ -145,6 +148,6 @@ const styles = {
     width: '100%',
     paddingHorizontal: 16,
     alignItems: 'center',
-    // marginVertical: 5,
+    marginVertical: 5,
   },
 }

@@ -2,10 +2,10 @@ import React from 'react'
 import { View } from 'react-native'
 import Text from '../../components/Text'
 
-export default ({ symbol }: { symbol: string }) => (
+export default ({ symbol, isSell }: { symbol: string, isSell: boolean }) => (
   <View style={styles.container}>
     <Text type="heading" weight="900">
-      Buy {symbol}
+      {isSell ? 'Sell' : 'Buy'} {symbol}
     </Text>
   </View>
 )
