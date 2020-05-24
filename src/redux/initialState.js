@@ -19,6 +19,6 @@ export default {
   stock: {
     selectedStock: {},
     stockData: {},
-    positionsMktData: {},
+    positionsMktData: null,
   },
 }

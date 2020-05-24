@@ -32,6 +32,6 @@ const styles = {
     flexDirection: 'row',
     width: '100%',
     justifyContent: 'center',
-    paddingTop: 20,
+    paddingTop: 10,
   },
 }
