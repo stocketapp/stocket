@@ -30,6 +30,10 @@ export default forwardRef((props, ref) => {
       type: 'TRADE_VIEW_IS_OPEN',
       tradeViewIsOpen: false,
     })
+    dispatch({
+      type: 'SET_QUANTITY',
+      stockQuantity: '0',
+    })
   }
 
   const setQuantity = quantity => {
@@ -59,13 +63,16 @@ export default forwardRef((props, ref) => {
   ])
 
   const createTradeTransaction = () => {
-    createTrade(currentUser?.uid, {
+    const obj = {
       value: total,
       price: selectedStock?.price,
       name: selectedStock?.name,
       symbol: selectedStock?.symbol,
       quantity: stockQuantity,
       action: selectedTradeAction,
+    }
+    createTrade(currentUser?.uid, obj, () => {
+      closeTradeView()
     })
   }
 
@@ -73,7 +80,7 @@ export default forwardRef((props, ref) => {
     return (
       stockQuantity &&
       (selectedTradeAction === 'BUY'
-        ? stockQuantity <= maxShares
+        ? stockQuantity <= maxShares && stockQuantity === 0
         : stockQuantity >= sharesOwned)
     )
   }, [stockQuantity, selectedTradeAction, maxShares, sharesOwned])

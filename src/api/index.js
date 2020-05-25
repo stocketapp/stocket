@@ -44,11 +44,19 @@ export async function getStock(symbols: string | Array<string>) {
   return data
 }
 
-export async function createTrade(uid: string, data: TradeDataType) {
+export async function createTrade(
+  uid: string,
+  data: TradeDataType,
+  callback?: () => void,
+) {
   const ref: DocReference = firestore().doc(`Users/${uid}`)
 
   try {
     await ref.collection('trades').add(data)
+
+    if (callback) {
+      callback()
+    }
   } catch (err) {
     console.log('[API] createTrade', err)
   }
