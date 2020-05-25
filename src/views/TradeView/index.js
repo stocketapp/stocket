@@ -80,7 +80,7 @@ export default forwardRef((props, ref) => {
     return (
       stockQuantity &&
       (selectedTradeAction === 'BUY'
-        ? stockQuantity <= maxShares && stockQuantity === 0
+        ? stockQuantity <= maxShares && stockQuantity !== '0'
         : stockQuantity >= sharesOwned)
     )
   }, [stockQuantity, selectedTradeAction, maxShares, sharesOwned])
