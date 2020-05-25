@@ -1,5 +1,5 @@
-import React, { useRef, forwardRef } from 'react'
-import { View, Dimensions, Text } from 'react-native'
+import React, { forwardRef } from 'react'
+import { Dimensions } from 'react-native'
 import { WebView } from 'react-native-webview'
 import Sheet from 'react-native-raw-bottom-sheet'
 

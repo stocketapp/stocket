@@ -3,7 +3,7 @@ import { View, StyleSheet, Dimensions } from 'react-native'
 import { Svg, Path } from 'react-native-svg'
 import * as scale from 'd3-scale'
 import * as shape from 'd3-shape'
-import { scaleLinear, scaleTime } from 'd3-scale'
+import { scaleLinear, scaleTime, scaleQuantile } from 'd3-scale'
 import Cursor from './Cursor'
 import { GREEN } from 'utils/colors'
 import maxBy from 'lodash.maxby'
@@ -35,6 +35,9 @@ export default function LineChart({ data = exampleData }) {
     .x(d => scaleX(moment(d.label, 'LT')))
     .y(d => scaleY(d.value))
     .curve(d3.shape.curveBasis)(data)
+  const scaleLabel = scaleQuantile()
+    .domain([minY.value, maxY.value])
+    .range(data.map(el => el.value))
 
   return (
     <View style={styles.container}>
@@ -42,7 +45,13 @@ export default function LineChart({ data = exampleData }) {
         <Path d={line} fill="transparent" stroke={GREEN} strokeWidth="2" />
       </Svg>
       <View style={{ ...StyleSheet.absoluteFill, width }}>
-        <Cursor d={line} scaleY={scaleY} scaleX={scaleX} data={data} />
+        <Cursor
+          d={line}
+          scaleY={scaleY}
+          scaleX={scaleX}
+          data={data}
+          scaleLabel={scaleLabel}
+        />
       </View>
     </View>
   )

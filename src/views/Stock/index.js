@@ -3,7 +3,7 @@ import { View, TouchableOpacity, ScrollView } from 'react-native'
 import { Text, LineChart } from 'components'
 import { GREEN, BACKGROUND, DARK_TEXT, GRAY_DARKER } from 'utils/colors'
 import { ArrowLeftIcon } from 'components/Icons'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import StockDetails from './StockDetails'
 import { useNavigation } from '@react-navigation/native'
 import StockPosition from './StockPosition'
@@ -14,6 +14,7 @@ import filter from 'lodash.filter'
 export default function Stock() {
   const { goBack } = useNavigation()
   const { selectedStock, positionsMktData } = useSelector(({ stock }) => stock)
+  const dispatch = useDispatch()
 
   const stockData = useMemo(
     () =>
@@ -30,6 +31,17 @@ export default function Stock() {
     }))
   }, [stockData])
 
+  const openTradeView = () => {
+    dispatch({
+      type: 'TRADE_VIEW_IS_OPEN',
+      tradeViewIsOpen: true,
+    })
+    dispatch({
+      type: 'STOCK_PRICE',
+      stockPrice: selectedStock?.price,
+    })
+  }
+
   return (
     <View style={styles.container} ph>
       <TouchableOpacity
@@ -43,28 +55,32 @@ export default function Stock() {
         showsVerticalScrollIndicator={false}
       >
         <View>
-          <View style={{ paddingHorizontal: 16, paddingTop: 20 }}>
-            <Text weight="900" style={{ fontSize: 30 }}>
-              {stockData?.quote.companyName}
-            </Text>
-            <Text
-              style={{ paddingTop: 5 }}
-              color={GRAY_DARKER}
-              weight="700"
-              type="label"
-            >
-              {stockData?.quote.symbol}
+          <View style={{ paddingHorizontal: 16, paddingBottom: 15 }}>
+            <View style={styles.header}>
+              <Text weight="900" style={{ fontSize: 30 }}>
+                {stockData?.quote.companyName}
+              </Text>
+              <Text
+                style={{ paddingBottom: 4, left: 10 }}
+                color={GRAY_DARKER}
+                weight="500"
+                type="label"
+              >
+                {stockData?.quote.symbol}
+              </Text>
+            </View>
+            <Text type="heading" weight="bold" style={{ paddingTop: 6 }}>
+              {stockData?.quote.iexRealtimePrice}
             </Text>
           </View>
 
-          {/* {graphData.datasets && <Graph data={graphData} />} */}
           {graphData && <LineChart data={graphData} />}
 
           <StockDetails data={stockData?.quote} />
 
           {stockData && <StockPosition data={selectedStock} />}
 
-          {stockData.news && <StockNews articles={stockData?.news} />}
+          {stockData?.news && <StockNews articles={stockData?.news} />}
         </View>
       </ScrollView>
 
@@ -80,7 +96,7 @@ export default function Stock() {
           </Text>
         </View>
 
-        <TouchableOpacity>
+        <TouchableOpacity onPress={openTradeView}>
           <View style={styles.button}>
             <Text color={DARK_TEXT} weight="800" style={{ fontSize: 18 }}>
               Trade
@@ -114,5 +130,10 @@ const styles = {
     paddingHorizontal: 35,
     paddingVertical: 8,
     borderRadius: 100,
+  },
+  header: {
+    paddingTop: 20,
+    flexDirection: 'row',
+    alignItems: 'flex-end',
   },
 }
