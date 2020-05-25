@@ -1,41 +1,46 @@
-import React, { useMemo, useEffect, useState } from 'react'
+import React, { useMemo } from 'react'
 import { View, TouchableOpacity, ScrollView } from 'react-native'
-import { Text, Graph } from 'components'
+import { Text, LineChart } from 'components'
 import { GREEN, BACKGROUND, DARK_TEXT, GRAY_DARKER } from 'utils/colors'
 import { ArrowLeftIcon } from 'components/Icons'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import StockDetails from './StockDetails'
 import { useNavigation } from '@react-navigation/native'
 import StockPosition from './StockPosition'
 import StockNews from './StockNews'
-import { getNewsArticle } from 'api'
+import find from 'lodash.find'
+import filter from 'lodash.filter'
 
 export default function Stock() {
   const { goBack } = useNavigation()
   const { selectedStock, positionsMktData } = useSelector(({ stock }) => stock)
-  const [articles, setArticles] = useState([])
+  const dispatch = useDispatch()
 
-  const position = useMemo(
-    () => positionsMktData.find(el => el.symbol === selectedStock.symbol),
-    [selectedStock, positionsMktData],
-  )
-
-  const currentData = useMemo(
-    () => positionsMktData.find(el => el.symbol === selectedStock?.symbol),
+  const stockData = useMemo(
+    () =>
+      find(positionsMktData, el => el.quote.symbol === selectedStock?.symbol),
     [positionsMktData, selectedStock],
   )
 
-  useEffect(() => {
-    const getArticles = async () => {
-      const res = await getNewsArticle(selectedStock?.symbol)
-      console.log(res)
-      setArticles(res.filter(el => el.lang === 'en'))
-    }
+  const graphData = useMemo(() => {
+    const arr = filter(stockData?.chart, el => el?.close !== null)
+    return arr.map(el => ({
+      value: el.close,
+      label: el.label,
+      date: el.date,
+    }))
+  }, [stockData])
 
-    if (selectedStock) {
-      getArticles()
-    }
-  }, [selectedStock])
+  const openTradeView = () => {
+    dispatch({
+      type: 'TRADE_VIEW_IS_OPEN',
+      tradeViewIsOpen: true,
+    })
+    dispatch({
+      type: 'STOCK_PRICE',
+      stockPrice: selectedStock?.price,
+    })
+  }
 
   return (
     <View style={styles.container} ph>
@@ -50,27 +55,32 @@ export default function Stock() {
         showsVerticalScrollIndicator={false}
       >
         <View>
-          <View style={{ paddingHorizontal: 16, paddingTop: 30 }}>
-            <Text weight="900" style={{ fontSize: 30 }}>
-              {currentData?.name}
-            </Text>
-            <Text
-              style={{ paddingTop: 5 }}
-              color={GRAY_DARKER}
-              weight="700"
-              type="label"
-            >
-              {selectedStock?.symbol}
+          <View style={{ paddingHorizontal: 16, paddingBottom: 15 }}>
+            <View style={styles.header}>
+              <Text weight="900" style={{ fontSize: 30 }}>
+                {stockData?.quote.companyName}
+              </Text>
+              <Text
+                style={{ paddingBottom: 4, left: 10 }}
+                color={GRAY_DARKER}
+                weight="500"
+                type="label"
+              >
+                {stockData?.quote.symbol}
+              </Text>
+            </View>
+            <Text type="heading" weight="bold" style={{ paddingTop: 6 }}>
+              {stockData?.quote.iexRealtimePrice}
             </Text>
           </View>
 
-          <Graph />
+          {graphData && <LineChart data={graphData} />}
 
-          <StockDetails data={position} />
+          <StockDetails data={stockData?.quote} />
 
-          {currentData && <StockPosition data={selectedStock} />}
+          {stockData && <StockPosition data={selectedStock} />}
 
-          <StockNews articles={articles} />
+          {stockData?.news && <StockNews articles={stockData?.news} />}
         </View>
       </ScrollView>
 
@@ -79,14 +89,14 @@ export default function Stock() {
           <Text color={GRAY_DARKER}>Day change </Text>
           <Text
             weight="900"
-            status={Number(position?.day_change) < 0 ? 'positive' : 'negative'}
+            status={Number(stockData?.day_change) < 0 ? 'positive' : 'negative'}
             style={{ paddingTop: 2, fontSize: 15 }}
           >
-            {position?.day_change}
+            {stockData?.quote.change}
           </Text>
         </View>
 
-        <TouchableOpacity>
+        <TouchableOpacity onPress={openTradeView}>
           <View style={styles.button}>
             <Text color={DARK_TEXT} weight="800" style={{ fontSize: 18 }}>
               Trade
@@ -120,5 +130,10 @@ const styles = {
     paddingHorizontal: 35,
     paddingVertical: 8,
     borderRadius: 100,
+  },
+  header: {
+    paddingTop: 20,
+    flexDirection: 'row',
+    alignItems: 'flex-end',
   },
 }

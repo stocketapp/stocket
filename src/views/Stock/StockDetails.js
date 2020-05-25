@@ -21,36 +21,36 @@ const StockDetailItem = ({ label, value }: DetailItemProps): React$Node => (
 
 type StockDetailsProps = {
   data: {
-    price_open: string,
-    day_high: string,
-    day_low: string,
+    open: string,
+    high: string,
+    low: string,
     volume: string,
-    market_cap: string,
-    eps: string,
-    '52_week_high': string,
-    '52_week_low': string,
+    marketCap: string,
+    peRatio: string,
+    week52High: string,
+    week52Low: string,
   },
 }
 
 export default ({ data }: StockDetailsProps): React$Node => (
   <View style={styles.container}>
     <View style={{ width: '48%' }}>
-      <StockDetailItem label="Open" value={data?.price_open} />
-      <StockDetailItem label="High" value={data?.day_high} />
-      <StockDetailItem label="Low" value={data?.day_low} />
+      <StockDetailItem label="Open" value={data?.open} />
+      <StockDetailItem label="High" value={data?.high} />
+      <StockDetailItem label="Low" value={data?.low} />
       <StockDetailItem
         label="Vol"
         value={numeral(data?.volume).format('0.00a')}
       />
     </View>
     <View style={{ width: '48%', paddingLeft: 15 }}>
-      <StockDetailItem label="52W H" value={data['52_week_high']} />
-      <StockDetailItem label="52W L" value={data['52_week_low']} />
+      <StockDetailItem label="52W H" value={data?.week52High} />
+      <StockDetailItem label="52W L" value={data?.week52Low} />
       <StockDetailItem
         label="Mkt Cap"
-        value={numeral(data?.market_cap).format('0.00a')}
+        value={numeral(data?.marketCap).format('0.00a')}
       />
-      <StockDetailItem label="EPS" value={data?.eps} />
+      <StockDetailItem label="P/E Ratio" value={data?.peRatio} />
     </View>
   </View>
 )

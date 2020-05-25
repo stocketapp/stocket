@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo } from 'react'
+import React, { useEffect } from 'react'
 import { TextInput, StyleSheet } from 'react-native'
 import { Container, Text } from 'components'
 import { useDispatch, useSelector } from 'react-redux'

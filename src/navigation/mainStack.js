@@ -1,11 +1,11 @@
 import React from 'react'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import TabBarComponent from './TabBarComponent'
-import { TrendingUpIcon, TradeIcon, SearchIcon } from 'components/Icons'
-import { GRAY_DARKER, GREEN } from 'utils/colors'
+import { TrendingUpIcon, SearchIcon } from 'components/Icons'
+import { GREEN } from 'utils/colors'
 
 import Home from 'views/Home'
-import Trade from 'views/Trade'
+// import Trade from 'views/Trade'
 import Search from 'views/Search'
 
 const Tab = createBottomTabNavigator()
@@ -19,7 +19,7 @@ export default () => (
       name="Home"
       component={Home}
       options={{
-        tabBarIcon: ({ color }) => <TrendingUpIcon size={50} color={color} />,
+        tabBarIcon: ({ color }) => <TrendingUpIcon size={40} color={color} />,
       }}
     />
     {/* <Tab.Screen
@@ -33,8 +33,9 @@ export default () => (
       name="Search"
       component={Search}
       options={{
-        tabBarIcon: ({ color }) => <SearchIcon size={45} color={color} />,
+        tabBarIcon: ({ color }) => <SearchIcon size={35} color={color} />,
       }}
     />
   </Tab.Navigator>
 )
+

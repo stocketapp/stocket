@@ -21,11 +21,9 @@ async function get(query: string) {
 }
 
 async function iexGet(query: string) {
-  const iexUrl =
-    process.env.NODE_ENV !== 'development'
-      ? 'https://sandbox.iexapis.com/stable'
-      : 'https://cloud.iexapis.com/v1'
-  const url = `${iexUrl}/${query}token=${IEX_CLOUD_KEY}`
+  const iexUrl = 'https://cloud.iexapis.com/v1'
+  // const iexUrl = 'https://sandbox.iexapis.com/stable'
+  const url = `${iexUrl}/${query}&token=${IEX_CLOUD_KEY}`
   const metric = await perf().newHttpMetric(url, 'GET')
   const res = await fetch(url, {
     method: 'GET',
@@ -46,11 +44,19 @@ export async function getStock(symbols: string | Array<string>) {
   return data
 }
 
-export async function createTrade(uid: string, data: TradeDataType) {
+export async function createTrade(
+  uid: string,
+  data: TradeDataType,
+  callback?: () => void,
+) {
   const ref: DocReference = firestore().doc(`Users/${uid}`)
 
   try {
     await ref.collection('trades').add(data)
+
+    if (callback) {
+      callback()
+    }
   } catch (err) {
     console.log('[API] createTrade', err)
   }
@@ -74,6 +80,19 @@ export async function addToWatchlist(uid: string, data: { symbol: string }) {
 
 export async function getNewsArticle(stock: string, last: number = 5) {
   const res = await iexGet(`stock/${stock}/news/last/${last}?`)
+  const result = await res.json()
+  return result
+}
+
+export async function getBatchStockData(
+  symbols: string,
+  range?: string = '1d',
+  last?: number = 5,
+) {
+  const typeQuery = '&types=quote,news,chart,intraday-prices'
+  const rangeQuery = `${range && `&range=${range}`}`
+  const url = `stock/market/batch?symbols=${symbols}${typeQuery}${rangeQuery}&last=${last}&chartInterval=5&chartIEXWhenNull=true`
+  const res = await iexGet(url)
   const result = await res.json()
   return result
 }

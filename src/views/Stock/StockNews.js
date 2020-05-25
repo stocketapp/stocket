@@ -1,4 +1,4 @@
-import React, { useRef, forwardRef } from 'react'
+import React, { useRef } from 'react'
 import { View, Image, TouchableOpacity } from 'react-native'
 import { Text, ModalWebview } from 'components'
 import { GRAY_DARKER } from 'utils/colors'
@@ -14,11 +14,15 @@ const ArticleItem = ({ article }) => {
             <Image source={{ uri: article?.image }} style={styles.img} />
           </View>
           <View
-            style={{ paddingLeft: 20, flex: 1, justifyContent: 'space-between' }}
+            style={{
+              paddingLeft: 20,
+              flex: 1,
+              justifyContent: 'space-between',
+            }}
           >
             <Text
-              type="title"
-              weight="500"
+              style={{ fontSize: 17 }}
+              weight="900"
               numberOfLines={3}
               ellipsizeMode="tail"
             >

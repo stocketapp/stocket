@@ -21,9 +21,11 @@ const Text = ({
       case 'title':
         return 20
       case 'label':
-        return 16
+        return 18
       case 'subtext':
         return 12
+      case 'big':
+        return 26
       default:
         return 14
     }
@@ -47,6 +49,7 @@ const Text = ({
     }),
     fontWeight: weight,
     color: !status ? color : setStatus(),
+    // fontFamily: 'Futura',
     ...style,
   }
 
