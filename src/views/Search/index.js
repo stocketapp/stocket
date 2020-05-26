@@ -14,17 +14,17 @@ export default function Search(): React$Node {
   const { currentUser } = useUser()
 
   useEffect(() => {
-    // const getResults = async () => {
-    //   try {
-    //     const res = await 
-    //     setResults(res)
-    //   } catch (err) {
-    //     console.log(err)
-    //   }
-    // }
+    const getResults = async () => {
+      try {
+        const res = await searchTerm(debounced)
+        setResults(res)
+      } catch (err) {
+        console.log(err)
+      }
+    }
 
     if (debounced) {
-      searchTerm(debounced)
+      getResults(debounced)
     }
   }, [debounced])
 
