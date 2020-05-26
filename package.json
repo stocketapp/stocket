@@ -7,7 +7,8 @@
     "start": "react-native start",
     "test": "jest",
     "lint": "eslint .",
-    "ios": "npx react-native run-ios --simulator 'iPhone 11 Pro' --scheme Development"
+    "ios": "npx react-native run-ios --simulator 'iPhone 11 Pro' --scheme Development",
+    "ios-device": "npx react-native run-ios --device \"Henry’s iPhone 11 Pro\" --scheme Development"
   },
   "dependencies": {
     "@invertase/react-native-apple-authentication": "^1.0.0",
