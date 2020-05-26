@@ -66,7 +66,6 @@ export async function createTrade(
 export async function searchTerm(term: string) {
   const res = await iexGet(`search/${term}`)
   const result = await res.json()
-  console.log('searchTerm 2', result)
   return result
 }
 

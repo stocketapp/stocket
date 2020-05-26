@@ -28,11 +28,11 @@ export default function Search(): React$Node {
     }
   }, [debounced])
 
-  const renderItem = ({ name, symbol }) => (
+  const renderItem = ({ securityName, symbol }) => (
     <TouchableOpacity style={styles.resultItem}>
       <View>
         <Text weight="700" type="label">
-          {name}
+          {securityName}
         </Text>
         <Text color={GRAY_DARKER} type="subtext" style={{ paddingTop: 5 }}>
           {symbol}
