@@ -80,7 +80,7 @@ export default function Stock() {
 
           {stockData && <StockPosition data={selectedStock} />}
 
-          {stockData?.news && <StockNews articles={stockData?.news} />}
+          {/* {stockData?.news && <StockNews articles={stockData?.news} />} */}
         </View>
       </ScrollView>
 
