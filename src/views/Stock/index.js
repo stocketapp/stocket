@@ -97,7 +97,7 @@ export default function Stock() {
 
         <TouchableOpacity onPress={openTradeView}>
           <View style={styles.button}>
-            <Text color={DARK_TEXT} weight="800" style={{ fontSize: 18 }}>
+            <Text color={DARK_TEXT} weight="BLACK" style={{ fontSize: 18 }}>
               Trade
             </Text>
           </View>
@@ -126,8 +126,8 @@ const styles = {
   },
   button: {
     backgroundColor: GREEN,
-    paddingHorizontal: 35,
-    paddingVertical: 8,
+    paddingHorizontal: 30,
+    paddingVertical: 5,
     borderRadius: 100,
   },
   header: {
