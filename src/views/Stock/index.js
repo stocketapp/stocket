@@ -57,13 +57,12 @@ export default function Stock() {
         <View>
           <View style={{ paddingHorizontal: 16, paddingBottom: 15 }}>
             <View style={styles.header}>
-              <Text weight="900" style={{ fontSize: 30 }}>
+              <Text weight="Black" style={{ fontSize: 30 }}>
                 {stockData?.quote.companyName}
               </Text>
               <Text
                 style={{ paddingBottom: 4, left: 10 }}
                 color={GRAY_DARKER}
-                weight="500"
                 type="label"
               >
                 {stockData?.quote.symbol}
@@ -88,7 +87,7 @@ export default function Stock() {
         <View style={{ flexDirection: 'column' }}>
           <Text color={GRAY_DARKER}>Day change </Text>
           <Text
-            weight="900"
+            weight="Black"
             status={Number(stockData?.day_change) < 0 ? 'positive' : 'negative'}
             style={{ paddingTop: 2, fontSize: 15 }}
           >

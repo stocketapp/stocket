@@ -21,7 +21,7 @@ export default ({
 }: SearchResultProps) => (
   <TouchableOpacity style={styles.resultItem} onPress={() => setStock(symbol)}>
     <View>
-      <Text weight="700" type="label">
+      <Text weight="Medium" type="label">
         {securityName}
       </Text>
       <Text color={GRAY_DARKER} type="subtext" style={{ paddingTop: 5 }}>

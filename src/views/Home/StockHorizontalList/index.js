@@ -25,7 +25,7 @@ export default function StockHorizontalList(props: StockHorizontalListProps) {
     () => (
       <Container style={styles.container} ph>
         <Container horizontal separate>
-          <Text type="title" style={styles.title} weight="bold">
+          <Text type="title" style={styles.title} weight="Bold">
             Stocks
           </Text>
 

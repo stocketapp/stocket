@@ -12,7 +12,7 @@ type TradeActionPropTypes = {
 export default ({ onActionChange, action }: TradeActionPropTypes) => (
   <View style={styles.container}>
     <TouchableOpacity onPress={() => onActionChange('BUY')}>
-      <Text color={action === 'BUY' ? GREEN : LABEL} weight="900" type="label">
+      <Text color={action === 'BUY' ? GREEN : LABEL} weight="Black" type="label">
         BUY
       </Text>
     </TouchableOpacity>
@@ -20,7 +20,7 @@ export default ({ onActionChange, action }: TradeActionPropTypes) => (
     <Divider vertical width={4} />
 
     <TouchableOpacity onPress={() => onActionChange('SELL')}>
-      <Text color={action === 'SELL' ? GREEN : LABEL} weight="900" type="label">
+      <Text color={action === 'SELL' ? GREEN : LABEL} weight="Black" type="label">
         SELL
       </Text>
     </TouchableOpacity>

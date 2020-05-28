@@ -4,7 +4,7 @@ import Text from '../../components/Text'
 
 export default ({ symbol, isSell }: { symbol: string, isSell: boolean }) => (
   <View style={styles.container}>
-    <Text type="heading" weight="900">
+    <Text type="heading" weight="Black">
       {isSell ? 'Sell' : 'Buy'} {symbol}
     </Text>
   </View>
