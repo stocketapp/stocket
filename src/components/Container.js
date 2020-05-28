@@ -1,9 +1,10 @@
 // @flow
 import React from 'react'
 import { View } from 'react-native'
+import { BACKGROUND } from 'utils/colors'
 import type { ContainerProps } from '../Types'
 
-export default function Container(props: ContainerProps): React$Node {
+export default (props: ContainerProps): React$Node => {
   const {
     children,
     style,
@@ -13,6 +14,7 @@ export default function Container(props: ContainerProps): React$Node {
     ph = false,
     top = 0,
     width = '100%',
+    fullView = false,
   } = props
   const defaultStyles = {
     width,
@@ -20,6 +22,8 @@ export default function Container(props: ContainerProps): React$Node {
     justifyContent: separate ? 'space-between' : justifyContent,
     flexDirection: horizontal ? 'row' : 'column',
     paddingTop: top,
+    backgroundColor: BACKGROUND,
+    ...(fullView && { flex: 1 }),
   }
 
   return <View style={[defaultStyles, style]}>{children}</View>

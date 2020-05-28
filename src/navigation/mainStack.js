@@ -1,12 +1,12 @@
 import React from 'react'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import TabBarComponent from './TabBarComponent'
-import { TrendingUpIcon, SearchIcon } from 'components/Icons'
+import { TrendingUpIcon, SearchIcon, ProfileIcon } from 'components/Icons'
 import { GREEN } from 'utils/colors'
 
 import Home from 'views/Home'
-// import Trade from 'views/Trade'
 import Search from 'views/Search'
+import Profile from 'views/Profile'
 
 const Tab = createBottomTabNavigator()
 
@@ -22,18 +22,18 @@ export default () => (
         tabBarIcon: ({ color }) => <TrendingUpIcon size={40} color={color} />,
       }}
     />
-    {/* <Tab.Screen
-      name="Trade"
-      component={Trade}
-      options={{
-        tabBarIcon: ({ color }) => <TradeIcon size={50} color={color} />,
-      }}
-    /> */}
     <Tab.Screen
       name="Search"
       component={Search}
       options={{
         tabBarIcon: ({ color }) => <SearchIcon size={35} color={color} />,
+      }}
+    />
+    <Tab.Screen
+      name="Profile"
+      component={Profile}
+      options={{
+        tabBarIcon: ({ color }) => <ProfileIcon size={36} color={color} />,
       }}
     />
   </Tab.Navigator>

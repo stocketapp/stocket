@@ -19,6 +19,7 @@ export type ContainerProps = {
   top?: number,
   width?: string | number,
   style?: ViewStyleProp,
+  fullView?: boolean,
 }
 
 export type TextProps = Text.propTypes & {
@@ -64,7 +65,7 @@ export type LabelProps = {
   title?: string,
   value?: string,
   children: React$Node,
-  style?: ViewStyleProp,
+  style?: ViewStyleProp,BACKGROUND
 }
 
 export type PositionType = {
