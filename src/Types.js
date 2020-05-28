@@ -30,16 +30,15 @@ export type TextProps = Text.propTypes & {
   style?: Text.propTypes.style,
   status?: 'negative' | 'positive',
   weight?:
-    | '100'
-    | '200'
-    | '300'
-    | '400'
-    | '500'
-    | '600'
-    | '700'
-    | '800'
-    | '900'
-    | 'bold',
+    | 'Black'
+    | 'Heavy'
+    | 'Bold'
+    | 'Semibold'
+    | 'Medium'
+    | 'Regular'
+    | 'Light'
+    | 'Thin'
+    | 'Ultralight'
 }
 
 export type TradeInfoProps = {
