@@ -17,9 +17,12 @@ export type ContainerProps = {
   separate?: boolean,
   ph?: boolean,
   top?: number,
+  bottom?: number,
   width?: string | number,
   style?: ViewStyleProp,
   fullView?: boolean,
+  safeAreaTop?: boolean,
+  safeAreaBottom?: boolean,
 }
 
 export type TextProps = Text.propTypes & {
