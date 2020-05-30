@@ -46,7 +46,7 @@ export default function Search(): React$Node {
   }
 
   return (
-    <Container fullView ph>
+    <Container fullView ph safeAreaTop safeAreaBottom>
       <SearchSymbols value={search} setValue={setSearch} />
 
       <FlatList
