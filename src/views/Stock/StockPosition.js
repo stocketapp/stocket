@@ -5,7 +5,7 @@ import { GRAY_DARKER } from 'utils/colors'
 import { formatCurrency } from 'utils/functions'
 
 export default ({ data }) => (
-  <Container ph style={{ paddingTop: 40 }}>
+  <Container ph top={40}>
     <Text type="heading" weight="Black">
       Position
     </Text>
