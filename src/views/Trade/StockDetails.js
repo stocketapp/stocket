@@ -7,7 +7,7 @@ import TradeAction from './TradeAction'
 import StockQuantity from './StockQuantity'
 import { useDispatch } from 'react-redux'
 
-export default function({ data }: TradeInfoProps): React$Node {
+export default function ({ data }: TradeInfoProps): React$Node {
   const status = parseFloat(data?.change_pct) > 0 ? 'positive' : 'negative'
   const price = data?.price
   const dispatch = useDispatch()
