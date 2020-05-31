@@ -67,7 +67,7 @@ export type LabelProps = {
   title?: string,
   value?: string,
   children: React$Node,
-  style?: ViewStyleProp,BACKGROUND
+  style?: ViewStyleProp,
 }
 
 export type PositionType = {
