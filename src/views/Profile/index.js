@@ -48,6 +48,7 @@ export default function Profile() {
             label="Portfolio Value"
             value={userInfo?.portfolioValue}
           />
+          <ProfileItem label="Combined Value" value={userInfo?.combinedValue} />
         </Container>
       </View>
 
