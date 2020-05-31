@@ -20,6 +20,7 @@ export default () => (
       component={Home}
       options={{
         tabBarIcon: ({ color }) => <TrendingUpIcon size={40} color={color} />,
+        animationTypeForReplace: 'pop',
       }}
     />
     <Tab.Screen
@@ -38,4 +39,3 @@ export default () => (
     />
   </Tab.Navigator>
 )
-

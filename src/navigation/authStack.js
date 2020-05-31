@@ -9,7 +9,7 @@ export default () => (
     <Stack.Screen
       name="Login"
       component={SignIn}
-      options={{ headerShown: false }}
+      options={{ headerShown: false, animationTypeForReplace: 'pop' }}
     />
   </Stack.Navigator>
 )

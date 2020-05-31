@@ -22,8 +22,8 @@ const styles = {
   item: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    borderBottomWidth: 0.2,
+    // borderBottomWidth: 0.2,
     borderBottomColor: GRAY_DARKER,
-    paddingBottom: 15,
+    paddingVertical: 15,
   },
 }
