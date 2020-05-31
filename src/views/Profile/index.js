@@ -6,6 +6,7 @@ import { SUB_BACKGROUND, LABEL } from 'utils/colors'
 import { useSelector } from 'react-redux'
 import { formatCurrency } from 'utils/functions'
 import ProfileItem from './ProfileItem'
+import AddCash from './AddCash'
 
 export default function Profile() {
   const { userInfo } = useSelector(({ user }) => user)
@@ -21,11 +22,17 @@ export default function Profile() {
           </Text>
         </View>
 
-        <View>
-          <Text style={styles.value}>Cash</Text>
-          <Text style={styles.cash} weight="Black">
-            {formatCurrency(userInfo?.cash)}
-          </Text>
+        <View style={styles.cashContainer}>
+          <View>
+            <Text style={styles.value}>Cash</Text>
+            <Text style={styles.cash} weight="Black">
+              {formatCurrency(userInfo?.cash)}
+            </Text>
+          </View>
+
+          <View>
+            <AddCash />
+          </View>
         </View>
       </Container>
 
@@ -56,5 +63,10 @@ const styles = {
   cash: {
     fontSize: 16,
     paddingTop: 5,
+  },
+  cashContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'flex-end',
   },
 }
