@@ -3,7 +3,7 @@
 import React, { useEffect, useRef } from 'react'
 import { StatusBar, View } from 'react-native'
 import MainStack from './src/navigation/AppStack'
-import AuthStack from './src/navigation/AuthStack'
+import AuthStack from './src/navigation/AuthenticationStack'
 import { useAuthState, useSetUserInfo } from 'hooks'
 // import RNBootSplash from 'react-native-bootsplash'
 import { BACKGROUND } from 'utils/colors'
