@@ -127,7 +127,7 @@ export default forwardRef((props, ref) => {
             <View
               style={[styles.actionBtn, { opacity: !btnDisabled ? 0.5 : 1 }]}
             >
-              <Text type="title" color={DARK_TEXT} weight="900">
+              <Text type="title" color={DARK_TEXT} weight="Black">
                 {trade.selectedTradeAction}
               </Text>
             </View>

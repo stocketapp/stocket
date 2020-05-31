@@ -8,7 +8,9 @@ const UsersRef = firestore().collection('Users')
 
 export default function useGetPortfolio(): {} {
   const { uid } = useSelector(({ user }) => user.currentUser)
-  const { positions, loading, positionsMktData: mktData } = useSelector(({ stock }) => stock)
+  const { positions, loading, positionsMktData: mktData } = useSelector(
+    ({ stock }) => stock,
+  )
   const dispatch = useDispatch()
 
   // THIS IS CALLED AGAIN WHEN MAKING A PURCHASE/SELLING STOCK

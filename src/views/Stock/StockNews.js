@@ -22,7 +22,7 @@ const ArticleItem = ({ article }) => {
           >
             <Text
               style={{ fontSize: 17 }}
-              weight="900"
+              weight="Black"
               numberOfLines={3}
               ellipsizeMode="tail"
             >
@@ -40,7 +40,7 @@ const ArticleItem = ({ article }) => {
 export default function StockNews({ articles }) {
   return (
     <View style={styles.container}>
-      <Text type="heading" weight="900" style={{ paddingBottom: 10 }}>
+      <Text type="heading" weight="Black" style={{ paddingBottom: 10 }}>
         News
       </Text>
 

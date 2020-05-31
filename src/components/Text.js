@@ -11,7 +11,7 @@ const Text = ({
   status,
   children,
   style,
-  weight = '500',
+  weight = 'Regular',
   ...props
 }: TextProps) => {
   const selectFontSize = () => {
@@ -47,9 +47,9 @@ const Text = ({
       textTransform: 'capitalize',
       letterSpacing: 1,
     }),
-    fontWeight: weight,
+    // fontWeight: weight,
     color: !status ? color : setStatus(),
-    // fontFamily: 'Futura',
+    fontFamily: `SFProText-${weight}`,
     ...style,
   }
 

@@ -46,7 +46,7 @@ export default function Search(): React$Node {
   }
 
   return (
-    <Container style={styles.container} ph>
+    <Container fullView ph safeAreaTop safeAreaBottom>
       <SearchSymbols value={search} setValue={setSearch} />
 
       <FlatList
@@ -67,10 +67,6 @@ export default function Search(): React$Node {
 }
 
 const styles = {
-  container: {
-    flex: 1,
-    backgroundColor: BACKGROUND,
-  },
   resultItem: {
     flexDirection: 'row',
     justifyContent: 'space-between',

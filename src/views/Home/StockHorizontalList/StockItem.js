@@ -24,7 +24,7 @@ const PortfolioItem = ({ item }: { item: PositionType }): React$Node => {
       <Container style={styles.container}>
         <Text
           type="heading"
-          weight="700"
+          weight="Medium"
           status={Number(item?.gains) > 0 ? 'positive' : 'negative'}
         >
           {Number(item?.gainsPercentage).toFixed(2) || '0'}%

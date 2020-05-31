@@ -12,10 +12,10 @@ type TradeDetailProps = {
 
 const TradeDetail = ({ label, value }: TradeDetailProps) => (
   <View style={styles.detail}>
-    <Text type="title" weight="400" color={LABEL}>
+    <Text type="title" weight="Thin" color={LABEL}>
       {label}
     </Text>
-    <Text weight="900" type="title">
+    <Text weight="Black" type="title">
       {value}
     </Text>
   </View>
@@ -44,7 +44,7 @@ export default ({
       <TradeDetail label="Shares" value={quantity} />
 
       <View style={styles.maxSharesContainer}>
-        <Text type="subtext" color={GRAY_DARKER} weight="700">
+        <Text type="subtext" color={GRAY_DARKER} weight="Medium">
           {sharesAmountLabel} {sharesAmount}
         </Text>
       </View>

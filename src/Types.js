@@ -17,8 +17,12 @@ export type ContainerProps = {
   separate?: boolean,
   ph?: boolean,
   top?: number,
+  bottom?: number,
   width?: string | number,
   style?: ViewStyleProp,
+  fullView?: boolean,
+  safeAreaTop?: boolean,
+  safeAreaBottom?: boolean,
 }
 
 export type TextProps = Text.propTypes & {
@@ -29,16 +33,15 @@ export type TextProps = Text.propTypes & {
   style?: Text.propTypes.style,
   status?: 'negative' | 'positive',
   weight?:
-    | '100'
-    | '200'
-    | '300'
-    | '400'
-    | '500'
-    | '600'
-    | '700'
-    | '800'
-    | '900'
-    | 'bold',
+    | 'Black'
+    | 'Heavy'
+    | 'Bold'
+    | 'Semibold'
+    | 'Medium'
+    | 'Regular'
+    | 'Light'
+    | 'Thin'
+    | 'Ultralight'
 }
 
 export type TradeInfoProps = {
@@ -64,7 +67,7 @@ export type LabelProps = {
   title?: string,
   value?: string,
   children: React$Node,
-  style?: ViewStyleProp,
+  style?: ViewStyleProp,BACKGROUND
 }
 
 export type PositionType = {

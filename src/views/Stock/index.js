@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react'
 import { View, TouchableOpacity, ScrollView } from 'react-native'
-import { Text, LineChart } from 'components'
+import { Text, LineChart, Container } from 'components'
 import { GREEN, BACKGROUND, DARK_TEXT, GRAY_DARKER } from 'utils/colors'
 import { ArrowLeftIcon } from 'components/Icons'
 import { useSelector, useDispatch } from 'react-redux'
@@ -10,6 +10,7 @@ import StockPosition from './StockPosition'
 import StockNews from './StockNews'
 import find from 'lodash.find'
 import filter from 'lodash.filter'
+import StockTradeBar from './StockTradeBar'
 
 export default function Stock() {
   const { goBack } = useNavigation()
@@ -43,7 +44,7 @@ export default function Stock() {
   }
 
   return (
-    <View style={styles.container} ph>
+    <Container style={styles.container} safeAreaTop>
       <TouchableOpacity
         style={{ paddingLeft: 15, paddingVertical: 5 }}
         onPress={goBack}
@@ -57,13 +58,12 @@ export default function Stock() {
         <View>
           <View style={{ paddingHorizontal: 16, paddingBottom: 15 }}>
             <View style={styles.header}>
-              <Text weight="900" style={{ fontSize: 30 }}>
+              <Text weight="Black" style={{ fontSize: 30 }}>
                 {stockData?.quote.companyName}
               </Text>
               <Text
                 style={{ paddingBottom: 4, left: 10 }}
                 color={GRAY_DARKER}
-                weight="500"
                 type="label"
               >
                 {stockData?.quote.symbol}
@@ -80,38 +80,24 @@ export default function Stock() {
 
           {stockData && <StockPosition data={selectedStock} />}
 
-          {/* {stockData?.news && <StockNews articles={stockData?.news} />} */}
+          {stockData?.news && process.env.NODE_ENV !== 'development' && (
+            <StockNews articles={stockData?.news} />
+          )}
         </View>
       </ScrollView>
 
-      <View style={styles.bottom}>
-        <View style={{ flexDirection: 'column' }}>
-          <Text color={GRAY_DARKER}>Day change </Text>
-          <Text
-            weight="900"
-            status={Number(stockData?.day_change) < 0 ? 'positive' : 'negative'}
-            style={{ paddingTop: 2, fontSize: 15 }}
-          >
-            {stockData?.quote.change}
-          </Text>
-        </View>
-
-        <TouchableOpacity onPress={openTradeView}>
-          <View style={styles.button}>
-            <Text color={DARK_TEXT} weight="800" style={{ fontSize: 18 }}>
-              Trade
-            </Text>
-          </View>
-        </TouchableOpacity>
-      </View>
-    </View>
+      <StockTradeBar
+        status={Number(stockData?.day_change) < 0 ? 'positive' : 'negative'}
+        change={stockData?.quote.change}
+        openTradeView={openTradeView}
+      />
+    </Container>
   )
 }
 
 const styles = {
   container: {
     flex: 1,
-    backgroundColor: BACKGROUND,
     justifyContent: 'space-between',
   },
   bottom: {
@@ -127,8 +113,8 @@ const styles = {
   },
   button: {
     backgroundColor: GREEN,
-    paddingHorizontal: 35,
-    paddingVertical: 8,
+    paddingHorizontal: 30,
+    paddingVertical: 5,
     borderRadius: 100,
   },
   header: {

@@ -1,6 +1,6 @@
 import initialState from '../initialState'
 
-export default function(state = initialState.stock, action) {
+export default function (state = initialState.stock, action) {
   switch (action.type) {
     case 'SET_SELECTED_STOCK':
       return { ...state, selectedStock: action.stock }
