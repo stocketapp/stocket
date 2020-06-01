@@ -2,12 +2,30 @@
 import firestore from '@react-native-firebase/firestore'
 import perf from '@react-native-firebase/perf'
 import type { TradeDataType, DocReference } from 'types'
-import { WTD_API_KEY } from '../../config'
+import { WTD_API_KEY, IEX_CLOUD_KEY } from '../../config'
 
 async function get(query: string) {
   const url = `https://api.worldtradingdata.com/api/v1/${query}&api_token=${WTD_API_KEY}`
   const metric = await perf().newHttpMetric(url, 'GET')
   metric.putAttribute('user', 'abcd')
+  const res = await fetch(url, {
+    method: 'GET',
+    Accept: 'applicatiion/json',
+  })
+  metric.setHttpResponseCode(res.status)
+  metric.setResponseContentType(res.headers.get('Content-Type'))
+  metric.setResponsePayloadSize(res.headers.get('Content-Length'))
+
+  await metric.stop()
+  return res
+}
+
+async function iexGet(endpoint: string, query?: string = '') {
+  // const iexUrl = 'https://cloud.iexapis.com/v1'
+  const iexUrl = 'https://sandbox.iexapis.com/stable'
+  const q = query !== '' ? `&${query}` : ''
+  const url = `${iexUrl}/${endpoint}?token=${IEX_CLOUD_KEY}${q}`
+  const metric = await perf().newHttpMetric(url, 'GET')
   const res = await fetch(url, {
     method: 'GET',
     Accept: 'applicatiion/json',
@@ -27,12 +45,55 @@ export async function getStock(symbols: string | Array<string>) {
   return data
 }
 
-export async function createTrade(uid: string, data: TradeDataType) {
+export async function createTrade(
+  uid: string,
+  data: TradeDataType,
+  callback?: () => void,
+) {
   const ref: DocReference = firestore().doc(`Users/${uid}`)
 
   try {
     await ref.collection('trades').add(data)
+
+    if (callback) {
+      callback()
+    }
   } catch (err) {
-    console.log('createTrade: Function -', err)
+    console.log('[API] createTrade', err)
   }
+}
+
+export async function searchTerm(term: string) {
+  const res = await iexGet(`search/${term}`)
+  const result = await res.json()
+  return result
+}
+
+export async function addToWatchlist(uid: string, data: { symbol: string }) {
+  const ref: DocReference = firestore().doc(`Users/${uid}`)
+
+  try {
+    await ref.collection('watchlist').add(data)
+  } catch (err) {
+    console.log('[API] addToWatchlist', err)
+  }
+}
+
+export async function getNewsArticle(stock: string, last: number = 5) {
+  const res = await iexGet(`stock/${stock}/news/last/${last}`)
+  const result = await res.json()
+  return result
+}
+
+export async function getBatchStockData(
+  symbols: string,
+  range?: string = '1d',
+  last?: number = 5,
+) {
+  const typeQuery = '&types=quote,news,chart,intraday-prices'
+  const rangeQuery = `${range && `&range=${range}`}`
+  const url = `symbols=${symbols}${typeQuery}${rangeQuery}&last=${last}&chartInterval=5&chartIEXWhenNull=true`
+  const res = await iexGet('stock/market/batch', url)
+  const result = await res.json()
+  return result
 }

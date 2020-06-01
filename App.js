@@ -1,65 +1,45 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- * @flow
- */
+// @flow
 
-import React, { useEffect } from 'react'
-import { StatusBar } from 'react-native'
-import switchNavigator from 'navigation'
+import React, { useEffect, useRef } from 'react'
+import { StatusBar, View } from 'react-native'
+import MainStack from './src/navigation/AppStack'
+import AuthStack from './src/navigation/AuthenticationStack'
 import { useAuthState, useSetUserInfo } from 'hooks'
-import { createAppContainer, SafeAreaView } from 'react-navigation'
-import RNBootSplash from 'react-native-bootsplash'
-import { BLACK } from 'utils/colors'
-import messaging from '@react-native-firebase/messaging'
-import { getFcmToken, requestNotificationPermission } from 'utils/functions'
+// import RNBootSplash from 'react-native-bootsplash'
+import { BACKGROUND } from 'utils/colors'
 import OneSignal from 'react-native-onesignal'
 import { ONESIGNAL_APPID } from './config'
+import TradeView from 'views/TradeView'
 
 export default function App(): React$Node {
   const { isAuth, currentUser } = useAuthState()
   const { loading } = useSetUserInfo(currentUser)
+  const tradeViewRef = useRef()
+
+  // useEffect(() => {
+  //   if (!loading) {
+  //     RNBootSplash.hide({ duration: 250 })
+  //   }
+  // }, [loading])
 
   useEffect(() => {
-    if (!loading) {
-      RNBootSplash.hide({ duration: 250 })
-    }
-  }, [loading])
-
-  useEffect(() => {
-    async function checkNotificationPermission() {
-      const isEnabled = await messaging().hasPermission()
-
-      if (isEnabled) {
-        getFcmToken()
-      } else {
-        requestNotificationPermission()
-      }
-    }
-
     OneSignal.init(ONESIGNAL_APPID)
-    checkNotificationPermission()
   }, [])
 
-  const navigator = switchNavigator(!isAuth ? 'AuthStack' : 'MainStack')
-  const NavigationRoutes = createAppContainer(navigator)
+  if (!isAuth) {
+    return <AuthStack />
+  }
 
   return (
-    <>
+    <View style={container}>
       <StatusBar barStyle="light-content" />
-      <SafeAreaView
-        style={container}
-        forceInset={{ top: 'always', bottom: 'never' }}
-      >
-        <NavigationRoutes />
-      </SafeAreaView>
-    </>
+      <MainStack />
+      <TradeView ref={tradeViewRef} />
+    </View>
   )
 }
 
 const container = {
   flex: 1,
-  backgroundColor: BLACK,
+  backgroundColor: BACKGROUND,
 }

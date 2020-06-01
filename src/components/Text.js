@@ -11,6 +11,7 @@ const Text = ({
   status,
   children,
   style,
+  weight = 'Regular',
   ...props
 }: TextProps) => {
   const selectFontSize = () => {
@@ -20,9 +21,11 @@ const Text = ({
       case 'title':
         return 20
       case 'label':
-        return 16
+        return 18
       case 'subtext':
         return 12
+      case 'big':
+        return 26
       default:
         return 14
     }
@@ -39,17 +42,22 @@ const Text = ({
   }
 
   const customStyle = {
-    fontFamily: 'Futura',
     fontSize: selectFontSize(),
     ...(cap && {
       textTransform: 'capitalize',
-      letterSpacing: 0.3,
+      letterSpacing: 1,
     }),
-    ...style,
+    // fontWeight: weight,
     color: !status ? color : setStatus(),
+    fontFamily: `SFProText-${weight}`,
+    ...style,
   }
 
-  return <RNText style={customStyle}>{children}</RNText>
+  return (
+    <RNText style={customStyle} {...props}>
+      {children}
+    </RNText>
+  )
 }
 
 export default Text

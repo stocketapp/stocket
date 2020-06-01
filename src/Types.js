@@ -1,6 +1,7 @@
 // @flow
-import { View, Text } from 'react-native'
+import { Text } from 'react-native'
 import { FirebaseFirestoreTypes } from '@react-native-firebase/firestore'
+import type { ViewStyleProp } from 'react-native/Libraries/StyleSheet/StyleSheet'
 
 export type IconProps = {
   size?: number,
@@ -10,23 +11,37 @@ export type IconProps = {
 
 export type ContainerProps = {
   children: React$Node,
-  style?: View.propTypes.style,
   justifyContent?: 'center' | 'flex-start' | 'flex-end' | 'space-between',
   alignItems?: 'center' | 'flex-start' | 'flex-end',
   horizontal?: boolean,
   separate?: boolean,
   ph?: boolean,
   top?: number,
+  bottom?: number,
   width?: string | number,
+  style?: ViewStyleProp,
+  fullView?: boolean,
+  safeAreaTop?: boolean,
+  safeAreaBottom?: boolean,
 }
 
-export type TextProps = {
-  type?: 'heading' | 'title' | 'label' | 'subtext',
+export type TextProps = Text.propTypes & {
+  type?: 'heading' | 'title' | 'label' | 'subtext' | 'big',
   cap?: boolean,
   color?: string,
   children?: Text.propTypes.children,
   style?: Text.propTypes.style,
   status?: 'negative' | 'positive',
+  weight?:
+    | 'Black'
+    | 'Heavy'
+    | 'Bold'
+    | 'Semibold'
+    | 'Medium'
+    | 'Regular'
+    | 'Light'
+    | 'Thin'
+    | 'Ultralight'
 }
 
 export type TradeInfoProps = {
@@ -52,7 +67,7 @@ export type LabelProps = {
   title?: string,
   value?: string,
   children: React$Node,
-  style?: View.propTypes.style,
+  style?: ViewStyleProp,
 }
 
 export type PositionType = {

@@ -1,26 +1,16 @@
 import React from 'react'
-import { View, StyleSheet } from 'react-native'
-import { BLACK } from 'utils/colors'
-import { Balance, BalanceGraph } from 'components'
 import { useGetPortfolio } from 'hooks'
-import PortfolioList from './PortfolioList'
+import { createStackNavigator } from '@react-navigation/stack'
+import Stock from '../Stock'
+import HomeView from './HomeView'
+
+const Stack = createStackNavigator()
 
 export default function Home() {
-  const { positions, loading } = useGetPortfolio()
-
   return (
-    <View style={styles.container}>
-      <Balance />
-      <BalanceGraph />
-      <PortfolioList data={positions} loading={loading} />
-    </View>
+    <Stack.Navigator headerMode="none">
+      <Stack.Screen name="Home" component={HomeView} />
+      <Stack.Screen name="Stock" component={Stock} />
+    </Stack.Navigator>
   )
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    paddingTop: 20,
-    backgroundColor: BLACK,
-  },
-})

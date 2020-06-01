@@ -7,7 +7,7 @@ import appleAuth, {
   AppleAuthRequestScope,
   AppleAuthRequestOperation,
 } from '@invertase/react-native-apple-authentication'
-import { GRAY } from 'utils/colors'
+import { BACKGROUND } from 'utils/colors'
 
 export default function SignIn() {
   async function onAppleButtonPress() {
@@ -29,11 +29,9 @@ export default function SignIn() {
       const currentUser = auth().currentUser
       const displayName = `${fullName?.givenName} ${fullName?.familyName}`
       currentUser.updateProfile({ displayName })
-      await firestore()
-        .doc(`Users/${currentUser?.uid}`)
-        .update({
-          name: displayName,
-        })
+      await firestore().doc(`Users/${currentUser?.uid}`).update({
+        name: displayName,
+      })
     }
   }
 
@@ -55,9 +53,10 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
+    backgroundColor: BACKGROUND,
   },
   appleButton: {
-    shadowColor: GRAY,
+    shadowColor: BACKGROUND,
     shadowOffset: { height: 1, width: 0 },
     shadowOpacity: 1,
     shadowRadius: 4,

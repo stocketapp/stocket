@@ -1,11 +1,12 @@
 // @flow
 import { useEffect } from 'react'
 import auth from '@react-native-firebase/auth'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
+import useUser from './useUser'
 
 export default function useAuthState() {
   const dispatch = useDispatch()
-  const { isAuth, currentUser } = useSelector(({ user }) => user)
+  const { isAuth, currentUser } = useUser()
 
   useEffect(() => {
     const authSubscription = auth().onAuthStateChanged(user => {
@@ -16,6 +17,11 @@ export default function useAuthState() {
         })
         dispatch({
           type: 'IS_AUTHENTICATED',
+          isAuth: true,
+        })
+      } else {
+        dispatch({
+          type: 'USER_LOGOUT',
           isAuth: true,
         })
       }

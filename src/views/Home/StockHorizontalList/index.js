@@ -4,16 +4,17 @@ import { FlatList, StyleSheet, View, TouchableOpacity } from 'react-native'
 import functions from '@react-native-firebase/functions'
 import { Text, Container, Loader } from 'components'
 import { RefreshIcon } from 'icons'
-import PortfolioItem from './PortfolioItem'
-import PortfolioEmpty from './PortfolioEmpty'
+import StockItem from './StockItem'
+import StockEmpty from './StockEmpty'
 
-type PortfolioListProps = {
+type StockHorizontalListProps = {
   data: Array<any>,
   loading: boolean,
 }
 
-export default function PortfolioList({ data, loading }: PortfolioListProps) {
-  const renderItem = ({ item }) => <PortfolioItem item={item} />
+export default function StockHorizontalList(props: StockHorizontalListProps) {
+  const { data, loading } = props
+  const renderItem = ({ item }) => <StockItem item={item} />
   const onUpdateGainsCall = functions().httpsCallable('onUpdateGainsCall')
 
   const refreshGains = () => {
@@ -24,8 +25,8 @@ export default function PortfolioList({ data, loading }: PortfolioListProps) {
     () => (
       <Container style={styles.container} ph>
         <Container horizontal separate>
-          <Text type="title" style={styles.title}>
-            Portfolio
+          <Text type="title" style={styles.title} weight="Bold">
+            Stocks
           </Text>
 
           <TouchableOpacity onPress={() => refreshGains()}>
@@ -38,10 +39,11 @@ export default function PortfolioList({ data, loading }: PortfolioListProps) {
           renderItem={renderItem}
           keyExtractor={(index, key) => key.toString()}
           style={styles.list}
+          horizontal
           contentContainerStyle={styles.listContent}
           ListEmptyComponent={() => (
             <View style={styles.listLoader}>
-              {loading ? <Loader /> : <PortfolioEmpty />}
+              {loading ? <Loader /> : <StockEmpty />}
             </View>
           )}
         />
@@ -56,13 +58,13 @@ const styles = StyleSheet.create({
     marginTop: 40,
   },
   title: {
-    marginBottom: 10,
+    paddingBottom: 10,
   },
   list: {
-    minHeight: 200,
+    minHeight: 100,
   },
   listContent: {
-    paddingTop: 10,
+    paddingVertical: 10,
   },
   listLoader: {
     width: '100%',

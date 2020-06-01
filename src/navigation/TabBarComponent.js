@@ -2,14 +2,13 @@
 import React from 'react'
 import { TouchableOpacity, Dimensions, StyleSheet } from 'react-native'
 import { Container } from 'components'
-import { GRAY_DARKER } from 'utils/colors'
+import { BACKGROUND } from 'utils/colors'
 
 type TabBarProps = {
-  renderIcon: ({
-    route: {},
-    tintColor: string,
-    focused: boolean,
-  }) => React$Node,
+  state: { routes: any, index: number },
+  descriptors: [],
+  activeTintColor: string,
+  inactiveTintColor: string,
   navigation: {
     navigate: (route: string) => void,
     state: { routes: Array<any>, index: number },
@@ -17,29 +16,35 @@ type TabBarProps = {
 }
 
 export default function TabBarComponent(props: TabBarProps): React$Node {
-  const { renderIcon, navigation } = props
-  const routes: Array<any> = navigation.state?.routes
-  const routesLength: number = routes.length
+  const {
+    navigation,
+    state,
+    descriptors,
+    activeTintColor,
+    inactiveTintColor,
+  } = props
+  const routesLength: number = state.routes.length
   const tabWidth: number = Dimensions.get('screen').width / routesLength
-  const activeRoute: number = navigation.state?.index
+  const activeRoute: number = state.index
 
   return (
-    <Container style={styles.container} horizontal>
-      {routes.map((route, routeIndex) => {
+    <Container style={styles.container} horizontal safeAreaBottom>
+      {state.routes.map((route, routeIndex) => {
         const focused: boolean = activeRoute === routeIndex
-        const tintColor: string = focused ? '#fff' : GRAY_DARKER
+        const tintColor: string = focused ? activeTintColor : inactiveTintColor
+        const { options } = descriptors[route.key]
+        const { tabBarIcon } = options
 
         return (
           <TouchableOpacity
-            onPress={() => navigation.navigate(route.key)}
+            onPress={() => navigation.navigate(route.name)}
             key={route.key}
             style={{
               width: tabWidth,
               alignItems: 'center',
-              paddingVertical: 10,
             }}
           >
-            {renderIcon({ route, tintColor, focused })}
+            {tabBarIcon({ color: tintColor })}
           </TouchableOpacity>
         )
       })}
@@ -49,11 +54,6 @@ export default function TabBarComponent(props: TabBarProps): React$Node {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: '#242424',
-    paddingBottom: 20,
-    shadowColor: '#101010',
-    shadowOffset: { height: -4, width: 0 },
-    shadowRadius: 3,
-    shadowOpacity: 0.3,
+    backgroundColor: BACKGROUND,
   },
 })
