@@ -38,10 +38,20 @@ def flipper_post_install(installer)
   installer.pods_project.targets.each do |target|
     if target.name == 'YogaKit'
       target.build_configurations.each do |config|
-        config.build_settings['SWIFT_VERSION'] = '5.1'
+        config.build_settings['SWIFT_VERSION'] = '4.1'
+      end
+    end
+
+    # Enable Flipper for simulators only
+    if target.name.start_with?('Flipper') || target.name == 'Flipper'
+      target.build_configurations.each do |config|
+        config.build_settings['VALID_ARCHS'] = 'arm64 arm64e'
+        config.build_settings['ARCHS'] = '${ARCHS_STANDARD_64_BIT}'
       end
     end
   end
+
+  installer.pods_project.save
 end
 
 def stocket_pods
