@@ -1,6 +1,6 @@
 {
   "name": "stocket",
-  "version": "0.0.1",
+  "version": "0.0.2-alpha.1",
   "private": true,
   "scripts": {
     "android": "react-native run-android",
@@ -43,6 +43,7 @@
     "react": "16.13.1",
     "react-native": "0.62.2",
     "react-native-bootsplash": "^2.2.4",
+    "react-native-flipper": "^0.45.0",
     "react-native-gesture-handler": "^1.6.1",
     "react-native-onesignal": "^3.7.3",
     "react-native-raw-bottom-sheet": "corasan/react-native-raw-bottom-sheet#master",

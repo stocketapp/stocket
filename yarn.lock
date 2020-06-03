@@ -6871,6 +6871,11 @@ react-native-flipper@^0.37.0:
   resolved "https://registry.yarnpkg.com/react-native-flipper/-/react-native-flipper-0.37.0.tgz#15187696e7361553952a83c77dcf53e508261662"
   integrity sha512-ZnL31EfUoXpFY4zddm/8hW6hh7+wr1VXFV+2s9TWx5F9XQ/bNVFsP+2/bbTVwYE678caZOpmHxkWebkVb2PTtA==
 
+react-native-flipper@^0.45.0:
+  version "0.45.0"
+  resolved "https://registry.yarnpkg.com/react-native-flipper/-/react-native-flipper-0.45.0.tgz#2f11d3a40b69f8d4cfad891c2dbcee87ca737c7d"
+  integrity sha512-u1FZ7W1iCj1R4JvqprAWKGx1KpciyVVCwuhNVmMon+jvfyIMYUYS+o7mt/wWIXh7mm2gDpKLhGWoLj3Q/risrA==
+
 react-native-gesture-handler@^1.6.1:
   version "1.6.1"
   resolved "https://registry.yarnpkg.com/react-native-gesture-handler/-/react-native-gesture-handler-1.6.1.tgz#678e2dce250ed66e93af409759be22cd6375dd17"

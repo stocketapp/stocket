@@ -6,7 +6,7 @@ export default {
   },
   portfolio: {
     positions: [],
-    loading: true,
+    loading: false,
   },
   trade: {
     selectedTradeAction: 'BUY',
@@ -20,5 +20,6 @@ export default {
     selectedStock: {},
     stockData: {},
     positionsMktData: null,
+    myStockLoading: false,
   },
 }
