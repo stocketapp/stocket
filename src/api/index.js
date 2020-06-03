@@ -21,8 +21,10 @@ async function get(query: string) {
 }
 
 async function iexGet(endpoint: string, query?: string = '') {
-  // const iexUrl = 'https://cloud.iexapis.com/v1'
-  const iexUrl = 'https://sandbox.iexapis.com/stable'
+  const iexUrl =
+    process.env.NODE_ENV === 'development'
+      ? 'https://sandbox.iexapis.com/stable'
+      : 'https://cloud.iexapis.com/v1'
   const q = query !== '' ? `&${query}` : ''
   const url = `${iexUrl}/${endpoint}?token=${IEX_CLOUD_KEY}${q}`
   const metric = await perf().newHttpMetric(url, 'GET')
