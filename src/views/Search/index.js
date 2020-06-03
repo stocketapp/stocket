@@ -2,7 +2,6 @@
 import React, { useState, useEffect } from 'react'
 import { FlatList } from 'react-native'
 import { Container, SearchSymbols } from 'components'
-import { BACKGROUND, GRAY_DARKER, GREEN } from 'utils/colors'
 import { useDebounce, useUser } from 'hooks'
 import { searchTerm, addToWatchlist, getBatchStockData } from 'api'
 import { useNavigation } from '@react-navigation/native'
@@ -64,23 +63,4 @@ export default function Search(): React$Node {
       />
     </Container>
   )
-}
-
-const styles = {
-  resultItem: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    borderBottomWidth: 0.3,
-    borderBottomColor: GRAY_DARKER,
-    paddingVertical: 12,
-    alignItems: 'center',
-  },
-  plus: {
-    borderWidth: 1.5,
-    borderColor: GREEN,
-    borderRadius: 100,
-    height: 22,
-    width: 22,
-    alignItems: 'center',
-  },
 }
