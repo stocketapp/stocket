@@ -8,6 +8,9 @@ import { formatCurrency } from 'utils/functions'
 import ProfileItem from './ProfileItem'
 import AddCash from './AddCash'
 import LogoutButton from './LogoutButton'
+import p from '../../../package.json'
+
+// const package = require('../../../package.json')
 
 export default function Profile() {
   const { userInfo } = useSelector(({ user }) => user)
@@ -54,6 +57,9 @@ export default function Profile() {
 
       <View style={{ width: '100%', alignItems: 'center', paddingBottom: 20 }}>
         <LogoutButton />
+        <Text style={{ paddingTop: 10 }} type="subtext" color={LABEL}>
+          {p.version}
+        </Text>
       </View>
     </Container>
   )
