@@ -27,7 +27,15 @@ function Purchase({ onClose, ref, isOpen }: PurchaseTypes) {
       closeOnDragDown
       dragFromTop
     >
-      <Container ph fullView style={{ backgroundColor: SUB_BACKGROUND }}>
+      <Container
+        ph
+        fullView
+        style={{
+          backgroundColor: SUB_BACKGROUND,
+          alignItems: 'center',
+          paddingTop: 20,
+        }}
+      >
         <PurchaseIllustration />
         <Text>Purchases</Text>
       </Container>
