@@ -1,5 +1,5 @@
 // @flow
-import React from 'react'
+import React, { useRef, useState } from 'react'
 import { View } from 'react-native'
 import { Container, Text } from 'components'
 import { SUB_BACKGROUND, LABEL } from 'utils/colors'
@@ -9,11 +9,13 @@ import ProfileItem from './ProfileItem'
 import AddCash from './AddCash'
 import LogoutButton from './LogoutButton'
 import p from '../../../package.json'
-
-// const package = require('../../../package.json')
+import Purchase from '../Purchase'
 
 export default function Profile() {
   const { userInfo } = useSelector(({ user }) => user)
+  const iapRef = useRef()
+  const [isIapOpen, setIsIapOpen] = useState(false)
+
   return (
     <Container fullView ph style={{ flex: 1, justifyContent: 'space-between' }}>
       <View style={{ flex: 1 }}>
@@ -41,7 +43,7 @@ export default function Profile() {
             </View>
 
             <View>
-              <AddCash />
+              <AddCash onPress={() => setIsIapOpen(true)} />
             </View>
           </View>
         </Container>
@@ -61,6 +63,11 @@ export default function Profile() {
           {p.version}
         </Text>
       </View>
+      <Purchase
+        ref={iapRef}
+        isOpen={isIapOpen}
+        onClose={() => setIsIapOpen(false)}
+      />
     </Container>
   )
 }
