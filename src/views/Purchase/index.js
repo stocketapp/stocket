@@ -3,7 +3,7 @@ import { Dimensions } from 'react-native'
 import { Container, Text } from 'components'
 import Sheet from 'react-native-raw-bottom-sheet'
 import { SUB_BACKGROUND, GREEN } from 'utils/colors'
-import PurchaseIllustration from './PurchasIllustration'
+import PurchaseIllustration from './PurchaseIllustration'
 
 type PurchaseTypes = {
   onClose: () => void,
@@ -57,4 +57,3 @@ const styles = {
     marginVertical: 5,
   },
 }
-
