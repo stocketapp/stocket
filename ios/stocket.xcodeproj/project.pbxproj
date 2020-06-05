@@ -98,6 +98,7 @@
 		2D02E47B1E0B4A5D006451C7 /* stocket-tvOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "stocket-tvOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D02E4901E0B4A5D006451C7 /* stocket-tvOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "stocket-tvOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3BB8DD8DB8F717CB33C375E7 /* Pods-Staging.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Staging.release.xcconfig"; path = "Target Support Files/Pods-Staging/Pods-Staging.release.xcconfig"; sourceTree = "<group>"; };
+		4DFF6848D0A7645225622615 /* Pods-Staging.staging.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Staging.staging.xcconfig"; path = "Target Support Files/Pods-Staging/Pods-Staging.staging.xcconfig"; sourceTree = "<group>"; };
 		56254A13C27071398EE6E5BE /* libPods-Development.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Development.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5C81CE2252FA486D9CCBA90A /* SF-Pro-Text-Semibold.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "SF-Pro-Text-Semibold.otf"; path = "../assets/fonts/SF-Pro-Text-Semibold.otf"; sourceTree = "<group>"; };
 		6A5F69C71A2A4253B41248E9 /* SF-Pro-Text-Bold.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "SF-Pro-Text-Bold.otf"; path = "../assets/fonts/SF-Pro-Text-Bold.otf"; sourceTree = "<group>"; };
@@ -108,6 +109,7 @@
 		B320FA92E52E218731E59D40 /* Pods-Staging.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Staging.debug.xcconfig"; path = "Target Support Files/Pods-Staging/Pods-Staging.debug.xcconfig"; sourceTree = "<group>"; };
 		B34E6359A76A41AC89F2CC83 /* SF-Pro-Text-Thin.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "SF-Pro-Text-Thin.otf"; path = "../assets/fonts/SF-Pro-Text-Thin.otf"; sourceTree = "<group>"; };
 		B690F1F8AA9C4CD596699A6D /* SF-Pro-Text-Heavy.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "SF-Pro-Text-Heavy.otf"; path = "../assets/fonts/SF-Pro-Text-Heavy.otf"; sourceTree = "<group>"; };
+		B8A349285BE0F16F329667EB /* Pods-Development.staging.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Development.staging.xcconfig"; path = "Target Support Files/Pods-Development/Pods-Development.staging.xcconfig"; sourceTree = "<group>"; };
 		BA11394223B0F1090076AE78 /* AppCenter-Config.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "AppCenter-Config.plist"; sourceTree = "<group>"; };
 		BA21948C23BB77F600A77A16 /* stocket-dev-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "stocket-dev-Bridging-Header.h"; sourceTree = "<group>"; };
 		BA21948D23BB77F600A77A16 /* File.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = File.swift; sourceTree = "<group>"; };
@@ -123,6 +125,7 @@
 		C40070336099D912413E815C /* libPods-Production.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Production.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CF028A2EE6298B1B4ECD1562 /* libPods-Staging.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Staging.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D196029B2DF9E0E7EE6AE861 /* Pods-Production.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Production.release.xcconfig"; path = "Target Support Files/Pods-Production/Pods-Production.release.xcconfig"; sourceTree = "<group>"; };
+		D631446E0AE023BC59A32E8D /* Pods-Production.staging.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Production.staging.xcconfig"; path = "Target Support Files/Pods-Production/Pods-Production.staging.xcconfig"; sourceTree = "<group>"; };
 		E0554ED088C64FB4B1AA08F2 /* SF-Pro-Text-Ultralight.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "SF-Pro-Text-Ultralight.otf"; path = "../assets/fonts/SF-Pro-Text-Ultralight.otf"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		ED2971642150620600B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS12.0.sdk/System/Library/Frameworks/JavaScriptCore.framework; sourceTree = DEVELOPER_DIR; };
@@ -251,6 +254,9 @@
 				D196029B2DF9E0E7EE6AE861 /* Pods-Production.release.xcconfig */,
 				B320FA92E52E218731E59D40 /* Pods-Staging.debug.xcconfig */,
 				3BB8DD8DB8F717CB33C375E7 /* Pods-Staging.release.xcconfig */,
+				B8A349285BE0F16F329667EB /* Pods-Development.staging.xcconfig */,
+				D631446E0AE023BC59A32E8D /* Pods-Production.staging.xcconfig */,
+				4DFF6848D0A7645225622615 /* Pods-Staging.staging.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -360,8 +366,8 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "Production" */;
 			buildPhases = (
-				BA54CA502488496A003591E5 /* Change version */,
 				67C82038E98A81D3FA36B2F7 /* [CP] Check Pods Manifest.lock */,
+				BA54CA502488496A003591E5 /* Change version */,
 				FD10A7F022414F080027D42C /* Start Packager */,
 				13B07F871A680F5B00A75B9A /* Sources */,
 				13B07F8C1A680F5B00A75B9A /* Frameworks */,
@@ -854,8 +860,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "
-";
+			shellScript = "\n";
 		};
 		BA9A7DF823E67A1A0062EEB4 /* Start Packager */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -1450,7 +1455,7 @@
 		};
 		BA54CA4A24884172003591E5 /* Staging */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = D196029B2DF9E0E7EE6AE861 /* Pods-Production.release.xcconfig */;
+			baseConfigurationReference = D631446E0AE023BC59A32E8D /* Pods-Production.staging.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -1477,7 +1482,7 @@
 		};
 		BA54CA4B24884172003591E5 /* Staging */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = C1BC417E74DA1BF66EA85832 /* Pods-Development.release.xcconfig */;
+			baseConfigurationReference = B8A349285BE0F16F329667EB /* Pods-Development.staging.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -1503,7 +1508,7 @@
 		};
 		BA54CA4C24884172003591E5 /* Staging */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 3BB8DD8DB8F717CB33C375E7 /* Pods-Staging.release.xcconfig */;
+			baseConfigurationReference = 4DFF6848D0A7645225622615 /* Pods-Staging.staging.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
