@@ -1,6 +1,6 @@
 {
   "name": "stocket",
-  "version": "0.0.3-alpha.2",
+  "version": "0.1.0-alpha.3",
   "private": true,
   "scripts": {
     "android": "react-native run-android",
