@@ -2,9 +2,9 @@ import React from 'react'
 import { View, TouchableOpacity } from 'react-native'
 import { Text } from 'components'
 import { BLUE } from 'utils/colors'
-import { useNavigation } from 'hooks'
+import { useNavigation } from '@react-navigation/native'
 
-export default function PortfolioEmpty() {
+export default function StockEmpty() {
   const { navigate } = useNavigation()
   return (
     <View style={styles.container}>

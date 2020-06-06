@@ -7,9 +7,11 @@
 #import <AppCenterReactNative.h>
 #import <AppCenterReactNativeAnalytics.h>
 #import <AppCenterReactNativeCrashes.h>
+#import <CodePush/CodePush.h>
+
 @import Firebase;
 
-#if DEBUG
+#if DEBUG && TARGET_OS_SIMULATOR
 #import <FlipperKit/FlipperClient.h>
 #import <FlipperKitLayoutPlugin/FlipperKitLayoutPlugin.h>
 #import <FlipperKitUserDefaultsPlugin/FKUserDefaultsPlugin.h>
@@ -33,7 +35,7 @@ static void InitializeFlipper(UIApplication *application) {
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-  #if DEBUG
+  #if DEBUG && TARGET_OS_SIMULATOR
 	  InitializeFlipper(application);
 	#endif
 	
@@ -63,7 +65,7 @@ static void InitializeFlipper(UIApplication *application) {
   [[UIApplication sharedApplication] setIdleTimerDisabled: YES];
   return [[RCTBundleURLProvider sharedSettings] jsBundleURLForBundleRoot:@"index" fallbackResource:nil];
 #else
-  return [[NSBundle mainBundle] URLForResource:@"main" withExtension:@"jsbundle"];
+  return [CodePush bundleURL];
 #endif
 }
 

@@ -1,5 +1,5 @@
 // @flow
-import React, { useMemo } from 'react'
+import React from 'react'
 import { FlatList, StyleSheet, View, TouchableOpacity } from 'react-native'
 import functions from '@react-native-firebase/functions'
 import { Text, Container, Loader } from 'components'
@@ -21,19 +21,21 @@ export default function StockHorizontalList(props: StockHorizontalListProps) {
     onUpdateGainsCall()
   }
 
-  return useMemo(
-    () => (
-      <Container style={styles.container} ph>
-        <Container horizontal separate>
-          <Text type="title" style={styles.title} weight="bold">
-            Stocks
-          </Text>
+  return (
+    <Container style={styles.container} ph>
+      <Container horizontal separate>
+        <Text type="title" style={styles.title} weight="Bold">
+          Stocks
+        </Text>
 
-          <TouchableOpacity onPress={() => refreshGains()}>
-            <RefreshIcon />
-          </TouchableOpacity>
-        </Container>
+        <TouchableOpacity onPress={() => refreshGains()}>
+          <RefreshIcon />
+        </TouchableOpacity>
+      </Container>
 
+      {loading ? (
+        <Loader />
+      ) : (
         <FlatList
           data={data}
           renderItem={renderItem}
@@ -43,13 +45,12 @@ export default function StockHorizontalList(props: StockHorizontalListProps) {
           contentContainerStyle={styles.listContent}
           ListEmptyComponent={() => (
             <View style={styles.listLoader}>
-              {loading ? <Loader /> : <StockEmpty />}
+              <StockEmpty />
             </View>
           )}
         />
-      </Container>
-    ),
-    [data, loading],
+      )}
+    </Container>
   )
 }
 

@@ -28,7 +28,7 @@ export default function TabBarComponent(props: TabBarProps): React$Node {
   const activeRoute: number = state.index
 
   return (
-    <Container style={styles.container} horizontal>
+    <Container style={styles.container} horizontal safeAreaBottom>
       {state.routes.map((route, routeIndex) => {
         const focused: boolean = activeRoute === routeIndex
         const tintColor: string = focused ? activeTintColor : inactiveTintColor

@@ -20,10 +20,13 @@ async function get(query: string) {
   return res
 }
 
-async function iexGet(query: string) {
-  const iexUrl = 'https://cloud.iexapis.com/v1'
-  // const iexUrl = 'https://sandbox.iexapis.com/stable'
-  const url = `${iexUrl}/${query}&token=${IEX_CLOUD_KEY}`
+async function iexGet(endpoint: string, query?: string = '') {
+  const iexUrl =
+    process.env.NODE_ENV === 'development'
+      ? 'https://sandbox.iexapis.com/stable'
+      : 'https://cloud.iexapis.com/v1'
+  const q = query !== '' ? `&${query}` : ''
+  const url = `${iexUrl}/${endpoint}?token=${IEX_CLOUD_KEY}${q}`
   const metric = await perf().newHttpMetric(url, 'GET')
   const res = await fetch(url, {
     method: 'GET',
@@ -62,10 +65,10 @@ export async function createTrade(
   }
 }
 
-export async function searchTerm(term: string, params?: string = '') {
-  const res = await get(`stock_search?search_term=${term}&${params}`)
-  const { data } = await res.json()
-  return data
+export async function searchTerm(term: string) {
+  const res = await iexGet(`search/${term}`)
+  const result = await res.json()
+  return result
 }
 
 export async function addToWatchlist(uid: string, data: { symbol: string }) {
@@ -79,7 +82,7 @@ export async function addToWatchlist(uid: string, data: { symbol: string }) {
 }
 
 export async function getNewsArticle(stock: string, last: number = 5) {
-  const res = await iexGet(`stock/${stock}/news/last/${last}?`)
+  const res = await iexGet(`stock/${stock}/news/last/${last}`)
   const result = await res.json()
   return result
 }
@@ -91,8 +94,8 @@ export async function getBatchStockData(
 ) {
   const typeQuery = '&types=quote,news,chart,intraday-prices'
   const rangeQuery = `${range && `&range=${range}`}`
-  const url = `stock/market/batch?symbols=${symbols}${typeQuery}${rangeQuery}&last=${last}&chartInterval=5&chartIEXWhenNull=true`
-  const res = await iexGet(url)
+  const url = `symbols=${symbols}${typeQuery}${rangeQuery}&last=${last}&chartInterval=5&chartIEXWhenNull=true`
+  const res = await iexGet('stock/market/batch', url)
   const result = await res.json()
   return result
 }

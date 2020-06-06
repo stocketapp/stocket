@@ -5,8 +5,8 @@ import { GRAY_DARKER } from 'utils/colors'
 import { formatCurrency } from 'utils/functions'
 
 export default ({ data }) => (
-  <Container ph style={{ paddingTop: 40 }}>
-    <Text type="heading" weight="900">
+  <Container ph top={40}>
+    <Text type="heading" weight="Black">
       Position
     </Text>
 
@@ -20,14 +20,12 @@ export default ({ data }) => (
       <View style={styles.posData}>
         <View style={{ paddingTop: 15 }}>
           <Text color={GRAY_DARKER}>Today's Return</Text>
-          <Text style={styles.postDataValue} weight="500">
-            $35.87
-          </Text>
+          <Text style={styles.postDataValue}>$35.87</Text>
         </View>
 
         <View style={{ paddingTop: 15 }}>
           <Text color={GRAY_DARKER}>Total Return</Text>
-          <Text style={styles.postDataValue} weight="500">
+          <Text style={styles.postDataValue}>
             {formatCurrency(data?.gains)}
           </Text>
         </View>
@@ -36,13 +34,11 @@ export default ({ data }) => (
       <View style={styles.posData}>
         <View style={{ paddingTop: 15 }}>
           <Text color={GRAY_DARKER}>Shares</Text>
-          <Text style={styles.postDataValue} weight="500">
-            {data?.shares.length}
-          </Text>
+          <Text style={styles.postDataValue}>{data?.shares.length}</Text>
         </View>
         <View style={{ paddingTop: 15 }}>
           <Text color={GRAY_DARKER}>Equity</Text>
-          <Text style={styles.postDataValue} weight="500">
+          <Text style={styles.postDataValue}>
             {formatCurrency(data?.value)}
           </Text>
         </View>
