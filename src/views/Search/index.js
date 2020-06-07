@@ -20,7 +20,7 @@ export default function Search(): React$Node {
     const getResults = async () => {
       try {
         const res = await searchTerm(debounced)
-        setResults(res)
+        setResults([res])
       } catch (err) {
         console.log(err)
       }
