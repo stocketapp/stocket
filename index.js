@@ -10,6 +10,7 @@ import configureStore from './src/redux/configureStore'
 import '@react-native-firebase/crashlytics'
 import RNAsyncStorageFlipper from 'rn-async-storage-flipper'
 import AsyncStorage from '@react-native-community/async-storage'
+import codePush from 'react-native-code-push'
 
 const store = configureStore()
 RNAsyncStorageFlipper(AsyncStorage)
@@ -24,4 +25,7 @@ const AppRoot = () => (
   </Provider>
 )
 
-AppRegistry.registerComponent(appName, () => AppRoot)
+const codePushOptions = {
+  checkFrequency: codePush.CheckFrequency.ON_APP_RESUME,
+}
+AppRegistry.registerComponent(appName, () => codePush(codePushOptions)(AppRoot))
