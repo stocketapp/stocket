@@ -8,7 +8,9 @@
     "test": "jest",
     "lint": "eslint .",
     "ios": "npx react-native run-ios --simulator 'iPhone 11 Pro' --scheme Development",
-    "ios-device": "npx react-native run-ios --device \"Henry’s iPhone 11 Pro\" --scheme Development"
+    "ios-device": "npx react-native run-ios --device \"Henry’s iPhone 11 Pro\" --scheme Development",
+    "cp-staging": "appcenter codepush release-react -a Stocket/StocketRN -d Staging",
+    "cp-prod": "appcenter codepush release-react -a Stocket/StocketRN -d Production"
   },
   "dependencies": {
     "@invertase/react-native-apple-authentication": "^1.0.0",
