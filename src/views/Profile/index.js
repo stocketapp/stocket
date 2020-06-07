@@ -1,5 +1,5 @@
 // @flow
-import React from 'react'
+import React, { useRef, useState } from 'react'
 import { View } from 'react-native'
 import { Container, Text } from 'components'
 import { SUB_BACKGROUND, LABEL } from 'utils/colors'
@@ -8,9 +8,14 @@ import { formatCurrency } from 'utils/functions'
 import ProfileItem from './ProfileItem'
 import AddCash from './AddCash'
 import LogoutButton from './LogoutButton'
+import p from '../../../package.json'
+import Purchase from '../Purchase'
 
 export default function Profile() {
   const { userInfo } = useSelector(({ user }) => user)
+  const iapRef = useRef()
+  const [isIapOpen, setIsIapOpen] = useState(false)
+
   return (
     <Container fullView ph style={{ flex: 1, justifyContent: 'space-between' }}>
       <View style={{ flex: 1 }}>
@@ -33,12 +38,12 @@ export default function Profile() {
             <View>
               <Text style={styles.value}>Cash</Text>
               <Text style={styles.cash} weight="Black">
-                {formatCurrency(userInfo?.cash)}
+                {userInfo?.cash}
               </Text>
             </View>
 
             <View>
-              <AddCash />
+              <AddCash onPress={() => setIsIapOpen(true)} />
             </View>
           </View>
         </Container>
@@ -54,7 +59,15 @@ export default function Profile() {
 
       <View style={{ width: '100%', alignItems: 'center', paddingBottom: 20 }}>
         <LogoutButton />
+        <Text style={{ paddingTop: 10 }} type="subtext" color={LABEL}>
+          {p.version}
+        </Text>
       </View>
+      <Purchase
+        ref={iapRef}
+        isOpen={isIapOpen}
+        onClose={() => setIsIapOpen(false)}
+      />
     </Container>
   )
 }

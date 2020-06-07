@@ -66,7 +66,9 @@ export async function createTrade(
 }
 
 export async function searchTerm(term: string) {
-  const res = await iexGet(`search/${term}`)
+  // const res = await iexGet(`search/${term}`)
+  // Change this to use the search API once I upgrade to paid plan
+  const res = await iexGet(`stock/${term}/quote`)
   const result = await res.json()
   return result
 }

@@ -3369,6 +3369,11 @@ domutils@^1.7.0:
     dom-serializer "0"
     domelementtype "1"
 
+dooboolab-welcome@^1.2.0:
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/dooboolab-welcome/-/dooboolab-welcome-1.2.0.tgz#295818ce85a8e97dc90c0ec0510b4008e2d722dc"
+  integrity sha512-XgEbjJHAsKLge/e8jtuHsv84Ovg1Gx0GvnOTOmOlVGV1643nduTAkT3fyo/mxKbzvyXBr47RHaJAY4R2toI0UA==
+
 ecc-jsbn@~0.1.1:
   version "0.1.2"
   resolved "https://registry.yarnpkg.com/ecc-jsbn/-/ecc-jsbn-0.1.2.tgz#3a83a904e54353287874c564b7549386849a98c9"
@@ -7128,6 +7133,13 @@ react-native-gesture-handler@^1.6.1:
     hoist-non-react-statics "^2.3.1"
     invariant "^2.2.4"
     prop-types "^15.7.2"
+
+react-native-iap@^4.4.9:
+  version "4.4.9"
+  resolved "https://registry.yarnpkg.com/react-native-iap/-/react-native-iap-4.4.9.tgz#dec82b12fd3165e8a86bd87c8b15fd8b510685aa"
+  integrity sha512-Ptz4kUgTzIROt+N3m1Z6xgN/FfjPN3nBEkw475SQaj62dfuGB+fY66LqASM7woetvn65lolr6VEh1OsT2nbqyQ==
+  dependencies:
+    dooboolab-welcome "^1.2.0"
 
 react-native-iphone-x-helper@^1.2.1:
   version "1.2.1"

@@ -7,7 +7,7 @@ import { getBatchStockData } from 'api'
 const UsersRef = firestore().collection('Users')
 
 export default function useGetPortfolio(): {} {
-  const [loading, setLoading] = useState(false)
+  const [loading, setLoading] = useState(true)
   const { uid } = useSelector(({ user }) => user.currentUser)
   const dispatch = useDispatch()
   const { positions, positionsMktData: mktData } = useSelector(
