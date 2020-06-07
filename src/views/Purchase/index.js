@@ -3,6 +3,7 @@ import { Dimensions } from 'react-native'
 import { Container, Text } from 'components'
 import Sheet from 'react-native-raw-bottom-sheet'
 import { SUB_BACKGROUND, GREEN } from 'utils/colors'
+import * as RNIap from 'react-native-iap'
 import PurchaseIllustration from './PurchaseIllustration'
 
 type PurchaseTypes = {
@@ -17,6 +18,19 @@ function Purchase({ onClose, ref, isOpen }: PurchaseTypes) {
       ref.current.open()
     }
   }, [isOpen, ref])
+
+  useEffect(() => {
+    const getProducts = async () => {
+      try {
+        await RNIap.initConnection()
+        const products = await RNIap.getProducts(['5k_buying_power'])
+      } catch (err) {
+        console.warn(err) // standardized err.code and err.message available
+      }
+    }
+
+    getProducts()
+  }, [])
 
   return (
     <Sheet

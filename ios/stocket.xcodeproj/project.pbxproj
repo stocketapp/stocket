@@ -42,6 +42,9 @@
 		BA9A7E0223E67A1A0062EEB4 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB11A68108700A75B9A /* LaunchScreen.xib */; };
 		BA9A7E1623E692F60062EEB4 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = BA9A7E1523E692F60062EEB4 /* GoogleService-Info.plist */; };
 		BA9A7E1A23E693350062EEB4 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = BA9A7E1923E693350062EEB4 /* GoogleService-Info.plist */; };
+		BAC96236248D478400F78E5C /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BAC96235248D478400F78E5C /* StoreKit.framework */; };
+		BAC96237248D478900F78E5C /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BAC96235248D478400F78E5C /* StoreKit.framework */; };
+		BAC96238248D478B00F78E5C /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BAC96235248D478400F78E5C /* StoreKit.framework */; };
 		BAEFF0F324805E430068BD78 /* SF-Pro-Text-Black.otf in Resources */ = {isa = PBXBuildFile; fileRef = A6C2F4CAB55C4CADAEE276AB /* SF-Pro-Text-Black.otf */; };
 		BAEFF0F424805E430068BD78 /* SF-Pro-Text-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 6A5F69C71A2A4253B41248E9 /* SF-Pro-Text-Bold.otf */; };
 		BAEFF0F524805E430068BD78 /* SF-Pro-Text-Heavy.otf in Resources */ = {isa = PBXBuildFile; fileRef = B690F1F8AA9C4CD596699A6D /* SF-Pro-Text-Heavy.otf */; };
@@ -121,6 +124,7 @@
 		BA9A7E1523E692F60062EEB4 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		BA9A7E1923E693350062EEB4 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		BABC5FA423AA5130002A831D /* stocket.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = stocket.entitlements; path = stocket/stocket.entitlements; sourceTree = "<group>"; };
+		BAC96235248D478400F78E5C /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		C1BC417E74DA1BF66EA85832 /* Pods-Development.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Development.release.xcconfig"; path = "Target Support Files/Pods-Development/Pods-Development.release.xcconfig"; sourceTree = "<group>"; };
 		C40070336099D912413E815C /* libPods-Production.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Production.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CF028A2EE6298B1B4ECD1562 /* libPods-Staging.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Staging.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -145,6 +149,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7DA9543AFB95166826481CD4 /* libPods-Production.a in Frameworks */,
+				BAC96238248D478B00F78E5C /* StoreKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -167,6 +172,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5904AC3E776E8E20AB12D60A /* libPods-Development.a in Frameworks */,
+				BAC96236248D478400F78E5C /* StoreKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -175,6 +181,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6E048CB58775074B88B2C2BE /* libPods-Staging.a in Frameworks */,
+				BAC96237248D478900F78E5C /* StoreKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -236,6 +243,7 @@
 		2D16E6871FA4F8E400B85C8A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				BAC96235248D478400F78E5C /* StoreKit.framework */,
 				ED297162215061F000B7C4FE /* JavaScriptCore.framework */,
 				ED2971642150620600B7C4FE /* JavaScriptCore.framework */,
 				56254A13C27071398EE6E5BE /* libPods-Development.a */,
@@ -860,7 +868,8 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\n";
+			shellScript = "
+";
 		};
 		BA9A7DF823E67A1A0062EEB4 /* Start Packager */ = {
 			isa = PBXShellScriptBuildPhase;
