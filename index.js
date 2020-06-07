@@ -28,4 +28,9 @@ const AppRoot = () => (
 const codePushOptions = {
   checkFrequency: codePush.CheckFrequency.ON_APP_RESUME,
 }
-AppRegistry.registerComponent(appName, () => codePush(codePushOptions)(AppRoot))
+const Root =
+  process.env.NODE_ENV === 'development'
+    ? AppRoot
+    : codePush(codePushOptions)(AppRoot)
+
+AppRegistry.registerComponent(appName, () => Root)
