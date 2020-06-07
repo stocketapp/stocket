@@ -38,7 +38,7 @@ export default function Profile() {
             <View>
               <Text style={styles.value}>Cash</Text>
               <Text style={styles.cash} weight="Black">
-                {formatCurrency(userInfo?.cash)}
+                {userInfo?.cash}
               </Text>
             </View>
 

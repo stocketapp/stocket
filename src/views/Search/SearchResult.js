@@ -5,7 +5,7 @@ import { BACKGROUND, GRAY_DARKER, GREEN } from 'utils/colors'
 
 type SearchResultProps = {
   item: {
-    securityName: string,
+    companyName: string,
     symbol: string,
   },
   onPress: () => void,
@@ -14,7 +14,7 @@ type SearchResultProps = {
 }
 
 export default ({
-  item: { securityName, symbol },
+  item: { companyName, symbol },
   onPress,
   setStock,
   uid,
@@ -22,7 +22,7 @@ export default ({
   <TouchableOpacity style={styles.resultItem} onPress={() => setStock(symbol)}>
     <View>
       <Text weight="Medium" type="label">
-        {securityName}
+        {companyName}
       </Text>
       <Text color={GRAY_DARKER} type="subtext" style={{ paddingTop: 5 }}>
         {symbol}
