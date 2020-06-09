@@ -4,17 +4,17 @@ import { Container, Text } from 'components'
 import Sheet from 'react-native-raw-bottom-sheet'
 import { SUB_BACKGROUND, GREEN } from 'utils/colors'
 import * as RNIap from 'react-native-iap'
-import PurchaseIllustration from './PurchaseIllustration'
-import purchasesArr from './purchases'
+import ProductsIllustration from './ProductsIllustration'
+import productsArr from './products'
 
-type PurchaseTypes = {
+type ProductsType = {
   onClose: () => void,
   isOpen: boolean,
   ref: { current: any },
 }
 
-function Purchase({ onClose, ref, isOpen }: PurchaseTypes) {
-  const [purchases, setPurchases] = useState(null)
+function Products({ onClose, ref, isOpen }: ProductsType) {
+  const [products, setProductss] = useState(null)
   useEffect(() => {
     if (isOpen) {
       ref.current.open()
@@ -22,16 +22,16 @@ function Purchase({ onClose, ref, isOpen }: PurchaseTypes) {
   }, [isOpen, ref])
 
   useEffect(() => {
-    // const getProducts = async () => {
-    //   try {
-    //     const products = await RNIap.getProducts(['5k_buying_power'])
-    //     console.log(products)
-    //   } catch (err) {
-    //     console.warn(err) // standardized err.code and err.message available
-    //   }
-    // }
-    // getProducts()
-    setPurchases(purchasesArr)
+    const getProducts = async () => {
+      try {
+        const res = await RNIap.getProducts(['5k_buying_power'])
+        console.log(res)
+      } catch (err) {
+        console.warn(err) // standardized err.code and err.message available
+      }
+    }
+    getProducts()
+    setProductss(productsArr)
   }, [])
 
   return (
@@ -52,16 +52,16 @@ function Purchase({ onClose, ref, isOpen }: PurchaseTypes) {
           paddingTop: 20,
         }}
       >
-        <PurchaseIllustration />
-        <Text>Purchases</Text>
+        <ProductsIllustration />
+        <Text>Productss</Text>
 
-        {purchases && purchases.map(el => <Text>{el.title}</Text>)}
+        {products && products.map(el => <Text>{el.title}</Text>)}
       </Container>
     </Sheet>
   )
 }
 
-export default forwardRef((props, ref) => Purchase({ ref, ...props }))
+export default forwardRef((props, ref) => Products({ ref, ...props }))
 
 const styles = {
   container: {

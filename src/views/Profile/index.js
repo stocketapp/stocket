@@ -4,12 +4,12 @@ import { View } from 'react-native'
 import { Container, Text } from 'components'
 import { SUB_BACKGROUND, LABEL } from 'utils/colors'
 import { useSelector } from 'react-redux'
-import { formatCurrency } from 'utils/functions'
+// import { formatCurrency } from 'utils/functions'
 import ProfileItem from './ProfileItem'
 import AddCash from './AddCash'
 import LogoutButton from './LogoutButton'
 import p from '../../../package.json'
-import Purchase from '../Purchase'
+import Products from '../Products'
 
 export default function Profile() {
   const { userInfo } = useSelector(({ user }) => user)
@@ -63,7 +63,7 @@ export default function Profile() {
           {p.version}
         </Text>
       </View>
-      <Purchase
+      <Products
         ref={iapRef}
         isOpen={isIapOpen}
         onClose={() => setIsIapOpen(false)}
