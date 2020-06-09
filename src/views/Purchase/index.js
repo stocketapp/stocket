@@ -1,10 +1,11 @@
-import React, { forwardRef, useEffect } from 'react'
+import React, { forwardRef, useEffect, useState } from 'react'
 import { Dimensions } from 'react-native'
 import { Container, Text } from 'components'
 import Sheet from 'react-native-raw-bottom-sheet'
 import { SUB_BACKGROUND, GREEN } from 'utils/colors'
 import * as RNIap from 'react-native-iap'
 import PurchaseIllustration from './PurchaseIllustration'
+import purchasesArr from './purchases'
 
 type PurchaseTypes = {
   onClose: () => void,
@@ -13,6 +14,7 @@ type PurchaseTypes = {
 }
 
 function Purchase({ onClose, ref, isOpen }: PurchaseTypes) {
+  const [purchases, setPurchases] = useState(null)
   useEffect(() => {
     if (isOpen) {
       ref.current.open()
@@ -20,16 +22,16 @@ function Purchase({ onClose, ref, isOpen }: PurchaseTypes) {
   }, [isOpen, ref])
 
   useEffect(() => {
-    const getProducts = async () => {
-      try {
-        await RNIap.initConnection()
-        const products = await RNIap.getProducts(['5k_buying_power'])
-      } catch (err) {
-        console.warn(err) // standardized err.code and err.message available
-      }
-    }
-
-    getProducts()
+    // const getProducts = async () => {
+    //   try {
+    //     const products = await RNIap.getProducts(['5k_buying_power'])
+    //     console.log(products)
+    //   } catch (err) {
+    //     console.warn(err) // standardized err.code and err.message available
+    //   }
+    // }
+    // getProducts()
+    setPurchases(purchasesArr)
   }, [])
 
   return (
@@ -52,6 +54,8 @@ function Purchase({ onClose, ref, isOpen }: PurchaseTypes) {
       >
         <PurchaseIllustration />
         <Text>Purchases</Text>
+
+        {purchases && purchases.map(el => <Text>{el.title}</Text>)}
       </Container>
     </Sheet>
   )

@@ -10,6 +10,7 @@ import { BACKGROUND } from 'utils/colors'
 import OneSignal from 'react-native-onesignal'
 import { ONESIGNAL_APPID } from './config'
 import TradeView from 'views/TradeView'
+import * as RNIap from 'react-native-iap'
 
 export default function App(): React$Node {
   const { isAuth, currentUser } = useAuthState()
@@ -24,6 +25,18 @@ export default function App(): React$Node {
 
   useEffect(() => {
     OneSignal.init(ONESIGNAL_APPID)
+  }, [])
+
+  useEffect(() => {
+    const initIAP = async () => {
+      try {
+        await RNIap.initConnection()
+      } catch (err) {
+        console.log(err)
+      }
+    }
+
+    initIAP()
   }, [])
 
   if (!isAuth) {
