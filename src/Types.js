@@ -41,7 +41,7 @@ export type TextProps = Text.propTypes & {
     | 'Regular'
     | 'Light'
     | 'Thin'
-    | 'Ultralight'
+    | 'Ultralight',
 }
 
 export type TradeInfoProps = {
