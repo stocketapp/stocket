@@ -1,7 +1,7 @@
 import React from 'react'
 import { View, StyleSheet, TouchableOpacity } from 'react-native'
 import { Text } from 'components'
-import { SUB_BACKGROUND, CARD_BACKGROUND, GREEN, DARK_TEXT } from 'utils/colors'
+import { CARD_BACKGROUND, GREEN, DARK_TEXT } from 'utils/colors'
 
 export default ({ product, onPurchase }) => (
   <View style={styles.container}>

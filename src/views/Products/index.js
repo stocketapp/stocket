@@ -42,8 +42,7 @@ function Products({ onClose, ref, isOpen }: ProductsType) {
 
   const buyCash = async sku => {
     try {
-      const res = await RNIap.requestPurchase(sku, false)
-      console.log(res)
+      await RNIap.requestPurchase(sku, false)
     } catch (err) {
       console.log(err)
     }

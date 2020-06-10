@@ -1,6 +1,8 @@
 // @flow
 import AsyncStorage from '@react-native-community/async-storage'
 import messaging from '@react-native-firebase/messaging'
+import find from 'lodash.find'
+import purchaseValues from './purchaseValues'
 
 export function formatCurrency(num: number | string) {
   return Number(num).toLocaleString('en-US', {
@@ -26,4 +28,14 @@ export async function requestNotificationPermission() {
   } catch (error) {
     console.log('permission rejected')
   }
+}
+
+type ProductValue = {
+  productId: string,
+  value: number,
+}
+
+export function getProductValue(productId: string): ProductValue {
+  const result = find(purchaseValues, el => el.productId === productId)
+  return result
 }

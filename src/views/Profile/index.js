@@ -4,7 +4,7 @@ import { View } from 'react-native'
 import { Container, Text } from 'components'
 import { LABEL, CARD_BACKGROUND } from 'utils/colors'
 import { useSelector } from 'react-redux'
-// import { formatCurrency } from 'utils/functions'
+import { formatCurrency } from 'utils/functions'
 import ProfileItem from './ProfileItem'
 import AddCash from './AddCash'
 import LogoutButton from './LogoutButton'
@@ -38,7 +38,7 @@ export default function Profile() {
             <View>
               <Text style={styles.value}>Cash</Text>
               <Text style={styles.cash} weight="Black">
-                {userInfo?.cash}
+                {formatCurrency(userInfo?.cash)}
               </Text>
             </View>
 
