@@ -2,7 +2,7 @@
 import React, { useRef, useState } from 'react'
 import { View } from 'react-native'
 import { Container, Text } from 'components'
-import { SUB_BACKGROUND, LABEL } from 'utils/colors'
+import { LABEL, CARD_BACKGROUND } from 'utils/colors'
 import { useSelector } from 'react-redux'
 // import { formatCurrency } from 'utils/functions'
 import ProfileItem from './ProfileItem'
@@ -76,7 +76,7 @@ const styles = {
   topBlock: {
     width: '100%',
     height: '29%',
-    backgroundColor: SUB_BACKGROUND,
+    backgroundColor: CARD_BACKGROUND,
     borderBottomRightRadius: 12,
     borderBottomLeftRadius: 12,
     justifyContent: 'space-between',

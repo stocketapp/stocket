@@ -6,6 +6,7 @@ import { SUB_BACKGROUND, GREEN } from 'utils/colors'
 import * as RNIap from 'react-native-iap'
 import ProductsIllustration from './ProductsIllustration'
 import productsArr from './products'
+import ProductItem from './ProductItem'
 
 type ProductsType = {
   onClose: () => void,
@@ -13,8 +14,13 @@ type ProductsType = {
   ref: { current: any },
 }
 
+const productIds = [
+  'com.corasan.stocket.5k_cash',
+  'com.corasan.stocket.10k_cash',
+]
+
 function Products({ onClose, ref, isOpen }: ProductsType) {
-  const [products, setProductss] = useState(null)
+  const [products, setProducts] = useState(null)
   useEffect(() => {
     if (isOpen) {
       ref.current.open()
@@ -24,15 +30,24 @@ function Products({ onClose, ref, isOpen }: ProductsType) {
   useEffect(() => {
     const getProducts = async () => {
       try {
-        const res = await RNIap.getProducts(['5k_buying_power'])
+        const res = await RNIap.getProducts(productIds)
+        setProducts(res)
         console.log(res)
       } catch (err) {
         console.warn(err) // standardized err.code and err.message available
       }
     }
     getProducts()
-    setProductss(productsArr)
   }, [])
+
+  const buyCash = async sku => {
+    try {
+      const res = await RNIap.requestPurchase(sku, false)
+      console.log(res)
+    } catch (err) {
+      console.log(err)
+    }
+  }
 
   return (
     <Sheet
@@ -53,9 +68,12 @@ function Products({ onClose, ref, isOpen }: ProductsType) {
         }}
       >
         <ProductsIllustration />
-        <Text>Productss</Text>
+        <Text>Products</Text>
 
-        {products && products.map(el => <Text>{el.title}</Text>)}
+        {products &&
+          products.map((el, i) => (
+            <ProductItem product={el} key={i} onPurchase={buyCash} />
+          ))}
       </Container>
     </Sheet>
   )
