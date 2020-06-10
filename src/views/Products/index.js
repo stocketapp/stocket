@@ -1,11 +1,10 @@
 import React, { forwardRef, useEffect, useState } from 'react'
-import { Dimensions } from 'react-native'
+import { Dimensions, View, StyleSheet } from 'react-native'
 import { Container, Text } from 'components'
 import Sheet from 'react-native-raw-bottom-sheet'
 import { SUB_BACKGROUND, GREEN } from 'utils/colors'
 import * as RNIap from 'react-native-iap'
 import ProductsIllustration from './ProductsIllustration'
-import productsArr from './products'
 import ProductItem from './ProductItem'
 
 type ProductsType = {
@@ -32,7 +31,6 @@ function Products({ onClose, ref, isOpen }: ProductsType) {
       try {
         const res = await RNIap.getProducts(productIds)
         setProducts(res)
-        console.log(res)
       } catch (err) {
         console.warn(err) // standardized err.code and err.message available
       }
@@ -69,10 +67,12 @@ function Products({ onClose, ref, isOpen }: ProductsType) {
         <ProductsIllustration />
         <Text>Products</Text>
 
-        {products &&
-          products.map((el, i) => (
-            <ProductItem product={el} key={i} onPurchase={buyCash} />
-          ))}
+        <View style={styles.products}>
+          {products &&
+            products.map((el, i) => (
+              <ProductItem product={el} key={i} onPurchase={buyCash} />
+            ))}
+        </View>
       </Container>
     </Sheet>
   )
@@ -80,7 +80,7 @@ function Products({ onClose, ref, isOpen }: ProductsType) {
 
 export default forwardRef((props, ref) => Products({ ref, ...props }))
 
-const styles = {
+const styles = StyleSheet.create({
   container: {
     borderRadius: 14,
     backgroundColor: SUB_BACKGROUND,
@@ -99,4 +99,9 @@ const styles = {
     alignItems: 'center',
     marginVertical: 5,
   },
-}
+  products: {
+    flexWrap: 'wrap',
+    flex: 1,
+    flexDirection: 'row',
+  },
+})
