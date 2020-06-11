@@ -65,7 +65,9 @@ function Products({ onClose, ref, isOpen }: ProductsType) {
         }}
       >
         <ProductsIllustration />
-        <Text>Products</Text>
+        <Text type="label" style={{ paddingBottom: 40 }}>
+          Add more cash to your account
+        </Text>
 
         <View style={styles.products}>
           {products &&

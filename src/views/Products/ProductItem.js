@@ -9,9 +9,17 @@ export default ({ product, onPurchase }) => (
       {product?.title}
     </Text>
 
-    <TouchableOpacity onPress={() => onPurchase(product?.productId)}>
+    <TouchableOpacity
+      onPress={() => onPurchase(product?.productId)}
+      style={styles.touchable}
+    >
       <View style={styles.btn}>
-        <Text weight="Black" color={DARK_TEXT}>
+        <Text
+          weight="Black"
+          color={DARK_TEXT}
+          style={{ textAlign: 'center' }}
+          type="label"
+        >
           {product?.localizedPrice}
         </Text>
       </View>
@@ -22,8 +30,8 @@ export default ({ product, onPurchase }) => (
 const styles = StyleSheet.create({
   container: {
     backgroundColor: CARD_BACKGROUND,
-    height: 120,
-    padding: 12,
+    height: 140,
+    paddingTop: 16,
     borderRadius: 12,
     alignItems: 'center',
     justifyContent: 'space-between',
@@ -33,10 +41,16 @@ const styles = StyleSheet.create({
   btn: {
     backgroundColor: GREEN,
     paddingHorizontal: 14,
-    paddingVertical: 7,
+    paddingVertical: 10,
     width: '100%',
     justifyContent: 'center',
     alignContent: 'center',
-    borderRadius: 120,
+    borderBottomLeftRadius: 12,
+    borderBottomRightRadius: 12,
+  },
+  touchable: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    width: '100%',
   },
 })
