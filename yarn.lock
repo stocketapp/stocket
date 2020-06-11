@@ -7167,9 +7167,10 @@ react-native-onesignal@^3.7.3:
   dependencies:
     invariant "^2.2.2"
 
-react-native-raw-bottom-sheet@corasan/react-native-raw-bottom-sheet#master:
-  version "2.1.0"
-  resolved "https://codeload.github.com/corasan/react-native-raw-bottom-sheet/tar.gz/5c3d8733cae51a40d693d51546afaf6aafd796eb"
+react-native-raw-bottom-sheet@^2.2.0:
+  version "2.2.0"
+  resolved "https://registry.yarnpkg.com/react-native-raw-bottom-sheet/-/react-native-raw-bottom-sheet-2.2.0.tgz#d11dabb86aadb014273767ef7b554924b13633c5"
+  integrity sha512-qL4JKIqvbcVxbkKzeh51hjV7suoJN3ouxzvLmOg0FBUV1yiJAfEbacjQdtRCI6+OU5pyGFBIifLsTXcFDwHggg==
 
 react-native-reanimated@^1.9.0:
   version "1.9.0"
