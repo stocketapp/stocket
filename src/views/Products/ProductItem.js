@@ -35,8 +35,8 @@ const styles = StyleSheet.create({
     borderRadius: 12,
     alignItems: 'center',
     justifyContent: 'space-between',
-    margin: 5,
-    width: '47%',
+    margin: 6,
+    width: '45%',
   },
   btn: {
     backgroundColor: GREEN,
