@@ -1,6 +1,7 @@
-import React, { forwardRef, useEffect } from 'react'
-import { Dimensions, View, StyleSheet, Alert } from 'react-native'
-import { Container, Text } from 'components'
+// @flow
+import React, { forwardRef, useEffect, useState, useRef } from 'react'
+import { Dimensions, View, StyleSheet, Animated, Easing } from 'react-native'
+import { Container, Text, LoadingCheckmark } from 'components'
 import Sheet from 'react-native-raw-bottom-sheet'
 import { SUB_BACKGROUND, GREEN } from 'utils/colors'
 import ProductsIllustration from './ProductsIllustration'
@@ -9,50 +10,52 @@ import IapHub from 'react-native-iaphub'
 import { useSelector } from 'react-redux'
 import { getProductValue } from 'utils/functions'
 import firestore from '@react-native-firebase/firestore'
+import transactionErrors from './transactionErrors'
 
-type ProductsType = {
+type Props = {
   onClose: () => void,
   isOpen: boolean,
   ref: { current: any },
 }
 
-function Products({ onClose, ref, isOpen }: ProductsType) {
+const { Value, timing } = Animated
+
+function Products({ onClose, ref, isOpen }: Props) {
   const { products } = useSelector(({ iapProducts }) => iapProducts)
   const { uid } = useSelector(({ user }) => user?.currentUser)
+  const [purchaseLoading, setPurchaseLoading] = useState(false)
+  const [progress] = useState(new Value(0))
+  const loadingMarkRef = useRef()
+
   useEffect(() => {
     if (isOpen) {
       ref.current.open()
     }
   }, [isOpen, ref])
 
+  useEffect(() => {
+    timing(progress, {
+      toValue: 1,
+      duration: 5000,
+      easing: Easing.linear,
+      useNativeDriver: false,
+    }).start(() => setPurchaseLoading(false))
+  }, [progress, purchaseLoading])
+
   const buyCash = async productId => {
     try {
       const transaction = await IapHub.buy(productId)
+      setPurchaseLoading(true)
       await updateCash(transaction?.sku)
     } catch (err) {
       console.log(err)
-      if (err.code === 'receipt_validation_failed') {
-        Alert.alert(
-          "We're having trouble validating your transaction",
-          "Give us some time, we'll retry to validate your transaction ASAP!",
-        )
-      } else if (err.code === 'receipt_request_failed') {
-        Alert.alert(
-          "We're having trouble validating your transaction",
-          'Please try to restore your purchases later (Button in the settings) or contact the support (support@myapp.com)',
-        )
-      } else {
-        Alert.alert(
-          'Purchase error',
-          'We were not able to process your purchase, please try again later or contact the support (support@myapp.com)',
-        )
-      }
+      transactionErrors(err.code)
     }
   }
 
   const updateCash = async productId => {
     const value = getProductValue(productId).value
-    return firestore()
+    await firestore()
       .collection('Users')
       .doc(uid)
       .update({
@@ -60,6 +63,7 @@ function Products({ onClose, ref, isOpen }: ProductsType) {
       })
   }
 
+  // console.log(purcha)
   return (
     <Sheet
       height={Dimensions.get('window').height - 80}
@@ -89,12 +93,25 @@ function Products({ onClose, ref, isOpen }: ProductsType) {
               <ProductItem product={el} key={i} onPurchase={buyCash} />
             ))}
         </View>
+
+        {purchaseLoading && (
+          <View style={styles.loadingmark}>
+            <LoadingCheckmark
+              size={105}
+              ref={loadingMarkRef}
+              loop={false}
+              progress={progress}
+            />
+          </View>
+        )}
       </Container>
     </Sheet>
   )
 }
 
-export default forwardRef((props, ref) => Products({ ref, ...props }))
+export default forwardRef<Props, React$Node>((props, ref) =>
+  Products({ ref, ...props }),
+)
 
 const styles = StyleSheet.create({
   container: {
@@ -119,5 +136,15 @@ const styles = StyleSheet.create({
     flexWrap: 'wrap',
     flex: 1,
     flexDirection: 'row',
+  },
+  loadingmark: {
+    position: 'absolute',
+    top: '30%',
+    height: 120,
+    width: 120,
+    backgroundColor: 'rgba(5, 6, 6, 0.9)',
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 12,
   },
 })
