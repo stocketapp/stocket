@@ -22,4 +22,7 @@ export default {
     positionsMktData: null,
     myStockLoading: false,
   },
+  iapProducts: {
+    products: null,
+  },
 }

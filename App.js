@@ -2,7 +2,7 @@
 
 import React, { useEffect, useRef } from 'react'
 import { StatusBar, View } from 'react-native'
-import { useAuthState, useSetUserInfo, usePurchaseUpdatedListener } from 'hooks'
+import { useAuthState, useSetUserInfo, useIapHub } from 'hooks'
 // import RNBootSplash from 'react-native-bootsplash'
 import { BACKGROUND } from 'utils/colors'
 import OneSignal from 'react-native-onesignal'
@@ -23,7 +23,7 @@ export default function App(): React$Node {
   const { isAuth, currentUser } = useAuthState()
   const {} = useSetUserInfo(currentUser)
   const tradeViewRef = useRef()
-  usePurchaseUpdatedListener()
+  useIapHub()
 
   // useEffect(() => {
   //   if (!loading) {

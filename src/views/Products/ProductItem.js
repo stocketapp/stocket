@@ -10,7 +10,7 @@ export default ({ product, onPurchase }) => (
     </Text>
 
     <TouchableOpacity
-      onPress={() => onPurchase(product?.productId)}
+      onPress={() => onPurchase(product?.sku)}
       style={styles.touchable}
     >
       <View style={styles.btn}>
@@ -20,7 +20,7 @@ export default ({ product, onPurchase }) => (
           style={{ textAlign: 'center' }}
           type="label"
         >
-          {product?.localizedPrice}
+          {product?.price}
         </Text>
       </View>
     </TouchableOpacity>

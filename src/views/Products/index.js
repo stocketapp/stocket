@@ -1,11 +1,14 @@
-import React, { forwardRef, useEffect, useState } from 'react'
-import { Dimensions, View, StyleSheet } from 'react-native'
+import React, { forwardRef, useEffect } from 'react'
+import { Dimensions, View, StyleSheet, Alert } from 'react-native'
 import { Container, Text } from 'components'
 import Sheet from 'react-native-raw-bottom-sheet'
 import { SUB_BACKGROUND, GREEN } from 'utils/colors'
-import * as RNIap from 'react-native-iap'
 import ProductsIllustration from './ProductsIllustration'
 import ProductItem from './ProductItem'
+import IapHub from 'react-native-iaphub'
+import { useSelector } from 'react-redux'
+import { getProductValue } from 'utils/functions'
+import firestore from '@react-native-firebase/firestore'
 
 type ProductsType = {
   onClose: () => void,
@@ -13,37 +16,48 @@ type ProductsType = {
   ref: { current: any },
 }
 
-const productIds = [
-  'com.corasan.stocket.5k_cash',
-  'com.corasan.stocket.10k_cash',
-]
-
 function Products({ onClose, ref, isOpen }: ProductsType) {
-  const [products, setProducts] = useState(null)
+  const { products } = useSelector(({ iapProducts }) => iapProducts)
+  const { uid } = useSelector(({ user }) => user?.currentUser)
   useEffect(() => {
     if (isOpen) {
       ref.current.open()
     }
   }, [isOpen, ref])
 
-  useEffect(() => {
-    const getProducts = async () => {
-      try {
-        const res = await RNIap.getProducts(productIds)
-        setProducts(res)
-      } catch (err) {
-        console.warn(err) // standardized err.code and err.message available
-      }
-    }
-    getProducts()
-  }, [])
-
-  const buyCash = async sku => {
+  const buyCash = async productId => {
     try {
-      await RNIap.requestPurchase(sku, false)
+      const transaction = await IapHub.buy(productId)
+      await updateCash(transaction?.sku)
     } catch (err) {
       console.log(err)
+      if (err.code === 'receipt_validation_failed') {
+        Alert.alert(
+          "We're having trouble validating your transaction",
+          "Give us some time, we'll retry to validate your transaction ASAP!",
+        )
+      } else if (err.code === 'receipt_request_failed') {
+        Alert.alert(
+          "We're having trouble validating your transaction",
+          'Please try to restore your purchases later (Button in the settings) or contact the support (support@myapp.com)',
+        )
+      } else {
+        Alert.alert(
+          'Purchase error',
+          'We were not able to process your purchase, please try again later or contact the support (support@myapp.com)',
+        )
+      }
     }
+  }
+
+  const updateCash = async productId => {
+    const value = getProductValue(productId).value
+    return firestore()
+      .collection('Users')
+      .doc(uid)
+      .update({
+        cash: firestore.FieldValue.increment(value),
+      })
   }
 
   return (
