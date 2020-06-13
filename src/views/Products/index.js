@@ -1,14 +1,21 @@
 // @flow
 import React, { forwardRef, useEffect, useState, useRef } from 'react'
-import { Dimensions, View, StyleSheet, Animated, Easing } from 'react-native'
+import {
+  Dimensions,
+  View,
+  StyleSheet,
+  Animated,
+  Easing,
+  Vibration,
+} from 'react-native'
 import { Container, Text, LoadingCheckmark } from 'components'
 import Sheet from 'react-native-raw-bottom-sheet'
-import { SUB_BACKGROUND, GREEN } from 'utils/colors'
+import { SUB_BACKGROUND, GREEN, LABEL } from 'utils/colors'
 import ProductsIllustration from './ProductsIllustration'
 import ProductItem from './ProductItem'
 import IapHub from 'react-native-iaphub'
 import { useSelector } from 'react-redux'
-import { getProductValue } from 'utils/functions'
+import { getProductValue, formatCurrency } from 'utils/functions'
 import firestore from '@react-native-firebase/firestore'
 import transactionErrors from './transactionErrors'
 
@@ -23,8 +30,9 @@ const { Value, timing } = Animated
 function Products({ onClose, ref, isOpen }: Props) {
   const { products } = useSelector(({ iapProducts }) => iapProducts)
   const { uid } = useSelector(({ user }) => user?.currentUser)
-  const [purchaseLoading, setPurchaseLoading] = useState(false)
+  const [purchaseLoading, setPurchaseLoading] = useState(true)
   const [progress] = useState(new Value(0))
+  const [selectedProduct, setSelectedProduct] = useState(null)
   const loadingMarkRef = useRef()
 
   useEffect(() => {
@@ -34,15 +42,21 @@ function Products({ onClose, ref, isOpen }: Props) {
   }, [isOpen, ref])
 
   useEffect(() => {
-    timing(progress, {
-      toValue: 1,
-      duration: 5000,
-      easing: Easing.linear,
-      useNativeDriver: false,
-    }).start(() => setPurchaseLoading(false))
-  }, [progress, purchaseLoading])
+    if (purchaseLoading && selectedProduct) {
+      timing(progress, {
+        toValue: 1,
+        duration: 5000,
+        easing: Easing.linear,
+        useNativeDriver: false,
+      }).start(() => {
+        Vibration.vibrate(200)
+        reset()
+      })
+    }
+  }, [progress, purchaseLoading, selectedProduct])
 
   const buyCash = async productId => {
+    setSelectedProduct(productId)
     try {
       const transaction = await IapHub.buy(productId)
       setPurchaseLoading(true)
@@ -63,7 +77,11 @@ function Products({ onClose, ref, isOpen }: Props) {
       })
   }
 
-  // console.log(purcha)
+  const reset = () => {
+    setPurchaseLoading(false)
+    setSelectedProduct(null)
+  }
+
   return (
     <Sheet
       height={Dimensions.get('window').height - 80}
@@ -94,14 +112,18 @@ function Products({ onClose, ref, isOpen }: Props) {
             ))}
         </View>
 
-        {purchaseLoading && (
+        {purchaseLoading && selectedProduct && (
           <View style={styles.loadingmark}>
             <LoadingCheckmark
-              size={105}
+              size={110}
               ref={loadingMarkRef}
-              loop={false}
+              // loop={false}
               progress={progress}
             />
+            <Text color={LABEL} type="label">
+              +$1,000,000.00
+              {/* +{formatCurrency(getProductValue(selectedProduct).value)} */}
+            </Text>
           </View>
         )}
       </Container>
@@ -140,11 +162,13 @@ const styles = StyleSheet.create({
   loadingmark: {
     position: 'absolute',
     top: '30%',
-    height: 120,
-    width: 120,
+    height: '22%',
+    minWidth: '42%',
     backgroundColor: 'rgba(5, 6, 6, 0.9)',
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: 12,
+    paddingBottom: 10,
+    paddingHorizontal: 5,
   },
 })
