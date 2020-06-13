@@ -22,7 +22,7 @@ const TradeDetail = ({ label, value }: TradeDetailProps) => (
 )
 
 type TradeDetailsProps = {
-  selectedStock: { price: string },
+  selectedStock: { latestPrice: string },
   quantity: string | number,
   maxShares: number,
   isSell: string,
@@ -40,7 +40,10 @@ export default ({
   const sharesAmount = isSell ? (maxShares >= 0 ? maxShares : '0') : owned
   return (
     <View style={{ paddingTop: 10 }}>
-      <TradeDetail label="Price" value={formatCurrency(selectedStock?.price)} />
+      <TradeDetail
+        label="Price"
+        value={formatCurrency(selectedStock?.latestPrice)}
+      />
       <TradeDetail label="Shares" value={quantity} />
 
       <View style={styles.maxSharesContainer}>

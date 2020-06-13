@@ -9,11 +9,12 @@ import TradeHeader from './TradeHeader'
 import TradeDetails from './TradeDetails'
 import TradeTotal from './TradeTotal'
 import TradeAction from './TradeAction'
+import find from 'lodash.find'
 
 export default forwardRef((props, ref) => {
   const { trade, stock, user } = useSelector(state => state)
   const { tradeViewIsOpen, stockQuantity, selectedTradeAction } = trade
-  const { selectedStock } = stock
+  const { selectedStock, positionsMktData } = stock
   const { currentUser, userInfo } = user
   const dispatch = useDispatch()
   const sharesOwned = selectedStock?.shares?.length
@@ -85,6 +86,18 @@ export default forwardRef((props, ref) => {
     )
   }, [stockQuantity, selectedTradeAction, maxShares, sharesOwned])
 
+  const stockData = useMemo(() => {
+    const found = find(
+      positionsMktData,
+      el => el.quote.symbol === selectedStock?.symbol,
+    )
+    if (!found) {
+      return selectedStock
+    }
+
+    return found
+  }, [positionsMktData, selectedStock])
+
   return (
     <Sheet
       height={Dimensions.get('window').height - 80}
@@ -97,12 +110,12 @@ export default forwardRef((props, ref) => {
       <View style={{ flex: 1, justifyContent: 'space-between' }}>
         <View style={{ paddingHorizontal: 16 }}>
           <TradeHeader
-            symbol={selectedStock?.symbol}
+            symbol={stockData?.symbol}
             isSell={trade.selectedTradeAction === 'SELL'}
           />
 
           <TradeDetails
-            selectedStock={selectedStock}
+            selectedStock={stockData.quote}
             quantity={stockQuantity}
             maxShares={maxShares}
             isSell={selectedTradeAction === 'BUY'}
