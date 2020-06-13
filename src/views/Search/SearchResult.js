@@ -14,24 +14,24 @@ type SearchResultProps = {
 }
 
 export default ({
-  item: { companyName, symbol },
+  item: { quote },
   onPress,
   setStock,
   uid,
 }: SearchResultProps) => (
-  <TouchableOpacity style={styles.resultItem} onPress={() => setStock(symbol)}>
+  <TouchableOpacity style={styles.resultItem} onPress={setStock}>
     <View>
       <Text weight="Medium" type="label">
-        {companyName}
+        {quote?.companyName}
       </Text>
       <Text color={GRAY_DARKER} type="subtext" style={{ paddingTop: 5 }}>
-        {symbol}
+        {quote?.symbol}
       </Text>
     </View>
 
     <TouchableOpacity
       style={{ padding: 6 }}
-      onPress={() => onPress(uid, { symbol })}
+      onPress={() => onPress(uid, { symbol: quote?.symbol })}
     >
       <View style={styles.plus}>
         <Text type="title" style={{ bottom: 3.8, left: 0.5 }} status="positive">

@@ -7,7 +7,7 @@ import { Container, Text } from 'components'
 import { useNavigation } from '@react-navigation/native'
 import { useDispatch } from 'react-redux'
 
-const PortfolioItem = ({ item }: { item: PositionType }): React$Node => {
+const StockItem = ({ item }: { item: PositionType }): React$Node => {
   const { navigate } = useNavigation()
   const dispatch = useDispatch()
 
@@ -62,4 +62,4 @@ const styles = StyleSheet.create({
   },
 })
 
-export default PortfolioItem
+export default StockItem

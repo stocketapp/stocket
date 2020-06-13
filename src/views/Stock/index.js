@@ -17,11 +17,17 @@ export default function Stock() {
   const { selectedStock, positionsMktData } = useSelector(({ stock }) => stock)
   const dispatch = useDispatch()
 
-  const stockData = useMemo(
-    () =>
-      find(positionsMktData, el => el.quote.symbol === selectedStock?.symbol),
-    [positionsMktData, selectedStock],
-  )
+  const stockData = useMemo(() => {
+    const found = find(
+      positionsMktData,
+      el => el.quote.symbol === selectedStock?.symbol,
+    )
+    if (!found) {
+      return selectedStock
+    }
+
+    return found
+  }, [positionsMktData, selectedStock])
 
   const graphData = useMemo(() => {
     const arr = filter(stockData?.chart, el => el?.close !== null)
@@ -78,7 +84,7 @@ export default function Stock() {
 
           <StockDetails data={stockData?.quote} />
 
-          {stockData && <StockPosition data={selectedStock} />}
+          {stockData?.shares && <StockPosition data={selectedStock} />}
 
           {stockData?.news && process.env.NODE_ENV !== 'development' && (
             <StockNews articles={stockData?.news} />
