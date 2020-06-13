@@ -30,7 +30,7 @@ const { Value, timing } = Animated
 function Products({ onClose, ref, isOpen }: Props) {
   const { products } = useSelector(({ iapProducts }) => iapProducts)
   const { uid } = useSelector(({ user }) => user?.currentUser)
-  const [purchaseLoading, setPurchaseLoading] = useState(true)
+  const [purchaseLoading, setPurchaseLoading] = useState(false)
   const [progress] = useState(new Value(0))
   const [selectedProduct, setSelectedProduct] = useState(null)
   const loadingMarkRef = useRef()
@@ -49,7 +49,7 @@ function Products({ onClose, ref, isOpen }: Props) {
         easing: Easing.linear,
         useNativeDriver: false,
       }).start(() => {
-        Vibration.vibrate(200)
+        Vibration.vibrate(500)
         reset()
       })
     }
@@ -117,12 +117,11 @@ function Products({ onClose, ref, isOpen }: Props) {
             <LoadingCheckmark
               size={110}
               ref={loadingMarkRef}
-              // loop={false}
+              loop={false}
               progress={progress}
             />
             <Text color={LABEL} type="label">
-              +$1,000,000.00
-              {/* +{formatCurrency(getProductValue(selectedProduct).value)} */}
+              +{formatCurrency(getProductValue(selectedProduct).value)}
             </Text>
           </View>
         )}
