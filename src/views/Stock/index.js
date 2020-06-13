@@ -1,7 +1,7 @@
 import React, { useMemo } from 'react'
 import { View, TouchableOpacity, ScrollView } from 'react-native'
 import { Text, LineChart, Container } from 'components'
-import { GREEN, BACKGROUND, DARK_TEXT, GRAY_DARKER } from 'utils/colors'
+import { GREEN, BACKGROUND, GRAY_DARKER } from 'utils/colors'
 import { ArrowLeftIcon } from 'components/Icons'
 import { useSelector, useDispatch } from 'react-redux'
 import StockDetails from './StockDetails'
@@ -20,7 +20,7 @@ export default function Stock() {
   const stockData = useMemo(() => {
     const found = find(
       positionsMktData,
-      el => el.quote.symbol === selectedStock?.symbol,
+      el => el?.quote?.symbol === selectedStock?.symbol,
     )
     if (!found) {
       return selectedStock
