@@ -2,14 +2,14 @@
 import React, { useRef, useState } from 'react'
 import { View } from 'react-native'
 import { Container, Text } from 'components'
-import { SUB_BACKGROUND, LABEL } from 'utils/colors'
+import { LABEL, CARD_BACKGROUND } from 'utils/colors'
 import { useSelector } from 'react-redux'
 import { formatCurrency } from 'utils/functions'
 import ProfileItem from './ProfileItem'
 import AddCash from './AddCash'
 import LogoutButton from './LogoutButton'
 import p from '../../../package.json'
-import Purchase from '../Purchase'
+import Products from '../Products'
 
 export default function Profile() {
   const { userInfo } = useSelector(({ user }) => user)
@@ -38,7 +38,7 @@ export default function Profile() {
             <View>
               <Text style={styles.value}>Cash</Text>
               <Text style={styles.cash} weight="Black">
-                {userInfo?.cash}
+                {formatCurrency(userInfo?.cash)}
               </Text>
             </View>
 
@@ -63,7 +63,7 @@ export default function Profile() {
           {p.version}
         </Text>
       </View>
-      <Purchase
+      <Products
         ref={iapRef}
         isOpen={isIapOpen}
         onClose={() => setIsIapOpen(false)}
@@ -76,7 +76,7 @@ const styles = {
   topBlock: {
     width: '100%',
     height: '29%',
-    backgroundColor: SUB_BACKGROUND,
+    backgroundColor: CARD_BACKGROUND,
     borderBottomRightRadius: 12,
     borderBottomLeftRadius: 12,
     justifyContent: 'space-between',

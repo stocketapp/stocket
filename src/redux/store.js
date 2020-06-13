@@ -4,6 +4,7 @@ import portfolio from './reducers/portfolio'
 import trade from './reducers/trade'
 import stock from './reducers/stock'
 import graph from './reducers/graph'
+import iapProducts from './reducers/iapProducts'
 
 const rootReducer = combineReducers({
   user,
@@ -11,6 +12,7 @@ const rootReducer = combineReducers({
   trade,
   stock,
   graph,
+  iapProducts,
 })
 
 export default (state, action) =>

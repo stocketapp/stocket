@@ -3369,7 +3369,7 @@ domutils@^1.7.0:
     dom-serializer "0"
     domelementtype "1"
 
-dooboolab-welcome@^1.2.0:
+dooboolab-welcome@^1.1.1, dooboolab-welcome@^1.2.0:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/dooboolab-welcome/-/dooboolab-welcome-1.2.0.tgz#295818ce85a8e97dc90c0ec0510b4008e2d722dc"
   integrity sha512-XgEbjJHAsKLge/e8jtuHsv84Ovg1Gx0GvnOTOmOlVGV1643nduTAkT3fyo/mxKbzvyXBr47RHaJAY4R2toI0UA==
@@ -7134,12 +7134,26 @@ react-native-gesture-handler@^1.6.1:
     invariant "^2.2.4"
     prop-types "^15.7.2"
 
+react-native-iap@4.4.3:
+  version "4.4.3"
+  resolved "https://registry.yarnpkg.com/react-native-iap/-/react-native-iap-4.4.3.tgz#16c174b569caf3e401a4c756de249ef64dada7a9"
+  integrity sha512-vywdYj61i/F3Qw+o1U130ap77AYYkyFX3ioDnl5UzOd3xmoo2/uH36FPdlKrFZUmdYdMySoV+AYJDLh5T5ihWw==
+  dependencies:
+    dooboolab-welcome "^1.1.1"
+
 react-native-iap@^4.4.9:
   version "4.4.9"
   resolved "https://registry.yarnpkg.com/react-native-iap/-/react-native-iap-4.4.9.tgz#dec82b12fd3165e8a86bd87c8b15fd8b510685aa"
   integrity sha512-Ptz4kUgTzIROt+N3m1Z6xgN/FfjPN3nBEkw475SQaj62dfuGB+fY66LqASM7woetvn65lolr6VEh1OsT2nbqyQ==
   dependencies:
     dooboolab-welcome "^1.2.0"
+
+react-native-iaphub@^3.0.3:
+  version "3.0.3"
+  resolved "https://registry.yarnpkg.com/react-native-iaphub/-/react-native-iaphub-3.0.3.tgz#95545aacba8231c7b90f9136abf3d8b049f2559c"
+  integrity sha512-hLIeV6vHY8bLBN0MT8Bni+Wbtz5nzDW2qYbaVcVYURMNKFQYLLB/B5ar+/hWVQ4/qKcFdn8c+AvFZqRv/1fqhg==
+  dependencies:
+    react-native-iap "4.4.3"
 
 react-native-iphone-x-helper@^1.2.1:
   version "1.2.1"
@@ -7153,9 +7167,10 @@ react-native-onesignal@^3.7.3:
   dependencies:
     invariant "^2.2.2"
 
-react-native-raw-bottom-sheet@corasan/react-native-raw-bottom-sheet#master:
-  version "2.1.0"
-  resolved "https://codeload.github.com/corasan/react-native-raw-bottom-sheet/tar.gz/5c3d8733cae51a40d693d51546afaf6aafd796eb"
+react-native-raw-bottom-sheet@^2.2.0:
+  version "2.2.0"
+  resolved "https://registry.yarnpkg.com/react-native-raw-bottom-sheet/-/react-native-raw-bottom-sheet-2.2.0.tgz#d11dabb86aadb014273767ef7b554924b13633c5"
+  integrity sha512-qL4JKIqvbcVxbkKzeh51hjV7suoJN3ouxzvLmOg0FBUV1yiJAfEbacjQdtRCI6+OU5pyGFBIifLsTXcFDwHggg==
 
 react-native-reanimated@^1.9.0:
   version "1.9.0"
