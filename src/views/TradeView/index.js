@@ -18,7 +18,21 @@ export default forwardRef((props, ref) => {
   const { currentUser, userInfo } = user
   const dispatch = useDispatch()
   const sharesOwned = selectedStock?.shares?.length
-  const maxShares = Math.floor(userInfo?.cash / selectedStock?.price)
+
+  const stockData = useMemo(() => {
+    const found = find(
+      positionsMktData,
+      el => el.quote.symbol === selectedStock?.symbol,
+    )
+    if (!found) {
+      return selectedStock
+    }
+
+    return found
+  }, [positionsMktData, selectedStock])
+
+  const maxShares = Math.floor(userInfo?.cash / stockData?.quote.latestPrice)
+  const latestPrice = stockData?.quote.latestPrice
 
   useEffect(() => {
     if (tradeViewIsOpen) {
@@ -58,17 +72,17 @@ export default forwardRef((props, ref) => {
     })
   }
 
-  const total = useMemo(() => stockQuantity * selectedStock?.price, [
+  const total = useMemo(() => stockQuantity * latestPrice, [
     stockQuantity,
-    selectedStock,
+    latestPrice,
   ])
 
   const createTradeTransaction = () => {
     const obj = {
       value: total,
-      price: selectedStock?.price,
-      name: selectedStock?.name,
-      symbol: selectedStock?.symbol,
+      price: latestPrice,
+      name: stockData?.quote.name,
+      symbol: stockData?.quote.symbol,
       quantity: stockQuantity,
       action: selectedTradeAction,
     }
@@ -85,18 +99,6 @@ export default forwardRef((props, ref) => {
         : stockQuantity <= sharesOwned && stockQuantity !== '0')
     )
   }, [stockQuantity, selectedTradeAction, maxShares, sharesOwned])
-
-  const stockData = useMemo(() => {
-    const found = find(
-      positionsMktData,
-      el => el.quote.symbol === selectedStock?.symbol,
-    )
-    if (!found) {
-      return selectedStock
-    }
-
-    return found
-  }, [positionsMktData, selectedStock])
 
   return (
     <Sheet
@@ -115,7 +117,7 @@ export default forwardRef((props, ref) => {
           />
 
           <TradeDetails
-            selectedStock={stockData.quote}
+            selectedStock={stockData?.quote}
             quantity={stockQuantity}
             maxShares={maxShares}
             isSell={selectedTradeAction === 'BUY'}
