@@ -9,15 +9,30 @@ import TradeHeader from './TradeHeader'
 import TradeDetails from './TradeDetails'
 import TradeTotal from './TradeTotal'
 import TradeAction from './TradeAction'
+import find from 'lodash.find'
 
 export default forwardRef((props, ref) => {
   const { trade, stock, user } = useSelector(state => state)
   const { tradeViewIsOpen, stockQuantity, selectedTradeAction } = trade
-  const { selectedStock } = stock
+  const { selectedStock, positionsMktData } = stock
   const { currentUser, userInfo } = user
   const dispatch = useDispatch()
   const sharesOwned = selectedStock?.shares?.length
-  const maxShares = Math.floor(userInfo?.cash / selectedStock?.price)
+
+  const stockData = useMemo(() => {
+    const found = find(
+      positionsMktData,
+      el => el.quote.symbol === selectedStock?.symbol,
+    )
+    if (!found) {
+      return selectedStock
+    }
+
+    return found
+  }, [positionsMktData, selectedStock])
+
+  const maxShares = Math.floor(userInfo?.cash / stockData?.quote.latestPrice)
+  const latestPrice = stockData?.quote.latestPrice
 
   useEffect(() => {
     if (tradeViewIsOpen) {
@@ -57,17 +72,17 @@ export default forwardRef((props, ref) => {
     })
   }
 
-  const total = useMemo(() => stockQuantity * selectedStock?.price, [
+  const total = useMemo(() => stockQuantity * latestPrice, [
     stockQuantity,
-    selectedStock,
+    latestPrice,
   ])
 
   const createTradeTransaction = () => {
     const obj = {
       value: total,
-      price: selectedStock?.price,
-      name: selectedStock?.name,
-      symbol: selectedStock?.symbol,
+      price: latestPrice,
+      name: stockData?.quote.name,
+      symbol: stockData?.quote.symbol,
       quantity: stockQuantity,
       action: selectedTradeAction,
     }
@@ -97,12 +112,12 @@ export default forwardRef((props, ref) => {
       <View style={{ flex: 1, justifyContent: 'space-between' }}>
         <View style={{ paddingHorizontal: 16 }}>
           <TradeHeader
-            symbol={selectedStock?.symbol}
+            symbol={stockData?.symbol}
             isSell={trade.selectedTradeAction === 'SELL'}
           />
 
           <TradeDetails
-            selectedStock={selectedStock}
+            selectedStock={stockData?.quote}
             quantity={stockQuantity}
             maxShares={maxShares}
             isSell={selectedTradeAction === 'BUY'}

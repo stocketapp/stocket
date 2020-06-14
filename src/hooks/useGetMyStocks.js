@@ -27,6 +27,7 @@ export default function useGetPortfolio(): {} {
           if (list.length > 0) {
             dispatch({ type: 'ALL_MY_STOCKS', positions: list })
             const syms = list.map(el => el.symbol)
+            // TODO: CALL THIS WHENEVER THE POSITION CHANGES IN DB
             if (!mktData) {
               const positionsMktData = await getBatchStockData(syms.join(','))
               if (positionsMktData) {

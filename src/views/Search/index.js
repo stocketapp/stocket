@@ -31,11 +31,6 @@ export default function Search(): React$Node {
     }
   }, [debounced])
 
-  const getResultData = async (symbol: string) => {
-    const res = await getBatchStockData(symbol)
-    goToStock(res)
-  }
-
   const goToStock = (item: {}) => {
     dispatch({
       type: 'SET_SELECTED_STOCK',
@@ -52,9 +47,9 @@ export default function Search(): React$Node {
         data={results}
         renderItem={({ item }) => (
           <SearchResult
-            item={item}
+            item={item[search]}
             onPress={addToWatchlist}
-            setStock={getResultData}
+            setStock={() => goToStock(item[search])}
             uid={currentUser?.uid}
           />
         )}
