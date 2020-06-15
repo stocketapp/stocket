@@ -13,34 +13,40 @@ type SearchResultProps = {
   uid: string,
 }
 
-export default ({
-  item: { quote },
+export default function SearchResult({
+  item,
   onPress,
   setStock,
   uid,
-}: SearchResultProps) => (
-  <TouchableOpacity style={styles.resultItem} onPress={setStock}>
-    <View>
-      <Text weight="Medium" type="label">
-        {quote?.companyName}
-      </Text>
-      <Text color={GRAY_DARKER} type="subtext" style={{ paddingTop: 5 }}>
-        {quote?.symbol}
-      </Text>
-    </View>
-
-    <TouchableOpacity
-      style={{ padding: 6 }}
-      onPress={() => onPress(uid, { symbol: quote?.symbol })}
-    >
-      <View style={styles.plus}>
-        <Text type="title" style={{ bottom: 3.8, left: 0.5 }} status="positive">
-          +
+}: SearchResultProps) {
+  return (
+    <TouchableOpacity style={styles.resultItem} onPress={setStock}>
+      <View>
+        <Text weight="Medium" type="label">
+          {item?.quote?.companyName}
+        </Text>
+        <Text color={GRAY_DARKER} type="subtext" style={{ paddingTop: 5 }}>
+          {item?.quote?.symbol}
         </Text>
       </View>
+
+      <TouchableOpacity
+        style={{ padding: 6 }}
+        onPress={() => onPress(uid, { symbol: item?.quote?.symbol })}
+      >
+        <View style={styles.plus}>
+          <Text
+            type="title"
+            style={{ bottom: 3.8, left: 0.5 }}
+            status="positive"
+          >
+            +
+          </Text>
+        </View>
+      </TouchableOpacity>
     </TouchableOpacity>
-  </TouchableOpacity>
-)
+  )
+}
 
 const styles = {
   container: {
