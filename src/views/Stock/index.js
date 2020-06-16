@@ -44,7 +44,7 @@ export default function Stock() {
     const getData = async () => {
       try {
         const res = await getBatchStockData(selectedStock)
-        const result = res[selectedStockPosition?.symbol]
+        const result = res[selectedStock]
         dispatch({
           type: 'TRADE_STOCK',
           tradeStock: result,
@@ -57,6 +57,10 @@ export default function Stock() {
 
     getData()
   }, [selectedStockPosition, selectedStock, dispatch])
+
+  const hasPosition =
+    selectedStockPosition?.shares &&
+    selectedStockPosition?.symbol === selectedStock
 
   return (
     <Container style={styles.container} safeAreaTop>
@@ -93,9 +97,7 @@ export default function Stock() {
 
           <StockDetails data={stock?.quote} />
 
-          {selectedStockPosition?.shares && (
-            <StockPosition data={selectedStockPosition} />
-          )}
+          {hasPosition && <StockPosition data={selectedStockPosition} />}
 
           {stock?.news && process.env.NODE_ENV !== 'development' && (
             <StockNews articles={stock?.news} />
@@ -104,7 +106,7 @@ export default function Stock() {
       </ScrollView>
 
       <StockTradeBar
-        status={stock?.quote?.change < 0 ? 'positive' : 'negative'}
+        status={stock?.quote?.change < 0 ? 'negative' : 'positive'}
         change={stock?.quote?.change}
         openTradeView={openTradeView}
         stockData={stock}

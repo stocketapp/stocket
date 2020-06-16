@@ -37,7 +37,7 @@ export default function Search(): React$Node {
   const goToStock = (item: {}) => {
     dispatch({
       type: 'SET_SELECTED_STOCK',
-      stock: item,
+      selectedStock: item?.quote?.symbol,
     })
     navigate('Stock')
   }
