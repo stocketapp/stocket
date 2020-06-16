@@ -15,23 +15,31 @@ export default function useGetMyStocks(): {} {
   const { positions } = useSelector(({ stock }) => stock)
 
   useEffect(() => {
-    return UsersRef.doc(uid)
+    onUpdateGainsCall({ uid })
+  }, [])
+
+  useEffect(() => {
+    const subscribe = UsersRef.doc(uid)
       .collection('positions')
       .onSnapshot(async snapshot => {
         try {
           setLoading(true)
           const list = []
-          snapshot.forEach(doc => list.push(doc.data()))
-          if (list.length > 0) {
-            await onUpdateGainsCall(uid, list)
-            dispatch({ type: 'ALL_MY_STOCKS', positions: list })
-          }
+          await snapshot.forEach(doc => {
+            list.push(doc.data())
+            dispatch({
+              type: 'ALL_MY_STOCKS',
+              positions: list,
+            })
+          })
         } catch (err) {
           console.log('useGetMyStocks', err)
         } finally {
           setLoading(false)
         }
       })
+
+    return () => subscribe()
   }, [])
 
   return { positions, loading }

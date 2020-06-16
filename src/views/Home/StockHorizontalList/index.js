@@ -3,7 +3,7 @@ import React from 'react'
 import { FlatList, StyleSheet, View, TouchableOpacity } from 'react-native'
 import functions from '@react-native-firebase/functions'
 import { useNavigation } from '@react-navigation/native'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { Text, Container, Loader } from 'components'
 import { RefreshIcon } from 'icons'
 import type { PositionType } from 'types'
@@ -20,19 +20,22 @@ export default function StockHorizontalList(props: StockHorizontalListProps) {
   const onUpdateGainsCall = functions().httpsCallable('onUpdateGainsCall')
   const { navigate } = useNavigation()
   const dispatch = useDispatch()
+  const { user } = useSelector(state => state)
 
   const refreshGains = () => {
-    onUpdateGainsCall()
+    onUpdateGainsCall({
+      uid: user?.currentUser?.uid,
+    })
   }
 
-  const goToStock = (stock: PositionType) => {
+  const goToStock = (selectedStock: PositionType) => {
     dispatch({
       type: 'SELECTED_STOCK_POSITION',
-      selectedStockPosition: stock,
+      selectedStockPosition: selectedStock,
     })
     dispatch({
       type: 'SET_SELECTED_STOCK',
-      selectedStock: stock?.symbol,
+      selectedStock: selectedStock?.symbol,
     })
     navigate('Stock')
   }
