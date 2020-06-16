@@ -2,8 +2,11 @@
 import React from 'react'
 import { FlatList, StyleSheet, View, TouchableOpacity } from 'react-native'
 import functions from '@react-native-firebase/functions'
+import { useNavigation } from '@react-navigation/native'
+import { useDispatch } from 'react-redux'
 import { Text, Container, Loader } from 'components'
 import { RefreshIcon } from 'icons'
+import type { PositionType } from 'types'
 import StockItem from './StockItem'
 import StockEmpty from './StockEmpty'
 
@@ -14,11 +17,24 @@ type StockHorizontalListProps = {
 
 export default function StockHorizontalList(props: StockHorizontalListProps) {
   const { data, loading } = props
-  const renderItem = ({ item }) => <StockItem item={item} />
   const onUpdateGainsCall = functions().httpsCallable('onUpdateGainsCall')
+  const { navigate } = useNavigation()
+  const dispatch = useDispatch()
 
   const refreshGains = () => {
     onUpdateGainsCall()
+  }
+
+  const goToStock = (stock: PositionType) => {
+    dispatch({
+      type: 'SELECTED_STOCK_POSITION',
+      selectedStockPosition: stock,
+    })
+    dispatch({
+      type: 'SET_SELECTED_STOCK',
+      selectedStock: stock?.symbol,
+    })
+    navigate('Stock')
   }
 
   return (
@@ -38,7 +54,9 @@ export default function StockHorizontalList(props: StockHorizontalListProps) {
       ) : (
         <FlatList
           data={data}
-          renderItem={renderItem}
+          renderItem={({ item }) => (
+            <StockItem item={item} onPress={() => goToStock(item)} />
+          )}
           keyExtractor={(index, key) => key.toString()}
           style={styles.list}
           horizontal

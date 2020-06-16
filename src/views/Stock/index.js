@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react'
+import React, { useMemo, useEffect, useState } from 'react'
 import { View, TouchableOpacity, ScrollView } from 'react-native'
 import { Text, LineChart, Container } from 'components'
 import { GREEN, BACKGROUND, GRAY_DARKER } from 'utils/colors'
@@ -8,35 +8,26 @@ import StockDetails from './StockDetails'
 import { useNavigation } from '@react-navigation/native'
 import StockPosition from './StockPosition'
 import StockNews from './StockNews'
-import find from 'lodash.find'
 import filter from 'lodash.filter'
 import StockTradeBar from './StockTradeBar'
+import { getBatchStockData } from 'api'
 
 export default function Stock() {
   const { goBack } = useNavigation()
-  const { selectedStock, positionsMktData } = useSelector(({ stock }) => stock)
+  const { selectedStockPosition, selectedStock } = useSelector(
+    ({ stock }) => stock,
+  )
+  const [stock, setStock] = useState(null)
   const dispatch = useDispatch()
 
-  const stockData = useMemo(() => {
-    const found = find(
-      positionsMktData,
-      el => el?.quote?.symbol === selectedStock?.symbol,
-    )
-    if (!found) {
-      return selectedStock
-    }
-
-    return found
-  }, [positionsMktData, selectedStock])
-
   const graphData = useMemo(() => {
-    const arr = filter(stockData?.chart, el => el?.close !== null)
+    const arr = filter(stock?.chart, el => el?.close !== null)
     return arr.map(el => ({
       value: el.close,
       label: el.label,
       date: el.date,
     }))
-  }, [stockData])
+  }, [stock])
 
   const openTradeView = () => {
     dispatch({
@@ -45,9 +36,27 @@ export default function Stock() {
     })
     dispatch({
       type: 'STOCK_PRICE',
-      stockPrice: selectedStock?.price,
+      stockPrice: stock?.quote?.latestPrice,
     })
   }
+
+  useEffect(() => {
+    const getData = async () => {
+      try {
+        const res = await getBatchStockData(selectedStock)
+        const result = res[selectedStockPosition?.symbol]
+        dispatch({
+          type: 'TRADE_STOCK',
+          tradeStock: result,
+        })
+        setStock(result)
+      } catch (err) {
+        console.log('[StockView] getData()', err)
+      }
+    }
+
+    getData()
+  }, [selectedStockPosition, selectedStock, dispatch])
 
   return (
     <Container style={styles.container} safeAreaTop>
@@ -65,37 +74,40 @@ export default function Stock() {
           <View style={{ paddingHorizontal: 16, paddingBottom: 15 }}>
             <View style={styles.header}>
               <Text weight="Black" style={{ fontSize: 30 }}>
-                {stockData?.quote.companyName}
+                {stock?.quote?.companyName}
               </Text>
               <Text
                 style={{ paddingBottom: 4, left: 10 }}
                 color={GRAY_DARKER}
                 type="label"
               >
-                {stockData?.quote.symbol}
+                {stock?.quote?.symbol}
               </Text>
             </View>
             <Text type="heading" weight="bold" style={{ paddingTop: 6 }}>
-              {stockData?.quote.iexRealtimePrice}
+              {stock?.quote?.iexRealtimePrice}
             </Text>
           </View>
 
-          {graphData && <LineChart data={graphData} />}
+          {graphData && stock?.chart && <LineChart data={graphData} />}
 
-          <StockDetails data={stockData?.quote} />
+          <StockDetails data={stock?.quote} />
 
-          {stockData?.shares && <StockPosition data={selectedStock} />}
+          {selectedStockPosition?.shares && (
+            <StockPosition data={selectedStockPosition} />
+          )}
 
-          {stockData?.news && process.env.NODE_ENV !== 'development' && (
-            <StockNews articles={stockData?.news} />
+          {stock?.news && process.env.NODE_ENV !== 'development' && (
+            <StockNews articles={stock?.news} />
           )}
         </View>
       </ScrollView>
 
       <StockTradeBar
-        status={Number(stockData?.day_change) < 0 ? 'positive' : 'negative'}
-        change={stockData?.quote.change}
+        status={stock?.quote?.change < 0 ? 'positive' : 'negative'}
+        change={stock?.quote?.change}
         openTradeView={openTradeView}
+        stockData={stock}
       />
     </Container>
   )

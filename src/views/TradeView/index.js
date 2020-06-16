@@ -9,30 +9,22 @@ import TradeHeader from './TradeHeader'
 import TradeDetails from './TradeDetails'
 import TradeTotal from './TradeTotal'
 import TradeAction from './TradeAction'
-import find from 'lodash.find'
 
-export default forwardRef((props, ref) => {
-  const { trade, stock, user } = useSelector(state => state)
-  const { tradeViewIsOpen, stockQuantity, selectedTradeAction } = trade
-  const { selectedStock, positionsMktData } = stock
+function TradeView({ ref }) {
+  const { trade, user, stock } = useSelector(state => state)
+  const {
+    tradeViewIsOpen,
+    stockQuantity,
+    selectedTradeAction,
+    tradeStock,
+  } = trade
+  const { selectedStockPosition } = stock
   const { currentUser, userInfo } = user
   const dispatch = useDispatch()
-  const sharesOwned = selectedStock?.shares?.length
+  const sharesOwned = selectedStockPosition?.shares?.length
 
-  const stockData = useMemo(() => {
-    const found = find(
-      positionsMktData,
-      el => el.quote.symbol === selectedStock?.symbol,
-    )
-    if (!found) {
-      return selectedStock
-    }
-
-    return found
-  }, [positionsMktData, selectedStock])
-
-  const maxShares = Math.floor(userInfo?.cash / stockData?.quote.latestPrice)
-  const latestPrice = stockData?.quote.latestPrice
+  const maxShares = Math.floor(userInfo?.cash / tradeStock?.quote.latestPrice)
+  const latestPrice = tradeStock?.quote.latestPrice
 
   useEffect(() => {
     if (tradeViewIsOpen) {
@@ -81,8 +73,8 @@ export default forwardRef((props, ref) => {
     const obj = {
       value: total,
       price: latestPrice,
-      name: stockData?.quote.name,
-      symbol: stockData?.quote.symbol,
+      name: tradeStock?.quote.name,
+      symbol: tradeStock?.quote.symbol,
       quantity: stockQuantity,
       action: selectedTradeAction,
     }
@@ -112,12 +104,12 @@ export default forwardRef((props, ref) => {
       <View style={{ flex: 1, justifyContent: 'space-between' }}>
         <View style={{ paddingHorizontal: 16 }}>
           <TradeHeader
-            symbol={stockData?.symbol}
+            symbol={stock?.symbol}
             isSell={trade.selectedTradeAction === 'SELL'}
           />
 
           <TradeDetails
-            selectedStock={stockData?.quote}
+            selectedStock={tradeStock?.quote}
             quantity={stockQuantity}
             maxShares={maxShares}
             isSell={selectedTradeAction === 'BUY'}
@@ -151,7 +143,9 @@ export default forwardRef((props, ref) => {
       </View>
     </Sheet>
   )
-})
+}
+
+export default forwardRef((props, ref) => TradeView({ ref, ...props }))
 
 const styles = {
   container: {

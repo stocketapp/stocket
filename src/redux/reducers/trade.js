@@ -16,6 +16,8 @@ export default function (state = initialState.trade, action) {
       return { ...state, tradeData: action.tradeData }
     case 'TRADE_VIEW_IS_OPEN':
       return { ...state, tradeViewIsOpen: action.tradeViewIsOpen }
+    case 'TRADE_STOCK':
+      return { ...state, tradeStock: action.tradeStock }
     default:
       return state
   }
