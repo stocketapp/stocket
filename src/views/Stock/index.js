@@ -2,7 +2,7 @@ import React, { useMemo, useEffect, useState } from 'react'
 import { View, TouchableOpacity, ScrollView, StyleSheet } from 'react-native'
 import { Text, LineChart, Container, Loader } from 'components'
 import { GREEN, BACKGROUND, GRAY_DARKER } from 'utils/colors'
-import { ArrowLeftIcon } from 'components/Icons'
+import { ArrowLeftIcon, FavoriteIcon } from 'components/Icons'
 import { useSelector, useDispatch } from 'react-redux'
 import StockDetails from './StockDetails'
 import { useNavigation } from '@react-navigation/native'
@@ -10,15 +10,17 @@ import StockPosition from './StockPosition'
 import StockNews from './StockNews'
 import filter from 'lodash.filter'
 import StockTradeBar from './StockTradeBar'
-import { getBatchStockData } from 'api'
+import { getBatchStockData, addToWatchlist } from 'api'
 
 export default function Stock({ route }) {
   const { goBack } = useNavigation()
   const { selectedStockPosition, selectedStock } = useSelector(
     ({ stock }) => stock,
   )
+  const { uid } = useSelector(({ user }) => user?.currentUser)
   const [stock, setStock] = useState(null)
   const dispatch = useDispatch()
+  const stockInfo = route.params?.stockInfo
 
   const graphData = useMemo(() => {
     const arr = filter(stock?.chart, el => el?.close !== null)
@@ -55,12 +57,13 @@ export default function Stock({ route }) {
       }
     }
 
-    if (!route.params?.stockInfo) {
+    if (!stockInfo) {
       getData()
     } else {
-      setStock(route.params?.stockInfo)
+      console.log(stockInfo)
+      setStock(stockInfo)
     }
-  }, [selectedStockPosition, selectedStock, dispatch, route])
+  }, [selectedStockPosition, selectedStock, dispatch, stockInfo])
 
   const hasPosition =
     selectedStockPosition?.shares &&
@@ -68,12 +71,18 @@ export default function Stock({ route }) {
 
   return (
     <Container style={styles.container} safeAreaTop>
-      <TouchableOpacity
-        style={{ paddingLeft: 15, paddingVertical: 5 }}
-        onPress={goBack}
-      >
-        <ArrowLeftIcon size={30} color={GREEN} />
-      </TouchableOpacity>
+      <View style={styles.navHeader}>
+        <TouchableOpacity style={{ padding: 5 }} onPress={goBack}>
+          <ArrowLeftIcon size={30} color={GREEN} />
+        </TouchableOpacity>
+        <TouchableOpacity
+          onPress={() => addToWatchlist(uid, { symbol: stock?.quote?.symbol })}
+          disabled={!stockInfo}
+          style={{ padding: 5 }}
+        >
+          <FavoriteIcon size={26} color={GREEN} filled={!!stockInfo} />
+        </TouchableOpacity>
+      </View>
 
       {!stock ? (
         <View style={styles.loader}>
@@ -153,5 +162,12 @@ const styles = StyleSheet.create({
     ...StyleSheet.absoluteFillObject,
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  navHeader: {
+    width: '100%',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    paddingHorizontal: 6,
+    alignItems: 'center',
   },
 })
