@@ -64,7 +64,7 @@ export default function Profile() {
         </Text>
       </View>
       <Products
-        forwardedRef={iapRef}
+        ref={iapRef}
         isOpen={isIapOpen}
         onClose={() => setIsIapOpen(false)}
       />

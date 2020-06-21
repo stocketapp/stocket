@@ -22,7 +22,7 @@ import transactionErrors from './transactionErrors'
 type Props = {
   onClose: () => void,
   isOpen: boolean,
-  forwardedRef: { current: any },
+  forwardedRef?: { current: any },
 }
 
 const { Value, timing } = Animated
@@ -37,7 +37,7 @@ function Products({ onClose, forwardedRef, isOpen }: Props) {
 
   useEffect(() => {
     if (isOpen) {
-      forwardedRef.current.open()
+      forwardedRef?.current?.open()
     }
   }, [isOpen, forwardedRef])
 
