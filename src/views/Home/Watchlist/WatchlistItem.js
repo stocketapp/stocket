@@ -21,7 +21,7 @@ export default ({ item }) => {
           ]}
         >
           <Text style={{ textAlign: 'right' }} weight="Medium">
-            {change}
+            {change > 0 && '+'}{change}
           </Text>
         </View>
       </View>
