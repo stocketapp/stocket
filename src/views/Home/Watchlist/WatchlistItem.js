@@ -1,31 +1,47 @@
+// @flow
 import React from 'react'
-import { View, StyleSheet } from 'react-native'
+import { View, StyleSheet, TouchableOpacity } from 'react-native'
 import { Text } from 'components'
 import { GREEN, RED, LABEL } from 'utils/colors'
 
-export default ({ item }) => {
+type Props = {
+  item: {
+    quote: {
+      symbol: string,
+      change: number,
+      latestPrice: number,
+      companyName: string,
+    },
+  },
+  onPress: () => void,
+}
+
+export default ({ item, onPress }: Props) => {
   const { symbol, change, latestPrice, companyName } = item?.quote
   return (
-    <View style={styles.container}>
-      <View style={styles.left}>
-        <Text>{symbol}</Text>
-        <Text color={LABEL}>{companyName}</Text>
-      </View>
+    <TouchableOpacity onPress={onPress}>
+      <View style={styles.container}>
+        <View style={styles.left}>
+          <Text>{symbol}</Text>
+          <Text color={LABEL}>{companyName}</Text>
+        </View>
 
-      <View style={styles.right}>
-        <Text style={{ textAlign: 'right' }}>{latestPrice}</Text>
-        <View
-          style={[
-            styles.change,
-            { backgroundColor: change >= 0 ? GREEN : RED },
-          ]}
-        >
-          <Text style={{ textAlign: 'right' }} weight="Medium">
-            {change > 0 && '+'}{change}
-          </Text>
+        <View style={styles.right}>
+          <Text style={{ textAlign: 'right' }}>{latestPrice}</Text>
+          <View
+            style={[
+              styles.change,
+              { backgroundColor: change >= 0 ? GREEN : RED },
+            ]}
+          >
+            <Text style={{ textAlign: 'right' }} weight="Medium">
+              {change > 0 && '+'}
+              {change}
+            </Text>
+          </View>
         </View>
       </View>
-    </View>
+    </TouchableOpacity>
   )
 }
 

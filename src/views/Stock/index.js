@@ -12,7 +12,7 @@ import filter from 'lodash.filter'
 import StockTradeBar from './StockTradeBar'
 import { getBatchStockData } from 'api'
 
-export default function Stock() {
+export default function Stock({ route }) {
   const { goBack } = useNavigation()
   const { selectedStockPosition, selectedStock } = useSelector(
     ({ stock }) => stock,
@@ -55,8 +55,12 @@ export default function Stock() {
       }
     }
 
-    getData()
-  }, [selectedStockPosition, selectedStock, dispatch])
+    if (!route.params?.stockInfo) {
+      getData()
+    } else {
+      setStock(route.params?.stockInfo)
+    }
+  }, [selectedStockPosition, selectedStock, dispatch, route])
 
   const hasPosition =
     selectedStockPosition?.shares &&
