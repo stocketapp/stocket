@@ -61,7 +61,6 @@ export default function Stock({ route }) {
     if (!stockInfo) {
       getData()
     } else {
-      console.log(stockInfo)
       setStock(stockInfo)
     }
   }, [selectedStockPosition, selectedStock, dispatch, stockInfo])
