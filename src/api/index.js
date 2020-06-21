@@ -68,16 +68,30 @@ export async function createTrade(
 export async function searchTerm(term: string) {
   // const res = await iexGet(`search/${term}`)
   // Change this to use the search API once I upgrade to paid plan
-  const res = await iexGet(`stock/${term}/quote`)
+  const range = '1d'
+  const typeQuery = '&types=quote,news,chart,intraday-prices'
+  const rangeQuery = `${range && `&range=${range}`}`
+  const url = `symbols=${term}${typeQuery}${rangeQuery}&last=5&chartInterval=5&chartIEXWhenNull=true`
+  const res = await iexGet('stock/market/batch', url)
   const result = await res.json()
   return result
 }
 
-export async function addToWatchlist(uid: string, data: { symbol: string }) {
+export async function addToWatchlist(uid: string, symbol: string) {
   const ref: DocReference = firestore().doc(`Users/${uid}`)
 
   try {
-    await ref.collection('watchlist').add(data)
+    await ref.collection('watchlist').doc(symbol).set({ symbol })
+  } catch (err) {
+    console.log('[API] addToWatchlist', err)
+  }
+}
+
+export async function removeFromWatchlist(uid: string, symbol: string) {
+  const ref: DocReference = firestore().doc(`Users/${uid}`)
+
+  try {
+    await ref.collection('watchlist').doc(symbol).delete()
   } catch (err) {
     console.log('[API] addToWatchlist', err)
   }

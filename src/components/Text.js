@@ -27,7 +27,7 @@ const Text = ({
       case 'big':
         return 26
       default:
-        return 14
+        return 15
     }
   }
 

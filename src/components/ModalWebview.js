@@ -10,7 +10,7 @@ export default forwardRef(({ uri }, ref) => {
       customStyles={{ container: { borderRadius: 10 } }}
       ref={ref}
       closeOnDragDown
-      dragFromTop
+      dragFromTopOnly
     >
       <WebView source={{ uri }} style={{ flex: 1 }} />
     </Sheet>

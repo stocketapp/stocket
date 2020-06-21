@@ -1,18 +1,34 @@
 import React from 'react'
-import { StyleSheet } from 'react-native'
+import { StyleSheet, ScrollView } from 'react-native'
 import { BACKGROUND } from 'utils/colors'
 import { Balance, LineChart, Container } from 'components'
-import { useGetMyStocks } from 'hooks'
+import { useGetMyStocks, useWatchlist } from 'hooks'
+import { useNavigation } from '@react-navigation/native'
 import StockHorizontalList from './StockHorizontalList'
+import Watchlist from './Watchlist'
 
 export default function Home() {
   const { positions, loading } = useGetMyStocks()
+  const watchlist = useWatchlist()
+  const { navigate } = useNavigation()
+
+  const onWatchlistItemPress = (stockInfo: PositionType) => {
+    navigate('Stock', { stockInfo })
+  }
 
   return (
     <Container style={styles.container} safeAreaTop>
-      <Balance />
-      <LineChart />
-      <StockHorizontalList data={positions} loading={loading} />
+      <ScrollView
+        contentContainerStyle={{ paddingBottom: 20 }}
+        showsVerticalScrollIndicator={false}
+      >
+        <Balance />
+        <LineChart />
+        <StockHorizontalList data={positions} loading={loading} />
+        {watchlist.length > 0 && (
+          <Watchlist data={watchlist} onItemPress={onWatchlistItemPress} />
+        )}
+      </ScrollView>
     </Container>
   )
 }

@@ -2,14 +2,14 @@
 import React, { useRef, useState } from 'react'
 import { View } from 'react-native'
 import { Container, Text } from 'components'
-import { SUB_BACKGROUND, LABEL } from 'utils/colors'
+import { LABEL, CARD_BACKGROUND } from 'utils/colors'
 import { useSelector } from 'react-redux'
 import { formatCurrency } from 'utils/functions'
 import ProfileItem from './ProfileItem'
 import AddCash from './AddCash'
 import LogoutButton from './LogoutButton'
 import p from '../../../package.json'
-import Purchase from '../Purchase'
+import Products from '../Products'
 
 export default function Profile() {
   const { userInfo } = useSelector(({ user }) => user)
@@ -21,12 +21,7 @@ export default function Profile() {
       <View style={{ flex: 1 }}>
         <Container style={styles.topBlock} ph safeAreaTop bottom={26}>
           <View>
-            <Text
-              type="title"
-              style={styles.name}
-              weight="Medium"
-              color={LABEL}
-            >
+            <Text type="heading" style={styles.name} weight="Bold">
               {userInfo?.name}
             </Text>
             <Text type="subtext" color={LABEL}>
@@ -37,8 +32,8 @@ export default function Profile() {
           <View style={styles.cashContainer}>
             <View>
               <Text style={styles.value}>Cash</Text>
-              <Text style={styles.cash} weight="Black">
-                {userInfo?.cash}
+              <Text style={styles.cash} weight="Bold" type="title">
+                {formatCurrency(userInfo?.cash)}
               </Text>
             </View>
 
@@ -63,7 +58,7 @@ export default function Profile() {
           {p.version}
         </Text>
       </View>
-      <Purchase
+      <Products
         ref={iapRef}
         isOpen={isIapOpen}
         onClose={() => setIsIapOpen(false)}
@@ -75,22 +70,21 @@ export default function Profile() {
 const styles = {
   topBlock: {
     width: '100%',
-    height: '29%',
-    backgroundColor: SUB_BACKGROUND,
+    height: '32%',
+    backgroundColor: CARD_BACKGROUND,
     borderBottomRightRadius: 12,
     borderBottomLeftRadius: 12,
     justifyContent: 'space-between',
     paddingHorizontal: 24,
   },
   name: {
-    paddingTop: 10,
+    paddingTop: 15,
   },
   value: {
     fontSize: 15,
     color: LABEL,
   },
   cash: {
-    fontSize: 16,
     paddingTop: 5,
   },
   cashContainer: {

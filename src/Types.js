@@ -7,6 +7,7 @@ export type IconProps = {
   size?: number,
   children: React$Node,
   color?: string,
+  filled?: boolean,
 }
 
 export type ContainerProps = {
@@ -41,7 +42,7 @@ export type TextProps = Text.propTypes & {
     | 'Regular'
     | 'Light'
     | 'Thin'
-    | 'Ultralight'
+    | 'Ultralight',
 }
 
 export type TradeInfoProps = {
