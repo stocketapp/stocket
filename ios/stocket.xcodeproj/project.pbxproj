@@ -120,7 +120,7 @@
 		BA3D549123AA4466006651B4 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		BA3D54B523AA45B1006651B4 /* Stocket Dev.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Stocket Dev.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BA9A7DF423E67A0E0062EEB4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = "Resources-iPad/stocket/Base.lproj/LaunchScreen.xib"; sourceTree = "<group>"; };
-		BA9A7E0B23E67A1A0062EEB4 /* Stocket Staging.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Stocket Staging.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		BA9A7E0B23E67A1A0062EEB4 /* Stocket.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Stocket.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BA9A7E1523E692F60062EEB4 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		BA9A7E1923E693350062EEB4 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		BABC5FA423AA5130002A831D /* stocket.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = stocket.entitlements; path = stocket/stocket.entitlements; sourceTree = "<group>"; };
@@ -302,7 +302,7 @@
 				2D02E47B1E0B4A5D006451C7 /* stocket-tvOS.app */,
 				2D02E4901E0B4A5D006451C7 /* stocket-tvOSTests.xctest */,
 				BA3D54B523AA45B1006651B4 /* Stocket Dev.app */,
-				BA9A7E0B23E67A1A0062EEB4 /* Stocket Staging.app */,
+				BA9A7E0B23E67A1A0062EEB4 /* Stocket.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -474,7 +474,7 @@
 			);
 			name = Staging;
 			productName = stocket;
-			productReference = BA9A7E0B23E67A1A0062EEB4 /* Stocket Staging.app */;
+			productReference = BA9A7E0B23E67A1A0062EEB4 /* Stocket.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -1535,7 +1535,7 @@
 					"-lc++",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.corasan.stocket;
-				PRODUCT_NAME = "Stocket Staging";
+				PRODUCT_NAME = Stocket;
 				SWIFT_OBJC_BRIDGING_HEADER = "stocket-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				VALID_ARCHS = "arm64 arm64e";
@@ -1640,7 +1640,7 @@
 					"-lc++",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.corasan.stocket;
-				PRODUCT_NAME = "Stocket Staging";
+				PRODUCT_NAME = Stocket;
 				SWIFT_OBJC_BRIDGING_HEADER = "stocket-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
@@ -1669,7 +1669,7 @@
 					"-lc++",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.corasan.stocket;
-				PRODUCT_NAME = "Stocket Staging";
+				PRODUCT_NAME = Stocket;
 				SWIFT_OBJC_BRIDGING_HEADER = "stocket-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				VALID_ARCHS = "arm64 arm64e";
