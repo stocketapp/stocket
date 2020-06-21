@@ -13,10 +13,8 @@ export default function useWatchlist() {
       .collection(`Users/${uid}/watchlist`)
       .onSnapshot(async snapshot => {
         const list = []
-        snapshot.docChanges().forEach(({ type, doc }) => {
-          if (type === 'added') {
-            list.push(doc.data().symbol)
-          }
+        snapshot.forEach(doc => {
+          list.push(doc.data().symbol)
         })
         const res = await getBatchStockData(list)
         setWatchlist(map(res, el => el))
