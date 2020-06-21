@@ -1,7 +1,7 @@
 import React, { useMemo, useEffect, useState } from 'react'
-import { View, TouchableOpacity, ScrollView } from 'react-native'
-import { Text, LineChart, Container } from 'components'
-import { GREEN, BACKGROUND, GRAY_DARKER, DARK_TEXT } from 'utils/colors'
+import { View, TouchableOpacity, ScrollView, StyleSheet } from 'react-native'
+import { Text, LineChart, Container, Loader } from 'components'
+import { GREEN, BACKGROUND, GRAY_DARKER } from 'utils/colors'
 import { ArrowLeftIcon } from 'components/Icons'
 import { useSelector, useDispatch } from 'react-redux'
 import StockDetails from './StockDetails'
@@ -70,52 +70,61 @@ export default function Stock() {
       >
         <ArrowLeftIcon size={30} color={GREEN} />
       </TouchableOpacity>
-      <ScrollView
-        contentContainerStyle={{ paddingBottom: 70 }}
-        showsVerticalScrollIndicator={false}
-      >
-        <View>
-          <View style={{ paddingHorizontal: 16, paddingBottom: 15 }}>
-            <View style={styles.header}>
-              <Text weight="Black" style={{ fontSize: 30 }}>
-                {stock?.quote?.companyName}
-              </Text>
-              <Text
-                style={{ paddingBottom: 4, left: 10 }}
-                color={GRAY_DARKER}
-                type="label"
-              >
-                {stock?.quote?.symbol}
-              </Text>
-            </View>
-            <Text type="heading" weight="bold" style={{ paddingTop: 6 }}>
-              {stock?.quote?.iexRealtimePrice}
-            </Text>
-          </View>
 
-          {graphData && stock?.chart && <LineChart data={graphData} />}
-
-          <StockDetails data={stock?.quote} />
-
-          {hasPosition && <StockPosition data={selectedStockPosition} />}
-
-          {stock?.news && process.env.NODE_ENV !== 'development' && (
-            <StockNews articles={stock?.news} />
-          )}
+      {!stock ? (
+        <View style={styles.loader}>
+          <Loader size={100} />
         </View>
-      </ScrollView>
+      ) : (
+        <>
+          <ScrollView
+            contentContainerStyle={{ paddingBottom: 70 }}
+            showsVerticalScrollIndicator={false}
+          >
+            <View>
+              <View style={{ paddingHorizontal: 16, paddingBottom: 15 }}>
+                <View style={styles.header}>
+                  <Text weight="Black" style={{ fontSize: 30 }}>
+                    {stock?.quote?.companyName}
+                  </Text>
+                  <Text
+                    style={{ paddingBottom: 4, left: 10 }}
+                    color={GRAY_DARKER}
+                    type="label"
+                  >
+                    {stock?.quote?.symbol}
+                  </Text>
+                </View>
+                <Text type="heading" weight="bold" style={{ paddingTop: 6 }}>
+                  {stock?.quote?.iexRealtimePrice}
+                </Text>
+              </View>
 
-      <StockTradeBar
-        status={stock?.quote?.change < 0 ? 'negative' : 'positive'}
-        price={stock?.quote?.latestPrice}
-        openTradeView={openTradeView}
-        stockData={stock}
-      />
+              {graphData && stock?.chart && <LineChart data={graphData} />}
+
+              <StockDetails data={stock?.quote} />
+
+              {hasPosition && <StockPosition data={selectedStockPosition} />}
+
+              {stock?.news && process.env.NODE_ENV !== 'development' && (
+                <StockNews articles={stock?.news} />
+              )}
+            </View>
+          </ScrollView>
+
+          <StockTradeBar
+            status={stock?.quote?.change < 0 ? 'negative' : 'positive'}
+            price={stock?.quote?.latestPrice}
+            openTradeView={openTradeView}
+            stockData={stock}
+          />
+        </>
+      )}
     </Container>
   )
 }
 
-const styles = {
+const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'space-between',
@@ -136,4 +145,9 @@ const styles = {
     flexDirection: 'row',
     alignItems: 'flex-end',
   },
-}
+  loader: {
+    ...StyleSheet.absoluteFillObject,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+})
