@@ -21,6 +21,7 @@ export default function useGetMyStocks(): {} {
   useEffect(() => {
     const subscribe = UsersRef.doc(uid)
       .collection('positions')
+      .orderBy('gainsPercentage', 'desc')
       .onSnapshot(async snapshot => {
         try {
           setLoading(true)
