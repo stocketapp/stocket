@@ -22,7 +22,9 @@ export default function Home() {
         <Balance />
         <LineChart />
         <StockHorizontalList data={positions} loading={loading} />
-        <Watchlist data={watchlist} onItemPress={onWatchlistItemPress} />
+        {watchlist.length > 0 && (
+          <Watchlist data={watchlist} onItemPress={onWatchlistItemPress} />
+        )}
       </ScrollView>
     </Container>
   )

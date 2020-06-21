@@ -10,7 +10,7 @@ import StockPosition from './StockPosition'
 import StockNews from './StockNews'
 import filter from 'lodash.filter'
 import StockTradeBar from './StockTradeBar'
-import { getBatchStockData, addToWatchlist } from 'api'
+import { getBatchStockData, addToWatchlist, removeFromWatchlist } from 'api'
 import find from 'lodash.find'
 
 export default function Stock({ route }) {
@@ -82,8 +82,11 @@ export default function Stock({ route }) {
           <ArrowLeftIcon size={30} color={GREEN} />
         </TouchableOpacity>
         <TouchableOpacity
-          onPress={() => addToWatchlist(uid, { symbol: stock?.quote?.symbol })}
-          disabled={isFav}
+          onPress={() =>
+            isFav
+              ? removeFromWatchlist(uid, stock?.quote?.symbol)
+              : addToWatchlist(uid, stock?.quote?.symbol)
+          }
           style={{ padding: 5 }}
         >
           <FavoriteIcon size={26} color={GREEN} filled={isFav} />
