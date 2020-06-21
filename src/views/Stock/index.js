@@ -1,7 +1,7 @@
 import React, { useMemo, useEffect, useState } from 'react'
 import { View, TouchableOpacity, ScrollView } from 'react-native'
 import { Text, LineChart, Container } from 'components'
-import { GREEN, BACKGROUND, GRAY_DARKER } from 'utils/colors'
+import { GREEN, BACKGROUND, GRAY_DARKER, DARK_TEXT } from 'utils/colors'
 import { ArrowLeftIcon } from 'components/Icons'
 import { useSelector, useDispatch } from 'react-redux'
 import StockDetails from './StockDetails'
@@ -107,7 +107,7 @@ export default function Stock() {
 
       <StockTradeBar
         status={stock?.quote?.change < 0 ? 'negative' : 'positive'}
-        change={stock?.quote?.change}
+        price={stock?.quote?.latestPrice}
         openTradeView={openTradeView}
         stockData={stock}
       />
@@ -130,12 +130,6 @@ const styles = {
     bottom: 0,
     backgroundColor: BACKGROUND,
     width: '100%',
-  },
-  button: {
-    backgroundColor: GREEN,
-    paddingHorizontal: 30,
-    paddingVertical: 5,
-    borderRadius: 100,
   },
   header: {
     paddingTop: 20,
