@@ -1,42 +1,36 @@
-import React, { useMemo } from 'react'
-import { View, TouchableOpacity, ScrollView } from 'react-native'
-import { Text, LineChart, Container } from 'components'
+import React, { useMemo, useEffect, useState } from 'react'
+import { View, TouchableOpacity, ScrollView, StyleSheet } from 'react-native'
+import { Text, LineChart, Container, Loader } from 'components'
 import { GREEN, BACKGROUND, GRAY_DARKER } from 'utils/colors'
-import { ArrowLeftIcon } from 'components/Icons'
+import { ArrowLeftIcon, FavoriteIcon } from 'components/Icons'
 import { useSelector, useDispatch } from 'react-redux'
 import StockDetails from './StockDetails'
 import { useNavigation } from '@react-navigation/native'
 import StockPosition from './StockPosition'
 import StockNews from './StockNews'
-import find from 'lodash.find'
 import filter from 'lodash.filter'
 import StockTradeBar from './StockTradeBar'
+import { getBatchStockData, addToWatchlist, removeFromWatchlist } from 'api'
+import find from 'lodash.find'
 
-export default function Stock() {
+export default function Stock({ route }) {
   const { goBack } = useNavigation()
-  const { selectedStock, positionsMktData } = useSelector(({ stock }) => stock)
+  const { selectedStockPosition, selectedStock, watchlist } = useSelector(
+    ({ stock }) => stock,
+  )
+  const { uid } = useSelector(({ user }) => user?.currentUser)
+  const [stock, setStock] = useState(null)
   const dispatch = useDispatch()
-
-  const stockData = useMemo(() => {
-    const found = find(
-      positionsMktData,
-      el => el?.quote?.symbol === selectedStock?.symbol,
-    )
-    if (!found) {
-      return selectedStock
-    }
-
-    return found
-  }, [positionsMktData, selectedStock])
+  const stockInfo = route.params?.stockInfo
 
   const graphData = useMemo(() => {
-    const arr = filter(stockData?.chart, el => el?.close !== null)
+    const arr = filter(stock?.chart, el => el?.close !== null)
     return arr.map(el => ({
       value: el.close,
       label: el.label,
       date: el.date,
     }))
-  }, [stockData])
+  }, [stock])
 
   const openTradeView = () => {
     dispatch({
@@ -45,63 +39,114 @@ export default function Stock() {
     })
     dispatch({
       type: 'STOCK_PRICE',
-      stockPrice: selectedStock?.price,
+      stockPrice: stock?.quote?.latestPrice,
     })
   }
 
+  useEffect(() => {
+    const getData = async () => {
+      try {
+        const res = await getBatchStockData(selectedStock)
+        const result = res[selectedStock]
+        dispatch({
+          type: 'TRADE_STOCK',
+          tradeStock: result,
+        })
+        setStock(result)
+      } catch (err) {
+        console.log('[StockView] getData()', err)
+      }
+    }
+
+    if (!stockInfo) {
+      getData()
+    } else {
+      console.log(stockInfo)
+      setStock(stockInfo)
+    }
+  }, [selectedStockPosition, selectedStock, dispatch, stockInfo])
+
+  const hasPosition =
+    selectedStockPosition?.shares &&
+    selectedStockPosition?.symbol === selectedStock
+
+  const isFav = find(
+    watchlist,
+    el => el?.quote?.symbol === stock?.quote?.symbol,
+  )
+
   return (
     <Container style={styles.container} safeAreaTop>
-      <TouchableOpacity
-        style={{ paddingLeft: 15, paddingVertical: 5 }}
-        onPress={goBack}
-      >
-        <ArrowLeftIcon size={30} color={GREEN} />
-      </TouchableOpacity>
-      <ScrollView
-        contentContainerStyle={{ paddingBottom: 70 }}
-        showsVerticalScrollIndicator={false}
-      >
-        <View>
-          <View style={{ paddingHorizontal: 16, paddingBottom: 15 }}>
-            <View style={styles.header}>
-              <Text weight="Black" style={{ fontSize: 30 }}>
-                {stockData?.quote.companyName}
-              </Text>
-              <Text
-                style={{ paddingBottom: 4, left: 10 }}
-                color={GRAY_DARKER}
-                type="label"
-              >
-                {stockData?.quote.symbol}
-              </Text>
-            </View>
-            <Text type="heading" weight="bold" style={{ paddingTop: 6 }}>
-              {stockData?.quote.iexRealtimePrice}
-            </Text>
-          </View>
+      <View style={styles.navHeader}>
+        <TouchableOpacity style={{ padding: 5 }} onPress={goBack}>
+          <ArrowLeftIcon size={30} color={GREEN} />
+        </TouchableOpacity>
+        <TouchableOpacity
+          onPress={() =>
+            isFav
+              ? removeFromWatchlist(uid, stock?.quote?.symbol)
+              : addToWatchlist(uid, stock?.quote?.symbol)
+          }
+          style={{ padding: 5 }}
+        >
+          <FavoriteIcon size={26} color={GREEN} filled={isFav} />
+        </TouchableOpacity>
+      </View>
 
-          {graphData && <LineChart data={graphData} />}
-
-          <StockDetails data={stockData?.quote} />
-
-          {stockData?.shares && <StockPosition data={selectedStock} />}
-
-          {stockData?.news && process.env.NODE_ENV !== 'development' && (
-            <StockNews articles={stockData?.news} />
-          )}
+      {!stock ? (
+        <View style={styles.loader}>
+          <Loader size={100} />
         </View>
-      </ScrollView>
+      ) : (
+        <>
+          <ScrollView
+            contentContainerStyle={{ paddingBottom: 70 }}
+            showsVerticalScrollIndicator={false}
+          >
+            <View>
+              <View style={{ paddingHorizontal: 16, paddingBottom: 15 }}>
+                <View style={styles.header}>
+                  <Text weight="Black" style={{ fontSize: 30 }}>
+                    {stock?.quote?.companyName}
+                  </Text>
+                  <Text
+                    style={{ paddingBottom: 4, left: 10 }}
+                    color={GRAY_DARKER}
+                    type="label"
+                  >
+                    {stock?.quote?.symbol}
+                  </Text>
+                </View>
+                <Text type="heading" weight="bold" style={{ paddingTop: 6 }}>
+                  {stock?.quote?.iexRealtimePrice}
+                </Text>
+              </View>
 
-      <StockTradeBar
-        status={Number(stockData?.day_change) < 0 ? 'positive' : 'negative'}
-        change={stockData?.quote.change}
-        openTradeView={openTradeView}
-      />
+              {graphData && stock?.chart && <LineChart data={graphData} />}
+
+              <StockDetails data={stock?.quote} />
+
+              {hasPosition && <StockPosition data={selectedStockPosition} />}
+
+              {stock?.news && process.env.NODE_ENV !== 'development' && (
+                <StockNews articles={stock?.news} />
+              )}
+            </View>
+          </ScrollView>
+
+          <StockTradeBar
+            status={stock?.quote?.change < 0 ? 'negative' : 'positive'}
+            price={stock?.quote?.latestPrice}
+            openTradeView={openTradeView}
+            stockData={stock}
+          />
+        </>
+      )}
     </Container>
   )
 }
 
-const styles = {
+const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'space-between',
@@ -117,15 +162,21 @@ const styles = {
     backgroundColor: BACKGROUND,
     width: '100%',
   },
-  button: {
-    backgroundColor: GREEN,
-    paddingHorizontal: 30,
-    paddingVertical: 5,
-    borderRadius: 100,
-  },
   header: {
     paddingTop: 20,
     flexDirection: 'row',
     alignItems: 'flex-end',
   },
-}
+  loader: {
+    ...StyleSheet.absoluteFillObject,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  navHeader: {
+    width: '100%',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    paddingHorizontal: 6,
+    alignItems: 'center',
+  },
+})

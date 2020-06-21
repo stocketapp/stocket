@@ -22,12 +22,12 @@ import transactionErrors from './transactionErrors'
 type Props = {
   onClose: () => void,
   isOpen: boolean,
-  ref: { current: any },
+  forwardedRef: { current: any },
 }
 
 const { Value, timing } = Animated
 
-function Products({ onClose, ref, isOpen }: Props) {
+function Products({ onClose, forwardedRef, isOpen }: Props) {
   const { products } = useSelector(({ iapProducts }) => iapProducts)
   const { uid } = useSelector(({ user }) => user?.currentUser)
   const [purchaseLoading, setPurchaseLoading] = useState(false)
@@ -37,9 +37,9 @@ function Products({ onClose, ref, isOpen }: Props) {
 
   useEffect(() => {
     if (isOpen) {
-      ref.current.open()
+      forwardedRef.current.open()
     }
-  }, [isOpen, ref])
+  }, [isOpen, forwardedRef])
 
   useEffect(() => {
     if (purchaseLoading && selectedProduct) {
@@ -86,7 +86,7 @@ function Products({ onClose, ref, isOpen }: Props) {
     <Sheet
       height={Dimensions.get('window').height - 80}
       customStyles={{ container: styles.container }}
-      ref={ref}
+      ref={forwardedRef}
       onClose={onClose}
       closeOnDragDown
       dragFromTop
@@ -130,9 +130,9 @@ function Products({ onClose, ref, isOpen }: Props) {
   )
 }
 
-export default forwardRef<Props, React$Node>((props, ref) =>
-  Products({ ref, ...props }),
-)
+export default forwardRef<Props, React$Node>((props: Props, ref: any) => (
+  <Products {...props} forwardedRef={ref} />
+))
 
 const styles = StyleSheet.create({
   container: {

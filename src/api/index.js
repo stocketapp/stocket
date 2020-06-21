@@ -77,11 +77,21 @@ export async function searchTerm(term: string) {
   return result
 }
 
-export async function addToWatchlist(uid: string, data: { symbol: string }) {
+export async function addToWatchlist(uid: string, symbol: string) {
   const ref: DocReference = firestore().doc(`Users/${uid}`)
 
   try {
-    await ref.collection('watchlist').add(data)
+    await ref.collection('watchlist').doc(symbol).set({ symbol })
+  } catch (err) {
+    console.log('[API] addToWatchlist', err)
+  }
+}
+
+export async function removeFromWatchlist(uid: string, symbol: string) {
+  const ref: DocReference = firestore().doc(`Users/${uid}`)
+
+  try {
+    await ref.collection('watchlist').doc(symbol).delete()
   } catch (err) {
     console.log('[API] addToWatchlist', err)
   }

@@ -1,47 +1,47 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 // @flow
 import { useEffect, useState } from 'react'
 import firestore from '@react-native-firebase/firestore'
 import { useSelector, useDispatch } from 'react-redux'
-import { getBatchStockData } from 'api'
+import functions from '@react-native-firebase/functions'
 
 const UsersRef = firestore().collection('Users')
 
-export default function useGetPortfolio(): {} {
+export default function useGetMyStocks(): {} {
   const [loading, setLoading] = useState(true)
   const { uid } = useSelector(({ user }) => user.currentUser)
   const dispatch = useDispatch()
-  const { positions, positionsMktData: mktData } = useSelector(
-    ({ stock }) => stock,
-  )
+  const onUpdateGainsCall = functions().httpsCallable('onUpdateGainsCall')
+  const { positions } = useSelector(({ stock }) => stock)
 
-  // THIS IS CALLED AGAIN WHEN MAKING A PURCHASE/SELLING STOCK
-  // CAUSING THE GRAPH TO FREEZE AND STOPPING THE STOCKVIEW FROM RE-RENDERING
   useEffect(() => {
-    return UsersRef.doc(uid)
+    onUpdateGainsCall({ uid })
+  }, [])
+
+  useEffect(() => {
+    const subscribe = UsersRef.doc(uid)
       .collection('positions')
+      .orderBy('gainsPercentage', 'desc')
       .onSnapshot(async snapshot => {
         try {
           setLoading(true)
           const list = []
-          snapshot.forEach(doc => list.push(doc.data()))
-          if (list.length > 0) {
-            dispatch({ type: 'ALL_MY_STOCKS', positions: list })
-            const syms = list.map(el => el.symbol)
-            // TODO: CALL THIS WHENEVER THE POSITION CHANGES IN DB
-            if (!mktData) {
-              const positionsMktData = await getBatchStockData(syms.join(','))
-              if (positionsMktData) {
-                dispatch({ type: 'MY_STOCKS_MKT_DATA', positionsMktData })
-              }
-            }
-          }
+          await snapshot.forEach(doc => {
+            list.push(doc.data())
+            dispatch({
+              type: 'ALL_MY_STOCKS',
+              positions: list,
+            })
+          })
         } catch (err) {
-          console.log('useGetPortfolio', err)
+          console.log('useGetMyStocks', err)
         } finally {
           setLoading(false)
         }
       })
-  }, [mktData, uid, dispatch])
+
+    return () => subscribe()
+  }, [])
 
   return { positions, loading }
 }

@@ -7,6 +7,7 @@ export type IconProps = {
   size?: number,
   children: React$Node,
   color?: string,
+  filled?: boolean,
 }
 
 export type ContainerProps = {

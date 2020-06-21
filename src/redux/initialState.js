@@ -15,12 +15,15 @@ export default {
     maxShares: null,
     sharesOwned: null,
     tradeViewIsOpen: false,
+    tradeStock: null,
   },
   stock: {
     selectedStock: {},
     stockData: {},
     positionsMktData: null,
     myStockLoading: false,
+    selectedStockPosition: null,
+    watchlist: [],
   },
   iapProducts: {
     products: null,

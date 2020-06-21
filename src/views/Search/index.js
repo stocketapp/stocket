@@ -1,16 +1,17 @@
 // flow
 import React, { useState, useEffect } from 'react'
 import { FlatList } from 'react-native'
-import { Container, SearchSymbols } from 'components'
+import { Container, SearchSymbols, Text } from 'components'
 import { useDebounce, useUser } from 'hooks'
-import { searchTerm, addToWatchlist, getBatchStockData } from 'api'
+import { searchTerm, addToWatchlist } from 'api'
 import { useNavigation } from '@react-navigation/native'
 import { useDispatch } from 'react-redux'
 import SearchResult from './SearchResult'
 
 export default function Search(): React$Node {
   const [search, setSearch] = useState(null)
-  const [results, setResults] = useState([])
+  const [results, setResults] = useState(null)
+  const [savedSearchTerm, setSavedSearchTerm] = useState(null)
   const debounced = useDebounce(search)
   const { currentUser } = useUser()
   const { navigate } = useNavigation()
@@ -19,10 +20,12 @@ export default function Search(): React$Node {
   useEffect(() => {
     const getResults = async () => {
       try {
+        setSavedSearchTerm(debounced)
         const res = await searchTerm(debounced)
         setResults([res])
       } catch (err) {
-        console.log(err)
+        setResults(null)
+        console.log('search', err)
       }
     }
 
@@ -34,7 +37,7 @@ export default function Search(): React$Node {
   const goToStock = (item: {}) => {
     dispatch({
       type: 'SET_SELECTED_STOCK',
-      stock: item,
+      selectedStock: item?.quote?.symbol,
     })
     navigate('Stock')
   }
@@ -47,14 +50,15 @@ export default function Search(): React$Node {
         data={results}
         renderItem={({ item }) => (
           <SearchResult
-            item={item[search]}
+            item={item[savedSearchTerm]}
             onPress={addToWatchlist}
-            setStock={() => goToStock(item[search])}
+            setStock={() => goToStock(item[savedSearchTerm])}
             uid={currentUser?.uid}
           />
         )}
         keyExtractor={(i, key) => key.toString()}
         contentContainerStyle={{ paddingVertical: 12 }}
+        ListEmptyComponent={() => <Text>No results</Text>}
       />
     </Container>
   )

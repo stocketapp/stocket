@@ -30,7 +30,9 @@ export default function useSetUserInfo(currentUser) {
       }
     }
 
-    getUserInfo()
+    if (currentUser) {
+      getUserInfo()
+    }
   }, [currentUser, dispatch])
 
   return { loading, userInfo }
