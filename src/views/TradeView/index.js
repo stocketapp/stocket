@@ -73,10 +73,11 @@ function TradeView({ ref }) {
     const obj = {
       value: total,
       price: latestPrice,
-      name: tradeStock?.quote.name,
+      name: tradeStock?.quote.companyName,
       symbol: tradeStock?.quote.symbol,
       quantity: stockQuantity,
       action: selectedTradeAction,
+      date: Date.now(),
     }
     createTrade(currentUser?.uid, obj, () => {
       closeTradeView()
