@@ -69,6 +69,7 @@ export default function StockHorizontalList(props: StockHorizontalListProps) {
               <StockEmpty />
             </View>
           )}
+          showsHorizontalScrollIndicator={false}
         />
       )}
     </Container>

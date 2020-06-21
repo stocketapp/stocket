@@ -18,7 +18,10 @@ export default function Home() {
 
   return (
     <Container style={styles.container} safeAreaTop>
-      <ScrollView contentContainerStyle={{ paddingBottom: 20 }}>
+      <ScrollView
+        contentContainerStyle={{ paddingBottom: 20 }}
+        showsVerticalScrollIndicator={false}
+      >
         <Balance />
         <LineChart />
         <StockHorizontalList data={positions} loading={loading} />
