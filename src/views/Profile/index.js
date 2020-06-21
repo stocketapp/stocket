@@ -21,12 +21,7 @@ export default function Profile() {
       <View style={{ flex: 1 }}>
         <Container style={styles.topBlock} ph safeAreaTop bottom={26}>
           <View>
-            <Text
-              type="title"
-              style={styles.name}
-              weight="Medium"
-              color={LABEL}
-            >
+            <Text type="heading" style={styles.name} weight="Bold">
               {userInfo?.name}
             </Text>
             <Text type="subtext" color={LABEL}>
@@ -37,7 +32,7 @@ export default function Profile() {
           <View style={styles.cashContainer}>
             <View>
               <Text style={styles.value}>Cash</Text>
-              <Text style={styles.cash} weight="Black">
+              <Text style={styles.cash} weight="Bold" type="title">
                 {formatCurrency(userInfo?.cash)}
               </Text>
             </View>
@@ -75,7 +70,7 @@ export default function Profile() {
 const styles = {
   topBlock: {
     width: '100%',
-    height: '29%',
+    height: '32%',
     backgroundColor: CARD_BACKGROUND,
     borderBottomRightRadius: 12,
     borderBottomLeftRadius: 12,
@@ -83,14 +78,13 @@ const styles = {
     paddingHorizontal: 24,
   },
   name: {
-    paddingTop: 10,
+    paddingTop: 15,
   },
   value: {
     fontSize: 15,
     color: LABEL,
   },
   cash: {
-    fontSize: 16,
     paddingTop: 5,
   },
   cashContainer: {
