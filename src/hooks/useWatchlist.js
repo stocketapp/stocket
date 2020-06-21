@@ -1,12 +1,13 @@
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import firestore from '@react-native-firebase/firestore'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import { getBatchStockData } from 'api'
 import map from 'lodash.map'
 
 export default function useWatchlist() {
   const { uid } = useSelector(({ user }) => user.currentUser)
-  const [watchlist, setWatchlist] = useState([])
+  const { watchlist } = useSelector(({ stock }) => stock)
+  const dispatch = useDispatch()
 
   useEffect(() => {
     const subscribe = firestore()
@@ -17,11 +18,14 @@ export default function useWatchlist() {
           list.push(doc.data().symbol)
         })
         const res = await getBatchStockData(list)
-        setWatchlist(map(res, el => el))
+        dispatch({
+          type: 'SET_WATCHLIST',
+          watchlist: map(res, el => el),
+        })
       })
 
     return () => subscribe()
-  }, [uid])
+  }, [uid, dispatch])
 
   return watchlist
 }

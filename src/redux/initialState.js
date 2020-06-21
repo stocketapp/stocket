@@ -23,6 +23,7 @@ export default {
     positionsMktData: null,
     myStockLoading: false,
     selectedStockPosition: null,
+    watchlist: [],
   },
   iapProducts: {
     products: null,

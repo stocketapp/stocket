@@ -11,10 +11,11 @@ import StockNews from './StockNews'
 import filter from 'lodash.filter'
 import StockTradeBar from './StockTradeBar'
 import { getBatchStockData, addToWatchlist } from 'api'
+import find from 'lodash.find'
 
 export default function Stock({ route }) {
   const { goBack } = useNavigation()
-  const { selectedStockPosition, selectedStock } = useSelector(
+  const { selectedStockPosition, selectedStock, watchlist } = useSelector(
     ({ stock }) => stock,
   )
   const { uid } = useSelector(({ user }) => user?.currentUser)
@@ -69,6 +70,11 @@ export default function Stock({ route }) {
     selectedStockPosition?.shares &&
     selectedStockPosition?.symbol === selectedStock
 
+  const isFav = find(
+    watchlist,
+    el => el?.quote?.symbol === stock?.quote?.symbol,
+  )
+
   return (
     <Container style={styles.container} safeAreaTop>
       <View style={styles.navHeader}>
@@ -77,10 +83,10 @@ export default function Stock({ route }) {
         </TouchableOpacity>
         <TouchableOpacity
           onPress={() => addToWatchlist(uid, { symbol: stock?.quote?.symbol })}
-          disabled={!stockInfo}
+          disabled={isFav}
           style={{ padding: 5 }}
         >
-          <FavoriteIcon size={26} color={GREEN} filled={!!stockInfo} />
+          <FavoriteIcon size={26} color={GREEN} filled={isFav} />
         </TouchableOpacity>
       </View>
 

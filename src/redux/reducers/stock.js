@@ -14,6 +14,8 @@ export default function (state = initialState.stock, action) {
       return { ...state, positionsMktData: action.positionsMktData }
     case 'SELECTED_STOCK_POSITION':
       return { ...state, selectedStockPosition: action.selectedStockPosition }
+    case 'SET_WATCHLIST':
+      return { ...state, watchlist: action.watchlist }
     default:
       return state
   }
