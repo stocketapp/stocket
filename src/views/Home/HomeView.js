@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { StyleSheet, ScrollView } from 'react-native'
 import { BACKGROUND } from 'utils/colors'
-import { Balance, LineChart, Container, VictoryLineGraph } from 'components'
+import { Balance, Container, VictoryLineGraph } from 'components'
 import { useGetMyStocks, useWatchlist } from 'hooks'
 import { useNavigation } from '@react-navigation/native'
 import StockHorizontalList from './StockHorizontalList'
