@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react'
+import React, { useState } from 'react'
 import { StyleSheet, ScrollView } from 'react-native'
 import { BACKGROUND } from 'utils/colors'
 import { Balance, Container, VictoryLineGraph } from 'components'
@@ -7,7 +7,6 @@ import { useNavigation } from '@react-navigation/native'
 import StockHorizontalList from './StockHorizontalList'
 import Watchlist from './Watchlist'
 import { useSelector } from 'react-redux'
-import { minBy } from 'lodash'
 
 export default function Home() {
   const { currentUser, userInfo } = useSelector(({ user }) => user)
