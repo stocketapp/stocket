@@ -1,17 +1,22 @@
-import React, { useState } from 'react'
+import React, { useState, useMemo } from 'react'
 import { StyleSheet, ScrollView } from 'react-native'
 import { BACKGROUND } from 'utils/colors'
 import { Balance, Container, VictoryLineGraph } from 'components'
-import { useGetMyStocks, useWatchlist } from 'hooks'
+import { useGetMyStocks, useWatchlist, useGetBalanceHistory } from 'hooks'
 import { useNavigation } from '@react-navigation/native'
 import StockHorizontalList from './StockHorizontalList'
 import Watchlist from './Watchlist'
+import { useSelector } from 'react-redux'
+import { minBy } from 'lodash'
 
 export default function Home() {
-  const { positions, loading } = useGetMyStocks()
-  const watchlist = useWatchlist()
+  const { currentUser, userInfo } = useSelector(({ user }) => user)
+  const uid = currentUser?.uid
+  const { positions, loading } = useGetMyStocks(uid)
+  const watchlist = useWatchlist(uid)
   const { navigate } = useNavigation()
   const [allowScroll, setAllowScroll] = useState(true)
+  const balanceHistory = useGetBalanceHistory(uid, userInfo?.portfolioValue)
 
   const onWatchlistItemPress = (stockInfo: PositionType) => {
     navigate('Stock', { stockInfo })
@@ -38,7 +43,13 @@ export default function Home() {
         scrollEnabled={allowScroll}
       >
         <Balance />
-        <VictoryLineGraph />
+        <VictoryLineGraph
+          data={balanceHistory}
+          x="date"
+          chartProps={{
+            minDomain: { y: 0.8 },
+          }}
+        />
         <StockHorizontalList data={positions} loading={loading} />
         {watchlist.length > 0 && (
           <Watchlist data={watchlist} onItemPress={onWatchlistItemPress} />

@@ -7,9 +7,8 @@ import functions from '@react-native-firebase/functions'
 
 const UsersRef = firestore().collection('Users')
 
-export default function useGetMyStocks(): {} {
+export default function useGetMyStocks(uid: string): {} {
   const [loading, setLoading] = useState(true)
-  const { uid } = useSelector(({ user }) => user.currentUser)
   const dispatch = useDispatch()
   const onUpdateGainsCall = functions().httpsCallable('onUpdateGainsCall')
   const { positions } = useSelector(({ stock }) => stock)

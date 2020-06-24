@@ -1,11 +1,11 @@
+// @flow
 import { useEffect } from 'react'
 import firestore from '@react-native-firebase/firestore'
 import { useSelector, useDispatch } from 'react-redux'
 import { getBatchStockData } from 'api'
 import { uniqBy } from 'lodash'
 
-export default function useWatchlist() {
-  const { uid } = useSelector(({ user }) => user.currentUser)
+export default function useWatchlist(uid: string) {
   const { watchlist } = useSelector(({ stock }) => stock)
   const dispatch = useDispatch()
 

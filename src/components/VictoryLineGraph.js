@@ -1,19 +1,36 @@
+// @flow
 import React from 'react'
 import { Dimensions } from 'react-native'
 import {
   VictoryLine,
   VictoryVoronoiContainer,
   VictoryChart,
-  VictoryLabel,
 } from 'victory-native'
 import { GREEN } from 'utils/colors'
 import exampleData from './LineChart/exampleData'
 
 const { width } = Dimensions.get('window')
 
-export default function VictoryLineGraph({ data = exampleData }) {
+type Props = {
+  data: {},
+  x: string,
+  y: string,
+  chartProps?: {
+    minDomain?: { y?: number, x?: number },
+  },
+  lineProps?: {},
+}
+
+export default function VictoryLineGraph({
+  data = exampleData,
+  x = 'label',
+  y = 'value',
+  chartProps,
+  lineProps,
+}: Props) {
   return (
     <VictoryChart
+      {...chartProps}
       containerComponent={
         <VictoryVoronoiContainer
           voronoiDimension="x"
@@ -25,13 +42,14 @@ export default function VictoryLineGraph({ data = exampleData }) {
           }}
         />
       }
-      padding={{ top: 50, bottom: -0.5 }}
+      padding={{ top: 60, bottom: 40 }}
     >
       <VictoryLine
-        interpolation="natural"
+        {...lineProps}
+        interpolation="basis"
         data={data}
-        x="label"
-        y="value"
+        x={x}
+        y={y}
         width={width}
         style={{
           data: {
@@ -41,7 +59,6 @@ export default function VictoryLineGraph({ data = exampleData }) {
             stroke: GREEN,
           },
         }}
-        labelComponent={<VictoryLabel style={{ display: 'none' }} />}
       />
     </VictoryChart>
   )
