@@ -2,7 +2,7 @@ import { useEffect } from 'react'
 import firestore from '@react-native-firebase/firestore'
 import { useSelector, useDispatch } from 'react-redux'
 import { getBatchStockData } from 'api'
-import uniqBy from 'lodash.uniqby'
+import { uniqBy } from 'lodash'
 
 export default function useWatchlist() {
   const { uid } = useSelector(({ user }) => user.currentUser)

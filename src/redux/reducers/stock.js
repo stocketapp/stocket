@@ -1,5 +1,5 @@
 import initialState from '../initialState'
-import filter from 'lodash.filter'
+import { filter } from 'lodash'
 
 export default function (state = initialState.stock, action) {
   switch (action.type) {

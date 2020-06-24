@@ -8,10 +8,10 @@ import StockDetails from './StockDetails'
 import { useNavigation } from '@react-navigation/native'
 import StockPosition from './StockPosition'
 import StockNews from './StockNews'
-import filter from 'lodash.filter'
+import { filter } from 'lodash'
 import StockTradeBar from './StockTradeBar'
 import { getBatchStockData, addToWatchlist, removeFromWatchlist } from 'api'
-import find from 'lodash.find'
+import { find } from 'lodash'
 
 export default function Stock({ route }) {
   const { goBack } = useNavigation()

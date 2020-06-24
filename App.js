@@ -5,8 +5,7 @@ import { StatusBar, View } from 'react-native'
 import { useAuthState, useSetUserInfo, useIapHub } from 'hooks'
 // import RNBootSplash from 'react-native-bootsplash'
 import { BACKGROUND } from 'utils/colors'
-import OneSignal from 'react-native-onesignal'
-import { ONESIGNAL_APPID, IAPHUB_API_KEY, IAPHUB_APPID } from './config'
+import { IAPHUB_API_KEY, IAPHUB_APPID } from './config'
 import TradeView from 'views/TradeView'
 import * as RNIap from 'react-native-iap'
 import IapHub from 'react-native-iaphub'
@@ -30,10 +29,6 @@ export default function App(): React$Node {
   //     RNBootSplash.hide({ duration: 250 })
   //   }
   // }, [loading])
-
-  useEffect(() => {
-    OneSignal.init(ONESIGNAL_APPID)
-  }, [])
 
   useEffect(() => {
     const initIAP = async () => {
