@@ -27,10 +27,10 @@ export default function useGetMyStocks(uid: string): {} {
           const list = []
           await snapshot.forEach(doc => {
             list.push(doc.data())
-            dispatch({
-              type: 'ALL_MY_STOCKS',
-              positions: list,
-            })
+          })
+          dispatch({
+            type: 'ALL_MY_STOCKS',
+            positions: list,
           })
         } catch (err) {
           console.log('useGetMyStocks', err)
