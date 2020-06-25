@@ -11,6 +11,8 @@ type CursorLineProps = {
   datum: any,
   onEvent: (value: string) => void,
   labelText: string | number,
+  leftOffset: number,
+  rightOffset: number,
 }
 
 export default function LabelCursor({
@@ -19,22 +21,23 @@ export default function LabelCursor({
   datum,
   onEvent,
   labelText,
+  leftOffset,
+  rightOffset,
 }: CursorLineProps) {
   const range = scale.y.range()
   let textX = x
 
   if (x < 20) {
     textX = x + 5
-  } else if (x > width - 40) {
-    textX = x - 80
+  } else if (x > width - leftOffset) {
+    textX = x - rightOffset
   } else {
-    textX = x - 40
+    textX = x - leftOffset
   }
 
-  const onEventCallback = useCallback(() => onEvent(datum?.value), [
-    datum?.value,
-    onEvent,
-  ])
+  const onEventCallback = useCallback(() => {
+    setTimeout(() => onEvent(datum?.value), 1000)
+  }, [datum?.value, onEvent])
 
   onEventCallback()
 
@@ -45,9 +48,9 @@ export default function LabelCursor({
         x2={x}
         y1={Math.max(...range)}
         y2={Math.min(...range)}
-        stroke={SUB_BACKGROUND}
+        stroke={LABEL}
         strokeWidth={2}
-        strokeOpacity={0.8}
+        strokeOpacity={0.3}
         on
       />
       <Text fill={LABEL} x={textX} y={20}>

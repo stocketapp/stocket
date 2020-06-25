@@ -1,5 +1,5 @@
 // @flow
-import React, { useCallback } from 'react'
+import React from 'react'
 import { Dimensions } from 'react-native'
 import {
   VictoryLine,
@@ -7,6 +7,7 @@ import {
   VictoryChart,
   VictoryAxis,
   VictoryGroup,
+  VictoryLabel,
 } from 'victory-native'
 import { GREEN } from 'utils/colors'
 import exampleData from '../LineChart/exampleData'
@@ -16,14 +17,17 @@ const { width } = Dimensions.get('window')
 
 type Props = {
   data: [],
-  x: string,
-  y: string,
+  x?: string,
+  y?: string,
   chartProps?: {
     minDomain?: { y?: number, x?: number },
   },
   lineProps?: {},
-  onEvent: (value: string | null) => void,
-  labelText: string | number,
+  onEvent?: (value: string | null) => void,
+  labelText?: string | number,
+  labelRightOffset?: number,
+  labelLeftOffset?: number,
+  onChartEvent: (value: string | number | null) => void,
 }
 
 export default function ChartLine({
@@ -32,24 +36,33 @@ export default function ChartLine({
   y = 'value',
   chartProps,
   lineProps,
-  onEvent,
+  onEvent = () => null,
   labelText = x,
+  labelRightOffset = 80,
+  labelLeftOffset = 40,
+  onChartEvent,
 }: Props) {
   return (
     <VictoryChart
       {...chartProps}
+      padding={styles.victoryChart}
       containerComponent={
         <VictoryVoronoiContainer
           voronoiDimension="x"
-          // $FlowFixMe
           labelComponent={
-            <CursorLine onEvent={onEvent} labelText={labelText} />
+            <CursorLine
+              onEvent={onChartEvent}
+              labelText={labelText}
+              leftOffset={labelLeftOffset}
+              rightOffset={labelRightOffset}
+            />
           }
           labels={({ datum }) => datum[labelText]}
-          onDeactivated={() => onEvent(null)}
+          onDeactivated={() => onChartEvent(null)}
+          mouseFollowTooltips
+          voronoiPadding={0}
         />
       }
-      padding={styles.victoryChart}
     >
       <VictoryGroup data={data} x={x} y={y}>
         <VictoryLine
@@ -59,8 +72,11 @@ export default function ChartLine({
           y={y}
           width={width}
           style={styles.victoryLine}
+          labels={() => ''}
+          labelComponent={<VictoryLabel />}
         />
-        <VictoryAxis style={styles.victoryAxis} />
+        <VictoryAxis style={styles.victoryAxis} height={0} width={0} label="" />
+        <VictoryAxis style={styles.victoryAxis} height={0} width={0} label="" />
       </VictoryGroup>
     </VictoryChart>
   )
@@ -73,8 +89,9 @@ const styles = {
     },
     labels: {
       stroke: GREEN,
+      display: 'none',
     },
   },
-  victoryAxis: { tickLabels: { display: 'none' } },
-  victoryChart: { top: 30, bottom: -0.2 },
+  victoryAxis: { tickLabels: { display: 'none', fill: 'none' } },
+  victoryChart: { top: 30, bottom: 0 },
 }

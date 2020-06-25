@@ -1,6 +1,6 @@
-import React, { useMemo, useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { View, TouchableOpacity, ScrollView, StyleSheet } from 'react-native'
-import { Text, LineChart, Container, Loader } from 'components'
+import { Text, Container, Loader, ChartLine } from 'components'
 import { GREEN, BACKGROUND, GRAY_DARKER } from 'utils/colors'
 import { ArrowLeftIcon, FavoriteIcon } from 'components/Icons'
 import { useSelector, useDispatch } from 'react-redux'
@@ -8,7 +8,7 @@ import StockDetails from './StockDetails'
 import { useNavigation } from '@react-navigation/native'
 import StockPosition from './StockPosition'
 import StockNews from './StockNews'
-import { filter } from 'lodash'
+import { filter, minBy } from 'lodash'
 import StockTradeBar from './StockTradeBar'
 import { getBatchStockData, addToWatchlist, removeFromWatchlist } from 'api'
 import { find } from 'lodash'
@@ -20,16 +20,23 @@ export default function Stock({ route }) {
   )
   const { uid } = useSelector(({ user }) => user?.currentUser)
   const [stock, setStock] = useState(null)
+  const [graphData, setGraphData] = useState(null)
+  const [allowScroll, setAllowScroll] = useState(true)
   const dispatch = useDispatch()
   const stockInfo = route.params?.stockInfo
 
-  const graphData = useMemo(() => {
-    const arr = filter(stock?.chart, el => el?.close !== null)
-    return arr.map(el => ({
-      value: el.close,
-      label: el.label,
-      date: el.date,
-    }))
+  useEffect(() => {
+    const getGraphData = () => {
+      const arr = filter(stock?.chart, el => el?.close !== null)
+      const result = arr.map(el => ({
+        value: el.close,
+        label: el.label,
+        date: el.date,
+      }))
+      setGraphData(result)
+    }
+
+    getGraphData()
   }, [stock])
 
   const openTradeView = () => {
@@ -64,6 +71,14 @@ export default function Stock({ route }) {
       setStock(stockInfo)
     }
   }, [selectedStockPosition, selectedStock, dispatch, stockInfo])
+
+  const onChartEvent = (value: string | number | null) => {
+    if (!value) {
+      setAllowScroll(true)
+    } else {
+      setAllowScroll(false)
+    }
+  }
 
   const hasPosition =
     selectedStockPosition?.shares &&
@@ -101,6 +116,7 @@ export default function Stock({ route }) {
           <ScrollView
             contentContainerStyle={{ paddingBottom: 70 }}
             showsVerticalScrollIndicator={false}
+            scrollEnabled={allowScroll}
           >
             <View>
               <View style={{ paddingHorizontal: 16, paddingBottom: 15 }}>
@@ -121,7 +137,20 @@ export default function Stock({ route }) {
                 </Text>
               </View>
 
-              {graphData && stock?.chart && <LineChart data={graphData} />}
+              {stock?.chart && graphData && (
+                <ChartLine
+                  x="label"
+                  y="value"
+                  data={graphData}
+                  chartProps={{
+                    minDomain: { y: minBy(graphData, 'value')?.value - 2 },
+                  }}
+                  labelText="value"
+                  labelRightOffset={40}
+                  labelLeftOffset={15}
+                  onChartEvent={onChartEvent}
+                />
+              )}
 
               <StockDetails data={stock?.quote} />
 

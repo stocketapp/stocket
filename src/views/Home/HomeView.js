@@ -26,15 +26,12 @@ export default function Home() {
     navigate('Stock', { stockInfo })
   }
 
-  const onTouchStart = e => {
-    const y = e.nativeEvent.locationY
-    if (y > 50 && y < 400) {
+  const onChartEvent = (value: string | number | null) => {
+    if (!value) {
+      setAllowScroll(true)
+    } else {
       setAllowScroll(false)
     }
-  }
-
-  const onTouchEnd = () => {
-    setAllowScroll(true)
   }
 
   return (
@@ -42,8 +39,6 @@ export default function Home() {
       <ScrollView
         contentContainerStyle={{ paddingBottom: 20 }}
         showsVerticalScrollIndicator={false}
-        onTouchStart={onTouchStart}
-        onTouchEnd={onTouchEnd}
         scrollEnabled={allowScroll}
       >
         <Balance value={balanceValue ?? userInfo?.portfolioValue} />
@@ -53,7 +48,7 @@ export default function Home() {
           chartProps={{
             minDomain: { y: 0.8 },
           }}
-          onEvent={setBalanceValue}
+          onChartEvent={onChartEvent}
         />
         <StockHorizontalList data={positions} loading={loading} />
         {watchlist.length > 0 && (
