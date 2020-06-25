@@ -24,6 +24,7 @@ export default function Stock({ route }) {
   const [allowScroll, setAllowScroll] = useState(true)
   const dispatch = useDispatch()
   const stockInfo = route.params?.stockInfo
+  let timeout
 
   useEffect(() => {
     const getGraphData = () => {
@@ -72,9 +73,13 @@ export default function Stock({ route }) {
     }
   }, [selectedStockPosition, selectedStock, dispatch, stockInfo])
 
+  useEffect(() => {
+    return () => clearTimeout(timeout)
+  }, [timeout])
+
   const onChartEvent = (value: string | number | null) => {
     if (!value) {
-      setAllowScroll(true)
+      timeout = setTimeout(() => setAllowScroll(true), 500)
     } else {
       setAllowScroll(false)
     }

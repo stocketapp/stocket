@@ -36,7 +36,7 @@ export default function LabelCursor({
   }
 
   const onEventCallback = useCallback(() => {
-    setTimeout(() => onEvent(datum?.value), 1000)
+    onEvent(datum?.value)
   }, [datum?.value, onEvent])
 
   onEventCallback()

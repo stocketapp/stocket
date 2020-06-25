@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { StyleSheet, ScrollView } from 'react-native'
 import { BACKGROUND } from 'utils/colors'
 import { Balance, Container, ChartLine } from 'components'
@@ -20,15 +20,20 @@ export default function Home() {
   const { navigate } = useNavigation()
   const [allowScroll, setAllowScroll] = useState(true)
   const balanceHistory = useGetBalanceHistory(uid, userInfo?.portfolioValue)
-  const [balanceValue, setBalanceValue] = useState(null)
+  const [balanceValue] = useState(null)
+  let timeout
 
   const onWatchlistItemPress = (stockInfo: PositionType) => {
     navigate('Stock', { stockInfo })
   }
 
+  useEffect(() => {
+    return () => clearTimeout(timeout)
+  }, [timeout])
+
   const onChartEvent = (value: string | number | null) => {
     if (!value) {
-      setAllowScroll(true)
+      timeout = setTimeout(() => setAllowScroll(true), 500)
     } else {
       setAllowScroll(false)
     }
