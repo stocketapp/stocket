@@ -5,6 +5,7 @@ import {
   VictoryLine,
   VictoryVoronoiContainer,
   VictoryChart,
+  VictoryAxis,
 } from 'victory-native'
 import { GREEN } from 'utils/colors'
 import exampleData from './LineChart/exampleData'
@@ -12,7 +13,7 @@ import exampleData from './LineChart/exampleData'
 const { width } = Dimensions.get('window')
 
 type Props = {
-  data: {},
+  data: [],
   x: string,
   y: string,
   chartProps?: {
@@ -42,7 +43,7 @@ export default function VictoryLineGraph({
           }}
         />
       }
-      padding={{ top: 60, bottom: 40 }}
+      padding={{ top: 0, bottom: -0.2 }}
     >
       <VictoryLine
         {...lineProps}
@@ -60,6 +61,7 @@ export default function VictoryLineGraph({
           },
         }}
       />
+      <VictoryAxis label="" style={{ tickLabels: { display: 'none' } }} />
     </VictoryChart>
   )
 }

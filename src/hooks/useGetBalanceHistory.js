@@ -15,13 +15,13 @@ function useGetBalanceHistory(uid: string, currentValue: string) {
           snapshot.forEach(doc => {
             let obj = {}
             const data = doc.data()
-            obj.date = moment.utc(data.date).format('MMM DD') //.format('MMM DD YYYY')
+            obj.date = moment.utc(data.date).format('MMM DD, YYYY')
             obj.value = data.value
             list.push(obj)
           })
           const today = Date.now()
           list.push({
-            date: moment.utc(today).format('MMM DD'), //.format('MMM DD YYYY'),
+            date: moment.utc(today).format('MMM DD, YYYY'),
             value: currentValue,
           })
           setBalanceHistory(list)
