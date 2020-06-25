@@ -7,9 +7,8 @@ import functions from '@react-native-firebase/functions'
 
 const UsersRef = firestore().collection('Users')
 
-export default function useGetMyStocks(): {} {
+export default function useGetMyStocks(uid: string): {} {
   const [loading, setLoading] = useState(true)
-  const { uid } = useSelector(({ user }) => user.currentUser)
   const dispatch = useDispatch()
   const onUpdateGainsCall = functions().httpsCallable('onUpdateGainsCall')
   const { positions } = useSelector(({ stock }) => stock)
@@ -28,10 +27,10 @@ export default function useGetMyStocks(): {} {
           const list = []
           await snapshot.forEach(doc => {
             list.push(doc.data())
-            dispatch({
-              type: 'ALL_MY_STOCKS',
-              positions: list,
-            })
+          })
+          dispatch({
+            type: 'ALL_MY_STOCKS',
+            positions: list,
           })
         } catch (err) {
           console.log('useGetMyStocks', err)
