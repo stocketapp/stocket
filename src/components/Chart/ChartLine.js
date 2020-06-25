@@ -1,5 +1,5 @@
 // @flow
-import React from 'react'
+import React, { useCallback } from 'react'
 import { Dimensions } from 'react-native'
 import {
   VictoryLine,
@@ -22,6 +22,7 @@ type Props = {
     minDomain?: { y?: number, x?: number },
   },
   lineProps?: {},
+  onEvent: (value: string | null) => void,
 }
 
 export default function ChartLine({
@@ -30,6 +31,7 @@ export default function ChartLine({
   y = 'value',
   chartProps,
   lineProps,
+  onEvent,
 }: Props) {
   return (
     <VictoryChart
@@ -38,8 +40,9 @@ export default function ChartLine({
         <VictoryVoronoiContainer
           voronoiDimension="x"
           // $FlowFixMe
-          labelComponent={<CursorLine />}
+          labelComponent={<CursorLine onEvent={onEvent} />}
           labels={({ datum }) => datum.value}
+          onDeactivated={() => onEvent(null)}
         />
       }
       padding={styles.victoryChart}

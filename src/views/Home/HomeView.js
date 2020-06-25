@@ -2,20 +2,25 @@ import React, { useState } from 'react'
 import { StyleSheet, ScrollView } from 'react-native'
 import { BACKGROUND } from 'utils/colors'
 import { Balance, Container, ChartLine } from 'components'
-import { useGetMyStocks, useWatchlist, useGetBalanceHistory } from 'hooks'
+import {
+  useGetMyStocks,
+  useWatchlist,
+  useGetBalanceHistory,
+  useUser,
+} from 'hooks'
 import { useNavigation } from '@react-navigation/native'
 import StockHorizontalList from './StockHorizontalList'
 import Watchlist from './Watchlist'
-import { useSelector } from 'react-redux'
 
 export default function Home() {
-  const { currentUser, userInfo } = useSelector(({ user }) => user)
+  const { userInfo, currentUser } = useUser()
   const uid = currentUser?.uid
   const { positions, loading } = useGetMyStocks(uid)
   const watchlist = useWatchlist(uid)
   const { navigate } = useNavigation()
   const [allowScroll, setAllowScroll] = useState(true)
   const balanceHistory = useGetBalanceHistory(uid, userInfo?.portfolioValue)
+  const [balanceValue, setBalanceValue] = useState(null)
 
   const onWatchlistItemPress = (stockInfo: PositionType) => {
     navigate('Stock', { stockInfo })
@@ -41,13 +46,14 @@ export default function Home() {
         onTouchEnd={onTouchEnd}
         scrollEnabled={allowScroll}
       >
-        <Balance />
+        <Balance value={balanceValue ?? userInfo?.portfolioValue} />
         <ChartLine
           data={balanceHistory}
           x="date"
           chartProps={{
             minDomain: { y: 0.8 },
           }}
+          onEvent={setBalanceValue}
         />
         <StockHorizontalList data={positions} loading={loading} />
         {watchlist.length > 0 && (

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useCallback, useEffect } from 'react'
 import { Dimensions } from 'react-native'
 import { SUB_BACKGROUND, LABEL } from 'utils/colors'
 import { Line, G, Text } from 'react-native-svg'
@@ -9,9 +9,15 @@ type CursorLineProps = {
   x: number,
   scale: any,
   datum: any,
+  onEvent: (value: string) => void,
 }
 
-export default function LabelCursor({ x, scale, datum }: CursorLineProps) {
+export default function LabelCursor({
+  x,
+  scale,
+  datum,
+  onEvent,
+}: CursorLineProps) {
   const range = scale.y.range()
   let textX = x
 
@@ -23,6 +29,13 @@ export default function LabelCursor({ x, scale, datum }: CursorLineProps) {
     textX = x - 40
   }
 
+  const onEventCallback = useCallback(() => onEvent(datum?.value), [
+    datum?.value,
+    onEvent,
+  ])
+
+  onEventCallback()
+
   return (
     <G>
       <Line
@@ -33,6 +46,7 @@ export default function LabelCursor({ x, scale, datum }: CursorLineProps) {
         stroke={SUB_BACKGROUND}
         strokeWidth={2}
         strokeOpacity={0.8}
+        on
       />
       <Text fill={LABEL} x={textX} y={20}>
         {datum?.date}
