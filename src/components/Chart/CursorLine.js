@@ -10,6 +10,7 @@ type CursorLineProps = {
   scale: any,
   datum: any,
   onEvent: (value: string) => void,
+  labelText: string | number,
 }
 
 export default function LabelCursor({
@@ -17,6 +18,7 @@ export default function LabelCursor({
   scale,
   datum,
   onEvent,
+  labelText,
 }: CursorLineProps) {
   const range = scale.y.range()
   let textX = x
@@ -49,7 +51,7 @@ export default function LabelCursor({
         on
       />
       <Text fill={LABEL} x={textX} y={20}>
-        {datum?.date}
+        {datum[labelText]}
       </Text>
     </G>
   )

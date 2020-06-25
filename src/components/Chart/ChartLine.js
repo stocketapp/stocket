@@ -23,15 +23,17 @@ type Props = {
   },
   lineProps?: {},
   onEvent: (value: string | null) => void,
+  labelText: string | number,
 }
 
 export default function ChartLine({
   data = exampleData,
-  x = 'label',
+  x = 'date',
   y = 'value',
   chartProps,
   lineProps,
   onEvent,
+  labelText = x,
 }: Props) {
   return (
     <VictoryChart
@@ -40,8 +42,10 @@ export default function ChartLine({
         <VictoryVoronoiContainer
           voronoiDimension="x"
           // $FlowFixMe
-          labelComponent={<CursorLine onEvent={onEvent} />}
-          labels={({ datum }) => datum.value}
+          labelComponent={
+            <CursorLine onEvent={onEvent} labelText={labelText} />
+          }
+          labels={({ datum }) => datum[labelText]}
           onDeactivated={() => onEvent(null)}
         />
       }
