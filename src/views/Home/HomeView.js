@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { StyleSheet, ScrollView } from 'react-native'
 import { BACKGROUND } from 'utils/colors'
-import { Balance, Container, VictoryLineGraph } from 'components'
+import { Balance, Container, ChartLine } from 'components'
 import { useGetMyStocks, useWatchlist, useGetBalanceHistory } from 'hooks'
 import { useNavigation } from '@react-navigation/native'
 import StockHorizontalList from './StockHorizontalList'
@@ -42,7 +42,7 @@ export default function Home() {
         scrollEnabled={allowScroll}
       >
         <Balance />
-        <VictoryLineGraph
+        <ChartLine
           data={balanceHistory}
           x="date"
           chartProps={{
