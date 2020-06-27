@@ -20,7 +20,7 @@ export default function Home() {
   const { navigate } = useNavigation()
   const [allowScroll, setAllowScroll] = useState(true)
   const balanceHistory = useGetBalanceHistory(uid, userInfo?.portfolioValue)
-  const [balanceValue] = useState(null)
+  const [balanceValue, setBalanceValue] = useState(null)
   let timeout
 
   const onWatchlistItemPress = (stockInfo: PositionType) => {
@@ -32,6 +32,7 @@ export default function Home() {
   }, [timeout])
 
   const onChartEvent = (value: string | number | null) => {
+    setBalanceValue(value)
     if (!value) {
       timeout = setTimeout(() => setAllowScroll(true), 500)
     } else {
