@@ -33,5 +33,5 @@ export default function useWatchlist(uid: string) {
     return () => subscribe()
   }, [uid, dispatch])
 
-  return uniqBy(watchlist, 'symbol')
+  return uniqBy(watchlist, el => el.quote.symbol)
 }
