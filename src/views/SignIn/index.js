@@ -1,5 +1,5 @@
 import React from 'react'
-import { View, Text, StyleSheet } from 'react-native'
+import { View, StyleSheet, Image } from 'react-native'
 import auth from '@react-native-firebase/auth'
 import firestore from '@react-native-firebase/firestore'
 import appleAuth, {
@@ -8,6 +8,7 @@ import appleAuth, {
   AppleAuthRequestOperation,
 } from '@invertase/react-native-apple-authentication'
 import { BACKGROUND } from 'utils/colors'
+import logo from '../../../assets/bootsplash_logo2x.png' // 'assets/bootsplash_logo@2x.png'
 
 export default function SignIn() {
   async function onAppleButtonPress() {
@@ -37,7 +38,7 @@ export default function SignIn() {
 
   return (
     <View style={styles.container}>
-      <Text>Sign In</Text>
+      <Image source={logo} style={styles.logo} />
       <AppleButton
         style={styles.appleButton}
         buttonStyle={AppleButton.Style.WHITE}
@@ -62,5 +63,10 @@ const styles = StyleSheet.create({
     shadowRadius: 4,
     width: '70%',
     height: 45,
+  },
+  logo: {
+    resizeMode: 'contain',
+    height: 160,
+    marginBottom: '40%',
   },
 })
