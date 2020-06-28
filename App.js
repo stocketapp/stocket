@@ -20,8 +20,8 @@ const iapHubConfig = {
 
 export default function App(): React$Node {
   const { isAuth, currentUser } = useAuthState()
-  const {} = useSetUserInfo(currentUser)
   const tradeViewRef = useRef()
+  useSetUserInfo(currentUser)
   useIapHub()
 
   // useEffect(() => {
