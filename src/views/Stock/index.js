@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { View, TouchableOpacity, ScrollView, StyleSheet } from 'react-native'
 import { Text, Container, Loader, ChartLine } from 'components'
 import { GREEN, BACKGROUND, GRAY_DARKER } from 'utils/colors'
@@ -8,37 +8,22 @@ import StockDetails from './StockDetails'
 import { useNavigation } from '@react-navigation/native'
 import StockPosition from './StockPosition'
 import StockNews from './StockNews'
-import { filter, minBy } from 'lodash'
 import StockTradeBar from './StockTradeBar'
-import { getBatchStockData, addToWatchlist, removeFromWatchlist } from 'api'
-import { find } from 'lodash'
+import { addToWatchlist, removeFromWatchlist } from 'api'
+import { find, minBy } from 'lodash'
+import { useGetCurrentStock, useGraphData } from './stockHooks'
 
 export default function Stock({ route }) {
   const { goBack } = useNavigation()
   const { selectedStockPosition, selectedStock, watchlist } = useSelector(
     ({ stock }) => stock,
   )
+  const stockInfo = route.params?.stockInfo
+  const stock = useGetCurrentStock(selectedStock, stockInfo)
+  const graphData = useGraphData(stock)
   const { uid } = useSelector(({ user }) => user?.currentUser)
-  const [stock, setStock] = useState(null)
-  const [graphData, setGraphData] = useState(null)
   const [allowScroll, setAllowScroll] = useState(true)
   const dispatch = useDispatch()
-  const stockInfo = route.params?.stockInfo
-  let timeout
-
-  useEffect(() => {
-    const getGraphData = () => {
-      const arr = filter(stock?.chart, el => el?.close !== null)
-      const result = arr.map(el => ({
-        value: el.close,
-        label: el.label,
-        date: el.date,
-      }))
-      setGraphData(result)
-    }
-
-    getGraphData()
-  }, [stock])
 
   const openTradeView = () => {
     dispatch({
@@ -51,35 +36,9 @@ export default function Stock({ route }) {
     })
   }
 
-  useEffect(() => {
-    const getData = async () => {
-      try {
-        const res = await getBatchStockData(selectedStock)
-        const result = res[selectedStock]
-        dispatch({
-          type: 'TRADE_STOCK',
-          tradeStock: result,
-        })
-        setStock(result)
-      } catch (err) {
-        console.log('[StockView] getData()', err)
-      }
-    }
-
-    if (!stockInfo) {
-      getData()
-    } else {
-      setStock(stockInfo)
-    }
-  }, [selectedStockPosition, selectedStock, dispatch, stockInfo])
-
-  useEffect(() => {
-    return () => clearTimeout(timeout)
-  }, [timeout])
-
   const onChartEvent = (value: string | number | null) => {
     if (!value) {
-      timeout = setTimeout(() => setAllowScroll(true), 500)
+      setAllowScroll(true)
     } else {
       setAllowScroll(false)
     }
