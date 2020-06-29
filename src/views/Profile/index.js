@@ -4,7 +4,7 @@ import { View } from 'react-native'
 import { Container, Text } from 'components'
 import { LABEL, CARD_BACKGROUND } from 'utils/colors'
 import { useSelector } from 'react-redux'
-import { formatCurrency } from 'utils/functions'
+import { formatCurrency, currencyToNumber } from 'utils/functions'
 import ProfileItem from './ProfileItem'
 import AddCash from './AddCash'
 import LogoutButton from './LogoutButton'
@@ -13,6 +13,7 @@ import Products from '../Products'
 
 export default function Profile() {
   const { userInfo } = useSelector(({ user }) => user)
+  const { cash, portfolioValue } = userInfo
   const iapRef = useRef()
   const [isIapOpen, setIsIapOpen] = useState(false)
 
@@ -33,7 +34,7 @@ export default function Profile() {
             <View>
               <Text style={styles.value}>Cash</Text>
               <Text style={styles.cash} weight="Bold" type="title">
-                {formatCurrency(userInfo?.cash)}
+                {formatCurrency(cash)}
               </Text>
             </View>
 
@@ -44,11 +45,11 @@ export default function Profile() {
         </Container>
 
         <Container top={40}>
+          <ProfileItem label="Portfolio" value={portfolioValue} />
           <ProfileItem
-            label="Portfolio Value"
-            value={userInfo?.portfolioValue}
+            label="Total Value"
+            value={formatCurrency(currencyToNumber(portfolioValue) + cash)}
           />
-          <ProfileItem label="Combined Value" value={userInfo?.combinedValue} />
         </Container>
       </View>
 
