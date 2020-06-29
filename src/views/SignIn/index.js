@@ -8,7 +8,8 @@ import appleAuth, {
   AppleAuthRequestOperation,
 } from '@invertase/react-native-apple-authentication'
 import { BACKGROUND } from 'utils/colors'
-import logo from '../../../assets/bootsplash_logo2x.png' // 'assets/bootsplash_logo@2x.png'
+import logo from '../../../assets/bootsplash_logo2x.png'
+import { createUserData } from 'api'
 
 export default function SignIn() {
   async function onAppleButtonPress() {
@@ -28,11 +29,19 @@ export default function SignIn() {
       )
       await auth().signInWithCredential(appleCredential)
       const currentUser = auth().currentUser
+      const { uid, email } = currentUser
       const displayName = `${fullName?.givenName} ${fullName?.familyName}`
-      currentUser.updateProfile({ displayName })
-      await firestore().doc(`Users/${currentUser?.uid}`).update({
-        name: displayName,
-      })
+      await currentUser.updateProfile({ displayName })
+
+      try {
+        const user = await firestore().doc(`Users/${uid}`).get()
+        const userExists = user.exists
+        if (!userExists) {
+          await createUserData({ uid, name: displayName, email })
+        }
+      } catch (err) {
+        console.log(err)
+      }
     }
   }
 
