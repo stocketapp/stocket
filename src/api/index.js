@@ -3,6 +3,7 @@ import firestore from '@react-native-firebase/firestore'
 import perf from '@react-native-firebase/perf'
 import type { TradeDataType, DocReference } from 'types'
 import { WTD_API_KEY, IEX_CLOUD_KEY } from '../../config'
+import { formatCurrency } from 'utils/functions'
 
 async function get(query: string) {
   const url = `https://api.worldtradingdata.com/api/v1/${query}&api_token=${WTD_API_KEY}`
@@ -114,4 +115,23 @@ export async function getBatchStockData(
   const res = await iexGet('stock/market/batch', url)
   const result = await res.json()
   return result
+}
+
+type CreateUserType = { uid: string, name: string, email: string }
+
+export async function createUserData({ uid, name, email }: CreateUserType) {
+  const userRef = firestore().doc(`Users/${uid}`)
+  const cash = 15000
+  try {
+    await userRef.set({
+      combinedValue: formatCurrency(cash),
+      portfolioValue: formatCurrency(0),
+      name,
+      cash,
+      email,
+      uid,
+    })
+  } catch (err) {
+    console.log('onCreateUserTrigger [Function] - ', err)
+  }
 }

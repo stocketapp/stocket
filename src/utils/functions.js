@@ -39,3 +39,13 @@ export function getProductValue(productId: string): ProductValue {
   const result = find(purchaseValues, el => el.productId === productId)
   return result
 }
+
+export function currencyToNumber(value: string) {
+  const number = parseFloat(value.replace(/[$,]/g, ''))
+  return number
+}
+
+export function sumCurrency(a: string, b: string) {
+  const sum = currencyToNumber(a) + currencyToNumber(b)
+  return formatCurrency(sum)
+}
