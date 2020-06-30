@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useMemo } from 'react'
 import { StyleSheet, ScrollView } from 'react-native'
 import { BACKGROUND } from 'utils/colors'
 import { Balance, Container, ChartLine } from 'components'
@@ -11,6 +11,8 @@ import {
 import { useNavigation } from '@react-navigation/native'
 import StockHorizontalList from './StockHorizontalList'
 import Watchlist from './Watchlist'
+import { currencyToNumber } from 'utils/functions'
+import { last, nth } from 'lodash'
 
 export default function Home() {
   const { userInfo, currentUser } = useUser()
@@ -22,6 +24,8 @@ export default function Home() {
   const balanceHistory = useGetBalanceHistory(uid, userInfo?.portfolioValue)
   const [balanceValue, setBalanceValue] = useState(null)
   let timeout
+
+  console.log(balanceHistory)
 
   const onWatchlistItemPress = (stockInfo: PositionType) => {
     navigate('Stock', { stockInfo })
@@ -40,6 +44,14 @@ export default function Home() {
     }
   }
 
+  const dayChange = useMemo(() => {
+    const lastEl = last(balanceHistory)
+    const penEl = nth(balanceHistory, -2)
+    const change =
+      currencyToNumber(lastEl?.value) - currencyToNumber(penEl?.value)
+    return parseFloat(change ?? 0)
+  }, [balanceHistory])
+
   return (
     <Container style={styles.container} safeAreaTop>
       <ScrollView
@@ -47,7 +59,10 @@ export default function Home() {
         showsVerticalScrollIndicator={false}
         scrollEnabled={allowScroll}
       >
-        <Balance value={balanceValue ?? userInfo?.portfolioValue} />
+        <Balance
+          value={balanceValue ?? userInfo?.portfolioValue}
+          dayChange={dayChange}
+        />
         <ChartLine
           data={balanceHistory}
           x="date"

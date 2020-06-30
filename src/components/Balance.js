@@ -4,7 +4,12 @@ import { GRAY_DARKER, GREEN } from 'utils/colors'
 import Text from './Text'
 import Container from './Container'
 
-const Balance = ({ value }: { value: string }): React$Node => {
+type Props = {
+  value: string,
+  dayChange: number,
+}
+
+const Balance = ({ value, dayChange }: Props): React$Node => {
   return (
     <Container ph>
       <Text color={GRAY_DARKER} type="label">
@@ -14,7 +19,7 @@ const Balance = ({ value }: { value: string }): React$Node => {
         {value || '$0.00'}
       </Text>
       <Text color={GREEN} style={{ fontWeight: '600' }}>
-        34.6
+        {dayChange}
       </Text>
     </Container>
   )

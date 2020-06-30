@@ -41,8 +41,9 @@ export function getProductValue(productId: string): ProductValue {
 }
 
 export function currencyToNumber(value: string) {
-  const number = parseFloat(value.replace(/[$,]/g, ''))
-  return number
+  const number = parseFloat(value?.replace(/[$,]/g, ''))
+  console.log('number', number)
+  return number ?? 0
 }
 
 export function sumCurrency(a: string, b: string) {
