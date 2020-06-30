@@ -25,8 +25,6 @@ export default function Home() {
   const [balanceValue, setBalanceValue] = useState(null)
   let timeout
 
-  console.log(balanceHistory)
-
   const onWatchlistItemPress = (stockInfo: PositionType) => {
     navigate('Stock', { stockInfo })
   }
