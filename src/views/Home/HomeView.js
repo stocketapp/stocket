@@ -44,11 +44,11 @@ export default function Home() {
 
   const dayChange = useMemo(() => {
     const lastEl = last(balanceHistory)
-    const penEl = nth(balanceHistory, -2)
     const change =
-      currencyToNumber(lastEl?.value) - currencyToNumber(penEl?.value)
-    return parseFloat(change ?? 0)
-  }, [balanceHistory])
+      currencyToNumber(userInfo?.portfolioValue) -
+      currencyToNumber(lastEl?.value)
+    return (change ?? 0).toFixed(2) // parseFloat(change ?? 0)
+  }, [balanceHistory, userInfo?.portfolioValue])
 
   return (
     <Container style={styles.container} safeAreaTop>

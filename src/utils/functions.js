@@ -42,7 +42,6 @@ export function getProductValue(productId: string): ProductValue {
 
 export function currencyToNumber(value: string) {
   const number = parseFloat(value?.replace(/[$,]/g, ''))
-  console.log('number', number)
   return number ?? 0
 }
 
