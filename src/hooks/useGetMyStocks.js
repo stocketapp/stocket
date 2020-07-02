@@ -1,21 +1,19 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 // @flow
 import { useEffect, useState } from 'react'
 import firestore from '@react-native-firebase/firestore'
 import { useSelector, useDispatch } from 'react-redux'
-import functions from '@react-native-firebase/functions'
+import { callUpdateGains } from 'api'
 
 const UsersRef = firestore().collection('Users')
 
 export default function useGetMyStocks(uid: string): {} {
   const [loading, setLoading] = useState(true)
   const dispatch = useDispatch()
-  const onUpdateGainsCall = functions().httpsCallable('onUpdateGainsCall')
   const { positions } = useSelector(({ stock }) => stock)
 
   useEffect(() => {
-    onUpdateGainsCall({ uid })
-  }, [])
+    callUpdateGains(uid)
+  }, [uid])
 
   useEffect(() => {
     const subscribe = UsersRef.doc(uid)
