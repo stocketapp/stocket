@@ -28,6 +28,22 @@ export default function (state = initialState.stock, action) {
           el => el.quote.symbol !== action.symbol,
         ),
       }
+    // case 'REMOVE_POSITION':
+    //   return {
+    //     ...state,
+    //     postions: filter(state.positions, el => el.symbol !== action.symbol),
+    //   }
+    // case 'UPDATE_POSITION':
+    //   console.log(action.position)
+    //   return {
+    //     ...state,
+    //     positions: Object.assign(
+    //       state.positions,
+    //       state.positions.map(el =>
+    //         el.symbol === action.position.symbol ? action.position : el,
+    //       ),
+    //     ),
+    //   }
     default:
       return state
   }

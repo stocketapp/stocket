@@ -11,7 +11,11 @@ const ArticleItem = ({ article }) => {
       <TouchableOpacity onPress={() => ref.current.open()}>
         <View style={styles.articleContainer}>
           <View>
-            <Image source={{ uri: article?.image }} style={styles.img} />
+            {/http/g.test(article?.image) ? (
+              <Image source={{ uri: article?.image }} style={styles.img} />
+            ) : (
+              <View style={{ ...styles.img, backgroundColor: 'gray' }} />
+            )}
           </View>
           <View
             style={{

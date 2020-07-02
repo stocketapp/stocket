@@ -17,14 +17,14 @@ function TradeView({ ref }) {
     stockQuantity,
     selectedTradeAction,
     tradeStock,
+    stockPrice,
   } = trade
   const { selectedStockPosition } = stock
   const { currentUser, userInfo } = user
   const dispatch = useDispatch()
   const sharesOwned = selectedStockPosition?.shares?.length
 
-  const maxShares = Math.floor(userInfo?.cash / tradeStock?.quote.latestPrice)
-  const latestPrice = tradeStock?.quote.latestPrice
+  const maxShares = Math.floor(userInfo?.cash / stockPrice)
 
   useEffect(() => {
     if (tradeViewIsOpen) {
@@ -64,15 +64,15 @@ function TradeView({ ref }) {
     })
   }
 
-  const total = useMemo(() => stockQuantity * latestPrice, [
+  const total = useMemo(() => stockQuantity * stockPrice, [
     stockQuantity,
-    latestPrice,
+    stockPrice,
   ])
 
   const createTradeTransaction = () => {
     const obj = {
       value: total,
-      price: latestPrice,
+      price: stockPrice,
       name: tradeStock?.quote.companyName,
       symbol: tradeStock?.quote.symbol,
       quantity: stockQuantity,
@@ -115,6 +115,7 @@ function TradeView({ ref }) {
             maxShares={maxShares}
             isSell={selectedTradeAction === 'BUY'}
             owned={sharesOwned}
+            price={stockPrice}
           />
 
           <TradeAction

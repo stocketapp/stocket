@@ -11,12 +11,20 @@ import StockNews from './StockNews'
 import StockTradeBar from './StockTradeBar'
 import { addToWatchlist, removeFromWatchlist } from 'api'
 import { find, minBy } from 'lodash'
-import { useGetCurrentStock, useGraphData } from './stockHooks'
+import {
+  useGetCurrentStock,
+  useGraphData,
+  usePriceSubscription,
+} from './stockHooks'
 
 export default function Stock({ route }) {
   const { goBack } = useNavigation()
-  const { selectedStockPosition, selectedStock, watchlist } = useSelector(
+  const { positions, selectedStock, watchlist } = useSelector(
     ({ stock }) => stock,
+  )
+  const selectedStockPosition = find(
+    positions,
+    el => el.symbol === selectedStock,
   )
   const stockInfo = route.params?.stockInfo
   const stock = useGetCurrentStock(selectedStock, stockInfo)
@@ -24,6 +32,8 @@ export default function Stock({ route }) {
   const { uid } = useSelector(({ user }) => user?.currentUser)
   const [allowScroll, setAllowScroll] = useState(true)
   const dispatch = useDispatch()
+  const { price } = usePriceSubscription(selectedStockPosition)
+  const latestPrice = price?.toFixed(2) ?? stock?.quote?.latestPrice.toFixed(2)
 
   const openTradeView = () => {
     dispatch({
@@ -32,7 +42,7 @@ export default function Stock({ route }) {
     })
     dispatch({
       type: 'STOCK_PRICE',
-      stockPrice: stock?.quote?.latestPrice,
+      stockPrice: latestPrice,
     })
   }
 
@@ -43,10 +53,6 @@ export default function Stock({ route }) {
       setAllowScroll(false)
     }
   }
-
-  const hasPosition =
-    selectedStockPosition?.shares &&
-    selectedStockPosition?.symbol === selectedStock
 
   const isFav = find(
     watchlist,
@@ -97,7 +103,7 @@ export default function Stock({ route }) {
                   </Text>
                 </View>
                 <Text type="heading" weight="bold" style={{ paddingTop: 6 }}>
-                  {stock?.quote?.iexRealtimePrice}
+                  {latestPrice}
                 </Text>
               </View>
 
@@ -118,17 +124,17 @@ export default function Stock({ route }) {
 
               <StockDetails data={stock?.quote} />
 
-              {hasPosition && <StockPosition data={selectedStockPosition} />}
-
-              {stock?.news && process.env.NODE_ENV !== 'development' && (
-                <StockNews articles={stock?.news} />
+              {selectedStockPosition && (
+                <StockPosition data={selectedStockPosition} />
               )}
+
+              {stock?.news && <StockNews articles={stock?.news} />}
             </View>
           </ScrollView>
 
           <StockTradeBar
             status={stock?.quote?.change < 0 ? 'negative' : 'positive'}
-            price={stock?.quote?.latestPrice}
+            price={latestPrice}
             openTradeView={openTradeView}
             stockData={stock}
           />

@@ -21,18 +21,18 @@ export default function SearchResult({
 }: SearchResultProps) {
   return (
     <TouchableOpacity style={styles.resultItem} onPress={setStock}>
-      <View>
+      <View style={{ flex: 1 }}>
         <Text weight="Medium" type="label">
-          {item?.quote?.companyName}
+          {item?.securityName}
         </Text>
         <Text color={GRAY_DARKER} type="subtext" style={{ paddingTop: 5 }}>
-          {item?.quote?.symbol}
+          {item?.symbol}
         </Text>
       </View>
 
       <TouchableOpacity
         style={{ padding: 6 }}
-        onPress={() => onPress(uid, { symbol: item?.quote?.symbol })}
+        onPress={() => onPress(uid, { symbol: item?.symbol })}
       >
         <View style={styles.plus}>
           <Text

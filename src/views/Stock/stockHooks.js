@@ -1,8 +1,10 @@
 // @flow
-import { useEffect, useState, useMemo } from 'react'
+import { useEffect, useState, useMemo, useCallback } from 'react'
 import { useDispatch } from 'react-redux'
-import { getBatchStockData } from 'api'
-import { filter } from 'lodash'
+import { getBatchStockData, updatePosition } from 'api'
+import { filter, reduce } from 'lodash'
+import SocketIO from 'socket.io-client'
+import { useUser } from 'hooks'
 
 export function useGetCurrentStock(selectedStock: string, stockInfo: {}) {
   const dispatch = useDispatch()
@@ -45,4 +47,49 @@ export function useGraphData(stock: { chart: [] }) {
   }
 
   return useMemo(() => getGraphData(stock), [stock])
+}
+
+type UsePriceSubscriptionTypes = {
+  symbol: string,
+  shares: [],
+}
+export function usePriceSubscription(position: UsePriceSubscriptionTypes) {
+  const [data, setData] = useState({})
+  const { currentUser } = useUser()
+  const { symbol, shares } = position
+
+  const getGains = (price) => {
+    const value = shares?.length * price
+    const gainsArr = shares.map(el => price - el.price)
+    const gains = reduce(gainsArr, (a, b) => a + b)
+    const gainsPercentage = (gains / value) * 100
+    return { gains, gainsPercentage, value }
+  }
+
+  const calcGains = useCallback(getGains, [data?.price])
+
+  useEffect(() => {
+    const url = 'https://ws-api.iextrading.com/1.0/last'
+    const socket = SocketIO(url)
+
+    if (symbol) {
+      socket.on('connect', () => {
+        socket.emit('subscribe', symbol)
+      })
+
+      socket.on('message', async message => {
+        const res = JSON.parse(message)
+        setData(res)
+        const positionGains = calcGains(res?.price)
+        const obj = {
+          ...positionGains,
+        }
+        await updatePosition({ uid: currentUser?.uid, symbol, data: obj })
+      })
+    }
+
+    return () => socket.emit('unsubscribe', symbol)
+  }, [symbol])
+
+  return data
 }
