@@ -3,6 +3,7 @@ import { useEffect, useState, useMemo } from 'react'
 import { useDispatch } from 'react-redux'
 import { getBatchStockData } from 'api'
 import { filter } from 'lodash'
+import SocketIO from 'socket.io-client'
 
 export function useGetCurrentStock(selectedStock: string, stockInfo: {}) {
   const dispatch = useDispatch()
@@ -45,4 +46,28 @@ export function useGraphData(stock: { chart: [] }) {
   }
 
   return useMemo(() => getGraphData(stock), [stock])
+}
+
+export function usePriceSubscription(symbol: string) {
+  const [data, setData] = useState({})
+
+  useEffect(() => {
+    const url = 'https://ws-api.iextrading.com/1.0/tops'
+    const socket = SocketIO(url)
+
+    if (symbol) {
+      socket.on('connect', () => {
+        socket.emit('subscribe', symbol)
+      })
+
+      socket.on('message', message => {
+        const res = JSON.parse(message)
+        setData(res)
+      })
+    }
+
+    return () => socket.emit('unsubscribe', symbol)
+  }, [symbol])
+
+  return data
 }

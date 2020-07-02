@@ -11,7 +11,11 @@ import StockNews from './StockNews'
 import StockTradeBar from './StockTradeBar'
 import { addToWatchlist, removeFromWatchlist } from 'api'
 import { find, minBy } from 'lodash'
-import { useGetCurrentStock, useGraphData } from './stockHooks'
+import {
+  useGetCurrentStock,
+  useGraphData,
+  usePriceSubscription,
+} from './stockHooks'
 
 export default function Stock({ route }) {
   const { goBack } = useNavigation()
@@ -24,6 +28,7 @@ export default function Stock({ route }) {
   const { uid } = useSelector(({ user }) => user?.currentUser)
   const [allowScroll, setAllowScroll] = useState(true)
   const dispatch = useDispatch()
+  const { lastSalePrice } = usePriceSubscription(selectedStock)
 
   const openTradeView = () => {
     dispatch({
@@ -97,7 +102,9 @@ export default function Stock({ route }) {
                   </Text>
                 </View>
                 <Text type="heading" weight="bold" style={{ paddingTop: 6 }}>
-                  {stock?.quote?.iexRealtimePrice}
+                  {/* {stock?.quote?.iexRealtimePrice} */}
+                  {lastSalePrice.toFixed(2) ??
+                    stock?.quote?.iexRealtimePrice.toFixed(2)}
                 </Text>
               </View>
 
