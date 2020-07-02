@@ -4,6 +4,14 @@ import perf from '@react-native-firebase/perf'
 import type { TradeDataType, DocReference } from 'types'
 import { WTD_API_KEY, IEX_CLOUD_KEY } from '../../config'
 import { formatCurrency } from 'utils/functions'
+import functions from '@react-native-firebase/functions'
+
+const FR = firestore()
+
+if (__DEV__) {
+  functions().useFunctionsEmulator('http://localhost:4001')
+  FR.settings({ host: 'localhost:4002', persistence: true, ssl: false })
+}
 
 async function get(query: string) {
   const url = `https://api.worldtradingdata.com/api/v1/${query}&api_token=${WTD_API_KEY}`
@@ -53,7 +61,7 @@ export async function createTrade(
   data: TradeDataType,
   callback?: () => void,
 ) {
-  const ref: DocReference = firestore().doc(`Users/${uid}`)
+  const ref: DocReference = FR.doc(`Users/${uid}`)
 
   try {
     await ref.collection('trades').add(data)
@@ -79,7 +87,7 @@ export async function searchTerm(term: string) {
 }
 
 export async function addToWatchlist(uid: string, symbol: string) {
-  const ref: DocReference = firestore().doc(`Users/${uid}`)
+  const ref: DocReference = FR.doc(`Users/${uid}`)
 
   try {
     await ref.collection('watchlist').doc(symbol).set({ symbol })
@@ -89,7 +97,7 @@ export async function addToWatchlist(uid: string, symbol: string) {
 }
 
 export async function removeFromWatchlist(uid: string, symbol: string) {
-  const ref: DocReference = firestore().doc(`Users/${uid}`)
+  const ref: DocReference = FR.doc(`Users/${uid}`)
 
   try {
     await ref.collection('watchlist').doc(symbol).delete()
@@ -120,7 +128,7 @@ export async function getBatchStockData(
 type CreateUserType = { uid: string, name: string, email: string }
 
 export async function createUserData({ uid, name, email }: CreateUserType) {
-  const userRef = firestore().doc(`Users/${uid}`)
+  const userRef = FR.doc(`Users/${uid}`)
   const cash = 15000
   try {
     await userRef.set({
@@ -134,4 +142,9 @@ export async function createUserData({ uid, name, email }: CreateUserType) {
   } catch (err) {
     console.log('onCreateUserTrigger [Function] - ', err)
   }
+}
+
+export function callUpdateGains(uid: string) {
+  const onUpdateGainsCall = functions().httpsCallable('onUpdateGainsCall')
+  onUpdateGainsCall({ uid })
 }

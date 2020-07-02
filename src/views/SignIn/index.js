@@ -11,6 +11,11 @@ import { BACKGROUND } from 'utils/colors'
 import logo from '../../../assets/bootsplash_logo2x.png'
 import { createUserData } from 'api'
 
+const FR = firestore()
+if (__DEV__) {
+  FR.settings({ host: 'localhost:4002' })
+}
+
 export default function SignIn() {
   async function onAppleButtonPress() {
     const appleAuthRequestResponse = await appleAuth.performRequest({
@@ -34,7 +39,7 @@ export default function SignIn() {
       await currentUser.updateProfile({ displayName })
 
       try {
-        const user = await firestore().doc(`Users/${uid}`).get()
+        const user = await FR.doc(`Users/${uid}`).get()
         const userExists = user.exists
         if (!userExists) {
           await createUserData({ uid, name: displayName, email })
