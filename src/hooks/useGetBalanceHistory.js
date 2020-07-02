@@ -2,27 +2,29 @@
 import { useEffect, useState } from 'react'
 import firestore from '@react-native-firebase/firestore'
 import moment from 'moment'
-import { uniqBy, sortBy } from 'lodash'
+import { uniqBy } from 'lodash'
+import { currencyToNumber } from 'utils/functions'
 
 function useGetBalanceHistory(uid: string, currentValue: string) {
   const [balanceHistory, setBalanceHistory] = useState(null)
   useEffect(() => {
     const subscribe = firestore()
       .collection(`Users/${uid}/balance_history`)
+      .orderBy('date', 'asc')
       .onSnapshot(async snapshot => {
         try {
           const list = []
           snapshot.forEach(doc => {
-            let obj = {}
             const data = doc.data()
-            obj.date = moment.utc(data.date).format('MMM DD, YYYY')
-            obj.value = data.value
-            list.push(obj)
+            list.push({
+              date: moment.utc(data?.date).format('MMM DD, YYYY'),
+              value: currencyToNumber(data?.value),
+            })
           })
           const today = Date.now()
           list.push({
             date: moment.utc(today).format('MMM DD, YYYY'),
-            value: currentValue,
+            value: currencyToNumber(currentValue),
           })
           setBalanceHistory(list)
         } catch (err) {
@@ -33,7 +35,7 @@ function useGetBalanceHistory(uid: string, currentValue: string) {
     return () => subscribe()
   }, [uid, currentValue])
 
-  return sortBy(uniqBy(balanceHistory, 'date'), 'date')
+  return uniqBy(balanceHistory, 'date')
 }
 
 export default useGetBalanceHistory
