@@ -11,8 +11,8 @@ import {
 import { useNavigation } from '@react-navigation/native'
 import StockHorizontalList from './StockHorizontalList'
 import Watchlist from './Watchlist'
-import { currencyToNumber } from 'utils/functions'
-import { last, nth } from 'lodash'
+import { currencyToNumber, formatCurrency } from 'utils/functions'
+import { nth } from 'lodash'
 
 export default function Home() {
   const { userInfo, currentUser } = useUser()
@@ -34,7 +34,7 @@ export default function Home() {
   }, [timeout])
 
   const onChartEvent = (value: string | number | null) => {
-    setBalanceValue(value)
+    setBalanceValue(value ? formatCurrency(value) : null)
     if (!value) {
       timeout = setTimeout(() => setAllowScroll(true), 500)
     } else {
@@ -43,11 +43,9 @@ export default function Home() {
   }
 
   const dayChange = useMemo(() => {
-    const lastEl = last(balanceHistory)
-    const change =
-      currencyToNumber(userInfo?.portfolioValue) -
-      currencyToNumber(lastEl?.value)
-    return (change ?? 0).toFixed(2) // parseFloat(change ?? 0)
+    const lastEl = nth(balanceHistory, -2)
+    const change = currencyToNumber(userInfo?.portfolioValue) - lastEl?.value
+    return (change ?? 0).toFixed(2)
   }, [balanceHistory, userInfo?.portfolioValue])
 
   return (
@@ -61,14 +59,14 @@ export default function Home() {
           value={balanceValue ?? userInfo?.portfolioValue}
           dayChange={dayChange}
         />
-        <ChartLine
-          data={balanceHistory}
-          x="date"
-          chartProps={{
-            minDomain: { y: 0.8 },
-          }}
-          onChartEvent={onChartEvent}
-        />
+        {balanceHistory && (
+          <ChartLine
+            data={balanceHistory}
+            x="date"
+            y="value"
+            onChartEvent={onChartEvent}
+          />
+        )}
         <StockHorizontalList data={positions} loading={loading} />
         {watchlist.length > 0 && (
           <Watchlist data={watchlist} onItemPress={onWatchlistItemPress} />

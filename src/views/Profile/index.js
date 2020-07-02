@@ -13,7 +13,6 @@ import Products from '../Products'
 
 export default function Profile() {
   const { userInfo } = useSelector(({ user }) => user)
-  const { cash, portfolioValue } = userInfo
   const iapRef = useRef()
   const [isIapOpen, setIsIapOpen] = useState(false)
 
@@ -34,7 +33,7 @@ export default function Profile() {
             <View>
               <Text style={styles.value}>Cash</Text>
               <Text style={styles.cash} weight="Bold" type="title">
-                {formatCurrency(cash)}
+                {formatCurrency(userInfo?.cash)}
               </Text>
             </View>
 
@@ -45,10 +44,12 @@ export default function Profile() {
         </Container>
 
         <Container top={40}>
-          <ProfileItem label="Portfolio" value={portfolioValue} />
+          <ProfileItem label="Portfolio" value={userInfo?.portfolioValue} />
           <ProfileItem
             label="Total Value"
-            value={formatCurrency(currencyToNumber(portfolioValue) + cash)}
+            value={formatCurrency(
+              currencyToNumber(userInfo?.portfolioValue) + userInfo?.cash,
+            )}
           />
         </Container>
       </View>
