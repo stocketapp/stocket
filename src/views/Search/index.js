@@ -11,7 +11,6 @@ import SearchResult from './SearchResult'
 export default function Search(): React$Node {
   const [search, setSearch] = useState(null)
   const [results, setResults] = useState(null)
-  const [savedSearchTerm, setSavedSearchTerm] = useState(null)
   const debounced = useDebounce(search)
   const { currentUser } = useUser()
   const { navigate } = useNavigation()
@@ -20,9 +19,8 @@ export default function Search(): React$Node {
   useEffect(() => {
     const getResults = async () => {
       try {
-        setSavedSearchTerm(debounced)
         const res = await searchTerm(debounced)
-        setResults([res])
+        setResults(res)
       } catch (err) {
         setResults(null)
         console.log('search', err)
@@ -37,7 +35,7 @@ export default function Search(): React$Node {
   const goToStock = (item: {}) => {
     dispatch({
       type: 'SET_SELECTED_STOCK',
-      selectedStock: item?.quote?.symbol,
+      selectedStock: item?.symbol,
     })
     navigate('Stock')
   }
@@ -50,9 +48,9 @@ export default function Search(): React$Node {
         data={results}
         renderItem={({ item }) => (
           <SearchResult
-            item={item[savedSearchTerm]}
+            item={item}
             onPress={addToWatchlist}
-            setStock={() => goToStock(item[savedSearchTerm])}
+            setStock={() => goToStock(item)}
             uid={currentUser?.uid}
           />
         )}
