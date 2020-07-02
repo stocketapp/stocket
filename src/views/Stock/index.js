@@ -19,8 +19,12 @@ import {
 
 export default function Stock({ route }) {
   const { goBack } = useNavigation()
-  const { selectedStockPosition, selectedStock, watchlist } = useSelector(
+  const { positions, selectedStock, watchlist } = useSelector(
     ({ stock }) => stock,
+  )
+  const selectedStockPosition = find(
+    positions,
+    el => el.symbol === selectedStock,
   )
   const stockInfo = route.params?.stockInfo
   const stock = useGetCurrentStock(selectedStock, stockInfo)
@@ -57,6 +61,8 @@ export default function Stock({ route }) {
     watchlist,
     el => el?.quote?.symbol === stock?.quote?.symbol,
   )
+  const latestPrice =
+    price?.toFixed(2) ?? stock?.quote?.iexRealtimePrice.toFixed(2)
 
   return (
     <Container style={styles.container} safeAreaTop>
@@ -103,8 +109,7 @@ export default function Stock({ route }) {
                 </View>
                 <Text type="heading" weight="bold" style={{ paddingTop: 6 }}>
                   {/* {stock?.quote?.iexRealtimePrice} */}
-                  {price?.toFixed(2) ??
-                    stock?.quote?.iexRealtimePrice.toFixed(2)}
+                  {latestPrice}
                 </Text>
               </View>
 
@@ -135,7 +140,7 @@ export default function Stock({ route }) {
 
           <StockTradeBar
             status={stock?.quote?.change < 0 ? 'negative' : 'positive'}
-            price={stock?.quote?.latestPrice}
+            price={latestPrice}
             openTradeView={openTradeView}
             stockData={stock}
           />
