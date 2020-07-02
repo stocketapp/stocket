@@ -33,8 +33,7 @@ export default function Stock({ route }) {
   const [allowScroll, setAllowScroll] = useState(true)
   const dispatch = useDispatch()
   const { price } = usePriceSubscription(selectedStockPosition)
-  const latestPrice =
-    price?.toFixed(2) ?? stock?.quote?.iexRealtimePrice.toFixed(2)
+  const latestPrice = price?.toFixed(2) ?? stock?.quote?.latestPrice.toFixed(2)
 
   const openTradeView = () => {
     dispatch({
@@ -54,10 +53,6 @@ export default function Stock({ route }) {
       setAllowScroll(false)
     }
   }
-
-  const hasPosition =
-    selectedStockPosition?.shares &&
-    selectedStockPosition?.symbol === selectedStock
 
   const isFav = find(
     watchlist,
@@ -108,7 +103,6 @@ export default function Stock({ route }) {
                   </Text>
                 </View>
                 <Text type="heading" weight="bold" style={{ paddingTop: 6 }}>
-                  {/* {stock?.quote?.iexRealtimePrice} */}
                   {latestPrice}
                 </Text>
               </View>
@@ -130,11 +124,11 @@ export default function Stock({ route }) {
 
               <StockDetails data={stock?.quote} />
 
-              {hasPosition && <StockPosition data={selectedStockPosition} />}
-
-              {stock?.news && process.env.NODE_ENV !== 'development' && (
-                <StockNews articles={stock?.news} />
+              {selectedStockPosition && (
+                <StockPosition data={selectedStockPosition} />
               )}
+
+              {stock?.news && <StockNews articles={stock?.news} />}
             </View>
           </ScrollView>
 
