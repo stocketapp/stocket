@@ -14,10 +14,9 @@ if (__DEV__) {
 }
 
 async function iexGet(endpoint: string, query?: string = '') {
-  const iexUrl =
-    __DEV__ === 'development'
-      ? 'https://sandbox.iexapis.com/stable'
-      : 'https://cloud.iexapis.com/v1'
+  const iexUrl = __DEV__
+    ? 'https://sandbox.iexapis.com/stable'
+    : 'https://cloud.iexapis.com/v1'
   const q = query !== '' ? `&${query}` : ''
   const url = `${iexUrl}/${endpoint}?token=${IEX_CLOUD_KEY}${q}`
   const metric = await perf().newHttpMetric(url, 'GET')
@@ -52,14 +51,16 @@ export async function createTrade(
 }
 
 export async function searchTerm(term: string) {
-  // const res = await iexGet(`search/${term}`)
+  const res = await iexGet(`search/${term}`)
   // Change this to use the search API once I upgrade to paid plan
-  const range = '1d'
-  const typeQuery = '&types=quote,news,chart,intraday-prices'
-  const rangeQuery = `${range && `&range=${range}`}`
-  const url = `symbols=${term}${typeQuery}${rangeQuery}&last=5&chartInterval=5&chartIEXWhenNull=true`
-  const res = await iexGet('stock/market/batch', url)
+  // const range = '1d'
+  // const typeQuery = '&types=quote,news,chart,intraday-prices'
+  // const rangeQuery = `${range && `&range=${range}`}`
+  // const url = `symbols=${term}${typeQuery}${rangeQuery}&last=5&chartInterval=5&chartIEXWhenNull=true`
+  // const res = await iexGet('stock/market/batch', url)
+  console.log(res)
   const result = await res.json()
+  console.log(result)
   return result
 }
 
