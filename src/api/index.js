@@ -140,11 +140,26 @@ export async function createUserData({ uid, name, email }: CreateUserType) {
       uid,
     })
   } catch (err) {
-    console.log('onCreateUserTrigger [Function] - ', err)
+    console.log('[Error] onCreateUserTrigger()', err)
   }
 }
 
 export function callUpdateGains(uid: string) {
   const onUpdateGainsCall = functions().httpsCallable('onUpdateGainsCall')
   onUpdateGainsCall({ uid })
+}
+
+type UpdatePositionTypes = {
+  uid: string,
+  symbol: string,
+  data: {},
+}
+export async function updatePosition(params: UpdatePositionTypes) {
+  const { uid, symbol, data } = params
+  const positionsRef = FR.doc(`Users/${uid}/positions/${symbol}`)
+  try {
+    await positionsRef.update(data)
+  } catch (err) {
+    console.log('[Error] updatePosition()', err)
+  }
 }

@@ -28,7 +28,7 @@ export default function Stock({ route }) {
   const { uid } = useSelector(({ user }) => user?.currentUser)
   const [allowScroll, setAllowScroll] = useState(true)
   const dispatch = useDispatch()
-  const { lastSalePrice } = usePriceSubscription(selectedStock)
+  const { price } = usePriceSubscription(selectedStockPosition)
 
   const openTradeView = () => {
     dispatch({
@@ -103,7 +103,7 @@ export default function Stock({ route }) {
                 </View>
                 <Text type="heading" weight="bold" style={{ paddingTop: 6 }}>
                   {/* {stock?.quote?.iexRealtimePrice} */}
-                  {lastSalePrice.toFixed(2) ??
+                  {price?.toFixed(2) ??
                     stock?.quote?.iexRealtimePrice.toFixed(2)}
                 </Text>
               </View>
