@@ -33,6 +33,8 @@ export default function Stock({ route }) {
   const [allowScroll, setAllowScroll] = useState(true)
   const dispatch = useDispatch()
   const { price } = usePriceSubscription(selectedStockPosition)
+  const latestPrice =
+    price?.toFixed(2) ?? stock?.quote?.iexRealtimePrice.toFixed(2)
 
   const openTradeView = () => {
     dispatch({
@@ -41,7 +43,7 @@ export default function Stock({ route }) {
     })
     dispatch({
       type: 'STOCK_PRICE',
-      stockPrice: stock?.quote?.latestPrice,
+      stockPrice: latestPrice,
     })
   }
 
@@ -61,8 +63,6 @@ export default function Stock({ route }) {
     watchlist,
     el => el?.quote?.symbol === stock?.quote?.symbol,
   )
-  const latestPrice =
-    price?.toFixed(2) ?? stock?.quote?.iexRealtimePrice.toFixed(2)
 
   return (
     <Container style={styles.container} safeAreaTop>
