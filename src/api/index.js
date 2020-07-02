@@ -52,15 +52,7 @@ export async function createTrade(
 
 export async function searchTerm(term: string) {
   const res = await iexGet(`search/${term}`)
-  // Change this to use the search API once I upgrade to paid plan
-  // const range = '1d'
-  // const typeQuery = '&types=quote,news,chart,intraday-prices'
-  // const rangeQuery = `${range && `&range=${range}`}`
-  // const url = `symbols=${term}${typeQuery}${rangeQuery}&last=5&chartInterval=5&chartIEXWhenNull=true`
-  // const res = await iexGet('stock/market/batch', url)
-  console.log(res)
   const result = await res.json()
-  console.log(result)
   return result
 }
 
