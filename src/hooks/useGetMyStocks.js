@@ -20,21 +20,13 @@ export default function useGetMyStocks(uid: string): {} {
       .collection('positions')
       .orderBy('gainsPercentage', 'desc')
       .onSnapshot(async snapshot => {
-        try {
-          setLoading(true)
-          const list = []
-          await snapshot.forEach(doc => {
-            list.push(doc.data())
-          })
-          dispatch({
-            type: 'ALL_MY_STOCKS',
-            positions: list,
-          })
-        } catch (err) {
-          console.log('useGetMyStocks', err)
-        } finally {
-          setLoading(false)
-        }
+        setLoading(true)
+        const list = snapshot.docs.map(el => el.data())
+        dispatch({
+          type: 'ALL_MY_STOCKS',
+          positions: list,
+        })
+        setLoading(false)
       })
 
     return () => subscribe()
