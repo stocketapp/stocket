@@ -10,7 +10,7 @@ export default function StockEmpty() {
     <View style={styles.container}>
       <Text cap>Portfolio is empty</Text>
 
-      <TouchableOpacity style={styles.btn} onPress={() => navigate('Trade')}>
+      <TouchableOpacity style={styles.btn} onPress={() => navigate('Search')}>
         <Text>Start Trading</Text>
       </TouchableOpacity>
     </View>

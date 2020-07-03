@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 // @flow
 import { useEffect } from 'react'
 import auth from '@react-native-firebase/auth'
@@ -22,7 +23,7 @@ export default function useAuthState() {
       } else {
         dispatch({
           type: 'USER_LOGOUT',
-          isAuth: true,
+          isAuth: false,
         })
       }
     })

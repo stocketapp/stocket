@@ -6,20 +6,16 @@ import { GREEN, BACKGROUND, DARK_TEXT, GRAY_DARKER } from 'utils/colors'
 
 type StockTradeBarProps = {
   status: string,
-  change: number,
+  price: number,
   openTradeView: () => void,
 }
 
-export default ({ status, change, openTradeView }: StockTradeBarProps) => (
+export default ({ status, price, openTradeView }: StockTradeBarProps) => (
   <Container style={styles.bottom} top={5} bottom={10}>
     <View style={{ flexDirection: 'column' }}>
-      <Text color={GRAY_DARKER}>Day change </Text>
-      <Text
-        weight="Black"
-        status={status}
-        style={{ paddingTop: 2, fontSize: 15 }}
-      >
-        {change}
+      <Text color={GRAY_DARKER}>Trade at</Text>
+      <Text weight="Black" style={{ paddingTop: 2, fontSize: 15 }}>
+        ${price}
       </Text>
     </View>
 

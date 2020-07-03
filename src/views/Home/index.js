@@ -1,5 +1,4 @@
 import React from 'react'
-import { useGetPortfolio } from 'hooks'
 import { createStackNavigator } from '@react-navigation/stack'
 import Stock from '../Stock'
 import HomeView from './HomeView'

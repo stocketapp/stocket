@@ -10,14 +10,21 @@ import TradeDetails from './TradeDetails'
 import TradeTotal from './TradeTotal'
 import TradeAction from './TradeAction'
 
-export default forwardRef((props, ref) => {
-  const { trade, stock, user } = useSelector(state => state)
-  const { tradeViewIsOpen, stockQuantity, selectedTradeAction } = trade
-  const { selectedStock } = stock
+function TradeView({ ref }) {
+  const { trade, user, stock } = useSelector(state => state)
+  const {
+    tradeViewIsOpen,
+    stockQuantity,
+    selectedTradeAction,
+    tradeStock,
+    stockPrice,
+  } = trade
+  const { selectedStockPosition } = stock
   const { currentUser, userInfo } = user
   const dispatch = useDispatch()
-  const sharesOwned = selectedStock?.shares?.length
-  const maxShares = Math.floor(userInfo?.cash / selectedStock?.price)
+  const sharesOwned = selectedStockPosition?.shares?.length
+
+  const maxShares = Math.floor(userInfo?.cash / stockPrice)
 
   useEffect(() => {
     if (tradeViewIsOpen) {
@@ -57,19 +64,20 @@ export default forwardRef((props, ref) => {
     })
   }
 
-  const total = useMemo(() => stockQuantity * selectedStock?.price, [
+  const total = useMemo(() => stockQuantity * stockPrice, [
     stockQuantity,
-    selectedStock,
+    stockPrice,
   ])
 
   const createTradeTransaction = () => {
     const obj = {
       value: total,
-      price: selectedStock?.price,
-      name: selectedStock?.name,
-      symbol: selectedStock?.symbol,
+      price: stockPrice,
+      name: tradeStock?.quote.companyName,
+      symbol: tradeStock?.quote.symbol,
       quantity: stockQuantity,
       action: selectedTradeAction,
+      date: Date.now(),
     }
     createTrade(currentUser?.uid, obj, () => {
       closeTradeView()
@@ -97,16 +105,17 @@ export default forwardRef((props, ref) => {
       <View style={{ flex: 1, justifyContent: 'space-between' }}>
         <View style={{ paddingHorizontal: 16 }}>
           <TradeHeader
-            symbol={selectedStock?.symbol}
+            symbol={stock?.symbol}
             isSell={trade.selectedTradeAction === 'SELL'}
           />
 
           <TradeDetails
-            selectedStock={selectedStock}
+            selectedStock={tradeStock?.quote}
             quantity={stockQuantity}
             maxShares={maxShares}
             isSell={selectedTradeAction === 'BUY'}
             owned={sharesOwned}
+            price={stockPrice}
           />
 
           <TradeAction
@@ -136,7 +145,9 @@ export default forwardRef((props, ref) => {
       </View>
     </Sheet>
   )
-})
+}
+
+export default forwardRef((props, ref) => TradeView({ ref, ...props }))
 
 const styles = {
   container: {

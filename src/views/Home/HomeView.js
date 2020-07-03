@@ -1,18 +1,77 @@
-import React from 'react'
-import { StyleSheet } from 'react-native'
+import React, { useState, useEffect, useMemo } from 'react'
+import { StyleSheet, ScrollView } from 'react-native'
 import { BACKGROUND } from 'utils/colors'
-import { Balance, LineChart, Container } from 'components'
-import { useGetMyStocks } from 'hooks'
+import { Balance, Container, ChartLine } from 'components'
+import {
+  useGetMyStocks,
+  useWatchlist,
+  useGetBalanceHistory,
+  useUser,
+} from 'hooks'
+import { useNavigation } from '@react-navigation/native'
 import StockHorizontalList from './StockHorizontalList'
+import Watchlist from './Watchlist'
+import { currencyToNumber, formatCurrency } from 'utils/functions'
+import { nth } from 'lodash'
 
 export default function Home() {
-  const { positions, loading } = useGetMyStocks()
+  const { userInfo, currentUser } = useUser()
+  const uid = currentUser?.uid
+  const { positions, loading } = useGetMyStocks(uid)
+  const watchlist = useWatchlist(uid)
+  const { navigate } = useNavigation()
+  const [allowScroll, setAllowScroll] = useState(true)
+  const balanceHistory = useGetBalanceHistory(uid, userInfo?.portfolioValue)
+  const [balanceValue, setBalanceValue] = useState(null)
+  let timeout
+
+  const onWatchlistItemPress = (stockInfo: PositionType) => {
+    navigate('Stock', { stockInfo })
+  }
+
+  useEffect(() => {
+    return () => clearTimeout(timeout)
+  }, [timeout])
+
+  const onChartEvent = (value: string | number | null) => {
+    setBalanceValue(value ? formatCurrency(value) : null)
+    if (!value) {
+      timeout = setTimeout(() => setAllowScroll(true), 500)
+    } else {
+      setAllowScroll(false)
+    }
+  }
+
+  const dayChange = useMemo(() => {
+    const lastEl = nth(balanceHistory, -2)
+    const change = currencyToNumber(userInfo?.portfolioValue) - lastEl?.value
+    return (change ?? 0).toFixed(2)
+  }, [balanceHistory, userInfo?.portfolioValue])
 
   return (
     <Container style={styles.container} safeAreaTop>
-      <Balance />
-      <LineChart />
-      <StockHorizontalList data={positions} loading={loading} />
+      <ScrollView
+        contentContainerStyle={{ paddingBottom: 20 }}
+        showsVerticalScrollIndicator={false}
+        scrollEnabled={allowScroll}
+      >
+        <Balance
+          value={balanceValue ?? userInfo?.portfolioValue}
+          dayChange={dayChange}
+        />
+        {balanceHistory && (
+          <ChartLine
+            data={balanceHistory}
+            x="date"
+            y="value"
+            onChartEvent={onChartEvent}
+          />
+        )}
+        <StockHorizontalList data={positions} loading={loading} />
+        {watchlist.length > 0 && (
+          <Watchlist data={watchlist} onItemPress={onWatchlistItemPress} />
+        )}
+      </ScrollView>
     </Container>
   )
 }

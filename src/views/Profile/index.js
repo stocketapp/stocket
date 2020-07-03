@@ -1,27 +1,27 @@
 // @flow
-import React from 'react'
+import React, { useRef, useState } from 'react'
 import { View } from 'react-native'
 import { Container, Text } from 'components'
-import { SUB_BACKGROUND, LABEL } from 'utils/colors'
+import { LABEL, CARD_BACKGROUND } from 'utils/colors'
 import { useSelector } from 'react-redux'
-import { formatCurrency } from 'utils/functions'
+import { formatCurrency, currencyToNumber } from 'utils/functions'
 import ProfileItem from './ProfileItem'
 import AddCash from './AddCash'
 import LogoutButton from './LogoutButton'
+import p from '../../../package.json'
+import Products from '../Products'
 
 export default function Profile() {
   const { userInfo } = useSelector(({ user }) => user)
+  const iapRef = useRef()
+  const [isIapOpen, setIsIapOpen] = useState(false)
+
   return (
     <Container fullView ph style={{ flex: 1, justifyContent: 'space-between' }}>
       <View style={{ flex: 1 }}>
         <Container style={styles.topBlock} ph safeAreaTop bottom={26}>
           <View>
-            <Text
-              type="title"
-              style={styles.name}
-              weight="Medium"
-              color={LABEL}
-            >
+            <Text type="heading" style={styles.name} weight="Bold">
               {userInfo?.name}
             </Text>
             <Text type="subtext" color={LABEL}>
@@ -32,29 +32,39 @@ export default function Profile() {
           <View style={styles.cashContainer}>
             <View>
               <Text style={styles.value}>Cash</Text>
-              <Text style={styles.cash} weight="Black">
+              <Text style={styles.cash} weight="Bold" type="title">
                 {formatCurrency(userInfo?.cash)}
               </Text>
             </View>
 
             <View>
-              <AddCash />
+              <AddCash onPress={() => setIsIapOpen(true)} />
             </View>
           </View>
         </Container>
 
         <Container top={40}>
+          <ProfileItem label="Portfolio" value={userInfo?.portfolioValue} />
           <ProfileItem
-            label="Portfolio Value"
-            value={userInfo?.portfolioValue}
+            label="Total Value"
+            value={formatCurrency(
+              currencyToNumber(userInfo?.portfolioValue) + userInfo?.cash,
+            )}
           />
-          <ProfileItem label="Combined Value" value={userInfo?.combinedValue} />
         </Container>
       </View>
 
       <View style={{ width: '100%', alignItems: 'center', paddingBottom: 20 }}>
         <LogoutButton />
+        <Text style={{ paddingTop: 10 }} type="subtext" color={LABEL}>
+          {p.version}
+        </Text>
       </View>
+      <Products
+        ref={iapRef}
+        isOpen={isIapOpen}
+        onClose={() => setIsIapOpen(false)}
+      />
     </Container>
   )
 }
@@ -62,22 +72,21 @@ export default function Profile() {
 const styles = {
   topBlock: {
     width: '100%',
-    height: '29%',
-    backgroundColor: SUB_BACKGROUND,
+    height: '32%',
+    backgroundColor: CARD_BACKGROUND,
     borderBottomRightRadius: 12,
     borderBottomLeftRadius: 12,
     justifyContent: 'space-between',
     paddingHorizontal: 24,
   },
   name: {
-    paddingTop: 10,
+    paddingTop: 15,
   },
   value: {
     fontSize: 15,
     color: LABEL,
   },
   cash: {
-    fontSize: 16,
     paddingTop: 5,
   },
   cashContainer: {

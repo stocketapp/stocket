@@ -21,7 +21,7 @@ const PadButton = ({ value, onPress, onDelete }) => {
   )
 }
 
-export default ({ onKeyPress, onDelete }) => {
+const VirtualNumPad = ({ onKeyPress, onDelete }) => {
   return (
     <View>
       {pad.map((row, i) => (
@@ -62,3 +62,5 @@ const styles = {
     fontWeight: '300',
   },
 }
+
+export default VirtualNumPad

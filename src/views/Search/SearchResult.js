@@ -5,7 +5,7 @@ import { BACKGROUND, GRAY_DARKER, GREEN } from 'utils/colors'
 
 type SearchResultProps = {
   item: {
-    securityName: string,
+    companyName: string,
     symbol: string,
   },
   onPress: () => void,
@@ -13,34 +13,40 @@ type SearchResultProps = {
   uid: string,
 }
 
-export default ({
-  item: { securityName, symbol },
+export default function SearchResult({
+  item,
   onPress,
   setStock,
   uid,
-}: SearchResultProps) => (
-  <TouchableOpacity style={styles.resultItem} onPress={() => setStock(symbol)}>
-    <View>
-      <Text weight="Medium" type="label">
-        {securityName}
-      </Text>
-      <Text color={GRAY_DARKER} type="subtext" style={{ paddingTop: 5 }}>
-        {symbol}
-      </Text>
-    </View>
-
-    <TouchableOpacity
-      style={{ padding: 6 }}
-      onPress={() => onPress(uid, { symbol })}
-    >
-      <View style={styles.plus}>
-        <Text type="title" style={{ bottom: 3.8, left: 0.5 }} status="positive">
-          +
+}: SearchResultProps) {
+  return (
+    <TouchableOpacity style={styles.resultItem} onPress={setStock}>
+      <View style={{ flex: 1 }}>
+        <Text weight="Medium" type="label">
+          {item?.securityName}
+        </Text>
+        <Text color={GRAY_DARKER} type="subtext" style={{ paddingTop: 5 }}>
+          {item?.symbol}
         </Text>
       </View>
+
+      <TouchableOpacity
+        style={{ padding: 6 }}
+        onPress={() => onPress(uid, { symbol: item?.symbol })}
+      >
+        <View style={styles.plus}>
+          <Text
+            type="title"
+            style={{ bottom: 3.8, left: 0.5 }}
+            status="positive"
+          >
+            +
+          </Text>
+        </View>
+      </TouchableOpacity>
     </TouchableOpacity>
-  </TouchableOpacity>
-)
+  )
+}
 
 const styles = {
   container: {

@@ -1,5 +1,5 @@
 import React from 'react'
-import { View, Text, StyleSheet } from 'react-native'
+import { View, StyleSheet, Image } from 'react-native'
 import auth from '@react-native-firebase/auth'
 import firestore from '@react-native-firebase/firestore'
 import appleAuth, {
@@ -8,6 +8,13 @@ import appleAuth, {
   AppleAuthRequestOperation,
 } from '@invertase/react-native-apple-authentication'
 import { BACKGROUND } from 'utils/colors'
+import logo from '../../../assets/bootsplash_logo2x.png'
+import { createUserData } from 'api'
+
+const FR = firestore()
+if (__DEV__) {
+  FR.settings({ host: 'localhost:4002' })
+}
 
 export default function SignIn() {
   async function onAppleButtonPress() {
@@ -27,17 +34,25 @@ export default function SignIn() {
       )
       await auth().signInWithCredential(appleCredential)
       const currentUser = auth().currentUser
+      const { uid, email } = currentUser
       const displayName = `${fullName?.givenName} ${fullName?.familyName}`
-      currentUser.updateProfile({ displayName })
-      await firestore().doc(`Users/${currentUser?.uid}`).update({
-        name: displayName,
-      })
+      await currentUser.updateProfile({ displayName })
+
+      try {
+        const user = await FR.doc(`Users/${uid}`).get()
+        const userExists = user.exists
+        if (!userExists) {
+          await createUserData({ uid, name: displayName, email })
+        }
+      } catch (err) {
+        console.log(err)
+      }
     }
   }
 
   return (
     <View style={styles.container}>
-      <Text>Sign In</Text>
+      <Image source={logo} style={styles.logo} />
       <AppleButton
         style={styles.appleButton}
         buttonStyle={AppleButton.Style.WHITE}
@@ -62,5 +77,10 @@ const styles = StyleSheet.create({
     shadowRadius: 4,
     width: '70%',
     height: 45,
+  },
+  logo: {
+    resizeMode: 'contain',
+    height: 160,
+    marginBottom: '40%',
   },
 })
