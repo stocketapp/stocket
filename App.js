@@ -5,7 +5,7 @@ import { StatusBar, View } from 'react-native'
 import { useAuthState, useSetUserInfo, useIapHub } from 'hooks'
 // import RNBootSplash from 'react-native-bootsplash'
 import { BACKGROUND } from 'utils/colors'
-import { IAPHUB_API_KEY, IAPHUB_APPID } from './config'
+import { IAPHUB_API_KEY, IAPHUB_APPID, IAPHUB_ENV } from './config'
 import TradeView from 'views/TradeView'
 import * as RNIap from 'react-native-iap'
 import IapHub from 'react-native-iaphub'
@@ -15,7 +15,7 @@ import AuthStack from './src/navigation/AuthenticationStack'
 const iapHubConfig = {
   appId: IAPHUB_APPID,
   apiKey: IAPHUB_API_KEY,
-  environment: 'development',
+  environment: IAPHUB_ENV,
 }
 
 export default function App(): React$Node {
