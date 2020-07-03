@@ -49,8 +49,13 @@ export async function createTrade(
 }
 
 export async function searchTerm(term: string) {
+  const trace = await perf().startTrace('IEX_TRACE')
+  trace.putAttribute('search_term', term)
   const res = await iexGet(`search/${term}`)
+  trace.putAttribute('search_response', String(res.status))
   const result = await res.json()
+  trace.putMetric('url_hit', 1)
+  await trace.stop()
   return result
 }
 
