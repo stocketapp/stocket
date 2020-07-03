@@ -14,9 +14,9 @@ const SearchSymbol = (props: SearchSymbolProps): React$Node => {
           value={value}
           onChangeText={setValue}
           style={styles.searchInput}
-          placeholder="Search"
+          placeholder="Search company symbol or name"
           placeholderTextColor={GRAY_DARKER}
-          autoCapitalize="characters"
+          autoCapitalize="words"
           returnKeyType="search"
           onSubmitEditing={({ text }) => onSearch(text)}
         />
