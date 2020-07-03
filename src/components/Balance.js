@@ -1,7 +1,7 @@
 // @flow
 import React from 'react'
 import { View } from 'react-native'
-import { GRAY_DARKER, LABEL } from 'utils/colors'
+import { GRAY_DARKER, LABEL, GREEN, RED } from 'utils/colors'
 import Text from './Text'
 import Container from './Container'
 
@@ -11,6 +11,7 @@ type Props = {
 }
 
 const Balance = ({ value, dayChange }: Props): React$Node => {
+  const color = dayChange > 0 ? GREEN : dayChange < 0 ? RED : 'white'
   return (
     <Container ph>
       <Text color={GRAY_DARKER} type="label">
@@ -23,7 +24,7 @@ const Balance = ({ value, dayChange }: Props): React$Node => {
         <Text weight="Light" color={LABEL}>
           Today's change{' '}
         </Text>
-        <Text weight="Bold" status={dayChange > 0 ? 'positive' : 'negative'}>
+        <Text weight="Bold" color={color}>
           {dayChange > 0 && '+'}
           {dayChange}
         </Text>

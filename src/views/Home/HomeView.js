@@ -13,6 +13,7 @@ import StockHorizontalList from './StockHorizontalList'
 import Watchlist from './Watchlist'
 import { currencyToNumber, formatCurrency } from 'utils/functions'
 import { nth } from 'lodash'
+import { useDispatch } from 'react-redux'
 
 export default function Home() {
   const { userInfo, currentUser } = useUser()
@@ -23,10 +24,15 @@ export default function Home() {
   const [allowScroll, setAllowScroll] = useState(true)
   const balanceHistory = useGetBalanceHistory(uid, userInfo?.portfolioValue)
   const [balanceValue, setBalanceValue] = useState(null)
+  const dispatch = useDispatch()
   let timeout
 
   const onWatchlistItemPress = (stockInfo: PositionType) => {
-    navigate('Stock', { stockInfo })
+    dispatch({
+      type: 'SET_SELECTED_STOCK',
+      selectedStock: stockInfo?.quote?.symbol,
+    })
+    navigate('Stock')
   }
 
   useEffect(() => {
@@ -44,6 +50,9 @@ export default function Home() {
 
   const dayChange = useMemo(() => {
     const lastEl = nth(balanceHistory, -2)
+    if (!lastEl) {
+      return 0
+    }
     const change = currencyToNumber(userInfo?.portfolioValue) - lastEl?.value
     return (change ?? 0).toFixed(2)
   }, [balanceHistory, userInfo?.portfolioValue])
