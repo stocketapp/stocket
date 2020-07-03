@@ -2,7 +2,7 @@
 import firestore from '@react-native-firebase/firestore'
 import perf from '@react-native-firebase/perf'
 import type { TradeDataType, DocReference } from 'types'
-import { IEX_CLOUD_KEY } from '../../config'
+import { IEX_CLOUD_KEY, IEX_URL } from '../../config'
 import { formatCurrency } from 'utils/functions'
 import functions from '@react-native-firebase/functions'
 
@@ -14,9 +14,7 @@ if (__DEV__) {
 }
 
 async function iexGet(endpoint: string, query?: string = '') {
-  const iexUrl = __DEV__
-    ? 'https://sandbox.iexapis.com/stable'
-    : 'https://cloud.iexapis.com/v1'
+  const iexUrl = IEX_URL
   const q = query !== '' ? `&${query}` : ''
   const url = `${iexUrl}/${endpoint}?token=${IEX_CLOUD_KEY}${q}`
   const metric = await perf().newHttpMetric(url, 'GET')
