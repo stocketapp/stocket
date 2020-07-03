@@ -2,29 +2,21 @@
 import firestore from '@react-native-firebase/firestore'
 import perf from '@react-native-firebase/perf'
 import type { TradeDataType, DocReference } from 'types'
-import { WTD_API_KEY, IEX_CLOUD_KEY } from '../../config'
+import { IEX_CLOUD_KEY } from '../../config'
+import { formatCurrency } from 'utils/functions'
+import functions from '@react-native-firebase/functions'
 
-async function get(query: string) {
-  const url = `https://api.worldtradingdata.com/api/v1/${query}&api_token=${WTD_API_KEY}`
-  const metric = await perf().newHttpMetric(url, 'GET')
-  metric.putAttribute('user', 'abcd')
-  const res = await fetch(url, {
-    method: 'GET',
-    Accept: 'applicatiion/json',
-  })
-  metric.setHttpResponseCode(res.status)
-  metric.setResponseContentType(res.headers.get('Content-Type'))
-  metric.setResponsePayloadSize(res.headers.get('Content-Length'))
+const FR = firestore()
 
-  await metric.stop()
-  return res
+if (__DEV__) {
+  functions().useFunctionsEmulator('http://localhost:4001')
+  FR.settings({ host: 'localhost:4002', persistence: true, ssl: false })
 }
 
 async function iexGet(endpoint: string, query?: string = '') {
-  const iexUrl =
-    process.env.NODE_ENV === 'development'
-      ? 'https://sandbox.iexapis.com/stable'
-      : 'https://cloud.iexapis.com/v1'
+  const iexUrl = __DEV__
+    ? 'https://sandbox.iexapis.com/stable'
+    : 'https://cloud.iexapis.com/v1'
   const q = query !== '' ? `&${query}` : ''
   const url = `${iexUrl}/${endpoint}?token=${IEX_CLOUD_KEY}${q}`
   const metric = await perf().newHttpMetric(url, 'GET')
@@ -40,19 +32,12 @@ async function iexGet(endpoint: string, query?: string = '') {
   return res
 }
 
-export async function getStock(symbols: string | Array<string>) {
-  const symbolsStr = typeof symbols === 'string' ? symbols : symbols.join(',')
-  const res = await get(`stock?symbol=${symbolsStr}`)
-  const { data } = await res.json()
-  return data
-}
-
 export async function createTrade(
   uid: string,
   data: TradeDataType,
   callback?: () => void,
 ) {
-  const ref: DocReference = firestore().doc(`Users/${uid}`)
+  const ref: DocReference = FR.doc(`Users/${uid}`)
 
   try {
     await ref.collection('trades').add(data)
@@ -66,19 +51,13 @@ export async function createTrade(
 }
 
 export async function searchTerm(term: string) {
-  // const res = await iexGet(`search/${term}`)
-  // Change this to use the search API once I upgrade to paid plan
-  const range = '1d'
-  const typeQuery = '&types=quote,news,chart,intraday-prices'
-  const rangeQuery = `${range && `&range=${range}`}`
-  const url = `symbols=${term}${typeQuery}${rangeQuery}&last=5&chartInterval=5&chartIEXWhenNull=true`
-  const res = await iexGet('stock/market/batch', url)
+  const res = await iexGet(`search/${term}`)
   const result = await res.json()
   return result
 }
 
 export async function addToWatchlist(uid: string, symbol: string) {
-  const ref: DocReference = firestore().doc(`Users/${uid}`)
+  const ref: DocReference = FR.doc(`Users/${uid}`)
 
   try {
     await ref.collection('watchlist').doc(symbol).set({ symbol })
@@ -88,7 +67,7 @@ export async function addToWatchlist(uid: string, symbol: string) {
 }
 
 export async function removeFromWatchlist(uid: string, symbol: string) {
-  const ref: DocReference = firestore().doc(`Users/${uid}`)
+  const ref: DocReference = FR.doc(`Users/${uid}`)
 
   try {
     await ref.collection('watchlist').doc(symbol).delete()
@@ -114,4 +93,42 @@ export async function getBatchStockData(
   const res = await iexGet('stock/market/batch', url)
   const result = await res.json()
   return result
+}
+
+type CreateUserType = { uid: string, name: string, email: string }
+export async function createUserData({ uid, name, email }: CreateUserType) {
+  const userRef: DocReference = FR.doc(`Users/${uid}`)
+  const cash = 15000
+  try {
+    await userRef.set({
+      combinedValue: formatCurrency(cash),
+      portfolioValue: formatCurrency(0),
+      name,
+      cash,
+      email,
+      uid,
+    })
+  } catch (err) {
+    console.log('[Error] onCreateUserTrigger()', err)
+  }
+}
+
+export function callUpdateGains(uid: string) {
+  const onUpdateGainsCall = functions().httpsCallable('onUpdateGainsCall')
+  onUpdateGainsCall({ uid })
+}
+
+type UpdatePositionTypes = {
+  uid: string,
+  symbol: string,
+  data: {},
+}
+export async function updatePosition(params: UpdatePositionTypes) {
+  const { uid, symbol, data } = params
+  const positionsRef: DocReference = FR.doc(`Users/${uid}/positions/${symbol}`)
+  try {
+    await positionsRef.update(data)
+  } catch (err) {
+    console.log('[Error] updatePosition()', err)
+  }
 }

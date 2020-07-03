@@ -1,6 +1,5 @@
 import initialState from '../initialState'
-import filter from 'lodash.filter'
-import uniq from 'lodash.uniq'
+import { filter } from 'lodash'
 
 export default function (state = initialState.stock, action) {
   switch (action.type) {
@@ -19,7 +18,7 @@ export default function (state = initialState.stock, action) {
     case 'SET_WATCHLIST':
       return {
         ...state,
-        watchlist: uniq([...state.watchlist, action.watchlist]),
+        watchlist: [...state.watchlist, action.watchlist],
       }
     case 'REMOVE_FROM_WATCHLIST':
       return {
@@ -29,6 +28,22 @@ export default function (state = initialState.stock, action) {
           el => el.quote.symbol !== action.symbol,
         ),
       }
+    // case 'REMOVE_POSITION':
+    //   return {
+    //     ...state,
+    //     postions: filter(state.positions, el => el.symbol !== action.symbol),
+    //   }
+    // case 'UPDATE_POSITION':
+    //   console.log(action.position)
+    //   return {
+    //     ...state,
+    //     positions: Object.assign(
+    //       state.positions,
+    //       state.positions.map(el =>
+    //         el.symbol === action.position.symbol ? action.position : el,
+    //       ),
+    //     ),
+    //   }
     default:
       return state
   }

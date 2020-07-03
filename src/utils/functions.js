@@ -1,7 +1,7 @@
 // @flow
 import AsyncStorage from '@react-native-community/async-storage'
 import messaging from '@react-native-firebase/messaging'
-import find from 'lodash.find'
+import { find } from 'lodash'
 import purchaseValues from './purchaseValues'
 
 export function formatCurrency(num: number | string) {
@@ -38,4 +38,14 @@ type ProductValue = {
 export function getProductValue(productId: string): ProductValue {
   const result = find(purchaseValues, el => el.productId === productId)
   return result
+}
+
+export function currencyToNumber(value: string) {
+  const number = parseFloat(value?.replace(/[$,]/g, ''))
+  return number ?? 0
+}
+
+export function sumCurrency(a: string, b: string) {
+  const sum = currencyToNumber(a) + currencyToNumber(b)
+  return formatCurrency(sum)
 }

@@ -1,6 +1,6 @@
-import React, { useMemo, useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { View, TouchableOpacity, ScrollView, StyleSheet } from 'react-native'
-import { Text, LineChart, Container, Loader } from 'components'
+import { Text, Container, Loader, ChartLine } from 'components'
 import { GREEN, BACKGROUND, GRAY_DARKER } from 'utils/colors'
 import { ArrowLeftIcon, FavoriteIcon } from 'components/Icons'
 import { useSelector, useDispatch } from 'react-redux'
@@ -8,29 +8,32 @@ import StockDetails from './StockDetails'
 import { useNavigation } from '@react-navigation/native'
 import StockPosition from './StockPosition'
 import StockNews from './StockNews'
-import filter from 'lodash.filter'
 import StockTradeBar from './StockTradeBar'
-import { getBatchStockData, addToWatchlist, removeFromWatchlist } from 'api'
-import find from 'lodash.find'
+import { addToWatchlist, removeFromWatchlist } from 'api'
+import { find, minBy } from 'lodash'
+import {
+  useGetCurrentStock,
+  useGraphData,
+  usePriceSubscription,
+} from './stockHooks'
 
 export default function Stock({ route }) {
   const { goBack } = useNavigation()
-  const { selectedStockPosition, selectedStock, watchlist } = useSelector(
+  const { positions, selectedStock, watchlist } = useSelector(
     ({ stock }) => stock,
   )
-  const { uid } = useSelector(({ user }) => user?.currentUser)
-  const [stock, setStock] = useState(null)
-  const dispatch = useDispatch()
+  const selectedStockPosition = find(
+    positions,
+    el => el.symbol === selectedStock,
+  )
   const stockInfo = route.params?.stockInfo
-
-  const graphData = useMemo(() => {
-    const arr = filter(stock?.chart, el => el?.close !== null)
-    return arr.map(el => ({
-      value: el.close,
-      label: el.label,
-      date: el.date,
-    }))
-  }, [stock])
+  const stock = useGetCurrentStock(selectedStock, stockInfo)
+  const graphData = useGraphData(stock)
+  const { uid } = useSelector(({ user }) => user?.currentUser)
+  const [allowScroll, setAllowScroll] = useState(true)
+  const dispatch = useDispatch()
+  const { price } = usePriceSubscription(selectedStockPosition)
+  const latestPrice = price?.toFixed(2) ?? stock?.quote?.latestPrice.toFixed(2)
 
   const openTradeView = () => {
     dispatch({
@@ -39,35 +42,17 @@ export default function Stock({ route }) {
     })
     dispatch({
       type: 'STOCK_PRICE',
-      stockPrice: stock?.quote?.latestPrice,
+      stockPrice: latestPrice,
     })
   }
 
-  useEffect(() => {
-    const getData = async () => {
-      try {
-        const res = await getBatchStockData(selectedStock)
-        const result = res[selectedStock]
-        dispatch({
-          type: 'TRADE_STOCK',
-          tradeStock: result,
-        })
-        setStock(result)
-      } catch (err) {
-        console.log('[StockView] getData()', err)
-      }
-    }
-
-    if (!stockInfo) {
-      getData()
+  const onChartEvent = (value: string | number | null) => {
+    if (!value) {
+      setAllowScroll(true)
     } else {
-      setStock(stockInfo)
+      setAllowScroll(false)
     }
-  }, [selectedStockPosition, selectedStock, dispatch, stockInfo])
-
-  const hasPosition =
-    selectedStockPosition?.shares &&
-    selectedStockPosition?.symbol === selectedStock
+  }
 
   const isFav = find(
     watchlist,
@@ -101,6 +86,7 @@ export default function Stock({ route }) {
           <ScrollView
             contentContainerStyle={{ paddingBottom: 70 }}
             showsVerticalScrollIndicator={false}
+            scrollEnabled={allowScroll}
           >
             <View>
               <View style={{ paddingHorizontal: 16, paddingBottom: 15 }}>
@@ -117,25 +103,38 @@ export default function Stock({ route }) {
                   </Text>
                 </View>
                 <Text type="heading" weight="bold" style={{ paddingTop: 6 }}>
-                  {stock?.quote?.iexRealtimePrice}
+                  {latestPrice}
                 </Text>
               </View>
 
-              {graphData && stock?.chart && <LineChart data={graphData} />}
+              {stock?.chart && graphData && (
+                <ChartLine
+                  x="label"
+                  y="value"
+                  data={graphData}
+                  chartProps={{
+                    minDomain: { y: minBy(graphData, 'value')?.value - 2 },
+                  }}
+                  labelText="value"
+                  labelRightOffset={40}
+                  labelLeftOffset={15}
+                  onChartEvent={onChartEvent}
+                />
+              )}
 
               <StockDetails data={stock?.quote} />
 
-              {hasPosition && <StockPosition data={selectedStockPosition} />}
-
-              {stock?.news && process.env.NODE_ENV !== 'development' && (
-                <StockNews articles={stock?.news} />
+              {selectedStockPosition && (
+                <StockPosition data={selectedStockPosition} />
               )}
+
+              {stock?.news && <StockNews articles={stock?.news} />}
             </View>
           </ScrollView>
 
           <StockTradeBar
             status={stock?.quote?.change < 0 ? 'negative' : 'positive'}
-            price={stock?.quote?.latestPrice}
+            price={latestPrice}
             openTradeView={openTradeView}
             stockData={stock}
           />

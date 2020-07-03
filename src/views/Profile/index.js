@@ -4,7 +4,7 @@ import { View } from 'react-native'
 import { Container, Text } from 'components'
 import { LABEL, CARD_BACKGROUND } from 'utils/colors'
 import { useSelector } from 'react-redux'
-import { formatCurrency } from 'utils/functions'
+import { formatCurrency, currencyToNumber } from 'utils/functions'
 import ProfileItem from './ProfileItem'
 import AddCash from './AddCash'
 import LogoutButton from './LogoutButton'
@@ -44,11 +44,13 @@ export default function Profile() {
         </Container>
 
         <Container top={40}>
+          <ProfileItem label="Portfolio" value={userInfo?.portfolioValue} />
           <ProfileItem
-            label="Portfolio Value"
-            value={userInfo?.portfolioValue}
+            label="Total Value"
+            value={formatCurrency(
+              currencyToNumber(userInfo?.portfolioValue) + userInfo?.cash,
+            )}
           />
-          <ProfileItem label="Combined Value" value={userInfo?.combinedValue} />
         </Container>
       </View>
 

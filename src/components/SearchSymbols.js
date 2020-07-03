@@ -8,7 +8,7 @@ import { SUB_BACKGROUND, GRAY_DARKER } from 'utils/colors'
 const SearchSymbol = (props: SearchSymbolProps): React$Node => {
   const { value, setValue, onSearch } = props
   return (
-    <Container top={20}>
+    <Container top={20} bottom={10}>
       <View style={styles.searchContainer}>
         <TextInput
           value={value}

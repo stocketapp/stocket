@@ -15,7 +15,7 @@ export default function useSetUserInfo(currentUser) {
         setLoading(true)
         const ref = UsersRef.doc(currentUser?.uid)
         await ref.onSnapshot(snapshot => {
-          const data = snapshot.data()
+          const data = snapshot?.data()
           if (data) {
             dispatch({
               type: 'SET_USER_INFO',
