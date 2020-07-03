@@ -27,7 +27,10 @@ const AppRoot = () => (
 
 const codePushOptions = {
   checkFrequency: codePush.CheckFrequency.ON_APP_RESUME,
+  installMode: codePush.InstallMode.ON_NEXT_RESUME,
+  mandatoryInstallMode: codePush.InstallMode.IMMEDIATE,
 }
+
 const Root = __DEV__ ? AppRoot : codePush(codePushOptions)(AppRoot)
 
 AppRegistry.registerComponent(appName, () => Root)
