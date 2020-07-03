@@ -56,7 +56,8 @@ type UsePriceSubscriptionTypes = {
 export function usePriceSubscription(position: UsePriceSubscriptionTypes) {
   const [data, setData] = useState({})
   const { currentUser } = useUser()
-  const { symbol, shares } = position
+  const symbol = position?.symbol
+  const shares = position?.shares
 
   const getGains = (price) => {
     const value = shares?.length * price

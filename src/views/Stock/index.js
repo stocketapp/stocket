@@ -24,7 +24,7 @@ export default function Stock({ route }) {
   )
   const selectedStockPosition = find(
     positions,
-    el => el.symbol === selectedStock,
+    el => el?.symbol === selectedStock,
   )
   const stockInfo = route.params?.stockInfo
   const stock = useGetCurrentStock(selectedStock, stockInfo)
@@ -32,7 +32,7 @@ export default function Stock({ route }) {
   const { uid } = useSelector(({ user }) => user?.currentUser)
   const [allowScroll, setAllowScroll] = useState(true)
   const dispatch = useDispatch()
-  const { price } = usePriceSubscription(selectedStockPosition)
+  const { price } = usePriceSubscription(selectedStockPosition ?? null)
   const latestPrice = price?.toFixed(2) ?? stock?.quote?.latestPrice.toFixed(2)
 
   const openTradeView = () => {
