@@ -11,8 +11,8 @@ import {
 import { useNavigation } from '@react-navigation/native'
 import StockHorizontalList from './StockHorizontalList'
 import Watchlist from './Watchlist'
-import { currencyToNumber, formatCurrency } from 'utils/functions'
-import { nth } from 'lodash'
+import { formatCurrency } from 'utils/functions'
+import { nth, last } from 'lodash'
 import { useDispatch } from 'react-redux'
 
 export default function Home() {
@@ -49,13 +49,18 @@ export default function Home() {
   }
 
   const dayChange = useMemo(() => {
-    const lastEl = nth(balanceHistory, -2)
-    if (!lastEl) {
-      return 0
+    const penultiEl = nth(balanceHistory, -2)
+    const lastEl = last(balanceHistory)
+    let change
+    if (!penultiEl && !lastEl) {
+      change = 0.0
+    } else if (!penultiEl && lastEl) {
+      change = lastEl?.value
+    } else {
+      change = lastEl?.value - penultiEl?.value
     }
-    const change = currencyToNumber(userInfo?.portfolioValue) - lastEl?.value
     return (change ?? 0).toFixed(2)
-  }, [balanceHistory, userInfo?.portfolioValue])
+  }, [balanceHistory])
 
   return (
     <Container style={styles.container} safeAreaTop>
