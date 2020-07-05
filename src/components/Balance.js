@@ -13,7 +13,7 @@ type Props = {
 const Balance = ({ value, dayChange }: Props): React$Node => {
   const color = dayChange > 0 ? GREEN : dayChange < 0 ? RED : 'white'
   return (
-    <Container ph>
+    <Container ph top={16}>
       <Text color={GRAY_DARKER} type="label">
         Invested
       </Text>

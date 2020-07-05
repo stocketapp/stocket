@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useMemo } from 'react'
-import { StyleSheet, ScrollView } from 'react-native'
+import { StyleSheet, ScrollView, View } from 'react-native'
 import { BACKGROUND } from 'utils/colors'
 import { Balance, Container, ChartLine } from 'components'
 import {
@@ -7,6 +7,7 @@ import {
   useWatchlist,
   useGetBalanceHistory,
   useUser,
+  useGetMarketStatus,
 } from 'hooks'
 import { useNavigation } from '@react-navigation/native'
 import StockHorizontalList from './StockHorizontalList'
@@ -14,6 +15,7 @@ import Watchlist from './Watchlist'
 import { formatCurrency } from 'utils/functions'
 import { nth, last } from 'lodash'
 import { useDispatch } from 'react-redux'
+import MarketStatus from './MarketStatus'
 
 export default function Home() {
   const { userInfo, currentUser } = useUser()
@@ -25,6 +27,7 @@ export default function Home() {
   const balanceHistory = useGetBalanceHistory(uid, userInfo?.portfolioValue)
   const [balanceValue, setBalanceValue] = useState(null)
   const dispatch = useDispatch()
+  const marketStatus = useGetMarketStatus()
   let timeout
 
   const onWatchlistItemPress = (stockInfo: PositionType) => {
@@ -69,10 +72,13 @@ export default function Home() {
         showsVerticalScrollIndicator={false}
         scrollEnabled={allowScroll}
       >
-        <Balance
-          value={balanceValue ?? userInfo?.portfolioValue}
-          dayChange={dayChange}
-        />
+        <View style={styles.header}>
+          <Balance
+            value={balanceValue ?? userInfo?.portfolioValue}
+            dayChange={dayChange}
+          />
+          <MarketStatus status={marketStatus} />
+        </View>
         {balanceHistory && (
           <ChartLine
             data={balanceHistory}
@@ -94,5 +100,9 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: BACKGROUND,
+  },
+  header: {
+    flexDirection: 'row',
+    flex: 1,
   },
 })
