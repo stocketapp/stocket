@@ -1,22 +1,21 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect } from 'react'
-import SocketIO from 'socket.io-client'
+import firestore from '@react-native-firebase/firestore'
+import { useDispatch } from 'react-redux'
+
+const marketRef = firestore().doc('Markets/stock_market')
 
 export default function () {
+  const dispatch = useDispatch()
+
   useEffect(() => {
-    const url = 'https://ws-api.iextrading.com/1.0/deep'
-    const socket = SocketIO(url)
-
-    socket.on('connect', () => {
-      socket.emit(
-        'subscribe',
-        JSON.stringify({
-          channels: ['systemevent'],
-        }),
-      )
+    const subscribe = marketRef.onSnapshot(snapshot => {
+      dispatch({
+        type: 'SET_MARKET_OPEN',
+        isMarketOpen: snapshot.get('is_open'),
+      })
     })
 
-    socket.on('systemevent', data => {
-      console.log(data)
-    })
+    return () => subscribe()
   }, [])
 }
