@@ -15,7 +15,6 @@ import Watchlist from './Watchlist'
 import { formatCurrency } from 'utils/functions'
 import { nth, last } from 'lodash'
 import { useDispatch } from 'react-redux'
-import MarketStatus from './MarketStatus'
 
 export default function Home() {
   const { userInfo, currentUser } = useUser()
@@ -103,6 +102,9 @@ const styles = StyleSheet.create({
   },
   header: {
     flexDirection: 'row',
-    flex: 1,
+    width: '100%',
+    justifyContent: 'space-between',
+    paddingHorizontal: 16,
+    paddingTop: 15,
   },
 })
