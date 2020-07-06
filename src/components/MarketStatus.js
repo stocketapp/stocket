@@ -4,18 +4,19 @@ import { StyleSheet, View } from 'react-native'
 import { Text } from 'components'
 import { SUB_BACKGROUND, GREEN, LABEL } from 'utils/colors'
 
-const MarketStatus = ({ status }: { status: boolean }) => {
-  return (
-    <View style={styles.container}>
-      <Text style={{ fontSize: 12 }} weight={status ? 'Medium' : 'Light'}>
-        Trading
-      </Text>
-      <View
-        style={{ ...styles.dot, backgroundColor: status ? GREEN : LABEL }}
-      />
-    </View>
-  )
+type Props = {
+  label: string,
+  status: boolean,
 }
+
+const MarketStatus = ({ status, label = 'Trading' }: Props) => (
+  <View style={styles.container}>
+    <Text style={{ fontSize: 12 }} weight={status ? 'Bold' : 'Light'}>
+      {label}
+    </Text>
+    <View style={{ ...styles.dot, backgroundColor: status ? GREEN : LABEL }} />
+  </View>
+)
 
 const styles = StyleSheet.create({
   dot: {
@@ -26,17 +27,15 @@ const styles = StyleSheet.create({
     marginLeft: 4,
   },
   container: {
-    paddingVertical: 10,
-    paddingHorizontal: 14,
+    paddingVertical: 8,
+    paddingHorizontal: 15,
     flexDirection: 'row',
-    position: 'absolute',
     backgroundColor: SUB_BACKGROUND,
     alignItems: 'center',
     justifyContent: 'center',
     borderRadius: 20,
     opacity: 0.7,
-    right: 10,
-    top: '14%',
+    maxHeight: 38,
   },
 })
 
