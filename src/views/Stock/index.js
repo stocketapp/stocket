@@ -83,7 +83,7 @@ export default function Stock({ route }) {
         </TouchableOpacity>
       </View>
 
-      {!stock ? (
+      {!stock && !graphData && !stock?.chart ? (
         <View style={styles.loader}>
           <Loader size={100} />
         </View>
@@ -113,20 +113,18 @@ export default function Stock({ route }) {
                 </Text>
               </View>
 
-              {stock?.chart && graphData && (
-                <ChartLine
-                  x="label"
-                  y="value"
-                  data={graphData}
-                  chartProps={{
-                    minDomain: { y: minBy(graphData, 'value')?.value - 2 },
-                  }}
-                  labelText="value"
-                  labelRightOffset={40}
-                  labelLeftOffset={15}
-                  onChartEvent={onChartEvent}
-                />
-              )}
+              <ChartLine
+                x="label"
+                y="value"
+                data={graphData}
+                chartProps={{
+                  minDomain: { y: minBy(graphData, 'value')?.value - 2 },
+                }}
+                labelText="value"
+                labelRightOffset={40}
+                labelLeftOffset={15}
+                onChartEvent={onChartEvent}
+              />
 
               <StockDetails data={stock?.quote} />
 
