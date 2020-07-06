@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useMemo } from 'react'
 import { StyleSheet, ScrollView, View } from 'react-native'
 import { BACKGROUND } from 'utils/colors'
-import { Balance, Container, ChartLine } from 'components'
+import { Balance, Container, ChartLine, MarketStatus } from 'components'
 import {
   useGetMyStocks,
   useWatchlist,
