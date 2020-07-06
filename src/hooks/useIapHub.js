@@ -1,17 +1,16 @@
+// @flow
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect } from 'react'
 import IapHub from 'react-native-iaphub'
-import useUser from './useUser'
 import { useDispatch } from 'react-redux'
 
-export default function useIapHub() {
-  const { currentUser } = useUser()
+export default function useIapHub(uid: string) {
   const dispatch = useDispatch()
 
   useEffect(() => {
     const iapHubLogin = async () => {
       try {
-        await IapHub.login(currentUser?.uid)
+        await IapHub.login(uid)
         const products = await IapHub.getUser()
         dispatch({
           type: 'SET_IAP_PRODUCTS',
@@ -22,8 +21,8 @@ export default function useIapHub() {
       }
     }
 
-    if (currentUser) {
+    if (uid) {
       iapHubLogin()
     }
-  }, [currentUser])
+  }, [uid])
 }

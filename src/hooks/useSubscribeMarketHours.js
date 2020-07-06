@@ -9,11 +9,15 @@ export default function () {
   const dispatch = useDispatch()
 
   useEffect(() => {
-    const subscribe = marketRef.onSnapshot(snapshot => {
-      dispatch({
-        type: 'SET_MARKET_OPEN',
-        isMarketOpen: snapshot.get('is_open'),
-      })
+    const subscribe = marketRef.onSnapshot((snapshot, err) => {
+      if (err) {
+        console.log('Error fetching market status', err)
+      } else {
+        dispatch({
+          type: 'SET_MARKET_OPEN',
+          isMarketOpen: snapshot.get('is_open'),
+        })
+      }
     })
 
     return () => subscribe()
