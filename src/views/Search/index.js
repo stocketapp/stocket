@@ -32,10 +32,10 @@ export default function Search(): React$Node {
     }
   }, [debounced])
 
-  const goToStock = (item: {}) => {
+  const goToStock = (symbol: string) => {
     dispatch({
       type: 'SET_SELECTED_STOCK',
-      selectedStock: item?.symbol,
+      selectedStock: symbol,
     })
     navigate('Stock')
   }
@@ -50,7 +50,7 @@ export default function Search(): React$Node {
           <SearchResult
             item={item}
             onPress={addToWatchlist}
-            setStock={() => goToStock(item)}
+            setStock={() => goToStock(item?.symbol)}
             uid={currentUser?.uid}
           />
         )}

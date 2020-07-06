@@ -1,16 +1,17 @@
 import React, { useState } from 'react'
 import { View, TouchableOpacity, ScrollView, StyleSheet } from 'react-native'
-import { Text, Container, Loader, ChartLine } from 'components'
+import { Text, Container, Loader, ChartLine, MarketStatus } from 'components'
 import { GREEN, BACKGROUND, GRAY_DARKER } from 'utils/colors'
 import { ArrowLeftIcon, FavoriteIcon } from 'components/Icons'
 import { useSelector, useDispatch } from 'react-redux'
+import { find, minBy } from 'lodash'
+import { useGetMarketStatus } from 'hooks'
 import StockDetails from './StockDetails'
 import { useNavigation } from '@react-navigation/native'
 import StockPosition from './StockPosition'
 import StockNews from './StockNews'
 import StockTradeBar from './StockTradeBar'
 import { addToWatchlist, removeFromWatchlist } from 'api'
-import { find, minBy } from 'lodash'
 import {
   useGetCurrentStock,
   useGraphData,
@@ -24,7 +25,7 @@ export default function Stock({ route }) {
   )
   const selectedStockPosition = find(
     positions,
-    el => el.symbol === selectedStock,
+    el => el?.symbol === selectedStock,
   )
   const stockInfo = route.params?.stockInfo
   const stock = useGetCurrentStock(selectedStock, stockInfo)
@@ -32,8 +33,9 @@ export default function Stock({ route }) {
   const { uid } = useSelector(({ user }) => user?.currentUser)
   const [allowScroll, setAllowScroll] = useState(true)
   const dispatch = useDispatch()
-  const { price } = usePriceSubscription(selectedStockPosition)
+  const { price } = usePriceSubscription(selectedStockPosition ?? null)
   const latestPrice = price?.toFixed(2) ?? stock?.quote?.latestPrice.toFixed(2)
+  const marketStatus = useGetMarketStatus()
 
   const openTradeView = () => {
     dispatch({
@@ -65,6 +67,10 @@ export default function Stock({ route }) {
         <TouchableOpacity style={{ padding: 5 }} onPress={goBack}>
           <ArrowLeftIcon size={30} color={GREEN} />
         </TouchableOpacity>
+        <MarketStatus
+          label={`Market is ${marketStatus ? 'open' : 'closed'}`}
+          status={marketStatus}
+        />
         <TouchableOpacity
           onPress={() =>
             isFav
@@ -77,7 +83,7 @@ export default function Stock({ route }) {
         </TouchableOpacity>
       </View>
 
-      {!stock ? (
+      {!stock && !graphData && !stock?.chart ? (
         <View style={styles.loader}>
           <Loader size={100} />
         </View>
@@ -107,20 +113,18 @@ export default function Stock({ route }) {
                 </Text>
               </View>
 
-              {stock?.chart && graphData && (
-                <ChartLine
-                  x="label"
-                  y="value"
-                  data={graphData}
-                  chartProps={{
-                    minDomain: { y: minBy(graphData, 'value')?.value - 2 },
-                  }}
-                  labelText="value"
-                  labelRightOffset={40}
-                  labelLeftOffset={15}
-                  onChartEvent={onChartEvent}
-                />
-              )}
+              <ChartLine
+                x="label"
+                y="value"
+                data={graphData}
+                chartProps={{
+                  minDomain: { y: minBy(graphData, 'value')?.value - 2 },
+                }}
+                labelText="value"
+                labelRightOffset={40}
+                labelLeftOffset={15}
+                onChartEvent={onChartEvent}
+              />
 
               <StockDetails data={stock?.quote} />
 
@@ -137,6 +141,7 @@ export default function Stock({ route }) {
             price={latestPrice}
             openTradeView={openTradeView}
             stockData={stock}
+            marketStatus={marketStatus}
           />
         </>
       )}

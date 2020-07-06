@@ -2,7 +2,7 @@
 
 import React, { useEffect, useRef } from 'react'
 import { StatusBar, View } from 'react-native'
-import { useAuthState, useSetUserInfo, useIapHub } from 'hooks'
+import { useAuthState, useSetUserInfo, useIapHub, useSubscribeMarketHours } from 'hooks'
 // import RNBootSplash from 'react-native-bootsplash'
 import { BACKGROUND } from 'utils/colors'
 import { IAPHUB_API_KEY, IAPHUB_APPID, IAPHUB_ENV } from './config'
@@ -23,6 +23,7 @@ export default function App(): React$Node {
   const tradeViewRef = useRef()
   useSetUserInfo(currentUser)
   useIapHub()
+  useSubscribeMarketHours()
 
   // useEffect(() => {
   //   if (!loading) {

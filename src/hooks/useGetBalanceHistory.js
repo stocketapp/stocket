@@ -17,13 +17,13 @@ function useGetBalanceHistory(uid: string, currentValue: string) {
           snapshot.forEach(doc => {
             const data = doc.data()
             list.push({
-              date: moment.utc(data?.date).format('MMM DD, YYYY'),
+              date: moment(data?.date).format('MMM DD, YYYY'),
               value: currencyToNumber(data?.value),
             })
           })
-          const today = Date.now()
+          const now = moment()
           list.push({
-            date: moment.utc(today).format('MMM DD, YYYY'),
+            date: moment(now).format('MMM DD, YYYY'),
             value: currencyToNumber(currentValue),
           })
           setBalanceHistory(list)

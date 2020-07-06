@@ -1,18 +1,19 @@
 import React, { useState, useEffect, useMemo } from 'react'
-import { StyleSheet, ScrollView } from 'react-native'
+import { StyleSheet, ScrollView, View } from 'react-native'
 import { BACKGROUND } from 'utils/colors'
-import { Balance, Container, ChartLine } from 'components'
+import { Balance, Container, ChartLine, MarketStatus } from 'components'
 import {
   useGetMyStocks,
   useWatchlist,
   useGetBalanceHistory,
   useUser,
+  useGetMarketStatus,
 } from 'hooks'
 import { useNavigation } from '@react-navigation/native'
 import StockHorizontalList from './StockHorizontalList'
 import Watchlist from './Watchlist'
-import { currencyToNumber, formatCurrency } from 'utils/functions'
-import { nth } from 'lodash'
+import { formatCurrency } from 'utils/functions'
+import { nth, last } from 'lodash'
 import { useDispatch } from 'react-redux'
 
 export default function Home() {
@@ -25,6 +26,7 @@ export default function Home() {
   const balanceHistory = useGetBalanceHistory(uid, userInfo?.portfolioValue)
   const [balanceValue, setBalanceValue] = useState(null)
   const dispatch = useDispatch()
+  const marketStatus = useGetMarketStatus()
   let timeout
 
   const onWatchlistItemPress = (stockInfo: PositionType) => {
@@ -49,13 +51,18 @@ export default function Home() {
   }
 
   const dayChange = useMemo(() => {
-    const lastEl = nth(balanceHistory, -2)
-    if (!lastEl) {
-      return 0
+    const penultiEl = nth(balanceHistory, -2)
+    const lastEl = last(balanceHistory)
+    let change
+    if (!penultiEl && !lastEl) {
+      change = 0.0
+    } else if (!penultiEl && lastEl) {
+      change = lastEl?.value
+    } else {
+      change = lastEl?.value - penultiEl?.value
     }
-    const change = currencyToNumber(userInfo?.portfolioValue) - lastEl?.value
     return (change ?? 0).toFixed(2)
-  }, [balanceHistory, userInfo?.portfolioValue])
+  }, [balanceHistory])
 
   return (
     <Container style={styles.container} safeAreaTop>
@@ -64,10 +71,13 @@ export default function Home() {
         showsVerticalScrollIndicator={false}
         scrollEnabled={allowScroll}
       >
-        <Balance
-          value={balanceValue ?? userInfo?.portfolioValue}
-          dayChange={dayChange}
-        />
+        <View style={styles.header}>
+          <Balance
+            value={balanceValue ?? userInfo?.portfolioValue}
+            dayChange={dayChange}
+          />
+          <MarketStatus status={marketStatus} />
+        </View>
         {balanceHistory && (
           <ChartLine
             data={balanceHistory}
@@ -89,5 +99,12 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: BACKGROUND,
+  },
+  header: {
+    flexDirection: 'row',
+    width: '100%',
+    justifyContent: 'space-between',
+    paddingHorizontal: 16,
+    paddingTop: 15,
   },
 })
