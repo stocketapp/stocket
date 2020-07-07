@@ -20,7 +20,9 @@ export default ({ data }) => (
       <View style={styles.posData}>
         <View style={{ paddingTop: 15 }}>
           <Text color={GRAY_DARKER}>Today's Return</Text>
-          <Text style={styles.postDataValue}>$35.87</Text>
+          <Text style={styles.postDataValue}>
+            {formatCurrency(data?.todayGains)}
+          </Text>
         </View>
 
         <View style={{ paddingTop: 15 }}>
