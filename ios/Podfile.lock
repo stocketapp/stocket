@@ -223,13 +223,13 @@ PODS:
     - AppCenter/Crashes
     - AppCenterReactNativeShared
     - React
-  - AppCenter/Analytics (3.2.0):
+  - AppCenter/Analytics (3.3.1):
     - AppCenter/Core
-  - AppCenter/Core (3.2.0)
-  - AppCenter/Crashes (3.2.0):
+  - AppCenter/Core (3.3.1)
+  - AppCenter/Crashes (3.3.1):
     - AppCenter/Core
-  - AppCenterReactNativeShared (3.0.3):
-    - AppCenter/Core (= 3.2.0)
+  - AppCenterReactNativeShared (3.1.0):
+    - AppCenter/Core (= 3.3.1)
   - Base64 (1.1.2)
   - boost-for-react-native (1.63.0)
   - BoringSSL-GRPC (0.0.7):
@@ -1008,11 +1008,11 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   abseil: 6c8eb7892aefa08d929b39f9bb108e5367e3228f
-  AppCenter: ca66175050d538b157959382dd43f1ab96cdab84
+  AppCenter: 76ecf7e959a68e36b0fd314e8dc5897660214423
   appcenter-analytics: 4fdc885acb8a3bfac835515a8b9610d054ba8b9f
   appcenter-core: 84a1c69361d10272bf08b2ff906c37f4e422b940
   appcenter-crashes: e9008710be7612c585c39f3dc2cf3894172dc6e2
-  AppCenterReactNativeShared: d1218878427a69d4b76f73883256455ed20f12b3
+  AppCenterReactNativeShared: 2ec88a4ac2c52cdbc828a1f9c16244b534c84026
   Base64: cecfb41a004124895a7bcee567a89bae5a89d49b
   boost-for-react-native: 39c7adb57c4e60d6c5479dd8623128eb5b3f0f2c
   BoringSSL-GRPC: 8edf627ee524575e2f8d19d56f068b448eea3879

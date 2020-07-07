@@ -72,6 +72,7 @@ export function usePriceSubscription(position: UsePriceSubscriptionTypes) {
   useEffect(() => {
     const url = 'https://ws-api.iextrading.com/1.0/last'
     const socket = SocketIO(url)
+    let throttleUpdate
 
     if (symbol) {
       socket.on('connect', () => {
@@ -85,12 +86,18 @@ export function usePriceSubscription(position: UsePriceSubscriptionTypes) {
         const obj = {
           ...positionGains,
         }
-        await updatePosition({ uid: currentUser?.uid, symbol, data: obj })
+        throttleUpdate = setTimeout(async () => {
+          await updatePosition({ uid: currentUser?.uid, symbol, data: obj })
+        }, 2000)
       })
     }
 
-    return () => socket.emit('unsubscribe', symbol)
-  }, [symbol])
+    return () => {
+      socket.emit('unsubscribe', symbol)
+      socket.close()
+      clearTimeout(throttleUpdate)
+    }
+  }, [])
 
   return data
 }
