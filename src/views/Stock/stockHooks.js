@@ -52,19 +52,23 @@ export function useGraphData(stock: { chart: [] }) {
 type UsePriceSubscriptionTypes = {
   symbol: string,
   shares: [],
+  previousDayPrice: number,
 }
 export function usePriceSubscription(position: UsePriceSubscriptionTypes) {
   const [data, setData] = useState({})
   const { currentUser } = useUser()
   const symbol = position?.symbol
   const shares = position?.shares
+  const prevDayPrice = position?.previousDayPrice
 
   const getGains = (price) => {
     const value = shares?.length * price
     const gainsArr = shares.map(el => price - el.price)
     const gains = reduce(gainsArr, (a, b) => a + b)
     const gainsPercentage = (gains / value) * 100
-    return { gains, gainsPercentage, value }
+    const prevValue = reduce(shares.map(el => prevDayPrice - el.price), (a, b) => a + b)
+    const todayGains = gains - prevValue
+    return { gains, gainsPercentage, value, todayGains }
   }
 
   const calcGains = useCallback(getGains, [data?.price])
