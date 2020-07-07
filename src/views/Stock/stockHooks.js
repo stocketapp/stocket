@@ -5,7 +5,7 @@ import { getBatchStockData, updatePosition } from 'api'
 import { filter, reduce } from 'lodash'
 import SocketIO from 'socket.io-client'
 import { useUser } from 'hooks'
-import { add } from 'lodash'
+import { subtract } from 'lodash'
 
 export function useGetCurrentStock(selectedStock: string, stockInfo: {}) {
   const dispatch = useDispatch()
@@ -68,7 +68,7 @@ export function usePriceSubscription(position: UsePriceSubscriptionTypes) {
     const gains = reduce(gainsArr, (a, b) => a + b)
     const gainsPercentage = (gains / value) * 100
     const prevValue = reduce(shares.map(el => prevDayPrice - el.price), (a, b) => a + b)
-    const todayGains = add(gains, prevValue)
+    const todayGains = subtract(Math.abs(gains), Math.abs(prevValue))
     return { gains, gainsPercentage, value, todayGains }
   }
 
