@@ -12,8 +12,7 @@ import {
 import { useNavigation, useFocusEffect } from '@react-navigation/native'
 import StockHorizontalList from './StockHorizontalList'
 import Watchlist from './Watchlist'
-import { formatCurrency, currencyToNumber } from 'utils/functions'
-import { nth, last } from 'lodash'
+import { formatCurrency } from 'utils/functions'
 import { useDispatch } from 'react-redux'
 import { callUpdateGains } from 'api'
 
@@ -28,6 +27,7 @@ export default function Home() {
   const [balanceValue, setBalanceValue] = useState(null)
   const dispatch = useDispatch()
   const marketStatus = useGetMarketStatus()
+  const { portfolioChange: change, portfolioChangePct: changePct } = userInfo
   let timeout
 
   const onWatchlistItemPress = (stockInfo: PositionType) => {
@@ -61,22 +61,6 @@ export default function Home() {
     }
   }
 
-  const dayChange = useMemo(() => {
-    const penultiEl = nth(balanceHistory, -2)
-    const lastEl = last(balanceHistory)
-    let change
-    if (!penultiEl && !lastEl) {
-      change = 0.0
-    } else if (!penultiEl && lastEl) {
-      change = lastEl?.value
-    } else {
-      change = lastEl?.value - penultiEl?.value
-    }
-    const changePct =
-      (change / currencyToNumber(userInfo?.portfolioValue)) * 100
-    return { change: (change ?? 0).toFixed(2), changePct }
-  }, [balanceHistory, userInfo?.portfolioValue])
-
   return (
     <Container style={styles.container} safeAreaTop>
       <ScrollView
@@ -87,7 +71,7 @@ export default function Home() {
         <View style={styles.header}>
           <Balance
             value={balanceValue ?? userInfo?.portfolioValue}
-            dayChange={dayChange}
+            dayChange={{ change, changePct }}
           />
           <MarketStatus status={marketStatus} />
         </View>

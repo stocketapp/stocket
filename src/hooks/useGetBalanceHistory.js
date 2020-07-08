@@ -17,7 +17,7 @@ function useGetBalanceHistory(uid: string, currentValue: string) {
           snapshot.forEach(doc => {
             const data = doc.data()
             list.push({
-              date: moment(data?.date).format('MMM DD, YYYY'),
+              date: moment(data?.date.toMillis()).format('MMM DD, YYYY'),
               value: currencyToNumber(data?.value),
             })
           })
