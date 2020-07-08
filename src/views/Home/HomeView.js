@@ -12,7 +12,7 @@ import {
 import { useNavigation, useFocusEffect } from '@react-navigation/native'
 import StockHorizontalList from './StockHorizontalList'
 import Watchlist from './Watchlist'
-import { formatCurrency } from 'utils/functions'
+import { formatCurrency, currencyToNumber } from 'utils/functions'
 import { nth, last } from 'lodash'
 import { useDispatch } from 'react-redux'
 import { callUpdateGains } from 'api'
@@ -72,8 +72,10 @@ export default function Home() {
     } else {
       change = lastEl?.value - penultiEl?.value
     }
-    return (change ?? 0).toFixed(2)
-  }, [balanceHistory])
+    const changePct =
+      (change / currencyToNumber(userInfo?.portfolioValue)) * 100
+    return { change: (change ?? 0).toFixed(2), changePct }
+  }, [balanceHistory, userInfo?.portfolioValue])
 
   return (
     <Container style={styles.container} safeAreaTop>

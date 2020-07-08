@@ -3,15 +3,19 @@ import React from 'react'
 import { View } from 'react-native'
 import { GRAY_DARKER, LABEL, GREEN, RED } from 'utils/colors'
 import Text from './Text'
-import Container from './Container'
+import { formatCurrency } from 'utils/functions'
 
 type Props = {
   value: string,
-  dayChange: number,
+  dayChange: {
+    change: number,
+    changePct: number,
+  },
 }
 
 const Balance = ({ value, dayChange }: Props): React$Node => {
-  const color = dayChange > 0 ? GREEN : dayChange < 0 ? RED : 'white'
+  const { change, changePct } = dayChange
+  const color = changePct > 0 ? GREEN : changePct < 0 ? RED : 'white'
   return (
     <View>
       <Text color={GRAY_DARKER} type="label">
@@ -21,12 +25,13 @@ const Balance = ({ value, dayChange }: Props): React$Node => {
         {value || '$0.00'}
       </Text>
       <View style={styles.changeContainer}>
-        <Text weight="Light" color={LABEL}>
-          Today's change{' '}
+        <Text weight="Medium" color={color}>
+          {changePct > 0 && '+'}
+          {`${formatCurrency(change)} (${changePct.toFixed(2)}%)`}
         </Text>
-        <Text weight="Bold" color={color}>
-          {dayChange > 0 && '+'}
-          {dayChange}
+        <Text weight="Light" color={LABEL}>
+          {' '}
+          Today
         </Text>
       </View>
     </View>
