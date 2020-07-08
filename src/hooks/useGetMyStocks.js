@@ -13,7 +13,7 @@ export default function useGetMyStocks(uid: string): {} {
   useEffect(() => {
     const subscribe = UsersRef.doc(uid)
       .collection('positions')
-      .orderBy('gainsPercentage', 'desc')
+      .orderBy('todayGainsPct', 'desc')
       .onSnapshot(async snapshot => {
         setLoading(true)
         const list = snapshot.docs.map(el => el.data())

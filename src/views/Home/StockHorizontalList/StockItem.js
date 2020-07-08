@@ -16,9 +16,9 @@ const StockItem = ({ item, onPress }: Props): React$Node => (
       <Text
         type="heading"
         weight="Medium"
-        status={Number(item?.gains) > 0 ? 'positive' : 'negative'}
+        status={item?.todayGainsPct > 0 ? 'positive' : 'negative'}
       >
-        {Number(item?.gainsPercentage).toFixed(2) || '0'}%
+        {item?.todayGainsPct.toFixed(2) || '0'}%
       </Text>
 
       <Text type="subtext" color="#fff" style={styles.bottomRow}>

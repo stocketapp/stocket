@@ -69,7 +69,8 @@ export function usePriceSubscription(position: UsePriceSubscriptionTypes) {
     const gainsPercentage = (gains / value) * 100
     const prevValue = reduce(shares.map(el => prevDayPrice - el.price), (a, b) => a + b)
     const todayGains = subtract(Math.abs(gains), Math.abs(prevValue))
-    return { gains, gainsPercentage, value, todayGains }
+    const todayGainsPct = (todayGains / value) * 100
+    return { gains, gainsPercentage, value, todayGains, todayGainsPct }
   }
 
   const calcGains = useCallback(getGains, [data?.price])
