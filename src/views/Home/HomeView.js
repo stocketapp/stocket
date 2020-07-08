@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo, useCallback } from 'react'
+import React, { useState, useEffect, useRef, useCallback, useMemo } from 'react'
 import { StyleSheet, ScrollView, View } from 'react-native'
 import { BACKGROUND } from 'utils/colors'
 import { Balance, Container, ChartLine, MarketStatus } from 'components'
@@ -12,7 +12,6 @@ import {
 import { useNavigation, useFocusEffect } from '@react-navigation/native'
 import StockHorizontalList from './StockHorizontalList'
 import Watchlist from './Watchlist'
-import { formatCurrency } from 'utils/functions'
 import { useDispatch } from 'react-redux'
 import { callUpdateGains } from 'api'
 
@@ -23,12 +22,13 @@ export default function Home() {
   const watchlist = useWatchlist(uid)
   const { navigate } = useNavigation()
   const [allowScroll, setAllowScroll] = useState(true)
-  const balanceHistory = useGetBalanceHistory(uid, userInfo?.portfolioValue)
+  const balanceHistory = useGetBalanceHistory(uid, userInfo)
   const [balanceValue, setBalanceValue] = useState(null)
+  const [balanceChange, setBalanceChange] = useState(null)
+  const [balanceChangePct, setBalanceChangePct] = useState(null)
   const dispatch = useDispatch()
   const marketStatus = useGetMarketStatus()
-  const { portfolioChange: change, portfolioChangePct: changePct } = userInfo
-  let timeout
+  const timeout = useRef()
 
   const onWatchlistItemPress = (stockInfo: PositionType) => {
     dispatch({
@@ -39,8 +39,14 @@ export default function Home() {
   }
 
   useEffect(() => {
-    return () => clearTimeout(timeout)
+    return () => clearTimeout(timeout.current)
   }, [timeout])
+
+  useEffect(() => {
+    setBalanceValue(userInfo?.portfolioValue)
+    setBalanceChange(userInfo?.portfolioChange)
+    setBalanceChangePct(userInfo?.portfolioChangePct)
+  }, [userInfo])
 
   useFocusEffect(
     useCallback(() => {
@@ -52,10 +58,15 @@ export default function Home() {
     }, [uid]),
   )
 
-  const onChartEvent = (value: string | number | null) => {
-    setBalanceValue(value ? formatCurrency(value) : null)
-    if (!value) {
-      timeout = setTimeout(() => setAllowScroll(true), 500)
+  const onChartEvent = (
+    item: { change: number, changePct: number, value: number } | null,
+  ) => {
+    setBalanceValue(item?.value ?? userInfo?.portfolioValue)
+    setBalanceChange(item?.change ?? userInfo?.portfolioChange)
+    setBalanceChangePct(item?.changePct ?? userInfo?.portfolioChangePct)
+
+    if (!item) {
+      timeout.current = setTimeout(() => setAllowScroll(true), 500)
     } else {
       setAllowScroll(false)
     }
@@ -70,8 +81,11 @@ export default function Home() {
       >
         <View style={styles.header}>
           <Balance
-            value={balanceValue ?? userInfo?.portfolioValue}
-            dayChange={{ change, changePct }}
+            dayChange={{
+              change: balanceChange ?? userInfo?.portfolioChange,
+              changePct: balanceChangePct ?? userInfo?.portfolioChangePct,
+              value: balanceValue ?? userInfo?.portfolioValue,
+            }}
           />
           <MarketStatus status={marketStatus} />
         </View>

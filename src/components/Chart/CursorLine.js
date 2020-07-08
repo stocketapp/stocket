@@ -36,8 +36,12 @@ export default function LabelCursor({
   }
 
   const onEventCallback = useCallback(() => {
-    onEvent(datum?.value)
-  }, [datum?.value, onEvent])
+    onEvent({
+      change: datum?.change,
+      changePct: datum?.changePct,
+      value: datum?.value,
+    })
+  }, [datum?.change, datum?.changePct, datum?.value, onEvent])
 
   onEventCallback()
 

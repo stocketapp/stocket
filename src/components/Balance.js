@@ -10,11 +10,12 @@ type Props = {
   dayChange: {
     change: number,
     changePct: number,
+    value: string | number,
   },
 }
 
-const Balance = ({ value, dayChange }: Props): React$Node => {
-  const { change, changePct } = dayChange
+const Balance = ({ dayChange }: Props): React$Node => {
+  const { change, changePct, value } = dayChange
   const color = changePct > 0 ? GREEN : changePct < 0 ? RED : 'white'
   return (
     <View>
@@ -22,12 +23,12 @@ const Balance = ({ value, dayChange }: Props): React$Node => {
         Invested
       </Text>
       <Text weight="Black" style={styles.value}>
-        {value || '$0.00'}
+        {typeof value !== 'number' ? value : formatCurrency(value)}
       </Text>
       <View style={styles.changeContainer}>
         <Text weight="Medium" color={color}>
           {changePct > 0 && '+'}
-          {`${formatCurrency(change)} (${changePct.toFixed(2)}%)`}
+          {`${formatCurrency(change)} (${changePct?.toFixed(2)}%)`}
         </Text>
         <Text weight="Light" color={LABEL}>
           {' '}

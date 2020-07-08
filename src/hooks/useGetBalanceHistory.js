@@ -5,7 +5,13 @@ import moment from 'moment'
 import { uniqBy } from 'lodash'
 import { currencyToNumber } from 'utils/functions'
 
-function useGetBalanceHistory(uid: string, currentValue: string) {
+type UserInfo = {
+  portfolioChange: number,
+  portfolioChangePct: number,
+  portfolioValue: string,
+}
+
+function useGetBalanceHistory(uid: string, userInfo: UserInfo) {
   const [balanceHistory, setBalanceHistory] = useState(null)
   useEffect(() => {
     const subscribe = firestore()
@@ -15,16 +21,20 @@ function useGetBalanceHistory(uid: string, currentValue: string) {
         try {
           const list = []
           snapshot.forEach(doc => {
-            const data = doc.data()
+            const { date, value, change, changePct } = doc?.data()
             list.push({
-              date: moment(data?.date.toMillis()).format('MMM DD, YYYY'),
-              value: currencyToNumber(data?.value),
+              date: moment(date.toMillis()).format('MMM DD, YYYY'),
+              value: currencyToNumber(value),
+              change,
+              changePct,
             })
           })
           const now = moment()
           list.push({
             date: moment(now).format('MMM DD, YYYY'),
-            value: currencyToNumber(currentValue),
+            value: currencyToNumber(userInfo?.portfolioValue),
+            change: userInfo?.portfolioChange,
+            changePct: userInfo?.portfolioChangePct,
           })
           setBalanceHistory(list)
         } catch (err) {
@@ -33,7 +43,7 @@ function useGetBalanceHistory(uid: string, currentValue: string) {
       })
 
     return () => subscribe()
-  }, [uid, currentValue])
+  }, [uid, userInfo])
 
   return uniqBy(balanceHistory, 'date')
 }
