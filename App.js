@@ -8,7 +8,7 @@ import {
   useIapHub,
   useSubscribeMarketHours,
 } from 'hooks'
-// import RNBootSplash from 'react-native-bootsplash'
+import RNBootSplash from 'react-native-bootsplash'
 import { BACKGROUND } from 'utils/colors'
 import { IAPHUB_API_KEY, IAPHUB_APPID, IAPHUB_ENV } from './config'
 import TradeView from 'views/TradeView'
@@ -26,15 +26,15 @@ const iapHubConfig = {
 export default function App(): React$Node {
   const { isAuth, currentUser } = useAuthState()
   const tradeViewRef = useRef()
-  useSetUserInfo(currentUser)
+  const { loading } = useSetUserInfo(currentUser)
   useIapHub(currentUser?.uid)
   useSubscribeMarketHours()
 
-  // useEffect(() => {
-  //   if (!loading) {
-  //     RNBootSplash.hide({ duration: 250 })
-  //   }
-  // }, [loading])
+  useEffect(() => {
+    if (!loading) {
+      RNBootSplash.hide({ duration: 300 })
+    }
+  }, [loading])
 
   useEffect(() => {
     const initIAP = async () => {

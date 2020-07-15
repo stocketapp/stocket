@@ -42,6 +42,9 @@
 		BA9A7E0123E67A1A0062EEB4 /* AppCenter-Config.plist in Resources */ = {isa = PBXBuildFile; fileRef = BA11394223B0F1090076AE78 /* AppCenter-Config.plist */; };
 		BAA7FDA5248FEC42000C9456 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = BA9A7E1923E693350062EEB4 /* GoogleService-Info.plist */; };
 		BAA7FDA6248FEC42000C9456 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = BA9A7E1923E693350062EEB4 /* GoogleService-Info.plist */; };
+		BAB356ED24BFBA4000D18438 /* BootSplash.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BAB356EC24BFBA4000D18438 /* BootSplash.storyboard */; };
+		BAB356EE24BFBA4000D18438 /* BootSplash.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BAB356EC24BFBA4000D18438 /* BootSplash.storyboard */; };
+		BAB356EF24BFBA4000D18438 /* BootSplash.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BAB356EC24BFBA4000D18438 /* BootSplash.storyboard */; };
 		BAC96236248D478400F78E5C /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BAC96235248D478400F78E5C /* StoreKit.framework */; };
 		BAC96237248D478900F78E5C /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BAC96235248D478400F78E5C /* StoreKit.framework */; };
 		BAC96238248D478B00F78E5C /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BAC96235248D478400F78E5C /* StoreKit.framework */; };
@@ -127,6 +130,7 @@
 		BA9A7E0B23E67A1A0062EEB4 /* Stocket.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Stocket.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BA9A7E1523E692F60062EEB4 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		BA9A7E1923E693350062EEB4 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		BAB356EC24BFBA4000D18438 /* BootSplash.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = BootSplash.storyboard; path = stocket/BootSplash.storyboard; sourceTree = "<group>"; };
 		BABC5FA423AA5130002A831D /* stocket.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = stocket.entitlements; path = stocket/stocket.entitlements; sourceTree = "<group>"; };
 		BAC96235248D478400F78E5C /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		E0554ED088C64FB4B1AA08F2 /* SF-Pro-Text-Ultralight.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "SF-Pro-Text-Ultralight.otf"; path = "../assets/fonts/SF-Pro-Text-Ultralight.otf"; sourceTree = "<group>"; };
@@ -208,6 +212,7 @@
 		13B07FAE1A68108700A75B9A /* stocket */ = {
 			isa = PBXGroup;
 			children = (
+				BAB356EC24BFBA4000D18438 /* BootSplash.storyboard */,
 				BA21949023BB785D00A77A16 /* stocket-Bridging-Header.h */,
 				BABC5FA423AA5130002A831D /* stocket.entitlements */,
 				BA3D548C23AA4419006651B4 /* FirebaseConfig */,
@@ -560,6 +565,7 @@
 				BA683C5224BFAAA2009F7606 /* LaunchScreen.storyboard in Resources */,
 				D1D26B6A98C6441CA3CADC0B /* SF-Pro-Text-Thin.otf in Resources */,
 				3607F76C99F44085A15D1712 /* SF-Pro-Text-Ultralight.otf in Resources */,
+				BAB356ED24BFBA4000D18438 /* BootSplash.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -595,6 +601,7 @@
 				BA3D54AE23AA45B1006651B4 /* Images.xcassets in Resources */,
 				BA683C5324BFAAA2009F7606 /* LaunchScreen.storyboard in Resources */,
 				BA11394423B0F1090076AE78 /* AppCenter-Config.plist in Resources */,
+				BAB356EE24BFBA4000D18438 /* BootSplash.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -615,6 +622,7 @@
 				BA9A7E0023E67A1A0062EEB4 /* Images.xcassets in Resources */,
 				BA683C5424BFAAA2009F7606 /* LaunchScreen.storyboard in Resources */,
 				BA9A7E0123E67A1A0062EEB4 /* AppCenter-Config.plist in Resources */,
+				BAB356EF24BFBA4000D18438 /* BootSplash.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -798,7 +806,8 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\n";
+			shellScript = "
+";
 		};
 		BA9A7DF823E67A1A0062EEB4 /* Start Packager */ = {
 			isa = PBXShellScriptBuildPhase;

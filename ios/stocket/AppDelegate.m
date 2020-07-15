@@ -8,6 +8,7 @@
 #import <AppCenterReactNativeAnalytics.h>
 #import <AppCenterReactNativeCrashes.h>
 #import <CodePush/CodePush.h>
+#import "RNBootSplash.h"
 
 @import Firebase;
 
@@ -56,6 +57,7 @@ static void InitializeFlipper(UIApplication *application) {
   [AppCenterReactNative register];
   [AppCenterReactNativeAnalytics registerWithInitiallyEnabled:true];
   [AppCenterReactNativeCrashes registerWithAutomaticProcessing];
+  [RNBootSplash initWithStoryboard:@"BootSplash" rootView:rootView];
   return YES;
 }
 
