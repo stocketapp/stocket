@@ -1,4 +1,4 @@
-import React, { forwardRef, useEffect, useMemo } from 'react'
+import React, { forwardRef, useEffect, useMemo, useRef, useState } from 'react'
 import { View, Dimensions, TouchableOpacity } from 'react-native'
 import Sheet from 'react-native-raw-bottom-sheet'
 import { useSelector, useDispatch } from 'react-redux'
@@ -9,6 +9,7 @@ import TradeHeader from './TradeHeader'
 import TradeDetails from './TradeDetails'
 import TradeTotal from './TradeTotal'
 import TradeAction from './TradeAction'
+import TradeSuccess from './TradeSuccess'
 
 function TradeView({ ref }) {
   const { trade, user, stock } = useSelector(state => state)
@@ -23,12 +24,15 @@ function TradeView({ ref }) {
   const { currentUser, userInfo } = user
   const dispatch = useDispatch()
   const sharesOwned = selectedStockPosition?.shares?.length
-
   const maxShares = Math.floor(userInfo?.cash / stockPrice)
+  const [isLoading, setIsLoading] = useState(false)
+  const [goToSuccess, setGoToSuccess] = useState(false)
 
   useEffect(() => {
     if (tradeViewIsOpen) {
       ref.current.open()
+    } else {
+      ref.current.close()
     }
   }, [tradeViewIsOpen, ref])
 
@@ -41,6 +45,7 @@ function TradeView({ ref }) {
       type: 'SET_QUANTITY',
       stockQuantity: '0',
     })
+    setGoToSuccess(false)
   }
 
   const setQuantity = quantity => {
@@ -69,7 +74,9 @@ function TradeView({ ref }) {
     stockPrice,
   ])
 
-  const createTradeTransaction = () => {
+  const createTradeTransaction = async () => {
+    setIsLoading(true)
+    setGoToSuccess(true)
     const obj = {
       value: total,
       price: stockPrice,
@@ -79,9 +86,9 @@ function TradeView({ ref }) {
       action: selectedTradeAction,
       date: Date.now(),
     }
-    createTrade(currentUser?.uid, obj, () => {
-      closeTradeView()
-    })
+    await createTrade({ uid: currentUser?.uid, data: obj }, () =>
+      setIsLoading(false),
+    )
   }
 
   const btnDisabled = useMemo(() => {
@@ -102,47 +109,58 @@ function TradeView({ ref }) {
       closeOnDragDown
       dragFromTop
     >
-      <View style={{ flex: 1, justifyContent: 'space-between' }}>
-        <View style={{ paddingHorizontal: 16 }}>
-          <TradeHeader
-            symbol={stock?.symbol}
-            isSell={trade.selectedTradeAction === 'SELL'}
-          />
+      {goToSuccess ? (
+        <TradeSuccess
+          loading={isLoading}
+          onFinished={closeTradeView}
+          tradeType={selectedTradeAction}
+          amount={stockQuantity}
+          total={total}
+          symbol={tradeStock?.quote.symbol}
+        />
+      ) : (
+        <View style={{ flex: 1, justifyContent: 'space-between' }}>
+          <View style={{ paddingHorizontal: 16 }}>
+            <TradeHeader
+              symbol={stock?.symbol}
+              isSell={trade.selectedTradeAction === 'SELL'}
+            />
 
-          <TradeDetails
-            selectedStock={tradeStock?.quote}
-            quantity={stockQuantity}
-            maxShares={maxShares}
-            isSell={selectedTradeAction === 'BUY'}
-            owned={sharesOwned}
-            price={stockPrice}
-          />
+            <TradeDetails
+              selectedStock={tradeStock?.quote}
+              quantity={stockQuantity}
+              maxShares={maxShares}
+              isSell={selectedTradeAction === 'BUY'}
+              owned={sharesOwned}
+              price={stockPrice}
+            />
 
-          <TradeAction
-            onActionChange={setAction}
-            action={selectedTradeAction}
-          />
-        </View>
+            <TradeAction
+              onActionChange={setAction}
+              action={selectedTradeAction}
+            />
+          </View>
 
-        <View style={{ paddingBottom: 40 }}>
-          <TradeTotal total={total} />
-          <VirtualNumPad onKeyPress={setQuantity} onDelete={remove} />
+          <View style={{ paddingBottom: 40 }}>
+            <TradeTotal total={total} />
+            <VirtualNumPad onKeyPress={setQuantity} onDelete={remove} />
 
-          <TouchableOpacity
-            style={styles.touchable}
-            onPress={createTradeTransaction}
-            disabled={!btnDisabled}
-          >
-            <View
-              style={[styles.actionBtn, { opacity: !btnDisabled ? 0.5 : 1 }]}
+            <TouchableOpacity
+              style={styles.touchable}
+              onPress={createTradeTransaction}
+              disabled={!btnDisabled}
             >
-              <Text type="title" color={DARK_TEXT} weight="Black">
-                {trade.selectedTradeAction}
-              </Text>
-            </View>
-          </TouchableOpacity>
+              <View
+                style={[styles.actionBtn, { opacity: !btnDisabled ? 0.5 : 1 }]}
+              >
+                <Text type="title" color={DARK_TEXT} weight="Black">
+                  {trade.selectedTradeAction}
+                </Text>
+              </View>
+            </TouchableOpacity>
+          </View>
         </View>
-      </View>
+      )}
     </Sheet>
   )
 }

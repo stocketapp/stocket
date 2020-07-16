@@ -12,7 +12,6 @@ const LoadingCheckmark = ({ size = 50, ref, loop }: Props) => (
   <LottieView
     source={require('../../assets/lottie/loading_checkmark.json')}
     style={{ height: size, width: size }}
-    autoPlay
     loop={loop}
     ref={ref}
   />

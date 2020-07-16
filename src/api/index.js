@@ -30,9 +30,14 @@ async function iexGet(endpoint: string, query?: string = '') {
   return res
 }
 
-export async function createTrade(
+type CreateTradeArg = {
   uid: string,
   data: TradeDataType,
+}
+
+export async function createTrade(
+  { uid, data }: CreateTradeArg,
+  onFinally?: () => void,
   callback?: () => void,
 ) {
   const ref: DocReference = FR.doc(`Users/${uid}`)
@@ -45,6 +50,10 @@ export async function createTrade(
     }
   } catch (err) {
     console.log('[API] createTrade', err)
+  } finally {
+    if (onFinally) {
+      onFinally()
+    }
   }
 }
 
