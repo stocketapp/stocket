@@ -18,7 +18,7 @@ export default function (state = initialState.stock, action) {
     case 'SET_WATCHLIST':
       return {
         ...state,
-        watchlist: [...state.watchlist, action.watchlist],
+        watchlist: action.watchlist,
       }
     case 'REMOVE_FROM_WATCHLIST':
       return {
