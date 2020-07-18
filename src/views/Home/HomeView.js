@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef, useCallback, useMemo } from 'react'
+import React, { useState, useEffect, useRef, useCallback } from 'react'
 import { StyleSheet, ScrollView, View } from 'react-native'
 import { BACKGROUND } from 'utils/colors'
 import { Balance, Container, ChartLine, MarketStatus } from 'components'
