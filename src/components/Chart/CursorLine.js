@@ -35,15 +35,13 @@ export default function LabelCursor({
     textX = x - leftOffset
   }
 
-  const onEventCallback = useCallback(() => {
+  useEffect(() => {
     onEvent({
       change: datum?.change,
       changePct: datum?.changePct,
       value: datum?.value,
     })
   }, [datum?.change, datum?.changePct, datum?.value, onEvent])
-
-  onEventCallback()
 
   return (
     <G>

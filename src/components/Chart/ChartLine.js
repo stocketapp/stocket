@@ -1,6 +1,6 @@
 // @flow
-import React from 'react'
-import { Dimensions } from 'react-native'
+import React, { useMemo } from 'react'
+import { Dimensions, View } from 'react-native'
 import {
   VictoryLine,
   VictoryVoronoiContainer,
@@ -12,6 +12,7 @@ import {
 import { GREEN } from 'utils/colors'
 import exampleData from '../LineChart/exampleData'
 import CursorLine from './CursorLine'
+import { minBy, maxBy } from 'lodash'
 
 const { width } = Dimensions.get('window')
 
@@ -42,43 +43,52 @@ export default function ChartLine({
   labelLeftOffset = 40,
   onChartEvent,
 }: Props) {
+  const domainRange = useMemo(() => {
+    const maxDomain = maxBy(data, 'value')?.value
+    const minDomain = minBy(data, 'value')?.value
+    return { minDomain, maxDomain }
+  }, [data])
+
   return (
-    <VictoryChart
-      {...chartProps}
-      padding={styles.victoryChart}
-      containerComponent={
-        <VictoryVoronoiContainer
-          voronoiDimension="x"
-          labelComponent={
-            <CursorLine
-              onEvent={onChartEvent}
-              labelText={labelText}
-              leftOffset={labelLeftOffset}
-              rightOffset={labelRightOffset}
-            />
-          }
-          labels={({ datum }) => datum[labelText]}
-          onDeactivated={() => onChartEvent(null)}
-          mouseFollowTooltips
-          voronoiPadding={0}
-        />
-      }
-    >
-      <VictoryGroup data={data} x={x} y={y}>
-        <VictoryLine
-          {...lineProps}
-          interpolation="basis"
-          x={x}
-          y={y}
-          width={width}
-          style={styles.victoryLine}
-          labels={() => ''}
-          labelComponent={<VictoryLabel />}
-        />
-        <VictoryAxis style={styles.victoryAxis} height={0} width={0} label="" />
-        <VictoryAxis style={styles.victoryAxis} height={0} width={0} label="" />
-      </VictoryGroup>
-    </VictoryChart>
+    <View style={{ paddingTop: 10 }}>
+      <VictoryChart
+        {...chartProps}
+        padding={styles.victoryChart}
+        containerComponent={
+          <VictoryVoronoiContainer
+            voronoiDimension="x"
+            labelComponent={
+              <CursorLine
+                onEvent={onChartEvent}
+                labelText={labelText}
+                leftOffset={labelLeftOffset}
+                rightOffset={labelRightOffset}
+              />
+            }
+            labels={({ datum }) => datum[labelText]}
+            onDeactivated={() => onChartEvent(null)}
+            mouseFollowTooltips
+            voronoiPadding={0}
+          />
+        }
+      >
+        <VictoryGroup data={data} x={x} y={y}>
+          <VictoryLine
+            {...lineProps}
+            interpolation="bundle"
+            x={x}
+            y={y}
+            width={width}
+            style={styles.victoryLine}
+            labels={() => ''}
+            labelComponent={<VictoryLabel />}
+            animate={{ duration: 200 }}
+            maxDomain={domainRange?.maxDomain * 1.1}
+            minDomain={domainRange?.minDomain * 1.1}
+          />
+        </VictoryGroup>
+      </VictoryChart>
+    </View>
   )
 }
 
@@ -93,5 +103,5 @@ const styles = {
     },
   },
   victoryAxis: { tickLabels: { display: 'none', fill: 'none' } },
-  victoryChart: { top: 30, bottom: 0 },
+  victoryChart: { top: 30, bottom: 10 },
 }

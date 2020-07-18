@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useCallback } from 'react'
 import { View, TouchableOpacity, ScrollView, StyleSheet } from 'react-native'
 import { Text, Container, Loader, ChartLine, MarketStatus } from 'components'
 import { GREEN, BACKGROUND, GRAY_DARKER } from 'utils/colors'
@@ -37,7 +37,7 @@ export default function Stock({ route }) {
   const latestPrice = price?.toFixed(2)
   const marketStatus = useGetMarketStatus()
 
-  const openTradeView = () => {
+  const openTradeView = useCallback(() => {
     dispatch({
       type: 'TRADE_VIEW_IS_OPEN',
       tradeViewIsOpen: true,
@@ -46,15 +46,15 @@ export default function Stock({ route }) {
       type: 'STOCK_PRICE',
       stockPrice: latestPrice,
     })
-  }
+  }, [latestPrice, dispatch])
 
-  const onChartEvent = (value: string | number | null) => {
+  const onChartEvent = useCallback((value: string | number | null) => {
     if (!value) {
       setAllowScroll(true)
     } else {
       setAllowScroll(false)
     }
-  }
+  }, [])
 
   const isFav = find(
     watchlist,
