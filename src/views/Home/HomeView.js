@@ -91,7 +91,7 @@ export default function Home() {
           <MarketStatus status={marketStatus} />
         </View>
 
-        {balanceHistory ? (
+        {balanceHistory && balanceHistory?.length > 1 ? (
           <ChartLine
             data={balanceHistory}
             x="date"
