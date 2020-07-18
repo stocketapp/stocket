@@ -10,10 +10,11 @@ import {
   useGetMarketStatus,
 } from 'hooks'
 import { useNavigation, useFocusEffect } from '@react-navigation/native'
-import StockHorizontalList from './StockHorizontalList'
-import Watchlist from './Watchlist'
 import { useDispatch } from 'react-redux'
 import { callUpdateGains } from 'api'
+import { ChartIllustration } from 'components/Icons'
+import StockHorizontalList from './StockHorizontalList'
+import Watchlist from './Watchlist'
 
 export default function Home() {
   const { userInfo, currentUser } = useUser()
@@ -89,13 +90,16 @@ export default function Home() {
           />
           <MarketStatus status={marketStatus} />
         </View>
-        {balanceHistory && (
+
+        {balanceHistory ? (
           <ChartLine
             data={balanceHistory}
             x="date"
             y="value"
             onChartEvent={onChartEvent}
           />
+        ) : (
+          <ChartIllustration />
         )}
         <StockHorizontalList data={positions} loading={loading} />
         {watchlist.length > 0 && (

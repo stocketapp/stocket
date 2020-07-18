@@ -24,7 +24,7 @@ export default function LabelCursor({
   leftOffset,
   rightOffset,
 }: CursorLineProps) {
-  const range = scale.y.range()
+  const range = scale?.y?.range()
   let textX = x
 
   if (x < 20) {
