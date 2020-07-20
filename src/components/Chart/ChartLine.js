@@ -5,7 +5,6 @@ import {
   VictoryLine,
   VictoryVoronoiContainer,
   VictoryChart,
-  VictoryAxis,
   VictoryGroup,
   VictoryLabel,
 } from 'victory-native'
@@ -13,23 +12,9 @@ import { GREEN } from 'utils/colors'
 import exampleData from '../LineChart/exampleData'
 import CursorLine from './CursorLine'
 import { minBy, maxBy } from 'lodash'
+import ChartRangeTabs from './ChartRangeTabs'
 
 const { width } = Dimensions.get('window')
-
-type Props = {
-  data: [],
-  x?: string,
-  y?: string,
-  chartProps?: {
-    minDomain?: { y?: number, x?: number },
-  },
-  lineProps?: {},
-  onEvent?: (value: string | null) => void,
-  labelText?: string | number,
-  labelRightOffset?: number,
-  labelLeftOffset?: number,
-  onChartEvent: (value: string | number | null) => void,
-}
 
 export default function ChartLine({
   data = exampleData,
@@ -42,6 +27,9 @@ export default function ChartLine({
   labelRightOffset = 80,
   labelLeftOffset = 40,
   onChartEvent,
+  showTabs = false,
+  tabs,
+  onTabPress,
 }: Props) {
   const domainRange = useMemo(() => {
     const maxDomain = maxBy(data, 'value')?.value
@@ -82,14 +70,38 @@ export default function ChartLine({
             style={styles.victoryLine}
             labels={() => ''}
             labelComponent={<VictoryLabel />}
-            animate={{ duration: 200 }}
             maxDomain={domainRange?.maxDomain * 1.1}
             minDomain={domainRange?.minDomain * 1.1}
           />
         </VictoryGroup>
       </VictoryChart>
+      {showTabs && (
+        <ChartRangeTabs>
+          {tabs.map(el => (
+            <ChartRangeTabs.Tab label={el} onPress={() => onTabPress(el)} />
+          ))}
+        </ChartRangeTabs>
+      )}
     </View>
   )
+}
+
+type Props = {
+  data: [],
+  x?: string,
+  y?: string,
+  chartProps?: {
+    minDomain?: { y?: number, x?: number },
+  },
+  lineProps?: {},
+  onEvent?: (value: string | null) => void,
+  labelText?: string | number,
+  labelRightOffset?: number,
+  labelLeftOffset?: number,
+  onChartEvent: (value: string | number | null) => void,
+  showTabs: boolean,
+  tabs: [string],
+  onTabPress: (tab: string) => void,
 }
 
 const styles = {

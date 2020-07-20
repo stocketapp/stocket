@@ -107,6 +107,12 @@ export async function getBatchStockData(
   return result
 }
 
+export async function getHistoricalData(symbol: string, range: string) {
+  const res = await iexGet(`stock/${symbol}/chart/${range}`)
+  const result = await res.json()
+  return result
+}
+
 type CreateUserType = { uid: string, name: string, email: string }
 export async function createUserData({ uid, name, email }: CreateUserType) {
   const userRef: DocReference = FR.doc(`Users/${uid}`)

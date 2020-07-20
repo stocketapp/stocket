@@ -1,7 +1,7 @@
 // @flow
-import { useEffect, useState, useMemo, useCallback } from 'react'
+import { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux'
-import { getBatchStockData, updatePosition } from 'api'
+import { getBatchStockData, updatePosition, getHistoricalData } from 'api'
 import { filter, reduce } from 'lodash'
 import SocketIO from 'socket.io-client'
 import { useUser } from 'hooks'
@@ -36,18 +36,41 @@ export function useGetCurrentStock(selectedStock: string, stockInfo: {}) {
   return stock
 }
 
-export function useGraphData(stock: { chart: [] }) {
-  const getGraphData = (item: { chart: [] }) => {
-    const arr = filter(item?.chart, el => el?.close !== null)
-    const result = arr.map(el => ({
-      value: el.close,
-      label: el.label,
-      date: el.date,
-    }))
-    return result
-  }
+type GraphDataType = {
+  data: { chart: [] } | [{}],
+}
 
-  return useMemo(() => getGraphData(stock), [stock])
+export function useGraphData(stockData: GraphDataType, range: string = 'now') {
+  const [graphData, setGraphData] = useState()
+
+  useEffect(() => {
+    const getGraphData = data => {
+      const arr = filter(data, el => el?.close !== null)
+      const result = arr.map(el => ({
+        value: el.close,
+        label: el.label,
+        date: el.date,
+      }))
+      setGraphData(result)
+    }
+
+    const getHistData = async () => {
+      try {
+        const res = await getHistoricalData(stockData?.quote?.symbol, range)
+        getGraphData(res)
+      } catch (err) {
+        console.log('[ERROR] getHistData', err)
+      }
+    }
+
+    if (range !== 'now') {
+      getHistData()
+    } else {
+      getGraphData(stockData?.chart)
+    }
+  }, [stockData, range])
+
+  return graphData
 }
 
 type UsePriceSubscriptionTypes = {
@@ -62,23 +85,24 @@ export function usePriceSubscription(position: UsePriceSubscriptionTypes) {
   const shares = position?.shares
   const prevDayPrice = position?.previousDayPrice
 
-  const getGains = (price) => {
-    const value = shares?.length * price
-    const gainsArr = shares.map(el => price - el.price)
-    const gains = reduce(gainsArr, (a, b) => a + b)
-    const gainsPercentage = (gains / value) * 100
-    const prevValue = reduce(shares.map(el => prevDayPrice - el.price), (a, b) => a + b)
-    const todayGains = subtract(Math.abs(gains), Math.abs(prevValue))
-    const todayGainsPct = (todayGains / value) * 100
-    return { gains, gainsPercentage, value, todayGains, todayGainsPct }
-  }
-
-  const calcGains = useCallback(getGains, [data?.price])
-
   useEffect(() => {
     const url = 'https://ws-api.iextrading.com/1.0/last'
     const socket = SocketIO(url)
     let throttleUpdate
+
+    const getGains = price => {
+      const value = shares?.length * price
+      const gainsArr = shares.map(el => price - el.price)
+      const gains = reduce(gainsArr, (a, b) => a + b)
+      const gainsPercentage = (gains / value) * 100
+      const prevValue = reduce(
+        shares.map(el => prevDayPrice - el.price),
+        (a, b) => a + b,
+      )
+      const todayGains = subtract(Math.abs(gains), Math.abs(prevValue))
+      const todayGainsPct = (todayGains / value) * 100
+      return { gains, gainsPercentage, value, todayGains, todayGainsPct }
+    }
 
     if (symbol) {
       socket.on('connect', () => {
@@ -88,7 +112,7 @@ export function usePriceSubscription(position: UsePriceSubscriptionTypes) {
       socket.on('message', async message => {
         const res = JSON.parse(message)
         setData(res)
-        const positionGains = calcGains(res?.price)
+        const positionGains = getGains(res?.price)
         const obj = {
           ...positionGains,
         }
@@ -103,7 +127,7 @@ export function usePriceSubscription(position: UsePriceSubscriptionTypes) {
       socket.close()
       clearTimeout(throttleUpdate)
     }
-  }, [])
+  }, [currentUser?.uid, prevDayPrice, shares, symbol])
 
   return data
 }

@@ -29,7 +29,8 @@ export default function Stock({ route }) {
   )
   const stockInfo = route.params?.stockInfo
   const stock = useGetCurrentStock(selectedStock, stockInfo)
-  const graphData = useGraphData(stock)
+  const [graphRange, setGraphRange] = useState('now')
+  const graphData = useGraphData(stock, graphRange)
   const { uid } = useSelector(({ user }) => user?.currentUser)
   const [allowScroll, setAllowScroll] = useState(true)
   const dispatch = useDispatch()
@@ -124,6 +125,9 @@ export default function Stock({ route }) {
                 labelRightOffset={40}
                 labelLeftOffset={15}
                 onChartEvent={onChartEvent}
+                showTabs
+                tabs={['now', '1m', '3m', '6m', '1y']}
+                onTabPress={setGraphRange}
               />
 
               <StockDetails data={stock?.quote} />
