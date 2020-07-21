@@ -84,7 +84,7 @@ function Products({ onClose, forwardedRef, isOpen }: Props) {
 
   return (
     <Sheet
-      height={Dimensions.get('window').height - 80}
+      height={Dimensions.get('window').height - 70}
       customStyles={{ container: styles.container }}
       ref={forwardedRef}
       onClose={onClose}

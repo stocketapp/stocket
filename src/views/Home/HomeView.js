@@ -97,7 +97,7 @@ export default function Home() {
             x="date"
             y="value"
             onChartEvent={onChartEvent}
-            lineProps={{ animate: { duration: 200 } }}
+            lineProps={{ animate: { duration: 500, easing: 'linear' } }}
           />
         ) : (
           <ChartIllustration />
