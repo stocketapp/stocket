@@ -95,12 +95,12 @@ function Products({ onClose, forwardedRef, isOpen }: Props) {
         style={{
           backgroundColor: SUB_BACKGROUND,
           alignItems: 'center',
-          paddingTop: 20,
+          paddingTop: 10,
           flex: 1,
         }}
       >
         <ProductsIllustration />
-        <Text type="label" style={{ paddingBottom: 40 }}>
+        <Text type="label" style={{ paddingVertical: 10 }}>
           Add more cash to your account
         </Text>
 
@@ -140,7 +140,7 @@ const styles = StyleSheet.create({
   },
   actionBtn: {
     width: '78%',
-    paddingVertical: 9,
+    paddingVertical: 10,
     backgroundColor: GREEN,
     justifyContent: 'center',
     alignItems: 'center',
@@ -157,6 +157,7 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'row',
     justifyContent: 'space-between',
+    paddingHorizontal: '9%',
   },
   loadingmark: {
     position: 'absolute',

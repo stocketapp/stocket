@@ -50,11 +50,11 @@ const styles = StyleSheet.create({
     alignContent: 'center',
     borderBottomLeftRadius: 12,
     borderBottomRightRadius: 12,
-    paddingVertical: 5,
+    paddingVertical: 4,
   },
   productImg: {
-    height: 110,
-    width: 110,
+    height: 100,
+    width: 100,
   },
   imgContainer: {
     paddingHorizontal: 10,
