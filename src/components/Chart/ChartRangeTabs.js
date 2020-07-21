@@ -69,6 +69,6 @@ const styles = StyleSheet.create({
   },
   label: {
     textTransform: 'capitalize',
-    fontSize: 10,
+    fontSize: 12,
   },
 })

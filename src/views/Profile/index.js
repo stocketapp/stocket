@@ -5,16 +5,18 @@ import { Container, Text } from 'components'
 import { LABEL, CARD_BACKGROUND } from 'utils/colors'
 import { useSelector } from 'react-redux'
 import { formatCurrency, currencyToNumber } from 'utils/functions'
+import { useTotalGains } from 'hooks'
 import ProfileItem from './ProfileItem'
 import AddCash from './AddCash'
 import LogoutButton from './LogoutButton'
-import p from '../../../package.json'
+import pckg from '../../../package.json'
 import Products from '../Products'
 
 export default function Profile() {
   const { userInfo } = useSelector(({ user }) => user)
   const iapRef = useRef()
   const [isIapOpen, setIsIapOpen] = useState(false)
+  const totalGains = useTotalGains()
 
   return (
     <Container fullView ph style={{ flex: 1, justifyContent: 'space-between' }}>
@@ -44,9 +46,13 @@ export default function Profile() {
         </Container>
 
         <Container top={40}>
-          <ProfileItem label="Portfolio" value={userInfo?.portfolioValue} />
           <ProfileItem
-            label="Total Value"
+            label="Portfolio Value"
+            value={userInfo?.portfolioValue}
+          />
+          <ProfileItem label="Portfolio Gains" value={totalGains} />
+          <ProfileItem
+            label="Account Value"
             value={formatCurrency(
               currencyToNumber(userInfo?.portfolioValue) + userInfo?.cash,
             )}
@@ -57,7 +63,7 @@ export default function Profile() {
       <View style={{ width: '100%', alignItems: 'center', paddingBottom: 20 }}>
         <LogoutButton />
         <Text style={{ paddingTop: 10 }} type="subtext" color={LABEL}>
-          {p.version}
+          {pckg.version}
         </Text>
       </View>
       <Products
