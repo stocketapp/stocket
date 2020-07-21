@@ -28,7 +28,7 @@ const Balance = ({ dayChange }: Props): React$Node => {
       <View style={styles.changeContainer}>
         <Text weight="Medium" color={color}>
           {changePct > 0 && '+'}
-          {`${formatCurrency(change)} (${changePct?.toFixed(2)}%)`}
+          {`${formatCurrency(change)} (${(changePct ?? 0)?.toFixed(2)}%)`}
         </Text>
         <Text weight="Light" color={LABEL}>
           {' '}

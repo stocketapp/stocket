@@ -5,7 +5,7 @@ import { find } from 'lodash'
 import purchaseValues from './purchaseValues'
 
 export function formatCurrency(num: number | string) {
-  return Number(num).toLocaleString('en-US', {
+  return Number(num ?? 0).toLocaleString('en-US', {
     style: 'currency',
     currency: 'USD',
   })
@@ -42,10 +42,11 @@ export function getProductValue(productId: string): ProductValue {
 
 export function currencyToNumber(value: string) {
   const number = parseFloat(value?.replace(/[$,]/g, ''))
-  return number ?? 0
+  return (number ?? 0).toFixed(2)
 }
 
 export function sumCurrency(a: string, b: string) {
   const sum = currencyToNumber(a) + currencyToNumber(b)
-  return formatCurrency(sum)
+  const currency = formatCurrency(sum)
+  return formatCurrency(sum) === '$NaN' ? '$0.00' : currency
 }
