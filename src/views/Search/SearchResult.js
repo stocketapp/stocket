@@ -2,6 +2,7 @@ import React from 'react'
 import { View, TouchableOpacity } from 'react-native'
 import { Text } from 'components'
 import { BACKGROUND, GRAY_DARKER, GREEN } from 'utils/colors'
+import { FavoriteIcon } from 'components/Icons'
 
 type SearchResultProps = {
   item: {
@@ -11,6 +12,7 @@ type SearchResultProps = {
   onPress: () => void,
   setStock: (symbol: string) => void,
   uid: string,
+  isFaved: (symbol: string) => void,
 }
 
 export default function SearchResult({
@@ -18,7 +20,9 @@ export default function SearchResult({
   onPress,
   setStock,
   uid,
+  isFaved,
 }: SearchResultProps) {
+  const isFav = isFaved(item?.symbol)
   return (
     <TouchableOpacity style={styles.resultItem} onPress={setStock}>
       <View style={{ flex: 1 }}>
@@ -32,17 +36,9 @@ export default function SearchResult({
 
       <TouchableOpacity
         style={{ padding: 6 }}
-        onPress={() => onPress(uid, { symbol: item?.symbol })}
+        onPress={() => onPress(uid, item?.symbol, isFav)}
       >
-        <View style={styles.plus}>
-          <Text
-            type="title"
-            style={{ bottom: 3.8, left: 0.5 }}
-            status="positive"
-          >
-            +
-          </Text>
-        </View>
+        <FavoriteIcon size={26} color={GREEN} filled={isFav} />
       </TouchableOpacity>
     </TouchableOpacity>
   )
