@@ -1,16 +1,9 @@
 // @flow
-import React, { forwardRef, useEffect, useState, useRef } from 'react'
-import {
-  Dimensions,
-  View,
-  StyleSheet,
-  Animated,
-  Easing,
-  Vibration,
-} from 'react-native'
-import { Text, LoadingCheckmark } from 'components'
+import React, { forwardRef, useEffect, useState, useMemo } from 'react'
+import { Dimensions, View, StyleSheet } from 'react-native'
+import { Text, SuccessScreen } from 'components'
 import Sheet from 'react-native-raw-bottom-sheet'
-import { SUB_BACKGROUND, GREEN, LABEL } from 'utils/colors'
+import { SUB_BACKGROUND, GREEN } from 'utils/colors'
 import ProductsIllustration from './ProductsIllustration'
 import ProductItem from './ProductItem'
 import IapHub from 'react-native-iaphub'
@@ -25,15 +18,12 @@ type Props = {
   forwardedRef?: { current: any },
 }
 
-const { Value, timing } = Animated
-
 function Products({ onClose, forwardedRef, isOpen }: Props) {
   const { products } = useSelector(({ iapProducts }) => iapProducts)
   const { uid } = useSelector(({ user }) => user?.currentUser)
   const [purchaseLoading, setPurchaseLoading] = useState(false)
-  const [progress] = useState(new Value(0))
-  const [selectedProduct, setSelectedProduct] = useState(null)
-  const loadingMarkRef = useRef()
+  const [success, setSuccess] = useState(false)
+  const [purchasedProduct, setPurchasedProduct] = useState(null)
 
   useEffect(() => {
     if (isOpen) {
@@ -41,29 +31,18 @@ function Products({ onClose, forwardedRef, isOpen }: Props) {
     }
   }, [isOpen, forwardedRef])
 
-  useEffect(() => {
-    if (purchaseLoading && selectedProduct) {
-      timing(progress, {
-        toValue: 1,
-        duration: 5000,
-        easing: Easing.linear,
-        useNativeDriver: false,
-      }).start(() => {
-        Vibration.vibrate(500)
-        reset()
-      })
-    }
-  }, [progress, purchaseLoading, selectedProduct])
-
   const buyCash = async productId => {
-    setSelectedProduct(productId)
     try {
-      const transaction = await IapHub.buy(productId)
       setPurchaseLoading(true)
+      const transaction = await IapHub.buy(productId)
+      setPurchasedProduct(transaction)
+      setSuccess(true)
       await updateCash(transaction?.sku)
     } catch (err) {
-      console.log(err)
+      console.log('[ERROR] buyCash()', err)
       transactionErrors(err.code)
+    } finally {
+      setPurchaseLoading(false)
     }
   }
 
@@ -79,8 +58,19 @@ function Products({ onClose, forwardedRef, isOpen }: Props) {
 
   const reset = () => {
     setPurchaseLoading(false)
-    setSelectedProduct(null)
+    setSuccess(false)
+    setPurchasedProduct(null)
   }
+
+  const onFinished = () => {
+    reset()
+    forwardedRef?.current?.close()
+  }
+
+  const purchasedValues = useMemo(
+    () => getProductValue(purchasedProduct?.sku),
+    [purchasedProduct?.sku],
+  )
 
   return (
     <Sheet
@@ -91,40 +81,37 @@ function Products({ onClose, forwardedRef, isOpen }: Props) {
       closeOnDragDown
       dragFromTop
     >
-      <View
-        style={{
-          backgroundColor: SUB_BACKGROUND,
-          alignItems: 'center',
-          paddingTop: 10,
-          flex: 1,
-        }}
-      >
-        <ProductsIllustration />
-        <Text type="label" style={{ paddingVertical: 10 }}>
-          Add more cash to your account
-        </Text>
+      {success ? (
+        <SuccessScreen
+          successText={`Successfully added ${formatCurrency(
+            purchasedValues?.value,
+          )} to your account.`}
+          bigText={purchasedValues.price}
+          onFinished={onFinished}
+          loading={purchaseLoading}
+        />
+      ) : (
+        <View
+          style={{
+            backgroundColor: SUB_BACKGROUND,
+            alignItems: 'center',
+            paddingTop: 10,
+            flex: 1,
+          }}
+        >
+          <ProductsIllustration />
+          <Text type="label" style={{ paddingVertical: 10 }}>
+            Add more cash to your account
+          </Text>
 
-        <View style={styles.products}>
-          {products &&
-            products.map((el, i) => (
-              <ProductItem product={el} key={i} onPurchase={buyCash} />
-            ))}
-        </View>
-
-        {purchaseLoading && selectedProduct && (
-          <View style={styles.loadingmark}>
-            <LoadingCheckmark
-              size={110}
-              ref={loadingMarkRef}
-              loop={false}
-              progress={progress}
-            />
-            <Text color={LABEL} type="label">
-              +{formatCurrency(getProductValue(selectedProduct).value)}
-            </Text>
+          <View style={styles.products}>
+            {products &&
+              products.map((el, i) => (
+                <ProductItem product={el} key={i} onPurchase={buyCash} />
+              ))}
           </View>
-        )}
-      </View>
+        </View>
+      )}
     </Sheet>
   )
 }

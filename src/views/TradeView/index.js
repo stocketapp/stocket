@@ -1,15 +1,15 @@
-import React, { forwardRef, useEffect, useMemo, useRef, useState } from 'react'
+import React, { forwardRef, useEffect, useMemo, useState } from 'react'
 import { View, Dimensions, TouchableOpacity } from 'react-native'
 import Sheet from 'react-native-raw-bottom-sheet'
 import { useSelector, useDispatch } from 'react-redux'
 import { SUB_BACKGROUND, DARK_TEXT, GREEN } from 'utils/colors'
-import { VirtualNumPad, Text } from 'components'
+import { VirtualNumPad, Text, SuccessScreen } from 'components'
 import { createTrade } from 'api'
 import TradeHeader from './TradeHeader'
 import TradeDetails from './TradeDetails'
 import TradeTotal from './TradeTotal'
 import TradeAction from './TradeAction'
-import TradeSuccess from './TradeSuccess'
+import { formatCurrency } from 'utils/functions'
 
 function TradeView({ ref }) {
   const { trade, user, stock } = useSelector(state => state)
@@ -110,13 +110,15 @@ function TradeView({ ref }) {
       dragFromTop
     >
       {goToSuccess ? (
-        <TradeSuccess
+        <SuccessScreen
           loading={isLoading}
           onFinished={closeTradeView}
-          tradeType={selectedTradeAction}
-          amount={stockQuantity}
-          total={total}
-          symbol={tradeStock?.quote.symbol}
+          successText={
+            selectedTradeAction === 'BUY'
+              ? `Your successfully purchased ${stockQuantity} shares of ${tradeStock?.quote.symbol}`
+              : `You successfully sold ${stockQuantity} shares of ${tradeStock?.quote.symbol}`
+          }
+          bigText={formatCurrency(total)}
         />
       ) : (
         <View style={{ flex: 1, justifyContent: 'space-between' }}>
