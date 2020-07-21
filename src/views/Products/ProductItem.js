@@ -1,56 +1,65 @@
 import React from 'react'
-import { View, StyleSheet, TouchableOpacity } from 'react-native'
+import { View, StyleSheet, TouchableOpacity, Image } from 'react-native'
 import { Text } from 'components'
 import { CARD_BACKGROUND, GREEN, DARK_TEXT } from 'utils/colors'
+import productImgs from '../../../assets/products'
 
 export default ({ product, onPurchase }) => (
-  <View style={styles.container}>
-    <Text weight="Bold" type="heading">
-      {product?.title}
-    </Text>
+  <TouchableOpacity
+    style={{ padding: 15 }}
+    activeOpacity={0.6}
+    onPress={() => onPurchase(product?.sku)}
+  >
+    {product?.sku && (
+      <View style={styles.container}>
+        <View style={styles.imgContainer}>
+          <Image source={productImgs[product?.sku]} style={styles.productImg} />
+        </View>
 
-    <TouchableOpacity
-      onPress={() => onPurchase(product?.sku)}
-      style={styles.touchable}
-    >
-      <View style={styles.btn}>
-        <Text
-          weight="Black"
-          color={DARK_TEXT}
-          style={{ textAlign: 'center' }}
-          type="label"
-        >
-          {product?.price}
-        </Text>
+        <View style={styles.btn}>
+          <Text
+            weight="Black"
+            color={DARK_TEXT}
+            style={{ textAlign: 'center' }}
+            type="label"
+          >
+            {product?.price}
+          </Text>
+        </View>
       </View>
-    </TouchableOpacity>
-  </View>
+    )}
+  </TouchableOpacity>
 )
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: CARD_BACKGROUND,
-    height: 140,
-    paddingTop: 16,
+    backgroundColor: '#222222',
     borderRadius: 12,
-    alignItems: 'center',
     justifyContent: 'space-between',
-    margin: 6,
-    width: '45%',
+    alignItems: 'center',
+    shadowColor: CARD_BACKGROUND,
+    shadowOffset: { height: 0, width: 1 },
+    shadowOpacity: 0.7,
+    shadowRadius: 6,
   },
   btn: {
     backgroundColor: GREEN,
-    paddingHorizontal: 14,
-    paddingVertical: 10,
+    opacity: 0.9,
     width: '100%',
     justifyContent: 'center',
     alignContent: 'center',
     borderBottomLeftRadius: 12,
     borderBottomRightRadius: 12,
+    paddingVertical: 5,
   },
-  touchable: {
-    justifyContent: 'center',
-    alignItems: 'center',
-    width: '100%',
+  productImg: {
+    height: 110,
+    width: 110,
+  },
+  imgContainer: {
+    paddingHorizontal: 10,
+    borderBottomLeftRadius: 12,
+    borderBottomRightRadius: 12,
+    marginVertical: 5,
   },
 })

@@ -91,13 +91,12 @@ function Products({ onClose, forwardedRef, isOpen }: Props) {
       closeOnDragDown
       dragFromTop
     >
-      <Container
-        ph
-        fullView
+      <View
         style={{
           backgroundColor: SUB_BACKGROUND,
           alignItems: 'center',
           paddingTop: 20,
+          flex: 1,
         }}
       >
         <ProductsIllustration />
@@ -125,7 +124,7 @@ function Products({ onClose, forwardedRef, isOpen }: Props) {
             </Text>
           </View>
         )}
-      </Container>
+      </View>
     </Sheet>
   )
 }
@@ -157,6 +156,7 @@ const styles = StyleSheet.create({
     flexWrap: 'wrap',
     flex: 1,
     flexDirection: 'row',
+    justifyContent: 'space-between',
   },
   loadingmark: {
     position: 'absolute',
