@@ -16,7 +16,12 @@ export default function Profile() {
   const { userInfo } = useSelector(({ user }) => user)
   const iapRef = useRef()
   const [isIapOpen, setIsIapOpen] = useState(false)
-  const totalGains = useTotalGains()
+  const portfolioValue = userInfo?.portfolioValue
+  const cash = formatCurrency(userInfo?.cash)
+  const { totalGains, totalGainsPct } = useTotalGains(portfolioValue)
+  const accountValue = formatCurrency(
+    currencyToNumber(portfolioValue) + userInfo?.cash,
+  )
 
   return (
     <Container fullView ph style={{ flex: 1, justifyContent: 'space-between' }}>
@@ -35,7 +40,7 @@ export default function Profile() {
             <View>
               <Text style={styles.value}>Cash</Text>
               <Text style={styles.cash} weight="Bold" type="title">
-                {formatCurrency(userInfo?.cash)}
+                {cash}
               </Text>
             </View>
 
@@ -46,17 +51,12 @@ export default function Profile() {
         </Container>
 
         <Container top={40}>
+          <ProfileItem label="Portfolio Value" value={portfolioValue} />
           <ProfileItem
-            label="Portfolio Value"
-            value={userInfo?.portfolioValue}
+            label="Portfolio Gains"
+            value={`${totalGains} (${totalGainsPct}%)`}
           />
-          <ProfileItem label="Portfolio Gains" value={totalGains} />
-          <ProfileItem
-            label="Account Value"
-            value={formatCurrency(
-              currencyToNumber(userInfo?.portfolioValue) + userInfo?.cash,
-            )}
-          />
+          <ProfileItem label="Account Value" value={accountValue} />
         </Container>
       </View>
 

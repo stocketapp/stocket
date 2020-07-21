@@ -121,6 +121,6 @@ const styles = StyleSheet.create({
     width: '100%',
     justifyContent: 'space-between',
     paddingHorizontal: 16,
-    paddingTop: 15,
+    paddingTop: 25,
   },
 })
