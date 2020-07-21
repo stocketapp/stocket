@@ -8,7 +8,7 @@ import {
   Easing,
   Vibration,
 } from 'react-native'
-import { Container, Text, LoadingCheckmark } from 'components'
+import { Text, LoadingCheckmark } from 'components'
 import Sheet from 'react-native-raw-bottom-sheet'
 import { SUB_BACKGROUND, GREEN, LABEL } from 'utils/colors'
 import ProductsIllustration from './ProductsIllustration'
