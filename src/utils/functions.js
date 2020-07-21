@@ -42,11 +42,10 @@ export function getProductValue(productId: string): ProductValue {
 
 export function currencyToNumber(value: string) {
   const number = parseFloat(value?.replace(/[$,]/g, ''))
-  return (number ?? 0).toFixed(2)
+  return number ?? 0
 }
 
 export function sumCurrency(a: string, b: string) {
   const sum = currencyToNumber(a) + currencyToNumber(b)
-  const currency = formatCurrency(sum)
-  return formatCurrency(sum) === '$NaN' ? '$0.00' : currency
+  return formatCurrency(sum)
 }

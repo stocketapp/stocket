@@ -7,11 +7,12 @@ import { formatCurrency } from 'utils/functions'
 import functions from '@react-native-firebase/functions'
 
 const FR = firestore()
+console.log(FR)
 
-if (__DEV__) {
-  functions().useFunctionsEmulator('http://localhost:4001')
-  FR.settings({ host: 'localhost:4002', persistence: true, ssl: false })
-}
+// if (__DEV__) {
+//   functions().useFunctionsEmulator('http://localhost:4001')
+//   FR.settings({ host: 'localhost:4002', persistence: true, ssl: false })
+// }
 
 async function iexGet(endpoint: string, query?: string = '') {
   const iexUrl = IEX_URL

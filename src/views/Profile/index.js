@@ -4,7 +4,7 @@ import { View } from 'react-native'
 import { Container, Text } from 'components'
 import { LABEL, CARD_BACKGROUND } from 'utils/colors'
 import { useSelector } from 'react-redux'
-import { formatCurrency, sumCurrency } from 'utils/functions'
+import { formatCurrency, currencyToNumber } from 'utils/functions'
 import { useTotalGains } from 'hooks'
 import ProfileItem from './ProfileItem'
 import AddCash from './AddCash'
@@ -19,9 +19,8 @@ export default function Profile() {
   const portfolioValue = userInfo?.portfolioValue
   const cash = formatCurrency(userInfo?.cash)
   const { totalGains, totalGainsPct } = useTotalGains(portfolioValue ?? '$0.00')
-  const accountValue = sumCurrency(
-    portfolioValue ?? '$0.00',
-    userInfo?.cash ?? '$0.00',
+  const accountValue = formatCurrency(
+    currencyToNumber(portfolioValue) + userInfo?.cash,
   )
 
   return (

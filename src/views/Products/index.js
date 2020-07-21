@@ -35,8 +35,8 @@ function Products({ onClose, forwardedRef, isOpen }: Props) {
     try {
       setPurchaseLoading(true)
       const transaction = await IapHub.buy(productId)
-      setPurchasedProduct(transaction)
       setSuccess(true)
+      setPurchasedProduct(transaction)
       await updateCash(transaction?.sku)
     } catch (err) {
       console.log('[ERROR] buyCash()', err)
@@ -72,6 +72,8 @@ function Products({ onClose, forwardedRef, isOpen }: Props) {
     [purchasedProduct?.sku],
   )
 
+  console.log(success)
+
   return (
     <Sheet
       height={Dimensions.get('window').height - 70}
@@ -81,6 +83,14 @@ function Products({ onClose, forwardedRef, isOpen }: Props) {
       closeOnDragDown
       dragFromTop
     >
+      {/* <SuccessScreen
+        successText={`Successfully added ${formatCurrency(
+          purchasedValues?.value,
+        )} to your account.`}
+        bigText={purchasedValues?.price}
+        onFinished={onFinished}
+        loading={purchaseLoading}
+      /> */}
       {success ? (
         <SuccessScreen
           successText={`Successfully added ${formatCurrency(
