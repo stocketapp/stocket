@@ -27,9 +27,9 @@ export default function ChartLine({
   labelRightOffset = 80,
   labelLeftOffset = 40,
   onChartEvent,
-  showTabs = false,
-  tabs,
+  tabs = [],
   onTabPress,
+  activeRangeTab,
 }: Props) {
   const domainRange = useMemo(() => {
     const maxDomain = maxBy(data, 'value')?.value
@@ -75,12 +75,12 @@ export default function ChartLine({
           />
         </VictoryGroup>
       </VictoryChart>
-      {showTabs && (
-        <ChartRangeTabs>
-          {tabs.map(el => (
-            <ChartRangeTabs.Tab label={el} onPress={() => onTabPress(el)} />
-          ))}
-        </ChartRangeTabs>
+      {tabs?.length > 0 && (
+        <ChartRangeTabs
+          activeRangeTab={activeRangeTab}
+          tabs={tabs}
+          onTabPress={onTabPress}
+        />
       )}
     </View>
   )
@@ -99,9 +99,9 @@ type Props = {
   labelRightOffset?: number,
   labelLeftOffset?: number,
   onChartEvent: (value: string | number | null) => void,
-  showTabs: boolean,
   tabs: [string],
   onTabPress: (tab: string) => void,
+  activeRangeTab: string,
 }
 
 const styles = {

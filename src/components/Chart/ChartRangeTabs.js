@@ -1,20 +1,35 @@
+// @flow
 import React, { useState } from 'react'
 import { View, StyleSheet, Pressable } from 'react-native'
 import { Text } from 'components'
-import { GREEN, DARK_TEXT } from 'utils/colors'
+import { GREEN, LABEL } from 'utils/colors'
 
-const ChartTab = ({ label, onPress = () => null }) => {
+type ChartTabTypes = {
+  label: string,
+  onPress: () => void,
+  activeTab: string,
+}
+const ChartTab = ({
+  label,
+  onPress = () => null,
+  activeTab,
+}: ChartTabTypes) => {
   const [opacity, setOpacity] = useState(1)
-
-  const onPressOut = () => {
-    setOpacity(1)
-    onPress()
-  }
+  const isActive = activeTab === label
 
   return (
-    <Pressable onPressIn={() => setOpacity(0.6)} onPressOut={onPressOut}>
+    <Pressable
+      onPress={onPress}
+      onPressIn={() => setOpacity(0.6)}
+      onPressOut={() => setOpacity(1)}
+    >
       <View style={[styles.tab, { opacity }]}>
-        <Text style={styles.label} type="subtext" weight="Bold">
+        <Text
+          style={styles.label}
+          type="subtext"
+          weight={isActive ? 'Black' : 'Medium'}
+          color={isActive ? GREEN : LABEL}
+        >
           {label}
         </Text>
       </View>
@@ -22,11 +37,19 @@ const ChartTab = ({ label, onPress = () => null }) => {
   )
 }
 
-const ChartRangeTabs = ({ children }) => {
-  return <View style={styles.container}>{children}</View>
-}
+const ChartRangeTabs = ({ children, activeRangeTab, onTabPress, tabs }) => (
+  <View style={styles.container}>
+    {tabs.map(el => (
+      <ChartTab
+        label={el}
+        onPress={() => onTabPress(el)}
+        activeTab={activeRangeTab}
+        key={el}
+      />
+    ))}
+  </View>
+)
 
-ChartRangeTabs.Tab = ChartTab
 export default ChartRangeTabs
 
 const styles = StyleSheet.create({
@@ -38,7 +61,6 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
   },
   tab: {
-    backgroundColor: GREEN,
     borderRadius: 50,
     width: 40,
     height: 20,
@@ -46,7 +68,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   label: {
-    color: DARK_TEXT,
     textTransform: 'capitalize',
     fontSize: 10,
   },

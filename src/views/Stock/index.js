@@ -125,9 +125,9 @@ export default function Stock({ route }) {
                 labelRightOffset={40}
                 labelLeftOffset={15}
                 onChartEvent={onChartEvent}
-                showTabs
                 tabs={['now', '1m', '3m', '6m', '1y']}
                 onTabPress={setGraphRange}
+                activeRangeTab={graphRange}
               />
 
               <StockDetails data={stock?.quote} />
