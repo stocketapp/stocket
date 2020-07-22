@@ -23,7 +23,7 @@ function useGetBalanceHistory(uid: string, userInfo: UserInfo) {
           snapshot.forEach(doc => {
             const { date, value, change, changePct } = doc?.data()
             list.push({
-              date: moment(date.toMillis()).format('MMM DD, YYYY'),
+              date: moment(date?.toMillis())?.format('MMM DD, YYYY'),
               value: currencyToNumber(value),
               change,
               changePct,
@@ -31,7 +31,7 @@ function useGetBalanceHistory(uid: string, userInfo: UserInfo) {
           })
           const now = moment()
           list.push({
-            date: moment(now).format('MMM DD, YYYY'),
+            date: moment(now)?.format('MMM DD, YYYY'),
             value: currencyToNumber(userInfo?.portfolioValue),
             change: userInfo?.portfolioChange,
             changePct: userInfo?.portfolioChangePct,
