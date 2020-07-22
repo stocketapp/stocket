@@ -9,7 +9,7 @@ import {
   VictoryLabel,
 } from 'victory-native'
 import { GREEN } from 'utils/colors'
-import exampleData from '../LineChart/exampleData'
+import exampleData from './exampleData'
 import CursorLine from './CursorLine'
 import { minBy, maxBy } from 'lodash'
 import ChartRangeTabs from './ChartRangeTabs'

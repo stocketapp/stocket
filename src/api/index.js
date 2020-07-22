@@ -7,7 +7,6 @@ import { formatCurrency } from 'utils/functions'
 import functions from '@react-native-firebase/functions'
 
 const FR = firestore()
-console.log(FR)
 
 // if (__DEV__) {
 //   functions().useFunctionsEmulator('http://localhost:4001')
