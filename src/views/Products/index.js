@@ -41,8 +41,6 @@ function Products({ onClose, forwardedRef, isOpen }: Props) {
     } catch (err) {
       console.log('[ERROR] buyCash()', err)
       transactionErrors(err.code)
-    } finally {
-      setPurchaseLoading(false)
     }
   }
 
@@ -56,23 +54,16 @@ function Products({ onClose, forwardedRef, isOpen }: Props) {
       })
   }
 
-  const reset = () => {
+  const onFinished = () => {
     setPurchaseLoading(false)
     setSuccess(false)
     setPurchasedProduct(null)
-  }
-
-  const onFinished = () => {
-    reset()
-    forwardedRef?.current?.close()
   }
 
   const purchasedValues = useMemo(
     () => getProductValue(purchasedProduct?.sku),
     [purchasedProduct?.sku],
   )
-
-  console.log(success)
 
   return (
     <Sheet
