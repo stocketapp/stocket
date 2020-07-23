@@ -25,23 +25,21 @@ export default ({ loading, onFinished, successText, bigText }: Props) => {
       <View style={{ paddingTop: '10%' }}>
         <LoadingCheckmark size={150} ref={ref} loop={false} />
       </View>
-      {!loading && (
-        <>
-          <Text style={{ textAlign: 'center' }}>{successText}</Text>
+      <>
+        <Text style={{ textAlign: 'center' }}>{successText}</Text>
 
-          <Text weight="Bold" style={{ paddingTop: 30, fontSize: 28 }}>
-            {bigText}
-          </Text>
+        <Text weight="Bold" style={{ paddingTop: 30, fontSize: 28 }}>
+          {bigText}
+        </Text>
 
-          <TouchableOpacity style={{ marginTop: '18%' }} onPress={onFinished}>
-            <View style={styles.btn}>
-              <Text weight="Heavy" color={DARK_TEXT}>
-                DONE
-              </Text>
-            </View>
-          </TouchableOpacity>
-        </>
-      )}
+        <TouchableOpacity style={{ marginTop: '18%' }} onPress={onFinished}>
+          <View style={styles.btn}>
+            <Text weight="Heavy" color={DARK_TEXT}>
+              DONE
+            </Text>
+          </View>
+        </TouchableOpacity>
+      </>
     </View>
   )
 }

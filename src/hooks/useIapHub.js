@@ -11,10 +11,10 @@ export default function useIapHub(uid: string) {
     const iapHubLogin = async () => {
       try {
         await IapHub.login(uid)
-        const products = await IapHub.getUser()
+        const user = await IapHub.getUser()
         dispatch({
           type: 'SET_IAP_PRODUCTS',
-          products: products?.productsForSale,
+          products: user?.productsForSale,
         })
       } catch (err) {
         console.log(err)

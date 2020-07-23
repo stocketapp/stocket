@@ -6,11 +6,15 @@ import Sheet from 'react-native-raw-bottom-sheet'
 import { SUB_BACKGROUND, GREEN } from 'utils/colors'
 import ProductsIllustration from './ProductsIllustration'
 import ProductItem from './ProductItem'
-import IapHub from 'react-native-iaphub'
 import { useSelector } from 'react-redux'
 import { getProductValue, formatCurrency } from 'utils/functions'
 import firestore from '@react-native-firebase/firestore'
-import transactionErrors from './transactionErrors'
+import {
+  requestPurchase,
+  purchaseUpdatedListener,
+  validateReceiptIos,
+} from 'react-native-iap'
+import { APPSTORE_APP_SECRET } from '../../../config'
 
 type Props = {
   onClose: () => void,
@@ -25,29 +29,54 @@ function Products({ onClose, forwardedRef, isOpen }: Props) {
   const [success, setSuccess] = useState(false)
   const [purchasedProduct, setPurchasedProduct] = useState(null)
 
+  const purchasedValues = useMemo(() => getProductValue(purchasedProduct), [
+    purchasedProduct,
+  ])
+
   useEffect(() => {
     if (isOpen) {
       forwardedRef?.current?.open()
     }
   }, [isOpen, forwardedRef])
 
-  const buyCash = async productId => {
-    let transaction
+  useEffect(() => {
+    let purchaseReq = purchaseUpdatedListener(async purchase => {
+      try {
+        const receipt = purchase?.transactionReceipt
+        const sku = purchase?.productId
+        setPurchasedProduct(sku)
+        setPurchaseLoading(true)
+        if (receipt) {
+          const obj = {
+            'receipt-data': receipt,
+            password: APPSTORE_APP_SECRET,
+          }
+          await validateReceiptIos(obj, true)
+          setSuccess(true)
+          await updateCash(sku)
+          setPurchaseLoading(false)
+        }
+      } catch (err) {
+        console.log(err)
+      }
+    })
+
+    return () => {
+      purchaseReq.remove()
+      purchaseReq = null
+    }
+  })
+
+  const buyCash = async sku => {
     try {
-      setPurchaseLoading(true)
-      transaction = await IapHub.buy(productId)
-      setSuccess(true)
-      setPurchasedProduct(transaction)
-      await updateCash(transaction?.sku)
+      await requestPurchase(sku, false)
     } catch (err) {
-      transactionErrors(err.code)
-    } finally {
-      console.log('finally done', transaction)
+      console.log('requestPurchase', err)
     }
   }
 
-  const updateCash = async productId => {
-    const value = getProductValue(productId).value
+  const updateCash = async sku => {
+    const value = getProductValue(sku).value
     await firestore()
       .collection('Users')
       .doc(uid)
@@ -57,39 +86,33 @@ function Products({ onClose, forwardedRef, isOpen }: Props) {
   }
 
   const onFinished = () => {
-    setPurchaseLoading(false)
+    setPurchaseLoading(true)
     setSuccess(false)
     setPurchasedProduct(null)
   }
 
-  const purchasedValues = useMemo(
-    () => getProductValue(purchasedProduct?.sku),
-    [purchasedProduct?.sku],
-  )
+  const close = () => {
+    onClose()
+    onFinished()
+  }
+
+  console.log(purchasedValues)
 
   return (
     <Sheet
       height={Dimensions.get('window').height - 70}
       customStyles={{ container: styles.container }}
       ref={forwardedRef}
-      onClose={onClose}
+      onClose={close}
       closeOnDragDown
       dragFromTop
     >
-      {/* <SuccessScreen
-        successText={`Successfully added ${formatCurrency(
-          purchasedValues?.value,
-        )} to your account.`}
-        bigText={purchasedValues?.price}
-        onFinished={onFinished}
-        loading={purchaseLoading}
-      /> */}
       {success ? (
         <SuccessScreen
           successText={`Successfully added ${formatCurrency(
             purchasedValues?.value,
           )} to your account.`}
-          bigText={purchasedValues?.price}
+          bigText={formatCurrency(purchasedValues?.price)}
           onFinished={onFinished}
           loading={purchaseLoading}
         />

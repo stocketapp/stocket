@@ -3168,7 +3168,7 @@ domutils@^1.7.0:
     dom-serializer "0"
     domelementtype "1"
 
-dooboolab-welcome@^1.1.1:
+dooboolab-welcome@^1.1.1, dooboolab-welcome@^1.2.0:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/dooboolab-welcome/-/dooboolab-welcome-1.2.0.tgz#295818ce85a8e97dc90c0ec0510b4008e2d722dc"
   integrity sha512-XgEbjJHAsKLge/e8jtuHsv84Ovg1Gx0GvnOTOmOlVGV1643nduTAkT3fyo/mxKbzvyXBr47RHaJAY4R2toI0UA==
@@ -6933,6 +6933,13 @@ react-native-iap@4.4.3:
   integrity sha512-vywdYj61i/F3Qw+o1U130ap77AYYkyFX3ioDnl5UzOd3xmoo2/uH36FPdlKrFZUmdYdMySoV+AYJDLh5T5ihWw==
   dependencies:
     dooboolab-welcome "^1.1.1"
+
+react-native-iap@^4.4.4:
+  version "4.5.0"
+  resolved "https://registry.yarnpkg.com/react-native-iap/-/react-native-iap-4.5.0.tgz#3837f287460dc5dab3b4f4adc57af2f363df77dc"
+  integrity sha512-745s02fU3sppsf/HMLpaesFmGodRCFdfTuIWbXlLpNxgXLa1POKfNMVuPHkm0lIzARNdHXiEfMHlHa2KaWV8xA==
+  dependencies:
+    dooboolab-welcome "^1.2.0"
 
 react-native-iaphub@^3.0.9:
   version "3.0.9"

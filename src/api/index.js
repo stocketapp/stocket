@@ -2,7 +2,13 @@
 import firestore from '@react-native-firebase/firestore'
 import perf from '@react-native-firebase/perf'
 import type { TradeDataType, DocReference } from 'types'
-import { IEX_CLOUD_KEY, IEX_URL } from '../../config'
+import {
+  IEX_CLOUD_KEY,
+  IEX_URL,
+  IAPHUB_APPID,
+  IAPHUB_ENV,
+  IAPHUB_API_KEY,
+} from '../../config'
 import { formatCurrency } from 'utils/functions'
 import functions from '@react-native-firebase/functions'
 
@@ -149,4 +155,32 @@ export async function updatePosition(params: UpdatePositionTypes) {
   } catch (err) {
     console.log('[Error] updatePosition()', err)
   }
+}
+
+type ReceiptValidationType = {
+  receipt: string,
+  uid: string,
+  sku: string,
+}
+export async function iapHubValidateReceipt(data: ReceiptValidationType) {
+  const { uid, receipt: token, sku } = data
+  const body = {
+    environment: IAPHUB_ENV,
+    platform: 'ios',
+    token,
+    sku,
+  }
+  const url = 'https://api.iaphub.com/app'
+  const res = await fetch(`${url}/${IAPHUB_APPID}/user/${uid}/receipt`, {
+    method: 'POST',
+    headers: {
+      Authorization: `ApiKey ${IAPHUB_API_KEY}`,
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+    },
+    body,
+  })
+  const result = await res.json()
+  console.log('result', result)
+  return result
 }
