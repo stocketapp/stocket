@@ -32,15 +32,17 @@ function Products({ onClose, forwardedRef, isOpen }: Props) {
   }, [isOpen, forwardedRef])
 
   const buyCash = async productId => {
+    let transaction
     try {
       setPurchaseLoading(true)
-      const transaction = await IapHub.buy(productId)
+      transaction = await IapHub.buy(productId)
       setSuccess(true)
       setPurchasedProduct(transaction)
       await updateCash(transaction?.sku)
     } catch (err) {
-      console.log('[ERROR] buyCash()', err)
       transactionErrors(err.code)
+    } finally {
+      console.log('finally done', transaction)
     }
   }
 
@@ -87,7 +89,7 @@ function Products({ onClose, forwardedRef, isOpen }: Props) {
           successText={`Successfully added ${formatCurrency(
             purchasedValues?.value,
           )} to your account.`}
-          bigText={purchasedValues.price}
+          bigText={purchasedValues?.price}
           onFinished={onFinished}
           loading={purchaseLoading}
         />

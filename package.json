@@ -40,7 +40,7 @@
     "react-native-code-push": "^6.3.0",
     "react-native-flipper": "^0.50.0",
     "react-native-gesture-handler": "^1.7.0",
-    "react-native-iap": "^4.5.0",
+    "react-native-iap": "4.4.3",
     "react-native-iaphub": "^3.0.9",
     "react-native-raw-bottom-sheet": "^2.2.0",
     "react-native-safe-area-context": "^3.1.1",
