@@ -18,7 +18,6 @@ const SearchSymbol = (props: SearchSymbolProps): React$Node => {
           placeholderTextColor={GRAY_DARKER}
           autoCapitalize="words"
           returnKeyType="search"
-          onSubmitEditing={({ text }) => onSearch(text)}
         />
 
         <TouchableOpacity style={styles.searchBtn} onPress={onSearch} disabled>
