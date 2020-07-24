@@ -851,7 +851,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "#!/usr/bin/env sh\n\n/Users/henry/Projects/stocket/prod-env.sh \n#&& /Users/henry/Projects/stocket/create-config.sh\n";
+			shellScript = "#!/usr/bin/env sh\n\nsh ../prod-env.sh \n";
 		};
 		BA3D54A723AA45B1006651B4 /* Start Packager */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -921,7 +921,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\nsh /Users/henry/Projects/stocket/dev-env.sh\n";
+			shellScript = "#!/usr/bin/env sh\n\nsh ../dev-env.sh\n";
 		};
 		BA97CDBE24CB17EE00767A99 /* Create Environment Variables */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -939,7 +939,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n/Users/henry/Projects/stocket/staging-env.sh\n";
+			shellScript = "#!/usr/bin/env sh\n\nsh ../staging-env.sh\n";
 		};
 		BA9A7DF823E67A1A0062EEB4 /* Start Packager */ = {
 			isa = PBXShellScriptBuildPhase;
