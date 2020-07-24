@@ -379,7 +379,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "Production" */;
 			buildPhases = (
-				BA97CDBC24CB156100767A99 /* Create Environment Variables */,
+				BA274DC224CB28CD0088E6F7 /* Set Environment Variables */,
 				75958C7A03BAE17FCCA63074 /* [CP] Check Pods Manifest.lock */,
 				BA54CA502488496A003591E5 /* Change version */,
 				FD10A7F022414F080027D42C /* Start Packager */,
@@ -835,6 +835,24 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
+		BA274DC224CB28CD0088E6F7 /* Set Environment Variables */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Set Environment Variables";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "#!/usr/bin/env sh\n\n/Users/henry/Projects/stocket/prod-env.sh \n#&& /Users/henry/Projects/stocket/create-config.sh\n";
+		};
 		BA3D54A723AA45B1006651B4 /* Start Packager */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -887,24 +905,6 @@
 			shellScript = "
 ";
 		};
-		BA97CDBC24CB156100767A99 /* Create Environment Variables */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			name = "Create Environment Variables";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\nsh /Users/henry/Projects/stocket/prod-env.sh\n";
-		};
 		BA97CDBD24CB17BE00767A99 /* Create Environment Variables */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -939,7 +939,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\nsh /Users/henry/Projects/stocket/staging-env.sh\n";
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n/Users/henry/Projects/stocket/staging-env.sh\n";
 		};
 		BA9A7DF823E67A1A0062EEB4 /* Start Packager */ = {
 			isa = PBXShellScriptBuildPhase;
