@@ -7,6 +7,7 @@ import {
   VictoryChart,
   VictoryGroup,
   VictoryLabel,
+  VictoryAxis,
 } from 'victory-native'
 import { GREEN } from 'utils/colors'
 import exampleData from './exampleData'
@@ -36,6 +37,8 @@ export default function ChartLine({
     const minDomain = minBy(data, 'value')?.value
     return { minDomain, maxDomain }
   }, [data])
+
+  console.log(domainRange?.maxDomain * 1.1, domainRange?.minDomain * 1.1)
 
   return (
     <View style={{ paddingTop: 10 }}>
@@ -72,6 +75,18 @@ export default function ChartLine({
             labelComponent={<VictoryLabel />}
             maxDomain={domainRange?.maxDomain * 1.1}
             minDomain={domainRange?.minDomain * 1.1}
+          />
+          <VictoryAxis
+            style={styles.victoryAxis}
+            height={0}
+            width={0}
+            label=""
+          />
+          <VictoryAxis
+            style={styles.victoryAxis}
+            height={0}
+            width={0}
+            label=""
           />
         </VictoryGroup>
       </VictoryChart>
@@ -115,5 +130,5 @@ const styles = {
     },
   },
   victoryAxis: { tickLabels: { display: 'none', fill: 'none' } },
-  victoryChart: { top: 30, bottom: 10 },
+  victoryChart: { top: 30, bottom: -1 },
 }

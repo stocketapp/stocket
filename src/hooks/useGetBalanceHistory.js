@@ -2,7 +2,7 @@
 import { useEffect, useState } from 'react'
 import firestore from '@react-native-firebase/firestore'
 import moment from 'moment'
-import { uniqBy } from 'lodash'
+import { uniqBy, find, map } from 'lodash'
 import { currencyToNumber } from 'utils/functions'
 
 type UserInfo = {
@@ -29,14 +29,21 @@ function useGetBalanceHistory(uid: string, userInfo: UserInfo) {
               changePct,
             })
           })
-          const now = moment()
-          list.push({
-            date: moment(now)?.format('MMM DD, YYYY'),
+          const nowDate = moment(moment())?.format('MMM DD, YYYY') // gets the current date
+          const nowBalance = {
+            date: nowDate,
             value: currencyToNumber(userInfo?.portfolioValue),
             change: userInfo?.portfolioChange,
             changePct: userInfo?.portfolioChangePct,
+          }
+          // replace server today's balance with real-time balance
+          const newArr = map(list, el => {
+            if (el.date === nowDate) {
+              return Object.assign({}, nowBalance)
+            }
+            return el
           })
-          setBalanceHistory(list)
+          setBalanceHistory(newArr)
         } catch (err) {
           console.log('[ERROR] useGetBalanceHistory', err)
         }
@@ -45,7 +52,7 @@ function useGetBalanceHistory(uid: string, userInfo: UserInfo) {
     return () => subscribe()
   }, [uid, userInfo])
 
-  return uniqBy(balanceHistory, 'date')
+  return balanceHistory
 }
 
 export default useGetBalanceHistory

@@ -5,7 +5,7 @@ import { useDispatch } from 'react-redux'
 
 const marketRef = firestore().doc('Markets/stock_market')
 
-export default function () {
+export default function useSubscribeMarketHours() {
   const dispatch = useDispatch()
 
   useEffect(() => {
