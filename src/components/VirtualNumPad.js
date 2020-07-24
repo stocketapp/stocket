@@ -14,7 +14,9 @@ const PadButton = ({ value, onPress, onDelete }) => {
             {value}
           </Text>
         ) : (
-          <Text style={styles.numText} status="positive">X</Text>
+          <Text style={styles.numText} status="positive">
+            X
+          </Text>
         )}
       </View>
     </TouchableOpacity>

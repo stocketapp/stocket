@@ -36,6 +36,15 @@ function TradeView({ ref }) {
     }
   }, [tradeViewIsOpen, ref])
 
+  useEffect(() => {
+    if (stockQuantity === '') {
+      dispatch({
+        type: 'SET_QUANTITY',
+        stockQuantity: '0',
+      })
+    }
+  }, [stockQuantity, dispatch])
+
   const closeTradeView = () => {
     dispatch({
       type: 'TRADE_VIEW_IS_OPEN',
@@ -51,11 +60,17 @@ function TradeView({ ref }) {
   const setQuantity = quantity => {
     dispatch({
       type: 'SET_QUANTITY',
-      stockQuantity: stockQuantity.concat(quantity),
+      stockQuantity: stockQuantity.concat(quantity).replace(/^0/g, ''),
     })
   }
 
   const remove = () => {
+    if (stockQuantity === '') {
+      dispatch({
+        type: 'SET_QUANTITY',
+        stockQuantity: stockQuantity.concat('0').replace(),
+      })
+    }
     dispatch({
       type: 'SET_QUANTITY',
       stockQuantity: stockQuantity.slice(0, -1),
