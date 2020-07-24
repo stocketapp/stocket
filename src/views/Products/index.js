@@ -96,8 +96,6 @@ function Products({ onClose, forwardedRef, isOpen }: Props) {
     onFinished()
   }
 
-  console.log(purchasedValues)
-
   return (
     <Sheet
       height={Dimensions.get('window').height - 70}

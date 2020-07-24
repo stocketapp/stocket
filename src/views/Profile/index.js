@@ -52,10 +52,7 @@ export default function Profile() {
 
         <Container top={40}>
           <ProfileItem label="Portfolio Value" value={portfolioValue} />
-          <ProfileItem
-            label="Portfolio Gains"
-            value={`${totalGains} (${totalGainsPct}%)`}
-          />
+          <ProfileItem label="Portfolio Gains" value={`${totalGains}`} />
           <ProfileItem label="Account Value" value={accountValue} />
         </Container>
       </View>

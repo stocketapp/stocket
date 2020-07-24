@@ -38,8 +38,6 @@ export default function ChartLine({
     return { minDomain, maxDomain }
   }, [data])
 
-  console.log(domainRange?.maxDomain * 1.1, domainRange?.minDomain * 1.1)
-
   return (
     <View style={{ paddingTop: 10 }}>
       <VictoryChart
