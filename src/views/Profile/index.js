@@ -18,7 +18,7 @@ export default function Profile() {
   const [isIapOpen, setIsIapOpen] = useState(false)
   const portfolioValue = userInfo?.portfolioValue
   const cash = formatCurrency(userInfo?.cash)
-  const { totalGains, totalGainsPct } = useTotalGains(portfolioValue ?? '$0.00')
+  const { totalGains } = useTotalGains(portfolioValue ?? '$0.00')
   const accountValue = formatCurrency(
     currencyToNumber(portfolioValue) + userInfo?.cash,
   )

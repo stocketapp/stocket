@@ -1,8 +1,9 @@
 // @flow
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect } from 'react'
-import IapHub from 'react-native-iaphub'
 import { useDispatch } from 'react-redux'
+import { getProducts } from 'react-native-iap'
+import iapProductsList from 'utils/iapProductsList'
 
 export default function useIapHub(uid: string) {
   const dispatch = useDispatch()
@@ -10,11 +11,12 @@ export default function useIapHub(uid: string) {
   useEffect(() => {
     const iapHubLogin = async () => {
       try {
-        await IapHub.login(uid)
-        const user = await IapHub.getUser()
+        const products = await getProducts(
+          iapProductsList.map(el => el.productId),
+        )
         dispatch({
           type: 'SET_IAP_PRODUCTS',
-          products: user?.productsForSale,
+          products,
         })
       } catch (err) {
         console.log(err)

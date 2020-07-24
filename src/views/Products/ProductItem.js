@@ -10,10 +10,13 @@ export default ({ product, onPurchase }) => (
     activeOpacity={0.6}
     onPress={() => onPurchase(product?.sku)}
   >
-    {product?.sku && (
+    {product?.productId && (
       <View style={styles.container}>
         <View style={styles.imgContainer}>
-          <Image source={productImgs[product?.sku]} style={styles.productImg} />
+          <Image
+            source={productImgs[product?.productId]}
+            style={styles.productImg}
+          />
         </View>
 
         <View style={styles.btn}>
