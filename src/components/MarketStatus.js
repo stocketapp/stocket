@@ -11,7 +11,7 @@ type Props = {
 
 const MarketStatus = ({ status, label = 'Trading' }: Props) => (
   <View style={styles.container}>
-    <Text style={{ fontSize: 12 }} weight={status ? 'Bold' : 'Light'}>
+    <Text style={{ fontSize: 12 }} weight={status ? 'Medium' : 'Light'}>
       {label}
     </Text>
     <View style={{ ...styles.dot, backgroundColor: status ? GREEN : LABEL }} />
