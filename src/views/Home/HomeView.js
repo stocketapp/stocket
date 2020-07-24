@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef, useCallback, useMemo } from 'react'
 import { StyleSheet, ScrollView, View } from 'react-native'
-import { BACKGROUND } from 'utils/colors'
-import { Balance, Container, ChartLine, MarketStatus } from 'components'
+import { BACKGROUND, GRAY_DARKER } from 'utils/colors'
+import { Balance, Container, ChartLine, MarketStatus, Text } from 'components'
 import {
   useGetMyStocks,
   useWatchlist,
@@ -94,6 +94,14 @@ export default function Home() {
         scrollEnabled={allowScroll}
       >
         <View style={styles.header}>
+          <View
+            style={{ flexDirection: 'row', justifyContent: 'space-between' }}
+          >
+            <Text color={GRAY_DARKER} type="label">
+              Invested
+            </Text>
+            <MarketStatus status={marketStatus} />
+          </View>
           <Balance
             dayChange={{
               change: balanceChange ?? userInfo?.portfolioChange,
@@ -102,7 +110,6 @@ export default function Home() {
               date: dateNow,
             }}
           />
-          <MarketStatus status={marketStatus} />
         </View>
 
         {balanceHistory && balanceHistory?.length > 1 ? (
@@ -131,9 +138,9 @@ const styles = StyleSheet.create({
     backgroundColor: BACKGROUND,
   },
   header: {
-    flexDirection: 'row',
+    flexDirection: 'column',
     width: '100%',
-    justifyContent: 'space-between',
+    // justifyContent: 'space-between',
     paddingHorizontal: 16,
     paddingTop: 25,
   },

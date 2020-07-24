@@ -18,10 +18,7 @@ const Balance = ({ dayChange }: Props): React$Node => {
   const { change, changePct, value, date } = dayChange
   const color = changePct > 0 ? GREEN : changePct < 0 ? RED : 'white'
   return (
-    <View>
-      <Text color={GRAY_DARKER} type="label">
-        Invested
-      </Text>
+    <>
       <Text weight="Black" style={styles.value}>
         {typeof value !== 'number' ? value : formatCurrency(value)}
       </Text>
@@ -35,13 +32,13 @@ const Balance = ({ dayChange }: Props): React$Node => {
           {date}
         </Text>
       </View>
-    </View>
+    </>
   )
 }
 
 const styles = {
   changeContainer: { flexDirection: 'row', paddingTop: 5 },
-  value: { fontSize: 34, paddingTop: 10 },
+  value: { fontSize: 34, paddingTop: 5 },
 }
 
 export default Balance

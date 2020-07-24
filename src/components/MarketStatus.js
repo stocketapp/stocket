@@ -36,6 +36,7 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     opacity: 0.7,
     maxHeight: 38,
+    marginBottom: 2,
   },
 })
 
