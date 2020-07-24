@@ -1,6 +1,6 @@
-import React, { useCallback, useEffect } from 'react'
+import React, { useEffect } from 'react'
 import { Dimensions } from 'react-native'
-import { SUB_BACKGROUND, LABEL } from 'utils/colors'
+import { LABEL } from 'utils/colors'
 import { Line, G, Text } from 'react-native-svg'
 
 const { width } = Dimensions.get('window')
@@ -40,8 +40,9 @@ export default function LabelCursor({
       change: datum?.change,
       changePct: datum?.changePct,
       value: datum?.value,
+      date: datum?.date,
     })
-  }, [datum?.change, datum?.changePct, datum?.value, onEvent])
+  }, [datum?.change, datum?.changePct, datum?.value, onEvent, datum?.date])
 
   return (
     <G>

@@ -6,16 +6,16 @@ import Text from './Text'
 import { formatCurrency } from 'utils/functions'
 
 type Props = {
-  value: string,
   dayChange: {
     change: number,
     changePct: number,
     value: string | number,
+    date: string,
   },
 }
 
 const Balance = ({ dayChange }: Props): React$Node => {
-  const { change, changePct, value } = dayChange
+  const { change, changePct, value, date } = dayChange
   const color = changePct > 0 ? GREEN : changePct < 0 ? RED : 'white'
   return (
     <View>
@@ -32,7 +32,7 @@ const Balance = ({ dayChange }: Props): React$Node => {
         </Text>
         <Text weight="Light" color={LABEL}>
           {' '}
-          Today
+          {date}
         </Text>
       </View>
     </View>

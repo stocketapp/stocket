@@ -43,6 +43,7 @@ export default function ChartLine({
       <VictoryChart
         {...chartProps}
         padding={styles.victoryChart}
+        domainPadding={{ y: 10 }}
         containerComponent={
           <VictoryVoronoiContainer
             voronoiDimension="x"
@@ -56,8 +57,6 @@ export default function ChartLine({
             }
             labels={({ datum }) => datum[labelText]}
             onDeactivated={() => onChartEvent(null)}
-            mouseFollowTooltips
-            voronoiPadding={0}
           />
         }
       >
@@ -74,18 +73,8 @@ export default function ChartLine({
             maxDomain={domainRange?.maxDomain * 1.1}
             minDomain={domainRange?.minDomain * 1.1}
           />
-          <VictoryAxis
-            style={styles.victoryAxis}
-            height={0}
-            width={0}
-            label=""
-          />
-          <VictoryAxis
-            style={styles.victoryAxis}
-            height={0}
-            width={0}
-            label=""
-          />
+          <VictoryAxis style={styles.victoryAxis} height={0} width={0} />
+          <VictoryAxis style={styles.victoryAxis} height={0} width={0} />
         </VictoryGroup>
       </VictoryChart>
       {tabs?.length > 0 && (
@@ -128,5 +117,5 @@ const styles = {
     },
   },
   victoryAxis: { tickLabels: { display: 'none', fill: 'none' } },
-  victoryChart: { top: 30, bottom: -1 },
+  victoryChart: { top: 30, bottom: -0.5 },
 }

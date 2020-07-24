@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef, useCallback } from 'react'
+import React, { useState, useEffect, useRef, useCallback, useMemo } from 'react'
 import { StyleSheet, ScrollView, View } from 'react-native'
 import { BACKGROUND } from 'utils/colors'
 import { Balance, Container, ChartLine, MarketStatus } from 'components'
@@ -27,9 +27,16 @@ export default function Home() {
   const [balanceValue, setBalanceValue] = useState(null)
   const [balanceChange, setBalanceChange] = useState(null)
   const [balanceChangePct, setBalanceChangePct] = useState(null)
+  const [balanceDate, setBalanceDate] = useState(null)
   const dispatch = useDispatch()
   const marketStatus = useGetMarketStatus()
   const timeout = useRef()
+  const dateNow = useMemo(() => {
+    if (!balanceDate) {
+      return 'Today'
+    }
+    return balanceDate
+  }, [balanceDate])
 
   const onWatchlistItemPress = (stockInfo: PositionType) => {
     dispatch({
@@ -60,11 +67,17 @@ export default function Home() {
   )
 
   const onChartEvent = (
-    item: { change: number, changePct: number, value: number } | null,
+    item: {
+      change: number,
+      changePct: number,
+      value: number,
+      date: string,
+    } | null,
   ) => {
-    setBalanceValue(item?.value ?? userInfo?.portfolioValue)
-    setBalanceChange(item?.change ?? userInfo?.portfolioChange)
-    setBalanceChangePct(item?.changePct ?? userInfo?.portfolioChangePct)
+    setBalanceValue(item?.value)
+    setBalanceChange(item?.change)
+    setBalanceChangePct(item?.changePct)
+    setBalanceDate(item?.date)
 
     if (!item) {
       timeout.current = setTimeout(() => setAllowScroll(true), 500)
@@ -86,6 +99,7 @@ export default function Home() {
               change: balanceChange ?? userInfo?.portfolioChange,
               changePct: balanceChangePct ?? userInfo?.portfolioChangePct,
               value: balanceValue ?? userInfo?.portfolioValue,
+              date: dateNow,
             }}
           />
           <MarketStatus status={marketStatus} />
