@@ -21,7 +21,7 @@ const SearchSymbol = (props: SearchSymbolProps): React$Node => {
           onSubmitEditing={({ text }) => onSearch(text)}
         />
 
-        <TouchableOpacity style={styles.searchBtn} onPress={onSearch}>
+        <TouchableOpacity style={styles.searchBtn} onPress={onSearch} disabled>
           <SearchIcon size={30} />
         </TouchableOpacity>
       </View>
