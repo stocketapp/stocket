@@ -379,6 +379,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "Production" */;
 			buildPhases = (
+				BA97CDBC24CB156100767A99 /* Create Environment Variables */,
 				75958C7A03BAE17FCCA63074 /* [CP] Check Pods Manifest.lock */,
 				BA54CA502488496A003591E5 /* Change version */,
 				FD10A7F022414F080027D42C /* Start Packager */,
@@ -440,6 +441,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = BA3D54B223AA45B1006651B4 /* Build configuration list for PBXNativeTarget "Development" */;
 			buildPhases = (
+				BA97CDBD24CB17BE00767A99 /* Create Environment Variables */,
 				A204E195E469D5ADA2CE106A /* [CP] Check Pods Manifest.lock */,
 				BA3D54A723AA45B1006651B4 /* Start Packager */,
 				BA3D54A823AA45B1006651B4 /* Sources */,
@@ -463,6 +465,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = BA9A7E0823E67A1A0062EEB4 /* Build configuration list for PBXNativeTarget "Staging" */;
 			buildPhases = (
+				BA97CDBE24CB17EE00767A99 /* Create Environment Variables */,
 				91A1860120BEC605435D5E58 /* [CP] Check Pods Manifest.lock */,
 				BA9A7DF823E67A1A0062EEB4 /* Start Packager */,
 				BA9A7DF923E67A1A0062EEB4 /* Sources */,
@@ -881,7 +884,62 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\n";
+			shellScript = "
+";
+		};
+		BA97CDBC24CB156100767A99 /* Create Environment Variables */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Create Environment Variables";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\nsh /Users/henry/Projects/stocket/prod-env.sh\n";
+		};
+		BA97CDBD24CB17BE00767A99 /* Create Environment Variables */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Create Environment Variables";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\nsh /Users/henry/Projects/stocket/dev-env.sh\n";
+		};
+		BA97CDBE24CB17EE00767A99 /* Create Environment Variables */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Create Environment Variables";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\nsh /Users/henry/Projects/stocket/staging-env.sh\n";
 		};
 		BA9A7DF823E67A1A0062EEB4 /* Start Packager */ = {
 			isa = PBXShellScriptBuildPhase;
