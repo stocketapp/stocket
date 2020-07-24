@@ -34,8 +34,8 @@ export default function Stock({ route }) {
   const { uid } = useSelector(({ user }) => user?.currentUser)
   const [allowScroll, setAllowScroll] = useState(true)
   const dispatch = useDispatch()
-  const { price } = usePriceSubscription(selectedStockPosition ?? null)
-  const latestPrice = price?.toFixed(2)
+  const { price } = usePriceSubscription(selectedStockPosition)
+  const latestPrice = price?.toFixed(2) ?? stock?.quote?.latestPrice
   const marketStatus = useGetMarketStatus()
 
   const openTradeView = useCallback(() => {
