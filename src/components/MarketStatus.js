@@ -2,6 +2,7 @@
 import React from 'react'
 import { StyleSheet, View } from 'react-native'
 import Text from './Text'
+import { useSubscribeMarketHours } from 'hooks'
 import { SUB_BACKGROUND, GREEN, LABEL } from 'utils/colors'
 
 type Props = {
@@ -9,14 +10,20 @@ type Props = {
   status: boolean,
 }
 
-const MarketStatus = ({ status, label = 'Trading' }: Props) => (
-  <View style={styles.container}>
-    <Text style={{ fontSize: 12 }} weight={status ? 'Medium' : 'Light'}>
-      {label}
-    </Text>
-    <View style={{ ...styles.dot, backgroundColor: status ? GREEN : LABEL }} />
-  </View>
-)
+const MarketStatus = ({ label }: Props) => {
+  const status = useSubscribeMarketHours()
+  const statusLabel = `Market is ${status ? 'open' : 'closed'}` ?? label
+  return (
+    <View style={styles.container}>
+      <Text style={{ fontSize: 12 }} weight={status ? 'Medium' : 'Light'}>
+        {statusLabel}
+      </Text>
+      <View
+        style={{ ...styles.dot, backgroundColor: status ? GREEN : LABEL }}
+      />
+    </View>
+  )
+}
 
 const styles = StyleSheet.create({
   dot: {

@@ -7,7 +7,6 @@ import {
   useWatchlist,
   useGetBalanceHistory,
   useUser,
-  useGetMarketStatus,
 } from 'hooks'
 import { useNavigation, useFocusEffect } from '@react-navigation/native'
 import { useDispatch } from 'react-redux'
@@ -29,7 +28,6 @@ export default function Home() {
   const [balanceChangePct, setBalanceChangePct] = useState(null)
   const [balanceDate, setBalanceDate] = useState(null)
   const dispatch = useDispatch()
-  const marketStatus = useGetMarketStatus()
   const timeout = useRef()
   const dateNow = useMemo(() => {
     if (!balanceDate) {
@@ -100,7 +98,7 @@ export default function Home() {
             <Text color={GRAY_DARKER} type="label">
               Invested
             </Text>
-            <MarketStatus status={marketStatus} />
+            <MarketStatus />
           </View>
           <Balance
             dayChange={{
@@ -112,7 +110,7 @@ export default function Home() {
           />
         </View>
 
-        {balanceHistory && balanceHistory?.length > 1 ? (
+        {balanceHistory && balanceHistory?.length > 0 ? (
           <ChartLine
             data={balanceHistory}
             x="date"

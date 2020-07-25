@@ -5,7 +5,6 @@ import { GREEN, BACKGROUND, GRAY_DARKER } from 'utils/colors'
 import { ArrowLeftIcon, FavoriteIcon } from 'components/Icons'
 import { useSelector, useDispatch } from 'react-redux'
 import { find, minBy } from 'lodash'
-import { useGetMarketStatus } from 'hooks'
 import StockDetails from './StockDetails'
 import { useNavigation } from '@react-navigation/native'
 import StockPosition from './StockPosition'
@@ -36,7 +35,6 @@ export default function Stock({ route }) {
   const dispatch = useDispatch()
   const { price } = usePriceSubscription(selectedStockPosition)
   const latestPrice = price?.toFixed(2) ?? stock?.quote?.latestPrice
-  const marketStatus = useGetMarketStatus()
 
   const openTradeView = useCallback(() => {
     dispatch({
@@ -68,10 +66,7 @@ export default function Stock({ route }) {
         <TouchableOpacity style={{ padding: 5 }} onPress={goBack}>
           <ArrowLeftIcon size={30} color={GREEN} />
         </TouchableOpacity>
-        <MarketStatus
-          label={`Market is ${marketStatus ? 'open' : 'closed'}`}
-          status={marketStatus}
-        />
+        <MarketStatus />
         <TouchableOpacity
           onPress={() =>
             isFav
