@@ -1,12 +1,9 @@
 // @flow
 import React, { forwardRef, useEffect, useState, useMemo } from 'react'
-import { Dimensions, View, StyleSheet } from 'react-native'
+import { Dimensions, View, StyleSheet, FlatList } from 'react-native'
 import { Text, SuccessScreen } from 'components'
 import Sheet from 'react-native-raw-bottom-sheet'
 import { SUB_BACKGROUND, GREEN } from 'utils/colors'
-import ProductsIllustration from './ProductsIllustration'
-import ProductItem from './ProductItem'
-import { useSelector } from 'react-redux'
 import { getProductValue, formatCurrency } from 'utils/functions'
 import firestore from '@react-native-firebase/firestore'
 import {
@@ -14,6 +11,10 @@ import {
   purchaseUpdatedListener,
   validateReceiptIos,
 } from 'react-native-iap'
+import { sortBy } from 'lodash'
+import ProductsIllustration from './ProductsIllustration'
+import ProductItem from './ProductItem'
+import { useSelector } from 'react-redux'
 import { APPSTORE_APP_SECRET } from '../../../config'
 
 type Props = {
@@ -128,12 +129,20 @@ function Products({ onClose, forwardedRef, isOpen }: Props) {
             Add more cash to your account
           </Text>
 
-          <View style={styles.products}>
-            {products &&
-              products.map((el, i) => (
-                <ProductItem product={el} key={i} onPurchase={buyCash} />
-              ))}
-          </View>
+          {products && (
+            <View style={styles.products}>
+              <FlatList
+                data={sortBy(products, 'price')}
+                renderItem={({ item }) => (
+                  <ProductItem product={item} onPurchase={buyCash} />
+                )}
+                keyExtractor={(el, key) => key.toString()}
+                numColumns={2}
+                contentContainerStyle={{ alignItems: 'center' }}
+                columnWrapperStyle={{ justifyContent: 'center' }}
+              />
+            </View>
+          )}
         </View>
       )}
     </Sheet>
@@ -164,22 +173,7 @@ const styles = StyleSheet.create({
     marginVertical: 5,
   },
   products: {
-    flexWrap: 'wrap',
-    flex: 1,
-    flexDirection: 'row',
+    width: '100%',
     justifyContent: 'space-between',
-    paddingHorizontal: '9%',
-  },
-  loadingmark: {
-    position: 'absolute',
-    top: '30%',
-    height: '22%',
-    minWidth: '42%',
-    backgroundColor: 'rgba(5, 6, 6, 0.9)',
-    justifyContent: 'center',
-    alignItems: 'center',
-    borderRadius: 12,
-    paddingBottom: 10,
-    paddingHorizontal: 5,
   },
 })

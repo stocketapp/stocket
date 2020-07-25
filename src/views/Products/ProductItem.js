@@ -6,7 +6,7 @@ import productImgs from '../../../assets/products'
 
 export default ({ product, onPurchase }) => (
   <TouchableOpacity
-    style={{ padding: 15 }}
+    style={styles.btnContainer}
     activeOpacity={0.6}
     onPress={() => onPurchase(product?.sku)}
   >
@@ -19,7 +19,7 @@ export default ({ product, onPurchase }) => (
           />
         </View>
 
-        <View style={styles.btn}>
+        <View style={styles.textContainer}>
           <Text
             weight="Black"
             color={DARK_TEXT}
@@ -38,14 +38,14 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: '#222222',
     borderRadius: 12,
-    justifyContent: 'space-between',
-    alignItems: 'center',
     shadowColor: CARD_BACKGROUND,
     shadowOffset: { height: 0, width: 1 },
     shadowOpacity: 0.7,
     shadowRadius: 6,
+    width: '100%',
+    paddingTop: 5,
   },
-  btn: {
+  textContainer: {
     backgroundColor: GREEN,
     opacity: 0.9,
     width: '100%',
@@ -56,13 +56,19 @@ const styles = StyleSheet.create({
     paddingVertical: 4,
   },
   productImg: {
-    height: 100,
-    width: 100,
+    height: '100%',
+    width: '100%',
   },
   imgContainer: {
     paddingHorizontal: 10,
-    borderBottomLeftRadius: 12,
-    borderBottomRightRadius: 12,
-    marginVertical: 5,
+    marginVertical: 6,
+    height: 100,
+    width: '100%',
+  },
+  btnContainer: {
+    padding: 10,
+    width: '45%',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 })
