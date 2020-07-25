@@ -16,14 +16,10 @@ export default function useSaveApnsToken(uid) {
 
     const getToken = async () => {
       const token = await messaging().getToken()
-      console.log(token)
       await saveToken(token)
     }
-
     getToken()
 
-    return messaging().onTokenRefresh(token => {
-      saveToken(token)
-    })
+    return messaging().onTokenRefresh(saveToken)
   }, [uid])
 }
