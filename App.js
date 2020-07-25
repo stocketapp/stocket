@@ -7,21 +7,19 @@ import {
   useSetUserInfo,
   useIapHub,
   useSubscribeMarketHours,
+  useSaveApnsToken,
 } from 'hooks'
 import RNBootSplash from 'react-native-bootsplash'
 import { BACKGROUND } from 'utils/colors'
-import { IAPHUB_API_KEY, IAPHUB_APPID, IAPHUB_ENV } from './config'
 import TradeView from 'views/TradeView'
 import * as RNIap from 'react-native-iap'
-import IapHub from 'react-native-iaphub'
+import messaging from '@react-native-firebase/messaging'
 import MainStack from './src/navigation/AppStack'
 import AuthStack from './src/navigation/AuthenticationStack'
 
-const iapHubConfig = {
-  appId: IAPHUB_APPID,
-  apiKey: IAPHUB_API_KEY,
-  environment: IAPHUB_ENV,
-}
+messaging().setBackgroundMessageHandler(async remoteMessage => {
+  console.log('Message handled in the background!', remoteMessage)
+})
 
 export default function App(): React$Node {
   const { isAuth, currentUser } = useAuthState()
@@ -29,6 +27,7 @@ export default function App(): React$Node {
   const { loading } = useSetUserInfo(currentUser)
   useIapHub(currentUser?.uid)
   useSubscribeMarketHours()
+  useSaveApnsToken(currentUser?.uid)
 
   useEffect(() => {
     if (!loading) {
@@ -39,13 +38,23 @@ export default function App(): React$Node {
   useEffect(() => {
     const initIAP = async () => {
       try {
-        await IapHub.init(iapHubConfig)
         await RNIap.initConnection()
       } catch (err) {
         console.log('initIAP', err)
       }
     }
     initIAP()
+  }, [])
+
+  useEffect(() => {
+    const requestNotificationPermission = async () => {
+      const authorizationStatus = await messaging().requestPermission()
+      if (authorizationStatus) {
+        console.log('Stocket is authorized to receive notifications')
+      }
+    }
+
+    requestNotificationPermission()
   }, [])
 
   if (!isAuth) {
