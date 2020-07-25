@@ -39,7 +39,7 @@ export default ({
   const sharesAmountLabel = isSell ? 'Max' : 'Owned'
   const sharesAmount = isSell ? (maxShares >= 0 ? maxShares : '0') : owned
   return (
-    <View style={{ paddingTop: 10 }}>
+    <View style={{ paddingTop: '3%' }}>
       <TradeDetail label="Price" value={formatCurrency(price)} />
       <TradeDetail label="Shares" value={quantity} />
 
@@ -56,10 +56,10 @@ const styles = {
   detail: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    paddingBottom: 14,
+    paddingBottom: '3%',
     borderBottomWidth: 0.2,
     borderBottomColor: GRAY_DARKER,
-    paddingTop: 50,
+    paddingTop: '9%',
   },
   maxSharesContainer: {
     width: '100%',

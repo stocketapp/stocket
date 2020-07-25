@@ -57,7 +57,7 @@ const styles = {
     width: width / 3,
     justifyContent: 'center',
     alignItems: 'center',
-    paddingVertical: 15,
+    paddingVertical: '4%',
   },
   numText: {
     fontSize: 24,

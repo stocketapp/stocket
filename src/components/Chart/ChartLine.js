@@ -63,7 +63,7 @@ export default function ChartLine({
         <VictoryGroup data={data} x={x} y={y}>
           <VictoryLine
             {...lineProps}
-            interpolation="bundle"
+            interpolation="basis"
             x={x}
             y={y}
             width={width}
