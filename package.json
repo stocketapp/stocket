@@ -1,6 +1,6 @@
 {
   "name": "stocket",
-  "version": "1.0.1-beta.4",
+  "version": "1.0.0-beta.5",
   "private": true,
   "scripts": {
     "android": "react-native run-android",
@@ -47,7 +47,7 @@
     "react-native-screens": "^2.9.0",
     "react-native-svg": "^12.1.0",
     "react-native-webview": "^10.3.2",
-    "react-redux": "^7.2.0",
+    "react-redux": "^7.2.1",
     "redux": "^4.0.5",
     "socket.io-client": "^2.3.0",
     "svg-path-properties": "^1.0.4",
