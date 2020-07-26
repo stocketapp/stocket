@@ -16,7 +16,7 @@ const FR = firestore()
 
 if (__DEV__) {
   functions().useFunctionsEmulator('http://localhost:4001')
-  // FR.settings({ host: 'localhost:4002', persistence: true, ssl: false })
+  FR.settings({ host: 'localhost:4002', persistence: true, ssl: false })
 }
 
 async function iexGet(endpoint: string, query?: string = '') {
