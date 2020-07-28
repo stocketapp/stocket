@@ -5,7 +5,7 @@ import { StatusBar, View } from 'react-native'
 import {
   useAuthState,
   useSetUserInfo,
-  useIapHub,
+  useIapProducts,
   useSubscribeMarketHours,
   useSaveApnsToken,
 } from 'hooks'
@@ -25,7 +25,7 @@ export default function App(): React$Node {
   const { isAuth, currentUser } = useAuthState()
   const tradeViewRef = useRef()
   const { loading } = useSetUserInfo(currentUser)
-  useIapHub(currentUser?.uid)
+  useIapProducts(currentUser?.uid)
   useSubscribeMarketHours()
   useSaveApnsToken(currentUser?.uid)
 

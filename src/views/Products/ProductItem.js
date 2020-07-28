@@ -8,7 +8,7 @@ export default ({ product, onPurchase }) => (
   <TouchableOpacity
     style={styles.btnContainer}
     activeOpacity={0.6}
-    onPress={() => onPurchase(product?.sku)}
+    onPress={() => onPurchase(product?.productId)}
   >
     {product?.productId && (
       <View style={styles.container}>
@@ -26,7 +26,7 @@ export default ({ product, onPurchase }) => (
             style={{ textAlign: 'center' }}
             type="label"
           >
-            {product?.price}
+            {product?.localizedPrice}
           </Text>
         </View>
       </View>

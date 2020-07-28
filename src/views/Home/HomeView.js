@@ -110,7 +110,7 @@ export default function Home() {
           />
         </View>
 
-        {balanceHistory && balanceHistory?.length > 0 ? (
+        {balanceHistory && balanceHistory?.length > 1 ? (
           <ChartLine
             data={balanceHistory}
             x="date"
