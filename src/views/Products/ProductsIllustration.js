@@ -3,7 +3,7 @@ import React from 'react'
 import Svg, { Path } from 'react-native-svg'
 import { View } from 'react-native'
 const PurchaseIllustration = () => (
-  <View style={{ height: 250, width: 250 }}>
+  <View style={{ height: 240, width: 240 }}>
     <Svg
       class="illustration"
       width="300"

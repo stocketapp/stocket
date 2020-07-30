@@ -56,15 +56,17 @@ const styles = StyleSheet.create({
     paddingVertical: 4,
   },
   productImg: {
-    height: '100%',
-    width: '100%',
+    height: '85%',
+    width: '85%',
     resizeMode: 'contain',
   },
   imgContainer: {
     paddingHorizontal: 10,
-    marginVertical: 6,
-    height: 100,
+    height: 85,
     width: '100%',
+    // backgroundColor: 'red',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   btnContainer: {
     padding: 10,

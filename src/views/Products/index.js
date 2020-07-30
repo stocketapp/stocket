@@ -99,7 +99,7 @@ function Products({ onClose, forwardedRef, isOpen }: Props) {
 
   return (
     <Sheet
-      height={Dimensions.get('window').height - 70}
+      height={Dimensions.get('window').height - 65}
       customStyles={{ container: styles.container }}
       ref={forwardedRef}
       onClose={close}
@@ -120,12 +120,12 @@ function Products({ onClose, forwardedRef, isOpen }: Props) {
           style={{
             backgroundColor: SUB_BACKGROUND,
             alignItems: 'center',
-            paddingTop: 10,
+            justifyContent: 'space-between',
             flex: 1,
           }}
         >
           <ProductsIllustration />
-          <Text type="label" style={{ paddingVertical: 10 }}>
+          <Text type="label" style={{ paddingTop: 25, paddingBottom: 5 }}>
             Add more cash to your account
           </Text>
 
@@ -157,6 +157,7 @@ const styles = StyleSheet.create({
   container: {
     borderRadius: 14,
     backgroundColor: SUB_BACKGROUND,
+    paddingBottom: '20%',
   },
   actionBtn: {
     width: '78%',
