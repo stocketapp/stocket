@@ -1,7 +1,7 @@
 // @flow
 
 import React, { useEffect, useRef } from 'react'
-import { StatusBar, View } from 'react-native'
+import { StatusBar, View, AppState } from 'react-native'
 import {
   useAuthState,
   useSetUserInfo,
@@ -16,6 +16,7 @@ import * as RNIap from 'react-native-iap'
 import messaging from '@react-native-firebase/messaging'
 import MainStack from './src/navigation/AppStack'
 import AuthStack from './src/navigation/AuthenticationStack'
+import AsyncStorage from '@react-native-community/async-storage'
 
 messaging().setBackgroundMessageHandler(async remoteMessage => {
   console.log('Message handled in the background!', remoteMessage)
@@ -55,6 +56,21 @@ export default function App(): React$Node {
     }
 
     requestNotificationPermission()
+  }, [])
+
+  useEffect(() => {
+    const deleteCache = async state => {
+      try {
+        if (state === 'background') {
+          await AsyncStorage.clear()
+        }
+      } catch (err) {
+        console.log(err)
+      }
+    }
+    AppState.addEventListener('change', deleteCache)
+
+    return () => AppState.removeEventListener('change', deleteCache)
   }, [])
 
   if (!isAuth) {

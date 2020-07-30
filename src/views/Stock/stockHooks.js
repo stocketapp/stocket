@@ -64,6 +64,7 @@ export function useGraphData(stockData: GraphData, range: GraphRange = 'now') {
       try {
         const item = await getItem()
         if (item) {
+          // save data to cache
           data = JSON.parse(item)
         } else {
           data = await getHistoricalData(stockData?.quote?.symbol, range)
@@ -80,7 +81,7 @@ export function useGraphData(stockData: GraphData, range: GraphRange = 'now') {
     } else {
       getGraphData(stockData?.chart)
     }
-  }, [stockData, range, getItem, setItem])
+  }, [stockData, range])
 
   return graphData
 }
