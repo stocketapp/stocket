@@ -8759,7 +8759,7 @@ victory-line@^35.0.7:
     prop-types "^15.5.8"
     victory-core "^35.0.7"
 
-victory-native@^35.0.0:
+victory-native@^35.0.1:
   version "35.0.1"
   resolved "https://registry.yarnpkg.com/victory-native/-/victory-native-35.0.1.tgz#76d69d019c295e9629a8c4de0ba45b3f8e04be33"
   integrity sha512-3JHM+8oLnD+ZVcIcJX2dmQu+QLlw3S5arqQ5z+dLeDT5gZevt6j6j+8H1zL/cbYx376zOLzTyhX/lO2EaT20JQ==
