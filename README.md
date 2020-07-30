@@ -3,8 +3,7 @@
 Stock simulation app.
 
 ## Environment variables setup
-
-To get the `config.js` file create a shell script that will run every time you build the app and ensure that you are using the correct variables for each scheme.
+To be able to run the app you'll need keys for IEX Cloud, IapHub, and a secret from the app store. To get the `config.js` file create a shell script that will run every time you build the app and ensure that you are using the correct variables for each scheme
 
 **1.** Create the following shell scripts `prod-env.sh`, `staging-env.sh`, `dev-env.sh`. Example of file content:
 

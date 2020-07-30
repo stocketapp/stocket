@@ -6,6 +6,7 @@ import { filter, reduce } from 'lodash'
 import SocketIO from 'socket.io-client'
 import { useUser } from 'hooks'
 import { subtract } from 'lodash'
+import { useAsyncStorage } from '@react-native-community/async-storage'
 
 export function useGetCurrentStock(selectedStock: string, stockInfo: {}) {
   const dispatch = useDispatch()
@@ -36,12 +37,16 @@ export function useGetCurrentStock(selectedStock: string, stockInfo: {}) {
   return stock
 }
 
-type GraphDataType = {
+type GraphData = {
   data: { chart: [] } | [{}],
 }
+type GraphRange = 'now' | '1m' | '3m' | '6m' | '1y'
 
-export function useGraphData(stockData: GraphDataType, range: string = 'now') {
+export function useGraphData(stockData: GraphData, range: GraphRange = 'now') {
   const [graphData, setGraphData] = useState()
+  const { getItem, setItem } = useAsyncStorage(
+    `@stocket_historical: ${stockData?.quote?.symbol}_${range}`,
+  )
 
   useEffect(() => {
     const getGraphData = data => {
@@ -55,9 +60,17 @@ export function useGraphData(stockData: GraphDataType, range: string = 'now') {
     }
 
     const getHistData = async () => {
+      let data = null
       try {
-        const res = await getHistoricalData(stockData?.quote?.symbol, range)
-        getGraphData(res)
+        const item = await getItem()
+        if (item) {
+          // save data to cache
+          data = JSON.parse(item)
+        } else {
+          data = await getHistoricalData(stockData?.quote?.symbol, range)
+          await setItem(JSON.stringify(data))
+        }
+        getGraphData(data)
       } catch (err) {
         console.log('[ERROR] getHistData', err)
       }

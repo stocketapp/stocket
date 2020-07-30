@@ -21,7 +21,7 @@ const SearchSymbol = (props: SearchSymbolProps): React$Node => {
         />
 
         <TouchableOpacity style={styles.searchBtn} onPress={onSearch} disabled>
-          <SearchIcon size={30} />
+          <SearchIcon size={28} />
         </TouchableOpacity>
       </View>
     </Container>
@@ -31,7 +31,8 @@ const SearchSymbol = (props: SearchSymbolProps): React$Node => {
 const styles = StyleSheet.create({
   searchContainer: {
     paddingVertical: 3,
-    paddingHorizontal: 18,
+    paddingLeft: 16,
+    paddingRight: 8,
     backgroundColor: SUB_BACKGROUND, // '#3F3F3F',
     width: '100%',
     borderRadius: 1000,
@@ -43,11 +44,11 @@ const styles = StyleSheet.create({
     fontSize: 16,
     flex: 1,
     letterSpacing: 0.5,
-    fontWeight: '600',
+    fontWeight: '500',
   },
   searchBtn: {
     paddingVertical: 3,
-    paddingHorizontal: 3,
+    paddingHorizontal: 1,
   },
 })
 
