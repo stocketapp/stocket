@@ -75,7 +75,6 @@ export default function Search(): React$Node {
         )}
         keyExtractor={(i, key) => key.toString()}
         contentContainerStyle={{ paddingVertical: 12 }}
-        ListEmptyComponent={() => <Text>No results</Text>}
       />
     </Container>
   )
