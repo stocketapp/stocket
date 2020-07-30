@@ -1,8 +1,9 @@
 // @flow
 import React, { useRef, useEffect } from 'react'
 import { View, TouchableOpacity } from 'react-native'
-import { LoadingCheckmark, Text } from 'components'
 import { GREEN, DARK_TEXT } from 'utils/colors'
+import LoadingCheckmark from './LoadingCheckmark'
+import Text from './Text'
 
 type Props = {
   loading: boolean,

@@ -12,6 +12,7 @@ import { useNavigation, useFocusEffect } from '@react-navigation/native'
 import { useDispatch } from 'react-redux'
 import { callUpdateGains } from 'api'
 import { ChartIllustration } from 'components/Icons'
+import { filter } from 'lodash'
 import StockHorizontalList from './StockHorizontalList'
 import Watchlist from './Watchlist'
 
@@ -112,7 +113,7 @@ export default function Home() {
 
         {balanceHistory && balanceHistory?.length > 1 ? (
           <ChartLine
-            data={balanceHistory}
+            data={filter(balanceHistory, el => el !== null)}
             x="date"
             y="value"
             onChartEvent={onChartEvent}

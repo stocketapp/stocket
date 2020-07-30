@@ -33,9 +33,9 @@ export default function ChartLine({
   activeRangeTab,
 }: Props) {
   const domainRange = useMemo(() => {
-    const maxDomain = maxBy(data, 'value')?.value
-    const minDomain = minBy(data, 'value')?.value
-    return { minDomain, maxDomain }
+    const maxX = maxBy(data, 'value')?.value
+    const minX = minBy(data, 'value')?.value
+    return { minX: minX === 0 ? -5 : minX, maxX }
   }, [data])
 
   return (
@@ -43,7 +43,8 @@ export default function ChartLine({
       <VictoryChart
         {...chartProps}
         padding={styles.victoryChart}
-        domainPadding={{ y: 10 }}
+        domainPadding={{ y: [25, 5] }}
+        domain={{ y: [domainRange.minX, domainRange?.maxX * 1.01] }}
         containerComponent={
           <VictoryVoronoiContainer
             voronoiDimension="x"
@@ -70,8 +71,6 @@ export default function ChartLine({
             style={styles.victoryLine}
             labels={() => ''}
             labelComponent={<VictoryLabel />}
-            maxDomain={domainRange?.maxDomain * 1.1}
-            minDomain={domainRange?.minDomain * 1.1}
           />
           <VictoryAxis style={styles.victoryAxis} height={0} width={0} />
           <VictoryAxis style={styles.victoryAxis} height={0} width={0} />
