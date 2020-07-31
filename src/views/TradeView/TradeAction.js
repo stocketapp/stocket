@@ -40,6 +40,6 @@ const styles = {
     flexDirection: 'row',
     width: '100%',
     justifyContent: 'center',
-    paddingTop: 10,
+    paddingVertical: '3%',
   },
 }

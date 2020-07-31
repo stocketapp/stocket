@@ -42,6 +42,7 @@ export default function TabBarComponent(props: TabBarProps): React$Node {
             style={{
               width: tabWidth,
               alignItems: 'center',
+              paddingVertical: '2%',
             }}
           >
             {tabBarIcon({ color: tintColor })}

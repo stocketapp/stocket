@@ -42,7 +42,14 @@ export default function SignIn() {
         const user = await FR.doc(`Users/${uid}`).get()
         const userExists = user.exists
         if (!userExists) {
-          await createUserData({ uid, name: displayName, email })
+          await createUserData({
+            uid,
+            name: displayName,
+            email,
+            portfolioChange: 0,
+            portfolioChangePct: 0,
+          })
+          await currentUser.updateProfile({ displayName })
         }
       } catch (err) {
         console.log(err)

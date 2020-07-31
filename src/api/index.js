@@ -2,7 +2,13 @@
 import firestore from '@react-native-firebase/firestore'
 import perf from '@react-native-firebase/perf'
 import type { TradeDataType, DocReference } from 'types'
-import { IEX_CLOUD_KEY, IEX_URL } from '../../config'
+import {
+  IEX_CLOUD_KEY,
+  IEX_URL,
+  IAPHUB_APPID,
+  IAPHUB_ENV,
+  IAPHUB_API_KEY,
+} from '../../config'
 import { formatCurrency } from 'utils/functions'
 import functions from '@react-native-firebase/functions'
 
@@ -30,9 +36,14 @@ async function iexGet(endpoint: string, query?: string = '') {
   return res
 }
 
-export async function createTrade(
+type CreateTradeArg = {
   uid: string,
   data: TradeDataType,
+}
+
+export async function createTrade(
+  { uid, data }: CreateTradeArg,
+  onFinally?: () => void,
   callback?: () => void,
 ) {
   const ref: DocReference = FR.doc(`Users/${uid}`)
@@ -45,6 +56,10 @@ export async function createTrade(
     }
   } catch (err) {
     console.log('[API] createTrade', err)
+  } finally {
+    if (onFinally) {
+      onFinally()
+    }
   }
 }
 
@@ -98,6 +113,12 @@ export async function getBatchStockData(
   return result
 }
 
+export async function getHistoricalData(symbol: string, range: string) {
+  const res = await iexGet(`stock/${symbol}/chart/${range}`)
+  const result = await res.json()
+  return result
+}
+
 type CreateUserType = { uid: string, name: string, email: string }
 export async function createUserData({ uid, name, email }: CreateUserType) {
   const userRef: DocReference = FR.doc(`Users/${uid}`)
@@ -134,4 +155,32 @@ export async function updatePosition(params: UpdatePositionTypes) {
   } catch (err) {
     console.log('[Error] updatePosition()', err)
   }
+}
+
+type ReceiptValidationType = {
+  receipt: string,
+  uid: string,
+  sku: string,
+}
+export async function iapHubValidateReceipt(data: ReceiptValidationType) {
+  const { uid, receipt: token, sku } = data
+  const body = {
+    environment: IAPHUB_ENV,
+    platform: 'ios',
+    token,
+    sku,
+  }
+  const url = 'https://api.iaphub.com/app'
+  const res = await fetch(`${url}/${IAPHUB_APPID}/user/${uid}/receipt`, {
+    method: 'POST',
+    headers: {
+      Authorization: `ApiKey ${IAPHUB_API_KEY}`,
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+    },
+    body,
+  })
+  const result = await res.json()
+  console.log('result', result)
+  return result
 }

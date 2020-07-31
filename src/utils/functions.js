@@ -2,10 +2,10 @@
 import AsyncStorage from '@react-native-community/async-storage'
 import messaging from '@react-native-firebase/messaging'
 import { find } from 'lodash'
-import purchaseValues from './purchaseValues'
+import iapProductsList from './iapProductsList'
 
 export function formatCurrency(num: number | string) {
-  return Number(num).toLocaleString('en-US', {
+  return Number(num ?? 0).toLocaleString('en-US', {
     style: 'currency',
     currency: 'USD',
   })
@@ -36,7 +36,7 @@ type ProductValue = {
 }
 
 export function getProductValue(productId: string): ProductValue {
-  const result = find(purchaseValues, el => el.productId === productId)
+  const result = find(iapProductsList, el => el.productId === productId)
   return result
 }
 

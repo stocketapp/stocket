@@ -78,6 +78,8 @@ export type PositionType = {
   symbol: string,
   uid: string,
   value: number,
+  todayGainsPct: number,
+  todayGains: number,
 }
 
 export type TradeDataType = {

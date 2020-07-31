@@ -47,9 +47,11 @@ export default function StockHorizontalList(props: StockHorizontalListProps) {
           Stocks
         </Text>
 
-        <TouchableOpacity onPress={() => refreshGains()}>
-          <RefreshIcon />
-        </TouchableOpacity>
+        {data?.length > 0 && (
+          <TouchableOpacity onPress={() => refreshGains()}>
+            <RefreshIcon />
+          </TouchableOpacity>
+        )}
       </Container>
 
       {loading ? (
@@ -78,16 +80,14 @@ export default function StockHorizontalList(props: StockHorizontalListProps) {
 
 const styles = StyleSheet.create({
   container: {
-    marginTop: 40,
-  },
-  title: {
-    paddingBottom: 10,
+    marginTop: 50,
   },
   list: {
     minHeight: 100,
   },
   listContent: {
     paddingVertical: 10,
+    width: '100%',
   },
   listLoader: {
     width: '100%',

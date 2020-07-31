@@ -7,10 +7,10 @@ export default function ({ onPress, label, value }) {
   return (
     <TouchableOpacity onPress={onPress} disabled={!onPress}>
       <View style={styles.item}>
-        <Text type="label" color={LABEL}>
+        <Text color={LABEL} style={{ fontSize: 16 }} weight="Regular">
           {label}
         </Text>
-        <Text type="label" weight="Medium">
+        <Text type="label" weight="Regular">
           {value}
         </Text>
       </View>
@@ -22,7 +22,7 @@ const styles = {
   item: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    // borderBottomWidth: 0.2,
+    alignItems: 'flex-end',
     borderBottomColor: GRAY_DARKER,
     paddingVertical: 15,
   },

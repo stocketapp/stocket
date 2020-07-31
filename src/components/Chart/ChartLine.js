@@ -1,19 +1,91 @@
 // @flow
-import React from 'react'
-import { Dimensions } from 'react-native'
+import React, { useMemo } from 'react'
+import { Dimensions, View } from 'react-native'
 import {
   VictoryLine,
   VictoryVoronoiContainer,
   VictoryChart,
-  VictoryAxis,
   VictoryGroup,
   VictoryLabel,
+  VictoryAxis,
 } from 'victory-native'
 import { GREEN } from 'utils/colors'
-import exampleData from '../LineChart/exampleData'
+import exampleData from './exampleData'
 import CursorLine from './CursorLine'
+import { minBy, maxBy } from 'lodash'
+import ChartRangeTabs from './ChartRangeTabs'
 
 const { width } = Dimensions.get('window')
+
+export default function ChartLine({
+  data = exampleData,
+  x = 'date',
+  y = 'value',
+  chartProps,
+  lineProps,
+  onEvent = () => null,
+  labelText = x,
+  labelRightOffset = 80,
+  labelLeftOffset = 40,
+  onChartEvent,
+  tabs = [],
+  onTabPress,
+  activeRangeTab,
+}: Props) {
+  const domainRange = useMemo(() => {
+    const maxX = maxBy(data, 'value')?.value
+    const minX = minBy(data, 'value')?.value
+    return { minX: minX === 0 ? -5 : minX, maxX }
+  }, [data])
+
+  return (
+    <View style={{ paddingTop: 10 }}>
+      <VictoryChart
+        {...chartProps}
+        padding={styles.victoryChart}
+        domainPadding={{ y: [25, 5] }}
+        domain={{ y: [domainRange.minX, domainRange?.maxX * 1.01] }}
+        containerComponent={
+          <VictoryVoronoiContainer
+            voronoiDimension="x"
+            labelComponent={
+              <CursorLine
+                onEvent={onChartEvent}
+                labelText={labelText}
+                leftOffset={labelLeftOffset}
+                rightOffset={labelRightOffset}
+              />
+            }
+            labels={({ datum }) => datum[labelText]}
+            onDeactivated={() => onChartEvent(null)}
+          />
+        }
+      >
+        <VictoryGroup data={data} x={x} y={y}>
+          <VictoryLine
+            {...lineProps}
+            interpolation="basis"
+            x={x}
+            y={y}
+            width={width}
+            style={styles.victoryLine}
+            labels={() => ''}
+            labelComponent={<VictoryLabel />}
+          />
+          <VictoryAxis style={styles.victoryAxis} height={0} width={0} />
+          <VictoryAxis style={styles.victoryAxis} height={0} width={0} />
+        </VictoryGroup>
+      </VictoryChart>
+      {tabs?.length > 0 && (
+        <ChartRangeTabs
+          activeRangeTab={activeRangeTab}
+          tabs={tabs}
+          onTabPress={onTabPress}
+        />
+      )}
+    </View>
+  )
+}
 
 type Props = {
   data: [],
@@ -28,58 +100,9 @@ type Props = {
   labelRightOffset?: number,
   labelLeftOffset?: number,
   onChartEvent: (value: string | number | null) => void,
-}
-
-export default function ChartLine({
-  data = exampleData,
-  x = 'date',
-  y = 'value',
-  chartProps,
-  lineProps,
-  onEvent = () => null,
-  labelText = x,
-  labelRightOffset = 80,
-  labelLeftOffset = 40,
-  onChartEvent,
-}: Props) {
-  return (
-    <VictoryChart
-      {...chartProps}
-      padding={styles.victoryChart}
-      containerComponent={
-        <VictoryVoronoiContainer
-          voronoiDimension="x"
-          labelComponent={
-            <CursorLine
-              onEvent={onChartEvent}
-              labelText={labelText}
-              leftOffset={labelLeftOffset}
-              rightOffset={labelRightOffset}
-            />
-          }
-          labels={({ datum }) => datum[labelText]}
-          onDeactivated={() => onChartEvent(null)}
-          mouseFollowTooltips
-          voronoiPadding={0}
-        />
-      }
-    >
-      <VictoryGroup data={data} x={x} y={y}>
-        <VictoryLine
-          {...lineProps}
-          interpolation="basis"
-          x={x}
-          y={y}
-          width={width}
-          style={styles.victoryLine}
-          labels={() => ''}
-          labelComponent={<VictoryLabel />}
-        />
-        <VictoryAxis style={styles.victoryAxis} height={0} width={0} label="" />
-        <VictoryAxis style={styles.victoryAxis} height={0} width={0} label="" />
-      </VictoryGroup>
-    </VictoryChart>
-  )
+  tabs: [string],
+  onTabPress: (tab: string) => void,
+  activeRangeTab: string,
 }
 
 const styles = {
@@ -93,5 +116,5 @@ const styles = {
     },
   },
   victoryAxis: { tickLabels: { display: 'none', fill: 'none' } },
-  victoryChart: { top: 30, bottom: 0 },
+  victoryChart: { top: 30, bottom: -0.5 },
 }

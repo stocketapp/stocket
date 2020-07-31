@@ -2,10 +2,16 @@
 import { useEffect, useState } from 'react'
 import firestore from '@react-native-firebase/firestore'
 import moment from 'moment'
-import { uniqBy } from 'lodash'
+import { findIndex } from 'lodash'
 import { currencyToNumber } from 'utils/functions'
 
-function useGetBalanceHistory(uid: string, currentValue: string) {
+type UserInfo = {
+  portfolioChange: number,
+  portfolioChangePct: number,
+  portfolioValue: string,
+}
+
+function useGetBalanceHistory(uid: string, userInfo: UserInfo) {
   const [balanceHistory, setBalanceHistory] = useState(null)
   useEffect(() => {
     const subscribe = firestore()
@@ -15,17 +21,28 @@ function useGetBalanceHistory(uid: string, currentValue: string) {
         try {
           const list = []
           snapshot.forEach(doc => {
-            const data = doc.data()
+            const { date, value, change, changePct } = doc?.data()
             list.push({
-              date: moment(data?.date).format('MMM DD, YYYY'),
-              value: currencyToNumber(data?.value),
+              date: moment(date?.toMillis())?.format('MMM DD, YYYY'),
+              value: currencyToNumber(value),
+              change,
+              changePct,
             })
           })
-          const now = moment()
-          list.push({
-            date: moment(now).format('MMM DD, YYYY'),
-            value: currencyToNumber(currentValue),
-          })
+          const nowDate = moment(moment())?.format('MMM DD, YYYY') // gets the current date
+          const nowBalance = {
+            date: nowDate,
+            value: currencyToNumber(userInfo?.portfolioValue),
+            change: userInfo?.portfolioChange,
+            changePct: userInfo?.portfolioChangePct,
+          }
+          // replace server today's balance with real-time balance
+          const index = findIndex(list, el => el?.date === nowDate)
+          if (index !== -1) {
+            list.splice(index, 1, nowBalance)
+          } else {
+            list.push(nowBalance)
+          }
           setBalanceHistory(list)
         } catch (err) {
           console.log('[ERROR] useGetBalanceHistory', err)
@@ -33,9 +50,9 @@ function useGetBalanceHistory(uid: string, currentValue: string) {
       })
 
     return () => subscribe()
-  }, [uid, currentValue])
+  }, [uid, userInfo])
 
-  return uniqBy(balanceHistory, 'date')
+  return balanceHistory ?? []
 }
 
 export default useGetBalanceHistory

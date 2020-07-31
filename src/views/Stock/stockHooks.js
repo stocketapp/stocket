@@ -1,10 +1,10 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 // @flow
-import { useEffect, useState, useMemo, useCallback } from 'react'
+import { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux'
-import { getBatchStockData, updatePosition } from 'api'
-import { filter, reduce } from 'lodash'
-import SocketIO from 'socket.io-client'
-import { useUser } from 'hooks'
+import { getBatchStockData, getHistoricalData } from 'api'
+import { filter } from 'lodash'
+import { useAsyncStorage } from '@react-native-community/async-storage'
 
 export function useGetCurrentStock(selectedStock: string, stockInfo: {}) {
   const dispatch = useDispatch()
@@ -35,62 +35,51 @@ export function useGetCurrentStock(selectedStock: string, stockInfo: {}) {
   return stock
 }
 
-export function useGraphData(stock: { chart: [] }) {
-  const getGraphData = (item: { chart: [] }) => {
-    const arr = filter(item?.chart, el => el?.close !== null)
-    const result = arr.map(el => ({
-      value: el.close,
-      label: el.label,
-      date: el.date,
-    }))
-    return result
-  }
-
-  return useMemo(() => getGraphData(stock), [stock])
+type GraphData = {
+  data: { chart: [] } | [{}],
 }
+type GraphRange = 'now' | '1m' | '3m' | '6m' | '1y'
 
-type UsePriceSubscriptionTypes = {
-  symbol: string,
-  shares: [],
-}
-export function usePriceSubscription(position: UsePriceSubscriptionTypes) {
-  const [data, setData] = useState({})
-  const { currentUser } = useUser()
-  const symbol = position?.symbol
-  const shares = position?.shares
-
-  const getGains = (price) => {
-    const value = shares?.length * price
-    const gainsArr = shares.map(el => price - el.price)
-    const gains = reduce(gainsArr, (a, b) => a + b)
-    const gainsPercentage = (gains / value) * 100
-    return { gains, gainsPercentage, value }
-  }
-
-  const calcGains = useCallback(getGains, [data?.price])
+export function useGraphData(stockData: GraphData, range: GraphRange = 'now') {
+  const [graphData, setGraphData] = useState()
+  const { getItem, setItem } = useAsyncStorage(
+    `@stocket_historical: ${stockData?.quote?.symbol}_${range}`,
+  )
 
   useEffect(() => {
-    const url = 'https://ws-api.iextrading.com/1.0/last'
-    const socket = SocketIO(url)
-
-    if (symbol) {
-      socket.on('connect', () => {
-        socket.emit('subscribe', symbol)
-      })
-
-      socket.on('message', async message => {
-        const res = JSON.parse(message)
-        setData(res)
-        const positionGains = calcGains(res?.price)
-        const obj = {
-          ...positionGains,
-        }
-        await updatePosition({ uid: currentUser?.uid, symbol, data: obj })
-      })
+    const getGraphData = data => {
+      const arr = filter(data, el => el?.close !== null)
+      const result = arr.map(el => ({
+        value: el.close,
+        label: el.label,
+        date: el.date,
+      }))
+      setGraphData(result)
     }
 
-    return () => socket.emit('unsubscribe', symbol)
-  }, [symbol])
+    const getHistData = async () => {
+      let data = null
+      try {
+        const item = await getItem()
+        if (item) {
+          // save data to cache
+          data = JSON.parse(item)
+        } else {
+          data = await getHistoricalData(stockData?.quote?.symbol, range)
+          await setItem(JSON.stringify(data))
+        }
+        getGraphData(data)
+      } catch (err) {
+        console.log('[ERROR] getHistData', err)
+      }
+    }
 
-  return data
+    if (range !== 'now') {
+      getHistData()
+    } else {
+      getGraphData(stockData?.chart)
+    }
+  }, [stockData, range])
+
+  return graphData
 }

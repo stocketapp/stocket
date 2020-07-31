@@ -1,20 +1,20 @@
-import React, { useState, useEffect, useMemo } from 'react'
+import React, { useState, useEffect, useRef, useCallback, useMemo } from 'react'
 import { StyleSheet, ScrollView, View } from 'react-native'
-import { BACKGROUND } from 'utils/colors'
-import { Balance, Container, ChartLine, MarketStatus } from 'components'
+import { BACKGROUND, GRAY_DARKER } from 'utils/colors'
+import { Balance, Container, ChartLine, MarketStatus, Text } from 'components'
 import {
   useGetMyStocks,
   useWatchlist,
   useGetBalanceHistory,
   useUser,
-  useGetMarketStatus,
 } from 'hooks'
-import { useNavigation } from '@react-navigation/native'
+import { useNavigation, useFocusEffect } from '@react-navigation/native'
+import { useDispatch } from 'react-redux'
+import { callUpdateGains } from 'api'
+import { ChartIllustration } from 'components/Icons'
+import { filter } from 'lodash'
 import StockHorizontalList from './StockHorizontalList'
 import Watchlist from './Watchlist'
-import { formatCurrency } from 'utils/functions'
-import { nth, last } from 'lodash'
-import { useDispatch } from 'react-redux'
 
 export default function Home() {
   const { userInfo, currentUser } = useUser()
@@ -23,11 +23,19 @@ export default function Home() {
   const watchlist = useWatchlist(uid)
   const { navigate } = useNavigation()
   const [allowScroll, setAllowScroll] = useState(true)
-  const balanceHistory = useGetBalanceHistory(uid, userInfo?.portfolioValue)
+  const balanceHistory = useGetBalanceHistory(uid, userInfo)
   const [balanceValue, setBalanceValue] = useState(null)
+  const [balanceChange, setBalanceChange] = useState(null)
+  const [balanceChangePct, setBalanceChangePct] = useState(null)
+  const [balanceDate, setBalanceDate] = useState(null)
   const dispatch = useDispatch()
-  const marketStatus = useGetMarketStatus()
-  let timeout
+  const timeout = useRef()
+  const dateNow = useMemo(() => {
+    if (!balanceDate) {
+      return 'Today'
+    }
+    return balanceDate
+  }, [balanceDate])
 
   const onWatchlistItemPress = (stockInfo: PositionType) => {
     dispatch({
@@ -38,31 +46,44 @@ export default function Home() {
   }
 
   useEffect(() => {
-    return () => clearTimeout(timeout)
+    return () => clearTimeout(timeout.current)
   }, [timeout])
 
-  const onChartEvent = (value: string | number | null) => {
-    setBalanceValue(value ? formatCurrency(value) : null)
-    if (!value) {
-      timeout = setTimeout(() => setAllowScroll(true), 500)
+  useEffect(() => {
+    setBalanceValue(userInfo?.portfolioValue)
+    setBalanceChange(userInfo?.portfolioChange)
+    setBalanceChangePct(userInfo?.portfolioChangePct)
+  }, [userInfo])
+
+  useFocusEffect(
+    useCallback(() => {
+      const focusTimeout = setTimeout(() => {
+        callUpdateGains(uid)
+      }, 1000)
+
+      return () => clearTimeout(focusTimeout)
+    }, [uid]),
+  )
+
+  const onChartEvent = (
+    item: {
+      change: number,
+      changePct: number,
+      value: number,
+      date: string,
+    } | null,
+  ) => {
+    setBalanceValue(item?.value)
+    setBalanceChange(item?.change)
+    setBalanceChangePct(item?.changePct)
+    setBalanceDate(item?.date)
+
+    if (!item) {
+      timeout.current = setTimeout(() => setAllowScroll(true), 500)
     } else {
       setAllowScroll(false)
     }
   }
-
-  const dayChange = useMemo(() => {
-    const penultiEl = nth(balanceHistory, -2)
-    const lastEl = last(balanceHistory)
-    let change
-    if (!penultiEl && !lastEl) {
-      change = 0.0
-    } else if (!penultiEl && lastEl) {
-      change = lastEl?.value
-    } else {
-      change = lastEl?.value - penultiEl?.value
-    }
-    return (change ?? 0).toFixed(2)
-  }, [balanceHistory])
 
   return (
     <Container style={styles.container} safeAreaTop>
@@ -72,19 +93,33 @@ export default function Home() {
         scrollEnabled={allowScroll}
       >
         <View style={styles.header}>
+          <View
+            style={{ flexDirection: 'row', justifyContent: 'space-between' }}
+          >
+            <Text color={GRAY_DARKER} type="label">
+              Invested
+            </Text>
+            <MarketStatus />
+          </View>
           <Balance
-            value={balanceValue ?? userInfo?.portfolioValue}
-            dayChange={dayChange}
+            dayChange={{
+              change: balanceChange ?? userInfo?.portfolioChange,
+              changePct: balanceChangePct ?? userInfo?.portfolioChangePct,
+              value: balanceValue ?? userInfo?.portfolioValue,
+              date: dateNow,
+            }}
           />
-          <MarketStatus status={marketStatus} />
         </View>
-        {balanceHistory && (
+
+        {balanceHistory && balanceHistory?.length > 1 ? (
           <ChartLine
-            data={balanceHistory}
+            data={filter(balanceHistory, el => el !== null)}
             x="date"
             y="value"
             onChartEvent={onChartEvent}
           />
+        ) : (
+          <ChartIllustration />
         )}
         <StockHorizontalList data={positions} loading={loading} />
         {watchlist.length > 0 && (
@@ -101,10 +136,9 @@ const styles = StyleSheet.create({
     backgroundColor: BACKGROUND,
   },
   header: {
-    flexDirection: 'row',
+    flexDirection: 'column',
     width: '100%',
-    justifyContent: 'space-between',
     paddingHorizontal: 16,
-    paddingTop: 15,
+    paddingTop: 25,
   },
 })

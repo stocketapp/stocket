@@ -1,12 +1,13 @@
 // flow
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useCallback } from 'react'
 import { FlatList } from 'react-native'
 import { Container, SearchSymbols, Text } from 'components'
 import { useDebounce, useUser } from 'hooks'
-import { searchTerm, addToWatchlist } from 'api'
+import { searchTerm, addToWatchlist, removeFromWatchlist } from 'api'
 import { useNavigation } from '@react-navigation/native'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import SearchResult from './SearchResult'
+import { includes, map } from 'lodash'
 
 export default function Search(): React$Node {
   const [search, setSearch] = useState(null)
@@ -15,6 +16,7 @@ export default function Search(): React$Node {
   const { currentUser } = useUser()
   const { navigate } = useNavigation()
   const dispatch = useDispatch()
+  const { watchlist } = useSelector(({ stock }) => stock)
 
   useEffect(() => {
     const getResults = async () => {
@@ -40,6 +42,22 @@ export default function Search(): React$Node {
     navigate('Stock')
   }
 
+  const isFaved = useCallback(
+    symbol => {
+      const arr = map(watchlist, el => el?.quote?.symbol)
+      return includes(arr, symbol)
+    },
+    [watchlist],
+  )
+
+  const toggleFromWatchlist = (uid, symbol, isFav) => {
+    if (!isFav) {
+      addToWatchlist(uid, symbol)
+    } else {
+      removeFromWatchlist(uid, symbol)
+    }
+  }
+
   return (
     <Container fullView ph safeAreaTop safeAreaBottom>
       <SearchSymbols value={search} setValue={setSearch} />
@@ -49,14 +67,14 @@ export default function Search(): React$Node {
         renderItem={({ item }) => (
           <SearchResult
             item={item}
-            onPress={addToWatchlist}
+            onPress={toggleFromWatchlist}
             setStock={() => goToStock(item?.symbol)}
             uid={currentUser?.uid}
+            isFaved={isFaved}
           />
         )}
         keyExtractor={(i, key) => key.toString()}
         contentContainerStyle={{ paddingVertical: 12 }}
-        ListEmptyComponent={() => <Text>No results</Text>}
       />
     </Container>
   )

@@ -12,7 +12,8 @@
       "type": "reactnative",
       "request": "launch",
       "platform": "ios",
-      "scheme": "Development"
+      "scheme": "Development",
+      "target": "simulator"
     }
   ]
 }

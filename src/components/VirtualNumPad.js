@@ -14,7 +14,9 @@ const PadButton = ({ value, onPress, onDelete }) => {
             {value}
           </Text>
         ) : (
-          <Text style={styles.numText} status="positive">X</Text>
+          <Text style={styles.numText} status="positive">
+            X
+          </Text>
         )}
       </View>
     </TouchableOpacity>
@@ -55,7 +57,7 @@ const styles = {
     width: width / 3,
     justifyContent: 'center',
     alignItems: 'center',
-    paddingVertical: 15,
+    paddingVertical: '4%',
   },
   numText: {
     fontSize: 24,

@@ -1,23 +1,21 @@
 // @flow
-import React, { forwardRef, useEffect, useState, useRef } from 'react'
-import {
-  Dimensions,
-  View,
-  StyleSheet,
-  Animated,
-  Easing,
-  Vibration,
-} from 'react-native'
-import { Container, Text, LoadingCheckmark } from 'components'
+import React, { forwardRef, useEffect, useState, useMemo } from 'react'
+import { Dimensions, View, StyleSheet, FlatList } from 'react-native'
+import { Text, SuccessScreen } from 'components'
 import Sheet from 'react-native-raw-bottom-sheet'
-import { SUB_BACKGROUND, GREEN, LABEL } from 'utils/colors'
-import ProductsIllustration from './ProductsIllustration'
-import ProductItem from './ProductItem'
-import IapHub from 'react-native-iaphub'
-import { useSelector } from 'react-redux'
+import { SUB_BACKGROUND, GREEN } from 'utils/colors'
 import { getProductValue, formatCurrency } from 'utils/functions'
 import firestore from '@react-native-firebase/firestore'
-import transactionErrors from './transactionErrors'
+import {
+  requestPurchase,
+  purchaseUpdatedListener,
+  validateReceiptIos,
+} from 'react-native-iap'
+import { sortBy } from 'lodash'
+import ProductsIllustration from './ProductsIllustration'
+import ProductItem from './ProductItem'
+import { useSelector } from 'react-redux'
+import { APPSTORE_APP_SECRET } from '../../../config'
 
 type Props = {
   onClose: () => void,
@@ -25,15 +23,16 @@ type Props = {
   forwardedRef?: { current: any },
 }
 
-const { Value, timing } = Animated
-
 function Products({ onClose, forwardedRef, isOpen }: Props) {
   const { products } = useSelector(({ iapProducts }) => iapProducts)
   const { uid } = useSelector(({ user }) => user?.currentUser)
   const [purchaseLoading, setPurchaseLoading] = useState(false)
-  const [progress] = useState(new Value(0))
-  const [selectedProduct, setSelectedProduct] = useState(null)
-  const loadingMarkRef = useRef()
+  const [success, setSuccess] = useState(false)
+  const [purchasedProduct, setPurchasedProduct] = useState(null)
+
+  const purchasedValues = useMemo(() => getProductValue(purchasedProduct), [
+    purchasedProduct,
+  ])
 
   useEffect(() => {
     if (isOpen) {
@@ -42,33 +41,43 @@ function Products({ onClose, forwardedRef, isOpen }: Props) {
   }, [isOpen, forwardedRef])
 
   useEffect(() => {
-    if (purchaseLoading && selectedProduct) {
-      timing(progress, {
-        toValue: 1,
-        duration: 5000,
-        easing: Easing.linear,
-        useNativeDriver: false,
-      }).start(() => {
-        Vibration.vibrate(500)
-        reset()
-      })
-    }
-  }, [progress, purchaseLoading, selectedProduct])
+    let purchaseReq = purchaseUpdatedListener(async purchase => {
+      try {
+        const receipt = purchase?.transactionReceipt
+        const sku = purchase?.productId
+        setPurchasedProduct(sku)
+        setPurchaseLoading(true)
+        if (receipt) {
+          const obj = {
+            'receipt-data': receipt,
+            password: APPSTORE_APP_SECRET,
+          }
+          await validateReceiptIos(obj, true)
+          setSuccess(true)
+          await updateCash(sku)
+          setPurchaseLoading(false)
+        }
+      } catch (err) {
+        console.log(err)
+      }
+    })
 
-  const buyCash = async productId => {
-    setSelectedProduct(productId)
+    return () => {
+      purchaseReq.remove()
+      purchaseReq = null
+    }
+  })
+
+  const buyCash = async sku => {
     try {
-      const transaction = await IapHub.buy(productId)
-      setPurchaseLoading(true)
-      await updateCash(transaction?.sku)
+      await requestPurchase(sku, false)
     } catch (err) {
-      console.log(err)
-      transactionErrors(err.code)
+      console.log('requestPurchase', err)
     }
   }
 
-  const updateCash = async productId => {
-    const value = getProductValue(productId).value
+  const updateCash = async sku => {
+    const value = getProductValue(sku).value
     await firestore()
       .collection('Users')
       .doc(uid)
@@ -77,55 +86,65 @@ function Products({ onClose, forwardedRef, isOpen }: Props) {
       })
   }
 
-  const reset = () => {
-    setPurchaseLoading(false)
-    setSelectedProduct(null)
+  const onFinished = () => {
+    setPurchaseLoading(true)
+    setSuccess(false)
+    setPurchasedProduct(null)
+  }
+
+  const close = () => {
+    onClose()
+    onFinished()
   }
 
   return (
     <Sheet
-      height={Dimensions.get('window').height - 80}
+      height={Dimensions.get('window').height - 65}
       customStyles={{ container: styles.container }}
       ref={forwardedRef}
-      onClose={onClose}
+      onClose={close}
       closeOnDragDown
       dragFromTop
     >
-      <Container
-        ph
-        fullView
-        style={{
-          backgroundColor: SUB_BACKGROUND,
-          alignItems: 'center',
-          paddingTop: 20,
-        }}
-      >
-        <ProductsIllustration />
-        <Text type="label" style={{ paddingBottom: 40 }}>
-          Add more cash to your account
-        </Text>
+      {success ? (
+        <SuccessScreen
+          successText={`Successfully added ${formatCurrency(
+            purchasedValues?.value,
+          )} to your account.`}
+          bigText={formatCurrency(purchasedValues?.price)}
+          onFinished={onFinished}
+          loading={purchaseLoading}
+        />
+      ) : (
+        <View
+          style={{
+            backgroundColor: SUB_BACKGROUND,
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            flex: 1,
+          }}
+        >
+          <ProductsIllustration />
+          <Text type="label" style={{ paddingTop: 25, paddingBottom: 5 }}>
+            Add more cash to your account
+          </Text>
 
-        <View style={styles.products}>
-          {products &&
-            products.map((el, i) => (
-              <ProductItem product={el} key={i} onPurchase={buyCash} />
-            ))}
+          {products && (
+            <View style={styles.products}>
+              <FlatList
+                data={sortBy(products, 'price')}
+                renderItem={({ item }) => (
+                  <ProductItem product={item} onPurchase={buyCash} />
+                )}
+                keyExtractor={(el, key) => key.toString()}
+                numColumns={2}
+                contentContainerStyle={{ alignItems: 'center' }}
+                columnWrapperStyle={{ justifyContent: 'center' }}
+              />
+            </View>
+          )}
         </View>
-
-        {purchaseLoading && selectedProduct && (
-          <View style={styles.loadingmark}>
-            <LoadingCheckmark
-              size={110}
-              ref={loadingMarkRef}
-              loop={false}
-              progress={progress}
-            />
-            <Text color={LABEL} type="label">
-              +{formatCurrency(getProductValue(selectedProduct).value)}
-            </Text>
-          </View>
-        )}
-      </Container>
+      )}
     </Sheet>
   )
 }
@@ -138,10 +157,11 @@ const styles = StyleSheet.create({
   container: {
     borderRadius: 14,
     backgroundColor: SUB_BACKGROUND,
+    paddingBottom: '20%',
   },
   actionBtn: {
     width: '78%',
-    paddingVertical: 9,
+    paddingVertical: 10,
     backgroundColor: GREEN,
     justifyContent: 'center',
     alignItems: 'center',
@@ -154,20 +174,7 @@ const styles = StyleSheet.create({
     marginVertical: 5,
   },
   products: {
-    flexWrap: 'wrap',
-    flex: 1,
-    flexDirection: 'row',
-  },
-  loadingmark: {
-    position: 'absolute',
-    top: '30%',
-    height: '22%',
-    minWidth: '42%',
-    backgroundColor: 'rgba(5, 6, 6, 0.9)',
-    justifyContent: 'center',
-    alignItems: 'center',
-    borderRadius: 12,
-    paddingBottom: 10,
-    paddingHorizontal: 5,
+    width: '100%',
+    justifyContent: 'space-between',
   },
 })

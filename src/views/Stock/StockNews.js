@@ -5,13 +5,17 @@ import { GRAY_DARKER } from 'utils/colors'
 
 const ArticleItem = ({ article }) => {
   const ref = useRef()
+  const noArticle = /http/g.test(article?.image)
 
   return (
     <>
-      <TouchableOpacity onPress={() => ref.current.open()}>
+      <TouchableOpacity
+        onPress={() => ref.current.open()}
+        disabled={!noArticle}
+      >
         <View style={styles.articleContainer}>
           <View>
-            {/http/g.test(article?.image) ? (
+            {noArticle ? (
               <Image source={{ uri: article?.image }} style={styles.img} />
             ) : (
               <View style={{ ...styles.img, backgroundColor: 'gray' }} />

@@ -1,22 +1,18 @@
-import React, { useState } from 'react'
+import React, { useState, useCallback } from 'react'
 import { View, TouchableOpacity, ScrollView, StyleSheet } from 'react-native'
 import { Text, Container, Loader, ChartLine, MarketStatus } from 'components'
 import { GREEN, BACKGROUND, GRAY_DARKER } from 'utils/colors'
 import { ArrowLeftIcon, FavoriteIcon } from 'components/Icons'
 import { useSelector, useDispatch } from 'react-redux'
 import { find, minBy } from 'lodash'
-import { useGetMarketStatus } from 'hooks'
 import StockDetails from './StockDetails'
 import { useNavigation } from '@react-navigation/native'
 import StockPosition from './StockPosition'
 import StockNews from './StockNews'
 import StockTradeBar from './StockTradeBar'
 import { addToWatchlist, removeFromWatchlist } from 'api'
-import {
-  useGetCurrentStock,
-  useGraphData,
-  usePriceSubscription,
-} from './stockHooks'
+import { useSubscribeMarketHours, usePriceSubscription } from 'hooks'
+import { useGetCurrentStock, useGraphData } from './stockHooks'
 
 export default function Stock({ route }) {
   const { goBack } = useNavigation()
@@ -29,15 +25,16 @@ export default function Stock({ route }) {
   )
   const stockInfo = route.params?.stockInfo
   const stock = useGetCurrentStock(selectedStock, stockInfo)
-  const graphData = useGraphData(stock)
+  const [graphRange, setGraphRange] = useState('now')
+  const graphData = useGraphData(stock, graphRange)
   const { uid } = useSelector(({ user }) => user?.currentUser)
   const [allowScroll, setAllowScroll] = useState(true)
   const dispatch = useDispatch()
-  const { price } = usePriceSubscription(selectedStockPosition ?? null)
-  const latestPrice = price?.toFixed(2) ?? stock?.quote?.latestPrice.toFixed(2)
-  const marketStatus = useGetMarketStatus()
+  const { latestPrice: price } = usePriceSubscription(selectedStockPosition)
+  const latestPrice = price?.toFixed(2) // ?? stock?.quote?.latestPrice
+  const marketStatus = useSubscribeMarketHours()
 
-  const openTradeView = () => {
+  const openTradeView = useCallback(() => {
     dispatch({
       type: 'TRADE_VIEW_IS_OPEN',
       tradeViewIsOpen: true,
@@ -46,15 +43,15 @@ export default function Stock({ route }) {
       type: 'STOCK_PRICE',
       stockPrice: latestPrice,
     })
-  }
+  }, [latestPrice, dispatch])
 
-  const onChartEvent = (value: string | number | null) => {
+  const onChartEvent = useCallback((value: string | number | null) => {
     if (!value) {
       setAllowScroll(true)
     } else {
       setAllowScroll(false)
     }
-  }
+  }, [])
 
   const isFav = find(
     watchlist,
@@ -67,10 +64,7 @@ export default function Stock({ route }) {
         <TouchableOpacity style={{ padding: 5 }} onPress={goBack}>
           <ArrowLeftIcon size={30} color={GREEN} />
         </TouchableOpacity>
-        <MarketStatus
-          label={`Market is ${marketStatus ? 'open' : 'closed'}`}
-          status={marketStatus}
-        />
+        <MarketStatus />
         <TouchableOpacity
           onPress={() =>
             isFav
@@ -124,6 +118,9 @@ export default function Stock({ route }) {
                 labelRightOffset={40}
                 labelLeftOffset={15}
                 onChartEvent={onChartEvent}
+                tabs={['now', '1m', '3m', '6m', '1y']}
+                onTabPress={setGraphRange}
+                activeRangeTab={graphRange}
               />
 
               <StockDetails data={stock?.quote} />

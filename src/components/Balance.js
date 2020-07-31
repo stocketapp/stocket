@@ -3,39 +3,42 @@ import React from 'react'
 import { View } from 'react-native'
 import { GRAY_DARKER, LABEL, GREEN, RED } from 'utils/colors'
 import Text from './Text'
-import Container from './Container'
+import { formatCurrency } from 'utils/functions'
 
 type Props = {
-  value: string,
-  dayChange: number,
+  dayChange: {
+    change: number,
+    changePct: number,
+    value: string | number,
+    date: string,
+  },
 }
 
-const Balance = ({ value, dayChange }: Props): React$Node => {
-  const color = dayChange > 0 ? GREEN : dayChange < 0 ? RED : 'white'
+const Balance = ({ dayChange }: Props): React$Node => {
+  const { change, changePct, value, date } = dayChange
+  const color = changePct > 0 ? GREEN : changePct < 0 ? RED : 'white'
   return (
-    <View>
-      <Text color={GRAY_DARKER} type="label">
-        Invested
-      </Text>
+    <>
       <Text weight="Black" style={styles.value}>
-        {value || '$0.00'}
+        {typeof value !== 'number' ? value : formatCurrency(value)}
       </Text>
       <View style={styles.changeContainer}>
-        <Text weight="Light" color={LABEL}>
-          Today's change{' '}
+        <Text weight="Medium" color={color}>
+          {changePct > 0 && '+'}
+          {`${formatCurrency(change)} (${(changePct ?? 0)?.toFixed(2)}%)`}
         </Text>
-        <Text weight="Bold" color={color}>
-          {dayChange > 0 && '+'}
-          {dayChange}
+        <Text weight="Light" color={LABEL}>
+          {' '}
+          {date}
         </Text>
       </View>
-    </View>
+    </>
   )
 }
 
 const styles = {
   changeContainer: { flexDirection: 'row', paddingTop: 5 },
-  value: { fontSize: 34, paddingTop: 10 },
+  value: { fontSize: 34, paddingTop: 5 },
 }
 
 export default Balance

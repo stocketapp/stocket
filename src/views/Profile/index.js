@@ -5,16 +5,23 @@ import { Container, Text } from 'components'
 import { LABEL, CARD_BACKGROUND } from 'utils/colors'
 import { useSelector } from 'react-redux'
 import { formatCurrency, currencyToNumber } from 'utils/functions'
+import { useTotalGains } from 'hooks'
 import ProfileItem from './ProfileItem'
 import AddCash from './AddCash'
 import LogoutButton from './LogoutButton'
-import p from '../../../package.json'
+import pckg from '../../../package.json'
 import Products from '../Products'
 
 export default function Profile() {
   const { userInfo } = useSelector(({ user }) => user)
   const iapRef = useRef()
   const [isIapOpen, setIsIapOpen] = useState(false)
+  const portfolioValue = userInfo?.portfolioValue
+  const cash = formatCurrency(userInfo?.cash)
+  const { totalGains } = useTotalGains(portfolioValue ?? '$0.00')
+  const accountValue = formatCurrency(
+    currencyToNumber(portfolioValue) + userInfo?.cash,
+  )
 
   return (
     <Container fullView ph style={{ flex: 1, justifyContent: 'space-between' }}>
@@ -33,7 +40,7 @@ export default function Profile() {
             <View>
               <Text style={styles.value}>Cash</Text>
               <Text style={styles.cash} weight="Bold" type="title">
-                {formatCurrency(userInfo?.cash)}
+                {cash}
               </Text>
             </View>
 
@@ -44,20 +51,16 @@ export default function Profile() {
         </Container>
 
         <Container top={40}>
-          <ProfileItem label="Portfolio" value={userInfo?.portfolioValue} />
-          <ProfileItem
-            label="Total Value"
-            value={formatCurrency(
-              currencyToNumber(userInfo?.portfolioValue) + userInfo?.cash,
-            )}
-          />
+          <ProfileItem label="Portfolio Value" value={portfolioValue} />
+          <ProfileItem label="Portfolio Gains" value={`${totalGains}`} />
+          <ProfileItem label="Account Value" value={accountValue} />
         </Container>
       </View>
 
       <View style={{ width: '100%', alignItems: 'center', paddingBottom: 20 }}>
         <LogoutButton />
         <Text style={{ paddingTop: 10 }} type="subtext" color={LABEL}>
-          {p.version}
+          {pckg.version}
         </Text>
       </View>
       <Products

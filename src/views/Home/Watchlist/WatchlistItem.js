@@ -22,12 +22,16 @@ export default ({ item, onPress }: Props) => {
     <TouchableOpacity onPress={onPress}>
       <View style={styles.container}>
         <View style={styles.left}>
-          <Text>{symbol}</Text>
-          <Text color={LABEL}>{companyName}</Text>
+          <Text weight="Semibold">{symbol}</Text>
+          <Text color={LABEL} weight="Medium">
+            {companyName}
+          </Text>
         </View>
 
         <View style={styles.right}>
-          <Text style={{ textAlign: 'right' }}>{latestPrice}</Text>
+          <Text style={{ textAlign: 'right' }} weight="Semibold">
+            {latestPrice}
+          </Text>
           <View
             style={[
               styles.change,
@@ -54,7 +58,7 @@ const styles = StyleSheet.create({
   change: {
     paddingVertical: 2,
     paddingHorizontal: 6,
-    minWidth: 62,
+    minWidth: 70,
     borderRadius: 4,
     marginTop: 3,
   },

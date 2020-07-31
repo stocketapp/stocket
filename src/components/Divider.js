@@ -12,7 +12,7 @@ export default ({ vertical = false, width = 0.5 }: DividerPropTypes) => {
     width: vertical ? width : '100%',
     height: vertical ? '100%' : width,
     backgroundColor: GRAY_DARKER,
-    ...(vertical ? { marginHorizontal: 15 } : { marginVertical: 15 }),
+    ...(vertical ? { marginHorizontal: '3%' } : { marginVertical: '2%' }),
   }
 
   return <View style={styles} />

@@ -1,46 +1,76 @@
 // @flow
 
 import React, { useEffect, useRef } from 'react'
-import { StatusBar, View } from 'react-native'
-import { useAuthState, useSetUserInfo, useIapHub, useSubscribeMarketHours } from 'hooks'
-// import RNBootSplash from 'react-native-bootsplash'
+import { StatusBar, View, AppState } from 'react-native'
+import {
+  useAuthState,
+  useSetUserInfo,
+  useIapProducts,
+  useSubscribeMarketHours,
+  useSaveApnsToken,
+} from 'hooks'
+import RNBootSplash from 'react-native-bootsplash'
 import { BACKGROUND } from 'utils/colors'
-import { IAPHUB_API_KEY, IAPHUB_APPID, IAPHUB_ENV } from './config'
 import TradeView from 'views/TradeView'
 import * as RNIap from 'react-native-iap'
-import IapHub from 'react-native-iaphub'
+import messaging from '@react-native-firebase/messaging'
 import MainStack from './src/navigation/AppStack'
 import AuthStack from './src/navigation/AuthenticationStack'
+import AsyncStorage from '@react-native-community/async-storage'
 
-const iapHubConfig = {
-  appId: IAPHUB_APPID,
-  apiKey: IAPHUB_API_KEY,
-  environment: IAPHUB_ENV,
-}
+messaging().setBackgroundMessageHandler(async remoteMessage => {
+  console.log('Message handled in the background!', remoteMessage)
+})
 
 export default function App(): React$Node {
   const { isAuth, currentUser } = useAuthState()
   const tradeViewRef = useRef()
-  useSetUserInfo(currentUser)
-  useIapHub()
+  const { loading } = useSetUserInfo(currentUser)
+  useIapProducts(currentUser?.uid)
   useSubscribeMarketHours()
+  useSaveApnsToken(currentUser?.uid)
 
-  // useEffect(() => {
-  //   if (!loading) {
-  //     RNBootSplash.hide({ duration: 250 })
-  //   }
-  // }, [loading])
+  useEffect(() => {
+    if (!loading) {
+      RNBootSplash.hide({ duration: 300 })
+    }
+  }, [loading])
 
   useEffect(() => {
     const initIAP = async () => {
       try {
-        await IapHub.init(iapHubConfig)
         await RNIap.initConnection()
       } catch (err) {
         console.log('initIAP', err)
       }
     }
     initIAP()
+  }, [])
+
+  useEffect(() => {
+    const requestNotificationPermission = async () => {
+      const authorizationStatus = await messaging().requestPermission()
+      if (authorizationStatus) {
+        console.log('Stocket is authorized to receive notifications')
+      }
+    }
+
+    requestNotificationPermission()
+  }, [])
+
+  useEffect(() => {
+    const deleteCache = async state => {
+      try {
+        if (state === 'background') {
+          await AsyncStorage.clear()
+        }
+      } catch (err) {
+        console.log(err)
+      }
+    }
+    AppState.addEventListener('change', deleteCache)
+
+    return () => AppState.removeEventListener('change', deleteCache)
   }, [])
 
   if (!isAuth) {

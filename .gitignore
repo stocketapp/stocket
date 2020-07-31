@@ -60,3 +60,7 @@ buck-out/
 
 config.js
 .vscode/.react
+
+*-env.sh
+AppCenter-Config.plist
+FirebaseConfig/
