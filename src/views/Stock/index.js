@@ -11,12 +11,8 @@ import StockPosition from './StockPosition'
 import StockNews from './StockNews'
 import StockTradeBar from './StockTradeBar'
 import { addToWatchlist, removeFromWatchlist } from 'api'
-import { useSubscribeMarketHours } from 'hooks'
-import {
-  useGetCurrentStock,
-  useGraphData,
-  usePriceSubscription,
-} from './stockHooks'
+import { useSubscribeMarketHours, usePriceSubscription } from 'hooks'
+import { useGetCurrentStock, useGraphData } from './stockHooks'
 
 export default function Stock({ route }) {
   const { goBack } = useNavigation()
@@ -34,8 +30,8 @@ export default function Stock({ route }) {
   const { uid } = useSelector(({ user }) => user?.currentUser)
   const [allowScroll, setAllowScroll] = useState(true)
   const dispatch = useDispatch()
-  const { price } = usePriceSubscription(selectedStockPosition)
-  const latestPrice = price?.toFixed(2) ?? stock?.quote?.latestPrice
+  const { latestPrice: price } = usePriceSubscription(selectedStockPosition)
+  const latestPrice = price?.toFixed(2) // ?? stock?.quote?.latestPrice
   const marketStatus = useSubscribeMarketHours()
 
   const openTradeView = useCallback(() => {

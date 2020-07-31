@@ -6922,6 +6922,11 @@ react-native-code-push@^6.3.0:
     semver "^7.3.2"
     xcode "3.0.1"
 
+react-native-event-source@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/react-native-event-source/-/react-native-event-source-1.1.0.tgz#75a085df49d17ffd6ff31ffeb269dd64e21b841a"
+  integrity sha512-CAs76IW8kTrdy0okfV2KPopm7E9TL0uNAR+SRrN7iZ/ii0zBeHWuhD4Q2F8gRKvmkrEtCZ6uwnfYL2TFmK0QZg==
+
 react-native-flipper@^0.37.0:
   version "0.37.0"
   resolved "https://registry.yarnpkg.com/react-native-flipper/-/react-native-flipper-0.37.0.tgz#15187696e7361553952a83c77dcf53e508261662"
