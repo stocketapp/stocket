@@ -41,7 +41,7 @@ export default function usePriceSubscription(position: PriceSubscriptionType) {
     const connect = async () => {
       try {
         stream = new RNEventSource(
-          `${IEX_CLOUD_SSE_URL}/stocksUS?symbols=${symbol}&token=${IEX_CLOUD_KEY}`,
+          `${IEX_CLOUD_SSE_URL}/stocksUSNoUTP?symbols=${symbol}&token=${IEX_CLOUD_KEY}`,
         )
 
         stream.addEventListener('message', async res => {
