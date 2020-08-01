@@ -3,9 +3,8 @@ import { useEffect, useState } from 'react'
 import { reduce } from 'lodash'
 import useUser from './useUser'
 import { subtract } from 'lodash'
-import RNEventSource from 'react-native-event-source'
 import { updatePosition } from 'api'
-import { IEX_CLOUD_KEY, IEX_CLOUD_SSE_URL } from '../../config'
+import { IEX_CLOUD_KEY, IEX_URL } from '../../config'
 
 type PriceSubscriptionType = {
   symbol: string,
@@ -13,62 +12,60 @@ type PriceSubscriptionType = {
   previousDayPrice: number,
 }
 
-export default function usePriceSubscription(position: PriceSubscriptionType) {
-  const [data, setData] = useState({})
+const getGains = (
+  { shares, previousDayPrice, symbol }: PriceSubscriptionType,
+  price: number,
+) => {
+  const value = shares?.length * price
+  const gainsArr = shares.map(el => price - el.price)
+  const gains = reduce(gainsArr, (a, b) => a + b)
+  const gainsPercentage = (gains / value) * 100
+  const prevValue = reduce(
+    shares.map(el => previousDayPrice - el.price),
+    (a, b) => a + b,
+  )
+  const todayGains = subtract(Math.abs(gains), Math.abs(prevValue))
+  const todayGainsPct = (todayGains / value) * 100
+  return { gains, gainsPercentage, value, todayGains, todayGainsPct }
+}
+
+export default function usePriceSubscription(
+  position: PriceSubscriptionType,
+): number {
+  const [price, setPrice] = useState(null)
   const { currentUser } = useUser()
-  const symbol = position?.symbol
-  const shares = position?.shares
-  const prevDayPrice = position?.previousDayPrice
 
   useEffect(() => {
-    let throttleUpdate
-    let stream
+    const symbol = position?.symbol
+    let priceInterval
 
-    const getGains = price => {
-      const value = shares?.length * price
-      const gainsArr = shares.map(el => price - el.price)
-      const gains = reduce(gainsArr, (a, b) => a + b)
-      const gainsPercentage = (gains / value) * 100
-      const prevValue = reduce(
-        shares.map(el => prevDayPrice - el.price),
-        (a, b) => a + b,
-      )
-      const todayGains = subtract(Math.abs(gains), Math.abs(prevValue))
-      const todayGainsPct = (todayGains / value) * 100
-      return { gains, gainsPercentage, value, todayGains, todayGainsPct }
-    }
-
-    const connect = async () => {
+    const getPrice = async () => {
       try {
-        stream = new RNEventSource(
-          `${IEX_CLOUD_SSE_URL}/stocksUSNoUTP?symbols=${symbol}&token=${IEX_CLOUD_KEY}`,
+        const res = await fetch(
+          `${IEX_URL}/stock/${symbol}/price?token=${IEX_CLOUD_KEY}`,
         )
-
-        stream.addEventListener('message', async res => {
-          const result = JSON.parse(res?.data)[0]
-          const positionGains = getGains(result?.latestPrice)
-          setData(result)
-          const obj = {
-            ...positionGains,
-          }
-          throttleUpdate = setTimeout(async () => {
-            await updatePosition({ uid: currentUser?.uid, symbol, data: obj })
-          }, 5000)
+        const responsePrice = await res.json()
+        setPrice(responsePrice)
+        const positionGains = getGains(position, price)
+        await updatePosition({
+          uid: currentUser?.uid,
+          symbol: position?.symbol,
+          data: { ...positionGains },
         })
       } catch (err) {
         console.log('[ERROR] usePriceSubscription()', err)
       }
     }
 
-    if (symbol) {
-      connect()
+    if (symbol && !price) {
+      getPrice()
+    } else if (symbol) {
+      priceInterval = setInterval(getPrice, 5000)
     }
     return () => {
-      stream.removeAllListeners()
-      stream.close()
-      clearTimeout(throttleUpdate)
+      clearInterval(priceInterval)
     }
-  }, [currentUser?.uid, prevDayPrice, shares, symbol])
+  }, [currentUser?.uid, price, position])
 
-  return data
+  return price
 }

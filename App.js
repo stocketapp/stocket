@@ -49,12 +49,8 @@ export default function App(): React$Node {
 
   useEffect(() => {
     const requestNotificationPermission = async () => {
-      const authorizationStatus = await messaging().requestPermission()
-      if (authorizationStatus) {
-        console.log('Stocket is authorized to receive notifications')
-      }
+      await messaging().requestPermission()
     }
-
     requestNotificationPermission()
   }, [])
 
