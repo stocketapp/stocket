@@ -3,7 +3,6 @@
 import { useEffect } from 'react'
 import auth from '@react-native-firebase/auth'
 import { useDispatch } from 'react-redux'
-import IapHub from 'react-native-iaphub'
 import useUser from './useUser'
 
 export default function useAuthState() {
@@ -26,7 +25,6 @@ export default function useAuthState() {
           type: 'USER_LOGOUT',
           isAuth: false,
         })
-        IapHub.logout()
       }
     })
 
