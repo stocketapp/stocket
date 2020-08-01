@@ -30,7 +30,7 @@ export default function Stock({ route }) {
   const { uid } = useSelector(({ user }) => user?.currentUser)
   const [allowScroll, setAllowScroll] = useState(true)
   const dispatch = useDispatch()
-  const price = usePriceSubscription(selectedStockPosition)
+  const price = usePriceSubscription(selectedStock)
   const latestPrice = price?.toFixed(2) // ?? stock?.quote?.latestPrice
   const marketStatus = useSubscribeMarketHours()
 
