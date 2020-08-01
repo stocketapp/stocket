@@ -56,7 +56,9 @@ export default function usePriceSubscription(
     }
   }, [currentUser?.uid, position, price, symbol])
 
-  useEffect(() => getPrice(), [])
+  useEffect(() => {
+    getPrice()
+  }, [])
 
   useEffect(() => {
     let priceInterval
