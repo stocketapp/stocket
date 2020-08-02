@@ -52,7 +52,7 @@ function Products({ onClose, forwardedRef, isOpen }: Props) {
             'receipt-data': receipt,
             password: APPSTORE_APP_SECRET,
           }
-          await validateReceiptIos(obj, true)
+          await validateReceiptIos(obj, __DEV__)
           setSuccess(true)
           await updateCash(sku)
           setPurchaseLoading(false)
@@ -87,7 +87,7 @@ function Products({ onClose, forwardedRef, isOpen }: Props) {
   }
 
   const onFinished = () => {
-    setPurchaseLoading(true)
+    setPurchaseLoading(false)
     setSuccess(false)
     setPurchasedProduct(null)
   }
