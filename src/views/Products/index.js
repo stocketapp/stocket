@@ -1,5 +1,11 @@
 // @flow
-import React, { forwardRef, useEffect, useState, useMemo } from 'react'
+import React, {
+  forwardRef,
+  useEffect,
+  useState,
+  useMemo,
+  useCallback,
+} from 'react'
 import { Dimensions, View, StyleSheet, FlatList } from 'react-native'
 import { Text, SuccessScreen } from 'components'
 import Sheet from 'react-native-raw-bottom-sheet'
@@ -10,11 +16,13 @@ import {
   requestPurchase,
   purchaseUpdatedListener,
   validateReceiptIos,
+  endConnection,
 } from 'react-native-iap'
 import { sortBy } from 'lodash'
 import ProductsIllustration from './ProductsIllustration'
 import ProductItem from './ProductItem'
 import { useSelector } from 'react-redux'
+import { useFocusEffect } from '@react-navigation/native'
 import { APPSTORE_APP_SECRET } from '../../../config'
 
 type Props = {
@@ -35,55 +43,54 @@ function Products({ onClose, forwardedRef, isOpen }: Props) {
   ])
 
   useEffect(() => {
+    endConnection()
     if (isOpen) {
       forwardedRef?.current?.open()
     }
   }, [isOpen, forwardedRef])
 
-  useEffect(() => {
-    let purchaseReq = purchaseUpdatedListener(async purchase => {
-      try {
-        const receipt = purchase?.transactionReceipt
-        const sku = purchase?.productId
-        setPurchasedProduct(sku)
-        setPurchaseLoading(true)
-        if (receipt) {
-          const obj = {
-            'receipt-data': receipt,
-            password: APPSTORE_APP_SECRET,
+  useFocusEffect(
+    useCallback(() => {
+      let purchaseReq = purchaseUpdatedListener(async purchase => {
+        try {
+          const receipt = purchase?.transactionReceipt
+          const sku = purchase?.productId
+          setPurchasedProduct(sku)
+          setPurchaseLoading(true)
+          if (receipt) {
+            const obj = {
+              'receipt-data': receipt,
+              password: APPSTORE_APP_SECRET,
+            }
+            await validateReceiptIos(obj, __DEV__)
+            setSuccess(true)
+            const value = getProductValue(sku).value
+            await firestore()
+              .collection('Users')
+              .doc(uid)
+              .update({
+                cash: firestore.FieldValue.increment(value),
+              })
+            setPurchaseLoading(false)
           }
-          await validateReceiptIos(obj, __DEV__)
-          setSuccess(true)
-          await updateCash(sku)
-          setPurchaseLoading(false)
+        } catch (err) {
+          console.log(err)
         }
-      } catch (err) {
-        console.log(err)
+      })
+
+      return () => {
+        purchaseReq.remove()
+        purchaseReq = null
       }
-    })
+    }, [uid]),
+  )
 
-    return () => {
-      purchaseReq.remove()
-      purchaseReq = null
-    }
-  })
-
-  const buyCash = async sku => {
+  const requestBuy = async sku => {
     try {
       await requestPurchase(sku, false)
     } catch (err) {
       console.log('requestPurchase', err)
     }
-  }
-
-  const updateCash = async sku => {
-    const value = getProductValue(sku).value
-    await firestore()
-      .collection('Users')
-      .doc(uid)
-      .update({
-        cash: firestore.FieldValue.increment(value),
-      })
   }
 
   const onFinished = () => {
@@ -134,7 +141,7 @@ function Products({ onClose, forwardedRef, isOpen }: Props) {
               <FlatList
                 data={sortBy(products, 'price')}
                 renderItem={({ item }) => (
-                  <ProductItem product={item} onPurchase={buyCash} />
+                  <ProductItem product={item} onPurchase={requestBuy} />
                 )}
                 keyExtractor={(el, key) => key.toString()}
                 numColumns={2}
