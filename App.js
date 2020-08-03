@@ -12,7 +12,6 @@ import {
 import RNBootSplash from 'react-native-bootsplash'
 import { BACKGROUND } from 'utils/colors'
 import TradeView from 'views/TradeView'
-import * as RNIap from 'react-native-iap'
 import messaging from '@react-native-firebase/messaging'
 import MainStack from './src/navigation/AppStack'
 import AuthStack from './src/navigation/AuthenticationStack'
@@ -27,25 +26,14 @@ export default function App(): React$Node {
   const tradeViewRef = useRef()
   const { loading } = useSetUserInfo(currentUser)
   useIapProducts(currentUser?.uid)
-  useSubscribeMarketHours()
   useSaveApnsToken(currentUser?.uid)
+  useSubscribeMarketHours()
 
   useEffect(() => {
     if (!loading) {
       RNBootSplash.hide({ duration: 300 })
     }
   }, [loading])
-
-  useEffect(() => {
-    const initIAP = async () => {
-      try {
-        await RNIap.initConnection()
-      } catch (err) {
-        console.log('initIAP', err)
-      }
-    }
-    initIAP()
-  }, [])
 
   useEffect(() => {
     const requestNotificationPermission = async () => {
