@@ -21,10 +21,15 @@ export default function useIapProducts(uid: string) {
 
   useEffect(() => {
     const iapProducts = async () => {
+      const products = []
       try {
-        const products = await RNIap.getProducts(
+        const result = await RNIap.getProducts(
           iapProductsList.map(el => el.productId),
         )
+        result.map(el => {
+          el.price = Number(el.price)
+          products.push(el)
+        })
         dispatch({
           type: 'SET_IAP_PRODUCTS',
           products,

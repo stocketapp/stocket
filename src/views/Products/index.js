@@ -33,7 +33,7 @@ function Products({ onClose, forwardedRef, isOpen }: Props) {
   const [success, setSuccess] = useState(false)
   const [purchasedProduct, setPurchasedProduct] = useState(null)
 
-  const purchasedValues = useMemo(() => getProductValue(purchasedProduct), [
+  const productValues = useMemo(() => getProductValue(purchasedProduct), [
     purchasedProduct,
   ])
 
@@ -105,9 +105,9 @@ function Products({ onClose, forwardedRef, isOpen }: Props) {
       {success ? (
         <SuccessScreen
           successText={`Successfully added ${formatCurrency(
-            purchasedValues?.value,
+            productValues?.value,
           )} to your account.`}
-          bigText={formatCurrency(purchasedValues?.price)}
+          bigText={formatCurrency(productValues?.price)}
           onFinished={onFinished}
           loading={purchaseLoading}
         />
@@ -135,7 +135,7 @@ function Products({ onClose, forwardedRef, isOpen }: Props) {
                 keyExtractor={(el, key) => key.toString()}
                 numColumns={2}
                 contentContainerStyle={{ alignItems: 'center' }}
-                columnWrapperStyle={{ justifyContent: 'center' }}
+                columnWrapperStyle={styles.columnWrapperStyle}
               />
             </View>
           )}
@@ -172,5 +172,9 @@ const styles = StyleSheet.create({
   products: {
     width: '100%',
     justifyContent: 'space-between',
+  },
+  columnWrapperStyle: {
+    justifyContent: 'flex-start',
+    width: '100%',
   },
 })
