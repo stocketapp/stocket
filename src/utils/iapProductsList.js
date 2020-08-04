@@ -5,9 +5,9 @@ export default [
     price: 14.99,
   },
   {
-    productId: 'com.corasan.stocket.25k_cash',
-    value: 25000,
-    price: 7.99,
+    productId: 'com.corasan.stocket.40k_cash',
+    value: 40000,
+    price: 9.99,
   },
   {
     productId: 'com.corasan.stocket.10k_cash',
