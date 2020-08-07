@@ -87,7 +87,6 @@ const styles = StyleSheet.create({
   },
   listContent: {
     paddingVertical: 10,
-    width: '100%',
   },
   listLoader: {
     width: '100%',
