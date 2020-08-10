@@ -36,7 +36,6 @@ export default function SignIn() {
       const currentUser = auth().currentUser
       const { uid, email } = currentUser
       const displayName = `${fullName?.givenName} ${fullName?.familyName}`
-      await currentUser.updateProfile({ displayName })
 
       try {
         const user = await FR.doc(`Users/${uid}`).get()

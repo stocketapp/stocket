@@ -1,20 +1,23 @@
 // @flow
-import React, { forwardRef, useEffect, useState, useMemo } from 'react'
+import React, {
+  forwardRef,
+  useEffect,
+  useState,
+  useMemo,
+  useCallback,
+} from 'react'
 import { Dimensions, View, StyleSheet, FlatList } from 'react-native'
 import { Text, SuccessScreen } from 'components'
 import Sheet from 'react-native-raw-bottom-sheet'
 import { SUB_BACKGROUND, GREEN } from 'utils/colors'
 import { getProductValue, formatCurrency } from 'utils/functions'
 import firestore from '@react-native-firebase/firestore'
-import {
-  requestPurchase,
-  purchaseUpdatedListener,
-  validateReceiptIos,
-} from 'react-native-iap'
+import * as RNIap from 'react-native-iap'
 import { sortBy } from 'lodash'
 import ProductsIllustration from './ProductsIllustration'
 import ProductItem from './ProductItem'
 import { useSelector } from 'react-redux'
+import { useFocusEffect } from '@react-navigation/native'
 import { APPSTORE_APP_SECRET } from '../../../config'
 
 type Props = {
@@ -30,7 +33,7 @@ function Products({ onClose, forwardedRef, isOpen }: Props) {
   const [success, setSuccess] = useState(false)
   const [purchasedProduct, setPurchasedProduct] = useState(null)
 
-  const purchasedValues = useMemo(() => getProductValue(purchasedProduct), [
+  const productValues = useMemo(() => getProductValue(purchasedProduct), [
     purchasedProduct,
   ])
 
@@ -40,54 +43,47 @@ function Products({ onClose, forwardedRef, isOpen }: Props) {
     }
   }, [isOpen, forwardedRef])
 
-  useEffect(() => {
-    let purchaseReq = purchaseUpdatedListener(async purchase => {
-      try {
+  useFocusEffect(
+    useCallback(() => {
+      const userRef = firestore().collection('Users').doc(uid)
+      const purchaseListener = RNIap.purchaseUpdatedListener(async purchase => {
         const receipt = purchase?.transactionReceipt
         const sku = purchase?.productId
-        setPurchasedProduct(sku)
-        setPurchaseLoading(true)
+
         if (receipt) {
-          const obj = {
-            'receipt-data': receipt,
-            password: APPSTORE_APP_SECRET,
+          try {
+            const obj = {
+              'receipt-data': receipt,
+              password: APPSTORE_APP_SECRET,
+            }
+            await RNIap.validateReceiptIos(obj, __DEV__)
+            const product = getProductValue(sku)
+            setPurchasedProduct(sku)
+            setSuccess(true)
+            await userRef.update({
+              cash: firestore.FieldValue.increment(product?.value),
+            })
+            await RNIap.finishTransaction(purchase, true)
+          } catch (err) {
+            console.error('[ERROR] RNIap.purchaseUpdatedListener()', err)
           }
-          await validateReceiptIos(obj, true)
-          setSuccess(true)
-          await updateCash(sku)
-          setPurchaseLoading(false)
         }
-      } catch (err) {
-        console.log(err)
-      }
-    })
-
-    return () => {
-      purchaseReq.remove()
-      purchaseReq = null
-    }
-  })
-
-  const buyCash = async sku => {
-    try {
-      await requestPurchase(sku, false)
-    } catch (err) {
-      console.log('requestPurchase', err)
-    }
-  }
-
-  const updateCash = async sku => {
-    const value = getProductValue(sku).value
-    await firestore()
-      .collection('Users')
-      .doc(uid)
-      .update({
-        cash: firestore.FieldValue.increment(value),
       })
+
+      return () => purchaseListener.remove()
+    }, [uid]),
+  )
+
+  const requestBuy = async sku => {
+    try {
+      await RNIap.requestPurchase(sku, false)
+    } catch (err) {
+      console.error('requestPurchase', err)
+    }
   }
 
   const onFinished = () => {
-    setPurchaseLoading(true)
+    setPurchaseLoading(false)
     setSuccess(false)
     setPurchasedProduct(null)
   }
@@ -109,9 +105,9 @@ function Products({ onClose, forwardedRef, isOpen }: Props) {
       {success ? (
         <SuccessScreen
           successText={`Successfully added ${formatCurrency(
-            purchasedValues?.value,
+            productValues?.value,
           )} to your account.`}
-          bigText={formatCurrency(purchasedValues?.price)}
+          bigText={formatCurrency(productValues?.price)}
           onFinished={onFinished}
           loading={purchaseLoading}
         />
@@ -134,12 +130,12 @@ function Products({ onClose, forwardedRef, isOpen }: Props) {
               <FlatList
                 data={sortBy(products, 'price')}
                 renderItem={({ item }) => (
-                  <ProductItem product={item} onPurchase={buyCash} />
+                  <ProductItem product={item} onPurchase={requestBuy} />
                 )}
                 keyExtractor={(el, key) => key.toString()}
                 numColumns={2}
                 contentContainerStyle={{ alignItems: 'center' }}
-                columnWrapperStyle={{ justifyContent: 'center' }}
+                columnWrapperStyle={styles.columnWrapperStyle}
               />
             </View>
           )}
@@ -176,5 +172,9 @@ const styles = StyleSheet.create({
   products: {
     width: '100%',
     justifyContent: 'space-between',
+  },
+  columnWrapperStyle: {
+    justifyContent: 'flex-start',
+    width: '100%',
   },
 })

@@ -122,7 +122,7 @@ export async function getHistoricalData(symbol: string, range: string) {
 type CreateUserType = { uid: string, name: string, email: string }
 export async function createUserData({ uid, name, email }: CreateUserType) {
   const userRef: DocReference = FR.doc(`Users/${uid}`)
-  const cash = 15000
+  const cash = 25000
   try {
     await userRef.set({
       combinedValue: formatCurrency(cash),

@@ -2,18 +2,34 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
-import { getProducts } from 'react-native-iap'
+import * as RNIap from 'react-native-iap'
 import iapProductsList from 'utils/iapProductsList'
 
 export default function useIapProducts(uid: string) {
   const dispatch = useDispatch()
 
   useEffect(() => {
-    const iapProducts = async () => {
+    const initIAP = async () => {
       try {
-        const products = await getProducts(
+        await RNIap.initConnection()
+      } catch (err) {
+        console.log('initIAP', err)
+      }
+    }
+    initIAP()
+  }, [])
+
+  useEffect(() => {
+    const iapProducts = async () => {
+      const products = []
+      try {
+        const result = await RNIap.getProducts(
           iapProductsList.map(el => el.productId),
         )
+        result.map(el => {
+          el.price = Number(el.price)
+          products.push(el)
+        })
         dispatch({
           type: 'SET_IAP_PRODUCTS',
           products,

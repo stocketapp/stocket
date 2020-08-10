@@ -7,14 +7,17 @@ module.exports = {
         cwd: 'babelrc',
         alias: {
           stocket: './',
-          views: '/Users/henry/Projects/stocket/src/views',
-          components: '/Users/henry/Projects/stocket/src/components',
-          utils: '/Users/henry/Projects/stocket/src/utils',
-          navigation: '/Users/henry/Projects/stocket/src/navigation',
-          hooks: '/Users/henry/Projects/stocket/src/hooks',
-          api: '/Users/henry/Projects/stocket/src/api',
-          icons: '/Users/henry/Projects/stocket/src/components/Icons',
-          types: '/Users/henry/Projects/stocket/src/Types',
+          views: '/Users/henry/Projects/React Native/stocket/src/views',
+          components:
+            '/Users/henry/Projects/React Native/stocket/src/components',
+          utils: '/Users/henry/Projects/React Native/stocket/src/utils',
+          navigation:
+            '/Users/henry/Projects/React Native/stocket/src/navigation',
+          hooks: '/Users/henry/Projects/React Native/stocket/src/hooks',
+          api: '/Users/henry/Projects/React Native/stocket/src/api',
+          icons:
+            '/Users/henry/Projects/React Native/stocket/src/components/Icons',
+          types: '/Users/henry/Projects/React Native/stocket/src/Types',
         },
       },
     ],
