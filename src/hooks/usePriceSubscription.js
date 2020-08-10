@@ -13,18 +13,19 @@ type PriceSubscriptionType = {
 }
 
 const getGains = (
-  { shares, previousDayPrice, symbol }: PriceSubscriptionType,
+  { shares, previousDayPrice, symbol, previousGains }: PriceSubscriptionType,
   price: number,
 ) => {
+  let todayGains
   const value = shares?.length * price
   const gainsArr = shares?.map(el => price - el.price)
   const gains = reduce(gainsArr, (a, b) => a + b)
   const gainsPercentage = (gains / value) * 100
-  const prevValue = reduce(
-    shares.map(el => previousDayPrice - el.price),
-    (a, b) => a + b,
-  )
-  const todayGains = subtract(Math.abs(gains), Math.abs(prevValue))
+  if (previousGains) {
+    todayGains = subtract(Math.abs(gains), Math.abs(previousGains))
+  } else {
+    todayGains = gains
+  }
   const todayGainsPct = (todayGains / value) * 100
   return { gains, gainsPercentage, value, todayGains, todayGainsPct }
 }
@@ -49,12 +50,13 @@ export default function usePriceSubscription(
           uid: currentUser?.uid,
           symbol: position?.symbol,
           data: { ...positionGains },
+          ...(symbol && { symbol }),
         })
       }
     } catch (err) {
       console.error('[ERROR] usePriceSubscription()', err)
     }
-  }, [currentUser?.uid, position, price, symbol])
+  }, [currentUser.uid, position, price, symbol])
 
   useEffect(() => {
     getPrice()
