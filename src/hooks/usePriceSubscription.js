@@ -17,7 +17,7 @@ const getGains = (
   price: number,
 ) => {
   const value = shares?.length * price
-  const gainsArr = shares.map(el => price - el.price)
+  const gainsArr = shares?.map(el => price - el.price)
   const gains = reduce(gainsArr, (a, b) => a + b)
   const gainsPercentage = (gains / value) * 100
   const prevValue = reduce(

@@ -12,9 +12,9 @@ import logo from '../../../assets/bootsplash_logo2x.png'
 import { createUserData } from 'api'
 
 const FR = firestore()
-// if (__DEV__) {
-//   FR.settings({ host: 'localhost:4002' })
-// }
+if (__DEV__) {
+  FR.settings({ host: 'localhost:4002' })
+}
 
 export default function SignIn() {
   async function onAppleButtonPress() {
