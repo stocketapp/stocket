@@ -27,14 +27,14 @@ export default function Profile() {
     <Container fullView ph style={{ flex: 1, justifyContent: 'space-between' }}>
       <View style={{ flex: 1 }}>
         <Container style={styles.topBlock} ph safeAreaTop bottom={26}>
-          {/* <View>
-            <Text type="heading" style={styles.name} weight="Bold">
+          <View>
+            {/* <Text type="heading" style={styles.name} weight="Bold">
               {userInfo?.name}
-            </Text>
-            <Text type="subtext" color={LABEL}>
+            </Text> */}
+            <Text type="subtext" color={LABEL} style={{ paddingTop: 15 }}>
               {userInfo?.email}
             </Text>
-          </View> */}
+          </View>
 
           <View style={styles.cashContainer}>
             <View>
