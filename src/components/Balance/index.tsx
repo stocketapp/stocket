@@ -1,22 +1,23 @@
-// @flow
 import React from 'react'
 import { View } from 'react-native'
-import { GRAY_DARKER, LABEL, GREEN, RED } from 'utils/colors'
-import Text from './Text'
+import { LABEL, GREEN, RED } from 'utils/colors'
+import Text from '../Text'
 import { formatCurrency } from 'utils/functions'
+import styles from './styles'
 
-type Props = {
+interface Props {
   dayChange: {
-    change: number,
-    changePct: number,
-    value: string | number,
-    date: string,
-  },
+    change: number
+    changePct: number
+    value: string | number
+    date: string
+  }
 }
 
-const Balance = ({ dayChange }: Props): React$Node => {
+const Balance = ({ dayChange }: Props) => {
   const { change, changePct, value, date } = dayChange
   const color = changePct > 0 ? GREEN : changePct < 0 ? RED : 'white'
+
   return (
     <>
       <Text weight="Black" style={styles.value}>
@@ -34,11 +35,6 @@ const Balance = ({ dayChange }: Props): React$Node => {
       </View>
     </>
   )
-}
-
-const styles = {
-  changeContainer: { flexDirection: 'row', paddingTop: 5 },
-  value: { fontSize: 34, paddingTop: 5 },
 }
 
 export default Balance
