@@ -11,14 +11,14 @@ module.exports = {
           stocket: './',
           views: '/Users/henry/Projects/React Native/stocket/src/views',
           '@components': './src/components',
-          '@utils': './src/utils/',
+          '@utils': './src/utils',
           navigation:
             '/Users/henry/Projects/React Native/stocket/src/navigation',
           hooks: '/Users/henry/Projects/React Native/stocket/src/hooks',
           api: '/Users/henry/Projects/React Native/stocket/src/api',
           icons:
             '/Users/henry/Projects/React Native/stocket/src/components/Icons',
-          types: '/Users/henry/Projects/React Native/stocket/src/Types',
+          '@types': './src/types',
         },
       },
     ],

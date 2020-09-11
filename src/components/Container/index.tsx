@@ -1,12 +1,11 @@
-// @flow
-import React from 'react'
+import React, { ReactNode } from 'react'
 import { View } from 'react-native'
 import { BACKGROUND } from 'utils/colors'
-import { useSafeArea } from 'react-native-safe-area-context'
-import type { ContainerProps } from '../Types'
+import { useSafeAreaInsets } from 'react-native-safe-area-context'
+import type { ContainerProps } from '@types'
 
-export default (props: ContainerProps): React$Node => {
-  const { top: insetTop, bottom: insetBottom } = useSafeArea()
+export default (props: ContainerProps): ReactNode => {
+  const { top: insetTop, bottom: insetBottom } = useSafeAreaInsets()
   const {
     children,
     style,
