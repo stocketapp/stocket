@@ -17,7 +17,7 @@ export default ({
   fullView = false,
   safeAreaTop = false,
   safeAreaBottom = false,
-}: ContainerProps): ReactNode => {
+}: ContainerProps): JSX.Element => {
   const { top: insetTop, bottom: insetBottom } = useSafeAreaInsets()
 
   const defaultStyles: ViewStyle = {

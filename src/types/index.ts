@@ -61,7 +61,7 @@ export interface TradeInfoProps {
 
 export interface SearchSymbolsProps {
   value: string
-  setvalue: () => void
+  setValue: () => void
   onSearch: () => void
 }
 
