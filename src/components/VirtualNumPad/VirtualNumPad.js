@@ -1,6 +1,6 @@
 import React from 'react'
 import { View, Dimensions, TouchableOpacity } from 'react-native'
-import Text from './Text'
+import Text from '../Text'
 
 const { width } = Dimensions.get('window')
 

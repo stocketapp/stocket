@@ -1,7 +1,7 @@
 // @flow
 import React from 'react'
 import { StyleSheet, View } from 'react-native'
-import Text from './Text'
+import Text from '../Text'
 import { useSubscribeMarketHours } from 'hooks'
 import { SUB_BACKGROUND, GREEN, LABEL } from 'utils/colors'
 
