@@ -14,7 +14,7 @@ interface Props {
   }
 }
 
-const Balance = ({ dayChange }: Props) => {
+const Balance = ({ dayChange }: Props): JSX.Element => {
   const { change, changePct, value, date } = dayChange
   const color = changePct > 0 ? GREEN : changePct < 0 ? RED : 'white'
 

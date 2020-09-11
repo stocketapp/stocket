@@ -28,10 +28,10 @@ export interface ContainerProps {
 }
 
 export interface TextProps {
-  interface?: 'heading' | 'title' | 'label' | 'subtext' | 'big'
+  type?: 'heading' | 'title' | 'label' | 'subtext' | 'big'
   cap?: boolean
   color?: string
-  children?: string
+  children?: any
   style?: TextStyle
   status?: 'negative' | 'positive'
   weight?:

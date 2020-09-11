@@ -1,6 +1,6 @@
 // @flow
 import React from 'react'
-import { Text as RNText } from 'react-native'
+import { Text as RNText, TextStyle } from 'react-native'
 import { GREEN, RED } from 'utils/colors'
 import type { TextProps } from 'types'
 
@@ -41,13 +41,12 @@ const Text = ({
     }
   }
 
-  const customStyle = {
+  const customStyle: TextStyle = {
     fontSize: selectFontSize(),
     ...(cap && {
       textTransform: 'capitalize',
       letterSpacing: 1,
     }),
-    // fontWeight: weight,
     color: !status ? color : setStatus(),
     fontFamily: `SFProText-${weight}`,
     ...style,
