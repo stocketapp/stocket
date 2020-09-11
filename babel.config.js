@@ -5,12 +5,13 @@ module.exports = {
       'module-resolver',
       {
         cwd: 'babelrc',
+        root: ['./src'],
+        extensions: ['.ios.js', '.android.js', '.js', '.ts', '.tsx', '.json'],
         alias: {
           stocket: './',
           views: '/Users/henry/Projects/React Native/stocket/src/views',
-          components:
-            '/Users/henry/Projects/React Native/stocket/src/components',
-          utils: '/Users/henry/Projects/React Native/stocket/src/utils',
+          '@components': './src/components',
+          '@utils': './src/utils/',
           navigation:
             '/Users/henry/Projects/React Native/stocket/src/navigation',
           hooks: '/Users/henry/Projects/React Native/stocket/src/hooks',
