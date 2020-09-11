@@ -9,36 +9,40 @@ import {
   IAPHUB_ENV,
   IAPHUB_API_KEY,
 } from '../../config'
-import { formatCurrency } from 'utils/functions'
+import { formatCurrency } from '@utils/functions'
 import functions from '@react-native-firebase/functions'
 
 const FR = firestore()
 
 if (__DEV__) {
   functions().useFunctionsEmulator('http://localhost:4001')
-  FR.settings({ host: 'localhost:4002', persistence: true, ssl: false })
+  FR.settings({
+    host: 'localhost:4002',
+    persistence: true,
+    ssl: false,
+    cacheSizeBytes: 10000,
+  })
 }
 
-async function iexGet(endpoint: string, query?: string = '') {
+async function iexGet(endpoint: string, query: string = '') {
   const iexUrl = IEX_URL
   const q = query !== '' ? `&${query}` : ''
   const url = `${iexUrl}/${endpoint}?token=${IEX_CLOUD_KEY}${q}`
   const metric = await perf().newHttpMetric(url, 'GET')
   const res = await fetch(url, {
     method: 'GET',
-    Accept: 'applicatiion/json',
   })
   metric.setHttpResponseCode(res.status)
   metric.setResponseContentType(res.headers.get('Content-Type'))
-  metric.setResponsePayloadSize(res.headers.get('Content-Length'))
+  metric.setResponsePayloadSize(Number(res.headers.get('Content-Length')))
 
   await metric.stop()
   return res
 }
 
 type CreateTradeArg = {
-  uid: string,
-  data: TradeDataType,
+  uid: string
+  data: TradeDataType
 }
 
 export async function createTrade(
@@ -102,8 +106,8 @@ export async function getNewsArticle(stock: string, last: number = 5) {
 
 export async function getBatchStockData(
   symbols: string,
-  range?: string = '1d',
-  last?: number = 5,
+  range: string = '1d',
+  last: number = 5,
 ) {
   const typeQuery = '&types=quote,news,chart,intraday-prices'
   const rangeQuery = `${range && `&range=${range}`}`
@@ -119,7 +123,7 @@ export async function getHistoricalData(symbol: string, range: string) {
   return result
 }
 
-type CreateUserType = { uid: string, name: string, email: string }
+type CreateUserType = { uid: string; name: string; email: string }
 export async function createUserData({ uid, name, email }: CreateUserType) {
   const userRef: DocReference = FR.doc(`Users/${uid}`)
   const cash = 25000
@@ -143,9 +147,9 @@ export function callUpdateGains(uid: string) {
 }
 
 type UpdatePositionTypes = {
-  uid: string,
-  symbol: string,
-  data: {},
+  uid: string
+  symbol: string
+  data: {}
 }
 export async function updatePosition(params: UpdatePositionTypes) {
   const { uid, symbol, data } = params
@@ -158,9 +162,9 @@ export async function updatePosition(params: UpdatePositionTypes) {
 }
 
 type ReceiptValidationType = {
-  receipt: string,
-  uid: string,
-  sku: string,
+  receipt: string
+  uid: string
+  sku: string
 }
 export async function iapHubValidateReceipt(data: ReceiptValidationType) {
   const { uid, receipt: token, sku } = data
