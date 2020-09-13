@@ -1,10 +1,15 @@
 import React from 'react'
-import { View, Dimensions, TouchableOpacity } from 'react-native'
+import { View, TouchableOpacity, GestureResponderEvent } from 'react-native'
 import Text from '../Text'
+import styles from './styles'
 
-const { width } = Dimensions.get('window')
+interface PadButtonProps {
+  value: string
+  onPress: (e: GestureResponderEvent) => void
+  onDelete: () => void
+}
 
-const PadButton = ({ value, onPress, onDelete }) => {
+const PadButton = ({ value, onPress, onDelete }: PadButtonProps) => {
   const isDelete = value === 'delete'
   return (
     <TouchableOpacity onPress={isDelete ? onDelete : onPress}>
@@ -23,7 +28,11 @@ const PadButton = ({ value, onPress, onDelete }) => {
   )
 }
 
-const VirtualNumPad = ({ onKeyPress, onDelete }) => {
+interface VirtualNumPad {
+  onKeyPress: (number: string) => void
+  onDelete: () => void
+}
+const VirtualNumPad = ({ onKeyPress, onDelete }: VirtualNumPad) => {
   return (
     <View>
       {pad.map((row, i) => (
@@ -48,21 +57,5 @@ const pad = [
   ['7', '8', '9'],
   ['  ', '0', 'delete'],
 ]
-
-const styles = {
-  row: {
-    flexDirection: 'row',
-  },
-  padBtn: {
-    width: width / 3,
-    justifyContent: 'center',
-    alignItems: 'center',
-    paddingVertical: '4%',
-  },
-  numText: {
-    fontSize: 24,
-    fontWeight: '300',
-  },
-}
 
 export default VirtualNumPad
