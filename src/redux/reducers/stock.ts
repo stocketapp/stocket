@@ -1,7 +1,20 @@
 import initialState from '../initialState'
 import { filter } from 'lodash'
+import type { PositionType } from 'types'
 
-export default function (state = initialState.stock, action) {
+interface StockAction {
+  selectedStock: string
+  search: string
+  stockData: object
+  positions: Array<any>
+  positionsMktData: object
+  selectedStockPosition: PositionType
+  type: string
+  watchlist: object
+  symbol: string
+}
+
+export default function (state = initialState.stock, action: StockAction) {
   switch (action.type) {
     case 'SET_SELECTED_STOCK':
       return { ...state, selectedStock: action.selectedStock }
@@ -25,25 +38,10 @@ export default function (state = initialState.stock, action) {
         ...state,
         watchlist: filter(
           state.watchlist,
-          el => el.quote.symbol !== action.symbol,
+          (el: { quote: { symbol: string } }) =>
+            el.quote.symbol !== action.symbol,
         ),
       }
-    // case 'REMOVE_POSITION':
-    //   return {
-    //     ...state,
-    //     postions: filter(state.positions, el => el.symbol !== action.symbol),
-    //   }
-    // case 'UPDATE_POSITION':
-    //   console.log(action.position)
-    //   return {
-    //     ...state,
-    //     positions: Object.assign(
-    //       state.positions,
-    //       state.positions.map(el =>
-    //         el.symbol === action.position.symbol ? action.position : el,
-    //       ),
-    //     ),
-    //   }
     default:
       return state
   }

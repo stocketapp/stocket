@@ -1,6 +1,20 @@
 import initialState from '../initialState'
+import type { TradeDataType } from 'types'
 
-export default function (state = initialState.trade, action) {
+interface TradeAction {
+  selectedTradeAction: string
+  stockQuantity: number
+  stockPrice: number
+  maxShares: number
+  sharesOwned: number
+  tradeData: TradeDataType
+  tradeViewIsOpen: boolean
+  tradeStock: object
+  isMarketOpen: boolean
+  type: string
+}
+
+export default function (state = initialState.trade, action: TradeAction) {
   switch (action.type) {
     case 'SELECTED_TRADE_ACTION':
       return { ...state, selectedTradeAction: action.selectedTradeAction }

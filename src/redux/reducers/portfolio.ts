@@ -1,6 +1,13 @@
 import initialState from '../initialState'
 
-export default function (state = initialState.portfolio, action) {
+interface PortfolioActions {
+  payload: Array<any>
+  type: string
+}
+export default function (
+  state = initialState.portfolio,
+  action: PortfolioActions,
+) {
   switch (action.type) {
     case 'SET_PORTFOLIO':
       return { ...state, positions: action.payload }

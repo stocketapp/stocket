@@ -1,6 +1,11 @@
 import initialState from '../initialState'
 
-export default function (state = initialState.portfolio, action) {
+interface Action {
+  payload: boolean
+  graphValue: any
+  type: string
+}
+export default function (state = initialState.portfolio, action: Action) {
   switch (action.type) {
     case 'SET_GRAPH_VALUE':
       return { ...state, graphValue: action.graphValue }
