@@ -14,6 +14,7 @@ import exampleData from './exampleData'
 import CursorLine from './CursorLine'
 import { minBy, maxBy } from 'lodash'
 import ChartRangeTabs from './ChartRangeTabs'
+import type { ChartLineProps } from 'types/ChartTypes'
 
 const { width } = Dimensions.get('window')
 
@@ -23,7 +24,6 @@ export default function ChartLine({
   y = 'value',
   chartProps,
   lineProps,
-  onEvent = () => null,
   labelText = x,
   labelRightOffset = 80,
   labelLeftOffset = 40,
@@ -31,7 +31,7 @@ export default function ChartLine({
   tabs = [],
   onTabPress,
   activeRangeTab,
-}: Props) {
+}: ChartLineProps) {
   const domainRange = useMemo(() => {
     const maxX = maxBy(data, 'value')?.value
     const minX = minBy(data, 'value')?.value
@@ -44,7 +44,7 @@ export default function ChartLine({
         {...chartProps}
         padding={styles.victoryChart}
         domainPadding={{ y: [25, 5] }}
-        domain={{ y: [domainRange.minX, domainRange?.maxX * 1.01] }}
+        domain={{ y: [domainRange.minX ?? 0, domainRange.maxX ?? 0 * 1.01] }}
         containerComponent={
           <VictoryVoronoiContainer
             voronoiDimension="x"
@@ -85,24 +85,6 @@ export default function ChartLine({
       )}
     </View>
   )
-}
-
-type Props = {
-  data: [],
-  x?: string,
-  y?: string,
-  chartProps?: {
-    minDomain?: { y?: number, x?: number },
-  },
-  lineProps?: {},
-  onEvent?: (value: string | null) => void,
-  labelText?: string | number,
-  labelRightOffset?: number,
-  labelLeftOffset?: number,
-  onChartEvent: (value: string | number | null) => void,
-  tabs: [string],
-  onTabPress: (tab: string) => void,
-  activeRangeTab: string,
 }
 
 const styles = {

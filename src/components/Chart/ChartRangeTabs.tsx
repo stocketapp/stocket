@@ -3,17 +3,13 @@ import React, { useState } from 'react'
 import { View, StyleSheet, Pressable } from 'react-native'
 import Text from '../Text'
 import { GREEN, LABEL } from 'utils/colors'
+import type { ChartTabProps, ChartRangeTabsProps } from 'types'
 
-type ChartTabTypes = {
-  label: string,
-  onPress: () => void,
-  activeTab: string,
-}
 const ChartTab = ({
   label,
   onPress = () => null,
   activeTab,
-}: ChartTabTypes) => {
+}: ChartTabProps) => {
   const [opacity, setOpacity] = useState(1)
   const isActive = activeTab === label
 
@@ -37,14 +33,18 @@ const ChartTab = ({
   )
 }
 
-const ChartRangeTabs = ({ children, activeRangeTab, onTabPress, tabs }) => (
+const ChartRangeTabs = ({
+  activeRangeTab,
+  onTabPress,
+  tabs,
+}: ChartRangeTabsProps) => (
   <View style={styles.container}>
-    {tabs.map(el => (
+    {tabs.map((tabLabel, i) => (
       <ChartTab
-        label={el}
-        onPress={() => onTabPress(el)}
+        label={tabLabel}
+        onPress={() => onTabPress(tabLabel)}
         activeTab={activeRangeTab}
-        key={el}
+        key={i}
       />
     ))}
   </View>

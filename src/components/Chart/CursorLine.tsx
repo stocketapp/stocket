@@ -2,21 +2,12 @@ import React, { useEffect } from 'react'
 import { Dimensions } from 'react-native'
 import { LABEL } from 'utils/colors'
 import { Line, G, Text } from 'react-native-svg'
+import type { CursorLineProps } from 'types'
 
 const { width } = Dimensions.get('window')
 
-type CursorLineProps = {
-  x: number,
-  scale: any,
-  datum: any,
-  onEvent: (value: string) => void,
-  labelText: string | number,
-  leftOffset: number,
-  rightOffset: number,
-}
-
 export default function LabelCursor({
-  x,
+  x = 0,
   scale,
   datum,
   onEvent,
@@ -54,7 +45,6 @@ export default function LabelCursor({
         stroke={LABEL}
         strokeWidth={2}
         strokeOpacity={0.3}
-        on
       />
       <Text fill={LABEL} x={textX} y={20}>
         {datum[labelText]}
