@@ -712,30 +712,30 @@ PODS:
     - React
   - RNCMaskedView (0.1.10):
     - React
-  - RNFBApp (8.4.1):
+  - RNFBApp (8.4.2):
     - Firebase/CoreOnly (~> 6.30.0)
     - React
-  - RNFBAuth (9.2.1):
+  - RNFBAuth (9.2.2):
     - Firebase/Auth (~> 6.30.0)
     - React
     - RNFBApp
-  - RNFBCrashlytics (8.4.2):
+  - RNFBCrashlytics (8.4.4):
     - Firebase/Crashlytics (~> 6.30.0)
     - React
     - RNFBApp
-  - RNFBFirestore (7.8.0):
+  - RNFBFirestore (7.8.1):
     - Firebase/Firestore (~> 6.30.0)
     - React
     - RNFBApp
-  - RNFBFunctions (7.4.2):
+  - RNFBFunctions (7.4.3):
     - Firebase/Functions (~> 6.30.0)
     - React
     - RNFBApp
-  - RNFBMessaging (7.8.4):
+  - RNFBMessaging (7.8.6):
     - Firebase/Messaging (~> 6.30.0)
     - React
     - RNFBApp
-  - RNFBPerf (7.4.2):
+  - RNFBPerf (7.4.3):
     - Firebase/Performance (~> 6.30.0)
     - React
     - RNFBApp
@@ -1051,13 +1051,13 @@ SPEC CHECKSUMS:
   RNBootSplash: b3836aa90c5bec690c6cd3c9ab355fcf98d0fe1d
   RNCAsyncStorage: 2a692bcb9b69b76a2f1a95f33db057129700af64
   RNCMaskedView: 5a8ec07677aa885546a0d98da336457e2bea557f
-  RNFBApp: e4321cad5dd23b43b3b4f0ca060300b9f85cb7a4
-  RNFBAuth: 09c6ceda66777758b6ffebf464f3226399e5732a
-  RNFBCrashlytics: accacec7be2426085b715b93cdb7b0a1308eb8eb
-  RNFBFirestore: e19737a64f9c46b00b1179b45c5cb20cf0c7c3ee
-  RNFBFunctions: 3a6acc52993bd3fdf61701357f8fb437b86f5755
-  RNFBMessaging: f28096dc79edf6b0a094e95c265c7224122d051d
-  RNFBPerf: 070e0df228f79b2d0bd5b1815e17ca79bf753273
+  RNFBApp: 373cce42559cc7a9a42afc876746e3946de3e32e
+  RNFBAuth: 701b29df3f364ef7b36992ad5e25628ce333ed89
+  RNFBCrashlytics: 834057016b34fa49e3eef028a13e35f48840c78c
+  RNFBFirestore: 75c8fb40f3414f7b8158a260eec47dc3bbc0cfd0
+  RNFBFunctions: 66f1f6e3efdea35f5263c58c921db0f4ddf4cd58
+  RNFBMessaging: c69238917a8672f5aed2c8a6ee124efa8f962677
+  RNFBPerf: cf6720eb30e6d363627c46b87a03eb9ba59fee14
   RNGestureHandler: 7a5833d0f788dbd107fbb913e09aa0c1ff333c39
   RNIap: 73ef1b1dc8b52fc411186585e81a8152ce0b4ecd
   RNScreens: b748efec66e095134c7166ca333b628cd7e6f3e2

@@ -21,7 +21,7 @@ export interface ContainerProps {
   top?: number
   bottom?: number
   width?: string | number
-  style?: ViewStyle
+  style?: ViewStyle | {}
   fullView?: boolean
   safeAreaTop?: boolean
   safeAreaBottom?: boolean
@@ -92,3 +92,10 @@ export interface TradeDataType {
 }
 
 export type DocReference = FirebaseFirestoreTypes.DocumentReference
+
+export type {
+  ChartLineProps,
+  CursorLineProps,
+  ChartTabProps,
+  ChartRangeTabsProps,
+} from './ChartTypes'

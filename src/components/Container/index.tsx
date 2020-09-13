@@ -1,10 +1,10 @@
-import React, { ReactNode } from 'react'
+import React from 'react'
 import { View, ViewStyle } from 'react-native'
 import { BACKGROUND } from 'utils/colors'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
-import type { ContainerProps } from '@types'
+import type { ContainerProps } from 'types'
 
-export default ({
+const Container: React.FC<ContainerProps> = ({
   children,
   style,
   justifyContent = 'flex-start',
@@ -17,7 +17,7 @@ export default ({
   fullView = false,
   safeAreaTop = false,
   safeAreaBottom = false,
-}: ContainerProps): JSX.Element => {
+}) => {
   const { top: insetTop, bottom: insetBottom } = useSafeAreaInsets()
 
   const defaultStyles: ViewStyle = {
@@ -33,3 +33,5 @@ export default ({
 
   return <View style={[defaultStyles, style]}>{children}</View>
 }
+
+export default Container

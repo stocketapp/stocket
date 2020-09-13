@@ -16,7 +16,7 @@ module.exports = {
           '@hooks': './stocket/src/hooks',
           '@api': './src/api',
           '@icons': './src/components/Icons',
-          '@types': './src/types',
+          types: './src/types',
         },
       },
     ],

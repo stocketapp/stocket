@@ -2,12 +2,15 @@ import React from 'react'
 import { View } from 'react-native'
 import { GRAY_DARKER } from 'utils/colors'
 
-type DividerPropTypes = {
-  vertical?: boolean,
-  width?: number,
+interface DividerPropTypes {
+  vertical?: boolean
+  width?: number
 }
 
-export default ({ vertical = false, width = 0.5 }: DividerPropTypes) => {
+const Divider: React.FC<DividerPropTypes> = ({
+  vertical = false,
+  width = 0.5,
+}) => {
   const styles = {
     width: vertical ? width : '100%',
     height: vertical ? '100%' : width,
@@ -17,3 +20,5 @@ export default ({ vertical = false, width = 0.5 }: DividerPropTypes) => {
 
   return <View style={styles} />
 }
+
+export default Divider
