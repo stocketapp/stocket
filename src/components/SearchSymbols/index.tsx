@@ -2,7 +2,7 @@ import React from 'react'
 import { View, TextInput, TouchableOpacity } from 'react-native'
 import Container from '../Container'
 import { SearchIcon } from '@icons'
-import type { SearchSymbolsProps } from '@types'
+import type { SearchSymbolsProps } from 'types'
 import { GRAY_DARKER } from '@utils/colors'
 import styles from './styles'
 

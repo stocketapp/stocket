@@ -3,7 +3,7 @@ import { Dimensions } from 'react-native'
 import { WebView } from 'react-native-webview'
 import Sheet from 'react-native-raw-bottom-sheet'
 
-export default forwardRef(({ uri }, ref) => {
+export default forwardRef(({ uri }: { uri: string }, ref: any) => {
   return (
     <Sheet
       height={Dimensions.get('window').height - 70}
