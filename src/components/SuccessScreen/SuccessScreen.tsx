@@ -1,19 +1,27 @@
-// @flow
 import React, { useRef, useEffect } from 'react'
 import { View, TouchableOpacity } from 'react-native'
-import { GREEN, DARK_TEXT } from 'utils/colors'
+import { DARK_TEXT } from 'utils/colors'
 import LoadingCheckmark from '../LoadingCheckmark/LoadingCheckmark'
 import Text from '../Text'
+import styles from './styles'
 
-type Props = {
-  loading: boolean,
-  successText: string,
-  onFinished: () => void,
-  bigText?: string,
+interface Props {
+  loading: boolean
+  successText: string
+  onFinished: () => void
+  bigText?: string
+}
+
+interface RefCurrent {
+  current:
+    | {
+        play: (a: number, b: number) => void | undefined
+      }
+    | undefined
 }
 
 export default ({ loading, onFinished, successText, bigText }: Props) => {
-  const ref = useRef()
+  const ref: RefCurrent = useRef()
 
   useEffect(() => {
     if (ref?.current) {
@@ -24,7 +32,7 @@ export default ({ loading, onFinished, successText, bigText }: Props) => {
   return (
     <View style={styles.container}>
       <View style={{ paddingTop: '10%' }}>
-        <LoadingCheckmark size={150} ref={ref} loop={false} />
+        <LoadingCheckmark size={150} forwardedRef={ref} loop={false} />
       </View>
       <>
         <Text style={{ textAlign: 'center' }}>{successText}</Text>
@@ -43,19 +51,4 @@ export default ({ loading, onFinished, successText, bigText }: Props) => {
       </>
     </View>
   )
-}
-
-const styles = {
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    paddingHorizontal: 20,
-  },
-  btn: {
-    backgroundColor: GREEN,
-    paddingVertical: 8,
-    paddingHorizontal: 25,
-    borderRadius: 100,
-  },
 }
