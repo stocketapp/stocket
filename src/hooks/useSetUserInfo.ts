@@ -1,13 +1,14 @@
 import { useEffect, useState } from 'react'
 import firestore from '@react-native-firebase/firestore'
 import { useDispatch, useSelector } from 'react-redux'
+import type { CurrentUser } from 'types'
 
 const UsersRef = firestore().collection('Users')
 
-export default function useSetUserInfo(currentUser) {
+export default function useSetUserInfo(currentUser: CurrentUser) {
   const [loading, setLoading] = useState(false)
   const dispatch = useDispatch()
-  const { userInfo } = useSelector(({ user }) => user)
+  const { userInfo } = useSelector(({ user }: { user: any }) => user)
 
   useEffect(() => {
     async function getUserInfo() {

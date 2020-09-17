@@ -4,9 +4,9 @@ import firestore from '@react-native-firebase/firestore'
 
 const FR = firestore()
 
-export default function useSaveApnsToken(uid) {
+export default function useSaveApnsToken(uid: string) {
   useEffect(() => {
-    const saveToken = async token => {
+    const saveToken = async (token: string) => {
       await FR.collection('Users')
         .doc(uid)
         .update({

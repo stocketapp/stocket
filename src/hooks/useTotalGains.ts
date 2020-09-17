@@ -3,8 +3,8 @@ import { useSelector } from 'react-redux'
 import { reduce, map } from 'lodash'
 import { formatCurrency, currencyToNumber } from 'utils/functions'
 
-export default function useTotalGains(portfolioValue) {
-  const { positions } = useSelector(({ stock }) => stock)
+export default function useTotalGains(portfolioValue: string) {
+  const { positions } = useSelector(({ stock }: { stock: any }) => stock)
   const value = currencyToNumber(portfolioValue)
 
   return useMemo(() => {

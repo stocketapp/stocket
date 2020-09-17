@@ -6,7 +6,7 @@ import { getBatchStockData } from 'api'
 import { uniqBy, map } from 'lodash'
 
 export default function useWatchlist(uid: string) {
-  const { watchlist } = useSelector(({ stock }) => stock)
+  const { watchlist } = useSelector(({ stock }: { stock: any }) => stock)
   const dispatch = useDispatch()
 
   useEffect(() => {
@@ -25,5 +25,8 @@ export default function useWatchlist(uid: string) {
     return () => subscribe()
   }, [uid, dispatch])
 
-  return uniqBy(watchlist, el => el?.quote?.symbol)
+  return uniqBy(
+    watchlist,
+    (el: { quote: { symbol: string } }) => el?.quote?.symbol,
+  )
 }

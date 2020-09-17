@@ -5,21 +5,28 @@ import moment from 'moment'
 import { findIndex } from 'lodash'
 import { currencyToNumber } from 'utils/functions'
 
-type UserInfo = {
-  portfolioChange: number,
-  portfolioChangePct: number,
-  portfolioValue: string,
+interface UserInfo {
+  portfolioChange: number
+  portfolioChangePct: number
+  portfolioValue: string
+}
+
+interface BalanceItem {
+  date: string
+  value: number
+  change: number
+  changePct: number
 }
 
 function useGetBalanceHistory(uid: string, userInfo: UserInfo) {
-  const [balanceHistory, setBalanceHistory] = useState(null)
+  const [historyItem, setHistItem] = useState<Array<BalanceItem> | null>(null)
   useEffect(() => {
     const subscribe = firestore()
       .collection(`Users/${uid}/balance_history`)
       .orderBy('date', 'asc')
       .onSnapshot(async snapshot => {
         try {
-          const list = []
+          const list: Array<BalanceItem> = []
           snapshot.forEach(doc => {
             const { date, value, change, changePct } = doc?.data()
             list.push({
@@ -43,7 +50,7 @@ function useGetBalanceHistory(uid: string, userInfo: UserInfo) {
           } else {
             list.push(nowBalance)
           }
-          setBalanceHistory(list)
+          setHistItem(list)
         } catch (err) {
           console.log('[ERROR] useGetBalanceHistory', err)
         }
@@ -52,7 +59,7 @@ function useGetBalanceHistory(uid: string, userInfo: UserInfo) {
     return () => subscribe()
   }, [uid, userInfo])
 
-  return balanceHistory ?? []
+  return historyItem ?? []
 }
 
 export default useGetBalanceHistory

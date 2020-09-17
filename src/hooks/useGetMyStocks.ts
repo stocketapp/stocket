@@ -8,7 +8,7 @@ const UsersRef = firestore().collection('Users')
 export default function useGetMyStocks(uid: string): {} {
   const [loading, setLoading] = useState(true)
   const dispatch = useDispatch()
-  const { positions } = useSelector(({ stock }) => stock)
+  const { positions } = useSelector(({ stock }: { stock: any }) => stock)
 
   useEffect(() => {
     const subscribe = UsersRef.doc(uid)
@@ -25,6 +25,7 @@ export default function useGetMyStocks(uid: string): {} {
       })
 
     return () => subscribe()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   return { positions, loading }
