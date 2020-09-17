@@ -1,4 +1,3 @@
-// @flow
 import React from 'react'
 import { View, ViewStyle } from 'react-native'
 import Container from '../Container'

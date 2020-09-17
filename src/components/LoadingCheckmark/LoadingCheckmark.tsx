@@ -1,4 +1,3 @@
-// @flow
 import React, { forwardRef } from 'react'
 import LottieView from 'lottie-react-native'
 
