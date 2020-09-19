@@ -1,6 +1,4 @@
-// @flow
-
-import React, { useEffect, useRef } from 'react'
+import React, { useEffect, useRef, ReactNode } from 'react'
 import { StatusBar, View, AppState } from 'react-native'
 import {
   useAuthState,
@@ -21,7 +19,7 @@ messaging().setBackgroundMessageHandler(async remoteMessage => {
   console.log('Message handled in the background!', remoteMessage)
 })
 
-export default function App(): React$Node {
+export default function App(): ReactNode {
   const { isAuth, currentUser } = useAuthState()
   const tradeViewRef = useRef()
   const { loading } = useSetUserInfo(currentUser)
@@ -43,7 +41,7 @@ export default function App(): React$Node {
   }, [])
 
   useEffect(() => {
-    const deleteCache = async state => {
+    const deleteCache = async (state: string) => {
       try {
         if (state === 'background') {
           await AsyncStorage.clear()
