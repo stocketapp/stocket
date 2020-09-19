@@ -8,34 +8,33 @@ import Home from 'views/Home'
 import Search from 'views/Search'
 import Profile from 'views/Profile'
 
-const Tab = createBottomTabNavigator()
+const { Navigator, Screen } = createBottomTabNavigator()
 
 export default () => (
-  <Tab.Navigator
+  <Navigator
     tabBar={props => <TabBarComponent {...props} />}
     tabBarOptions={{ activeTintColor: GREEN, inactiveTintColor: '#4a5a5a' }}
   >
-    <Tab.Screen
+    <Screen
       name="Home"
       component={Home}
       options={{
         tabBarIcon: ({ color }) => <TrendingUpIcon size={40} color={color} />,
-        animationTypeForReplace: 'pop',
       }}
     />
-    <Tab.Screen
+    <Screen
       name="Search"
       component={Search}
       options={{
         tabBarIcon: ({ color }) => <SearchIcon size={35} color={color} />,
       }}
     />
-    <Tab.Screen
+    <Screen
       name="Profile"
       component={Profile}
       options={{
         tabBarIcon: ({ color }) => <ProfileIcon size={36} color={color} />,
       }}
     />
-  </Tab.Navigator>
+  </Navigator>
 )

@@ -93,6 +93,10 @@ export interface TradeDataType {
 
 export type DocReference = FirebaseFirestoreTypes.DocumentReference
 
+export interface CurrentUser {
+  uid: string
+}
+
 export type {
   ChartLineProps,
   CursorLineProps,
