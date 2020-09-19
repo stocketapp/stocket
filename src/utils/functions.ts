@@ -4,7 +4,7 @@ import messaging from '@react-native-firebase/messaging'
 import { find } from 'lodash'
 import iapProductsList from './iapProductsList'
 
-export function formatCurrency(num: number | string) {
+export function formatCurrency(num: number | string): string {
   return Number(num ?? 0).toLocaleString('en-US', {
     style: 'currency',
     currency: 'USD',
@@ -30,22 +30,22 @@ export async function requestNotificationPermission() {
   }
 }
 
-type ProductValue = {
-  productId: string,
-  value: number,
+interface ProductValue {
+  productId: string
+  value: number
 }
 
-export function getProductValue(productId: string): ProductValue {
-  const result = find(iapProductsList, el => el.productId === productId)
+export function getProductValue(productId: string): ProductValue | null {
+  const result = find(iapProductsList, el => el.productId === productId) ?? null
   return result
 }
 
-export function currencyToNumber(value: string) {
+export function currencyToNumber(value: string): number {
   const number = parseFloat(value?.replace(/[$,]/g, ''))
   return number ?? 0
 }
 
-export function sumCurrency(a: string, b: string) {
+export function sumCurrency(a: string, b: string): string {
   const sum = currencyToNumber(a) + currencyToNumber(b)
   return formatCurrency(sum)
 }
