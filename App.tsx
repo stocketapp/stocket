@@ -18,7 +18,7 @@ import AsyncStorage from '@react-native-community/async-storage'
 messaging().setBackgroundMessageHandler(async remoteMessage => {
   console.log('Message handled in the background!', remoteMessage)
 })
-// comment
+
 export default function App(): ReactNode {
   const { isAuth, currentUser } = useAuthState()
   const tradeViewRef = useRef()
