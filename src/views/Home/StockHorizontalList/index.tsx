@@ -1,18 +1,18 @@
-// @flow
 import React from 'react'
 import { FlatList, StyleSheet, View, TouchableOpacity } from 'react-native'
 import functions from '@react-native-firebase/functions'
 import { useNavigation } from '@react-navigation/native'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { Text, Container, Loader } from '@components'
 import { RefreshIcon } from '@icons'
 import type { PositionType } from 'types'
 import StockItem from './StockItem'
 import StockEmpty from './StockEmpty'
+import useStateSelector from '@selector'
 
 type StockHorizontalListProps = {
-  data: Array<any>,
-  loading: boolean,
+  data: Array<any>
+  loading: boolean
 }
 
 export default function StockHorizontalList(props: StockHorizontalListProps) {
@@ -20,11 +20,12 @@ export default function StockHorizontalList(props: StockHorizontalListProps) {
   const onUpdateGainsCall = functions().httpsCallable('onUpdateGainsCall')
   const { navigate } = useNavigation()
   const dispatch = useDispatch()
-  const { user } = useSelector(state => state)
+  const user = useStateSelector('user')
+  const { currentUser } = user
 
   const refreshGains = () => {
     onUpdateGainsCall({
-      uid: user?.currentUser?.uid,
+      uid: currentUser?.uid,
     })
   }
 
@@ -43,7 +44,7 @@ export default function StockHorizontalList(props: StockHorizontalListProps) {
   return (
     <Container style={styles.container} ph>
       <Container horizontal separate>
-        <Text type="title" style={styles.title} weight="Bold">
+        <Text type="title" weight="Bold">
           Stocks
         </Text>
 

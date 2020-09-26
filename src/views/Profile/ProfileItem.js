@@ -1,7 +1,7 @@
 import React from 'react'
 import { View, TouchableOpacity } from 'react-native'
-import { Text } from 'components'
-import { LABEL, GRAY_DARKER } from 'utils/colors'
+import { Text } from '@components'
+import { LABEL, GRAY_DARKER } from '@utils/colors'
 
 export default function ({ onPress, label, value }) {
   return (

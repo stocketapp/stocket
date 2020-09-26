@@ -3,7 +3,7 @@ import LottieView from 'lottie-react-native'
 
 const Loader = ({ size = 50 }: { size?: number }) => (
   <LottieView
-    source={require('../../assets/lottie/loading.json')}
+    source={require('../../../assets/lottie/loading.json')}
     style={{ height: size, width: size }}
     autoPlay
     loop

@@ -13,7 +13,7 @@ const LoadingCheckmark: React.FC<Props> = ({
   loop,
 }) => (
   <LottieView
-    source={require('../../assets/lottie/loading_checkmark.json')}
+    source={require('../../../assets/lottie/loading_checkmark.json')}
     style={{ height: size, width: size }}
     loop={loop}
     ref={forwardedRef}

@@ -1,17 +1,17 @@
 import React, { useState, useEffect, useRef, useCallback, useMemo } from 'react'
 import { StyleSheet, ScrollView, View } from 'react-native'
-import { BACKGROUND, GRAY_DARKER } from 'utils/colors'
-import { Balance, Container, ChartLine, MarketStatus, Text } from 'components'
+import { BACKGROUND, GRAY_DARKER } from '@utils/colors'
+import { Balance, Container, ChartLine, MarketStatus, Text } from '@components'
 import {
   useGetMyStocks,
   useWatchlist,
   useGetBalanceHistory,
   useUser,
-} from 'hooks'
+} from '@hooks'
 import { useNavigation, useFocusEffect } from '@react-navigation/native'
 import { useDispatch } from 'react-redux'
-import { callUpdateGains } from 'api'
-import { ChartIllustration } from 'components/Icons'
+import { callUpdateGains } from '@api'
+import { ChartIllustration } from '@components/Icons'
 import { filter } from 'lodash'
 import StockHorizontalList from './StockHorizontalList'
 import Watchlist from './Watchlist'

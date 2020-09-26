@@ -1,12 +1,12 @@
 import React from 'react'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import TabBarComponent from './TabBarComponent'
-import { TrendingUpIcon, SearchIcon, ProfileIcon } from 'components/Icons'
-import { GREEN } from 'utils/colors'
+import { TrendingUpIcon, SearchIcon, ProfileIcon } from '@icons'
+import { GREEN } from '@utils/colors'
 
-import Home from 'views/Home'
-import Search from 'views/Search'
-import Profile from 'views/Profile'
+import Home from '@views/Home'
+import Search from '@views/Search'
+import Profile from '@views/Profile'
 
 const { Navigator, Screen } = createBottomTabNavigator()
 

@@ -1,6 +1,6 @@
 import React from 'react'
 import { View } from 'react-native'
-import { GRAY_DARKER } from 'utils/colors'
+import { GRAY_DARKER } from '@utils/colors'
 
 interface DividerPropTypes {
   vertical?: boolean

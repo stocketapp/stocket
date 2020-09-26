@@ -1,15 +1,15 @@
 // flow
 import React, { useState, useEffect, useCallback } from 'react'
 import { FlatList } from 'react-native'
-import { Container, SearchSymbols, Text } from 'components'
-import { useDebounce, useUser } from 'hooks'
-import { searchTerm, addToWatchlist, removeFromWatchlist } from 'api'
+import { Container, SearchSymbols, Text } from '@components'
+import { useDebounce, useUser } from '@hooks'
+import { searchTerm, addToWatchlist, removeFromWatchlist } from '@api'
 import { useNavigation } from '@react-navigation/native'
 import { useDispatch, useSelector } from 'react-redux'
 import SearchResult from './SearchResult'
 import { includes, map } from 'lodash'
 
-export default function Search(): React$Node {
+export default function Search(): ReactElement {
   const [search, setSearch] = useState(null)
   const [results, setResults] = useState(null)
   const debounced = useDebounce(search)

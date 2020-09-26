@@ -9,14 +9,19 @@ module.exports = {
         extensions: ['.ios.js', '.android.js', '.js', '.ts', '.tsx', '.json'],
         alias: {
           '@stocket': './',
-          '@views': './src/views',
-          '@components': './src/components',
-          '@utils': './src/utils',
-          '@navigation': './src/navigation',
+          '@views': '/Users/henry/Projects/ReactNative/stocket/src/views',
+          '@components':
+            '/Users/henry/Projects/ReactNative/stocket/src/components',
+          '@utils': '/Users/henry/Projects/ReactNative/stocket/src/utils',
+          '@navigation':
+            '/Users/henry/Projects/ReactNative/stocket/src/navigation',
           '@hooks': './stocket/src/hooks',
-          '@api': './src/api',
-          '@icons': './src/components/Icons',
-          types: './src/types',
+          '@api': '/Users/henry/Projects/ReactNative/stocket/src/api',
+          '@icons':
+            '/Users/henry/Projects/ReactNative/stocket/src/components/Icons',
+          types: '/Users/henry/Projects/ReactNative/stocket/src/types',
+          '@selector':
+            '/Users/henry/Projects/ReactNative/stocket/src/redux/selector.ts',
         },
       },
     ],

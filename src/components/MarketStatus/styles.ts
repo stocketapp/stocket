@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native'
-import { SUB_BACKGROUND, GREEN } from 'utils/colors'
+import { SUB_BACKGROUND, GREEN } from '@utils/colors'
 
 export default StyleSheet.create({
   dot: {

@@ -1,8 +1,8 @@
 // @flow
 import React from 'react'
 import { View, TouchableOpacity } from 'react-native'
-import { Text, Container } from 'components'
-import { GREEN, BACKGROUND, DARK_TEXT, GRAY_DARKER } from 'utils/colors'
+import { Text, Container } from '@components'
+import { GREEN, BACKGROUND, DARK_TEXT, GRAY_DARKER } from '@utils/colors'
 
 type StockTradeBarProps = {
   status: string,

@@ -212,14 +212,14 @@ PODS:
     - abseil/base/base_internal
     - abseil/base/config
     - abseil/meta/type_traits
-  - appcenter-analytics (3.1.1):
+  - appcenter-analytics (3.1.2):
     - AppCenter/Analytics
     - AppCenterReactNativeShared
     - React
-  - appcenter-core (3.1.1):
+  - appcenter-core (3.1.2):
     - AppCenterReactNativeShared
     - React
-  - appcenter-crashes (3.1.1):
+  - appcenter-crashes (3.1.2):
     - AppCenter/Crashes
     - AppCenterReactNativeShared
     - React
@@ -638,11 +638,11 @@ PODS:
     - React-cxxreact (= 0.63.2)
     - React-jsi (= 0.63.2)
   - React-jsinspector (0.63.2)
-  - react-native-flipper (0.56.0):
+  - react-native-flipper (0.58.0):
     - React
-  - react-native-safe-area-context (3.1.7):
-    - React
-  - react-native-webview (10.8.3):
+  - react-native-safe-area-context (3.1.8):
+    - React-Core
+  - react-native-webview (10.9.0):
     - React
   - React-RCTActionSheet (0.63.2):
     - React-Core/RCTActionSheetHeaders (= 0.63.2)
@@ -704,32 +704,32 @@ PODS:
     - React-Core (= 0.63.2)
     - React-cxxreact (= 0.63.2)
     - React-jsi (= 0.63.2)
-  - RNAppleAuthentication (1.1.2):
-    - React
+  - RNAppleAuthentication (2.0.2):
+    - React-Core
   - RNBootSplash (2.2.5):
     - React
   - RNCAsyncStorage (1.12.0):
     - React
   - RNCMaskedView (0.1.10):
     - React
-  - RNFBApp (8.4.2):
+  - RNFBApp (8.4.3):
     - Firebase/CoreOnly (~> 6.30.0)
-    - React
-  - RNFBAuth (9.2.2):
+    - React-Core
+  - RNFBAuth (9.2.3):
     - Firebase/Auth (~> 6.30.0)
-    - React
+    - React-Core
     - RNFBApp
-  - RNFBCrashlytics (8.4.4):
+  - RNFBCrashlytics (8.4.5):
     - Firebase/Crashlytics (~> 6.30.0)
-    - React
+    - React-Core
     - RNFBApp
-  - RNFBFirestore (7.8.1):
+  - RNFBFirestore (7.8.2):
     - Firebase/Firestore (~> 6.30.0)
-    - React
+    - React-Core
     - RNFBApp
-  - RNFBFunctions (7.4.3):
+  - RNFBFunctions (7.4.4):
     - Firebase/Functions (~> 6.30.0)
-    - React
+    - React-Core
     - RNFBApp
   - RNFBMessaging (7.8.6):
     - Firebase/Messaging (~> 6.30.0)
@@ -741,9 +741,9 @@ PODS:
     - RNFBApp
   - RNGestureHandler (1.8.0):
     - React
-  - RNIap (4.5.3):
-    - React
-  - RNScreens (2.10.1):
+  - RNIap (4.6.2):
+    - React-Core
+  - RNScreens (2.11.0):
     - React
   - RNSVG (12.1.0):
     - React
@@ -975,9 +975,9 @@ EXTERNAL SOURCES:
 SPEC CHECKSUMS:
   abseil: 6c8eb7892aefa08d929b39f9bb108e5367e3228f
   AppCenter: aba7de06e4c2184f90dc84f7866bd07f82427d69
-  appcenter-analytics: bce201b504c8138d235e6f42de1f36d30d2cd7f5
-  appcenter-core: 086ab16077baef60368c6a119af6e9e127406286
-  appcenter-crashes: 10790bf670f79150f1654d79f76c10a8b4936688
+  appcenter-analytics: 86931681ba39a34856727e415d39e7d4693ad7fe
+  appcenter-core: 1cca3f4d1f01e820710dc82e14ad2b4806a4f907
+  appcenter-crashes: 5da5dca952c3d1a3eea2d596748d94ec0412fbd1
   AppCenterReactNativeShared: b9fa50d999e830e03f086f487b1aa0f9772088c1
   Base64: cecfb41a004124895a7bcee567a89bae5a89d49b
   boost-for-react-native: 39c7adb57c4e60d6c5479dd8623128eb5b3f0f2c
@@ -1034,9 +1034,9 @@ SPEC CHECKSUMS:
   React-jsi: 54245e1d5f4b690dec614a73a3795964eeef13a8
   React-jsiexecutor: 8ca588cc921e70590820ce72b8789b02c67cce38
   React-jsinspector: b14e62ebe7a66e9231e9581279909f2fc3db6606
-  react-native-flipper: 01ba6e29dd3595dd8a348adfccc76affb31f722e
-  react-native-safe-area-context: 955ecfce672683b495d9294d2f154a9ad1d9796b
-  react-native-webview: 598605cd213f5096e695f5b33fbee210a47e60ab
+  react-native-flipper: 7983d3bc856f85f7debf059fce0f63e02b48b972
+  react-native-safe-area-context: 79fea126c6830c85f65947c223a5e3058a666937
+  react-native-webview: bfe5436586b214759bd5043658863549fffc8e92
   React-RCTActionSheet: 910163b6b09685a35c4ebbc52b66d1bfbbe39fc5
   React-RCTAnimation: 9a883bbe1e9d2e158d4fb53765ed64c8dc2200c6
   React-RCTBlob: 39cf0ece1927996c4466510e25d2105f67010e13
@@ -1047,25 +1047,25 @@ SPEC CHECKSUMS:
   React-RCTText: 1b6773e776e4b33f90468c20fe3b16ca3e224bb8
   React-RCTVibration: 4d2e726957f4087449739b595f107c0d4b6c2d2d
   ReactCommon: a0a1edbebcac5e91338371b72ffc66aa822792ce
-  RNAppleAuthentication: 473b2c076f1a48a537610580a168c1fb6d0a90c6
+  RNAppleAuthentication: 09bf9752c73e1a19ba71b27538bc76cb4f8441a6
   RNBootSplash: b3836aa90c5bec690c6cd3c9ab355fcf98d0fe1d
   RNCAsyncStorage: 2a692bcb9b69b76a2f1a95f33db057129700af64
   RNCMaskedView: 5a8ec07677aa885546a0d98da336457e2bea557f
-  RNFBApp: 373cce42559cc7a9a42afc876746e3946de3e32e
-  RNFBAuth: 701b29df3f364ef7b36992ad5e25628ce333ed89
-  RNFBCrashlytics: 834057016b34fa49e3eef028a13e35f48840c78c
-  RNFBFirestore: 75c8fb40f3414f7b8158a260eec47dc3bbc0cfd0
-  RNFBFunctions: 66f1f6e3efdea35f5263c58c921db0f4ddf4cd58
+  RNFBApp: a74d8259d827c8bf55100e759cffa2e50ba6fe30
+  RNFBAuth: ccae9605207f4a3bc6e03cd0adb5433872ef4418
+  RNFBCrashlytics: 4039c6b27a35dd6cbbb0c111d4f668ce513a2881
+  RNFBFirestore: f2d9ff58a4a2d91f9084c1ac0662054a10766a66
+  RNFBFunctions: c6f99e1947be3adb41af48d156ee49035a951014
   RNFBMessaging: c69238917a8672f5aed2c8a6ee124efa8f962677
   RNFBPerf: cf6720eb30e6d363627c46b87a03eb9ba59fee14
   RNGestureHandler: 7a5833d0f788dbd107fbb913e09aa0c1ff333c39
-  RNIap: 73ef1b1dc8b52fc411186585e81a8152ce0b4ecd
-  RNScreens: b748efec66e095134c7166ca333b628cd7e6f3e2
+  RNIap: d396b2d00fac180aa6d3f50e5856ce7096766203
+  RNScreens: 0e91da98ab26d5d04c7b59a9b6bd694124caf88c
   RNSVG: ce9d996113475209013317e48b05c21ee988d42e
   SSZipArchive: 62d4947b08730e4cda640473b0066d209ff033c9
   Yoga: 7740b94929bbacbddda59bf115b5317e9a161598
   YogaKit: f782866e155069a2cca2517aafea43200b01fd5a
 
-PODFILE CHECKSUM: 906b8845e839a70100c592ff40804e43151382c6
+PODFILE CHECKSUM: 48d3b9140726f71543e0ca2a7f478832053dc649
 
-COCOAPODS: 1.10.0.beta.2
+COCOAPODS: 1.9.3

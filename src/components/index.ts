@@ -1,5 +1,4 @@
 export { default as Balance } from './Balance'
-export { default as Header } from './Header/Header'
 export { default as Text } from './Text'
 export { default as Container } from './Container'
 export { default as SearchSymbols } from './SearchSymbols'

@@ -8,7 +8,7 @@ import {
   VictoryLabel,
   VictoryAxis,
 } from 'victory-native'
-import { GREEN } from 'utils/colors'
+import { GREEN } from '@utils/colors'
 import exampleData from './exampleData'
 import CursorLine from './CursorLine'
 import { minBy, maxBy } from 'lodash'

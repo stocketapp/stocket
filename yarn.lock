@@ -780,10 +780,10 @@
   dependencies:
     "@hapi/hoek" "^8.3.0"
 
-"@invertase/react-native-apple-authentication@^1.1.2":
-  version "1.1.2"
-  resolved "https://registry.yarnpkg.com/@invertase/react-native-apple-authentication/-/react-native-apple-authentication-1.1.2.tgz#cf86364d89030f0b9970d04468fde2d204cab5df"
-  integrity sha512-eRwLOyxPtAP0ZEy1iaBf+Sle7upBnyqOkeXgScWNKLKsb4r6+6I6CvMuHNdMZ9ObSdUfAVgAbj5L09TbJRw0hQ==
+"@invertase/react-native-apple-authentication@^2.0.2":
+  version "2.0.2"
+  resolved "https://registry.yarnpkg.com/@invertase/react-native-apple-authentication/-/react-native-apple-authentication-2.0.2.tgz#306783c127d838c6873ac6a09c9b25695c3a9390"
+  integrity sha512-XUdcVqO7u6JWikPpYbIF+3NILXyz5x77G0l8WVPplJ0r9d9m4iTsmNTiK9vOgVTNQIhY6r7gwcf3mGo/gJ6ojw==
 
 "@istanbuljs/load-nyc-config@^1.0.0":
   version "1.1.0"
@@ -1472,35 +1472,35 @@
   resolved "https://registry.yarnpkg.com/@react-native-community/masked-view/-/masked-view-0.1.10.tgz#5dda643e19e587793bc2034dd9bf7398ad43d401"
   integrity sha512-rk4sWFsmtOw8oyx8SD3KSvawwaK7gRBSEIy2TAwURyGt+3TizssXP1r8nx3zY+R7v2vYYHXZ+k2/GULAT/bcaQ==
 
-"@react-native-firebase/app@^8.4.2":
-  version "8.4.2"
-  resolved "https://registry.yarnpkg.com/@react-native-firebase/app/-/app-8.4.2.tgz#3d7093062e403368f90947e2d999fb9101330bf4"
-  integrity sha512-toHk6bPdhLPQUWw9ZNljNisv58JrZdSDzDzZPa19xEB5465iAMx46tCBrKdoSdq0pMq9w1iYzgOhMg8lxzM2qw==
+"@react-native-firebase/app@^8.4.3":
+  version "8.4.3"
+  resolved "https://registry.yarnpkg.com/@react-native-firebase/app/-/app-8.4.3.tgz#7f5c0d16c8b56808a26625af34259c8c50e0307b"
+  integrity sha512-qkjY4gvX4B0x1PKwaZIxByxwtnSlpvRt6IAlygB4rkeUv9XTBvW2j2xCGprEbKYZswEgSeY4ZDWl5SXYe6FgCg==
   dependencies:
     opencollective-postinstall "^2.0.1"
     superstruct "^0.6.2"
 
-"@react-native-firebase/auth@^9.2.2":
-  version "9.2.2"
-  resolved "https://registry.yarnpkg.com/@react-native-firebase/auth/-/auth-9.2.2.tgz#ce8630fa2a60c694be3179d20a6ff57e1509d346"
-  integrity sha512-pp1UW/TK6mwqpI0tZx3Y6UymLj8qktR4FuB85fzqElum6OwZ4QGq9P7fBY2PXGrTMagRNHyWtDMRBidv1GaXfA==
+"@react-native-firebase/auth@^9.2.3":
+  version "9.2.3"
+  resolved "https://registry.yarnpkg.com/@react-native-firebase/auth/-/auth-9.2.3.tgz#a5501def2855297e113c8dc6ccdba18f8f17480b"
+  integrity sha512-dJqdNleh0k+7kHoXfFBfMW0vWrzztkejjzFV7YrPD+UQisIHXKQWr27TxyX5+dTga0GTgfqJGkdi5yky22Q/uA==
 
-"@react-native-firebase/crashlytics@^8.4.4":
-  version "8.4.4"
-  resolved "https://registry.yarnpkg.com/@react-native-firebase/crashlytics/-/crashlytics-8.4.4.tgz#59def805ca1cbb50de91ac7c7be53f04339acfd7"
-  integrity sha512-a1DFxnG2dacIrl6qrMdSAJ/pMYZqqx98zJu/rC9S/bf21OEcbDQazpHSdv0HDWY0Qma4K1sP4VKYbdicastBzg==
+"@react-native-firebase/crashlytics@^8.4.5":
+  version "8.4.5"
+  resolved "https://registry.yarnpkg.com/@react-native-firebase/crashlytics/-/crashlytics-8.4.5.tgz#4908e7aebb78cc7f02d882f6908a95371df047d4"
+  integrity sha512-unOFluKP/aDsdg7FN4r6fsBTNxWD5PWTeL8+VART+xq9iH2/2UXYGZNqY2bKLG8UUksz89zuyqQSl55SPJ2n8A==
   dependencies:
     stacktrace-js "^2.0.0"
 
-"@react-native-firebase/firestore@^7.8.1":
-  version "7.8.1"
-  resolved "https://registry.yarnpkg.com/@react-native-firebase/firestore/-/firestore-7.8.1.tgz#031212259b5a0832733520342ebfd71c6bab8433"
-  integrity sha512-BVSYyd5coR/b/fWZMD7+npEStSuI3jBEQS1CcHF9FnKjWy4HcKXyNrZI0JVXsNm2boeKy5yl6Guy7d6Ijv89HA==
+"@react-native-firebase/firestore@^7.8.2":
+  version "7.8.2"
+  resolved "https://registry.yarnpkg.com/@react-native-firebase/firestore/-/firestore-7.8.2.tgz#732a5743a37e5e238c748e03bfb41c38ccb04fdd"
+  integrity sha512-eqKk/Z+dYpcVfHzI9tQ+/s2fqsZwYbyheazP7yWthF4D9EMoe6BNPVE4AuFvPrrAsnxJebH9a/9jhP3YaMj/Zw==
 
-"@react-native-firebase/functions@^7.4.3":
-  version "7.4.3"
-  resolved "https://registry.yarnpkg.com/@react-native-firebase/functions/-/functions-7.4.3.tgz#fb00e005cae011b415600e893d71d9a57014ba3c"
-  integrity sha512-GRekoCLi83xUiDu2Zz3pOnbZ6hStTByNTDEIuMFjJG4T3Hf/+m5nRle3nxj7qCoxOkXu58MnJT0Q4r54C5pVcw==
+"@react-native-firebase/functions@^7.4.4":
+  version "7.4.4"
+  resolved "https://registry.yarnpkg.com/@react-native-firebase/functions/-/functions-7.4.4.tgz#636528fea10d1d6c3703d491cca0fc5d9394ab61"
+  integrity sha512-sAwtu8JaIDTpA+ip93Xao1IDF+aHkgsjaF2QfHWLRX8cF82KNKk00JF5r177YbGuoEeq9kY7a549MHrxJy/N6A==
 
 "@react-native-firebase/messaging@^7.8.6":
   version "7.8.6"
@@ -1512,45 +1512,45 @@
   resolved "https://registry.yarnpkg.com/@react-native-firebase/perf/-/perf-7.4.3.tgz#3fb92daf3a8a68a22ec95260a7a5fef91002a237"
   integrity sha512-uaeBL7vfC8g7OUnwhwBAuiZ4wUbpY51RwfA5qbT+uDZwpSrHgrzNX1XhcRWQ7qkhboS66nDlGG/MpthRqCbdNQ==
 
-"@react-navigation/bottom-tabs@^5.8.0":
-  version "5.8.0"
-  resolved "https://registry.yarnpkg.com/@react-navigation/bottom-tabs/-/bottom-tabs-5.8.0.tgz#d7386809bceeead0adcaacf61b6563be9cefd5cb"
-  integrity sha512-geF/FSIg6cArY5jLwJJZrp7PDzLoSrONkCgq9n/4yKxtQapB/Pn5ljSHCNRGNkkb/+g8zqRQmEL5yX4DOja0OA==
+"@react-navigation/bottom-tabs@^5.9.0":
+  version "5.9.0"
+  resolved "https://registry.yarnpkg.com/@react-navigation/bottom-tabs/-/bottom-tabs-5.9.0.tgz#18ae3011256874863adc5f877dc3cbf6594b3a4e"
+  integrity sha512-4hP/YWgd+yKdZM+n4BPbWgdPapW9lrDz3fgQ0w3FTDlYaFPL8pv3Q9aDO03+Uj1VnuprdJN5LgZONGCcAFrItQ==
   dependencies:
     color "^3.1.2"
     react-native-iphone-x-helper "^1.2.1"
 
-"@react-navigation/core@^5.12.3":
-  version "5.12.3"
-  resolved "https://registry.yarnpkg.com/@react-navigation/core/-/core-5.12.3.tgz#0484fcca290569a0dc10b70b99f00edd3f1fd93c"
-  integrity sha512-aEOTAw4FRRNsNu6F9ibLk3SVSs4Res8BI832NEZN6qUto5ZgtuYnQHWeWV2cZ43Nc9KvUyQC/vXvO2RScwgFwA==
+"@react-navigation/core@^5.12.4":
+  version "5.12.4"
+  resolved "https://registry.yarnpkg.com/@react-navigation/core/-/core-5.12.4.tgz#1bd0c81d098895c8ffe49f8624fae60c9abc5684"
+  integrity sha512-vhaVIJGfSgln4dIoO4R2HeX9p3Vc7OJLa0/JpKHpXn/DZgNVn+RP7ktk1CRZ16ikUJ0k8CxzuvRxeRIg7EhA7w==
   dependencies:
-    "@react-navigation/routers" "^5.4.11"
+    "@react-navigation/routers" "^5.4.12"
     escape-string-regexp "^4.0.0"
     nanoid "^3.1.12"
     query-string "^6.13.1"
     react-is "^16.13.0"
     use-subscription "^1.4.0"
 
-"@react-navigation/native@^5.7.3":
-  version "5.7.3"
-  resolved "https://registry.yarnpkg.com/@react-navigation/native/-/native-5.7.3.tgz#3cda5ee7b0fe0d980db6d788419f0af50a64deac"
-  integrity sha512-bXb1g/cLpGF2DW1Vxk90Ch5vbaZTk5b/4Fn5xjQlueQODgc9ca+GPEssKZ84hCrNmS+Xg+iK1m/ArawLF5gMlw==
+"@react-navigation/native@^5.7.4":
+  version "5.7.4"
+  resolved "https://registry.yarnpkg.com/@react-navigation/native/-/native-5.7.4.tgz#f55d54ab26942cf40fb3f6e1d6b9c26056e1d4e3"
+  integrity sha512-ndLojJZyWqxGdWeXlSr7ylHaMbBIwvoXnmsKHOMvUN6FV0dxv8b8L9T1yRW82b9mak4y6y6Q+1gIAWjO7FhAsQ==
   dependencies:
-    "@react-navigation/core" "^5.12.3"
+    "@react-navigation/core" "^5.12.4"
     nanoid "^3.1.12"
 
-"@react-navigation/routers@^5.4.11":
-  version "5.4.11"
-  resolved "https://registry.yarnpkg.com/@react-navigation/routers/-/routers-5.4.11.tgz#75dbec1809e282c3749068845099c5bee2c792f0"
-  integrity sha512-J/CsHdIjYBRe81UUiLOoz9NSrQ91uP23Oe21QPCALInRHx+rfwo2oPl6Fn8xAa7n8Dtt2oQUGyF+g5d05cB74w==
+"@react-navigation/routers@^5.4.12":
+  version "5.4.12"
+  resolved "https://registry.yarnpkg.com/@react-navigation/routers/-/routers-5.4.12.tgz#5c3690650c94be3a54b617a1c07510d2f604c03f"
+  integrity sha512-IwMmxeb5e6LboljhakmhtrHBXLYFrFDr2c1GjAG538e4MjT4QGi/ZYckAxCh/NqKI0knnzqKppPl2NsOMv/NoQ==
   dependencies:
     nanoid "^3.1.12"
 
-"@react-navigation/stack@^5.9.0":
-  version "5.9.0"
-  resolved "https://registry.yarnpkg.com/@react-navigation/stack/-/stack-5.9.0.tgz#bf24607175bf502798cc4c832aa8a86e55f3b365"
-  integrity sha512-kt6M0ZLMyNKXfKi50n01bHg4/d8zp0Yh5QaQG4d1roWOqdV9ou1nFEK4l2yQ6XKH2lLSYswHElPDZUuWd+6XzA==
+"@react-navigation/stack@^5.9.1":
+  version "5.9.1"
+  resolved "https://registry.yarnpkg.com/@react-navigation/stack/-/stack-5.9.1.tgz#2ddc82b70eafd7d50c2f7cd6f11303b876603fa8"
+  integrity sha512-LPSB8/etYYBe0NLHPndrly2amM/feSXXZJ3KevvKH3zP+RbEonsLOpmjOh2jXpZy9+1oLlSuGs+xzgpamMuguw==
   dependencies:
     color "^3.1.2"
     react-native-iphone-x-helper "^1.2.1"
@@ -1659,10 +1659,10 @@
   dependencies:
     "@types/istanbul-lib-report" "*"
 
-"@types/jest@^26.0.13":
-  version "26.0.13"
-  resolved "https://registry.yarnpkg.com/@types/jest/-/jest-26.0.13.tgz#5a7b9d5312f5dd521a38329c38ee9d3802a0b85e"
-  integrity sha512-sCzjKow4z9LILc6DhBvn5AkIfmQzDZkgtVVKmGwVrs5tuid38ws281D4l+7x1kP487+FlKDh5kfMZ8WSPAdmdA==
+"@types/jest@^26.0.14":
+  version "26.0.14"
+  resolved "https://registry.yarnpkg.com/@types/jest/-/jest-26.0.14.tgz#078695f8f65cb55c5a98450d65083b2b73e5a3f3"
+  integrity sha512-Hz5q8Vu0D288x3iWXePSn53W7hAjP0H7EQ6QvDO9c7t46mR0lNOLlfuwQ+JkVxuhygHzlzPX+0jKdA3ZgSh+Vg==
   dependencies:
     jest-diff "^25.2.1"
     pretty-format "^25.2.1"
@@ -1697,10 +1697,10 @@
   resolved "https://registry.yarnpkg.com/@types/prop-types/-/prop-types-15.7.3.tgz#2ab0d5da2e5815f94b0b9d4b95d1e5f243ab2ca7"
   integrity sha512-KfRL3PuHmqQLOG+2tGpRO26Ctg+Cq1E01D2DMriKEATHgWLfeNDmq9e29Q9WIky0dQ3NPkd1mzYH8Lm936Z9qw==
 
-"@types/react-native@^0.63.18":
-  version "0.63.18"
-  resolved "https://registry.yarnpkg.com/@types/react-native/-/react-native-0.63.18.tgz#748d82c6453befe97285393ad9530472d8de56af"
-  integrity sha512-WwEWqmHiqFn61M1FZR/+frj+E8e2o8i5cPqu9mjbjtZS/gBfCKVESF2ai/KAlaQECkkWkx/nMJeCc5eHMmLQgw==
+"@types/react-native@^0.63.22":
+  version "0.63.22"
+  resolved "https://registry.yarnpkg.com/@types/react-native/-/react-native-0.63.22.tgz#5babb88b73c892e3f23b7c18bf83c320cf872f69"
+  integrity sha512-T+ST35WEwpLFAVCGZ4efujd7eHo1yPx3lwme79pg8sLr2EEhpFbblhXkHTJmENJBEL4FbB5suOS3sMn5kuvioQ==
   dependencies:
     "@types/react" "*"
 
@@ -2012,24 +2012,24 @@ anymatch@^3.0.3:
     normalize-path "^3.0.0"
     picomatch "^2.0.4"
 
-appcenter-analytics@3.1.1:
-  version "3.1.1"
-  resolved "https://registry.yarnpkg.com/appcenter-analytics/-/appcenter-analytics-3.1.1.tgz#3239f6c068236bf4a7babf8ad27ee8f36b0cebc7"
-  integrity sha512-xs/jg8wLEzBC60gyTHmBQgBVV2PS9NmvATKIP4/ogLvc5/0lnoRdKQ1M9jK5UJDeiOvUuBNCdeUQsimIRk3VCQ==
+appcenter-analytics@3.1.2:
+  version "3.1.2"
+  resolved "https://registry.yarnpkg.com/appcenter-analytics/-/appcenter-analytics-3.1.2.tgz#7bf78cdfe2575a5ac27e0edf72c6fdbd7e37c098"
+  integrity sha512-uHLcAJW+rP3eO24L5gjAIVMG0Ok2MaLB9bZAdwyIVqSlo1K7ByBTfHDMz6r1RXMRRbIabgiZi+i0+WfZH2dsjA==
   dependencies:
-    appcenter "3.1.1"
+    appcenter "3.1.2"
 
-appcenter-crashes@3.1.1:
-  version "3.1.1"
-  resolved "https://registry.yarnpkg.com/appcenter-crashes/-/appcenter-crashes-3.1.1.tgz#32fac6efe089bef5da7cb2c3598215b04f3659bc"
-  integrity sha512-hs8iGqMsedABfAxpa5gVhZl+BTmShPRj3ZnPAVYCaDR9c4IrZhEuHm452VPUR8alL1DnQTSIC9Ojc3g3NGkRqw==
+appcenter-crashes@3.1.2:
+  version "3.1.2"
+  resolved "https://registry.yarnpkg.com/appcenter-crashes/-/appcenter-crashes-3.1.2.tgz#b2665bccc713c916f659c8997f6fe67f20ea8c99"
+  integrity sha512-G/laj2HhwFKhgEPabyWZpHA04C7hQIzLuVZmQ2EwJ8WOq5yQwQqu561gEsRFNFHY3/8Jxf9VPsG47R1254OF/A==
   dependencies:
-    appcenter "3.1.1"
+    appcenter "3.1.2"
 
-appcenter-link-scripts@3.1.1:
-  version "3.1.1"
-  resolved "https://registry.yarnpkg.com/appcenter-link-scripts/-/appcenter-link-scripts-3.1.1.tgz#f0ca3c2e3b42eea0ea4c3a6833211e34a32f2543"
-  integrity sha512-CmV1GhLSXbx/hAtMonN/GvAIiQOtqCcRwV9pnyvX0CYwGlLNxpQwang2cFnwUpBLE9NDJVvtjvvz3SeDn4tMLg==
+appcenter-link-scripts@3.1.2:
+  version "3.1.2"
+  resolved "https://registry.yarnpkg.com/appcenter-link-scripts/-/appcenter-link-scripts-3.1.2.tgz#97025d322fd38e7e84c85424801613ed826c02bc"
+  integrity sha512-L6wEqUraNYV7X9BAJ+/DvI7XedNnQrdW8cfBJI9HhgzJVAOaHEVcj4BxDQv5H7y5vpKH66G/m8CHx79YgtMPhg==
   dependencies:
     debug "4.1.1"
     glob "5.0.15"
@@ -2039,12 +2039,12 @@ appcenter-link-scripts@3.1.1:
     which "1.2.11"
     xcode "2.0.0"
 
-appcenter@3.1.1:
-  version "3.1.1"
-  resolved "https://registry.yarnpkg.com/appcenter/-/appcenter-3.1.1.tgz#0e14a0111bb0c6a558ab8e89890fbd7ac2f1ebb3"
-  integrity sha512-tzaYLgUti2nK4n2yqo5Rs7lr7O5cNgLSbfnZ9/S0HYc+F+Svwj1tV81tKcj2xZlePI8BpyUlLXBXiN/oZ1GEAA==
+appcenter@3.1.2:
+  version "3.1.2"
+  resolved "https://registry.yarnpkg.com/appcenter/-/appcenter-3.1.2.tgz#183c356db239cf036c280ff2577029dcdba0a912"
+  integrity sha512-69WrDb3dGiT9S9OBhz/eaC384jxXHZIPXwk9FJG8uSZgFdHo+CKw4zbbVrPAHXEPkrgstVNMCuar9XXkr7A1Bw==
   dependencies:
-    appcenter-link-scripts "3.1.1"
+    appcenter-link-scripts "3.1.2"
 
 argparse@^1.0.7:
   version "1.0.10"
@@ -6227,10 +6227,10 @@ mkdirp@^0.5.1:
   dependencies:
     minimist "^1.2.5"
 
-moment@^2.27.0:
-  version "2.27.0"
-  resolved "https://registry.yarnpkg.com/moment/-/moment-2.27.0.tgz#8bff4e3e26a236220dfe3e36de756b6ebaa0105d"
-  integrity sha512-al0MUK7cpIcglMv3YF13qSgdAIqxHTO7brRtaz3DlSULbqfazqkc5kEjNrLDOM7fsjshoFIihnU8snrP7zUvhQ==
+moment@^2.29.0:
+  version "2.29.0"
+  resolved "https://registry.yarnpkg.com/moment/-/moment-2.29.0.tgz#fcbef955844d91deb55438613ddcec56e86a3425"
+  integrity sha512-z6IJ5HXYiuxvFTI6eiQ9dm77uE0gyy1yXNApVHqTcnIKfY9tIwEjlzsZ6u1LQXvVgKeTnv9Xm7NDvJ7lso3MtA==
 
 ms@2.0.0:
   version "2.0.0"
@@ -7092,15 +7092,15 @@ react-native-flipper@^0.37.0:
   resolved "https://registry.yarnpkg.com/react-native-flipper/-/react-native-flipper-0.37.0.tgz#15187696e7361553952a83c77dcf53e508261662"
   integrity sha512-ZnL31EfUoXpFY4zddm/8hW6hh7+wr1VXFV+2s9TWx5F9XQ/bNVFsP+2/bbTVwYE678caZOpmHxkWebkVb2PTtA==
 
-react-native-flipper@^0.49.0:
-  version "0.49.0"
-  resolved "https://registry.yarnpkg.com/react-native-flipper/-/react-native-flipper-0.49.0.tgz#8fd19b7cd8af1e7772ece07e54366aa751a87016"
-  integrity sha512-Y0fIwEyEsouYKbyve71Ps7cUryDcEGLY2EOyve6p9gNMDdpVIfo040JgwCOD/2s+AjWK3C7F0wl4IXIrnF+wiA==
+react-native-flipper@^0.55.0:
+  version "0.55.0"
+  resolved "https://registry.yarnpkg.com/react-native-flipper/-/react-native-flipper-0.55.0.tgz#1fb0e280eff2224f2ab5b3f429896e05112ced41"
+  integrity sha512-z2FARpeCfMWVn4zdYJtpGiYqcmo48dCuAjEI3CdkCewjQVNrT5DxUm33Yr/iM1HnTzVKRKsluPuPsKJXXHaQtw==
 
-react-native-flipper@^0.56.0:
-  version "0.56.0"
-  resolved "https://registry.yarnpkg.com/react-native-flipper/-/react-native-flipper-0.56.0.tgz#8a2999dc1db5fef7bbcce1332c9b656552d8f89b"
-  integrity sha512-0KV2faSucWJosxDWWxpmP5uy4jLLkZfvbsLNy88P1SkGGNIyjno46w9+1HE9jwqAdcysfznZ0l1voh2CXlhrMQ==
+react-native-flipper@^0.58.0:
+  version "0.58.0"
+  resolved "https://registry.yarnpkg.com/react-native-flipper/-/react-native-flipper-0.58.0.tgz#d691aa5d88856b50f59d765f3f14c4c1f0336f2c"
+  integrity sha512-x/g1XLht5IauACHMT1UYPd/UbkY7nZoRyIo+5Pzqa1cnup/0DUyd/VVXR3zrZOhz1VqoYzvUblOA0GEmFNP/BA==
 
 react-native-gesture-handler@^1.8.0:
   version "1.8.0"
@@ -7112,10 +7112,10 @@ react-native-gesture-handler@^1.8.0:
     invariant "^2.2.4"
     prop-types "^15.7.2"
 
-react-native-iap@^4.5.3:
-  version "4.5.3"
-  resolved "https://registry.yarnpkg.com/react-native-iap/-/react-native-iap-4.5.3.tgz#f5eb68199faaa442c6d062121e7382eecc30c17c"
-  integrity sha512-jaWMAUpXmkwy5EqVmOiGtqIisaqLXjbjc0wWg5mmXjnYh5pxKX3Zmtpe7BfJaC4lIyyO8ZI3PiWUTMNnELU8vA==
+react-native-iap@^4.6.2:
+  version "4.6.2"
+  resolved "https://registry.yarnpkg.com/react-native-iap/-/react-native-iap-4.6.2.tgz#d50872d0466723718109b2e52181a7480434c3fd"
+  integrity sha512-2wwhmdyp2s00ybNwXalNuT6RnsHe4mwbLNp4f9CnhPNBeErPErDcnY4WRvNed8GhJE20tajPKjRmYfjrj8DMTA==
   dependencies:
     dooboolab-welcome "^1.2.0"
 
@@ -7129,10 +7129,10 @@ react-native-raw-bottom-sheet@^2.2.0:
   resolved "https://registry.yarnpkg.com/react-native-raw-bottom-sheet/-/react-native-raw-bottom-sheet-2.2.0.tgz#d11dabb86aadb014273767ef7b554924b13633c5"
   integrity sha512-qL4JKIqvbcVxbkKzeh51hjV7suoJN3ouxzvLmOg0FBUV1yiJAfEbacjQdtRCI6+OU5pyGFBIifLsTXcFDwHggg==
 
-react-native-safe-area-context@^3.1.7:
-  version "3.1.7"
-  resolved "https://registry.yarnpkg.com/react-native-safe-area-context/-/react-native-safe-area-context-3.1.7.tgz#fc9e636dfb168f992a2172d363509ce0611a8403"
-  integrity sha512-qSyg/pVMwVPgAy8yCvw349Q+uEUhtRBV33eVXHHkfoou1vCChJxI7SmNR47/6M3BLdjWcyc4lcd018Kx+jhQCw==
+react-native-safe-area-context@^3.1.8:
+  version "3.1.8"
+  resolved "https://registry.yarnpkg.com/react-native-safe-area-context/-/react-native-safe-area-context-3.1.8.tgz#7a9883aa0f38f9c77d4bef2b89e4e285bc1024a3"
+  integrity sha512-9gUlsDZ96QwT9AKzA6aVWM/NX5rlJgauZ9HgCDVzKbe29UQYT1740QJnnaI2GExmkFGp6o7ZLNhCXZW95eYVFA==
 
 react-native-safe-modules@^1.0.0:
   version "1.0.0"
@@ -7141,10 +7141,10 @@ react-native-safe-modules@^1.0.0:
   dependencies:
     dedent "^0.6.0"
 
-react-native-screens@^2.10.1:
-  version "2.10.1"
-  resolved "https://registry.yarnpkg.com/react-native-screens/-/react-native-screens-2.10.1.tgz#06d22fae87ef0ce51c616c34a199726db1403b95"
-  integrity sha512-Z2kKSk4AwWRQNCBmTjViuBQK0/Lx0jc25TZptn/2gKYUCOuVRvCekoA26u0Tsb3BIQ8tWDsZW14OwDlFUXW1aw==
+react-native-screens@^2.11.0:
+  version "2.11.0"
+  resolved "https://registry.yarnpkg.com/react-native-screens/-/react-native-screens-2.11.0.tgz#34b30b07c2d04aa100cba984b944b303bfa43ea6"
+  integrity sha512-vJzJE3zI1XUtqthrX3Dh2TBQWB+xFyaGhF52KBq9FjJUN5ws4xpLZJxBWa1KbGV3DilmcSZ4jmZR5LGordwE7w==
 
 react-native-svg@^12.1.0:
   version "12.1.0"
@@ -7154,10 +7154,10 @@ react-native-svg@^12.1.0:
     css-select "^2.1.0"
     css-tree "^1.0.0-alpha.39"
 
-react-native-webview@^10.8.3:
-  version "10.8.3"
-  resolved "https://registry.yarnpkg.com/react-native-webview/-/react-native-webview-10.8.3.tgz#63245fdf39320dbbc67c26e1e305342a51f93d66"
-  integrity sha512-QV3dCGG8xsr/65Rpf2/Khno8fzkyyJKUZpn00y6Wd1hbYRqataZOesCm2ceZS21yXzLLGVHmQlB5/41h3K787Q==
+react-native-webview@^10.9.0:
+  version "10.9.0"
+  resolved "https://registry.yarnpkg.com/react-native-webview/-/react-native-webview-10.9.0.tgz#a45998f82ab1bbbbfde22b8b155394772610157a"
+  integrity sha512-zYZfmdJca/xRbwvvOfPhzL59SQC4L0W9rPWVF4zMi7BMDdCVHXVp0wKZ9KzmqxZNwadZNTxl5s0pvd6p3S34Fg==
   dependencies:
     escape-string-regexp "2.0.0"
     invariant "2.2.4"
@@ -7305,15 +7305,15 @@ redux-devtools-instrument@^1.9.4:
     lodash "^4.17.19"
     symbol-observable "^1.2.0"
 
-redux-flipper@^1.3.2:
-  version "1.3.2"
-  resolved "https://registry.yarnpkg.com/redux-flipper/-/redux-flipper-1.3.2.tgz#bbc05ca0958daad45df25caa31c1078875f253f7"
-  integrity sha512-Gh0AllSKHB/qOYhkEG+jeAgRcgJ0V43wIiVgzZkfOzekzXAEAbVtBK0hfhtvqnv7MIHa/JIu522XLv+YP8T3GQ==
+redux-flipper@^1.4.0:
+  version "1.4.0"
+  resolved "https://registry.yarnpkg.com/redux-flipper/-/redux-flipper-1.4.0.tgz#9f9bdee5a6b46d89885bcb02509c377946aecc73"
+  integrity sha512-lef1dt+9mvRLsO80U3xMcHMOYNc1zqWJ1E8+JnhSZHoRJoVRrX7x+4MdtaB/e8aAE6QO//vc1E3eQu9IMrBN6w==
   dependencies:
     "@types/node" "^14.0.22"
     cycle "^1.0.3"
     dayjs "^1.8.29"
-    react-native-flipper "^0.49.0"
+    react-native-flipper "^0.55.0"
 
 redux@^4.0.0, redux@^4.0.5:
   version "4.0.5"
@@ -8600,10 +8600,10 @@ typedarray@^0.0.6:
   resolved "https://registry.yarnpkg.com/typedarray/-/typedarray-0.0.6.tgz#867ac74e3864187b1d3d47d996a78ec5c8830777"
   integrity sha1-hnrHTjhkGHsdPUfZlqeOxciDB3c=
 
-typescript@^4.0.2:
-  version "4.0.2"
-  resolved "https://registry.yarnpkg.com/typescript/-/typescript-4.0.2.tgz#7ea7c88777c723c681e33bf7988be5d008d05ac2"
-  integrity sha512-e4ERvRV2wb+rRZ/IQeb3jm2VxBsirQLpQhdxplZ2MEzGvDkkMmPglecnNDfSUBivMjP93vRbngYYDQqQ/78bcQ==
+typescript@^4.0.3:
+  version "4.0.3"
+  resolved "https://registry.yarnpkg.com/typescript/-/typescript-4.0.3.tgz#153bbd468ef07725c1df9c77e8b453f8d36abba5"
+  integrity sha512-tEu6DGxGgRJPb/mVPIZ48e69xCn2yRmCgYmDugAVwmJ6o+0u1RI18eO7E7WBTLYLaEVVOhwQmcdhQHweux/WPg==
 
 ua-parser-js@^0.7.18:
   version "0.7.22"

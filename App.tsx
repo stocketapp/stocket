@@ -1,19 +1,19 @@
 import React, { useEffect, useRef, ReactNode } from 'react'
 import { StatusBar, View, AppState } from 'react-native'
+import AsyncStorage from '@react-native-community/async-storage'
+import messaging from '@react-native-firebase/messaging'
+import RNBootSplash from 'react-native-bootsplash'
 import {
   useAuthState,
   useSetUserInfo,
   useIapProducts,
   useSubscribeMarketHours,
   useSaveApnsToken,
-} from 'hooks'
-import RNBootSplash from 'react-native-bootsplash'
-import { BACKGROUND } from 'utils/colors'
-import TradeView from 'views/TradeView'
-import messaging from '@react-native-firebase/messaging'
+} from './src/hooks'
+import { BACKGROUND } from './src/utils/colors'
+import TradeView from './src/views/TradeView'
 import MainStack from './src/navigation/AppStack'
 import AuthStack from './src/navigation/AuthenticationStack'
-import AsyncStorage from '@react-native-community/async-storage'
 
 messaging().setBackgroundMessageHandler(async remoteMessage => {
   console.log('Message handled in the background!', remoteMessage)

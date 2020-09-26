@@ -1,7 +1,7 @@
 import React from 'react'
 import { View, TouchableOpacity } from 'react-native'
-import { Text } from 'components'
-import { GREEN, DARK_TEXT, LABEL } from 'utils/colors'
+import { Text } from '@components'
+import { GREEN, DARK_TEXT, LABEL } from '@utils/colors'
 import { useNavigation } from '@react-navigation/native'
 
 export default function StockEmpty() {

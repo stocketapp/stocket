@@ -1,8 +1,8 @@
 import React from 'react'
 import { View } from 'react-native'
-import { Text } from 'components'
-import { GRAY_DARKER, LABEL } from 'utils/colors'
-import { formatCurrency } from 'utils/functions'
+import { Text } from '@components'
+import { GRAY_DARKER, LABEL } from '@utils/colors'
+import { formatCurrency } from '@utils/functions'
 
 export default ({ total }) => (
   <View style={{ paddingHorizontal: 16 }}>

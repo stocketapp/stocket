@@ -1,8 +1,8 @@
 // @flow
 import React from 'react'
 import { View, TouchableOpacity } from 'react-native'
-import { Text, Divider } from 'components'
-import { GREEN, LABEL } from 'utils/colors'
+import { Text, Divider } from '@components'
+import { GREEN, LABEL } from '@utils/colors'
 
 type TradeActionPropTypes = {
   onActionChange: (action: string) => void,

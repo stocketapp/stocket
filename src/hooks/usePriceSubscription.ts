@@ -3,7 +3,7 @@ import { useEffect, useState, useCallback } from 'react'
 import { reduce } from 'lodash'
 import useUser from './useUser'
 import { subtract } from 'lodash'
-import { updatePosition } from 'api'
+import { updatePosition } from '@api'
 import { IEX_CLOUD_KEY, IEX_URL } from '../../config'
 
 interface PriceSubscriptionType {

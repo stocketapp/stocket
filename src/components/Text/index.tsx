@@ -1,7 +1,7 @@
 // @flow
 import React from 'react'
 import { Text as RNText, TextStyle } from 'react-native'
-import { GREEN, RED } from 'utils/colors'
+import { GREEN, RED } from '@utils/colors'
 import type { TextProps } from 'types'
 
 const Text = ({

@@ -1,9 +1,9 @@
 // @flow
 import React from 'react'
 import { TouchableOpacity, StyleSheet } from 'react-native'
-import { SUB_BACKGROUND, GRAY_DARKER } from 'utils/colors'
+import { SUB_BACKGROUND, GRAY_DARKER } from '@utils/colors'
 import type { PositionType } from 'types'
-import { Container, Text } from 'components'
+import { Container, Text } from '@components'
 
 type Props = {
   item: PositionType,

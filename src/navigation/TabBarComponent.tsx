@@ -1,7 +1,7 @@
 import React, { ReactElement } from 'react'
 import { TouchableOpacity, Dimensions, StyleSheet } from 'react-native'
-import { Container } from 'components'
-import { BACKGROUND } from 'utils/colors'
+import { Container } from '@components'
+import { BACKGROUND } from '@utils/colors'
 import { NavigationHelpers, ParamListBase } from '@react-navigation/native'
 import { BottomTabDescriptorMap } from '@react-navigation/bottom-tabs/lib/typescript/src/types'
 

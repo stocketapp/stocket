@@ -2,7 +2,7 @@ import React from 'react'
 import { Dimensions, View } from 'react-native'
 import { Path, Svg } from 'react-native-svg'
 import type { IconProps } from '../Types'
-import { SUB_BACKGROUND, LABEL } from 'utils/colors'
+import { SUB_BACKGROUND, LABEL } from '@utils/colors'
 import Text from '../Text'
 
 const { width } = Dimensions.get('screen')

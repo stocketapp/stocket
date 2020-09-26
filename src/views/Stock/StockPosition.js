@@ -1,8 +1,8 @@
 import React from 'react'
 import { View } from 'react-native'
-import { Text, Container } from 'components'
-import { GRAY_DARKER } from 'utils/colors'
-import { formatCurrency } from 'utils/functions'
+import { Text, Container } from '@components'
+import { GRAY_DARKER } from '@utils/colors'
+import { formatCurrency } from '@utils/functions'
 
 export default ({ data }) => (
   <Container ph top={40}>

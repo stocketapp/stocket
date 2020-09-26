@@ -2,14 +2,14 @@ import React, { forwardRef, useEffect, useMemo, useState } from 'react'
 import { View, Dimensions, TouchableOpacity } from 'react-native'
 import Sheet from 'react-native-raw-bottom-sheet'
 import { useSelector, useDispatch } from 'react-redux'
-import { SUB_BACKGROUND, DARK_TEXT, GREEN } from 'utils/colors'
-import { VirtualNumPad, Text, SuccessScreen } from 'components'
-import { createTrade } from 'api'
+import { SUB_BACKGROUND, DARK_TEXT, GREEN } from '@utils/colors'
+import { VirtualNumPad, Text, SuccessScreen } from '@components'
+import { createTrade } from '@api'
 import TradeHeader from './TradeHeader'
 import TradeDetails from './TradeDetails'
 import TradeTotal from './TradeTotal'
 import TradeAction from './TradeAction'
-import { formatCurrency } from 'utils/functions'
+import { formatCurrency } from '@utils/functions'
 
 function TradeView({ ref }) {
   const { trade, user, stock } = useSelector(state => state)

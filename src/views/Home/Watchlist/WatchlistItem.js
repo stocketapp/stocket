@@ -1,8 +1,8 @@
 // @flow
 import React from 'react'
 import { View, StyleSheet, TouchableOpacity } from 'react-native'
-import { Text } from 'components'
-import { GREEN, RED, LABEL } from 'utils/colors'
+import { Text } from '@components'
+import { GREEN, RED, LABEL } from '@utils/colors'
 
 type Props = {
   item: {

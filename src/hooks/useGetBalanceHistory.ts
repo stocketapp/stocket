@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react'
 import firestore from '@react-native-firebase/firestore'
 import moment from 'moment'
 import { findIndex } from 'lodash'
-import { currencyToNumber } from 'utils/functions'
+import { currencyToNumber } from '@utils/functions'
 
 interface UserInfo {
   portfolioChange: number

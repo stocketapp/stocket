@@ -1,7 +1,7 @@
 import React from 'react'
 import { View, StyleSheet, TouchableOpacity, Image } from 'react-native'
-import { Text } from 'components'
-import { CARD_BACKGROUND, GREEN, DARK_TEXT } from 'utils/colors'
+import { Text } from '@components'
+import { CARD_BACKGROUND, GREEN, DARK_TEXT } from '@utils/colors'
 import productImgs from '../../../assets/products'
 
 export default ({ product, onPurchase }) => (

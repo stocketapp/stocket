@@ -1,4 +1,6 @@
-export default {
+import type { RootState } from 'types'
+
+const initialState: RootState = {
   user: {
     isAuth: false,
     currentUser: null,
@@ -11,9 +13,9 @@ export default {
   trade: {
     selectedTradeAction: 'BUY',
     stockQuantity: '0',
-    stockPrice: null,
-    maxShares: null,
-    sharesOwned: null,
+    stockPrice: 0,
+    maxShares: 0,
+    sharesOwned: 0,
     tradeViewIsOpen: false,
     tradeStock: null,
   },
@@ -29,3 +31,5 @@ export default {
     products: null,
   },
 }
+
+export default initialState

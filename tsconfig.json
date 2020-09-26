@@ -10,17 +10,18 @@
     "noEmit": true,
     "strict": true,
     "target": "esnext",
-    "baseUrl": ".",
+    "baseUrl": "./src",
     "paths": {
       "*": ["src/*"],
-      "@components*": ["src/components"],
-      "@utils*": ["src/utils", "src/utils*"],
-      "types*": ["src/types", "src/utils*"],
-      "@views*": ["src/views", "src/views*"],
-      "@navigation*": ["src/navigation", "src/navigation*"],
-      "@hooks*": ["src/hooks", "src/hooks*"],
-      "@api*": ["src/api", "src/api*"],
-      "@icons*": ["src/components/Icons", "src/components/Icons*"]
+      "@components*": ["components", "components*"],
+      "@utils*": ["utils", "utils*"],
+      "types*": ["types", "utils*"],
+      "@views*": ["views", "views*"],
+      "@navigation*": ["navigation", "navigation*"],
+      "@hooks*": ["hooks", "hooks*"],
+      "@api*": ["api", "api*"],
+      "@icons*": ["components/Icons", "components/Icons*"],
+      "@selector": ["redux/selector.ts"]
     }
   },
   "exclude": [

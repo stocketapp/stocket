@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { View, StyleSheet, Pressable } from 'react-native'
 import Text from '../Text'
-import { GREEN, LABEL } from 'utils/colors'
+import { GREEN, LABEL } from '@utils/colors'
 import type { ChartTabProps, ChartRangeTabsProps } from 'types'
 
 const ChartTab = ({

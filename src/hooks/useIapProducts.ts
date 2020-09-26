@@ -3,7 +3,7 @@
 import { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 import * as RNIap from 'react-native-iap'
-import iapProductsList from 'utils/iapProductsList'
+import iapProductsList from '@utils/iapProductsList'
 
 export default function useIapProducts(uid: string) {
   const dispatch = useDispatch()

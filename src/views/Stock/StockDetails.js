@@ -1,8 +1,8 @@
 // @flow
 import React from 'react'
 import { View } from 'react-native'
-import { Text } from 'components'
-import { GRAY_DARKER } from 'utils/colors'
+import { Text } from '@components'
+import { GRAY_DARKER } from '@utils/colors'
 import numeral from 'numeral'
 
 type DetailItemProps = {

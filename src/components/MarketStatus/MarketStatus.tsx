@@ -1,8 +1,8 @@
 import React from 'react'
 import { View } from 'react-native'
 import Text from '../Text'
-import { useSubscribeMarketHours } from 'hooks'
-import { GREEN, LABEL } from 'utils/colors'
+import { useSubscribeMarketHours } from '@hooks'
+import { GREEN, LABEL } from '@utils/colors'
 import styles from './styles'
 
 interface Props {

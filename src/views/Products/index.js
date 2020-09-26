@@ -7,10 +7,10 @@ import React, {
   useCallback,
 } from 'react'
 import { Dimensions, View, StyleSheet, FlatList } from 'react-native'
-import { Text, SuccessScreen } from 'components'
+import { Text, SuccessScreen } from '@components'
 import Sheet from 'react-native-raw-bottom-sheet'
-import { SUB_BACKGROUND, GREEN } from 'utils/colors'
-import { getProductValue, formatCurrency } from 'utils/functions'
+import { SUB_BACKGROUND, GREEN } from '@utils/colors'
+import { getProductValue, formatCurrency } from '@utils/functions'
 import firestore from '@react-native-firebase/firestore'
 import * as RNIap from 'react-native-iap'
 import { sortBy } from 'lodash'

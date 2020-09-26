@@ -1,8 +1,8 @@
 import React from 'react'
 import { View, TouchableOpacity } from 'react-native'
-import { Text } from 'components'
-import { BACKGROUND, GRAY_DARKER, GREEN } from 'utils/colors'
-import { FavoriteIcon } from 'components/Icons'
+import { Text } from '@components'
+import { BACKGROUND, GRAY_DARKER, GREEN } from '@utils/colors'
+import { FavoriteIcon } from '@components/Icons'
 
 type SearchResultProps = {
   item: {

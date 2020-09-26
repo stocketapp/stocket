@@ -1,9 +1,9 @@
 // @flow
 import React from 'react'
 import { View } from 'react-native'
-import { Text } from 'components'
-import { LABEL, GRAY_DARKER } from 'utils/colors'
-import { formatCurrency } from 'utils/functions'
+import { Text } from '@components'
+import { LABEL, GRAY_DARKER } from '@utils/colors'
+import { formatCurrency } from '@utils/functions'
 
 type TradeDetailProps = {
   label: string,
