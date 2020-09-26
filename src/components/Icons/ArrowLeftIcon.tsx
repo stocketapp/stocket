@@ -1,6 +1,6 @@
 import React from 'react'
 import { Path } from 'react-native-svg'
-import type { IconProps } from '../Types'
+import type { IconProps } from 'types'
 import Icon from './Icon'
 
 export default ({ size, color = '#fff' }: IconProps) => (

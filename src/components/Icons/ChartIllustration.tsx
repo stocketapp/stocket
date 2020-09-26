@@ -1,22 +1,15 @@
 import React from 'react'
 import { Dimensions, View } from 'react-native'
 import { Path, Svg } from 'react-native-svg'
-import type { IconProps } from '../Types'
+import type { IconProps } from 'types'
 import { SUB_BACKGROUND, LABEL } from '@utils/colors'
 import Text from '../Text'
 
 const { width } = Dimensions.get('screen')
 
-export default ({ size, color = '#fff', filled }: IconProps) => (
+export default ({}: IconProps) => (
   <View style={{ height: 240, width, alignItems: 'center', bottom: 20 }}>
-    <Svg
-      class="illustration"
-      width="130%"
-      height="230"
-      viewBox="0 0 1145 550"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-    >
+    <Svg width="130%" height="230" viewBox="0 0 1145 550" fill="none">
       <Path
         fill-rule="evenodd"
         clip-rule="evenodd"

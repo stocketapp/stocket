@@ -2,7 +2,7 @@
 import React from 'react'
 import { Path } from 'react-native-svg'
 import Icon from './Icon'
-import type { IconProps } from '../Types'
+import type { IconProps } from 'types'
 
 const SearchIcon = ({ size, color = '#fff' }: IconProps) => (
   <Icon size={size} color={color}>

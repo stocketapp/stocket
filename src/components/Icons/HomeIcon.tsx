@@ -1,9 +1,9 @@
 import React from 'react'
 import Icon from './Icon'
 import { Path } from 'react-native-svg'
-import type { IconProps } from '../Types'
+import type { IconProps } from 'types'
 
-const HomeIcon = ({ size, color = '#fff' }: IconProps): React$Node => (
+const HomeIcon = ({ size, color = '#fff' }: IconProps) => (
   <Icon size={size} color={color}>
     <Path
       fill-rule="evenodd"
