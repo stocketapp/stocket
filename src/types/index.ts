@@ -2,7 +2,7 @@
 
 import { TextStyle, ViewStyle } from 'react-native'
 import { FirebaseFirestoreTypes } from '@react-native-firebase/firestore'
-import { ReactNode } from 'react'
+import { Dispatch, ReactNode, SetStateAction } from 'react'
 
 export interface IconProps {
   size?: number
@@ -60,9 +60,14 @@ export interface TradeInfoProps {
 }
 
 export interface SearchSymbolsProps {
-  value: string
-  setValue: () => void
-  onSearch: () => void
+  value: string | null
+  setValue: Dispatch<SetStateAction<string>>
+  onSearch?: () => void
+}
+
+export interface SearchResultType {
+  symbol: string
+  securityName: string
 }
 
 export interface LabelProps {

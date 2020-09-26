@@ -2,13 +2,7 @@
 import firestore from '@react-native-firebase/firestore'
 import perf from '@react-native-firebase/perf'
 import type { TradeDataType, DocReference } from 'types'
-import {
-  IEX_CLOUD_KEY,
-  IEX_URL,
-  IAPHUB_APPID,
-  IAPHUB_ENV,
-  IAPHUB_API_KEY,
-} from '../../config'
+import { IEX_CLOUD_KEY, IEX_URL, IAPHUB_APPID, IAPHUB_ENV, IAPHUB_API_KEY } from '../../config'
 import { formatCurrency } from '@utils/functions'
 import functions from '@react-native-firebase/functions'
 
@@ -67,9 +61,9 @@ export async function createTrade(
   }
 }
 
-export async function searchTerm(term: string) {
+export async function searchTerm(term: string | null) {
   const trace = await perf().startTrace('IEX_TRACE')
-  trace.putAttribute('search_term', term)
+  trace.putAttribute('search_term', term ?? '')
   const res = await iexGet(`search/${term}`)
   trace.putAttribute('search_response', String(res.status))
   const result = await res.json()
@@ -104,11 +98,7 @@ export async function getNewsArticle(stock: string, last: number = 5) {
   return result
 }
 
-export async function getBatchStockData(
-  symbols: string,
-  range: string = '1d',
-  last: number = 5,
-) {
+export async function getBatchStockData(symbols: string, range: string = '1d', last: number = 5) {
   const typeQuery = '&types=quote,news,chart,intraday-prices'
   const rangeQuery = `${range && `&range=${range}`}`
   const url = `symbols=${symbols}${typeQuery}${rangeQuery}&last=${last}&chartInterval=5&chartIEXWhenNull=true`

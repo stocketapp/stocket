@@ -2,20 +2,16 @@ import React from 'react'
 import { View, TextInput, TouchableOpacity } from 'react-native'
 import Container from '../Container'
 import { SearchIcon } from '@icons'
-import type { SearchSymbolsProps } from 'types'
+import type { SearchSymbolsProps as Props } from 'types'
 import { GRAY_DARKER } from '@utils/colors'
 import styles from './styles'
 
-const SearchSymbol: React.FC<SearchSymbolsProps> = ({
-  value,
-  setValue,
-  onSearch,
-}) => (
+const SearchSymbol: React.FC<Props> = ({ value, setValue, onSearch }) => (
   <Container top={20} bottom={10}>
     <View style={styles.searchContainer}>
       <TextInput
-        value={value}
-        onChangeText={setValue}
+        value={value ?? ''}
+        onChangeText={text => setValue(text)}
         style={styles.searchInput}
         placeholder="Search company symbol or name"
         placeholderTextColor={GRAY_DARKER}

@@ -1,16 +1,17 @@
 // flow
-import React, { useState, useEffect, useCallback } from 'react'
+import React, { useState, useEffect, useCallback, ReactElement } from 'react'
 import { FlatList } from 'react-native'
-import { Container, SearchSymbols, Text } from '@components'
+import { Container, SearchSymbols } from '@components'
 import { useDebounce, useUser } from '@hooks'
 import { searchTerm, addToWatchlist, removeFromWatchlist } from '@api'
 import { useNavigation } from '@react-navigation/native'
 import { useDispatch, useSelector } from 'react-redux'
-import SearchResult from './SearchResult'
 import { includes, map } from 'lodash'
+import type { SearchResultType } from 'types'
+import SearchResult from './SearchResult'
 
 export default function Search(): ReactElement {
-  const [search, setSearch] = useState(null)
+  const [search, setSearch] = useState('')
   const [results, setResults] = useState(null)
   const debounced = useDebounce(search)
   const { currentUser } = useUser()
@@ -30,7 +31,7 @@ export default function Search(): ReactElement {
     }
 
     if (debounced) {
-      getResults(debounced)
+      getResults()
     }
   }, [debounced])
 
@@ -43,14 +44,14 @@ export default function Search(): ReactElement {
   }
 
   const isFaved = useCallback(
-    symbol => {
+    (symbol: string): boolean => {
       const arr = map(watchlist, el => el?.quote?.symbol)
       return includes(arr, symbol)
     },
     [watchlist],
   )
 
-  const toggleFromWatchlist = (uid, symbol, isFav) => {
+  const toggleFromWatchlist = (uid: string, symbol: string, isFav: boolean) => {
     if (!isFav) {
       addToWatchlist(uid, symbol)
     } else {
@@ -63,8 +64,8 @@ export default function Search(): ReactElement {
       <SearchSymbols value={search} setValue={setSearch} />
 
       <FlatList
-        data={results}
-        renderItem={({ item }) => (
+        data={results ?? []}
+        renderItem={({ item }: { item: SearchResultType }) => (
           <SearchResult
             item={item}
             onPress={toggleFromWatchlist}
