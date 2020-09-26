@@ -1,41 +1,33 @@
 // @flow
-import React, {
-  forwardRef,
-  useEffect,
-  useState,
-  useMemo,
-  useCallback,
-} from 'react'
+import React, { forwardRef, useEffect, useState, useMemo, useCallback } from 'react'
 import { Dimensions, View, StyleSheet, FlatList } from 'react-native'
 import { Text, SuccessScreen } from '@components'
 import Sheet from 'react-native-raw-bottom-sheet'
-import { SUB_BACKGROUND, GREEN } from '@utils/colors'
-import { getProductValue, formatCurrency } from '@utils/functions'
 import firestore from '@react-native-firebase/firestore'
 import * as RNIap from 'react-native-iap'
 import { sortBy } from 'lodash'
+import { useIapProductsSelector, useUserSelector } from '@selectors'
+import { useFocusEffect } from '@react-navigation/native'
+import { SUB_BACKGROUND, GREEN } from '@utils/colors'
+import { getProductValue, formatCurrency } from '@utils/functions'
 import ProductsIllustration from './ProductsIllustration'
 import ProductItem from './ProductItem'
-import { useSelector } from 'react-redux'
-import { useFocusEffect } from '@react-navigation/native'
 import { APPSTORE_APP_SECRET } from '../../../config'
 
 type Props = {
-  onClose: () => void,
-  isOpen: boolean,
-  forwardedRef?: { current: any },
+  onClose: () => void
+  isOpen: boolean
+  forwardedRef?: { current: any }
 }
 
 function Products({ onClose, forwardedRef, isOpen }: Props) {
-  const { products } = useSelector(({ iapProducts }) => iapProducts)
-  const { uid } = useSelector(({ user }) => user?.currentUser)
+  const { products } = useIapProductsSelector()
+  const { currentUser } = useUserSelector()
   const [purchaseLoading, setPurchaseLoading] = useState(false)
   const [success, setSuccess] = useState(false)
-  const [purchasedProduct, setPurchasedProduct] = useState(null)
+  const [purchasedProduct, setPurchasedProduct] = useState<string | null>(null)
 
-  const productValues = useMemo(() => getProductValue(purchasedProduct), [
-    purchasedProduct,
-  ])
+  const productValues = useMemo(() => getProductValue(purchasedProduct), [purchasedProduct])
 
   useEffect(() => {
     if (isOpen) {
@@ -45,7 +37,7 @@ function Products({ onClose, forwardedRef, isOpen }: Props) {
 
   useFocusEffect(
     useCallback(() => {
-      const userRef = firestore().collection('Users').doc(uid)
+      const userRef = firestore().collection('Users').doc(currentUser?.uid)
       const purchaseListener = RNIap.purchaseUpdatedListener(async purchase => {
         const receipt = purchase?.transactionReceipt
         const sku = purchase?.productId
@@ -61,7 +53,7 @@ function Products({ onClose, forwardedRef, isOpen }: Props) {
             setPurchasedProduct(sku)
             setSuccess(true)
             await userRef.update({
-              cash: firestore.FieldValue.increment(product?.value),
+              cash: firestore.FieldValue.increment(product?.value ?? 0),
             })
             await RNIap.finishTransaction(purchase, true)
           } catch (err) {
@@ -71,10 +63,10 @@ function Products({ onClose, forwardedRef, isOpen }: Props) {
       })
 
       return () => purchaseListener.remove()
-    }, [uid]),
+    }, [currentUser?.uid]),
   )
 
-  const requestBuy = async sku => {
+  const requestBuy = async (sku: string) => {
     try {
       await RNIap.requestPurchase(sku, false)
     } catch (err) {
@@ -100,14 +92,14 @@ function Products({ onClose, forwardedRef, isOpen }: Props) {
       ref={forwardedRef}
       onClose={close}
       closeOnDragDown
-      dragFromTop
+      dragFromTopOnly
     >
       {success ? (
         <SuccessScreen
           successText={`Successfully added ${formatCurrency(
-            productValues?.value,
+            productValues?.value ?? 0,
           )} to your account.`}
-          bigText={formatCurrency(productValues?.price)}
+          bigText={formatCurrency(productValues?.price ?? 0)}
           onFinished={onFinished}
           loading={purchaseLoading}
         />
@@ -129,9 +121,7 @@ function Products({ onClose, forwardedRef, isOpen }: Props) {
             <View style={styles.products}>
               <FlatList
                 data={sortBy(products, 'price')}
-                renderItem={({ item }) => (
-                  <ProductItem product={item} onPurchase={requestBuy} />
-                )}
+                renderItem={({ item }) => <ProductItem product={item} onPurchase={requestBuy} />}
                 keyExtractor={(el, key) => key.toString()}
                 numColumns={2}
                 contentContainerStyle={{ alignItems: 'center' }}
@@ -145,7 +135,7 @@ function Products({ onClose, forwardedRef, isOpen }: Props) {
   )
 }
 
-export default forwardRef<Props, React$Node>((props: Props, ref: any) => (
+export default forwardRef<Props, any>((props: Props, ref: any) => (
   <Products {...props} forwardedRef={ref} />
 ))
 

@@ -9,7 +9,7 @@ import appleAuth, {
 } from '@invertase/react-native-apple-authentication'
 import { BACKGROUND } from '@utils/colors'
 import { createUserData } from '@api'
-import logo from '../../../assets/bootsplash_logo2x.png'
+import logo from '../../assets/bootsplash_logo2x.png'
 
 const FR = firestore()
 if (__DEV__) {

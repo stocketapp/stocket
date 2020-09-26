@@ -106,6 +106,12 @@ export interface BalanceItem {
   changePct: number
 }
 
+export interface ProductValue {
+  productId: string
+  value: number
+  price: number
+}
+
 export type DocReference = FirebaseFirestoreTypes.DocumentReference
 export type DocumentSnapshot = FirebaseFirestoreTypes.DocumentSnapshot<
   FirebaseFirestoreTypes.DocumentData

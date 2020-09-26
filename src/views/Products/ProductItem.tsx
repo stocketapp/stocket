@@ -2,9 +2,15 @@ import React from 'react'
 import { View, StyleSheet, TouchableOpacity, Image } from 'react-native'
 import { Text } from '@components'
 import { CARD_BACKGROUND, GREEN, DARK_TEXT } from '@utils/colors'
-import productImgs from '../../../assets/products'
+import productImgs from '../../assets/products'
+import type { ProductValue } from 'types'
 
-export default ({ product, onPurchase }) => (
+type Props = {
+  product: ProductValue
+  onPurchase: (product: string) => void
+}
+
+export default ({ product, onPurchase }: Props) => (
   <TouchableOpacity
     style={styles.btnContainer}
     activeOpacity={0.6}
@@ -13,19 +19,11 @@ export default ({ product, onPurchase }) => (
     {product?.productId && (
       <View style={styles.container}>
         <View style={styles.imgContainer}>
-          <Image
-            source={productImgs[product?.productId]}
-            style={styles.productImg}
-          />
+          <Image source={productImgs[product?.productId]} style={styles.productImg} />
         </View>
 
         <View style={styles.textContainer}>
-          <Text
-            weight="Black"
-            color={DARK_TEXT}
-            style={{ textAlign: 'center' }}
-            type="label"
-          >
+          <Text weight="Black" color={DARK_TEXT} style={{ textAlign: 'center' }} type="label">
             {product?.localizedPrice}
           </Text>
         </View>

@@ -3,6 +3,7 @@ import AsyncStorage from '@react-native-community/async-storage'
 import messaging from '@react-native-firebase/messaging'
 import { find } from 'lodash'
 import iapProductsList from './iapProductsList'
+import type { ProductValue } from 'types'
 
 export function formatCurrency(num: number | string): string {
   return Number(num ?? 0).toLocaleString('en-US', {
@@ -30,12 +31,7 @@ export async function requestNotificationPermission() {
   }
 }
 
-interface ProductValue {
-  productId: string
-  value: number
-}
-
-export function getProductValue(productId: string): ProductValue | null {
+export function getProductValue(productId: string | null): ProductValue | null {
   const result = find(iapProductsList, el => el.productId === productId) ?? null
   return result
 }
