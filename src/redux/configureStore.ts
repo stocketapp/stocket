@@ -2,12 +2,12 @@ import { createStore, applyMiddleware, compose } from 'redux'
 import rootStores from './store'
 
 export default function configureStore() {
-  let store
+  let store: any
   const createDebugger = require('redux-flipper').default
   const reduxDebugger = createDebugger()
 
   if (__DEV__) {
-    const enchancer = window.__REDUX_DEVTOOLS_EXTENSION__ || compose
+    const enchancer = (window as any).__REDUX_DEVTOOLS_EXTENSION__ || compose
     store = createStore(rootStores, enchancer(applyMiddleware(reduxDebugger)))
     if (module.hot) {
       module.hot.accept(() => {

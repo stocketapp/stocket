@@ -8,7 +8,7 @@ import { RefreshIcon } from '@icons'
 import type { PositionType } from 'types'
 import StockItem from './StockItem'
 import StockEmpty from './StockEmpty'
-import useStateSelector from '@selector'
+import { useUserSelector } from '@selectors'
 
 type StockHorizontalListProps = {
   data: Array<any>
@@ -20,8 +20,7 @@ export default function StockHorizontalList(props: StockHorizontalListProps) {
   const onUpdateGainsCall = functions().httpsCallable('onUpdateGainsCall')
   const { navigate } = useNavigation()
   const dispatch = useDispatch()
-  const user = useStateSelector('user')
-  const { currentUser } = user
+  const { currentUser } = useUserSelector()
 
   const refreshGains = () => {
     onUpdateGainsCall({
@@ -60,9 +59,7 @@ export default function StockHorizontalList(props: StockHorizontalListProps) {
       ) : (
         <FlatList
           data={data}
-          renderItem={({ item }) => (
-            <StockItem item={item} onPress={() => goToStock(item)} />
-          )}
+          renderItem={({ item }) => <StockItem item={item} onPress={() => goToStock(item)} />}
           keyExtractor={(index, key) => key.toString()}
           style={styles.list}
           horizontal

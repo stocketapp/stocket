@@ -15,5 +15,5 @@ const rootReducer = combineReducers({
   iapProducts,
 })
 
-export default (state, action) =>
-  rootReducer(action.type === 'USER_LOGOUT' ? undefined : state, action)
+export default (state: any, action: any) =>
+  rootReducer(action.type === 'USER_LOGOUT' ? null : state, action)

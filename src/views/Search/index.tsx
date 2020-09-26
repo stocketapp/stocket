@@ -1,14 +1,14 @@
-// flow
 import React, { useState, useEffect, useCallback, ReactElement } from 'react'
 import { FlatList } from 'react-native'
 import { Container, SearchSymbols } from '@components'
 import { useDebounce, useUser } from '@hooks'
 import { searchTerm, addToWatchlist, removeFromWatchlist } from '@api'
 import { useNavigation } from '@react-navigation/native'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { includes, map } from 'lodash'
 import type { SearchResultType } from 'types'
 import SearchResult from './SearchResult'
+import { useStockSelector } from '@selectors'
 
 export default function Search(): ReactElement {
   const [search, setSearch] = useState('')
@@ -17,7 +17,7 @@ export default function Search(): ReactElement {
   const { currentUser } = useUser()
   const { navigate } = useNavigation()
   const dispatch = useDispatch()
-  const { watchlist } = useSelector(({ stock }) => stock)
+  const { watchlist } = useStockSelector()
 
   useEffect(() => {
     const getResults = async () => {

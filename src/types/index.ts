@@ -1,5 +1,3 @@
-// <reference path="react/inidex.d.ts" />
-
 import { TextStyle, ViewStyle } from 'react-native'
 import { FirebaseFirestoreTypes } from '@react-native-firebase/firestore'
 import { Dispatch, ReactNode, SetStateAction } from 'react'

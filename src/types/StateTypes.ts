@@ -6,12 +6,6 @@ export interface RootState {
   trade: TradeState
   stock: StockState
   iapProducts: IapProductsState
-  // [key: string]:
-  //   | UserState
-  //   | PortfolioState
-  //   | TradeState
-  //   | StockState
-  //   | IapProductsState
 }
 
 export interface UserState {
@@ -59,3 +53,5 @@ export interface StockState {
 export interface IapProductsState {
   products: Array<any> | null
 }
+
+export type DefaultState = UserState | PortfolioState | TradeState | StockState | IapProductsState
