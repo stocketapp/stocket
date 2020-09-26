@@ -42,7 +42,7 @@ export interface TradeState {
 }
 
 export interface StockState {
-  selectedStock: object
+  selectedStock: SelectedStockData
   stockData: object
   positionsMktData: object | null
   myStockLoading: boolean
@@ -50,8 +50,12 @@ export interface StockState {
   watchlist: Array<any>
 }
 
+export interface SelectedStockData {
+  quote: {
+    symbol: string
+  }
+}
+
 export interface IapProductsState {
   products: Array<any> | null
 }
-
-export type DefaultState = UserState | PortfolioState | TradeState | StockState | IapProductsState

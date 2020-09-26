@@ -76,11 +76,7 @@ export default function ChartLine({
         </VictoryGroup>
       </VictoryChart>
       {tabs?.length > 0 && (
-        <ChartRangeTabs
-          activeRangeTab={activeRangeTab}
-          tabs={tabs}
-          onTabPress={onTabPress}
-        />
+        <ChartRangeTabs activeRangeTab={activeRangeTab} tabs={tabs} onTabPress={onTabPress} />
       )}
     </View>
   )

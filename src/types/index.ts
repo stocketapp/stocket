@@ -2,11 +2,16 @@ import { TextStyle, ViewStyle } from 'react-native'
 import { FirebaseFirestoreTypes } from '@react-native-firebase/firestore'
 import { Dispatch, ReactNode, SetStateAction } from 'react'
 
-export interface IconProps {
+export interface SvgProps {
   size?: number
-  children: ReactNode
+  children?: ReactNode
   color?: string
   filled?: boolean
+}
+
+export interface IconProps {
+  size?: number
+  color?: string
 }
 
 export interface ContainerProps {
@@ -94,7 +99,17 @@ export interface TradeDataType {
   value: number
 }
 
+export interface BalanceItem {
+  date: string
+  value: number
+  change: number
+  changePct: number
+}
+
 export type DocReference = FirebaseFirestoreTypes.DocumentReference
+export type DocumentSnapshot = FirebaseFirestoreTypes.DocumentSnapshot<
+  FirebaseFirestoreTypes.DocumentData
+>
 
 export interface CurrentUser {
   uid: string

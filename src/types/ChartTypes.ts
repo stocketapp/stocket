@@ -1,3 +1,4 @@
+import type { BalanceItem } from './index'
 export interface CursorLineProps {
   x?: number
   scale?: any
@@ -15,7 +16,7 @@ interface ChartLineData {
 }
 
 export interface ChartLineProps {
-  data: Array<ChartLineData>
+  data: Array<BalanceItem>
   x?: string
   y?: string
   chartProps?: {
@@ -26,10 +27,10 @@ export interface ChartLineProps {
   labelText?: string | number
   labelRightOffset?: number
   labelLeftOffset?: number
-  onChartEvent: (value: string | number | null) => void
-  tabs: Array<string>
-  onTabPress: (tab: string) => void
-  activeRangeTab: string
+  onChartEvent?: (item: { change: number; changePct: number; value: number; date: string }) => void
+  tabs?: Array<string>
+  onTabPress?: (tab: string) => void
+  activeRangeTab?: string
 }
 
 export interface ChartRangeTabsProps {

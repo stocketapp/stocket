@@ -1,5 +1,5 @@
 import React from 'react'
-import { View, TouchableOpacity } from 'react-native'
+import { View, TouchableOpacity, StyleSheet } from 'react-native'
 import { Text } from '@components'
 import { GREEN, DARK_TEXT, LABEL } from '@utils/colors'
 import { useNavigation } from '@react-navigation/native'
@@ -21,7 +21,7 @@ export default function StockEmpty() {
   )
 }
 
-const styles = {
+const styles = StyleSheet.create({
   container: {
     justifyContent: 'center',
     alignItems: 'center',
@@ -35,4 +35,4 @@ const styles = {
     borderRadius: 8,
     marginTop: 20,
   },
-}
+})

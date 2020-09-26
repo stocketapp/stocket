@@ -2,19 +2,15 @@ import React, { useState, useEffect, useRef, useCallback, useMemo } from 'react'
 import { StyleSheet, ScrollView, View } from 'react-native'
 import { BACKGROUND, GRAY_DARKER } from '@utils/colors'
 import { Balance, Container, ChartLine, MarketStatus, Text } from '@components'
-import {
-  useGetMyStocks,
-  useWatchlist,
-  useGetBalanceHistory,
-  useUser,
-} from '@hooks'
+import { useGetMyStocks, useWatchlist, useGetBalanceHistory, useUser } from '@hooks'
 import { useNavigation, useFocusEffect } from '@react-navigation/native'
 import { useDispatch } from 'react-redux'
 import { callUpdateGains } from '@api'
-import { ChartIllustration } from '@components/Icons'
+import { ChartIllustration } from '@icons'
 import { filter } from 'lodash'
 import StockHorizontalList from './StockHorizontalList'
 import Watchlist from './Watchlist'
+import type { SelectedStockData } from 'types'
 
 export default function Home() {
   const { userInfo, currentUser } = useUser()
@@ -24,12 +20,12 @@ export default function Home() {
   const { navigate } = useNavigation()
   const [allowScroll, setAllowScroll] = useState(true)
   const balanceHistory = useGetBalanceHistory(uid, userInfo)
-  const [balanceValue, setBalanceValue] = useState(null)
-  const [balanceChange, setBalanceChange] = useState(null)
-  const [balanceChangePct, setBalanceChangePct] = useState(null)
-  const [balanceDate, setBalanceDate] = useState(null)
+  const [balanceValue, setBalanceValue] = useState(0)
+  const [balanceChange, setBalanceChange] = useState(0)
+  const [balanceChangePct, setBalanceChangePct] = useState(0)
+  const [balanceDate, setBalanceDate] = useState('')
   const dispatch = useDispatch()
-  const timeout = useRef()
+  const timeout = useRef<any>(null)
   const dateNow = useMemo(() => {
     if (!balanceDate) {
       return 'Today'
@@ -37,7 +33,7 @@ export default function Home() {
     return balanceDate
   }, [balanceDate])
 
-  const onWatchlistItemPress = (stockInfo: PositionType) => {
+  const onWatchlistItemPress = (stockInfo: SelectedStockData) => {
     dispatch({
       type: 'SET_SELECTED_STOCK',
       selectedStock: stockInfo?.quote?.symbol,
@@ -67,19 +63,21 @@ export default function Home() {
 
   const onChartEvent = (
     item: {
-      change: number,
-      changePct: number,
-      value: number,
-      date: string,
+      change: number
+      changePct: number
+      value: number
+      date: string
     } | null,
   ) => {
-    setBalanceValue(item?.value)
-    setBalanceChange(item?.change)
-    setBalanceChangePct(item?.changePct)
-    setBalanceDate(item?.date)
+    setBalanceValue(item?.value ?? 0)
+    setBalanceChange(item?.change ?? 0)
+    setBalanceChangePct(item?.changePct ?? 0)
+    setBalanceDate(item?.date ?? '')
 
     if (!item) {
-      timeout.current = setTimeout(() => setAllowScroll(true), 500)
+      if (timeout.current) {
+        timeout.current = setTimeout(() => setAllowScroll(true), 500)
+      }
     } else {
       setAllowScroll(false)
     }
@@ -93,9 +91,7 @@ export default function Home() {
         scrollEnabled={allowScroll}
       >
         <View style={styles.header}>
-          <View
-            style={{ flexDirection: 'row', justifyContent: 'space-between' }}
-          >
+          <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
             <Text color={GRAY_DARKER} type="label">
               Invested
             </Text>
@@ -122,9 +118,7 @@ export default function Home() {
           <ChartIllustration />
         )}
         <StockHorizontalList data={positions} loading={loading} />
-        {watchlist.length > 0 && (
-          <Watchlist data={watchlist} onItemPress={onWatchlistItemPress} />
-        )}
+        {watchlist.length > 0 && <Watchlist data={watchlist} onItemPress={onWatchlistItemPress} />}
       </ScrollView>
     </Container>
   )

@@ -5,12 +5,12 @@ import { SUB_BACKGROUND, GRAY_DARKER } from '@utils/colors'
 import type { PositionType } from 'types'
 import { Container, Text } from '@components'
 
-type Props = {
-  item: PositionType,
-  onPress: () => void,
+interface Props {
+  item: PositionType
+  onPress: () => void
 }
 
-const StockItem = ({ item, onPress }: Props): React$Node => (
+const StockItem = ({ item, onPress }: Props) => (
   <TouchableOpacity onPress={onPress}>
     <Container style={styles.container}>
       <Text

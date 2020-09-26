@@ -2,10 +2,11 @@
 import { useEffect, useState } from 'react'
 import firestore from '@react-native-firebase/firestore'
 import { useSelector, useDispatch } from 'react-redux'
+import type { PortfolioState } from 'types'
 
 const UsersRef = firestore().collection('Users')
 
-export default function useGetMyStocks(uid: string): {} {
+export default function useGetMyStocks(uid: string): PortfolioState {
   const [loading, setLoading] = useState(true)
   const dispatch = useDispatch()
   const { positions } = useSelector(({ stock }: { stock: any }) => stock)

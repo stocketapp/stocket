@@ -1,19 +1,14 @@
 import { useEffect, useState } from 'react'
-import firestore, {
-  FirebaseFirestoreTypes,
-} from '@react-native-firebase/firestore'
-import type { DocReference } from 'types'
+import firestore from '@react-native-firebase/firestore'
+import type { DocumentSnapshot } from 'types'
 
 const marketRef = firestore().doc('Markets/stock_market')
 
-type Snapshot = FirebaseFirestoreTypes.DocumentReference<
-  FirebaseFirestoreTypes.DocumentData
->
 export default function useSubscribeMarketHours() {
   const [status, setStatus] = useState(false)
 
   useEffect(() => {
-    const subscribe = marketRef.onSnapshot((snapshot: any, err: any) => {
+    const subscribe = marketRef.onSnapshot((snapshot: DocumentSnapshot, err?: any) => {
       if (err) {
         console.log('Error fetching market status', err)
       } else {

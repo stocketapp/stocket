@@ -27,6 +27,13 @@ export default function useWatchlist(uid: string) {
 
   return uniqBy(
     watchlist,
-    (el: { quote: { symbol: string } }) => el?.quote?.symbol,
+    (el: {
+      quote: {
+        symbol: string
+        change: number
+        latestPrice: number
+        companyName: string
+      }
+    }) => el?.quote?.symbol,
   )
 }

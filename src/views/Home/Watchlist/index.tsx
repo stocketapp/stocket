@@ -3,10 +3,18 @@ import React from 'react'
 import { StyleSheet, View } from 'react-native'
 import { Text } from '@components'
 import WatchlistItem from './WatchlistItem'
+import type { SelectedStockData } from 'types'
 
 type Props = {
-  data: [],
-  onItemPress: (item: {}) => void,
+  data: Array<{
+    quote: {
+      symbol: string
+      change: number
+      latestPrice: number
+      companyName: string
+    }
+  }>
+  onItemPress: (item: SelectedStockData) => void
 }
 
 const Watchlist = ({ data, onItemPress }: Props) => (

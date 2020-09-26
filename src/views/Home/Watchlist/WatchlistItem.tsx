@@ -7,13 +7,13 @@ import { GREEN, RED, LABEL } from '@utils/colors'
 type Props = {
   item: {
     quote: {
-      symbol: string,
-      change: number,
-      latestPrice: number,
-      companyName: string,
-    },
-  },
-  onPress: () => void,
+      symbol: string
+      change: number
+      latestPrice: number
+      companyName: string
+    }
+  }
+  onPress: () => void
 }
 
 export default ({ item, onPress }: Props) => {
@@ -32,12 +32,7 @@ export default ({ item, onPress }: Props) => {
           <Text style={{ textAlign: 'right' }} weight="Semibold">
             {latestPrice}
           </Text>
-          <View
-            style={[
-              styles.change,
-              { backgroundColor: change >= 0 ? GREEN : RED },
-            ]}
-          >
+          <View style={[styles.change, { backgroundColor: change >= 0 ? GREEN : RED }]}>
             <Text style={{ textAlign: 'right' }} weight="Medium">
               {change > 0 && '+'}
               {change}
