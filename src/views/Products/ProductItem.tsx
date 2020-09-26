@@ -2,11 +2,11 @@ import React from 'react'
 import { View, StyleSheet, TouchableOpacity, Image } from 'react-native'
 import { Text } from '@components'
 import { CARD_BACKGROUND, GREEN, DARK_TEXT } from '@utils/colors'
-import productImgs from '../../assets/products'
+import productImgs from '@products-assets'
 import type { ProductValue } from 'types'
 
 type Props = {
-  product: ProductValue
+  product: ProductValue & { localizedPrice: string }
   onPurchase: (product: string) => void
 }
 

@@ -18,6 +18,8 @@ module.exports = {
           '@icons': './src/components/Icons',
           types: './src/types',
           '@selectors': './src/redux/selectors.ts',
+          '@assets': './src/assets',
+          '@products-assets': './src/assets/products',
         },
       },
     ],

@@ -4,14 +4,7 @@ import Svg, { Path } from 'react-native-svg'
 import { View } from 'react-native'
 const PurchaseIllustration = () => (
   <View style={{ height: 240, width: 240 }}>
-    <Svg
-      class="illustration"
-      width="300"
-      height="370"
-      viewBox="265 100 375 700"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-    >
+    <Svg width="300" height="370" viewBox="265 100 375 700" fill="none">
       <Path
         d="M611.412 233.605C611.748 235.905 612.74 237.678 613.418 237.842C614.342 238.075 616.484 234.605 616.587 234.495L611.412 233.605Z"
         fill="white"

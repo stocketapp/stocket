@@ -1,6 +1,6 @@
 import { Alert } from 'react-native'
 
-export default function (err) {
+export default function (err: string) {
   switch (err) {
     case 'user_cancelled':
       break
