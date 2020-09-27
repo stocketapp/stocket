@@ -2,53 +2,41 @@ import React from 'react'
 import { View, StyleSheet, Image } from 'react-native'
 import auth from '@react-native-firebase/auth'
 import firestore from '@react-native-firebase/firestore'
-import appleAuth, {
-  AppleButton,
-  AppleAuthRequestScope,
-  AppleAuthRequestOperation,
-} from '@invertase/react-native-apple-authentication'
+import appleAuth, { AppleButton } from '@invertase/react-native-apple-authentication'
 import { BACKGROUND } from '@utils/colors'
 import { createUserData } from '@api'
-import logo from '../../assets/bootsplash_logo2x.png'
+
+const logo = require('../../assets/bootsplash_logo2x.png')
 
 const FR = firestore()
 if (__DEV__) {
-  FR.settings({ host: 'localhost:4002' })
+  FR.settings({ host: 'localhost:4002', cacheSizeBytes: 2000, ssl: false, persistence: true })
 }
 
 export default function SignIn() {
   async function onAppleButtonPress() {
     const appleAuthRequestResponse = await appleAuth.performRequest({
-      requestedOperation: AppleAuthRequestOperation.LOGIN,
-      requestedScopes: [
-        AppleAuthRequestScope.EMAIL,
-        AppleAuthRequestScope.FULL_NAME,
-      ],
+      requestedOperation: appleAuth.Operation.LOGIN,
+      requestedScopes: [appleAuth.Scope.EMAIL, appleAuth.Scope.FULL_NAME],
     })
 
     const { identityToken, nonce, fullName } = appleAuthRequestResponse
     if (identityToken) {
-      const appleCredential = auth.AppleAuthProvider.credential(
-        identityToken,
-        nonce,
-      )
+      const appleCredential = auth.AppleAuthProvider.credential(identityToken, nonce)
       await auth().signInWithCredential(appleCredential)
       const currentUser = auth().currentUser
-      const { uid, email } = currentUser
       const displayName = `${fullName?.givenName} ${fullName?.familyName}`
 
       try {
-        const user = await FR.doc(`Users/${uid}`).get()
+        const user = await FR.doc(`Users/${currentUser?.uid}`).get()
         const userExists = user.exists
         if (!userExists) {
           await createUserData({
-            uid,
+            uid: currentUser?.uid,
             name: displayName,
-            email,
-            portfolioChange: 0,
-            portfolioChangePct: 0,
+            email: currentUser?.email,
           })
-          await currentUser.updateProfile({ displayName })
+          await currentUser?.updateProfile({ displayName })
         }
       } catch (err) {
         console.log(err)

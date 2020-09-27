@@ -1,9 +1,15 @@
 import React from 'react'
-import { View, TouchableOpacity } from 'react-native'
+import { View, TouchableOpacity, StyleSheet } from 'react-native'
 import { Text } from '@components'
 import { LABEL, GRAY_DARKER } from '@utils/colors'
 
-export default function ({ onPress, label, value }) {
+type Props = {
+  onPress?: () => void
+  label: string
+  value: string
+}
+
+export default function ({ onPress, label, value }: Props) {
   return (
     <TouchableOpacity onPress={onPress} disabled={!onPress}>
       <View style={styles.item}>
@@ -18,7 +24,7 @@ export default function ({ onPress, label, value }) {
   )
 }
 
-const styles = {
+const styles = StyleSheet.create({
   item: {
     flexDirection: 'row',
     justifyContent: 'space-between',
@@ -26,4 +32,4 @@ const styles = {
     borderBottomColor: GRAY_DARKER,
     paddingVertical: 15,
   },
-}
+})

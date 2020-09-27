@@ -1,9 +1,8 @@
 // @flow
 import React, { useRef, useState } from 'react'
-import { View } from 'react-native'
+import { View, StyleSheet } from 'react-native'
 import { Container, Text } from '@components'
 import { LABEL, CARD_BACKGROUND } from '@utils/colors'
-import { useSelector } from 'react-redux'
 import { formatCurrency, currencyToNumber } from '@utils/functions'
 import { useTotalGains } from '@hooks'
 import ProfileItem from './ProfileItem'
@@ -11,17 +10,16 @@ import AddCash from './AddCash'
 import LogoutButton from './LogoutButton'
 import pckg from '../../../package.json'
 import Products from '../Products'
+import { useUserSelector } from '@selectors'
 
 export default function Profile() {
-  const { userInfo } = useSelector(({ user }) => user)
-  const iapRef = useRef()
+  const { userInfo } = useUserSelector()
+  const iapRef = useRef(null)
   const [isIapOpen, setIsIapOpen] = useState(false)
-  const portfolioValue = userInfo?.portfolioValue
-  const cash = formatCurrency(userInfo?.cash)
+  const portfolioValue = userInfo?.portfolioValue ?? '$0.00'
+  const cash = formatCurrency(userInfo?.cash ?? 0)
   const { totalGains } = useTotalGains(portfolioValue ?? '$0.00')
-  const accountValue = formatCurrency(
-    currencyToNumber(portfolioValue) + userInfo?.cash,
-  )
+  const accountValue = formatCurrency(currencyToNumber(portfolioValue ?? '$0.00') + cash)
 
   return (
     <Container fullView ph style={{ flex: 1, justifyContent: 'space-between' }}>
@@ -63,16 +61,12 @@ export default function Profile() {
           {pckg.version}
         </Text>
       </View>
-      <Products
-        ref={iapRef}
-        isOpen={isIapOpen}
-        onClose={() => setIsIapOpen(false)}
-      />
+      <Products ref={iapRef} isOpen={isIapOpen} onClose={() => setIsIapOpen(false)} />
     </Container>
   )
 }
 
-const styles = {
+const styles = StyleSheet.create({
   topBlock: {
     width: '100%',
     height: '32%',
@@ -97,4 +91,4 @@ const styles = {
     justifyContent: 'space-between',
     alignItems: 'flex-end',
   },
-}
+})
