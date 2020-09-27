@@ -2,7 +2,7 @@
 import React from 'react'
 import { Text as RNText, TextStyle } from 'react-native'
 import { GREEN, RED } from '@utils/colors'
-import type { TextProps } from 'types'
+import type { CustomTextProps } from 'types'
 
 const Text = ({
   type,
@@ -13,7 +13,7 @@ const Text = ({
   style,
   weight = 'Regular',
   ...props
-}: TextProps) => {
+}: CustomTextProps) => {
   const selectFontSize = () => {
     switch (type) {
       case 'heading':

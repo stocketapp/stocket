@@ -1,4 +1,4 @@
-import { TextStyle, ViewStyle } from 'react-native'
+import { TextProps, TextStyle, ViewStyle } from 'react-native'
 import { FirebaseFirestoreTypes } from '@react-native-firebase/firestore'
 import { Dispatch, ReactNode, SetStateAction } from 'react'
 
@@ -30,7 +30,7 @@ export interface ContainerProps {
   safeAreaBottom?: boolean
 }
 
-export interface TextProps {
+export interface CustomTextProps extends TextProps {
   type?: 'heading' | 'title' | 'label' | 'subtext' | 'big'
   cap?: boolean
   color?: string
@@ -89,6 +89,8 @@ export interface PositionType {
   value: number
   todayGainsPct: number
   todayGains: number
+  shares: Array<any>
+  previousDayPrice: number
 }
 
 export interface TradeDataType {
@@ -100,10 +102,11 @@ export interface TradeDataType {
 }
 
 export interface BalanceItem {
-  date: string
+  date: string | Date
   value: number
-  change: number
-  changePct: number
+  change?: number
+  changePct?: number
+  label?: string
 }
 
 export interface ProductValue {
@@ -119,6 +122,13 @@ export type DocumentSnapshot = FirebaseFirestoreTypes.DocumentSnapshot<
 
 export interface CurrentUser {
   uid: string
+}
+
+export interface ArticleType {
+  image: string
+  headline: string
+  source: string
+  url: string
 }
 
 export * from './ChartTypes'

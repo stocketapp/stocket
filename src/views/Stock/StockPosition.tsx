@@ -1,10 +1,11 @@
 import React from 'react'
-import { View } from 'react-native'
+import { View, StyleSheet } from 'react-native'
 import { Text, Container } from '@components'
 import { GRAY_DARKER } from '@utils/colors'
 import { formatCurrency } from '@utils/functions'
+import type { PositionType } from 'types'
 
-export default ({ data }) => (
+export default ({ data }: { data: PositionType }) => (
   <Container ph top={40}>
     <Text type="heading" weight="Black">
       Position
@@ -20,16 +21,12 @@ export default ({ data }) => (
       <View style={styles.posData}>
         <View style={{ paddingTop: 15 }}>
           <Text color={GRAY_DARKER}>Today's Return</Text>
-          <Text style={styles.postDataValue}>
-            {formatCurrency(data?.todayGains)}
-          </Text>
+          <Text style={styles.postDataValue}>{formatCurrency(data?.todayGains)}</Text>
         </View>
 
         <View style={{ paddingTop: 15 }}>
           <Text color={GRAY_DARKER}>Total Return</Text>
-          <Text style={styles.postDataValue}>
-            {formatCurrency(data?.gains)}
-          </Text>
+          <Text style={styles.postDataValue}>{formatCurrency(data?.gains)}</Text>
         </View>
       </View>
 
@@ -40,9 +37,7 @@ export default ({ data }) => (
         </View>
         <View style={{ paddingTop: 15 }}>
           <Text color={GRAY_DARKER}>Equity</Text>
-          <Text style={styles.postDataValue}>
-            {formatCurrency(data?.value)}
-          </Text>
+          <Text style={styles.postDataValue}>{formatCurrency(data?.value)}</Text>
         </View>
       </View>
     </View>
@@ -51,7 +46,7 @@ export default ({ data }) => (
   </Container>
 )
 
-const styles = {
+const styles = StyleSheet.create({
   posData: {
     justifyContent: 'space-between',
     width: '49%',
@@ -60,4 +55,4 @@ const styles = {
     paddingTop: 2,
     fontSize: 22,
   },
-}
+})

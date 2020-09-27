@@ -5,18 +5,13 @@ import { Text, Container } from '@components'
 import { GREEN, BACKGROUND, DARK_TEXT, GRAY_DARKER } from '@utils/colors'
 
 type StockTradeBarProps = {
-  status: string,
-  price: number,
-  openTradeView: () => void,
-  marketStatus: boolean,
+  status: string
+  price: number | string
+  openTradeView: () => void
+  marketStatus: boolean
 }
 
-export default ({
-  status,
-  price,
-  openTradeView,
-  marketStatus,
-}: StockTradeBarProps) => (
+export default ({ price, openTradeView, marketStatus }: StockTradeBarProps) => (
   <Container style={styles.bottom} top={5} bottom={10}>
     <View style={{ flexDirection: 'column' }}>
       <Text color={GRAY_DARKER}>Trade at</Text>
@@ -27,7 +22,7 @@ export default ({
 
     <TouchableOpacity onPress={openTradeView} disabled={!marketStatus}>
       <View style={{ ...styles.button, opacity: marketStatus ? 1 : 0.4 }}>
-        <Text color={DARK_TEXT} weight="BLACK" style={{ fontSize: 18 }}>
+        <Text color={DARK_TEXT} weight="Black" style={{ fontSize: 18 }}>
           Trade
         </Text>
       </View>

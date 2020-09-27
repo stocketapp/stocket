@@ -1,19 +1,18 @@
 import React, { useRef } from 'react'
-import { View, Image, TouchableOpacity } from 'react-native'
+import { View, Image, TouchableOpacity, StyleSheet, Text as RNText } from 'react-native'
 import { Text, ModalWebview } from '@components'
 import { GRAY_DARKER } from '@utils/colors'
+import type { ArticleType } from 'types'
 
-const ArticleItem = ({ article }) => {
-  const ref = useRef()
+const ArticleItem = ({ article }: { article: ArticleType }) => {
+  const ref = useRef(null)
   const noArticle = /http/g.test(article?.image)
 
   return (
     <>
-      <TouchableOpacity
-        onPress={() => ref.current.open()}
-        disabled={!noArticle}
-      >
+      <TouchableOpacity onPress={() => (ref.current as any).open()} disabled={!noArticle}>
         <View style={styles.articleContainer}>
+          <RNText>hi</RNText>
           <View>
             {noArticle ? (
               <Image source={{ uri: article?.image }} style={styles.img} />
@@ -28,12 +27,7 @@ const ArticleItem = ({ article }) => {
               justifyContent: 'space-between',
             }}
           >
-            <Text
-              style={{ fontSize: 17 }}
-              weight="Black"
-              numberOfLines={3}
-              ellipsizeMode="tail"
-            >
+            <Text style={{ fontSize: 17 }} weight="Black" numberOfLines={3} ellipsizeMode="tail">
               {article?.headline}
             </Text>
             <Text color={GRAY_DARKER}>{article?.source}</Text>
@@ -45,7 +39,7 @@ const ArticleItem = ({ article }) => {
   )
 }
 
-export default function StockNews({ articles }) {
+export default function StockNews({ articles }: { articles: Array<ArticleType> }) {
   return (
     <View style={styles.container}>
       <Text type="heading" weight="Black" style={{ paddingBottom: 10 }}>
@@ -59,7 +53,7 @@ export default function StockNews({ articles }) {
   )
 }
 
-const styles = {
+const styles = StyleSheet.create({
   container: {
     paddingTop: 40,
     paddingHorizontal: 16,
@@ -73,4 +67,4 @@ const styles = {
     width: 125,
     borderRadius: 4,
   },
-}
+})

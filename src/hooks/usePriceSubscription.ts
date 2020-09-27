@@ -5,17 +5,9 @@ import useUser from './useUser'
 import { subtract } from 'lodash'
 import { updatePosition } from '@api'
 import { IEX_CLOUD_KEY, IEX_URL } from '../../config'
+import { PositionType } from 'types'
 
-interface PriceSubscriptionType {
-  symbol: string
-  shares: []
-  previousDayPrice: number
-}
-
-const getGains = (
-  { shares, previousDayPrice }: PriceSubscriptionType,
-  price: number,
-) => {
+const getGains = ({ shares, previousDayPrice }: PositionType, price: number) => {
   const value = shares?.length * price
   const gainsArr = shares?.map((el: { price: number }) => price - el.price)
   const gains = reduce(gainsArr, (a, b) => a + b) ?? 0
@@ -32,16 +24,14 @@ const getGains = (
 
 export default function usePriceSubscription(
   symbol: string,
-  position: PriceSubscriptionType,
+  position: PositionType | null,
 ): number {
   const [price, setPrice] = useState(0)
   const { currentUser } = useUser()
 
   const getPrice = useCallback(async () => {
     try {
-      const res = await fetch(
-        `${IEX_URL}/stock/${symbol}/price?token=${IEX_CLOUD_KEY}`,
-      )
+      const res = await fetch(`${IEX_URL}/stock/${symbol}/price?token=${IEX_CLOUD_KEY}`)
       const responsePrice = await res.json()
       setPrice(responsePrice)
       if (position) {

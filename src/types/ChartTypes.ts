@@ -1,15 +1,16 @@
+import { Dispatch, SetStateAction } from 'react'
 import type { BalanceItem } from './index'
 export interface CursorLineProps {
   x?: number
   scale?: any
   datum?: any
-  onEvent: (value: any) => void
+  onEvent: (item: { change: number; changePct: number; value: number; date: string }) => void
   labelText: string | number
   leftOffset: number
   rightOffset: number
 }
 
-interface ChartLineData {
+export interface ChartLineData {
   date: Date
   value: number
   label: string
@@ -29,7 +30,7 @@ export interface ChartLineProps {
   labelLeftOffset?: number
   onChartEvent?: (item: { change: number; changePct: number; value: number; date: string }) => void
   tabs?: Array<string>
-  onTabPress?: (tab: string) => void
+  onTabPress?: Dispatch<SetStateAction<GraphRange>>
   activeRangeTab?: string
 }
 
@@ -44,3 +45,5 @@ export interface ChartTabProps {
   onPress: () => void
   activeTab: string
 }
+
+export type GraphRange = 'now' | '1m' | '3m' | '6m' | '1y'

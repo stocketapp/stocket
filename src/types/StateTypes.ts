@@ -42,20 +42,42 @@ export interface TradeState {
 }
 
 export interface StockState {
-  selectedStock: SelectedStockData
+  selectedStock: string
   stockData: object
   positionsMktData: object | null
   myStockLoading: boolean
   selectedStockPosition: string | null
   watchlist: Array<any>
+  positions: Array<PositionType>
 }
 
 export interface SelectedStockData {
-  quote: {
-    symbol: string
-  }
+  quote: StockQuote
+  chart: Array<SelectedStockChart>
+  news: Array<any>
+}
+
+export interface SelectedStockChart {
+  close: number
+  label: string
+  date: string
 }
 
 export interface IapProductsState {
   products: Array<any> | null
+}
+
+export interface StockQuote {
+  symbol?: string
+  close: number
+  companyName: string
+  open: string
+  high: string
+  low: string
+  volume: string
+  marketCap: string
+  peRatio: string
+  week52High: string
+  week52Low: string
+  change: number
 }

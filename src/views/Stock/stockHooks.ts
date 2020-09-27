@@ -5,10 +5,14 @@ import { useDispatch } from 'react-redux'
 import { getBatchStockData, getHistoricalData } from '@api'
 import { filter } from 'lodash'
 import { useAsyncStorage } from '@react-native-community/async-storage'
+import type { SelectedStockData, SelectedStockChart, GraphRange } from 'types'
 
-export function useGetCurrentStock(selectedStock: string, stockInfo: {}) {
+export function useGetCurrentStock(
+  selectedStock: string,
+  stockInfo: SelectedStockData,
+): SelectedStockData | null {
   const dispatch = useDispatch()
-  const [stock, setStock] = useState(null)
+  const [stock, setStock] = useState<SelectedStockData | null>(null)
 
   useEffect(() => {
     const getData = async () => {
@@ -36,18 +40,19 @@ export function useGetCurrentStock(selectedStock: string, stockInfo: {}) {
 }
 
 type GraphData = {
-  data: { chart: [] } | [{}],
+  data: { chart: [] } | [{}]
 }
-type GraphRange = 'now' | '1m' | '3m' | '6m' | '1y'
 
-export function useGraphData(stockData: GraphData, range: GraphRange = 'now') {
-  const [graphData, setGraphData] = useState()
+export function useGraphData(stockData: SelectedStockData | null, range: GraphRange = 'now') {
+  const [graphData, setGraphData] = useState<Array<{ value: number; label: string; date: string }>>(
+    [],
+  )
   const { getItem, setItem } = useAsyncStorage(
     `@stocket_historical: ${stockData?.quote?.symbol}_${range}`,
   )
 
   useEffect(() => {
-    const getGraphData = data => {
+    const getGraphData = (data: Array<SelectedStockChart>) => {
       const arr = filter(data, el => el?.close !== null)
       const result = arr.map(el => ({
         value: el.close,
@@ -65,7 +70,7 @@ export function useGraphData(stockData: GraphData, range: GraphRange = 'now') {
           // save data to cache
           data = JSON.parse(item)
         } else {
-          data = await getHistoricalData(stockData?.quote?.symbol, range)
+          data = await getHistoricalData(stockData?.quote?.symbol ?? '', range)
           await setItem(JSON.stringify(data))
         }
         getGraphData(data)
@@ -77,7 +82,7 @@ export function useGraphData(stockData: GraphData, range: GraphRange = 'now') {
     if (range !== 'now') {
       getHistData()
     } else {
-      getGraphData(stockData?.chart)
+      getGraphData(stockData?.chart ?? [])
     }
   }, [stockData, range])
 

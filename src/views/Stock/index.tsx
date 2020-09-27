@@ -2,8 +2,8 @@ import React, { useState, useCallback } from 'react'
 import { View, TouchableOpacity, ScrollView, StyleSheet } from 'react-native'
 import { Text, Container, Loader, ChartLine, MarketStatus } from '@components'
 import { GREEN, BACKGROUND, GRAY_DARKER } from '@utils/colors'
-import { ArrowLeftIcon, FavoriteIcon } from '@components/Icons'
-import { useSelector, useDispatch } from 'react-redux'
+import { ArrowLeftIcon, FavoriteIcon } from '@icons'
+import { useDispatch } from 'react-redux'
 import { find, minBy } from 'lodash'
 import StockDetails from './StockDetails'
 import { useNavigation } from '@react-navigation/native'
@@ -13,26 +13,25 @@ import StockTradeBar from './StockTradeBar'
 import { addToWatchlist, removeFromWatchlist } from '@api'
 import { useSubscribeMarketHours, usePriceSubscription } from '@hooks'
 import { useGetCurrentStock, useGraphData } from './stockHooks'
+import { useStockSelector, useUserSelector } from '@selectors'
+import type { GraphRange } from 'types'
 
-export default function Stock({ route }) {
+export default function Stock({ route }: { route: any }) {
   const { goBack } = useNavigation()
-  const { positions, selectedStock, watchlist } = useSelector(
-    ({ stock }) => stock,
-  )
-  const selectedStockPosition = find(
-    positions,
-    el => el?.symbol === selectedStock,
-  )
+  const { positions, selectedStock, watchlist } = useStockSelector()
+  const selectedStockPosition = find(positions, el => el?.symbol === selectedStock) ?? null
   const stockInfo = route.params?.stockInfo
   const stock = useGetCurrentStock(selectedStock, stockInfo)
-  const [graphRange, setGraphRange] = useState('now')
+  const [graphRange, setGraphRange] = useState<GraphRange>('now')
   const graphData = useGraphData(stock, graphRange)
-  const { uid } = useSelector(({ user }) => user?.currentUser)
+  const { currentUser } = useUserSelector()
+  const uid = currentUser?.uid
   const [allowScroll, setAllowScroll] = useState(true)
   const dispatch = useDispatch()
   const price = usePriceSubscription(selectedStock, selectedStockPosition)
   const latestPrice = price?.toFixed(2) // ?? stock?.quote?.latestPrice
   const marketStatus = useSubscribeMarketHours()
+  const symbol = stock?.quote?.symbol ?? ''
 
   const openTradeView = useCallback(() => {
     dispatch({
@@ -53,10 +52,7 @@ export default function Stock({ route }) {
     }
   }, [])
 
-  const isFav = find(
-    watchlist,
-    el => el?.quote?.symbol === stock?.quote?.symbol,
-  )
+  const isFav = find(watchlist, el => el?.quote?.symbol === stock?.quote?.symbol)
 
   return (
     <Container style={styles.container} safeAreaTop>
@@ -65,19 +61,17 @@ export default function Stock({ route }) {
           <ArrowLeftIcon size={30} color={GREEN} />
         </TouchableOpacity>
         <MarketStatus />
-        <TouchableOpacity
-          onPress={() =>
-            isFav
-              ? removeFromWatchlist(uid, stock?.quote?.symbol)
-              : addToWatchlist(uid, stock?.quote?.symbol)
-          }
-          style={{ padding: 5 }}
-        >
-          <FavoriteIcon size={26} color={GREEN} filled={isFav} />
-        </TouchableOpacity>
+        {uid && (
+          <TouchableOpacity
+            onPress={() => (isFav ? removeFromWatchlist(uid, symbol) : addToWatchlist(uid, symbol))}
+            style={{ padding: 5 }}
+          >
+            <FavoriteIcon size={26} color={GREEN} />
+          </TouchableOpacity>
+        )}
       </View>
 
-      {!stock && !graphData && !stock?.chart ? (
+      {!stock && !graphData ? (
         <View style={styles.loader}>
           <Loader size={100} />
         </View>
@@ -94,15 +88,11 @@ export default function Stock({ route }) {
                   <Text weight="Black" style={{ fontSize: 30 }}>
                     {stock?.quote?.companyName}
                   </Text>
-                  <Text
-                    style={{ paddingBottom: 4, left: 10 }}
-                    color={GRAY_DARKER}
-                    type="label"
-                  >
+                  <Text style={{ paddingBottom: 4, left: 10 }} color={GRAY_DARKER} type="label">
                     {stock?.quote?.symbol}
                   </Text>
                 </View>
-                <Text type="heading" weight="bold" style={{ paddingTop: 6 }}>
+                <Text type="heading" weight="Bold" style={{ paddingTop: 6 }}>
                   {latestPrice}
                 </Text>
               </View>
@@ -112,34 +102,33 @@ export default function Stock({ route }) {
                 y="value"
                 data={graphData}
                 chartProps={{
-                  minDomain: { y: minBy(graphData, 'value')?.value - 2 },
+                  minDomain: { y: (minBy(graphData, 'value')?.value ?? 0) - 2 },
                 }}
                 labelText="value"
                 labelRightOffset={40}
                 labelLeftOffset={15}
-                onChartEvent={onChartEvent}
+                onEvent={onChartEvent}
                 tabs={['now', '1m', '3m', '6m', '1y']}
                 onTabPress={setGraphRange}
                 activeRangeTab={graphRange}
               />
 
-              <StockDetails data={stock?.quote} />
+              {stock && <StockDetails data={stock?.quote} />}
 
-              {selectedStockPosition && (
-                <StockPosition data={selectedStockPosition} />
-              )}
+              {selectedStockPosition && <StockPosition data={selectedStockPosition} />}
 
               {stock?.news && <StockNews articles={stock?.news} />}
             </View>
           </ScrollView>
 
-          <StockTradeBar
-            status={stock?.quote?.change < 0 ? 'negative' : 'positive'}
-            price={latestPrice}
-            openTradeView={openTradeView}
-            stockData={stock}
-            marketStatus={marketStatus}
-          />
+          {stock && (
+            <StockTradeBar
+              status={stock?.quote?.change < 0 ? 'negative' : 'positive'}
+              price={latestPrice}
+              openTradeView={openTradeView}
+              marketStatus={marketStatus}
+            />
+          )}
         </>
       )}
     </Container>
