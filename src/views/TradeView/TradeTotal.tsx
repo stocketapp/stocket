@@ -1,10 +1,10 @@
 import React from 'react'
-import { View } from 'react-native'
+import { View, StyleSheet } from 'react-native'
 import { Text } from '@components'
 import { GRAY_DARKER, LABEL } from '@utils/colors'
 import { formatCurrency } from '@utils/functions'
 
-export default ({ total }) => (
+export default ({ total }: { total: number }) => (
   <View style={{ paddingHorizontal: 16 }}>
     <View style={styles.container}>
       <Text type="title" color={LABEL}>
@@ -17,7 +17,7 @@ export default ({ total }) => (
   </View>
 )
 
-const styles = {
+const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
     justifyContent: 'space-between',
@@ -25,4 +25,4 @@ const styles = {
     borderBottomColor: GRAY_DARKER,
     paddingBottom: 14,
   },
-}
+})

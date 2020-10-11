@@ -1,7 +1,7 @@
 import React, { forwardRef, useEffect, useMemo, useState } from 'react'
-import { View, Dimensions, TouchableOpacity } from 'react-native'
+import { View, Dimensions, TouchableOpacity, StyleSheet } from 'react-native'
 import Sheet from 'react-native-raw-bottom-sheet'
-import { useSelector, useDispatch } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { SUB_BACKGROUND, DARK_TEXT, GREEN } from '@utils/colors'
 import { VirtualNumPad, Text, SuccessScreen } from '@components'
 import { createTrade } from '@api'
@@ -10,31 +10,40 @@ import TradeDetails from './TradeDetails'
 import TradeTotal from './TradeTotal'
 import TradeAction from './TradeAction'
 import { formatCurrency } from '@utils/functions'
+import { useStockSelector, useUserSelector, useTradeSelector } from '@selectors'
+import type { TradeDataType } from 'types'
 
-function TradeView({ ref }) {
-  const { trade, user, stock } = useSelector(state => state)
+type Props = {
+  forwardedRef?: any
+}
+
+function TradeView({ forwardedRef }: Props) {
+  // const { trade, user, stock } = useSelector(state => state)
   const {
     tradeViewIsOpen,
     stockQuantity,
     selectedTradeAction,
     tradeStock,
     stockPrice,
-  } = trade
-  const { selectedStockPosition } = stock
-  const { currentUser, userInfo } = user
+  } = useTradeSelector()
+  const { selectedStockPosition } = useStockSelector()
+  const { currentUser, userInfo } = useUserSelector()
+  // const { tradeViewIsOpen, stockQuantity, selectedTradeAction, tradeStock, stockPrice } = trade
+  // const { selectedStockPosition } = stock
+  // const { currentUser, userInfo } = user
   const dispatch = useDispatch()
   const sharesOwned = selectedStockPosition?.shares?.length
-  const maxShares = Math.floor(userInfo?.cash / stockPrice)
+  const maxShares = Math.floor(userInfo?.cash ?? 0 / stockPrice)
   const [isLoading, setIsLoading] = useState(false)
   const [goToSuccess, setGoToSuccess] = useState(false)
 
   useEffect(() => {
-    if (tradeViewIsOpen) {
-      ref.current.open()
+    if (forwardedRef && tradeViewIsOpen) {
+      forwardedRef?.current?.open()
     } else {
-      ref.current.close()
+      forwardedRef?.current?.close()
     }
-  }, [tradeViewIsOpen, ref])
+  }, [tradeViewIsOpen, forwardedRef])
 
   useEffect(() => {
     if (stockQuantity === '') {
@@ -57,7 +66,7 @@ function TradeView({ ref }) {
     setGoToSuccess(false)
   }
 
-  const setQuantity = quantity => {
+  const setQuantity = (quantity: string) => {
     dispatch({
       type: 'SET_QUANTITY',
       stockQuantity: stockQuantity.concat(quantity).replace(/^0/g, ''),
@@ -68,7 +77,7 @@ function TradeView({ ref }) {
     if (stockQuantity === '') {
       dispatch({
         type: 'SET_QUANTITY',
-        stockQuantity: stockQuantity.concat('0').replace(),
+        stockQuantity: stockQuantity.concat(''),
       })
     }
     dispatch({
@@ -77,22 +86,21 @@ function TradeView({ ref }) {
     })
   }
 
-  const setAction = action => {
+  const setAction = (action: string) => {
     dispatch({
       type: 'SELECTED_TRADE_ACTION',
       selectedTradeAction: action,
     })
   }
 
-  const total = useMemo(() => stockQuantity * stockPrice, [
-    stockQuantity,
-    stockPrice,
-  ])
+  const total = useMemo(() => {
+    return Number(stockQuantity) * stockPrice
+  }, [stockQuantity, stockPrice])
 
   const createTradeTransaction = async () => {
     setIsLoading(true)
     setGoToSuccess(true)
-    const obj = {
+    const obj: TradeDataType = {
       value: total,
       price: stockPrice,
       name: tradeStock?.quote.companyName,
@@ -101,17 +109,18 @@ function TradeView({ ref }) {
       action: selectedTradeAction,
       date: Date.now(),
     }
-    await createTrade({ uid: currentUser?.uid, data: obj }, () =>
-      setIsLoading(false),
-    )
+    if (currentUser?.uid && obj) {
+      await createTrade({ uid: currentUser?.uid, data: obj }, () => setIsLoading(false))
+    }
   }
 
   const btnDisabled = useMemo(() => {
+    const qtty = Number(stockQuantity)
     return (
       stockQuantity &&
       (selectedTradeAction === 'BUY'
-        ? stockQuantity <= maxShares && stockQuantity !== '0'
-        : stockQuantity <= sharesOwned && stockQuantity !== '0')
+        ? qtty <= maxShares && stockQuantity !== '0'
+        : qtty <= (sharesOwned ?? 0) && stockQuantity !== '0')
     )
   }, [stockQuantity, selectedTradeAction, maxShares, sharesOwned])
 
@@ -119,10 +128,10 @@ function TradeView({ ref }) {
     <Sheet
       height={Dimensions.get('window').height - 70}
       customStyles={{ container: styles.container }}
-      ref={ref}
+      ref={forwardedRef}
       onClose={closeTradeView}
       closeOnDragDown
-      dragFromTop
+      dragFromTopOnly
     >
       {goToSuccess ? (
         <SuccessScreen
@@ -139,12 +148,12 @@ function TradeView({ ref }) {
         <View style={{ flex: 1, justifyContent: 'space-between' }}>
           <View style={{ paddingHorizontal: 16 }}>
             <TradeHeader
-              symbol={stock?.symbol}
-              isSell={trade.selectedTradeAction === 'SELL'}
+              symbol={tradeStock?.quote?.symbol}
+              isSell={selectedTradeAction === 'SELL'}
             />
 
             <TradeDetails
-              selectedStock={tradeStock?.quote}
+              // selectedStock={tradeStock?.quote}
               quantity={stockQuantity}
               maxShares={maxShares}
               isSell={selectedTradeAction === 'BUY'}
@@ -152,10 +161,7 @@ function TradeView({ ref }) {
               price={stockPrice}
             />
 
-            <TradeAction
-              onActionChange={setAction}
-              action={selectedTradeAction}
-            />
+            <TradeAction onActionChange={setAction} action={selectedTradeAction} />
           </View>
 
           <View style={{ paddingBottom: 40 }}>
@@ -167,11 +173,9 @@ function TradeView({ ref }) {
               onPress={createTradeTransaction}
               disabled={!btnDisabled}
             >
-              <View
-                style={[styles.actionBtn, { opacity: !btnDisabled ? 0.5 : 1 }]}
-              >
+              <View style={[styles.actionBtn, { opacity: !btnDisabled ? 0.5 : 1 }]}>
                 <Text type="title" color={DARK_TEXT} weight="Black">
-                  {trade.selectedTradeAction}
+                  {selectedTradeAction}
                 </Text>
               </View>
             </TouchableOpacity>
@@ -182,9 +186,9 @@ function TradeView({ ref }) {
   )
 }
 
-export default forwardRef((props, ref) => TradeView({ ref, ...props }))
+export default forwardRef((props, forwardedRef) => TradeView({ forwardedRef, ...props }))
 
-const styles = {
+const styles = StyleSheet.create({
   container: {
     borderRadius: 14,
     backgroundColor: SUB_BACKGROUND,
@@ -203,4 +207,4 @@ const styles = {
     alignItems: 'center',
     marginVertical: 5,
   },
-}
+})

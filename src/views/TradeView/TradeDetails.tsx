@@ -1,13 +1,13 @@
 // @flow
 import React from 'react'
-import { View } from 'react-native'
+import { View, StyleSheet } from 'react-native'
 import { Text } from '@components'
 import { LABEL, GRAY_DARKER } from '@utils/colors'
 import { formatCurrency } from '@utils/functions'
 
 type TradeDetailProps = {
-  label: string,
-  value: string | number,
+  label: string
+  value: string | number
 }
 
 const TradeDetail = ({ label, value }: TradeDetailProps) => (
@@ -22,26 +22,20 @@ const TradeDetail = ({ label, value }: TradeDetailProps) => (
 )
 
 type TradeDetailsProps = {
-  quantity: string | number,
-  maxShares: number,
-  isSell: string,
-  owned: number,
-  price: number,
+  quantity?: string | number
+  maxShares?: number
+  isSell: boolean
+  owned?: number
+  price?: number
 }
 
-export default ({
-  quantity,
-  maxShares,
-  isSell,
-  owned,
-  price,
-}: TradeDetailsProps) => {
+export default ({ quantity, maxShares, isSell, owned, price }: TradeDetailsProps) => {
   const sharesAmountLabel = isSell ? 'Max' : 'Owned'
-  const sharesAmount = isSell ? (maxShares >= 0 ? maxShares : '0') : owned
+  const sharesAmount = isSell ? ((maxShares ?? 0) >= 0 ? maxShares : '0') : owned
   return (
     <View style={{ paddingTop: '3%' }}>
-      <TradeDetail label="Price" value={formatCurrency(price)} />
-      <TradeDetail label="Shares" value={quantity} />
+      <TradeDetail label="Price" value={formatCurrency(price ?? 0)} />
+      <TradeDetail label="Shares" value={quantity ?? ''} />
 
       <View style={styles.maxSharesContainer}>
         <Text type="subtext" color={GRAY_DARKER} weight="Medium">
@@ -52,7 +46,7 @@ export default ({
   )
 }
 
-const styles = {
+const styles = StyleSheet.create({
   detail: {
     flexDirection: 'row',
     justifyContent: 'space-between',
@@ -67,4 +61,4 @@ const styles = {
     height: 30,
     justifyContent: 'center',
   },
-}
+})

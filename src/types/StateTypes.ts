@@ -34,11 +34,11 @@ export interface PortfolioState {
 export interface TradeState {
   selectedTradeAction: string
   stockQuantity: string
-  stockPrice: number | null
+  stockPrice: number
   maxShares: number | null
   sharesOwned: number | null
   tradeViewIsOpen: boolean
-  tradeStock: string | null
+  tradeStock: SelectedStockData | null
 }
 
 export interface StockState {
@@ -46,7 +46,7 @@ export interface StockState {
   stockData: object
   positionsMktData: object | null
   myStockLoading: boolean
-  selectedStockPosition: string | null
+  selectedStockPosition: PositionType | null
   watchlist: Array<any>
   positions: Array<PositionType>
 }

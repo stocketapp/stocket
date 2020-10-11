@@ -94,11 +94,13 @@ export interface PositionType {
 }
 
 export interface TradeDataType {
-  symbol: string
-  action: string
-  quantity: number
-  price: number
-  value: number
+  symbol?: string
+  action?: string
+  quantity?: string
+  price?: number
+  value?: number
+  name?: string
+  date?: number
 }
 
 export interface BalanceItem {
