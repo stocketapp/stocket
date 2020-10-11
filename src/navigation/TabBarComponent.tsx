@@ -6,13 +6,7 @@ import { NavigationHelpers, ParamListBase } from '@react-navigation/native'
 import { BottomTabDescriptorMap } from '@react-navigation/bottom-tabs/lib/typescript/src/types'
 
 export default function TabBarComponent(props: TabBarProps): ReactElement {
-  const {
-    navigation,
-    state,
-    descriptors,
-    activeTintColor,
-    inactiveTintColor,
-  } = props
+  const { navigation, state, descriptors, activeTintColor, inactiveTintColor } = props
   const routesLength: number = state.routes.length
   const tabWidth: number = Dimensions.get('screen').width / routesLength
   const activeRoute: number = state.index
@@ -21,8 +15,7 @@ export default function TabBarComponent(props: TabBarProps): ReactElement {
     <Container style={styles.container} horizontal safeAreaBottom>
       {state.routes.map((route: TabBarRoute, routeIndex: number) => {
         const focused: boolean = activeRoute === routeIndex
-        const tintColor: string =
-          (focused ? activeTintColor : inactiveTintColor) ?? '#000'
+        const tintColor: string = (focused ? activeTintColor : inactiveTintColor) ?? '#000'
         const { options } = descriptors[route.key]
         const { tabBarIcon } = options
 

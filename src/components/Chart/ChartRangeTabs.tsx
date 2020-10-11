@@ -4,20 +4,12 @@ import Text from '../Text'
 import { GREEN, LABEL } from '@utils/colors'
 import type { ChartTabProps, ChartRangeTabsProps } from 'types'
 
-const ChartTab = ({
-  label,
-  onPress = () => null,
-  activeTab,
-}: ChartTabProps) => {
+const ChartTab = ({ label, onPress = () => null, activeTab }: ChartTabProps) => {
   const [opacity, setOpacity] = useState(1)
   const isActive = activeTab === label
 
   return (
-    <Pressable
-      onPress={onPress}
-      onPressIn={() => setOpacity(0.6)}
-      onPressOut={() => setOpacity(1)}
-    >
+    <Pressable onPress={onPress} onPressIn={() => setOpacity(0.6)} onPressOut={() => setOpacity(1)}>
       <View style={[styles.tab, { opacity }]}>
         <Text
           style={styles.label}
@@ -32,11 +24,7 @@ const ChartTab = ({
   )
 }
 
-const ChartRangeTabs = ({
-  activeRangeTab,
-  onTabPress,
-  tabs,
-}: ChartRangeTabsProps) => (
+const ChartRangeTabs = ({ activeRangeTab, onTabPress, tabs }: ChartRangeTabsProps) => (
   <View style={styles.container}>
     {tabs.map((tabLabel, i) => (
       <ChartTab

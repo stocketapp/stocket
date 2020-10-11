@@ -28,14 +28,16 @@ export interface ChartLineProps {
   labelText?: string | number
   labelRightOffset?: number
   labelLeftOffset?: number
-  onChartEvent?: (item: { change: number; changePct: number; value: number; date: string }) => void
+  onChartEvent?: (
+    item: { change: number; changePct: number; value: number; date: string } | null,
+  ) => void
   tabs?: Array<string>
-  onTabPress?: Dispatch<SetStateAction<GraphRange>>
+  onTabPress?: Dispatch<SetStateAction<GraphRange> | string>
   activeRangeTab?: string
 }
 
 export interface ChartRangeTabsProps {
-  activeRangeTab: string
+  activeRangeTab?: string | undefined
   onTabPress: (tab: string) => void
   tabs: Array<string>
 }
@@ -43,7 +45,7 @@ export interface ChartRangeTabsProps {
 export interface ChartTabProps {
   label: string
   onPress: () => void
-  activeTab: string
+  activeTab?: string
 }
 
 export type GraphRange = 'now' | '1m' | '3m' | '6m' | '1y'

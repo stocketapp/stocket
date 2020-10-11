@@ -14,14 +14,14 @@
     "resolveJsonModule": true,
     "paths": {
       "*": ["src/*"],
-      "@components*": ["src/components", "src/components*"],
+      "@components*": ["components", "src/components*"],
       "@utils*": ["src/utils", "src/utils*"],
       "types*": ["src/types", "src/utils*"],
       "@views*": ["src/views", "src/views*"],
       "@navigation*": ["src/navigation", "src/navigation*"],
       "@hooks*": ["src/hooks", "src/hooks*"],
       "@api*": ["src/api", "src/api*"],
-      "@icons*": ["src/components/Icons", "src/components/Icons*"],
+      "@icons*": ["@icons", "@icons*"],
       "@selectors": ["src/redux/selectors.ts"],
       "@assets": ["src/assets", "src/assets*"],
       "@products-assets": ["src/assets/products"]

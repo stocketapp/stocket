@@ -15,7 +15,7 @@ module.exports = {
           '@navigation': './src/navigation',
           '@hooks': './src/hooks',
           '@api': './src/api',
-          '@icons': './src/components/Icons',
+          '@icons': './src/@icons',
           types: './src/types',
           '@selectors': './src/redux/selectors.ts',
           '@assets': './src/assets',

@@ -7,10 +7,7 @@ interface DividerPropTypes {
   width?: number
 }
 
-const Divider: React.FC<DividerPropTypes> = ({
-  vertical = false,
-  width = 0.5,
-}) => {
+const Divider: React.FC<DividerPropTypes> = ({ vertical = false, width = 0.5 }) => {
   const styles = {
     width: vertical ? width : '100%',
     height: vertical ? '100%' : width,

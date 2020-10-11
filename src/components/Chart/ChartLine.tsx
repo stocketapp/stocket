@@ -49,14 +49,14 @@ export default function ChartLine({
             voronoiDimension="x"
             labelComponent={
               <CursorLine
-                onEvent={onChartEvent}
+                onEvent={e => onChartEvent && onChartEvent(e)}
                 labelText={labelText}
                 leftOffset={labelLeftOffset}
                 rightOffset={labelRightOffset}
               />
             }
             labels={({ datum }) => datum[labelText]}
-            onDeactivated={() => onChartEvent(null)}
+            onDeactivated={() => onChartEvent && onChartEvent(null)}
           />
         }
       >
@@ -76,7 +76,11 @@ export default function ChartLine({
         </VictoryGroup>
       </VictoryChart>
       {tabs?.length > 0 && (
-        <ChartRangeTabs activeRangeTab={activeRangeTab} tabs={tabs} onTabPress={onTabPress} />
+        <ChartRangeTabs
+          activeRangeTab={activeRangeTab}
+          tabs={tabs}
+          onTabPress={tab => onTabPress && onTabPress(tab)}
+        />
       )}
     </View>
   )
