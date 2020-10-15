@@ -5,6 +5,7 @@ import trade from './reducers/trade'
 import stock from './reducers/stock'
 import graph from './reducers/graph'
 import iapProducts from './reducers/iapProducts'
+import initialState from './initialState'
 
 const rootReducer = combineReducers({
   user,
@@ -16,4 +17,4 @@ const rootReducer = combineReducers({
 })
 
 export default (state: any, action: any) =>
-  rootReducer(action.type === 'USER_LOGOUT' ? null : state, action)
+  rootReducer(action.type === 'USER_LOGOUT' ? initialState : state, action)

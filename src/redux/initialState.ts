@@ -20,12 +20,13 @@ const initialState: RootState = {
     tradeStock: null,
   },
   stock: {
-    selectedStock: {},
+    selectedStock: '',
     stockData: {},
     positionsMktData: null,
     myStockLoading: false,
     selectedStockPosition: null,
     watchlist: [],
+    positions: [],
   },
   iapProducts: {
     products: null,

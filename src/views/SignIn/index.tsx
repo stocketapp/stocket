@@ -10,7 +10,12 @@ const logo = require('../../assets/bootsplash_logo2x.png')
 
 const FR = firestore()
 if (__DEV__) {
-  FR.settings({ host: 'localhost:4002', cacheSizeBytes: 2000, ssl: false, persistence: true })
+  FR.settings({
+    host: 'localhost:4002',
+    cacheSizeBytes: firestore.CACHE_SIZE_UNLIMITED,
+    ssl: false,
+    persistence: true,
+  })
 }
 
 export default function SignIn() {

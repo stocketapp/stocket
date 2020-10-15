@@ -1,7 +1,8 @@
 import initialState from '../initialState'
+import type { IapProductsState } from 'types'
 
 interface Action {
-  products: Array<any>
+  products: IapProductsState
   type: string
 }
 export default function (state = initialState.iapProducts, action: Action) {

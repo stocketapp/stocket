@@ -5,7 +5,6 @@ import type { TradeDataType, DocReference } from 'types'
 import { IEX_CLOUD_KEY, IEX_URL } from '../../config'
 import { formatCurrency } from '@utils/functions'
 import functions from '@react-native-firebase/functions'
-import firebase from '@react-native-firebase/app'
 
 const FR = firestore()
 
@@ -13,8 +12,9 @@ if (__DEV__) {
   functions().useFunctionsEmulator('http://localhost:4001')
   FR.settings({
     host: 'localhost:4002',
+    cacheSizeBytes: firestore.CACHE_SIZE_UNLIMITED,
     ssl: false,
-    // cacheSizeBytes: firebase.firestore.CACHE_SIZE_UNLIMITED,
+    persistence: true,
   })
 }
 
