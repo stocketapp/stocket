@@ -3,26 +3,20 @@ import React from 'react'
 import { View, StyleSheet, TouchableOpacity } from 'react-native'
 import { Text } from '@components'
 import { GREEN, RED, LABEL } from '@utils/colors'
+import type { SelectedStockData } from 'types'
 
 type Props = {
-  item: {
-    quote: {
-      symbol: string
-      change: number
-      latestPrice: number
-      companyName: string
-    }
-  }
+  item: SelectedStockData
   onPress: () => void
 }
 
-export default ({ item, onPress }: Props) => {
+const WatchlistItem = ({ item, onPress }: Props) => {
   const { symbol, change, latestPrice, companyName } = item?.quote
   return (
     <TouchableOpacity onPress={onPress}>
       <View style={styles.container}>
         <View style={styles.left}>
-          <Text weight="Semibold">{symbol}</Text>
+          <Text weight="Semibold">{symbol ?? ''}</Text>
           <Text color={LABEL} weight="Medium">
             {companyName}
           </Text>
@@ -43,6 +37,8 @@ export default ({ item, onPress }: Props) => {
     </TouchableOpacity>
   )
 }
+
+export default WatchlistItem
 
 const styles = StyleSheet.create({
   container: {

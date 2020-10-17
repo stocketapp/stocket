@@ -13,8 +13,12 @@ export default function useWatchlist(uid: string) {
     const subscribe = firestore()
       .collection(`Users/${uid}/watchlist`)
       .onSnapshot(async snapshot => {
-        const symbols = snapshot.docs.map(doc => doc?.data()?.symbol)
-        const res = await getBatchStockData(symbols?.join(','))
+        let symbols
+        let res = []
+        symbols = snapshot.docs.map(doc => doc?.data()?.symbol)
+        if (symbols.length > 0) {
+          res = await getBatchStockData(symbols?.join(','))
+        }
 
         dispatch({
           type: 'SET_WATCHLIST',
