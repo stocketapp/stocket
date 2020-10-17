@@ -54,7 +54,7 @@ export default function usePriceSubscription(
   }, [])
 
   useEffect(() => {
-    let priceInterval: NodeJS.Timeout
+    let priceInterval: number
     if (symbol) {
       priceInterval = setInterval(getPrice, 5000)
     }
