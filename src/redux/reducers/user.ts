@@ -8,6 +8,7 @@ interface UserAction {
   currentUser: object
   userInfo: object
   type: string
+  payload: any
 }
 
 export default function (state = userState, action: UserAction) {
@@ -17,7 +18,7 @@ export default function (state = userState, action: UserAction) {
     case 'SET_USER':
       return { ...state, currentUser: action.currentUser }
     case 'SET_USER_INFO':
-      return { ...state, userInfo: action.userInfo }
+      return { ...state, userInfo: action.payload }
     default:
       return state
   }

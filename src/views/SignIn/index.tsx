@@ -9,14 +9,14 @@ import { createUserData } from '@api'
 const logo = require('../../assets/bootsplash_logo2x.png')
 
 const FR = firestore()
-if (__DEV__) {
-  FR.settings({
-    host: 'localhost:4002',
-    cacheSizeBytes: firestore.CACHE_SIZE_UNLIMITED,
-    ssl: false,
-    persistence: true,
-  })
-}
+// if (__DEV__) {
+//   FR.settings({
+//     host: 'localhost:4002',
+//     cacheSizeBytes: firestore.CACHE_SIZE_UNLIMITED,
+//     ssl: false,
+//     persistence: true,
+//   })
+// }
 
 export default function SignIn() {
   async function onAppleButtonPress() {
