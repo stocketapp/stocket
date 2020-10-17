@@ -2,9 +2,15 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
-      "*": ["src/*"],
-      "test/*": ["test/*"],
-      "underscore": ["lodash"],
+      "*": [
+        "src/*"
+      ],
+      "test/*": [
+        "test/*"
+      ],
+      "underscore": [
+        "lodash"
+      ],
       "@components*": [
         "components",
         "src/components*"
