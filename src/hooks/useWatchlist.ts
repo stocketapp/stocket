@@ -2,7 +2,7 @@
 import { useEffect } from 'react'
 import firestore from '@react-native-firebase/firestore'
 import { useSelector, useDispatch } from 'react-redux'
-import { getBatchStockData } from 'api'
+import { getBatchStockData } from '@api'
 import { uniqBy, map } from 'lodash'
 
 export default function useWatchlist(uid: string) {
@@ -27,6 +27,13 @@ export default function useWatchlist(uid: string) {
 
   return uniqBy(
     watchlist,
-    (el: { quote: { symbol: string } }) => el?.quote?.symbol,
+    (el: {
+      quote: {
+        symbol: string
+        change: number
+        latestPrice: number
+        companyName: string
+      }
+    }) => el?.quote?.symbol,
   )
 }

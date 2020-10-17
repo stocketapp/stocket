@@ -1,4 +1,6 @@
-export default [
+import type { BalanceItem } from 'types/ChartTypes'
+
+const exampleData: Array<BalanceItem> = [
   { date: new Date(2020, 1, 1), value: 2100, label: '3:55 PM' },
   { date: new Date(2020, 2, 1), value: 3100, label: '3:59 PM' },
   { date: new Date(2020, 3, 1), value: 5100, label: '4:05 PM' },
@@ -12,3 +14,5 @@ export default [
   { date: new Date(2020, 11, 1), value: 70100, label: '5:40 PM' },
   { date: new Date(2020, 12, 1), value: 90100, label: '5:55 PM' },
 ]
+
+export default exampleData

@@ -5,7 +5,7 @@ module.exports = {
       'module-resolver',
       {
         cwd: 'babelrc',
-        root: ['./src'],
+        root: ['./'],
         extensions: ['.ios.js', '.android.js', '.js', '.ts', '.tsx', '.json'],
         alias: {
           '@stocket': './',
@@ -13,10 +13,13 @@ module.exports = {
           '@components': './src/components',
           '@utils': './src/utils',
           '@navigation': './src/navigation',
-          '@hooks': './stocket/src/hooks',
+          '@hooks': './src/hooks',
           '@api': './src/api',
           '@icons': './src/components/Icons',
           types: './src/types',
+          '@selectors': './src/redux/selectors.ts',
+          '@assets': './src/assets',
+          '@products-assets': './src/assets/products',
         },
       },
     ],

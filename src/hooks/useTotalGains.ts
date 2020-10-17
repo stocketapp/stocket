@@ -1,7 +1,7 @@
 import { useMemo } from 'react'
 import { useSelector } from 'react-redux'
 import { reduce, map } from 'lodash'
-import { formatCurrency, currencyToNumber } from 'utils/functions'
+import { formatCurrency, currencyToNumber } from '@utils/functions'
 
 export default function useTotalGains(portfolioValue: string) {
   const { positions } = useSelector(({ stock }: { stock: any }) => stock)

@@ -2,13 +2,7 @@
 import firestore from '@react-native-firebase/firestore'
 import perf from '@react-native-firebase/perf'
 import type { TradeDataType, DocReference } from 'types'
-import {
-  IEX_CLOUD_KEY,
-  IEX_URL,
-  IAPHUB_APPID,
-  IAPHUB_ENV,
-  IAPHUB_API_KEY,
-} from '../../config'
+import { IEX_CLOUD_KEY, IEX_URL } from '../../config'
 import { formatCurrency } from '@utils/functions'
 import functions from '@react-native-firebase/functions'
 
@@ -18,9 +12,9 @@ if (__DEV__) {
   functions().useFunctionsEmulator('http://localhost:4001')
   FR.settings({
     host: 'localhost:4002',
-    persistence: true,
+    cacheSizeBytes: firestore.CACHE_SIZE_UNLIMITED,
     ssl: false,
-    cacheSizeBytes: 10000,
+    persistence: true,
   })
 }
 
@@ -67,9 +61,9 @@ export async function createTrade(
   }
 }
 
-export async function searchTerm(term: string) {
+export async function searchTerm(term: string | null) {
   const trace = await perf().startTrace('IEX_TRACE')
-  trace.putAttribute('search_term', term)
+  trace.putAttribute('search_term', term ?? '')
   const res = await iexGet(`search/${term}`)
   trace.putAttribute('search_response', String(res.status))
   const result = await res.json()
@@ -104,11 +98,7 @@ export async function getNewsArticle(stock: string, last: number = 5) {
   return result
 }
 
-export async function getBatchStockData(
-  symbols: string,
-  range: string = '1d',
-  last: number = 5,
-) {
+export async function getBatchStockData(symbols: string, range: string = '1d', last: number = 5) {
   const typeQuery = '&types=quote,news,chart,intraday-prices'
   const rangeQuery = `${range && `&range=${range}`}`
   const url = `symbols=${symbols}${typeQuery}${rangeQuery}&last=${last}&chartInterval=5&chartIEXWhenNull=true`
@@ -123,7 +113,13 @@ export async function getHistoricalData(symbol: string, range: string) {
   return result
 }
 
-type CreateUserType = { uid: string; name: string; email: string }
+interface CreateUserType {
+  uid?: string
+  name?: string
+  email?: string | null
+  // portfolioValue: number
+  // portfolioChangePct: number
+}
 export async function createUserData({ uid, name, email }: CreateUserType) {
   const userRef: DocReference = FR.doc(`Users/${uid}`)
   const cash = 25000
@@ -135,6 +131,8 @@ export async function createUserData({ uid, name, email }: CreateUserType) {
       cash,
       email,
       uid,
+      portfolioChange: 0,
+      portfolioChangePct: 0,
     })
   } catch (err) {
     console.log('[Error] onCreateUserTrigger()', err)
@@ -161,30 +159,29 @@ export async function updatePosition(params: UpdatePositionTypes) {
   }
 }
 
-type ReceiptValidationType = {
-  receipt: string
-  uid: string
-  sku: string
-}
-export async function iapHubValidateReceipt(data: ReceiptValidationType) {
-  const { uid, receipt: token, sku } = data
-  const body = {
-    environment: IAPHUB_ENV,
-    platform: 'ios',
-    token,
-    sku,
-  }
-  const url = 'https://api.iaphub.com/app'
-  const res = await fetch(`${url}/${IAPHUB_APPID}/user/${uid}/receipt`, {
-    method: 'POST',
-    headers: {
-      Authorization: `ApiKey ${IAPHUB_API_KEY}`,
-      Accept: 'application/json',
-      'Content-Type': 'application/json',
-    },
-    body,
-  })
-  const result = await res.json()
-  console.log('result', result)
-  return result
-}
+// type ReceiptValidationType = {
+//   receipt: string
+//   uid: string
+//   sku: string
+// }
+// export async function iapHubValidateReceipt(data: ReceiptValidationType) {
+//   const { uid, receipt: token, sku } = data
+//   const body = {
+//     environment: IAPHUB_ENV,
+//     platform: 'ios',
+//     token,
+//     sku,
+//   }
+//   const url = 'https://api.iaphub.com/app'
+//   const res = await fetch(`${url}/${IAPHUB_APPID}/user/${uid}/receipt`, {
+//     method: 'POST',
+//     headers: {
+//       Authorization: `ApiKey ${IAPHUB_API_KEY}`,
+//       Accept: 'application/json',
+//       'Content-Type': 'application/json',
+//     },
+//     body,
+//   })
+//   const result = await res.json()
+//   return result
+// }

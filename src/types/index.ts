@@ -1,14 +1,17 @@
-// <reference path="react/inidex.d.ts" />
-
-import { TextStyle, ViewStyle } from 'react-native'
+import { TextProps, TextStyle, ViewStyle } from 'react-native'
 import { FirebaseFirestoreTypes } from '@react-native-firebase/firestore'
-import { ReactNode } from 'react'
+import { Dispatch, ReactNode, SetStateAction } from 'react'
+
+export interface SvgProps {
+  size?: number
+  children?: ReactNode
+  color?: string
+  filled?: boolean
+}
 
 export interface IconProps {
   size?: number
-  children: ReactNode
   color?: string
-  filled?: boolean
 }
 
 export interface ContainerProps {
@@ -27,7 +30,7 @@ export interface ContainerProps {
   safeAreaBottom?: boolean
 }
 
-export interface TextProps {
+export interface CustomTextProps extends TextProps {
   type?: 'heading' | 'title' | 'label' | 'subtext' | 'big'
   cap?: boolean
   color?: string
@@ -60,9 +63,14 @@ export interface TradeInfoProps {
 }
 
 export interface SearchSymbolsProps {
-  value: string
-  setValue: () => void
-  onSearch: () => void
+  value: string | null
+  setValue: Dispatch<SetStateAction<string>>
+  onSearch?: () => void
+}
+
+export interface SearchResultType {
+  symbol: string
+  securityName: string
 }
 
 export interface LabelProps {
@@ -81,25 +89,49 @@ export interface PositionType {
   value: number
   todayGainsPct: number
   todayGains: number
+  shares: Array<any>
+  previousDayPrice: number
 }
 
 export interface TradeDataType {
-  symbol: string
-  action: string
-  quantity: number
-  price: number
+  symbol?: string
+  action?: string
+  quantity?: string
+  price?: number
+  value?: number
+  name?: string
+  date?: number
+}
+
+export interface BalanceItem {
+  date: string | Date
   value: number
+  change?: number
+  changePct?: number
+  label?: string
+}
+
+export interface ProductValue {
+  productId: string
+  value: number
+  price: number
 }
 
 export type DocReference = FirebaseFirestoreTypes.DocumentReference
+export type DocumentSnapshot = FirebaseFirestoreTypes.DocumentSnapshot<
+  FirebaseFirestoreTypes.DocumentData
+>
 
 export interface CurrentUser {
   uid: string
 }
 
-export type {
-  ChartLineProps,
-  CursorLineProps,
-  ChartTabProps,
-  ChartRangeTabsProps,
-} from './ChartTypes'
+export interface ArticleType {
+  image: string
+  headline: string
+  source: string
+  url: string
+}
+
+export * from './ChartTypes'
+export * from './StateTypes'

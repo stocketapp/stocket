@@ -1,8 +1,8 @@
 import React from 'react'
 import { View } from 'react-native'
-import { LABEL, GREEN, RED } from 'utils/colors'
+import { LABEL, GREEN, RED } from '@utils/colors'
 import Text from '../Text'
-import { formatCurrency } from 'utils/functions'
+import { formatCurrency } from '@utils/functions'
 import styles from './styles'
 
 interface Props {

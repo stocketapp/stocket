@@ -5,28 +5,27 @@
     "esModuleInterop": true,
     "isolatedModules": true,
     "jsx": "react",
-    "lib": ["es6"],
+    "lib": ["es6", "DOM", "esnext"],
     "moduleResolution": "node",
     "noEmit": true,
     "strict": true,
     "target": "esnext",
     "baseUrl": ".",
+    "resolveJsonModule": true,
     "paths": {
       "*": ["src/*"],
-      "@components*": ["src/components"],
+      "@components*": ["src/components", "src/components*"],
       "@utils*": ["src/utils", "src/utils*"],
       "types*": ["src/types", "src/utils*"],
       "@views*": ["src/views", "src/views*"],
       "@navigation*": ["src/navigation", "src/navigation*"],
       "@hooks*": ["src/hooks", "src/hooks*"],
       "@api*": ["src/api", "src/api*"],
-      "@icons*": ["src/components/Icons", "src/components/Icons*"]
+      "@icons*": ["src/components/icons", "src/components/icons*"],
+      "@selectors": ["src/redux/selectors.ts"],
+      "@assets": ["src/assets", "src/assets*"],
+      "@products-assets": ["src/assets/products"]
     }
   },
-  "exclude": [
-    "node_modules",
-    "babel.config.js",
-    "metro.config.js",
-    "jest.config.js"
-  ]
+  "exclude": ["node_modules", "babel.config.js", "metro.config.js", "jest.config.js"]
 }

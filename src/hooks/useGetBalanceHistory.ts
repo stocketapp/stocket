@@ -3,19 +3,13 @@ import { useEffect, useState } from 'react'
 import firestore from '@react-native-firebase/firestore'
 import moment from 'moment'
 import { findIndex } from 'lodash'
-import { currencyToNumber } from 'utils/functions'
+import { currencyToNumber } from '@utils/functions'
+import type { BalanceItem } from 'types'
 
 interface UserInfo {
   portfolioChange: number
   portfolioChangePct: number
   portfolioValue: string
-}
-
-interface BalanceItem {
-  date: string
-  value: number
-  change: number
-  changePct: number
 }
 
 function useGetBalanceHistory(uid: string, userInfo: UserInfo) {

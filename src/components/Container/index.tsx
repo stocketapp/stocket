@@ -1,6 +1,6 @@
 import React from 'react'
 import { View, ViewStyle } from 'react-native'
-import { BACKGROUND } from 'utils/colors'
+import { BACKGROUND } from '@utils/colors'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
 import type { ContainerProps } from 'types'
 

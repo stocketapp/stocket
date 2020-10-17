@@ -11,29 +11,21 @@ export default function useSetUserInfo(currentUser: CurrentUser) {
   const { userInfo } = useSelector(({ user }: { user: any }) => user)
 
   useEffect(() => {
-    async function getUserInfo() {
-      try {
-        setLoading(true)
-        const ref = UsersRef.doc(currentUser?.uid)
-        await ref.onSnapshot(snapshot => {
-          const data = snapshot?.data()
-          if (data) {
-            dispatch({
-              type: 'SET_USER_INFO',
-              userInfo: data,
-            })
-          }
+    let unsubscribe: () => void
+    const ref = UsersRef.doc(currentUser?.uid)
+    unsubscribe = ref.onSnapshot(snapshot => {
+      setLoading(true)
+      const data = snapshot?.data()
+      if (data) {
+        dispatch({
+          type: 'SET_USER_INFO',
+          userInfo: data,
         })
-      } catch (err) {
-        console.log(err)
-      } finally {
-        setLoading(false)
       }
-    }
+      setLoading(false)
+    })
 
-    if (currentUser) {
-      getUserInfo()
-    }
+    return () => unsubscribe()
   }, [currentUser, dispatch])
 
   return { loading, userInfo }

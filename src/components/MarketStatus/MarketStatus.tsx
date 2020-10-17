@@ -1,13 +1,12 @@
 import React from 'react'
 import { View } from 'react-native'
 import Text from '../Text'
-import { useSubscribeMarketHours } from 'hooks'
-import { GREEN, LABEL } from 'utils/colors'
+import { useSubscribeMarketHours } from '@hooks'
+import { GREEN, LABEL } from '@utils/colors'
 import styles from './styles'
 
 interface Props {
-  label: string
-  status: boolean
+  label?: string
 }
 
 const MarketStatus = ({ label }: Props) => {
@@ -18,9 +17,7 @@ const MarketStatus = ({ label }: Props) => {
       <Text style={{ fontSize: 12 }} weight={status ? 'Medium' : 'Light'}>
         {statusLabel}
       </Text>
-      <View
-        style={{ ...styles.dot, backgroundColor: status ? GREEN : LABEL }}
-      />
+      <View style={{ ...styles.dot, backgroundColor: status ? GREEN : LABEL }} />
     </View>
   )
 }

@@ -8,7 +8,7 @@ import {
   VictoryLabel,
   VictoryAxis,
 } from 'victory-native'
-import { GREEN } from 'utils/colors'
+import { GREEN } from '@utils/colors'
 import exampleData from './exampleData'
 import CursorLine from './CursorLine'
 import { minBy, maxBy } from 'lodash'
@@ -49,14 +49,14 @@ export default function ChartLine({
             voronoiDimension="x"
             labelComponent={
               <CursorLine
-                onEvent={onChartEvent}
+                onEvent={e => onChartEvent && onChartEvent(e)}
                 labelText={labelText}
                 leftOffset={labelLeftOffset}
                 rightOffset={labelRightOffset}
               />
             }
             labels={({ datum }) => datum[labelText]}
-            onDeactivated={() => onChartEvent(null)}
+            onDeactivated={() => onChartEvent && onChartEvent(null)}
           />
         }
       >
@@ -79,7 +79,7 @@ export default function ChartLine({
         <ChartRangeTabs
           activeRangeTab={activeRangeTab}
           tabs={tabs}
-          onTabPress={onTabPress}
+          onTabPress={tab => onTabPress && onTabPress(tab)}
         />
       )}
     </View>
