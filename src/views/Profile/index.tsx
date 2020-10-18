@@ -19,7 +19,7 @@ export default function Profile() {
   const portfolioValue = userInfo?.portfolioValue ?? '$0.00'
   const cash = formatCurrency(userInfo?.cash ?? 0)
   const { totalGains } = useTotalGains(portfolioValue ?? '$0.00')
-  const accountValue = formatCurrency(currencyToNumber(portfolioValue ?? '$0.00') + cash)
+  const accountValue = formatCurrency(currencyToNumber(portfolioValue) + currencyToNumber(cash))
 
   return (
     <Container fullView ph style={{ flex: 1, justifyContent: 'space-between' }}>
@@ -51,7 +51,7 @@ export default function Profile() {
         <Container top={40}>
           <ProfileItem label="Portfolio Value" value={portfolioValue} />
           <ProfileItem label="Portfolio Gains" value={`${totalGains}`} />
-          <ProfileItem label="Account Value" value={accountValue} />
+          <ProfileItem label="Account Value" value={accountValue ?? '$0.00'} />
         </Container>
       </View>
 
