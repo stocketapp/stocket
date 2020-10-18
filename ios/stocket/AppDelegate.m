@@ -9,6 +9,7 @@
 #import <AppCenterReactNativeCrashes.h>
 #import <CodePush/CodePush.h>
 #import "RNBootSplash.h"
+#import <RNGoogleSignin/RNGoogleSignin.h>
 
 @import Firebase;
 
@@ -58,6 +59,10 @@ static void InitializeFlipper(UIApplication *application) {
   [AppCenterReactNativeCrashes registerWithAutomaticProcessing];
   [RNBootSplash initWithStoryboard:@"BootSplash" rootView:rootView];
   return YES;
+}
+
+- (BOOL)application:(UIApplication *)application openURL:(nonnull NSURL *)url options:(nonnull NSDictionary<NSString *,id> *)options {
+  return [RNGoogleSignin application:application openURL:url options:options];
 }
 
 - (NSURL *)sourceURLForBridge:(RCTBridge *)bridge
