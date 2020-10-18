@@ -11,3 +11,4 @@ export { default as LoadingCheckmark } from './LoadingCheckmark/LoadingCheckmark
 export { default as ChartLine } from './Chart/ChartLine'
 export { default as MarketStatus } from './MarketStatus/MarketStatus'
 export { default as SuccessScreen } from './SuccessScreen/SuccessScreen'
+export { default as GoogleSignIn } from './GoogleSignIn/GoogleSignIn'
