@@ -843,7 +843,8 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\n";
+			shellScript = "
+";
 		};
 		BA97CDBD24CB17BE00767A99 /* Create Environment Variables */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -930,7 +931,8 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\n";
+			shellScript = "
+";
 		};
 		C2ADBE8EE5CD3001648AEA98 /* [CP-User] [RNFB] Crashlytics Configuration */ = {
 			isa = PBXShellScriptBuildPhase;

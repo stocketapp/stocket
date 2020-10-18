@@ -14,8 +14,9 @@
     "postinstall": "npx pod-install"
   },
   "dependencies": {
-    "@emotion/core": "^10.0.35",
-    "@emotion/native": "^10.0.27",
+    "@emotion/core": "11.0.0-rc.0",
+    "@emotion/native": "11.0.0-rc.0",
+    "@emotion/react": "11.0.0-rc.0",
     "@invertase/react-native-apple-authentication": "^2.0.2",
     "@react-native-community/async-storage": "^1.12.1",
     "@react-native-community/google-signin": "^5.0.0",
@@ -80,6 +81,7 @@
     "jest": "^26.5.3",
     "jest-emotion": "^10.0.32",
     "metro-react-native-babel-preset": "^0.63.0",
+    "react-native-svg-transformer": "^0.14.3",
     "react-test-renderer": "16.14.0",
     "redux-flipper": "^1.4.0",
     "remote-redux-devtools": "^0.5.16",
