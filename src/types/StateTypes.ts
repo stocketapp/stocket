@@ -80,4 +80,5 @@ export interface StockQuote {
   week52High: string
   week52Low: string
   change: number
+  latestPrice: number
 }

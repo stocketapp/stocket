@@ -1,32 +1,29 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useState } from 'react'
 import firestore from '@react-native-firebase/firestore'
-import { useDispatch, useSelector } from 'react-redux'
-import type { CurrentUser } from 'types'
+import { useUserSelector } from '@selectors'
+import { useDispatchAction } from '@hooks'
 
 const UsersRef = firestore().collection('Users')
 
-export default function useSetUserInfo(currentUser: CurrentUser) {
+export default function useSetUserInfo() {
   const [loading, setLoading] = useState(false)
-  const dispatch = useDispatch()
-  const { userInfo } = useSelector(({ user }: { user: any }) => user)
+  const dispatch = useDispatchAction()
+  const { userInfo, currentUser } = useUserSelector()
 
   useEffect(() => {
-    let unsubscribe: () => void
     const ref = UsersRef.doc(currentUser?.uid)
-    unsubscribe = ref.onSnapshot(snapshot => {
+    const unsubscribe = ref.onSnapshot(snapshot => {
       setLoading(true)
       const data = snapshot?.data()
       if (data) {
-        dispatch({
-          type: 'SET_USER_INFO',
-          userInfo: data,
-        })
+        dispatch('SET_USER_INFO', data)
+        setLoading(false)
       }
-      setLoading(false)
     })
 
     return () => unsubscribe()
-  }, [currentUser, dispatch])
+  }, [currentUser])
 
   return { loading, userInfo }
 }

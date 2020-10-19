@@ -6,14 +6,7 @@ import WatchlistItem from './WatchlistItem'
 import type { SelectedStockData } from 'types'
 
 type Props = {
-  data: Array<{
-    quote: {
-      symbol: string
-      change: number
-      latestPrice: number
-      companyName: string
-    }
-  }>
+  data: Array<SelectedStockData>
   onItemPress: (item: SelectedStockData) => void
 }
 

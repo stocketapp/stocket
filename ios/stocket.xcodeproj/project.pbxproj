@@ -28,6 +28,24 @@
 		BA3D549223AA4466006651B4 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = BA3D549123AA4466006651B4 /* GoogleService-Info.plist */; };
 		BA3D54A923AA45B1006651B4 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
 		BA3D54AE23AA45B1006651B4 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
+		BA530A22253B008100A0FC07 /* SF-Pro-Text-Black.otf in Resources */ = {isa = PBXBuildFile; fileRef = EA9879C046B64717BF8C63E7 /* SF-Pro-Text-Black.otf */; };
+		BA530A23253B008100A0FC07 /* SF-Pro-Text-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = B3A1ACFEB8FC4FD3B555279C /* SF-Pro-Text-Bold.otf */; };
+		BA530A24253B008100A0FC07 /* SF-Pro-Text-Heavy.otf in Resources */ = {isa = PBXBuildFile; fileRef = ED51EBA5B3284928A4CB1708 /* SF-Pro-Text-Heavy.otf */; };
+		BA530A25253B008100A0FC07 /* SF-Pro-Text-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = 78FB8C2F23FB4379AFD4706F /* SF-Pro-Text-Light.otf */; };
+		BA530A26253B008100A0FC07 /* SF-Pro-Text-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 287A74C45C1F497F913D8D19 /* SF-Pro-Text-Medium.otf */; };
+		BA530A27253B008100A0FC07 /* SF-Pro-Text-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 093CBF8279984A8BAF1F52E0 /* SF-Pro-Text-Regular.otf */; };
+		BA530A28253B008100A0FC07 /* SF-Pro-Text-Semibold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 0E2760951F894A708BE7323D /* SF-Pro-Text-Semibold.otf */; };
+		BA530A29253B008100A0FC07 /* SF-Pro-Text-Thin.otf in Resources */ = {isa = PBXBuildFile; fileRef = 6C6392B3E1D64AE3B031F447 /* SF-Pro-Text-Thin.otf */; };
+		BA530A2A253B008100A0FC07 /* SF-Pro-Text-Ultralight.otf in Resources */ = {isa = PBXBuildFile; fileRef = 28FF65D2F01A4380B0A89C18 /* SF-Pro-Text-Ultralight.otf */; };
+		BA530A31253B009200A0FC07 /* SF-Pro-Text-Black.otf in Resources */ = {isa = PBXBuildFile; fileRef = EA9879C046B64717BF8C63E7 /* SF-Pro-Text-Black.otf */; };
+		BA530A32253B009200A0FC07 /* SF-Pro-Text-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = B3A1ACFEB8FC4FD3B555279C /* SF-Pro-Text-Bold.otf */; };
+		BA530A33253B009200A0FC07 /* SF-Pro-Text-Heavy.otf in Resources */ = {isa = PBXBuildFile; fileRef = ED51EBA5B3284928A4CB1708 /* SF-Pro-Text-Heavy.otf */; };
+		BA530A34253B009200A0FC07 /* SF-Pro-Text-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = 78FB8C2F23FB4379AFD4706F /* SF-Pro-Text-Light.otf */; };
+		BA530A35253B009200A0FC07 /* SF-Pro-Text-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 287A74C45C1F497F913D8D19 /* SF-Pro-Text-Medium.otf */; };
+		BA530A36253B009200A0FC07 /* SF-Pro-Text-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 093CBF8279984A8BAF1F52E0 /* SF-Pro-Text-Regular.otf */; };
+		BA530A37253B009200A0FC07 /* SF-Pro-Text-Semibold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 0E2760951F894A708BE7323D /* SF-Pro-Text-Semibold.otf */; };
+		BA530A38253B009200A0FC07 /* SF-Pro-Text-Thin.otf in Resources */ = {isa = PBXBuildFile; fileRef = 6C6392B3E1D64AE3B031F447 /* SF-Pro-Text-Thin.otf */; };
+		BA530A39253B009200A0FC07 /* SF-Pro-Text-Ultralight.otf in Resources */ = {isa = PBXBuildFile; fileRef = 28FF65D2F01A4380B0A89C18 /* SF-Pro-Text-Ultralight.otf */; };
 		BA704B7124BFDEF600FE4DE1 /* main.jsbundle in Sources */ = {isa = PBXBuildFile; fileRef = 008F07F21AC5B25A0029DE68 /* main.jsbundle */; };
 		BA94071F24BFE2D90000A64D /* main.jsbundle in Sources */ = {isa = PBXBuildFile; fileRef = 008F07F21AC5B25A0029DE68 /* main.jsbundle */; };
 		BA94072024BFE2ED0000A64D /* main.jsbundle in Sources */ = {isa = PBXBuildFile; fileRef = 008F07F21AC5B25A0029DE68 /* main.jsbundle */; };
@@ -579,6 +597,15 @@
 				BA3D54AE23AA45B1006651B4 /* Images.xcassets in Resources */,
 				BA11394423B0F1090076AE78 /* AppCenter-Config.plist in Resources */,
 				BAB356EE24BFBA4000D18438 /* BootSplash.storyboard in Resources */,
+				BA530A22253B008100A0FC07 /* SF-Pro-Text-Black.otf in Resources */,
+				BA530A23253B008100A0FC07 /* SF-Pro-Text-Bold.otf in Resources */,
+				BA530A24253B008100A0FC07 /* SF-Pro-Text-Heavy.otf in Resources */,
+				BA530A25253B008100A0FC07 /* SF-Pro-Text-Light.otf in Resources */,
+				BA530A26253B008100A0FC07 /* SF-Pro-Text-Medium.otf in Resources */,
+				BA530A27253B008100A0FC07 /* SF-Pro-Text-Regular.otf in Resources */,
+				BA530A28253B008100A0FC07 /* SF-Pro-Text-Semibold.otf in Resources */,
+				BA530A29253B008100A0FC07 /* SF-Pro-Text-Thin.otf in Resources */,
+				BA530A2A253B008100A0FC07 /* SF-Pro-Text-Ultralight.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -590,6 +617,15 @@
 				BA9A7E0023E67A1A0062EEB4 /* Images.xcassets in Resources */,
 				BA9A7E0123E67A1A0062EEB4 /* AppCenter-Config.plist in Resources */,
 				BAB356EF24BFBA4000D18438 /* BootSplash.storyboard in Resources */,
+				BA530A31253B009200A0FC07 /* SF-Pro-Text-Black.otf in Resources */,
+				BA530A32253B009200A0FC07 /* SF-Pro-Text-Bold.otf in Resources */,
+				BA530A33253B009200A0FC07 /* SF-Pro-Text-Heavy.otf in Resources */,
+				BA530A34253B009200A0FC07 /* SF-Pro-Text-Light.otf in Resources */,
+				BA530A35253B009200A0FC07 /* SF-Pro-Text-Medium.otf in Resources */,
+				BA530A36253B009200A0FC07 /* SF-Pro-Text-Regular.otf in Resources */,
+				BA530A37253B009200A0FC07 /* SF-Pro-Text-Semibold.otf in Resources */,
+				BA530A38253B009200A0FC07 /* SF-Pro-Text-Thin.otf in Resources */,
+				BA530A39253B009200A0FC07 /* SF-Pro-Text-Ultralight.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -715,11 +751,13 @@
 			);
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-Staging/Pods-Staging-resources.sh",
+				"${PODS_ROOT}/GoogleSignIn/Resources/GoogleSignIn.bundle",
 				"${PODS_CONFIGURATION_BUILD_DIR}/React-Core/AccessibilityResources.bundle",
 				"${PODS_CONFIGURATION_BUILD_DIR}/gRPC-C++/gRPCCertificates-Cpp.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GoogleSignIn.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/AccessibilityResources.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/gRPCCertificates-Cpp.bundle",
 			);
@@ -805,7 +843,8 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\n";
+			shellScript = "
+";
 		};
 		BA97CDBD24CB17BE00767A99 /* Create Environment Variables */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -892,7 +931,8 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\n";
+			shellScript = "
+";
 		};
 		C2ADBE8EE5CD3001648AEA98 /* [CP-User] [RNFB] Crashlytics Configuration */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -911,11 +951,13 @@
 			);
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-Production/Pods-Production-resources.sh",
+				"${PODS_ROOT}/GoogleSignIn/Resources/GoogleSignIn.bundle",
 				"${PODS_CONFIGURATION_BUILD_DIR}/React-Core/AccessibilityResources.bundle",
 				"${PODS_CONFIGURATION_BUILD_DIR}/gRPC-C++/gRPCCertificates-Cpp.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GoogleSignIn.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/AccessibilityResources.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/gRPCCertificates-Cpp.bundle",
 			);
@@ -953,11 +995,13 @@
 			);
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-Development/Pods-Development-resources.sh",
+				"${PODS_ROOT}/GoogleSignIn/Resources/GoogleSignIn.bundle",
 				"${PODS_CONFIGURATION_BUILD_DIR}/React-Core/AccessibilityResources.bundle",
 				"${PODS_CONFIGURATION_BUILD_DIR}/gRPC-C++/gRPCCertificates-Cpp.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GoogleSignIn.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/AccessibilityResources.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/gRPCCertificates-Cpp.bundle",
 			);
