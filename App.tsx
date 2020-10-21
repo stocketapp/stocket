@@ -22,7 +22,7 @@ messaging().setBackgroundMessageHandler(async remoteMessage => {
 export default function App(): ReactNode {
   const { isAuth, currentUser } = useAuthState()
   const tradeViewRef = useRef()
-  const { loading } = useSetUserInfo(currentUser)
+  const { loading } = useSetUserInfo()
   useIapProducts(currentUser?.uid)
   useSaveApnsToken(currentUser?.uid)
   useSubscribeMarketHours()
