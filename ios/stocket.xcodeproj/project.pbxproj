@@ -792,7 +792,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "#!/usr/bin/env sh\n\nsh ../prod-env.sh \n";
+			shellScript = "#!/usr/bin/env sh\n\nsh ../env/prod-env.sh \n";
 		};
 		BA3D54A723AA45B1006651B4 /* Start Packager */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -862,7 +862,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "#!/usr/bin/env sh\n\nsh ../dev-env.sh\n";
+			shellScript = "#!/usr/bin/env sh\n\nsh ../env/dev-env.sh\n";
 		};
 		BA97CDBE24CB17EE00767A99 /* Create Environment Variables */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -880,7 +880,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "#!/usr/bin/env sh\n\nsh ../staging-env.sh\n";
+			shellScript = "#!/usr/bin/env sh\n\nsh ../env/staging-env.sh\n";
 		};
 		BA9A7DF823E67A1A0062EEB4 /* Start Packager */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -1476,6 +1476,7 @@
 				SWIFT_OBJC_BRIDGING_HEADER = "stocket-dev-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Debug;
@@ -1502,6 +1503,7 @@
 				PRODUCT_NAME = Development;
 				SWIFT_OBJC_BRIDGING_HEADER = "stocket-dev-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Release;
@@ -1604,6 +1606,7 @@
 				PRODUCT_NAME = Development;
 				SWIFT_OBJC_BRIDGING_HEADER = "stocket-dev-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Staging;
@@ -1631,6 +1634,7 @@
 				PRODUCT_NAME = Stocket;
 				SWIFT_OBJC_BRIDGING_HEADER = "stocket-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
 				VALID_ARCHS = "arm64 arm64e";
 				VERSIONING_SYSTEM = "apple-generic";
 			};
@@ -1737,6 +1741,7 @@
 				SWIFT_OBJC_BRIDGING_HEADER = "stocket-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
 				VALID_ARCHS = "arm64 arm64e";
 				VERSIONING_SYSTEM = "apple-generic";
 			};
@@ -1765,6 +1770,7 @@
 				PRODUCT_NAME = Stocket;
 				SWIFT_OBJC_BRIDGING_HEADER = "stocket-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
 				VALID_ARCHS = "arm64 arm64e";
 				VERSIONING_SYSTEM = "apple-generic";
 			};
