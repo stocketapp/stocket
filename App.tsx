@@ -14,6 +14,7 @@ import { BACKGROUND } from './src/utils/colors'
 import TradeView from './src/views/TradeView'
 import MainStack from './src/navigation/AppStack'
 import AuthStack from './src/navigation/AuthenticationStack'
+import crashlytics from '@react-native-firebase/crashlytics'
 
 messaging().setBackgroundMessageHandler(async remoteMessage => {
   console.log('Message handled in the background!', remoteMessage)
@@ -28,6 +29,7 @@ export default function App(): ReactNode {
   useSubscribeMarketHours()
 
   useEffect(() => {
+    crashlytics().log('App Mounted')
     if (!loading) {
       RNBootSplash.hide({ duration: 300 })
     }
