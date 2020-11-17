@@ -217,24 +217,24 @@ PODS:
     - AppAuth/ExternalUserAgent (= 1.4.0)
   - AppAuth/Core (1.4.0)
   - AppAuth/ExternalUserAgent (1.4.0)
-  - appcenter-analytics (3.1.2):
+  - appcenter-analytics (4.0.0):
     - AppCenter/Analytics
     - AppCenterReactNativeShared
-    - React
-  - appcenter-core (3.1.2):
+    - React-Core
+  - appcenter-core (4.0.0):
     - AppCenterReactNativeShared
-    - React
-  - appcenter-crashes (3.1.2):
+    - React-Core
+  - appcenter-crashes (4.0.0):
     - AppCenter/Crashes
     - AppCenterReactNativeShared
-    - React
-  - AppCenter/Analytics (3.3.4):
+    - React-Core
+  - AppCenter/Analytics (4.0.0):
     - AppCenter/Core
-  - AppCenter/Core (3.3.4)
-  - AppCenter/Crashes (3.3.4):
+  - AppCenter/Core (4.0.0)
+  - AppCenter/Crashes (4.0.0):
     - AppCenter/Core
-  - AppCenterReactNativeShared (3.1.2):
-    - AppCenter/Core (= 3.3.4)
+  - AppCenterReactNativeShared (4.0.0):
+    - AppCenter/Core (= 4.0.0)
   - Base64 (1.1.2)
   - boost-for-react-native (1.63.0)
   - BoringSSL-GRPC (0.0.7):
@@ -721,7 +721,7 @@ PODS:
     - React-jsi (= 0.63.3)
   - RNAppleAuthentication (2.1.0):
     - React-Core
-  - RNBootSplash (2.2.8):
+  - RNBootSplash (3.0.1):
     - React-Core
   - RNCAsyncStorage (1.12.1):
     - React-Core
@@ -761,7 +761,7 @@ PODS:
     - React-Core
   - RNIap (5.1.1):
     - React-Core
-  - RNScreens (2.14.0):
+  - RNScreens (2.15.0):
     - React-Core
   - RNSVG (12.1.0):
     - React
@@ -999,11 +999,11 @@ EXTERNAL SOURCES:
 SPEC CHECKSUMS:
   abseil: 6c8eb7892aefa08d929b39f9bb108e5367e3228f
   AppAuth: 31bcec809a638d7bd2f86ea8a52bd45f6e81e7c7
-  AppCenter: 0487be185c038ed2ecc5ed38219af1dcd280af23
-  appcenter-analytics: 86931681ba39a34856727e415d39e7d4693ad7fe
-  appcenter-core: 1cca3f4d1f01e820710dc82e14ad2b4806a4f907
-  appcenter-crashes: 5da5dca952c3d1a3eea2d596748d94ec0412fbd1
-  AppCenterReactNativeShared: 66667cd2dfad295b84bbf0f462e0e139e2128284
+  AppCenter: 51351e0121e40ba75e28ecb7de5c2e69d480df5e
+  appcenter-analytics: 3e8bf76870877c5abdfb752e1dc014be2b2030e4
+  appcenter-core: e7aa4513ee9173b82c4a4497d49abb0ec7ceb159
+  appcenter-crashes: 0052b9ae5cc6b5c184238eb6c230ed5942d91f10
+  AppCenterReactNativeShared: 69aedc15c136e5f76a0cc9eb2ad84d3cefc6e64f
   Base64: cecfb41a004124895a7bcee567a89bae5a89d49b
   boost-for-react-native: 39c7adb57c4e60d6c5479dd8623128eb5b3f0f2c
   BoringSSL-GRPC: 8edf627ee524575e2f8d19d56f068b448eea3879
@@ -1075,7 +1075,7 @@ SPEC CHECKSUMS:
   React-RCTVibration: 8e9fb25724a0805107fc1acc9075e26f814df454
   ReactCommon: 4167844018c9ed375cc01a843e9ee564399e53c3
   RNAppleAuthentication: 46cbc67739bae83ca229497f9b0038f3f5431443
-  RNBootSplash: 14d30c2e1de7247d334540cb2c2d7f3c2acc6150
+  RNBootSplash: 52cb45e8667861daf1b4cbdf26bfd8eff4014ecc
   RNCAsyncStorage: b03032fdbdb725bea0bd9e5ec5a7272865ae7398
   RNCMaskedView: 5a8ec07677aa885546a0d98da336457e2bea557f
   RNFBApp: 2810471bdc092151f20f16a9f8915b1ad70325b2
@@ -1088,7 +1088,7 @@ SPEC CHECKSUMS:
   RNGestureHandler: 7a5833d0f788dbd107fbb913e09aa0c1ff333c39
   RNGoogleSignin: ad866d4c4af2651e36801dd3b7771d7715353499
   RNIap: c0377981dfabe50887c5d1ff110011ed9b7cb6f3
-  RNScreens: 2e278a90eb15092ed261d4f2271e3fc9b60d08d4
+  RNScreens: 2ad555d4d9fa10b91bb765ca07fe9b29d59573f0
   RNSVG: ce9d996113475209013317e48b05c21ee988d42e
   SSZipArchive: 62d4947b08730e4cda640473b0066d209ff033c9
   Yoga: 7d13633d129fd179e01b8953d38d47be90db185a
