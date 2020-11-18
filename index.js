@@ -11,18 +11,22 @@ import '@react-native-firebase/crashlytics'
 import RNAsyncStorageFlipper from 'rn-async-storage-flipper'
 import AsyncStorage from '@react-native-community/async-storage'
 import codePush from 'react-native-code-push'
+import { ApolloProvider } from '@apollo/client'
+import client from './ApolloClient'
 
 const store = configureStore()
 RNAsyncStorageFlipper(AsyncStorage)
 
 const AppRoot = () => (
-  <Provider store={store}>
-    <SafeAreaProvider>
-      <NavigationContainer>
-        <App />
-      </NavigationContainer>
-    </SafeAreaProvider>
-  </Provider>
+  <ApolloProvider client={client}>
+    <Provider store={store}>
+      <SafeAreaProvider>
+        <NavigationContainer>
+          <App />
+        </NavigationContainer>
+      </SafeAreaProvider>
+    </Provider>
+  </ApolloProvider>
 )
 
 const codePushOptions = {
