@@ -1,17 +1,18 @@
 import { ApolloClient, InMemoryCache, createHttpLink } from '@apollo/client'
 import { setContext } from '@apollo/client/link/context'
 import auth from '@react-native-firebase/auth'
+import { STOCKET_API_URL } from './config'
 
 const httpLink = createHttpLink({
-  uri: 'localhost:3000/graphql',
+  uri: STOCKET_API_URL,
 })
 
 const authLink = setContext(async (_, { headers }) => {
-  const token = await auth().currentUser?.getIdTokenResult()
+  const result = await auth().currentUser?.getIdTokenResult()
   return {
     headers: {
       ...headers,
-      authorization: token ?? '',
+      authorization: result?.token ?? '',
     },
   }
 })
