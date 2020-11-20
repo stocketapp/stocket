@@ -13,9 +13,14 @@ import AsyncStorage from '@react-native-community/async-storage'
 import codePush from 'react-native-code-push'
 import { ApolloProvider } from '@apollo/client'
 import client from './ApolloClient'
+import Reactotron from 'reactotron-react-native'
 
 const store = configureStore()
-RNAsyncStorageFlipper(AsyncStorage)
+
+if (__DEV__) {
+  RNAsyncStorageFlipper(AsyncStorage)
+  Reactotron.setAsyncStorageHandler(AsyncStorage).configure().useReactNative().connect()
+}
 
 const AppRoot = () => (
   <ApolloProvider client={client}>

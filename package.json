@@ -61,6 +61,7 @@
     "react-native-svg": "^12.1.0",
     "react-native-webview": "^10.10.2",
     "react-redux": "^7.2.2",
+    "reactotron-react-native": "^5.0.0",
     "redux": "^4.0.5",
     "socket.io-client": "^3.0.1",
     "svg-path-properties": "^1.0.9",
