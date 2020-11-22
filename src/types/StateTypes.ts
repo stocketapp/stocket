@@ -11,6 +11,8 @@ export interface RootState {
 export interface UserState {
   currentUser?: {
     uid: string
+    email: string
+    displayName: string
   } | null
   isAuth: boolean
   userInfo?: UserInfo | null
