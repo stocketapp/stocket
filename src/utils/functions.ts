@@ -1,4 +1,3 @@
-// @flow
 import AsyncStorage from '@react-native-community/async-storage'
 import messaging from '@react-native-firebase/messaging'
 import { find } from 'lodash'

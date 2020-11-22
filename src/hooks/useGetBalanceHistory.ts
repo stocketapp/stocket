@@ -1,4 +1,3 @@
-// @flow
 import { useEffect, useState } from 'react'
 import firestore from '@react-native-firebase/firestore'
 import moment from 'moment'

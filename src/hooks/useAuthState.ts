@@ -1,5 +1,4 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-// @flow
 import { useEffect } from 'react'
 import auth from '@react-native-firebase/auth'
 import { useDispatch } from 'react-redux'

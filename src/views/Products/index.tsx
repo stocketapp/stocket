@@ -1,4 +1,3 @@
-// @flow
 import React, { forwardRef, useEffect, useState, useMemo, useCallback } from 'react'
 import { Dimensions, View, StyleSheet, FlatList } from 'react-native'
 import { Text, SuccessScreen } from '@components'
