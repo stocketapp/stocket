@@ -33,7 +33,7 @@ export default function useIapProducts(uid: string) {
           products,
         })
       } catch (err) {
-        console.log(err)
+        console.log('fetch iapProducts', err)
       }
     }
 
