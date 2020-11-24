@@ -1,5 +1,4 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-// @flow
 import { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { getBatchStockData, getHistoricalData } from '@api'

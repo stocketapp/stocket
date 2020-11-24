@@ -1,5 +1,10 @@
 import { PositionType } from './index'
 
+export interface DispatchAction {
+  type: string
+  payload: any
+}
+
 export interface RootState {
   user: UserState
   portfolio: PortfolioState
@@ -11,6 +16,8 @@ export interface RootState {
 export interface UserState {
   currentUser?: {
     uid: string
+    email: string
+    displayName: string
   } | null
   isAuth: boolean
   userInfo?: UserInfo | null
