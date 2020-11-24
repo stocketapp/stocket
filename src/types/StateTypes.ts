@@ -1,5 +1,10 @@
 import { PositionType } from './index'
 
+export interface DispatchAction {
+  type: string
+  payload: any
+}
+
 export interface RootState {
   user: UserState
   portfolio: PortfolioState
