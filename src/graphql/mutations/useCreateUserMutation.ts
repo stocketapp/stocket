@@ -7,7 +7,6 @@ import { FirebaseAuthTypes } from '@react-native-firebase/auth'
 export default function useCreateUserMutation() {
   const { currentUser } = useUserSelector()
   const [mutation] = useMutation(GET_USER_QUERY)
-
   const createUser = useCallback(
     async (user: FirebaseAuthTypes.User) => {
       const { displayName, email, uid } = user ?? {}
