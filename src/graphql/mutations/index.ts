@@ -6,5 +6,3 @@ export default function useStocketMutation() {
     createUser,
   }
 }
-
-export * as useCreateUserMutation from './useCreateUserMutation'
