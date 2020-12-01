@@ -675,6 +675,9 @@ PODS:
     - React
   - react-native-safe-area-context (3.1.9):
     - React-Core
+  - react-native-shake (10.0.4):
+    - React
+    - Shake (~> 10.0.0)
   - react-native-webview (10.10.2):
     - React-Core
   - React-perflogger (0.64.0-rc.0)
@@ -787,6 +790,7 @@ PODS:
     - React-Core
   - RNSVG (12.1.0):
     - React
+  - Shake (10.0.7)
   - SSZipArchive (2.2.3)
   - Yoga (1.14.0)
   - YogaKit (1.18.1):
@@ -837,6 +841,7 @@ DEPENDENCIES:
   - React-jsinspector (from `../node_modules/react-native/ReactCommon/jsinspector`)
   - react-native-flipper (from `../node_modules/react-native-flipper`)
   - react-native-safe-area-context (from `../node_modules/react-native-safe-area-context`)
+  - "react-native-shake (from `../node_modules/@shakebugs/react-native-shake`)"
   - react-native-webview (from `../node_modules/react-native-webview`)
   - React-perflogger (from `../node_modules/react-native/ReactCommon/reactperflogger`)
   - React-RCTActionSheet (from `../node_modules/react-native/Libraries/ActionSheetIOS`)
@@ -913,6 +918,7 @@ SPEC REPOS:
     - OpenSSL-Universal
     - PromisesObjC
     - Protobuf
+    - Shake
     - SSZipArchive
     - YogaKit
 
@@ -963,6 +969,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native-flipper"
   react-native-safe-area-context:
     :path: "../node_modules/react-native-safe-area-context"
+  react-native-shake:
+    :path: "../node_modules/@shakebugs/react-native-shake"
   react-native-webview:
     :path: "../node_modules/react-native-webview"
   React-perflogger:
@@ -1091,6 +1099,7 @@ SPEC CHECKSUMS:
   React-jsinspector: c6f66ae4b8a4a06c38efa64e011e38d87c2f8b6c
   react-native-flipper: fb2a09c4ce12fbab9dfa89b074e295c291d501f3
   react-native-safe-area-context: b6e0e284002381d2ff29fa4fff42b4d8282e3c94
+  react-native-shake: 168b18d4656c9c90a787ecf41822f88be7b532ec
   react-native-webview: 0aa2cde4ee7e3e1c5fffdf64dbce9c709aa18155
   React-perflogger: 5169bd5ca57e293aeefcaefe63e28cfeb854b1ff
   React-RCTActionSheet: fb111d835374f39a6eb74dc6d8a39152eacda571
@@ -1120,6 +1129,7 @@ SPEC CHECKSUMS:
   RNIap: b5b832ec0c9a4130dbee89a159d899f42da3f88d
   RNScreens: 2ad555d4d9fa10b91bb765ca07fe9b29d59573f0
   RNSVG: ce9d996113475209013317e48b05c21ee988d42e
+  Shake: 5dbd59e3e3363cea29bef608cc14aa13b09f96fc
   SSZipArchive: 62d4947b08730e4cda640473b0066d209ff033c9
   Yoga: a560f1bf2f0ac8b047ba341f5bddbb3b87e2ac70
   YogaKit: f782866e155069a2cca2517aafea43200b01fd5a

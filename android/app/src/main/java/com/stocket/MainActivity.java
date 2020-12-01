@@ -2,6 +2,10 @@ package com.stocket;
 
 import com.facebook.react.ReactActivity;
 
+
+import com.shakebugs.shake.Shake;
+import android.view.MotionEvent;
+
 public class MainActivity extends ReactActivity {
 
   /**
@@ -11,5 +15,11 @@ public class MainActivity extends ReactActivity {
   @Override
   protected String getMainComponentName() {
     return "stocket";
+  }
+
+  @Override
+  public boolean dispatchTouchEvent(MotionEvent ev) {
+      Shake.handleTouchEvent(ev, this);
+      return super.dispatchTouchEvent(ev);
   }
 }

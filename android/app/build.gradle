@@ -131,6 +131,7 @@ android {
     }
 
     defaultConfig {
+		multiDexEnabled true
         applicationId "com.stocket"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion

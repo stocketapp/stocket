@@ -8,7 +8,7 @@ import functions from '@react-native-firebase/functions'
 const FR = firestore()
 
 if (__DEV__) {
-  functions().useFunctionsEmulator('http://localhost:4001')
+  // functions().useFunctionsEmulator('http://localhost:4001')
   // FR.settings({
   //   host: 'localhost:4002',
   //   cacheSizeBytes: firestore.CACHE_SIZE_UNLIMITED,
