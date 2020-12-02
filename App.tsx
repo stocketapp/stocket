@@ -15,6 +15,7 @@ import TradeView from './src/views/TradeView'
 import MainStack from './src/navigation/AppStack'
 import AuthStack from './src/navigation/AuthenticationStack'
 import crashlytics from '@react-native-firebase/crashlytics'
+import Shake from '@shakebugs/react-native-shake'
 
 messaging().setBackgroundMessageHandler(async remoteMessage => {
   console.log('Message handled in the background!', remoteMessage)
@@ -30,8 +31,9 @@ export default function App(): ReactNode {
 
   useEffect(() => {
     crashlytics().log('App Mounted')
+    Shake.start()
     if (!loading) {
-      RNBootSplash.hide({ duration: 300 })
+      RNBootSplash.hide({ fade: true })
     }
   }, [loading])
 

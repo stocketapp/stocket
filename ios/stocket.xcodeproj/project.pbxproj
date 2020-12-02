@@ -390,6 +390,8 @@
 				8E4047EA86D8E6DAFC430ABE /* [CP] Copy Pods Resources */,
 				B0DF13E1F2E5C94098710EFF /* [CP-User] [RNFB] Core Configuration */,
 				BF257286CD1C9C9EC2F5F765 /* [CP-User] [RNFB] Crashlytics Configuration */,
+				695B85ECDFE2DE6AD153FA5E /* [CP] Embed Pods Frameworks */,
+				8BB52B62798D477456192724 /* Upload Sourcemap */,
 			);
 			buildRules = (
 			);
@@ -452,6 +454,8 @@
 				DFBA6196A6F36E74293A4EFB /* [CP] Copy Pods Resources */,
 				E836F97717D1A4A3A78A8A60 /* [CP-User] [RNFB] Core Configuration */,
 				F45F5D038E3DAB3347AD578E /* [CP-User] [RNFB] Crashlytics Configuration */,
+				DC4CA85A30F3D190B660374F /* [CP] Embed Pods Frameworks */,
+				6B8E531E50E790A7666EE555 /* Upload Sourcemap */,
 			);
 			buildRules = (
 			);
@@ -476,6 +480,8 @@
 				54053D2E05FAEE435F2744FB /* [CP] Copy Pods Resources */,
 				033CC8417448D89D24B706F9 /* [CP-User] [RNFB] Core Configuration */,
 				51AA0B0D494265BDC593E6E2 /* [CP-User] [RNFB] Crashlytics Configuration */,
+				3DFED9C6964B630E9E307761 /* [CP] Embed Pods Frameworks */,
+				71DA1701A29644F10E655159 /* Upload Sourcemap */,
 			);
 			buildRules = (
 			);
@@ -692,6 +698,24 @@
 			shellPath = /bin/sh;
 			shellScript = "export NODE_BINARY=node\n../node_modules/react-native/scripts/react-native-xcode.sh";
 		};
+		3DFED9C6964B630E9E307761 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Staging/Pods-Staging-frameworks.sh",
+				"${PODS_ROOT}/Shake/Shake.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Shake.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Staging/Pods-Staging-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		51AA0B0D494265BDC593E6E2 /* [CP-User] [RNFB] Crashlytics Configuration */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -726,6 +750,24 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Staging/Pods-Staging-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		695B85ECDFE2DE6AD153FA5E /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Production/Pods-Production-frameworks.sh",
+				"${PODS_ROOT}/Shake/Shake.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Shake.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Production/Pods-Production-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		77AA6864E0B417FAA20C8C23 /* [CP] Check Pods Manifest.lock */ = {
@@ -951,6 +993,24 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "#!/usr/bin/env bash\n#\n# Copyright (c) 2016-present Invertase Limited & Contributors\n#\n# Licensed under the Apache License, Version 2.0 (the \"License\");\n# you may not use this library except in compliance with the License.\n# You may obtain a copy of the License at\n#\n#   http://www.apache.org/licenses/LICENSE-2.0\n#\n# Unless required by applicable law or agreed to in writing, software\n# distributed under the License is distributed on an \"AS IS\" BASIS,\n# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n# See the License for the specific language governing permissions and\n# limitations under the License.\n#\nset -e\n\nif [[ ${PODS_ROOT} ]]; then\n  echo \"info: Exec FirebaseCrashlytics Run from Pods\"\n  \"${PODS_ROOT}/FirebaseCrashlytics/run\"\nelse\n  echo \"info: Exec FirebaseCrashlytics Run from framework\"\n  \"${PROJECT_DIR}/FirebaseCrashlytics.framework/run\"\nfi\n";
+		};
+		DC4CA85A30F3D190B660374F /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Development/Pods-Development-frameworks.sh",
+				"${PODS_ROOT}/Shake/Shake.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Shake.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Development/Pods-Development-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
 		};
 		DFBA6196A6F36E74293A4EFB /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
