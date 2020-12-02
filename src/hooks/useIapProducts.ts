@@ -1,4 +1,3 @@
-// @flow
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
@@ -23,9 +22,7 @@ export default function useIapProducts(uid: string) {
     const iapProducts = async () => {
       const products: Array<RNIap.Product> = []
       try {
-        const result = await RNIap.getProducts(
-          iapProductsList.map(el => el.productId),
-        )
+        const result = await RNIap.getProducts(iapProductsList.map(el => el.productId))
         result.map(el => {
           let prod = { productPrice: 0, ...el }
           prod.productPrice = Number(el.price)
@@ -36,7 +33,7 @@ export default function useIapProducts(uid: string) {
           products,
         })
       } catch (err) {
-        console.log(err)
+        console.log('fetch iapProducts', err)
       }
     }
 

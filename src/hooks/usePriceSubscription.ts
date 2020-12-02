@@ -1,4 +1,3 @@
-// @flow
 import { useEffect, useState, useCallback } from 'react'
 import { reduce } from 'lodash'
 import useUser from './useUser'

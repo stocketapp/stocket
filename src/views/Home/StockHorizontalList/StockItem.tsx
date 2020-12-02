@@ -1,4 +1,3 @@
-// @flow
 import React from 'react'
 import { TouchableOpacity, StyleSheet } from 'react-native'
 import { SUB_BACKGROUND, GRAY_DARKER } from '@utils/colors'

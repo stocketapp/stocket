@@ -1,4 +1,3 @@
-// @flow
 import React from 'react'
 import { View, TouchableOpacity } from 'react-native'
 import { Text, Container } from '@components'
