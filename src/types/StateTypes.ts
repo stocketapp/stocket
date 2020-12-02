@@ -1,5 +1,10 @@
 import { PositionType } from './index'
 
+export interface DispatchAction {
+  type: string
+  payload: any
+}
+
 export interface RootState {
   user: UserState
   portfolio: PortfolioState
@@ -11,6 +16,8 @@ export interface RootState {
 export interface UserState {
   currentUser?: {
     uid: string
+    email: string
+    displayName: string
   } | null
   isAuth: boolean
   userInfo?: UserInfo | null
@@ -53,8 +60,8 @@ export interface StockState {
 
 export interface SelectedStockData {
   quote: StockQuote
-  chart: Array<SelectedStockChart>
-  news: Array<any>
+  chart?: Array<SelectedStockChart>
+  news?: Array<any>
 }
 
 export interface SelectedStockChart {
@@ -69,16 +76,16 @@ export interface IapProductsState {
 
 export interface StockQuote {
   symbol?: string
-  close: number
-  companyName: string
-  open: string
-  high: string
-  low: string
-  volume: string
-  marketCap: string
-  peRatio: string
-  week52High: string
-  week52Low: string
-  change: number
-  latestPrice: number
+  close?: number
+  companyName?: string
+  open?: string
+  high?: string
+  low?: string
+  volume?: string
+  marketCap?: string
+  peRatio?: string
+  week52High?: string
+  week52Low?: string
+  change?: number
+  latestPrice?: number
 }

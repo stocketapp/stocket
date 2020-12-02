@@ -1,24 +1,17 @@
 import initialState from '../initialState'
-// import type {  } from 'types'
+import type { DispatchAction } from 'types'
 
 const { user: userState } = initialState
 
-interface UserAction {
-  isAuth: boolean
-  currentUser: object
-  userInfo: object
-  type: string
-  payload: any
-}
-
-export default function (state = userState, action: UserAction) {
-  switch (action.type) {
+export default function (state = userState, action: DispatchAction) {
+  const { type, payload } = action
+  switch (type) {
     case 'IS_AUTHENTICATED':
-      return { ...state, isAuth: action.isAuth }
+      return { ...state, isAuth: payload }
     case 'SET_USER':
-      return { ...state, currentUser: action.currentUser }
+      return { ...state, currentUser: payload }
     case 'SET_USER_INFO':
-      return { ...state, userInfo: action.payload }
+      return { ...state, userInfo: payload }
     default:
       return state
   }

@@ -27,7 +27,7 @@
 			<string>Editor</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>com.googleusercontent.apps.883607112422-djgp4om0motfv2jgjbrrscdabfdjojoc</string>
+				<string>com.googleusercontent.apps.1072088358272-mt4tu8f479b53nbm28ab702oc4v1tkig</string>
 			</array>
 		</dict>
 	</array>
@@ -41,8 +41,6 @@
 	<true/>
 	<key>NSAppTransportSecurity</key>
 	<dict>
-		<key>NSAllowsArbitraryLoads</key>
-		<true/>
 		<key>NSExceptionDomains</key>
 		<dict>
 			<key>localhost</key>
@@ -85,5 +83,12 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
+	<key>Shake</key>
+	<dict>
+		<key>APIClientID</key>
+		<string>fNv80EPd14YGPemcfrJANG3UaijxrI4XmXiSQzgQ</string>
+		<key>APIClientSecret</key>
+		<string>FGED1MPwcHmlp2vwxkrzKGov1Ni8HSHb2K1VzANK53uhOZ7mYtzfrY1</string>
+	</dict>
 </dict>
 </plist>

@@ -1,4 +1,3 @@
-// @flow
 import React from 'react'
 import Svg, { Rect } from 'react-native-svg'
 import type { SvgProps } from 'types'

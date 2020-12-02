@@ -20,6 +20,8 @@ module.exports = {
           '@selectors': './src/redux/selectors.ts',
           '@assets': './src/assets',
           '@products-assets': './src/assets/products',
+          '@queries': './src/graphql/queries',
+          '@mutations': './src/graphql/mutations',
         },
       },
     ],

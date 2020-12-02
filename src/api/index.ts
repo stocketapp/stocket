@@ -1,4 +1,3 @@
-// @flow
 import firestore from '@react-native-firebase/firestore'
 import perf from '@react-native-firebase/perf'
 import type { TradeDataType, DocReference } from 'types'
@@ -9,7 +8,7 @@ import functions from '@react-native-firebase/functions'
 const FR = firestore()
 
 if (__DEV__) {
-  functions().useFunctionsEmulator('http://localhost:4001')
+  // functions().useFunctionsEmulator('http://localhost:4001')
   // FR.settings({
   //   host: 'localhost:4002',
   //   cacheSizeBytes: firestore.CACHE_SIZE_UNLIMITED,
