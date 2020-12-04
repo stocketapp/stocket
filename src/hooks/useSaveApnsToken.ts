@@ -7,16 +7,20 @@ const FR = firestore()
 export default function useSaveApnsToken(uid: string) {
   useEffect(() => {
     const saveToken = async (token: string) => {
-      await FR.collection('Users')
-        .doc(uid)
-        .update({
-          apnsTokens: firestore.FieldValue.arrayUnion(token),
-        })
+      await FR.collection('Users').doc(uid).update({
+        apnsTokens: token,
+      })
     }
 
     const getToken = async () => {
-      const token = await messaging().getToken()
-      await saveToken(token)
+      try {
+        const token = await messaging().getToken()
+        if (uid) {
+          await saveToken(token)
+        }
+      } catch (err) {
+        console.log('getToken()', err)
+      }
     }
     getToken()
 
