@@ -1,6 +1,6 @@
 {
   "name": "stocket",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "private": true,
   "scripts": {
     "android": "react-native run-android",
@@ -9,8 +9,8 @@
     "lint": "eslint .",
     "ios": "npx react-native run-ios --simulator 'iPhone 11 Pro' --scheme Development",
     "ios-device": "npx react-native run-ios --device \"Henry’s iPhone 11 Pro\" --scheme Development",
-    "cp-staging": "cd ios && sh ../staging-env.sh && cd .. && appcenter codepush release-react -a Stocket/StocketRN -d Staging",
-    "cp-prod": "cd ios && sh ../prod-env.sh && cd .. && appcenter codepush release-react -a Stocket/StocketRN -d Production",
+    "cp-staging": "cd ios && sh ../env/staging-env.sh && cd .. && npx appcenter codepush release-react -a Stocket/StocketRN -d Staging",
+    "cp-prod": "cd ios && sh ../env/prod-env.sh && cd .. && npx appcenter codepush release-react -a Stocket/StocketRN -d Production",
     "postinstall": "npx pod-install"
   },
   "dependencies": {
