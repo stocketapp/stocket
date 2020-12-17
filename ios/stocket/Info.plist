@@ -17,7 +17,7 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>1.2.0</string>
+	<string>1.2.2</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleURLTypes</key>
@@ -27,12 +27,12 @@
 			<string>Editor</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>com.googleusercontent.apps.1072088358272-mt4tu8f479b53nbm28ab702oc4v1tkig</string>
+				<string>com.googleusercontent.apps.883607112422-djgp4om0motfv2jgjbrrscdabfdjojoc</string>
 			</array>
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>2</string>
+	<string>1</string>
 	<key>CodePushDeploymentKey</key>
 	<string>$(CODEPUSH_KEY)</string>
 	<key>ITSAppUsesNonExemptEncryption</key>
@@ -52,6 +52,13 @@
 	</dict>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string></string>
+	<key>Shake</key>
+	<dict>
+		<key>APIClientID</key>
+		<string>fNv80EPd14YGPemcfrJANG3UaijxrI4XmXiSQzgQ</string>
+		<key>APIClientSecret</key>
+		<string>FGED1MPwcHmlp2vwxkrzKGov1Ni8HSHb2K1VzANK53uhOZ7mYtzfrY1</string>
+	</dict>
 	<key>UIAppFonts</key>
 	<array>
 		<string>SF-Pro-Text-Black.otf</string>
@@ -83,12 +90,5 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
-	<key>Shake</key>
-	<dict>
-		<key>APIClientID</key>
-		<string>fNv80EPd14YGPemcfrJANG3UaijxrI4XmXiSQzgQ</string>
-		<key>APIClientSecret</key>
-		<string>FGED1MPwcHmlp2vwxkrzKGov1Ni8HSHb2K1VzANK53uhOZ7mYtzfrY1</string>
-	</dict>
 </dict>
 </plist>

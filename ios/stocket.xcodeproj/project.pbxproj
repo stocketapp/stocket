@@ -391,7 +391,6 @@
 				B0DF13E1F2E5C94098710EFF /* [CP-User] [RNFB] Core Configuration */,
 				BF257286CD1C9C9EC2F5F765 /* [CP-User] [RNFB] Crashlytics Configuration */,
 				695B85ECDFE2DE6AD153FA5E /* [CP] Embed Pods Frameworks */,
-				8BB52B62798D477456192724 /* Upload Sourcemap */,
 			);
 			buildRules = (
 			);
@@ -455,7 +454,6 @@
 				E836F97717D1A4A3A78A8A60 /* [CP-User] [RNFB] Core Configuration */,
 				F45F5D038E3DAB3347AD578E /* [CP-User] [RNFB] Crashlytics Configuration */,
 				DC4CA85A30F3D190B660374F /* [CP] Embed Pods Frameworks */,
-				6B8E531E50E790A7666EE555 /* Upload Sourcemap */,
 			);
 			buildRules = (
 			);
@@ -481,7 +479,6 @@
 				033CC8417448D89D24B706F9 /* [CP-User] [RNFB] Core Configuration */,
 				51AA0B0D494265BDC593E6E2 /* [CP-User] [RNFB] Crashlytics Configuration */,
 				3DFED9C6964B630E9E307761 /* [CP] Embed Pods Frameworks */,
-				71DA1701A29644F10E655159 /* Upload Sourcemap */,
 			);
 			buildRules = (
 			);
@@ -891,7 +888,8 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\n";
+			shellScript = "
+";
 		};
 		BA97CDBD24CB17BE00767A99 /* Create Environment Variables */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -978,7 +976,8 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\n";
+			shellScript = "
+";
 		};
 		BF257286CD1C9C9EC2F5F765 /* [CP-User] [RNFB] Crashlytics Configuration */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -1305,6 +1304,7 @@
 				SWIFT_OBJC_BRIDGING_HEADER = "stocket-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Release;
