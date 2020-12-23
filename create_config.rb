@@ -11,7 +11,8 @@ IEX_CLOUD_SSE_URL=ENV['IEX_CLOUD_SSE_URL']
 GOOGLE_STOCKET_WEB_CLIENT_ID=ENV['GOOGLE_STOCKET_WEB_CLIENT_ID']
 STOCKET_API_URL=ENV['STOCKET_API_URL']
 
-open('../config.js', 'w') { |output_file|
+open("#{__dir__}/config.js", 'w') { |output_file|
+  puts __dir__
   output_file.puts "export const IEX_CLOUD_KEY = '#{IEX_CLOUD_KEY}'"
   puts "created IEX_CLOUD_KEY"
   output_file.puts "export const IAPHUB_API_KEY = '#{IAPHUB_API_KEY}'"
