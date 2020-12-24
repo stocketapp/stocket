@@ -48,13 +48,13 @@
 		BA530A37253B009200A0FC07 /* SF-Pro-Text-Semibold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 0E2760951F894A708BE7323D /* SF-Pro-Text-Semibold.otf */; };
 		BA530A38253B009200A0FC07 /* SF-Pro-Text-Thin.otf in Resources */ = {isa = PBXBuildFile; fileRef = 6C6392B3E1D64AE3B031F447 /* SF-Pro-Text-Thin.otf */; };
 		BA530A39253B009200A0FC07 /* SF-Pro-Text-Ultralight.otf in Resources */ = {isa = PBXBuildFile; fileRef = 28FF65D2F01A4380B0A89C18 /* SF-Pro-Text-Ultralight.otf */; };
+		BA6023F225943E1100C5157B /* main.jsbundle in Resources */ = {isa = PBXBuildFile; fileRef = 008F07F21AC5B25A0029DE68 /* main.jsbundle */; };
 		BA704B7124BFDEF600FE4DE1 /* main.jsbundle in Sources */ = {isa = PBXBuildFile; fileRef = 008F07F21AC5B25A0029DE68 /* main.jsbundle */; };
 		BA94071F24BFE2D90000A64D /* main.jsbundle in Sources */ = {isa = PBXBuildFile; fileRef = 008F07F21AC5B25A0029DE68 /* main.jsbundle */; };
 		BA94072024BFE2ED0000A64D /* main.jsbundle in Sources */ = {isa = PBXBuildFile; fileRef = 008F07F21AC5B25A0029DE68 /* main.jsbundle */; };
 		BA94072124BFE4830000A64D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		BA94072224BFE4920000A64D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		BA94072324BFE49A0000A64D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
-		BA94072424BFE5280000A64D /* main.jsbundle in Resources */ = {isa = PBXBuildFile; fileRef = 008F07F21AC5B25A0029DE68 /* main.jsbundle */; };
 		BA94072624BFE5360000A64D /* main.jsbundle in Resources */ = {isa = PBXBuildFile; fileRef = 008F07F21AC5B25A0029DE68 /* main.jsbundle */; };
 		BA9A7DFA23E67A1A0062EEB4 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
 		BA9A7DFB23E67A1A0062EEB4 /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA21948D23BB77F600A77A16 /* File.swift */; };
@@ -380,7 +380,6 @@
 			buildConfigurationList = 13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "Production" */;
 			buildPhases = (
 				E1A3A7226AE997190E17AB96 /* [CP] Check Pods Manifest.lock */,
-				BA54CA502488496A003591E5 /* Change version */,
 				FD10A7F022414F080027D42C /* Start Packager */,
 				13B07F871A680F5B00A75B9A /* Sources */,
 				13B07F8C1A680F5B00A75B9A /* Frameworks */,
@@ -556,7 +555,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BA94072424BFE5280000A64D /* main.jsbundle in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				BA11394323B0F1090076AE78 /* AppCenter-Config.plist in Resources */,
 				BA3D549223AA4466006651B4 /* GoogleService-Info.plist in Resources */,
@@ -613,6 +611,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BA6023F225943E1100C5157B /* main.jsbundle in Resources */,
 				BAA7FDA6248FEC42000C9456 /* GoogleService-Info.plist in Resources */,
 				BA9A7E0023E67A1A0062EEB4 /* Images.xcassets in Resources */,
 				BA9A7E0123E67A1A0062EEB4 /* AppCenter-Config.plist in Resources */,
@@ -850,25 +849,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "export NODE_BINARY=/usr/local/bin/node\n../node_modules/react-native/scripts/react-native-xcode.sh\n";
-		};
-		BA54CA502488496A003591E5 /* Change version */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			name = "Change version";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "
-";
 		};
 		BA9A7DF823E67A1A0062EEB4 /* Start Packager */ = {
 			isa = PBXShellScriptBuildPhase;
