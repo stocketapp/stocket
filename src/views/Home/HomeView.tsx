@@ -9,7 +9,7 @@ import { callUpdateGains } from '@api'
 import { ChartIllustration } from '@icons'
 import { filter } from 'lodash'
 import StockHorizontalList from './StockHorizontalList'
-import Watchlist from './Watchlist'
+import Watchlist from './Watchlist/Watchlist'
 import type { SelectedStockData } from 'types'
 
 export default function Home() {
@@ -107,7 +107,7 @@ export default function Home() {
           />
         </View>
 
-        {balanceHistory && balanceHistory?.length > 1 ? (
+        {/* {balanceHistory && balanceHistory?.length > 1 ? (
           <ChartLine
             data={filter(balanceHistory, el => el !== null)}
             x="date"
@@ -116,7 +116,7 @@ export default function Home() {
           />
         ) : (
           <ChartIllustration />
-        )}
+        )} */}
         <StockHorizontalList data={positions} loading={loading} />
         {watchlist.length > 0 && <Watchlist data={watchlist} onItemPress={onWatchlistItemPress} />}
       </ScrollView>

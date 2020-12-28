@@ -66,7 +66,7 @@ export default function Stock({ route }: { route: any }) {
             onPress={() => (isFav ? removeFromWatchlist(uid, symbol) : addToWatchlist(uid, symbol))}
             style={{ padding: 5 }}
           >
-            <FavoriteIcon size={26} color={GREEN} />
+            <FavoriteIcon size={26} color={GREEN} filled={isFav} />
           </TouchableOpacity>
         )}
       </View>
