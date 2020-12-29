@@ -10,21 +10,19 @@ interface WatchlistResult extends QueryResult {
 
 export default function useGetWatchlist(): WatchlistResult {
   const dispatch = useDispatch()
-  const {
-    data: { getWatchlist },
-    ...rest
-  } = useQuery(GET_WATCHLIST_QUERY)
+  const { data, ...rest } = useQuery(GET_WATCHLIST_QUERY)
+  const watchlist = data?.getWatchlist
 
   useEffect(() => {
-    if (getWatchlist) {
+    if (watchlist) {
       dispatch({
         type: 'SET_WATCHLIST',
-        watchlist: getWatchlist,
+        watchlist: watchlist,
       })
     }
-  }, [getWatchlist, dispatch])
+  }, [watchlist, dispatch])
 
-  return { data: getWatchlist, ...rest }
+  return { data: watchlist, ...rest }
 }
 
 const GET_WATCHLIST_QUERY = gql`
