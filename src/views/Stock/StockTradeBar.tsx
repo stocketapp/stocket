@@ -4,7 +4,6 @@ import { Text, Container } from '@components'
 import { GREEN, BACKGROUND, DARK_TEXT, GRAY_DARKER } from '@utils/colors'
 
 type StockTradeBarProps = {
-  status: string
   price: number | string
   openTradeView: () => void
   marketStatus: boolean

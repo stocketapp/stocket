@@ -2,11 +2,11 @@ import React from 'react'
 import { StyleSheet, View } from 'react-native'
 import { Text } from '@components'
 import WatchlistItem from './WatchlistItem'
-import type { SelectedStockData } from 'types'
+import type { IexQuote } from 'types'
 
 type Props = {
-  data: Array<SelectedStockData>
-  onItemPress: (item: SelectedStockData) => void
+  data: Array<IexQuote>
+  onItemPress: (item: IexQuote) => void
 }
 
 const Watchlist = ({ data, onItemPress }: Props) => (

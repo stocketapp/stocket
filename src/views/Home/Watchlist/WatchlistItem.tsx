@@ -2,15 +2,15 @@ import React from 'react'
 import { View, StyleSheet, TouchableOpacity } from 'react-native'
 import { Text } from '@components'
 import { GREEN, RED, LABEL } from '@utils/colors'
-import type { SelectedStockData } from 'types'
+import type { IexQuote } from 'types'
 
 type Props = {
-  item: SelectedStockData
+  item: IexQuote
   onPress: () => void
 }
 
 const WatchlistItem = ({ item, onPress }: Props) => {
-  const { symbol, change, latestPrice, companyName } = item?.quote
+  const { symbol, change, latestPrice, companyName } = item
   return (
     <TouchableOpacity onPress={onPress}>
       <View style={styles.container}>

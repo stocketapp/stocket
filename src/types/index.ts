@@ -133,5 +133,25 @@ export interface ArticleType {
   url: string
 }
 
+export interface IexQuote {
+  change: number
+  changePercent: number
+  close: number
+  closeTime: number
+  companyName: string
+  high: number
+  iexRealtimePrice: number
+  latestPrice: number
+  low: number
+  marketCap: number
+  open: number
+  openTime: number
+  peRatio: number
+  symbol: string
+  week52High: string
+  week52Low: number
+  ytdChange: number
+}
+
 export * from './ChartTypes'
 export * from './StateTypes'

@@ -52,7 +52,7 @@ export default function Stock({ route }: { route: any }) {
     }
   }, [])
 
-  const isFav = find(watchlist, el => el?.quote?.symbol === stock?.quote?.symbol)
+  const isFav = find(watchlist, el => el?.symbol === stock?.quote?.symbol)
 
   return (
     <Container style={styles.container} safeAreaTop>
@@ -123,7 +123,6 @@ export default function Stock({ route }: { route: any }) {
 
           {stock && (
             <StockTradeBar
-              status={stock?.quote?.change < 0 ? 'negative' : 'positive'}
               price={latestPrice}
               openTradeView={openTradeView}
               marketStatus={marketStatus}
