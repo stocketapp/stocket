@@ -4,13 +4,13 @@ import { IexQuote } from 'types'
 import { useDispatch } from 'react-redux'
 import { useEffect } from 'react'
 
-interface WatchlistResult extends QueryResult {
+export interface WatchlistResult extends QueryResult {
   data: Array<IexQuote>
 }
 
 export default function useGetWatchlist(): WatchlistResult {
   const dispatch = useDispatch()
-  const { data, ...rest } = useQuery(GET_WATCHLIST_QUERY)
+  const { data, ...rest } = useQuery(GET_WATCHLIST_QUERY, { pollInterval: 5000 })
   const watchlist = data?.getWatchlist
 
   useEffect(() => {
