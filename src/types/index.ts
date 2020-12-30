@@ -137,15 +137,15 @@ export interface IexQuote {
   change: number
   changePercent: number
   close: number
-  closeTime: number
+  closeTime: bigint
   companyName: string
   high: number
   iexRealtimePrice: number
   latestPrice: number
   low: number
-  marketCap: number
+  marketCap: bigint
   open: number
-  openTime: number
+  openTime: bigint
   peRatio: number
   symbol: string
   week52High: string
