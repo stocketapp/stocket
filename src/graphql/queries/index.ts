@@ -1,9 +1,14 @@
 import useGetUser from './useGetUser'
-import useGetWatchlist from './useGetWatchlist'
+import useGetWatchlist, { WatchlistResult } from './useGetWatchlist'
 
-export default function useStocketQueries() {
-  return {
-    getWatchlist: useGetWatchlist,
-    getUser: useGetUser(),
-  }
+type StocketQueries = {
+  useGetWatchlist: () => WatchlistResult
+  useGetUser: () => void
 }
+
+const stocketQueries: StocketQueries = {
+  useGetWatchlist: useGetWatchlist,
+  useGetUser: useGetUser,
+}
+
+export default stocketQueries

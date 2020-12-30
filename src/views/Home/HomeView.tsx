@@ -3,28 +3,23 @@ import { StyleSheet, ScrollView, View } from 'react-native'
 import { BACKGROUND, GRAY_DARKER } from '@utils/colors'
 import { Balance, Container, ChartLine, MarketStatus, Text } from '@components'
 import { useGetMyStocks, useGetBalanceHistory, useUser } from '@hooks'
-import { useNavigation, useFocusEffect } from '@react-navigation/native'
-import { useDispatch } from 'react-redux'
+import { useFocusEffect } from '@react-navigation/native'
 import { callUpdateGains } from '@api'
 import { ChartIllustration } from '@icons'
 import { filter } from 'lodash'
 import StockHorizontalList from './StockHorizontalList'
 import Watchlist from './Watchlist/Watchlist'
-import type { IexQuote } from 'types'
-import useStocketQueries from '@queries'
 
 export default function Home() {
   const { userInfo, currentUser } = useUser()
   const uid = currentUser?.uid
   const { positions, loading } = useGetMyStocks(uid)
-  const { navigate } = useNavigation()
   const [allowScroll, setAllowScroll] = useState(true)
   const balanceHistory = useGetBalanceHistory(uid, userInfo)
   const [balanceValue, setBalanceValue] = useState(0)
   const [balanceChange, setBalanceChange] = useState(0)
   const [balanceChangePct, setBalanceChangePct] = useState(0)
   const [balanceDate, setBalanceDate] = useState('')
-  const dispatch = useDispatch()
   const timeout = useRef<any>(null)
   const dateNow = useMemo(() => {
     if (!balanceDate) {
@@ -32,16 +27,6 @@ export default function Home() {
     }
     return balanceDate
   }, [balanceDate])
-  const StocketQueries = useStocketQueries()
-  const { data: watchlist, error } = StocketQueries.getWatchlist()
-
-  const onWatchlistItemPress = (stockInfo: IexQuote) => {
-    dispatch({
-      type: 'SET_SELECTED_STOCK',
-      selectedStock: stockInfo?.symbol,
-    })
-    navigate('Stock')
-  }
 
   useEffect(() => {
     return () => clearTimeout(timeout.current)
@@ -109,7 +94,7 @@ export default function Home() {
           />
         </View>
 
-        {/* {balanceHistory && balanceHistory?.length > 1 ? (
+        {balanceHistory && balanceHistory?.length > 1 ? (
           <ChartLine
             data={filter(balanceHistory, el => el !== null)}
             x="date"
@@ -118,11 +103,9 @@ export default function Home() {
           />
         ) : (
           <ChartIllustration />
-        )} */}
-        <StockHorizontalList data={positions} loading={loading} />
-        {watchlist && watchlist.length > 0 && !error && (
-          <Watchlist data={watchlist} onItemPress={onWatchlistItemPress} />
         )}
+        <StockHorizontalList data={positions} loading={loading} />
+        <Watchlist />
       </ScrollView>
     </Container>
   )
