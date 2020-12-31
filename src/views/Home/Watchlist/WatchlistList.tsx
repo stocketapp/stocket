@@ -14,7 +14,7 @@ const Watchlist = ({ data, onItemPress }: Props) => (
     <Text type="title" weight="Heavy" style={styles.title}>
       Watchlist
     </Text>
-    {data.map((item: IexQuote, i: number) => (
+    {data?.map((item: IexQuote, i: number) => (
       <WatchlistItem item={item} key={i} onPress={() => onItemPress(item)} />
     ))}
   </>
