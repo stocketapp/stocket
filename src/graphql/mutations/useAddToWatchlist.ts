@@ -10,7 +10,7 @@ export default function useAddToWatchlist() {
   const [mutation] = useMutation(ADD_TO_WATCHLIST_MUTATION)
 
   const addToWatchlist = useCallback(
-    symbol => {
+    (symbol: string) => {
       return mutation({
         variables: { input: { symbol } },
       })

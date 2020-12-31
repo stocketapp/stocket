@@ -9,6 +9,7 @@ export default function useAuthState() {
   const batchDispatch = useBatchDispatch()
   const dispatch = useDispatchAction()
   const { isAuth, currentUser } = useUser()
+  const createUser = StocketMutations.useCreateUser()
 
   useEffect(() => {
     const authSubscription = auth().onAuthStateChanged(async user => {
@@ -20,7 +21,7 @@ export default function useAuthState() {
             { type: 'SET_USER', payload: user },
             { type: 'IS_AUTHENTICATED', payload: true },
           ])
-          StocketMutations.createUser(user)
+          await createUser(user)
         } catch (err) {
           console.log('authSubscription', err)
         }
