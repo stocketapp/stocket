@@ -2,10 +2,6 @@ import { gql } from '@apollo/client'
 import { useMutation } from '@apollo/client'
 import { useCallback } from 'react'
 
-type AddToWatchlistInput = {
-  symbol: string
-}
-
 export default function useAddToWatchlist() {
   const [mutation] = useMutation(ADD_TO_WATCHLIST_MUTATION)
 
