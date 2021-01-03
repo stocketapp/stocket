@@ -153,5 +153,10 @@ export interface IexQuote {
   ytdChange: number
 }
 
+export interface ReduxAction<T> {
+  type: string
+  payload: T
+}
+
 export * from './ChartTypes'
 export * from './StateTypes'

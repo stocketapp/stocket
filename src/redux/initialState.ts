@@ -31,6 +31,9 @@ const initialState: RootState = {
   iapProducts: {
     products: null,
   },
+  watchlistStore: {
+    watchlist: [],
+  },
 }
 
 export default initialState

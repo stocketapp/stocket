@@ -20,3 +20,7 @@ export function usePortfolioSelector() {
 export function useIapProductsSelector() {
   return useSelector(({ iapProducts }: RootState) => iapProducts)
 }
+
+export function useWatchlistSelector() {
+  return useSelector(({ watchlistStore }: RootState) => watchlistStore)
+}

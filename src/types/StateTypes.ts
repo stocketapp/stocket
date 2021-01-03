@@ -1,3 +1,4 @@
+import { WatchlistStore } from 'redux/reducers/watchlistStore'
 import { PositionType } from './index'
 
 export interface DispatchAction {
@@ -11,6 +12,7 @@ export interface RootState {
   trade: TradeState
   stock: StockState
   iapProducts: IapProductsState
+  watchlistStore: WatchlistStore
 }
 
 export interface UserState {
