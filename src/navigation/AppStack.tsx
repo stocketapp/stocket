@@ -4,9 +4,7 @@ import TabBarComponent from './TabBarComponent'
 import { TrendingUpIcon, SearchIcon, ProfileIcon } from '@icons'
 import { GREEN } from '@utils/colors'
 
-import Home from '@views/Home'
-import Search from '@views/Search'
-import Profile from '@views/Profile'
+import { Home, Search, Profile } from '@views'
 
 const { Navigator, Screen } = createBottomTabNavigator()
 
