@@ -94,7 +94,7 @@ export default function Home() {
           />
         </View>
 
-        {balanceHistory && balanceHistory?.length > 1 ? (
+        {/* {balanceHistory && balanceHistory?.length > 1 ? (
           <ChartLine
             data={filter(balanceHistory, el => el !== null)}
             x="date"
@@ -103,7 +103,7 @@ export default function Home() {
           />
         ) : (
           <ChartIllustration />
-        )}
+        )} */}
         <StockHorizontalList data={positions} loading={loading} />
         <Watchlist />
       </ScrollView>

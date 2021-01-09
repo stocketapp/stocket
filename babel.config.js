@@ -23,6 +23,7 @@ module.exports = {
           '@queries': './src/graphql/queries',
           '@mutations': './src/graphql/mutations',
           '@svg': './src/assets/svg',
+          '@styledComponents': './src/components/StyledComponents',
         },
       },
     ],

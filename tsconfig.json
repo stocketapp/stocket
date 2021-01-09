@@ -28,7 +28,8 @@
       "@products-assets": ["src/assets/products", "src/assets/products*"],
       "@queries": ["./src/graphql/queries", "./src/graphql/queries*"],
       "@mutations": ["./src/graphql/mutations", "./src/graphql/mutations*"],
-      "@svg": ["./src/assets/svg", "./src/assets/svg*"]
+      "@svg": ["./src/assets/svg", "./src/assets/svg*"],
+      "@styledComponents": ["./src/components/StyledComponents", "./src/components/StyledComponents*"]
     }
   },
   "exclude": ["node_modules", "babel.config.js", "metro.config.js", "jest.config.js"]
