@@ -38,8 +38,7 @@ export default function (state = initialState.stock, action: StockAction) {
         ...state,
         watchlist: filter(
           state.watchlist,
-          (el: { quote: { symbol: string } }) =>
-            el.quote.symbol !== action.symbol,
+          (el: { quote: { symbol: string } }) => el.quote.symbol !== action.symbol,
         ),
       }
     default:

@@ -42,7 +42,8 @@ export default function Stock({ route }: { route: any }) {
       type: 'STOCK_PRICE',
       stockPrice: latestPrice,
     })
-  }, [latestPrice, dispatch])
+    dispatch({ type: 'SELECTED_STOCK_POSITION', selectedStockPosition })
+  }, [latestPrice, dispatch, selectedStockPosition])
 
   const onChartEvent = useCallback((value: string | number | null) => {
     if (!value) {
