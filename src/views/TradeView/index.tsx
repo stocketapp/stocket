@@ -33,7 +33,7 @@ function TradeView({ forwardedRef }: Props) {
   // const { currentUser, userInfo } = user
   const dispatch = useDispatch()
   const sharesOwned = selectedStockPosition?.shares?.length
-  const maxShares = Math.floor(userInfo?.cash ?? 0 / stockPrice)
+  const maxShares = Math.floor((userInfo?.cash ?? 0) / stockPrice)
   const [isLoading, setIsLoading] = useState(false)
   const [goToSuccess, setGoToSuccess] = useState(false)
 
