@@ -14,7 +14,8 @@ import codePush from 'react-native-code-push'
 import { ApolloProvider } from '@apollo/client'
 import client from './ApolloClient'
 import Reactotron from 'reactotron-react-native'
-
+// import { ThemeProvider } from '@emotion/react'
+// import theme from './src/theme'
 const store = configureStore()
 
 if (__DEV__) {
@@ -27,7 +28,9 @@ const AppRoot = () => (
     <Provider store={store}>
       <SafeAreaProvider>
         <NavigationContainer>
+          {/* <ThemeProvider theme={theme}> */}
           <App />
+          {/* </ThemeProvider> */}
         </NavigationContainer>
       </SafeAreaProvider>
     </Provider>
