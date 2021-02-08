@@ -4,7 +4,7 @@ import { WatchlistList } from './Watchlist'
 
 export default function Home() {
   return (
-    <Container fullView>
+    <Container fullView safeAreaTop ph>
       <WatchlistList />
     </Container>
   )

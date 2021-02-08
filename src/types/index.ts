@@ -133,5 +133,21 @@ export interface ArticleType {
   url: string
 }
 
+export interface IEXQuote {
+  symbol: string
+  close: number
+  companyName: string
+  open: string
+  high: string
+  low: string
+  volume: string
+  marketCap: string
+  peRatio: string
+  week52High: string
+  week52Low: string
+  change: number
+  latestPrice: number
+}
+
 export * from './ChartTypes'
 export * from './StateTypes'
