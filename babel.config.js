@@ -22,6 +22,7 @@ module.exports = {
           '@products-assets': './src/assets/products',
           '@queries': './src/graphql/queries',
           '@mutations': './src/graphql/mutations',
+          '@theme': './src/theme.ts',
         },
       },
     ],

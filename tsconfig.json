@@ -27,6 +27,7 @@
       "@products-assets": ["src/assets/products"],
       "@queries": ["./src/graphql/queries"],
       "@mutations": ["./src/graphql/mutations"],
+      "@theme": ["./src/theme.ts"],
     }
   },
   "exclude": ["node_modules", "babel.config.js", "metro.config.js", "jest.config.js"]
