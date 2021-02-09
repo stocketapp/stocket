@@ -21,4 +21,3 @@ export const GET_WATCHLIST_QUERY = gql`
     }
   }
 `
-
