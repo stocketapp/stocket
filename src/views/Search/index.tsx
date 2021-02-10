@@ -1,14 +1,15 @@
 import React, { useState, useEffect, useCallback, ReactElement } from 'react'
 import { FlatList } from 'react-native'
 import { Container, SearchSymbols } from '@components'
-import { useDebounce, useUser } from '@hooks'
-import { searchTerm, addToWatchlist, removeFromWatchlist } from '@api'
+import { useDebounce, useUser, useStocketMutation } from '@hooks'
+import { searchTerm } from '@api'
 import { useNavigation } from '@react-navigation/native'
 import { useDispatch } from 'react-redux'
 import { includes, map } from 'lodash'
 import type { SearchResultType } from 'types'
 import SearchResult from './SearchResult'
 import { useStockSelector } from '@selectors'
+import { ADD_TO_WATCHLIST, REMOVE_FROM_WATCHLIST } from '@mutations'
 
 export default function Search(): ReactElement {
   const [search, setSearch] = useState('')
@@ -18,6 +19,8 @@ export default function Search(): ReactElement {
   const { navigate } = useNavigation()
   const dispatch = useDispatch()
   const { watchlist } = useStockSelector()
+  const addToWatchlistMutate = useStocketMutation(ADD_TO_WATCHLIST)
+  const removeFromWatchlistMutate = useStocketMutation(REMOVE_FROM_WATCHLIST)
 
   useEffect(() => {
     const getResults = async () => {
@@ -53,9 +56,9 @@ export default function Search(): ReactElement {
 
   const toggleFromWatchlist = (uid: string, symbol: string, isFav: boolean) => {
     if (!isFav) {
-      addToWatchlist(uid, symbol)
+      addToWatchlistMutate({ symbol })
     } else {
-      removeFromWatchlist(uid, symbol)
+      removeFromWatchlistMutate({ symbol })
     }
   }
 

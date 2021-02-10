@@ -8,9 +8,17 @@ export default function useStocketMutation() {
   }
 }
 
-export const CREATE_WATCHLIST = gql`
-  mutation CreateWatchlist($input: CreateWatchlistInput!) {
-    createWatchlist(input: $input) {
+export const ADD_TO_WATCHLIST = gql`
+  mutation AddToWatchlist($input: AddToWatchlistInput!) {
+    addToWatchlist(input: $input) {
+      symbol
+    }
+  }
+`
+
+export const REMOVE_FROM_WATCHLIST = gql`
+  mutation RemoveFromWatchlist($input: RemoveFromWatchlist!) {
+    removeFromWatchlist(input: $input) {
       symbol
     }
   }
