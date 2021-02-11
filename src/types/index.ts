@@ -12,6 +12,7 @@ export interface SvgProps {
 export interface IconProps {
   size?: number
   color?: string
+  filled?: boolean
 }
 
 export interface ContainerProps {
@@ -118,9 +119,7 @@ export interface ProductValue {
 }
 
 export type DocReference = FirebaseFirestoreTypes.DocumentReference
-export type DocumentSnapshot = FirebaseFirestoreTypes.DocumentSnapshot<
-  FirebaseFirestoreTypes.DocumentData
->
+export type DocumentSnapshot = FirebaseFirestoreTypes.DocumentSnapshot<FirebaseFirestoreTypes.DocumentData>
 
 export interface CurrentUser {
   uid: string

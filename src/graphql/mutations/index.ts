@@ -17,7 +17,7 @@ export const ADD_TO_WATCHLIST = gql`
 `
 
 export const REMOVE_FROM_WATCHLIST = gql`
-  mutation RemoveFromWatchlist($input: RemoveFromWatchlist!) {
+  mutation RemoveFromWatchlist($input: RemoveFromWatchlistInput!) {
     removeFromWatchlist(input: $input) {
       symbol
     }
