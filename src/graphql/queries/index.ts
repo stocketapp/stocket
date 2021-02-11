@@ -1,9 +1,9 @@
 export * from './useGetUser'
 import { gql } from '@apollo/client'
 
-export const GET_WATCHLIST_QUERY = gql`
-  query {
-    getWatchlist {
+const IexQuoteFragment = gql`
+  fragment IexQuoteFragment on WatchlistQuotes {
+    quotes {
       symbol
       change
       changePercent
@@ -20,4 +20,14 @@ export const GET_WATCHLIST_QUERY = gql`
       ytdChange
     }
   }
+`
+
+export const GET_WATCHLIST_QUERY = gql`
+  query {
+    watchlist {
+      ...IexQuoteFragment
+      symbols
+    }
+  }
+  ${IexQuoteFragment}
 `

@@ -1,4 +1,4 @@
-import { PositionType } from './index'
+import { IEXQuote, PositionType } from './index'
 
 export interface DispatchAction {
   type: string
@@ -11,6 +11,7 @@ export interface RootState {
   trade: TradeState
   stock: StockState
   iapProducts: IapProductsState
+  watchlist: Array<IEXQuote>
 }
 
 export interface UserState {

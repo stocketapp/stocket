@@ -1,13 +1,32 @@
 import { gql } from '@apollo/client'
 
-export const GET_WATCHLIST_QUERY = gql`
-  query {
-    getWatchlist {
+const IexQuoteFragment = gql`
+  fragment IexQuoteFragment on WatchlistQuotes {
+    quotes {
       symbol
       change
-      companyName
       changePercent
-      ...WatchlistFieldsFragment
+      close
+      closeTime
+      companyName
+      high
+      iexRealtimePrice
+      latestPrice
+      low
+      marketCap
+      week52Low
+      week52High
+      ytdChange
     }
   }
+`
+
+export const GET_WATCHLIST_QUERY = gql`
+  query {
+    watchlist {
+      ...IexQuoteFragment
+      symbols
+    }
+  }
+  ${IexQuoteFragment}
 `

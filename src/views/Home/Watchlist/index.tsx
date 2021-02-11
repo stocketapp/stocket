@@ -4,12 +4,12 @@ import type { IEXQuote } from 'types'
 import WatchlistItem from './WatchlistItem'
 import { useDispatch } from 'react-redux'
 import { useNavigation } from '@react-navigation/native'
-import { GET_WATCHLIST_QUERY } from '@queries'
+import { GET_WATCHLIST_QUERY } from '../queries'
 import { useQuery } from '@apollo/client'
 
 export const WatchlistList = () => {
-  const { data, loading } = useQuery(GET_WATCHLIST_QUERY)
-  const watchlist = data?.getWatchlist
+  const { data, loading } = useQuery(GET_WATCHLIST_QUERY, { fetchPolicy: 'cache-first' })
+  const watchlist = data?.watchlist.quotes
   const dispatch = useDispatch()
   const { navigate } = useNavigation()
 
