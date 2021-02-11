@@ -1,17 +1,18 @@
 import { gql } from '@apollo/client'
 
-export const GET_WATCHLIST_QUERY = gql`
+export const WATCHLIST_QUERY = gql`
   query {
     watchlist {
+      symbols
       quotes {
         symbol
         change
         changePercent
         companyName
-        latestPrice
         id
+        latestPrice
+        logo
       }
-      symbols
     }
   }
 `

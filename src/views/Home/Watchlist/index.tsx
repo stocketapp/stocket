@@ -8,7 +8,9 @@ import { GET_WATCHLIST_QUERY } from '../queries'
 import { useQuery } from '@apollo/client'
 
 export const WatchlistList = () => {
-  const { data, loading } = useQuery(GET_WATCHLIST_QUERY, { fetchPolicy: 'cache-first' })
+  const { data, loading } = useQuery(GET_WATCHLIST_QUERY, {
+    pollInterval: 10000,
+  })
   const watchlist = data?.watchlist.quotes
   const dispatch = useDispatch()
   const { navigate } = useNavigation()

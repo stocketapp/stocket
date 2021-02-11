@@ -31,7 +31,7 @@ export default function App(): ReactNode {
   useEffect(() => {
     crashlytics().log('App Mounted')
     if (!loading) {
-      RNBootSplash.hide({ duration: 300 })
+      RNBootSplash.hide({ fade: true })
     }
   }, [loading])
 
