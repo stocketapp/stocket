@@ -5,7 +5,6 @@ import { WatchlistList } from './Watchlist'
 import { HeaderContainer } from './styles'
 import { useGetMyStocks, useUser } from '@hooks'
 import { useTheme } from '@emotion/react'
-// import { useNavigation, useFocusEffect } from '@react-navigation/native'
 import StockHorizontalList from './StockHorizontalList'
 
 export default function Home() {
@@ -13,9 +12,6 @@ export default function Home() {
   const { userInfo, currentUser } = useUser()
   const uid = currentUser?.uid
   const { positions, loading } = useGetMyStocks(uid)
-  // const { navigate } = useNavigation()
-  // const [allowScroll, setAllowScroll] = useState(true)
-  // const balanceHistory = useGetBalanceHistory(uid, userInfo)
   const [balanceValue, setBalanceValue] = useState(0)
   const [balanceChange, setBalanceChange] = useState(0)
   const [balanceChangePct, setBalanceChangePct] = useState(0)
@@ -38,16 +34,6 @@ export default function Home() {
     setBalanceChange(userInfo?.portfolioChange)
     setBalanceChangePct(userInfo?.portfolioChangePct)
   }, [userInfo])
-
-  // useFocusEffect(
-  //   useCallback(() => {
-  //     const focusTimeout = setTimeout(() => {
-  //       // callUpdateGains(uid)
-  //     }, 1000)
-
-  //     return () => clearTimeout(focusTimeout)
-  //   }, [uid]),
-  // )
 
   return (
     <Container fullView safeAreaTop ph>

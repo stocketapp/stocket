@@ -6,7 +6,7 @@ import { useDispatch } from 'react-redux'
 import { useNavigation, useFocusEffect } from '@react-navigation/native'
 import { useQuery } from '@apollo/client'
 import { WATCHLIST_QUERY } from '@queries'
-import { watchlistSymbols, isWatchlistLoading } from '../../../Cache'
+import { watchlistSymbols, isWatchlistLoading } from '@cache'
 
 export const WatchlistList = () => {
   const dispatch = useDispatch()

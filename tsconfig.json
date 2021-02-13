@@ -28,6 +28,7 @@
       "@queries": ["./src/graphql/queries", "./src/graphql/queries*"],
       "@mutations": ["./src/graphql/mutations"],
       "@theme": ["./src/theme.ts"],
+      "@cache": ["./src/Cache.ts"]
     }
   },
   "exclude": ["node_modules", "babel.config.js", "metro.config.js", "jest.config.js"]

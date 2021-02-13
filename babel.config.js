@@ -23,6 +23,7 @@ module.exports = {
           '@queries': './src/graphql/queries',
           '@mutations': './src/graphql/mutations',
           '@theme': './src/theme.ts',
+          '@cache': './src/Cache.ts',
         },
       },
     ],
