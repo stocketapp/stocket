@@ -10,15 +10,15 @@ import { useNavigation } from '@react-navigation/native'
 import StockPosition from './StockPosition'
 import StockNews from './StockNews'
 import StockTradeBar from './StockTradeBar'
-import { addToWatchlist, removeFromWatchlist } from '@api'
 import { useSubscribeMarketHours, usePriceSubscription } from '@hooks'
 import { useGetCurrentStock, useGraphData } from './stockHooks'
-import { useStockSelector, useUserSelector } from '@selectors'
+import { useStockSelector, useUserSelector, useWatchlistSelector } from '@selectors'
 import type { GraphRange } from 'types'
+import StocketMutations from '@mutations'
 
 export default function Stock({ route }: { route: any }) {
   const { goBack } = useNavigation()
-  const { positions, selectedStock, watchlist } = useStockSelector()
+  const { positions, selectedStock } = useStockSelector()
   const selectedStockPosition = find(positions, el => el?.symbol === selectedStock) ?? null
   const stockInfo = route.params?.stockInfo
   const stock = useGetCurrentStock(selectedStock, stockInfo)
@@ -32,6 +32,9 @@ export default function Stock({ route }: { route: any }) {
   const latestPrice = price?.toFixed(2) // ?? stock?.quote?.latestPrice
   const marketStatus = useSubscribeMarketHours()
   const symbol = stock?.quote?.symbol ?? ''
+  const addToWatchlist = StocketMutations.useAddToWatchlist()
+  const removeFromWatchlist = StocketMutations.useRemoveFromWatchlist()
+  const { watchlist } = useWatchlistSelector()
 
   const openTradeView = useCallback(() => {
     dispatch({
@@ -52,7 +55,7 @@ export default function Stock({ route }: { route: any }) {
     }
   }, [])
 
-  const isFav = find(watchlist, el => el?.quote?.symbol === stock?.quote?.symbol)
+  const isFav = find(watchlist, el => el?.symbol === symbol)
 
   return (
     <Container style={styles.container} safeAreaTop>
@@ -63,10 +66,10 @@ export default function Stock({ route }: { route: any }) {
         <MarketStatus />
         {uid && (
           <TouchableOpacity
-            onPress={() => (isFav ? removeFromWatchlist(uid, symbol) : addToWatchlist(uid, symbol))}
+            onPress={() => (isFav ? removeFromWatchlist(symbol) : addToWatchlist(symbol))}
             style={{ padding: 5 }}
           >
-            <FavoriteIcon size={26} color={GREEN} filled={isFav} />
+            <FavoriteIcon size={26} color={GREEN} filled={!!isFav} />
           </TouchableOpacity>
         )}
       </View>
@@ -89,7 +92,7 @@ export default function Stock({ route }: { route: any }) {
                     {stock?.quote?.companyName}
                   </Text>
                   <Text style={{ paddingBottom: 4, left: 10 }} color={GRAY_DARKER} type="label">
-                    {stock?.quote?.symbol}
+                    {symbol}
                   </Text>
                 </View>
                 <Text type="heading" weight="Bold" style={{ paddingTop: 6 }}>
@@ -123,7 +126,6 @@ export default function Stock({ route }: { route: any }) {
 
           {stock && (
             <StockTradeBar
-              status={stock?.quote?.change < 0 ? 'negative' : 'positive'}
               price={latestPrice}
               openTradeView={openTradeView}
               marketStatus={marketStatus}

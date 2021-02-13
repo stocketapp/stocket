@@ -2,10 +2,14 @@ import React, { ReactElement } from 'react'
 import { TouchableOpacity, Dimensions, StyleSheet } from 'react-native'
 import { Container } from '@components'
 import { BACKGROUND } from '@utils/colors'
-import { NavigationHelpers, ParamListBase } from '@react-navigation/native'
-import { BottomTabDescriptorMap } from '@react-navigation/bottom-tabs/lib/typescript/src/types'
+import {
+  BottomTabBarOptions,
+  BottomTabBarProps,
+} from '@react-navigation/bottom-tabs/lib/typescript/src/types'
 
-export default function TabBarComponent(props: TabBarProps): ReactElement {
+export default function TabBarComponent(
+  props: BottomTabBarProps<BottomTabBarOptions>,
+): ReactElement {
   const { navigation, state, descriptors, activeTintColor, inactiveTintColor } = props
   const routesLength: number = state.routes.length
   const tabWidth: number = Dimensions.get('screen').width / routesLength
@@ -13,7 +17,7 @@ export default function TabBarComponent(props: TabBarProps): ReactElement {
 
   return (
     <Container style={styles.container} horizontal safeAreaBottom>
-      {state.routes.map((route: TabBarRoute, routeIndex: number) => {
+      {state.routes.map((route, routeIndex) => {
         const focused: boolean = activeRoute === routeIndex
         const tintColor: string = (focused ? activeTintColor : inactiveTintColor) ?? '#000'
         const { options } = descriptors[route.key]
@@ -35,22 +39,6 @@ export default function TabBarComponent(props: TabBarProps): ReactElement {
       })}
     </Container>
   )
-}
-
-interface TabBarProps {
-  state: { routes: any; index: number }
-  descriptors: BottomTabDescriptorMap
-  activeTintColor?: string
-  inactiveTintColor?: string
-  navigation: NavigationHelpers<ParamListBase>
-}
-
-interface TabBarRoute {
-  key: number
-  name: string
-  options: {
-    tabBarIcon: (args: { color?: string }) => ReactElement
-  }
 }
 
 const styles = StyleSheet.create({

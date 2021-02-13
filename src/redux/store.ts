@@ -6,6 +6,7 @@ import stock from './reducers/stock'
 import graph from './reducers/graph'
 import iapProducts from './reducers/iapProducts'
 import initialState from './initialState'
+import watchlist from './reducers/watchlist'
 
 const rootReducer = combineReducers({
   user,
@@ -14,6 +15,7 @@ const rootReducer = combineReducers({
   stock,
   graph,
   iapProducts,
+  watchlist,
 })
 
 export default (state: any, action: any) =>
