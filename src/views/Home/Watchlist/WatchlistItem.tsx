@@ -1,61 +1,65 @@
 import React from 'react'
-import { View, StyleSheet, TouchableOpacity } from 'react-native'
+import { TouchableOpacity } from 'react-native'
 import { Text } from '@components'
 import { GREEN, RED, LABEL } from '@utils/colors'
-import type { IEXQuote } from 'types'
+import {
+  Image,
+  ImageContainer,
+  ItemLeftContainer,
+  ItemRightContainer,
+  WatchlistItemContainer,
+  SymbolAndName,
+  Change,
+} from './styles'
 
-type Props = {
-  item: IEXQuote
-  onPress: (quote: IEXQuote) => void
+type WatchlistItemProps = {
+  item: WatchlistIexQuote
+  onPress: (quote: WatchlistIexQuote) => void
 }
 
-const WatchlistItem = ({ item, onPress }: Props) => {
-  const { symbol, change, latestPrice, companyName } = item
+const WatchlistItem = ({ item, onPress }: WatchlistItemProps) => {
+  const { symbol, change, latestPrice, companyName, logo } = item
+  const changeBg = { backgroundColor: change >= 0 ? GREEN : RED }
+
   return (
     <TouchableOpacity onPress={() => onPress(item)}>
-      <View style={styles.container}>
-        <View style={styles.left}>
-          <Text weight="Semibold">{symbol ?? ''}</Text>
-          <Text color={LABEL} weight="Medium">
-            {companyName}
-          </Text>
-        </View>
+      <WatchlistItemContainer>
+        <ItemLeftContainer>
+          <ImageContainer>
+            <Image source={{ uri: logo }} />
+          </ImageContainer>
+          <SymbolAndName>
+            <Text weight="Black">{symbol ?? ''}</Text>
+            <Text color={LABEL} weight="Medium">
+              {companyName}
+            </Text>
+          </SymbolAndName>
+        </ItemLeftContainer>
 
-        <View style={styles.right}>
+        <ItemRightContainer>
           <Text style={{ textAlign: 'right' }} weight="Semibold">
             {latestPrice}
           </Text>
-          <View style={[styles.change, { backgroundColor: change >= 0 ? GREEN : RED }]}>
+          <Change style={changeBg}>
             <Text style={{ textAlign: 'right' }} weight="Medium">
               {change > 0 && '+'}
               {change}
             </Text>
-          </View>
-        </View>
-      </View>
+          </Change>
+        </ItemRightContainer>
+      </WatchlistItemContainer>
     </TouchableOpacity>
   )
 }
 
-export default WatchlistItem
+export interface WatchlistIexQuote {
+  symbol: string
+  companyName: string
+  change: number
+  latestPrice: number
+  logo: string
+  changePercent: number
+  id: number
+}
 
-const styles = StyleSheet.create({
-  container: {
-    paddingVertical: 15,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-  },
-  change: {
-    paddingVertical: 2,
-    paddingHorizontal: 6,
-    minWidth: 70,
-    borderRadius: 4,
-    marginTop: 3,
-  },
-  left: {
-    justifyContent: 'space-between',
-  },
-  right: {
-    justifyContent: 'space-between',
-  },
-})
+export default WatchlistItem

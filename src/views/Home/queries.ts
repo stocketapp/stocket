@@ -10,6 +10,7 @@ export const WATCHLIST_QUERY = gql`
         companyName
         latestPrice
         id
+        logo
       }
       symbols
       watchlistSymbolsVar @client

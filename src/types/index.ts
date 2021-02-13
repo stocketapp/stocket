@@ -146,6 +146,7 @@ export interface IEXQuote {
   week52Low: string
   change: number
   latestPrice: number
+  logo: string
 }
 
 export * from './ChartTypes'
