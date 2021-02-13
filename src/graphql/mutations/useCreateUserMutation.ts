@@ -1,12 +1,10 @@
 import { gql } from '@apollo/client'
 import { useMutation } from '@apollo/client'
 import { useCallback } from 'react'
-import { useUserSelector } from '@selectors'
 import { FirebaseAuthTypes } from '@react-native-firebase/auth'
 
 export default function useCreateUserMutation() {
-  const { currentUser } = useUserSelector()
-  const [mutation] = useMutation(CREATE_USER_QUERY)
+  const [mutation] = useMutation(GET_USER_QUERY)
   const createUser = useCallback(
     async (user: FirebaseAuthTypes.User) => {
       const { displayName, email, uid } = user ?? {}
@@ -17,21 +15,19 @@ export default function useCreateUserMutation() {
           displayName,
         },
       }
-      if (currentUser?.uid) {
+      if (uid) {
         return mutation({
           variables: { input: MUTATION_INPUT },
         })
-      } else {
-        throw Error('No current user. Cannot create user data in DB')
       }
     },
-    [mutation, currentUser],
+    [mutation],
   )
 
   return createUser
 }
 
-const CREATE_USER_QUERY = gql`
+const GET_USER_QUERY = gql`
   mutation CreateUser($input: CreateUserInput!) {
     createUser(input: $input) {
       success

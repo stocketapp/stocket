@@ -1,5 +1,9 @@
-import { WatchlistStore } from 'redux/reducers/watchlistStore'
-import { PositionType } from './index'
+import { IEXQuote, PositionType } from './index'
+
+export interface DispatchAction {
+  type: string
+  payload: any
+}
 
 export interface DispatchAction {
   type: string
@@ -12,7 +16,7 @@ export interface RootState {
   trade: TradeState
   stock: StockState
   iapProducts: IapProductsState
-  watchlistStore: WatchlistStore
+  watchlist: Array<IEXQuote>
 }
 
 export interface UserState {

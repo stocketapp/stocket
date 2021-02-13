@@ -1,11 +1,25 @@
-import useCreateUser from './useCreateUserMutation'
-import useAddToWatchlist from './useAddToWatchlist'
-import useRemoveFromWatchlist from './useRemoveFromWatchlist'
+import useCreateUserMutation from './useCreateUserMutation'
+import { gql } from '@apollo/client'
 
-const stocketMutations = {
-  useCreateUser,
-  useAddToWatchlist,
-  useRemoveFromWatchlist,
+export default function useStocketMutation() {
+  const createUser = useCreateUserMutation()
+  return {
+    createUser,
+  }
 }
 
-export default stocketMutations
+export const ADD_TO_WATCHLIST = gql`
+  mutation AddToWatchlist($input: AddToWatchlistInput!) {
+    addToWatchlist(input: $input) {
+      symbol
+    }
+  }
+`
+
+export const REMOVE_FROM_WATCHLIST = gql`
+  mutation RemoveFromWatchlist($input: RemoveFromWatchlistInput!) {
+    removeFromWatchlist(input: $input) {
+      symbol
+    }
+  }
+`

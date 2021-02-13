@@ -24,6 +24,8 @@ module.exports = {
           '@mutations': './src/graphql/mutations',
           '@svg': './src/assets/svg',
           '@styledComponents': './src/components/StyledComponents',
+          '@theme': './src/theme.ts',
+          '@cache': './src/Cache.ts',
         },
       },
     ],

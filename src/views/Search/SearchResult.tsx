@@ -10,13 +10,12 @@ interface SearchResultProps {
     securityName: string
     symbol: string
   }
-  onPress: (uid: string, symbol: string, isFav: boolean) => void
+  onPress: (symbol: string, isFav: boolean) => void
   setStock: () => void
-  uid: string
   isFaved: (symbol: string) => boolean
 }
 
-export default function SearchResult({ item, onPress, setStock, uid, isFaved }: SearchResultProps) {
+export default function SearchResult({ item, onPress, setStock, isFaved }: SearchResultProps) {
   const isFav = isFaved(item?.symbol)
   return (
     <TouchableOpacity style={styles.resultItem} onPress={setStock}>
@@ -31,7 +30,7 @@ export default function SearchResult({ item, onPress, setStock, uid, isFaved }: 
 
       <TouchableOpacity
         style={{ padding: 6 }}
-        onPress={() => onPress(uid, item?.symbol, isFaved(item?.symbol))}
+        onPress={() => onPress(item?.symbol, isFaved(item?.symbol))}
       >
         <FavoriteIcon size={26} color={GREEN} filled={isFav} />
       </TouchableOpacity>

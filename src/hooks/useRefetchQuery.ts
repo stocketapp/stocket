@@ -9,9 +9,7 @@ function useRefetchQuery(query: Query, pollInterval: number = 5000, options?: Op
   const result = useQuery(query, { ...options })
 
   const refetch = useCallback(() => {
-    const refetchInterval = setInterval(() => {
-      result.refetch()
-    }, pollInterval)
+    const refetchInterval = setInterval(async () => await result.refetch(), pollInterval)
 
     return () => clearTimeout(refetchInterval)
   }, [result, pollInterval])

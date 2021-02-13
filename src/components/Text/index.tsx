@@ -52,7 +52,7 @@ const Text = ({
   }
 
   return (
-    <RNText style={customStyle} {...props}>
+    <RNText style={customStyle} {...props} numberOfLines={1} ellipsizeMode="tail">
       {children}
     </RNText>
   )

@@ -4,7 +4,9 @@ import TabBarComponent from './TabBarComponent'
 import { TrendingUpIcon, SearchIcon, ProfileIcon } from '@icons'
 import { GREEN } from '@utils/colors'
 
-import { Home, Search, Profile } from '@views'
+import { Search, Profile } from '@views'
+import HomeStack from './stacks/HomeStack'
+// import HomeOld from '../views/HomeOld/HomeView'
 
 const { Navigator, Screen } = createBottomTabNavigator()
 
@@ -15,7 +17,7 @@ export default () => (
   >
     <Screen
       name="Home"
-      component={Home}
+      component={HomeStack}
       options={{
         tabBarIcon: ({ color }) => <TrendingUpIcon size={40} color={color} />,
       }}
