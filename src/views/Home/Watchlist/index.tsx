@@ -6,7 +6,7 @@ import { useDispatch } from 'react-redux'
 import { useNavigation, useFocusEffect } from '@react-navigation/native'
 import { useQuery } from '@apollo/client'
 import { WATCHLIST_QUERY } from '@queries'
-import { watchlistSymbols, isWatchlistLoading } from '@cache'
+import { watchlistSymbolsVar, isWatchlistLoadingVar } from '@cache'
 
 export const WatchlistList = () => {
   const dispatch = useDispatch()
@@ -26,14 +26,14 @@ export const WatchlistList = () => {
   useFocusEffect(
     useCallback(() => {
       let refetchInterval = setInterval(async () => await refetch(), 10000)
-      watchlistSymbols(symbols)
+      watchlistSymbolsVar(symbols)
 
       return () => clearInterval(refetchInterval)
     }, [symbols, refetch]),
   )
 
   useEffect(() => {
-    isWatchlistLoading(loading)
+    isWatchlistLoadingVar(loading)
   }, [loading])
 
   return (

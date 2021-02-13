@@ -16,7 +16,7 @@ import MainStack from './navigation/AppStack'
 import AuthStack from './navigation/AuthenticationStack'
 import crashlytics from '@react-native-firebase/crashlytics'
 import { useReactiveVar } from '@apollo/client'
-import { isWatchlistLoading } from './Cache'
+import { isWatchlistLoadingVar } from './Cache'
 
 messaging().setBackgroundMessageHandler(async remoteMessage => {
   console.log('Message handled in the background!', remoteMessage)
@@ -29,14 +29,14 @@ export default function App(): ReactNode {
   useIapProducts(currentUser?.uid)
   useSaveApnsToken(currentUser?.uid)
   useSubscribeMarketHours()
-  const isWatchlistLoadingVar = useReactiveVar(isWatchlistLoading)
+  const isWatchlistLoading = useReactiveVar(isWatchlistLoadingVar)
 
   useEffect(() => {
     crashlytics().log('App Mounted')
-    if (!loading && !isWatchlistLoadingVar) {
+    if (!loading && !isWatchlistLoading) {
       RNBootSplash.hide({ fade: true })
     }
-  }, [loading, isWatchlistLoadingVar])
+  }, [loading, isWatchlistLoading])
 
   useEffect(() => {
     const requestNotificationPermission = async () => {
