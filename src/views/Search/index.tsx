@@ -9,7 +9,9 @@ import { includes } from 'lodash'
 import type { SearchResultType } from 'types'
 import SearchResult from './SearchResult'
 import { ADD_TO_WATCHLIST, REMOVE_FROM_WATCHLIST } from '@mutations'
-import { gql, useApolloClient } from '@apollo/client'
+import { useReactiveVar } from '@apollo/client'
+import { watchlistSymbolsVar } from '@cache'
+import { remove } from 'lodash'
 
 export default function Search(): ReactElement {
   const [search, setSearch] = useState('')
@@ -19,18 +21,7 @@ export default function Search(): ReactElement {
   const dispatch = useDispatch()
   const addToWatchlistMutate = useStocketMutation(ADD_TO_WATCHLIST)
   const removeFromWatchlistMutate = useStocketMutation(REMOVE_FROM_WATCHLIST)
-  const client = useApolloClient()
-  const {
-    watchlist: { symbols },
-  } = client.readQuery({
-    query: gql`
-      query {
-        watchlist {
-          symbols
-        }
-      }
-    `,
-  })
+  const watchlistSymbols = useReactiveVar(watchlistSymbolsVar)
 
   useEffect(() => {
     const getResults = async () => {
@@ -56,13 +47,23 @@ export default function Search(): ReactElement {
     navigate('Stock')
   }
 
-  const isFaved = useCallback((symbol: string): boolean => includes(symbols, symbol), [symbols])
+  const isFaved = useCallback((symbol: string): boolean => includes(watchlistSymbols, symbol), [
+    watchlistSymbols,
+  ])
+
+  const addToWatchlistCache = (newValue: string) => {
+    watchlistSymbolsVar([...watchlistSymbols, newValue])
+  }
+
+  const removeFromWatchlistCache = (symbol: string) => {
+    watchlistSymbolsVar(remove(watchlistSymbols, el => el !== symbol))
+  }
 
   const toggleFromWatchlist = (symbol: string, isFav: boolean) => {
     if (!isFav) {
-      addToWatchlistMutate({ symbol })
+      addToWatchlistMutate({ symbol }, addToWatchlistCache(symbol))
     } else {
-      removeFromWatchlistMutate({ symbol })
+      removeFromWatchlistMutate({ symbol }, removeFromWatchlistCache(symbol))
     }
   }
 

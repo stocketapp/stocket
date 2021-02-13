@@ -9,7 +9,10 @@ type variablesType = Record<string, any> | undefined
 export default function useStocketMutation(mutation: mutationType, options?: mutationOptions) {
   const [mutate] = useMutation(mutation, options)
 
-  const callback = useCallback((input: variablesType) => mutate({ variables: { input } }), [mutate])
+  const callback = useCallback(
+    (input: variablesType, update?) => mutate({ variables: { input }, update }),
+    [mutate],
+  )
 
   return callback
 }
