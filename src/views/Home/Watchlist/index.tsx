@@ -1,11 +1,13 @@
 import React, { useCallback, useEffect } from 'react'
 import { Container, Text } from '@components'
-import WatchlistItem, { WatchlistIexQuote } from './WatchlistItem'
+import type { IEXQuote } from 'types'
+import WatchlistItem from './WatchlistItem'
 import { useDispatch } from 'react-redux'
 import { useNavigation, useFocusEffect } from '@react-navigation/native'
 import { useQuery } from '@apollo/client'
 import { WATCHLIST_QUERY } from '@queries'
 import { watchlistSymbolsVar, isWatchlistLoadingVar } from '@cache'
+import { WatchlistIexQuote } from './WatchlistItem'
 
 export const WatchlistList = () => {
   const dispatch = useDispatch()

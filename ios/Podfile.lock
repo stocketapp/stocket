@@ -736,7 +736,7 @@ PODS:
     - React-perflogger (= 0.64.0-rc.0)
   - RNAppleAuthentication (2.1.0):
     - React-Core
-  - RNBootSplash (3.1.3):
+  - RNBootSplash (3.1.4):
     - React-Core
   - RNCAsyncStorage (1.12.1):
     - React-Core
@@ -1087,7 +1087,8 @@ SPEC CHECKSUMS:
   React-jsinspector: c6f66ae4b8a4a06c38efa64e011e38d87c2f8b6c
   react-native-flipper: 23e7e1d9e1301a72156f9da33e27aa4dde450670
   react-native-safe-area-context: b6e0e284002381d2ff29fa4fff42b4d8282e3c94
-  react-native-webview: 0aa2cde4ee7e3e1c5fffdf64dbce9c709aa18155
+  react-native-shake: 168b18d4656c9c90a787ecf41822f88be7b532ec
+  react-native-webview: dfd7202ff115c44d3ea401c2f36122fb3ac79f07
   React-perflogger: 5169bd5ca57e293aeefcaefe63e28cfeb854b1ff
   React-RCTActionSheet: fb111d835374f39a6eb74dc6d8a39152eacda571
   React-RCTAnimation: fcbd8159f1d43024573c1580cdcdfa9c79de14b5
@@ -1101,7 +1102,7 @@ SPEC CHECKSUMS:
   React-runtimeexecutor: 5dff1516673538004cc19d182c27982456d6aee2
   ReactCommon: 2bf12d2dcc580f9b06f46913137924b38d9087c6
   RNAppleAuthentication: 46cbc67739bae83ca229497f9b0038f3f5431443
-  RNBootSplash: 43868f415d2a2c7b5365ebc8dd0f93abbce0f00c
+  RNBootSplash: 774bfb6219ceaf22f3f87f691ddc51e0746d6ff2
   RNCAsyncStorage: b03032fdbdb725bea0bd9e5ec5a7272865ae7398
   RNCMaskedView: 5a8ec07677aa885546a0d98da336457e2bea557f
   RNFBApp: d75aa9756bca20df2c902a3f7e11bc276f03c65b
