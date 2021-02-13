@@ -1,7 +1,8 @@
-import { ApolloClient, InMemoryCache, createHttpLink } from '@apollo/client'
+import { ApolloClient, createHttpLink } from '@apollo/client'
 import { setContext } from '@apollo/client/link/context'
 import auth from '@react-native-firebase/auth'
-import { STOCKET_API_URL } from './config'
+import { STOCKET_API_URL } from '../config'
+import cache from './Cache'
 
 const httpLink = createHttpLink({
   uri: STOCKET_API_URL,
@@ -17,9 +18,11 @@ const authLink = setContext(async (_, { headers }) => {
   }
 })
 
+const link = authLink.concat(httpLink)
+
 const client = new ApolloClient({
-  link: authLink.concat(httpLink),
-  cache: new InMemoryCache(),
+  link,
+  cache,
 })
 
 export default client

@@ -9,12 +9,15 @@ import {
   useIapProducts,
   useSubscribeMarketHours,
   useSaveApnsToken,
-} from './src/hooks'
-import { BACKGROUND } from './src/utils/colors'
-import TradeView from './src/views/TradeView'
-import MainStack from './src/navigation/AppStack'
-import AuthStack from './src/navigation/AuthenticationStack'
+} from './hooks'
+import { BACKGROUND } from './utils/colors'
+import TradeView from './views/TradeView'
+import MainStack from './navigation/AppStack'
+import AuthStack from './navigation/AuthenticationStack'
 import crashlytics from '@react-native-firebase/crashlytics'
+import { useQuery } from '@apollo/client'
+import { WATCHLIST_QUERY } from '@queries'
+import { watchlistSymbols, watchlistQuotes } from './Cache'
 
 messaging().setBackgroundMessageHandler(async remoteMessage => {
   console.log('Message handled in the background!', remoteMessage)
@@ -27,13 +30,24 @@ export default function App(): ReactNode {
   useIapProducts(currentUser?.uid)
   useSaveApnsToken(currentUser?.uid)
   useSubscribeMarketHours()
+  const { data: watchlistData, loading: isWatchlistLoading } = useQuery(WATCHLIST_QUERY, {
+    pollInterval: 10000,
+  })
+  const watchlist = watchlistData?.watchlist
+
+  useEffect(() => {
+    if (!isWatchlistLoading) {
+      watchlistQuotes(watchlist?.quotes)
+      watchlistSymbols(watchlist?.symbols)
+    }
+  }, [watchlist, isWatchlistLoading])
 
   useEffect(() => {
     crashlytics().log('App Mounted')
-    if (!loading) {
+    if (!loading && !isWatchlistLoading) {
       RNBootSplash.hide({ fade: true })
     }
-  }, [loading])
+  }, [loading, isWatchlistLoading])
 
   useEffect(() => {
     const requestNotificationPermission = async () => {
