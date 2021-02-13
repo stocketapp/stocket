@@ -1,16 +1,19 @@
-import React from 'react'
+import React, { useCallback, useEffect } from 'react'
 import { Container, Text } from '@components'
 import type { IEXQuote } from 'types'
 import WatchlistItem from './WatchlistItem'
 import { useDispatch } from 'react-redux'
-import { useNavigation } from '@react-navigation/native'
-import { useReactiveVar } from '@apollo/client'
-import { watchlistQuotes } from '../../../Cache'
+import { useNavigation, useFocusEffect } from '@react-navigation/native'
+import { useQuery } from '@apollo/client'
+import { WATCHLIST_QUERY } from '@queries'
+import { watchlistSymbols, isWatchlistLoading } from '../../../Cache'
 
 export const WatchlistList = () => {
   const dispatch = useDispatch()
   const { navigate } = useNavigation()
-  const watchlist = useReactiveVar(watchlistQuotes)
+  const { data, loading, refetch } = useQuery(WATCHLIST_QUERY)
+  const watchlist = data?.watchlist?.quotes
+  const symbols = data?.watchlist?.symbols
 
   const onItemPress = (quote: IEXQuote) => {
     dispatch({
@@ -19,6 +22,19 @@ export const WatchlistList = () => {
     })
     navigate('Stock')
   }
+
+  useFocusEffect(
+    useCallback(() => {
+      let refetchInterval = setInterval(async () => await refetch(), 10000)
+      watchlistSymbols(symbols)
+
+      return () => clearInterval(refetchInterval)
+    }, [symbols, refetch]),
+  )
+
+  useEffect(() => {
+    isWatchlistLoading(loading)
+  }, [loading])
 
   return (
     <Container>

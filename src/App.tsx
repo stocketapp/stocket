@@ -15,9 +15,8 @@ import TradeView from './views/TradeView'
 import MainStack from './navigation/AppStack'
 import AuthStack from './navigation/AuthenticationStack'
 import crashlytics from '@react-native-firebase/crashlytics'
-import { useQuery } from '@apollo/client'
-import { WATCHLIST_QUERY } from '@queries'
-import { watchlistSymbols, watchlistQuotes } from './Cache'
+import { useReactiveVar } from '@apollo/client'
+import { isWatchlistLoading } from './Cache'
 
 messaging().setBackgroundMessageHandler(async remoteMessage => {
   console.log('Message handled in the background!', remoteMessage)
@@ -30,24 +29,14 @@ export default function App(): ReactNode {
   useIapProducts(currentUser?.uid)
   useSaveApnsToken(currentUser?.uid)
   useSubscribeMarketHours()
-  const { data: watchlistData, loading: isWatchlistLoading } = useQuery(WATCHLIST_QUERY, {
-    pollInterval: 10000,
-  })
-  const watchlist = watchlistData?.watchlist
-
-  useEffect(() => {
-    if (!isWatchlistLoading) {
-      watchlistQuotes(watchlist?.quotes)
-      watchlistSymbols(watchlist?.symbols)
-    }
-  }, [watchlist, isWatchlistLoading])
+  const isWatchlistLoadingVar = useReactiveVar(isWatchlistLoading)
 
   useEffect(() => {
     crashlytics().log('App Mounted')
-    if (!loading && !isWatchlistLoading) {
+    if (!loading && !isWatchlistLoadingVar) {
       RNBootSplash.hide({ fade: true })
     }
-  }, [loading, isWatchlistLoading])
+  }, [loading, isWatchlistLoadingVar])
 
   useEffect(() => {
     const requestNotificationPermission = async () => {

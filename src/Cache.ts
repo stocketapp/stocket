@@ -1,7 +1,7 @@
 import { InMemoryCache, makeVar } from '@apollo/client'
 
 export const watchlistSymbols = makeVar([])
-export const watchlistQuotes = makeVar([])
+export const isWatchlistLoading = makeVar(true)
 
 const cache = new InMemoryCache({
   typePolicies: {
@@ -12,9 +12,9 @@ const cache = new InMemoryCache({
             return watchlistSymbols()
           },
         },
-        watchlistQuotes: {
+        isWatchlistLoading: {
           read() {
-            return watchlistQuotes()
+            return isWatchlistLoading()
           },
         },
       },
