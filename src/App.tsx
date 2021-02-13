@@ -34,7 +34,7 @@ export default function App(): ReactNode {
 
   useEffect(() => {
     crashlytics().log('App Mounted')
-    // Shake.start()
+    Shake.start()
     if (!loading && !isWatchlistLoading) {
       RNBootSplash.hide({ fade: true })
     }
