@@ -12,6 +12,7 @@ export interface SvgProps {
 export interface IconProps {
   size?: number
   color?: string
+  filled?: boolean
 }
 
 export interface ContainerProps {
@@ -118,9 +119,7 @@ export interface ProductValue {
 }
 
 export type DocReference = FirebaseFirestoreTypes.DocumentReference
-export type DocumentSnapshot = FirebaseFirestoreTypes.DocumentSnapshot<
-  FirebaseFirestoreTypes.DocumentData
->
+export type DocumentSnapshot = FirebaseFirestoreTypes.DocumentSnapshot<FirebaseFirestoreTypes.DocumentData>
 
 export interface CurrentUser {
   uid: string
@@ -131,6 +130,23 @@ export interface ArticleType {
   headline: string
   source: string
   url: string
+}
+
+export interface IEXQuote {
+  symbol: string
+  close: number
+  companyName: string
+  open: string
+  high: string
+  low: string
+  volume: string
+  marketCap: string
+  peRatio: string
+  week52High: string
+  week52Low: string
+  change: number
+  latestPrice: number
+  logo: string
 }
 
 export * from './ChartTypes'

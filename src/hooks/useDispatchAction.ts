@@ -1,6 +1,6 @@
 import { useDispatch } from 'react-redux'
 
-export default function useDispatchAction() {
+export default function useDispatchAction<T>() {
   const dispatch = useDispatch()
-  return (type: string, payload: any) => dispatch({ type, payload })
+  return (type: string, payload: T) => dispatch({ type, payload })
 }

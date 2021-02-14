@@ -3,7 +3,7 @@ import { AppRegistry } from 'react-native'
 import 'react-native-gesture-handler'
 import { NavigationContainer } from '@react-navigation/native'
 import { SafeAreaProvider } from 'react-native-safe-area-context'
-import App from './App'
+import App from './src/App'
 import { name as appName } from './app.json'
 import { Provider } from 'react-redux'
 import configureStore from './src/redux/configureStore'
@@ -12,9 +12,10 @@ import RNAsyncStorageFlipper from 'rn-async-storage-flipper'
 import AsyncStorage from '@react-native-community/async-storage'
 import codePush from 'react-native-code-push'
 import { ApolloProvider } from '@apollo/client'
-import client from './ApolloClient'
+import client from './src/ApolloClient'
 import Reactotron from 'reactotron-react-native'
-
+import { ThemeProvider } from '@emotion/react'
+import theme from './src/theme'
 const store = configureStore()
 
 if (__DEV__) {
@@ -27,7 +28,9 @@ const AppRoot = () => (
     <Provider store={store}>
       <SafeAreaProvider>
         <NavigationContainer>
-          <App />
+          <ThemeProvider theme={theme}>
+            <App />
+          </ThemeProvider>
         </NavigationContainer>
       </SafeAreaProvider>
     </Provider>

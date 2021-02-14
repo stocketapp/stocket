@@ -3,7 +3,11 @@ import { Path } from 'react-native-svg'
 import type { IconProps } from 'types'
 import Icon from './Icon'
 
-export default ({ size, color = '#fff', filled }: IconProps) => (
+interface Props extends IconProps {
+  filled: boolean
+}
+
+export default ({ size, color = '#fff', filled }: Props) => (
   <Icon size={size} color={color}>
     <Path
       fillRule={filled ? 'nonzero' : 'evenodd'}

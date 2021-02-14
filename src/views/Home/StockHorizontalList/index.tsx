@@ -41,7 +41,7 @@ export default function StockHorizontalList(props: StockHorizontalListProps) {
   }
 
   return (
-    <Container style={styles.container} ph>
+    <Container style={styles.container}>
       <Container horizontal separate>
         <Text type="title" weight="Bold">
           Stocks

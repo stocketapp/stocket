@@ -28,20 +28,6 @@ export default function (state = initialState.stock, action: StockAction) {
       return { ...state, positionsMktData: action.positionsMktData }
     case 'SELECTED_STOCK_POSITION':
       return { ...state, selectedStockPosition: action.selectedStockPosition }
-    case 'SET_WATCHLIST':
-      return {
-        ...state,
-        watchlist: action.watchlist,
-      }
-    case 'REMOVE_FROM_WATCHLIST':
-      return {
-        ...state,
-        watchlist: filter(
-          state.watchlist,
-          (el: { quote: { symbol: string } }) =>
-            el.quote.symbol !== action.symbol,
-        ),
-      }
     default:
       return state
   }

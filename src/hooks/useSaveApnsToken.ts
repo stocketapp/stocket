@@ -22,7 +22,9 @@ export default function useSaveApnsToken(uid: string) {
         console.log('getToken()', err)
       }
     }
-    getToken()
+    if (uid) {
+      getToken()
+    }
 
     return messaging().onTokenRefresh(saveToken)
   }, [uid])
