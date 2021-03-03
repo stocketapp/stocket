@@ -52,7 +52,7 @@ export default function Search(): ReactElement {
   ])
 
   const addToWatchlistCache = (newValue: string) => {
-    watchlistSymbolsVar([...watchlistSymbols, newValue])
+    watchlistSymbolsVar([...(watchlistSymbols ?? []), newValue])
   }
 
   const removeFromWatchlistCache = (symbol: string) => {
