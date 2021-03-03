@@ -9,9 +9,16 @@ export default function useStocketMutation() {
 }
 
 export const ADD_TO_WATCHLIST = gql`
-  mutation AddToWatchlist($input: AddToWatchlistInput!) {
+  mutation($input: AddToWatchlistInput!) {
     addToWatchlist(input: $input) {
       symbol
+      symbol
+      change
+      changePercent
+      companyName
+      latestPrice
+      id
+      logo
     }
   }
 `

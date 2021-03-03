@@ -10,7 +10,7 @@ import type { SearchResultType } from 'types'
 import SearchResult from './SearchResult'
 import { ADD_TO_WATCHLIST, REMOVE_FROM_WATCHLIST } from '@mutations'
 import { useReactiveVar } from '@apollo/client'
-import { watchlistSymbolsVar } from '@cache'
+import { watchlistSymbolsVar, watchlistQuotesVar } from '@cache'
 import { remove } from 'lodash'
 
 export default function Search(): ReactElement {
@@ -51,7 +51,7 @@ export default function Search(): ReactElement {
     watchlistSymbols,
   ])
 
-  const addToWatchlistCache = (newValue: string) => {
+  const addToWatchlistSymbolsCache = (newValue: string) => {
     watchlistSymbolsVar([...(watchlistSymbols ?? []), newValue])
   }
 
@@ -59,9 +59,10 @@ export default function Search(): ReactElement {
     watchlistSymbolsVar(remove(watchlistSymbols, el => el !== symbol))
   }
 
-  const toggleFromWatchlist = (symbol: string, isFav: boolean) => {
+  const toggleFromWatchlist = async (symbol: string, isFav: boolean) => {
     if (!isFav) {
-      addToWatchlistMutate({ symbol }, addToWatchlistCache(symbol))
+      const { data } = await addToWatchlistMutate({ symbol }, addToWatchlistSymbolsCache(symbol))
+      watchlistQuotesVar([...watchlistQuotesVar(), data?.addToWatchlist])
     } else {
       removeFromWatchlistMutate({ symbol }, removeFromWatchlistCache(symbol))
     }

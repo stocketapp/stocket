@@ -2,6 +2,7 @@ import { InMemoryCache, makeVar, ReactiveVar } from '@apollo/client'
 
 export const watchlistSymbolsVar: ReactiveVar<string[]> = makeVar<string[]>([])
 export const isWatchlistLoadingVar = makeVar(true)
+export const watchlistQuotesVar: ReactiveVar<any[]> = makeVar<any[]>([])
 
 const cache = new InMemoryCache({
   typePolicies: {
@@ -15,6 +16,11 @@ const cache = new InMemoryCache({
         isWatchlistLoading: {
           read() {
             return isWatchlistLoadingVar()
+          },
+        },
+        watchlistQuotes: {
+          read() {
+            return watchlistQuotesVar()
           },
         },
       },

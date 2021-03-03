@@ -5,7 +5,7 @@ import { STOCKET_API_URL } from '../config'
 import cache from './Cache'
 
 const httpLink = createHttpLink({
-  uri: 'https://api.stocketapp.com/graphql', //STOCKET_API_URL,
+  uri: STOCKET_API_URL,
 })
 
 const authLink = setContext(async (_, { headers }) => {

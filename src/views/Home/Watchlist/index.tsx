@@ -1,20 +1,36 @@
 import React, { useCallback, useEffect } from 'react'
 import { Container, Text } from '@components'
-import type { IEXQuote } from 'types'
 import WatchlistItem from './WatchlistItem'
 import { useDispatch } from 'react-redux'
 import { useNavigation, useFocusEffect } from '@react-navigation/native'
-import { useQuery } from '@apollo/client'
+import { useQuery, useReactiveVar } from '@apollo/client'
 import { WATCHLIST_QUERY } from '@queries'
-import { watchlistSymbolsVar, isWatchlistLoadingVar } from '@cache'
+import { watchlistSymbolsVar, isWatchlistLoadingVar, watchlistQuotesVar } from '@cache'
 import { WatchlistIexQuote } from './WatchlistItem'
 
 export const WatchlistList = () => {
   const dispatch = useDispatch()
   const { navigate } = useNavigation()
   const { data, loading, refetch } = useQuery(WATCHLIST_QUERY)
-  const watchlist = data?.watchlist?.quotes
+  const quotes = data?.watchlist?.quotes
   const symbols = data?.watchlist?.symbols
+  const watchlistQuotes = useReactiveVar(watchlistQuotesVar)
+
+  useEffect(() => {
+    watchlistQuotesVar(quotes)
+  }, [quotes])
+
+  useFocusEffect(
+    useCallback(() => {
+      let refetchInterval = setInterval(async () => await refetch(), 10000)
+      watchlistSymbolsVar(symbols)
+      return () => clearInterval(refetchInterval)
+    }, [symbols, refetch]),
+  )
+
+  useEffect(() => {
+    isWatchlistLoadingVar(loading)
+  }, [loading])
 
   const onItemPress = (quote: WatchlistIexQuote) => {
     dispatch({
@@ -24,25 +40,12 @@ export const WatchlistList = () => {
     navigate('Stock')
   }
 
-  useFocusEffect(
-    useCallback(() => {
-      let refetchInterval = setInterval(async () => await refetch(), 10000)
-      watchlistSymbolsVar(symbols)
-
-      return () => clearInterval(refetchInterval)
-    }, [symbols, refetch]),
-  )
-
-  useEffect(() => {
-    isWatchlistLoadingVar(loading)
-  }, [loading])
-
   return (
     <Container>
       <Text type="title" weight="Heavy" style={{ paddingBottom: 10 }}>
         Watchlist
       </Text>
-      {watchlist?.map((el: WatchlistIexQuote, i: number) => (
+      {watchlistQuotes?.map((el: WatchlistIexQuote, i: number) => (
         <WatchlistItem item={el} onPress={onItemPress} key={i} />
       ))}
     </Container>
