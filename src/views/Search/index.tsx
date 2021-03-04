@@ -62,7 +62,7 @@ export default function Search(): ReactElement {
   const toggleFromWatchlist = async (symbol: string, isFav: boolean) => {
     if (!isFav) {
       const { data } = await addToWatchlistMutate({ symbol }, addToWatchlistSymbolsCache(symbol))
-      watchlistQuotesVar([...watchlistQuotesVar(), data?.addToWatchlist])
+      watchlistQuotesVar([...(watchlistQuotesVar() ?? []), data?.addToWatchlist])
     } else {
       removeFromWatchlistMutate({ symbol }, removeFromWatchlistCache(symbol))
     }
