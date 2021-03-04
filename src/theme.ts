@@ -1,5 +1,3 @@
-import type { Theme } from '@emotion/react/types'
-
 const theme: CustomTheme = {
   colors: {
     BG_DARK: '#020808',
@@ -23,7 +21,7 @@ const theme: CustomTheme = {
 }
 export default theme
 
-export interface CustomTheme extends Theme {
+export interface CustomTheme {
   colors: {
     BG_DARK: string
     BG_DARK_SECONDARY: string
