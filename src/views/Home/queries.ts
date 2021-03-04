@@ -13,9 +13,6 @@ export const WATCHLIST_QUERY = gql`
         logo
       }
       symbols
-      watchlistSymbolsVar @client
-      isWatchlistLoadingVar @client
-      watchlistQuotes @client
     }
   }
 `

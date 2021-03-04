@@ -4,7 +4,7 @@ import WatchlistItem from './WatchlistItem'
 import { useDispatch } from 'react-redux'
 import { useNavigation, useFocusEffect } from '@react-navigation/native'
 import { useQuery, useReactiveVar } from '@apollo/client'
-import { WATCHLIST_QUERY } from '@queries'
+import { WATCHLIST_QUERY } from '../queries'
 import { watchlistSymbolsVar, isWatchlistLoadingVar, watchlistQuotesVar } from '@cache'
 import { WatchlistIexQuote } from './WatchlistItem'
 
