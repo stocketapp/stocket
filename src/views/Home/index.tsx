@@ -8,7 +8,7 @@ import { useTheme } from '@emotion/react'
 import StockHorizontalList from './StockHorizontalList'
 
 export default function Home() {
-  const theme = useTheme()
+  const { colors } = useTheme()
   const { userInfo, currentUser } = useUser()
   const uid = currentUser?.uid
   const { positions, loading } = useGetMyStocks(uid)
@@ -43,7 +43,7 @@ export default function Home() {
       >
         <HeaderContainer>
           <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-            <Text color={theme.colors.GRAY} type="label">
+            <Text color={colors.GRAY} type="label">
               Invested
             </Text>
             <MarketStatus />
