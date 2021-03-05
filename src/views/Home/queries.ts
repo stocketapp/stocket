@@ -16,3 +16,11 @@ export const WATCHLIST_QUERY = gql`
     }
   }
 `
+
+export const USER_BALANCE_QUERY = gql`
+  query {
+    portfolioValue {
+      value
+    }
+  }
+`
