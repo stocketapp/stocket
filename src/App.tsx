@@ -33,12 +33,18 @@ export default function App(): ReactNode {
   const isWatchlistLoading = useReactiveVar(isWatchlistLoadingVar)
 
   useEffect(() => {
+    if (!isAuth) {
+      isWatchlistLoadingVar(false)
+    }
+  }, [isAuth])
+
+  useEffect(() => {
     crashlytics().log('App Mounted')
     Shake.start()
     if (!loading && !isWatchlistLoading) {
       RNBootSplash.hide({ fade: true })
     }
-  }, [loading, isWatchlistLoading])
+  }, [loading, isWatchlistLoading, isAuth])
 
   useEffect(() => {
     const requestNotificationPermission = async () => {
