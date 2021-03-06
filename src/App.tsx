@@ -33,15 +33,9 @@ export default function App(): ReactNode {
   const isWatchlistLoading = useReactiveVar(isWatchlistLoadingVar)
 
   useEffect(() => {
-    if (!isAuth) {
-      isWatchlistLoadingVar(false)
-    }
-  }, [isAuth])
-
-  useEffect(() => {
     crashlytics().log('App Mounted')
     Shake.start()
-    if (!loading && !isWatchlistLoading) {
+    if ((!loading && !isWatchlistLoading && isAuth) || (!isAuth && !isWatchlistLoading)) {
       RNBootSplash.hide({ fade: true })
     }
   }, [loading, isWatchlistLoading, isAuth])
@@ -68,7 +62,7 @@ export default function App(): ReactNode {
     return () => AppState.removeEventListener('change', deleteCache)
   }, [])
 
-  if (!isAuth) {
+  if (!isAuth && !isWatchlistLoading) {
     return <AuthStack />
   }
 
