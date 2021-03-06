@@ -21,9 +21,13 @@ export default function useHomeHook() {
   const watchlistQuotes = useReactiveVar(watchlistQuotesVar)
 
   useEffect(() => {
+    const watchlist = watchlistData?.watchlist
     portfolioValueVar(balanceData?.portfolioValue)
-    watchlistQuotesVar(watchlistData?.watchlist?.quotes)
-  }, [balanceData?.portfolioValue, watchlistData?.watchlist?.quotes])
+    watchlistQuotesVar(watchlist?.quotes)
+
+    watchlistQuotesVar(watchlist?.quotes)
+    watchlistSymbolsVar(watchlist?.symbols)
+  }, [balanceData?.portfolioValue, watchlistData?.watchlist])
 
   useEffect(() => {
     isWatchlistLoadingVar(watchlistLoading)
@@ -32,16 +36,13 @@ export default function useHomeHook() {
 
   useFocusEffect(
     useCallback(() => {
-      const watchlist = watchlistData?.watchlist
       let refetchInterval = setInterval(async () => {
         await refetchWatchlist()
-        watchlistSymbolsVar(watchlist?.symbols)
-        watchlistQuotesVar(watchlist?.quotes)
         await refetchBalance()
       }, 10000)
 
       return () => clearInterval(refetchInterval)
-    }, [watchlistData?.watchlist, refetchWatchlist, refetchBalance]),
+    }, [refetchWatchlist, refetchBalance]),
   )
 
   return { invested: portfolioValue, watchlist: watchlistQuotes }
