@@ -9,6 +9,7 @@ import {
   isWatchlistLoadingVar,
   watchlistQuotesVar,
 } from '@cache'
+import { WatchlistIexQuote } from '../Watchlist/WatchlistItem'
 
 export default function useHomeHook() {
   const { data: balanceData, loading: balanceLoading, refetch: refetchBalance } = useQuery(
@@ -17,17 +18,17 @@ export default function useHomeHook() {
   const { data: watchlistData, loading: watchlistLoading, refetch: refetchWatchlist } = useQuery(
     WATCHLIST_QUERY,
   )
-  const portfolioValue = balanceData?.portfolioValue
+  const portfolio = balanceData?.portfolio
   const watchlistQuotes = useReactiveVar(watchlistQuotesVar)
 
   useEffect(() => {
     const watchlist = watchlistData?.watchlist
-    portfolioValueVar(balanceData?.portfolioValue)
+    portfolioValueVar(balanceData?.portfolio)
     watchlistQuotesVar(watchlist?.quotes)
 
     watchlistQuotesVar(watchlist?.quotes)
     watchlistSymbolsVar(watchlist?.symbols)
-  }, [balanceData?.portfolioValue, watchlistData?.watchlist])
+  }, [balanceData?.portfolio, watchlistData?.watchlist])
 
   useEffect(() => {
     isWatchlistLoadingVar(watchlistLoading)
@@ -45,5 +46,17 @@ export default function useHomeHook() {
     }, [refetchWatchlist, refetchBalance]),
   )
 
-  return { invested: portfolioValue, watchlist: watchlistQuotes }
+  return { portfolio, watchlist: watchlistQuotes }
+}
+
+export interface UseHomeHookObject {
+  portfolio: PortfolioQueryType
+  watchlist: [WatchlistIexQuote]
+}
+
+export interface PortfolioQueryType {
+  value: number
+  change: number
+  changePct: number
+  symbols: [String]
 }

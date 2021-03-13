@@ -4,8 +4,8 @@ import { find } from 'lodash'
 import iapProductsList from './iapProductsList'
 import type { ProductValue } from 'types'
 
-export function formatCurrency(num: number | string): string {
-  return Number(num ?? 0).toLocaleString('en-US', {
+export function formatCurrency(num: number): string {
+  return Number(num).toLocaleString('en-US', {
     style: 'currency',
     currency: 'USD',
   })

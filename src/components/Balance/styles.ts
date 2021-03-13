@@ -1,12 +1,16 @@
-import { StyleSheet } from 'react-native'
+import styled, { css } from '@emotion/native'
 
-export default StyleSheet.create({
-  changeContainer: {
-    flexDirection: 'row',
-    paddingTop: 5,
-  },
-  value: {
-    fontSize: 34,
-    paddingTop: 5,
-  },
+export const ChangeContainer = styled.View({
+  flexDirection: 'row',
+  paddingTop: 10,
+  flexWrap: 'wrap',
+})
+
+export const BalanceContaienr = styled.View({
+  paddingTop: 15,
+})
+
+export const valueStyle = css({
+  fontSize: 34,
+  paddingTop: 5,
 })

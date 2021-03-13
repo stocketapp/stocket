@@ -1,39 +1,42 @@
 import React from 'react'
-import { View } from 'react-native'
-import { LABEL, GREEN, RED } from '@utils/colors'
+import { GREEN, RED } from '@utils/colors'
 import Text from '../Text'
 import { formatCurrency } from '@utils/functions'
-import styles from './styles'
+import { PortfolioQueryType } from 'views/Home/hooks/useHomeHook'
+import { ChangeContainer, BalanceContaienr, valueStyle } from './styles'
 
-interface Props {
-  dayChange: {
-    change: number
-    changePct: number
-    value: string | number
-    date: string
-  }
-}
-
-const Balance = ({ dayChange }: Props): JSX.Element => {
-  const { change, changePct, value, date } = dayChange
+const Balance = ({ value, change, changePct }: PortfolioQueryType): JSX.Element => {
   const color = changePct > 0 ? GREEN : changePct < 0 ? RED : 'white'
+  const upOrDown = changePct > 0 ? 'up' : 'down'
+  const formattedChange = change.toLocaleString('en-US', {
+    style: 'currency',
+    currency: 'USD',
+  })
 
   return (
-    <>
-      <Text weight="Black" style={styles.value}>
-        {typeof value !== 'number' ? value : formatCurrency(value)}
+    <BalanceContaienr>
+      <Text weight="Black" style={valueStyle}>
+        {formatCurrency(value)}{' '}
       </Text>
-      <View style={styles.changeContainer}>
-        <Text weight="Medium" color={color}>
-          {changePct > 0 && '+'}
-          {`${formatCurrency(change)} (${(changePct ?? 0)?.toFixed(2)}%)`}
+      <ChangeContainer>
+        <Text weight="Medium" type="label">
+          Your portfolio is {upOrDown}{' '}
+          <Text weight="Bold" color={color} type="label">
+            {(changePct ?? 0)?.toFixed(2)}%{' '}
+          </Text>
+          today,
         </Text>
-        <Text weight="Light" color={LABEL}>
-          {' '}
-          {date}
+        <Text color={color} weight="Bold" type="label">
+          <Text weight="Medium" type="label">
+            it gained{' '}
+          </Text>
+          {formattedChange}{' '}
+          <Text weight="Medium" type="label">
+            in total value.
+          </Text>
         </Text>
-      </View>
-    </>
+      </ChangeContainer>
+    </BalanceContaienr>
   )
 }
 

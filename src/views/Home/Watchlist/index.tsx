@@ -18,7 +18,7 @@ export const WatchlistList = ({ data }: { data: WatchlistIexQuote[] }) => {
   }
 
   return (
-    <Container>
+    <Container top={40}>
       <Text type="title" weight="Heavy" style={{ paddingBottom: 10 }}>
         Watchlist
       </Text>
