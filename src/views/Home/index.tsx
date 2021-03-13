@@ -8,7 +8,7 @@ import useHomeHook from './hooks/useHomeHook'
 
 export default function Home() {
   const { colors } = useTheme()
-  const { invested, watchlist } = useHomeHook()
+  const { portfolio, watchlist } = useHomeHook()
 
   return (
     <Container fullView safeAreaTop ph>
@@ -23,14 +23,7 @@ export default function Home() {
             </Text>
             <MarketStatus />
           </View>
-          <Balance
-            dayChange={{
-              change: 0,
-              changePct: 0,
-              value: invested?.value,
-              date: 'Today',
-            }}
-          />
+          <Balance {...portfolio} />
         </HeaderContainer>
         {/* <StockHorizontalList data={positions} loading={loading} /> */}
         <WatchlistList data={watchlist} />

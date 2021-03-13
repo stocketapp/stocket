@@ -132,6 +132,8 @@ export interface ArticleType {
   url: string
 }
 
+// v2.x.x Types that matches GraphQL API Types
+
 export interface IEXQuote {
   symbol: string
   close: number
