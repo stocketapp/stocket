@@ -12,6 +12,10 @@ const Balance = ({ value, change, changePct }: PortfolioQueryType): JSX.Element 
     style: 'currency',
     currency: 'USD',
   })
+  const day = new Date().getDay()
+  const isWeekend = day === 6 ? 'yesterday' : day === 0 ? 'on Friday' : 'today'
+  const is = day === 6 || day === 0 ? 'was' : 'is'
+  console.log(isWeekend)
 
   return (
     <BalanceContaienr>
@@ -20,11 +24,11 @@ const Balance = ({ value, change, changePct }: PortfolioQueryType): JSX.Element 
       </Text>
       <ChangeContainer>
         <Text weight="Medium" type="label">
-          Your portfolio is {upOrDown}{' '}
+          Your portfolio {is} {upOrDown}{' '}
           <Text weight="Bold" color={color} type="label">
             {(changePct ?? 0)?.toFixed(2)}%{' '}
           </Text>
-          today,
+          {isWeekend},
         </Text>
         <Text color={color} weight="Bold" type="label">
           <Text weight="Medium" type="label">
