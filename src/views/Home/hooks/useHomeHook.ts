@@ -12,7 +12,7 @@ import {
 import { WatchlistIexQuote } from '../Watchlist/WatchlistItem'
 
 export default function useHomeHook() {
-  const { data: balanceData, loading: portfolioLoading, refetch: refetchBalance } = useQuery(
+  const { data: balanceData, loading: portfolioLoading, refetch: refetchPortfolio } = useQuery(
     USER_BALANCE_QUERY,
   )
   const { data: watchlistData, loading: watchlistLoading, refetch: refetchWatchlist } = useQuery(
@@ -39,11 +39,11 @@ export default function useHomeHook() {
     useCallback(() => {
       let refetchInterval = setInterval(async () => {
         await refetchWatchlist()
-        await refetchBalance()
+        await refetchPortfolio()
       }, 10000)
 
       return () => clearInterval(refetchInterval)
-    }, [refetchWatchlist, refetchBalance]),
+    }, [refetchWatchlist, refetchPortfolio]),
   )
 
   return { portfolio, watchlist: watchlistQuotes }
