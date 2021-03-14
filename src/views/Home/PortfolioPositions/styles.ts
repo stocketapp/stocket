@@ -36,7 +36,7 @@ export const portfolioListEmptyStyle = css({
 
 export const positionItemContainer = css({
   width: 130,
-  minHeight: 152,
+  minHeight: 155,
   flexDirection: 'column',
   justifyContent: 'space-between',
   alignItems: 'center',
