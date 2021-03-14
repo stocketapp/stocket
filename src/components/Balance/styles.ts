@@ -2,7 +2,7 @@ import styled, { css } from '@emotion/native'
 
 export const ChangeContainer = styled.View({
   flexDirection: 'row',
-  paddingTop: 10,
+  paddingTop: 15,
   flexWrap: 'wrap',
 })
 
@@ -12,5 +12,5 @@ export const BalanceContaienr = styled.View({
 
 export const valueStyle = css({
   fontSize: 34,
-  paddingTop: 5,
+  paddingTop: 10,
 })

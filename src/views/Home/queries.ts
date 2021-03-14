@@ -23,6 +23,12 @@ export const USER_BALANCE_QUERY = gql`
       value
       change
       changePct
+      positions {
+        change
+        changePct
+        symbol
+        logo
+      }
     }
   }
 `

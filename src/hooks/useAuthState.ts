@@ -14,6 +14,8 @@ export default function useAuthState() {
   useEffect(() => {
     const authSubscription = auth().onAuthStateChanged(async user => {
       if (user) {
+        const authed = await user.getIdTokenResult()
+        console.info(authed?.token)
         try {
           batchDispatch([
             { type: 'SET_USER', payload: user },

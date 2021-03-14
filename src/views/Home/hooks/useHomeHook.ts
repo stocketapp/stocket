@@ -4,7 +4,7 @@ import { USER_BALANCE_QUERY, WATCHLIST_QUERY } from '../queries'
 import { useQuery, useReactiveVar } from '@apollo/client'
 import {
   portfolioValueVar,
-  isPortfolioValueLoadingVar,
+  isPortfolioLoadingVar,
   watchlistSymbolsVar,
   isWatchlistLoadingVar,
   watchlistQuotesVar,
@@ -12,7 +12,7 @@ import {
 import { WatchlistIexQuote } from '../Watchlist/WatchlistItem'
 
 export default function useHomeHook() {
-  const { data: balanceData, loading: balanceLoading, refetch: refetchBalance } = useQuery(
+  const { data: balanceData, loading: portfolioLoading, refetch: refetchBalance } = useQuery(
     USER_BALANCE_QUERY,
   )
   const { data: watchlistData, loading: watchlistLoading, refetch: refetchWatchlist } = useQuery(
@@ -32,8 +32,8 @@ export default function useHomeHook() {
 
   useEffect(() => {
     isWatchlistLoadingVar(watchlistLoading)
-    isPortfolioValueLoadingVar(balanceLoading)
-  }, [balanceLoading, watchlistLoading])
+    isPortfolioLoadingVar(portfolioLoading)
+  }, [portfolioLoading, watchlistLoading])
 
   useFocusEffect(
     useCallback(() => {
