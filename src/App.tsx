@@ -17,7 +17,7 @@ import AuthStack from './navigation/AuthenticationStack'
 import crashlytics from '@react-native-firebase/crashlytics'
 import Shake from '@shakebugs/react-native-shake'
 import { useReactiveVar } from '@apollo/client'
-import { isWatchlistLoadingVar } from './Cache'
+import { isWatchlistLoadingVar, isPortfolioLoadingVar } from './Cache'
 
 messaging().setBackgroundMessageHandler(async remoteMessage => {
   console.log('Message handled in the background!', remoteMessage)
@@ -31,14 +31,18 @@ export default function App(): ReactNode {
   useSaveApnsToken(currentUser?.uid)
   useSubscribeMarketHours()
   const isWatchlistLoading = useReactiveVar(isWatchlistLoadingVar)
+  const isPortfolioLoading = useReactiveVar(isPortfolioLoadingVar)
 
   useEffect(() => {
     crashlytics().log('App Mounted')
     Shake.start()
-    if ((!loading && !isWatchlistLoading && isAuth) || (!isAuth && !isWatchlistLoading)) {
+    if (
+      (!loading && !isWatchlistLoading && !isPortfolioLoading && isAuth) ||
+      (!isAuth && !isWatchlistLoading && !isPortfolioLoading)
+    ) {
       RNBootSplash.hide({ fade: true })
     }
-  }, [loading, isWatchlistLoading, isAuth])
+  }, [loading, isWatchlistLoading, isAuth, isPortfolioLoading])
 
   useEffect(() => {
     const requestNotificationPermission = async () => {

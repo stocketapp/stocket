@@ -5,6 +5,7 @@ import { WatchlistList } from './Watchlist'
 import { HeaderContainer } from './styles'
 import { useTheme } from '@emotion/react'
 import useHomeHook from './hooks/useHomeHook'
+import PortfolioPositions from './PortfolioPositions'
 
 export default function Home() {
   const { colors } = useTheme()
@@ -25,7 +26,7 @@ export default function Home() {
           </View>
           <Balance {...portfolio} />
         </HeaderContainer>
-        {/* <StockHorizontalList data={positions} loading={loading} /> */}
+        <PortfolioPositions positions={portfolio?.positions} />
         <WatchlistList data={watchlist} />
       </ScrollView>
     </Container>
