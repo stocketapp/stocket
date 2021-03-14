@@ -40,7 +40,7 @@ export default function useHomeHook() {
       let refetchInterval = setInterval(async () => {
         await refetchWatchlist()
         await refetchPortfolio()
-      }, 10000)
+      }, 15000)
 
       return () => clearInterval(refetchInterval)
     }, [refetchWatchlist, refetchPortfolio]),
