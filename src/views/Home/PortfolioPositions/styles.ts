@@ -26,7 +26,7 @@ export const portfolioListStyle = css({
 })
 
 export const portfolioListContentStyle = css({
-  paddingVertical: 10,
+  paddingVertical: 15,
 })
 
 export const portfolioListEmptyStyle = css({
