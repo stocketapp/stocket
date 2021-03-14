@@ -11,6 +11,6 @@ export const BalanceContaienr = styled.View({
 })
 
 export const valueStyle = css({
-  fontSize: 34,
+  fontSize: 35,
   paddingTop: 10,
 })

@@ -19,6 +19,7 @@ const PositionItem = ({ item, onPress }: PositionItemProps) => {
   const { changePct, symbol, logo } = item
   const color = changePct > 0 ? GREEN : changePct < 0 ? RED : 'white'
   const bgColor = changePct > 0 ? '#71DB772A' : '#EB455A2A'
+  const positiveOrNegative = changePct > 0 ? '+' : '-'
 
   return (
     <PositionButton onPress={onPress}>
@@ -31,6 +32,7 @@ const PositionItem = ({ item, onPress }: PositionItemProps) => {
         </Text>
         <ChangePctContainer style={{ backgroundColor: bgColor }}>
           <Text weight="Medium" color={color}>
+            {positiveOrNegative}
             {changePct}%
           </Text>
         </ChangePctContainer>
