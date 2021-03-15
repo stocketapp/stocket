@@ -6,9 +6,9 @@ export const Image = styled.Image({
   borderRadius: 22,
 })
 
-export const ImageContainer = styled.View({
-  paddingHorizontal: 2,
-})
+export const ImageContainer = styled.View(({ theme }) => ({
+  paddingHorizontal: theme.p.xsm,
+}))
 
 export const ItemLeftContainer = styled.View({
   width: '100%',
@@ -18,23 +18,24 @@ export const ItemLeftContainer = styled.View({
 
 export const ItemRightContainer = styled.View({
   justifyContent: 'space-between',
+  alignItems: 'flex-end',
 })
 
-export const WatchlistItemContainer = styled.View({
-  paddingVertical: 15,
+export const WatchlistItemContainer = styled.View(({ theme }) => ({
+  paddingVertical: theme.p.lg,
   flexDirection: 'row',
   justifyContent: 'space-between',
-})
+}))
 
-export const SymbolAndName = styled.View({
+export const SymbolAndName = styled.View(({ theme }) => ({
   justifyContent: 'space-between',
-  paddingLeft: 15,
-})
+  paddingLeft: theme.p.md,
+}))
 
-export const Change = styled.View({
-  paddingVertical: 2,
-  paddingHorizontal: 6,
-  minWidth: 70,
+export const Change = styled.View(({ theme }) => ({
+  paddingVertical: theme.p.xsm,
+  paddingHorizontal: theme.p.sm,
+  width: 70,
   borderRadius: 4,
-  marginTop: 3,
-})
+  marginTop: theme.m.sm,
+}))
