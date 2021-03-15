@@ -13,7 +13,7 @@ export const containerStyles = css({
 })
 
 export const dotStyles = css({
-  height: 12,
-  width: 12,
+  height: 10,
+  width: 10,
   borderRadius: 6,
 })

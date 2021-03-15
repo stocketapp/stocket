@@ -40,12 +40,12 @@ const WatchlistItem = ({ item, onPress }: WatchlistItemProps) => {
 
         <ItemRightContainer>
           <Text style={{ textAlign: 'right' }} weight="Semibold" type="label">
-            {latestPrice}
+            {latestPrice.toFixed(2)}
           </Text>
           <Change style={changeBg}>
             <Text style={{ textAlign: 'right' }} weight="Semibold">
               {change > 0 && '+'}
-              {change}
+              {change.toFixed(2)}
             </Text>
           </Change>
         </ItemRightContainer>
