@@ -29,19 +29,21 @@ const WatchlistItem = ({ item, onPress }: WatchlistItemProps) => {
             <Image source={{ uri: logo }} />
           </ImageContainer>
           <SymbolAndName>
-            <Text weight="Black">{symbol ?? ''}</Text>
-            <Text color={LABEL} weight="Medium">
+            <Text weight="Black" type="label">
+              {symbol}
+            </Text>
+            <Text color={LABEL} weight="Medium" type="label">
               {companyName}
             </Text>
           </SymbolAndName>
         </ItemLeftContainer>
 
         <ItemRightContainer>
-          <Text style={{ textAlign: 'right' }} weight="Semibold">
+          <Text style={{ textAlign: 'right' }} weight="Semibold" type="label">
             {latestPrice}
           </Text>
           <Change style={changeBg}>
-            <Text style={{ textAlign: 'right' }} weight="Medium">
+            <Text style={{ textAlign: 'right' }} weight="Semibold">
               {change > 0 && '+'}
               {change}
             </Text>

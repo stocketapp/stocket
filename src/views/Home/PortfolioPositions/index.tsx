@@ -5,16 +5,13 @@ import { useDispatch } from 'react-redux'
 import { Text, Container } from '@components'
 import PositionItem from './PortfolioPositionItem'
 import PortfolioPositionsEmpty from './PortfolioPositionsEmpty'
-import {
-  containerListStyle,
-  portfolioListStyle,
-  portfolioListContentStyle,
-  portfolioListEmptyStyle,
-} from './styles'
+import { portfolioListStyle, portfolioListContentStyle, portfolioListEmptyStyle } from './styles'
+import { useTheme } from '@emotion/react'
 
 const PortfolioPositions = ({ positions }: { positions: [PortfolioPositionType] }) => {
   const { navigate } = useNavigation()
   const dispatch = useDispatch()
+  const { p } = useTheme()
 
   const goToStock = (selectedStock: PortfolioPositionType) => {
     dispatch({
@@ -29,7 +26,7 @@ const PortfolioPositions = ({ positions }: { positions: [PortfolioPositionType] 
   }
 
   return (
-    <Container style={containerListStyle}>
+    <Container top={p.xxlg}>
       <Container horizontal separate>
         <Text type="heading" weight="Black">
           Positions

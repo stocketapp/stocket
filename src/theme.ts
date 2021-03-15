@@ -11,12 +11,22 @@ const theme: CustomTheme = {
     WHITE: '#FFFFFF',
   },
   p: {
-    sm: 4,
+    xsm: 2,
+    sm: 5,
     md: 10,
-    lg: 14,
-    'lg-20': 20,
-    'lg-26': 26,
-    screen: 16,
+    lg: 15,
+    xlg: 20,
+    xxlg: 26,
+    huge: 35,
+  },
+  m: {
+    xsm: 2,
+    sm: 5,
+    md: 10,
+    lg: 15,
+    xlg: 20,
+    xxlg: 26,
+    huge: 35,
   },
 }
 export default theme
@@ -34,11 +44,21 @@ export interface CustomTheme {
     WHITE: string
   }
   p: {
-    sm: number
-    md: number
-    lg: number
-    'lg-20': number
-    'lg-26': number
-    screen: number
+    xsm: 2
+    sm: 5
+    md: 10
+    lg: 15
+    xlg: 20
+    xxlg: 26
+    huge: 35
+  }
+  m: {
+    xsm: 2
+    sm: 5
+    md: 10
+    lg: 15
+    xlg: 20
+    xxlg: 26
+    huge: 35
   }
 }

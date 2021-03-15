@@ -4,10 +4,12 @@ import WatchlistItem from './WatchlistItem'
 import { useDispatch } from 'react-redux'
 import { useNavigation } from '@react-navigation/native'
 import { WatchlistIexQuote } from './WatchlistItem'
+import { useTheme } from '@emotion/react'
 
 export const WatchlistList = ({ data }: { data: WatchlistIexQuote[] }) => {
   const dispatch = useDispatch()
   const { navigate } = useNavigation()
+  const { p } = useTheme()
 
   const onItemPress = (quote: WatchlistIexQuote) => {
     dispatch({
@@ -18,7 +20,7 @@ export const WatchlistList = ({ data }: { data: WatchlistIexQuote[] }) => {
   }
 
   return (
-    <Container top={30}>
+    <Container top={p.xxlg}>
       <Text type="heading" weight="Heavy">
         Watchlist
       </Text>

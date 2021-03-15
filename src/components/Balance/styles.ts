@@ -1,16 +1,15 @@
 import styled, { css } from '@emotion/native'
 
-export const ChangeContainer = styled.View({
+export const ChangeContainer = styled.View(({ theme }) => ({
   flexDirection: 'row',
-  paddingTop: 15,
+  paddingTop: theme.p.sm,
   flexWrap: 'wrap',
-})
+}))
 
-export const BalanceContaienr = styled.View({
-  paddingTop: 15,
-})
+export const BalanceContaienr = styled.View(({ theme }) => ({
+  paddingTop: theme.p.lg,
+}))
 
 export const valueStyle = css({
   fontSize: 35,
-  paddingTop: 10,
 })
