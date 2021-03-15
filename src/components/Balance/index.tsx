@@ -15,7 +15,6 @@ const Balance = ({ value, change, changePct }: PortfolioQueryType): JSX.Element 
   const day = new Date().getDay()
   const isWeekend = day === 6 ? 'yesterday' : day === 0 ? 'on Friday' : 'today'
   const is = day === 6 || day === 0 ? 'was' : 'is'
-  console.log(isWeekend)
 
   return (
     <BalanceContaienr>
