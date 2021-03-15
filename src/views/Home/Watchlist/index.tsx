@@ -21,7 +21,7 @@ export const WatchlistList = ({ data }: { data: WatchlistIexQuote[] }) => {
 
   return (
     <Container top={p.xxlg}>
-      <Text type="heading" weight="Heavy">
+      <Text type="heading" weight="Black">
         Watchlist
       </Text>
       {data?.map((el: WatchlistIexQuote, i: number) => (

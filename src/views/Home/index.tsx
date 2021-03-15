@@ -1,14 +1,12 @@
 import React from 'react'
-import { View, ScrollView } from 'react-native'
-import { Container, Text, MarketStatus, Balance } from '@components'
+import { ScrollView } from 'react-native'
+import { Container, MarketStatus, Balance } from '@components'
 import { WatchlistList } from './Watchlist'
-import { HeaderContainer } from './styles'
-import { useTheme } from '@emotion/react'
+import { HeaderContainer, StatusContainer } from './styles'
 import useHomeHook from './hooks/useHomeHook'
 import PortfolioPositions from './PortfolioPositions'
 
 export default function Home() {
-  const { colors } = useTheme()
   const { portfolio, watchlist } = useHomeHook()
 
   return (
@@ -18,12 +16,9 @@ export default function Home() {
         showsVerticalScrollIndicator={false}
       >
         <HeaderContainer>
-          <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-            <Text color={colors.GRAY} type="label">
-              Invested
-            </Text>
+          <StatusContainer>
             <MarketStatus />
-          </View>
+          </StatusContainer>
           <Balance {...portfolio} />
         </HeaderContainer>
         <PortfolioPositions positions={portfolio?.positions} />

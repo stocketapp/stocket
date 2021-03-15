@@ -33,7 +33,7 @@ const PositionItem = ({ item, onPress }: PositionItemProps) => {
         <ChangePctContainer style={{ backgroundColor: bgColor }}>
           <Text weight="Medium" color={color}>
             {positiveOrNegative}
-            {changePct}%
+            {changePct.toFixed(2)}%
           </Text>
         </ChangePctContainer>
       </Container>

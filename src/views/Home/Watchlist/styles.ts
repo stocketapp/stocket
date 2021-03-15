@@ -35,7 +35,7 @@ export const SymbolAndName = styled.View(({ theme }) => ({
 export const Change = styled.View(({ theme }) => ({
   paddingVertical: theme.p.xsm,
   paddingHorizontal: theme.p.sm,
-  width: 70,
+  width: 72,
   borderRadius: 4,
   marginTop: theme.m.sm,
 }))

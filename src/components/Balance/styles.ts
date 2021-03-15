@@ -7,7 +7,7 @@ export const ChangeContainer = styled.View(({ theme }) => ({
 }))
 
 export const BalanceContaienr = styled.View(({ theme }) => ({
-  paddingTop: theme.p.lg,
+  paddingBottom: theme.p.xlg,
 }))
 
 export const valueStyle = css({
