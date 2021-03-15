@@ -16,7 +16,7 @@ export const PositionButton = styled.TouchableOpacity({
 })
 
 export const ChangePctContainer = styled.View({
-  paddingHorizontal: 15,
+  paddingHorizontal: 10,
   paddingVertical: 5,
   borderRadius: 150,
 })
