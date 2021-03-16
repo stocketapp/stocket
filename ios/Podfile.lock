@@ -668,7 +668,7 @@ PODS:
   - react-native-shake (10.0.4):
     - React
     - Shake (~> 10.0.0)
-  - react-native-webview (11.2.4):
+  - react-native-webview (11.2.5):
     - React-Core
   - React-perflogger (0.64.0)
   - React-RCTActionSheet (0.64.0):
@@ -765,7 +765,7 @@ PODS:
     - Firebase/Messaging (~> 7.6.0)
     - React-Core
     - RNFBApp
-  - RNFBPerf (10.8.1):
+  - RNFBPerf (11.1.0):
     - Firebase/Performance (~> 7.6.0)
     - React-Core
     - RNFBApp
@@ -1120,7 +1120,7 @@ SPEC CHECKSUMS:
   react-native-flipper: 5a9d5959364fca6a8a9658d941343774cb197857
   react-native-safe-area-context: f0906bf8bc9835ac9a9d3f97e8bde2a997d8da79
   react-native-shake: 168b18d4656c9c90a787ecf41822f88be7b532ec
-  react-native-webview: d924ebd615d0d0c0e67dcfc3aa982ed313574b8d
+  react-native-webview: e994346d13f4d8b240347bc5be043a860452e4b6
   React-perflogger: 9c547d8f06b9bf00cb447f2b75e8d7f19b7e02af
   React-RCTActionSheet: 3080b6e12e0e1a5b313c8c0050699b5c794a1b11
   React-RCTAnimation: 3f96f21a497ae7dabf4d2f150ee43f906aaf516f
@@ -1143,7 +1143,7 @@ SPEC CHECKSUMS:
   RNFBFirestore: 337b96bf5b1b2d32bb9fc4735afd47b16532dde8
   RNFBFunctions: 739e2a8e56f64d57de3f3cb50c2788867ba9e24b
   RNFBMessaging: 1823217d31e942531cc3f51fb5367dcbc69c1e10
-  RNFBPerf: 4d6ab97701da4aeb51da94117bf4026a0c3a5843
+  RNFBPerf: 90ba26c995ca3d18fb373f0edcf8353c18c61733
   RNGestureHandler: a479ebd5ed4221a810967000735517df0d2db211
   RNGoogleSignin: ad866d4c4af2651e36801dd3b7771d7715353499
   RNIap: f00befe6581a5953191108cb97d9b3872473337b

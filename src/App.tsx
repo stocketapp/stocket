@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, ReactNode } from 'react'
+import { useEffect, useRef, ReactNode } from 'react'
 import { StatusBar, View, AppState } from 'react-native'
 import AsyncStorage from '@react-native-community/async-storage'
 import messaging from '@react-native-firebase/messaging'
@@ -40,6 +40,7 @@ export default function App(): ReactNode {
       (!loading && !isWatchlistLoading && !isPortfolioLoading && isAuth) ||
       (!isAuth && !isWatchlistLoading && !isPortfolioLoading)
     ) {
+      console.log('IT IS HIDDEN!!!')
       RNBootSplash.hide({ fade: true })
     }
   }, [loading, isWatchlistLoading, isAuth, isPortfolioLoading])
