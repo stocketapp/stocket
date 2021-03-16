@@ -1,4 +1,3 @@
-import React from 'react'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import TabBarComponent from './TabBarComponent'
 import { TrendingUpIcon, SearchIcon, ProfileIcon } from '@icons'

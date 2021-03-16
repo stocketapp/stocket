@@ -1,4 +1,3 @@
-import React from 'react'
 import { View, TouchableOpacity, GestureResponderEvent } from 'react-native'
 import Text from '../Text'
 import styles from './styles'

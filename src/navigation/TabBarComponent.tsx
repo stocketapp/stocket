@@ -1,4 +1,4 @@
-import React, { ReactElement } from 'react'
+import { ReactElement } from 'react';
 import { TouchableOpacity, Dimensions, StyleSheet } from 'react-native'
 import { Container } from '@components'
 import { BACKGROUND } from '@utils/colors'

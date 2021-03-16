@@ -1,4 +1,4 @@
-import React, { forwardRef, useEffect, useMemo, useState } from 'react'
+import { forwardRef, useEffect, useMemo, useState } from 'react';
 import { View, Dimensions, TouchableOpacity, StyleSheet } from 'react-native'
 import Sheet from 'react-native-raw-bottom-sheet'
 import { useDispatch } from 'react-redux'

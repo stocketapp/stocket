@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback, ReactElement } from 'react'
+import { useState, useEffect, useCallback, ReactElement } from 'react';
 import { FlatList } from 'react-native'
 import { Container, SearchSymbols } from '@components'
 import { useDebounce, useStocketMutation } from '@hooks'

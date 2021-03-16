@@ -1,4 +1,3 @@
-import React from 'react'
 import { SignIn } from '@views'
 import { createStackNavigator } from '@react-navigation/stack'
 

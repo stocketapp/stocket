@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { useState } from 'react';
 import { View, StyleSheet, Pressable } from 'react-native'
 import Text from '../Text'
 import { GREEN, LABEL } from '@utils/colors'

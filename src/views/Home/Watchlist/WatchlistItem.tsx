@@ -1,4 +1,3 @@
-import React from 'react'
 import { TouchableOpacity } from 'react-native'
 import { Text } from '@components'
 import { GREEN, RED, LABEL } from '@utils/colors'

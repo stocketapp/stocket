@@ -1,4 +1,3 @@
-import React from 'react'
 import { GoogleButton, ButtonText, Container } from './styles'
 import GLogo from '@assets/svg/Google_Logo.svg'
 

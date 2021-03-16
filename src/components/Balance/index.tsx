@@ -1,4 +1,3 @@
-import React from 'react'
 import { GREEN, RED } from '@utils/colors'
 import Text from '../Text'
 import { formatCurrency } from '@utils/functions'

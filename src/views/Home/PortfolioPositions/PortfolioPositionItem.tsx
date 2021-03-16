@@ -1,4 +1,3 @@
-import React from 'react'
 import { GREEN, RED } from '@utils/colors'
 import { Text, Container } from '@components'
 import {
