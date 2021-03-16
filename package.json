@@ -45,6 +45,7 @@
     "moment": "^2.29.1",
     "numeral": "^2.0.6",
     "react": "17.0.1",
+    "react-content-loader": "^6.0.2",
     "react-native": "0.64.0",
     "react-native-bootsplash": "^3.1.5",
     "react-native-code-push": "^7.0.0",
