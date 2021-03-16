@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from 'react'
+import { useRef, useEffect } from 'react';
 import { View, TouchableOpacity } from 'react-native'
 import { DARK_TEXT } from '@utils/colors'
 import LoadingCheckmark from '../LoadingCheckmark/LoadingCheckmark'

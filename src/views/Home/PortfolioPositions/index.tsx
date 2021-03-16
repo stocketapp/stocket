@@ -1,4 +1,3 @@
-import React from 'react'
 import { FlatList, View } from 'react-native'
 import { useNavigation } from '@react-navigation/native'
 import { useDispatch } from 'react-redux'

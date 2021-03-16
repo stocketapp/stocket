@@ -1,5 +1,5 @@
 // @flow
-import React, { useRef, useState } from 'react'
+import { useRef, useState } from 'react';
 import { View, StyleSheet, TouchableOpacity } from 'react-native'
 import { Container, Text } from '@components'
 import { LABEL, CARD_BACKGROUND } from '@utils/colors'

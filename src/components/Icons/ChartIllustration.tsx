@@ -1,4 +1,3 @@
-import React from 'react'
 import { Dimensions, View } from 'react-native'
 import { Path, Svg } from 'react-native-svg'
 import type { IconProps } from 'types'

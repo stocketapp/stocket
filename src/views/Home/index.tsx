@@ -1,4 +1,3 @@
-import React from 'react'
 import { ScrollView } from 'react-native'
 import { Container, MarketStatus, Balance } from '@components'
 import { WatchlistList } from './Watchlist'

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import { useEffect } from 'react';
 import { Dimensions } from 'react-native'
 import { LABEL } from '@utils/colors'
 import { Line, G, Text } from 'react-native-svg'

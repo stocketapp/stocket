@@ -1,4 +1,3 @@
-import React from 'react'
 import { View, StyleSheet } from 'react-native'
 import { Text, Container } from '@components'
 import { GRAY_DARKER } from '@utils/colors'

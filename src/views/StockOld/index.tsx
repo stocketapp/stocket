@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react'
+import { useState, useCallback } from 'react';
 import { View, TouchableOpacity, ScrollView, StyleSheet } from 'react-native'
 import { Text, Container, Loader, ChartLine, MarketStatus } from '@components'
 import { GREEN, BACKGROUND, GRAY_DARKER } from '@utils/colors'

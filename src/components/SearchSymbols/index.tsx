@@ -1,4 +1,4 @@
-import React from 'react'
+import * as React from 'react';
 import { View, TextInput, TouchableOpacity } from 'react-native'
 import Container from '../Container'
 import { SearchIcon } from '@icons'

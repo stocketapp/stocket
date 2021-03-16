@@ -1,4 +1,3 @@
-import React from 'react'
 import { Container, Text } from '@components'
 import WatchlistItem from './WatchlistItem'
 import { useDispatch } from 'react-redux'
