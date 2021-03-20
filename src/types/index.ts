@@ -1,4 +1,4 @@
-import { TextProps, TextStyle, ViewStyle } from 'react-native'
+import { ViewStyle } from 'react-native'
 import { FirebaseFirestoreTypes } from '@react-native-firebase/firestore'
 import { Dispatch, ReactNode, SetStateAction } from 'react'
 
@@ -13,41 +13,6 @@ export interface IconProps {
   size?: number
   color?: string
   filled?: boolean
-}
-
-export interface ContainerProps {
-  children: ReactNode
-  justifyContent?: 'center' | 'flex-start' | 'flex-end' | 'space-between'
-  alignItems?: 'center' | 'flex-start' | 'flex-end'
-  horizontal?: boolean
-  separate?: boolean
-  ph?: boolean
-  top?: number
-  bottom?: number
-  width?: string | number
-  style?: ViewStyle | {}
-  fullView?: boolean
-  safeAreaTop?: boolean
-  safeAreaBottom?: boolean
-}
-
-export interface CustomTextProps extends TextProps {
-  type?: 'heading' | 'title' | 'label' | 'subtext' | 'big'
-  cap?: boolean
-  color?: string
-  children?: any
-  style?: TextStyle
-  status?: 'negative' | 'positive'
-  weight?:
-    | 'Black'
-    | 'Heavy'
-    | 'Bold'
-    | 'Semibold'
-    | 'Medium'
-    | 'Regular'
-    | 'Light'
-    | 'Thin'
-    | 'Ultralight'
 }
 
 export interface TradeInfoProps {
@@ -141,7 +106,7 @@ export interface IEXQuote {
   open: string
   high: string
   low: string
-  volume: string
+  iexVolume: string
   marketCap: string
   peRatio: string
   week52High: string
@@ -149,6 +114,7 @@ export interface IEXQuote {
   change: number
   latestPrice: number
   logo: string
+  changePercent: number
 }
 
 export * from './ChartTypes'
