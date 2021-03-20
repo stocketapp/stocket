@@ -1,6 +1,5 @@
-import { Text as RNText, TextStyle } from 'react-native'
+import { Text as RNText, TextStyle, TextProps } from 'react-native'
 import { GREEN, RED } from '@utils/colors'
-import type { CustomTextProps } from 'types'
 
 const Text = ({
   type,
@@ -10,6 +9,10 @@ const Text = ({
   children,
   style,
   weight = 'Regular',
+  pt,
+  pb,
+  pr,
+  pl,
   ...props
 }: CustomTextProps) => {
   const selectFontSize = () => {
@@ -23,7 +26,7 @@ const Text = ({
       case 'subtext':
         return 12
       case 'big':
-        return 26
+        return 30
       default:
         return 15
     }
@@ -47,6 +50,10 @@ const Text = ({
     }),
     color: !status ? color : setStatus(),
     fontFamily: `SFProText-${weight}`,
+    ...(pt && { paddingTop: pt }),
+    ...(pb && { paddingBottom: pb }),
+    ...(pr && { paddingRight: pr }),
+    ...(pl && { paddingLeft: pl }),
     ...style,
   }
 
@@ -55,6 +62,29 @@ const Text = ({
       {children}
     </RNText>
   )
+}
+
+export interface CustomTextProps extends TextProps {
+  type?: 'heading' | 'title' | 'label' | 'subtext' | 'big'
+  cap?: boolean
+  color?: string
+  children?: any
+  style?: TextStyle
+  status?: 'negative' | 'positive'
+  pt?: number
+  pb?: number
+  pr?: number
+  pl?: number
+  weight?:
+    | 'Black'
+    | 'Heavy'
+    | 'Bold'
+    | 'Semibold'
+    | 'Medium'
+    | 'Regular'
+    | 'Light'
+    | 'Thin'
+    | 'Ultralight'
 }
 
 export default Text
