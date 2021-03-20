@@ -16,7 +16,7 @@ const theme: CustomTheme = {
     md: 10,
     lg: 15,
     xlg: 20,
-    xxlg: 26,
+    xxlg: 28,
     huge: 35,
   },
   m: {
@@ -25,7 +25,7 @@ const theme: CustomTheme = {
     md: 10,
     lg: 15,
     xlg: 20,
-    xxlg: 26,
+    xxlg: 28,
     huge: 35,
   },
 }
@@ -49,7 +49,7 @@ export interface CustomTheme {
     md: 10
     lg: 15
     xlg: 20
-    xxlg: 26
+    xxlg: 28
     huge: 35
   }
   m: {
@@ -58,7 +58,7 @@ export interface CustomTheme {
     md: 10
     lg: 15
     xlg: 20
-    xxlg: 26
+    xxlg: 28
     huge: 35
   }
 }

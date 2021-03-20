@@ -1,5 +1,5 @@
 import { Container } from '@components'
-import { StockHeaderLoader } from './Loaders'
+import { StockHeaderLoader } from './ContentLoaders'
 
 export default function StockContentLoader() {
   return (
