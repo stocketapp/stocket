@@ -18,12 +18,14 @@ const Container: React.FC<ContainerProps> = ({
   fullView = false,
   safeAreaTop = false,
   safeAreaBottom = false,
+  alignItems = 'flex-start',
 }) => {
   const { top: insetTop, bottom: insetBottom } = useSafeAreaInsets()
 
   const defaultStyles: ViewStyle = {
     width,
     justifyContent: separate ? 'space-between' : justifyContent,
+    alignItems,
     flexDirection: horizontal ? 'row' : 'column',
     paddingHorizontal: ph ? 18 : 0,
     paddingTop: safeAreaTop ? insetTop : top,
