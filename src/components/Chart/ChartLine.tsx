@@ -1,4 +1,4 @@
-import { useMemo } from 'react';
+import { useMemo } from 'react'
 import { Dimensions, View } from 'react-native'
 import {
   VictoryLine,

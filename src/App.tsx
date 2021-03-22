@@ -40,7 +40,6 @@ export default function App(): ReactNode {
       (!loading && !isWatchlistLoading && !isPortfolioLoading && isAuth) ||
       (!isAuth && !isWatchlistLoading && !isPortfolioLoading)
     ) {
-      console.log('IT IS HIDDEN!!!')
       RNBootSplash.hide({ fade: true })
     }
   }, [loading, isWatchlistLoading, isAuth, isPortfolioLoading])
