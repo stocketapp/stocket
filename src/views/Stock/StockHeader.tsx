@@ -1,4 +1,4 @@
-import { Image, View } from 'react-native'
+import { Image } from 'react-native'
 import { Container, Text } from '@components'
 import { useTheme } from '@emotion/react'
 import { formatCurrency } from '@utils/functions'
