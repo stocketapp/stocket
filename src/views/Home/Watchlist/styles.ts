@@ -11,7 +11,6 @@ export const ImageContainer = styled.View(({ theme }) => ({
 }))
 
 export const ItemLeftContainer = styled.View({
-  width: '100%',
   flex: 0.8,
   flexDirection: 'row',
 })
@@ -25,6 +24,8 @@ export const WatchlistItemContainer = styled.View(({ theme }) => ({
   paddingVertical: theme.p.lg,
   flexDirection: 'row',
   justifyContent: 'space-between',
+  alignItems: 'center',
+  width: '100%',
 }))
 
 export const SymbolAndName = styled.View(({ theme }) => ({
