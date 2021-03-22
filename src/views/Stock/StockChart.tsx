@@ -1,24 +1,16 @@
 import { VictoryLine, VictoryCursorContainer, LineSegment } from 'victory-native'
 import { GREEN } from '@utils/colors'
 
-export default function StockChart({ data }: StockPriceChart) {
+export default function StockChart({ data }: { data: StockPriceChartItemType[] }) {
   console.log(data)
   return (
     <VictoryLine
-      padding={{ left: 0, top: 10 }}
+      padding={{ left: 0, top: 15, bottom: -10 }}
+      domainPadding={{ x: 0, y: 25 }}
       interpolation="natural"
-      data={[
-        { x: 1, y: 2 },
-        { x: 2, y: 5 },
-        { x: 3, y: 3 },
-        { x: 4, y: 6 },
-        { x: 5, y: 7 },
-        { x: 6, y: 5 },
-        { x: 7, y: 8 },
-        { x: 8, y: 7 },
-        { x: 9, y: 10 },
-        { x: 10, y: 11 },
-      ]}
+      x="label"
+      y="close"
+      data={data}
       containerComponent={
         <VictoryCursorContainer
           cursorDimension="x"
@@ -26,18 +18,14 @@ export default function StockChart({ data }: StockPriceChart) {
         />
       }
       style={styles.victoryLine}
-      maxDomain={{ y: 12 }}
-      minDomain={{ x: 1 }}
     />
   )
 }
 
-interface StockPriceChart {
-  data: {
-    label: string
-    close: number
-    date: string
-  }
+export interface StockPriceChartItemType {
+  label: string
+  close: number
+  date: string
 }
 
 const styles = {
