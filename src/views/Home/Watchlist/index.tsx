@@ -1,9 +1,9 @@
+import { useTheme } from '@emotion/react'
 import { Container, Text } from '@components'
-import WatchlistItem from './WatchlistItem'
 import { useDispatch } from 'react-redux'
 import { useNavigation } from '@react-navigation/native'
+import WatchlistItem from './WatchlistItem'
 import { WatchlistIexQuote } from './WatchlistItem'
-import { useTheme } from '@emotion/react'
 
 export const WatchlistList = ({ data }: { data: WatchlistIexQuote[] }) => {
   const dispatch = useDispatch()
