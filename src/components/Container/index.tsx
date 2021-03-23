@@ -25,6 +25,7 @@ const Container: React.FC<ContainerProps> = ({
   alignItems = 'flex-start',
   useNavBar = false,
   scrollable = false,
+  pv = null,
 }) => {
   const { top: insetTop, bottom: insetBottom } = useSafeAreaInsets()
   const { goBack, canGoBack } = useNavigation()
@@ -35,13 +36,17 @@ const Container: React.FC<ContainerProps> = ({
     alignItems,
     flexDirection: horizontal ? 'row' : 'column',
     paddingHorizontal: ph ? 18 : 0,
-    paddingTop: safeAreaTop ? insetTop : top,
-    paddingBottom: safeAreaBottom ? insetBottom : bottom,
     paddingRight: ph ? 18 : right,
     paddingLeft: ph ? 18 : left,
     ...(ph ? { paddingHorizontal: 18 } : { paddingRight: right, paddingLeft: left }),
     backgroundColor: BACKGROUND,
     ...(fullView && { flex: 1 }),
+    ...(pv
+      ? { paddingVertical: pv }
+      : {
+          paddingTop: safeAreaTop ? insetTop : top,
+          paddingBottom: safeAreaBottom ? insetBottom : bottom,
+        }),
   }
 
   return (
@@ -89,6 +94,7 @@ export interface ContainerProps {
   safeAreaBottom?: boolean
   useNavBar?: boolean
   scrollable?: boolean
+  pv?: number
 }
 
 export default Container
