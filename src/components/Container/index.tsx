@@ -1,7 +1,11 @@
 import * as React from 'react'
-import { View, ViewStyle } from 'react-native'
-import { BACKGROUND } from '@utils/colors'
+import { View, ViewStyle, TouchableOpacity, ScrollView, Dimensions } from 'react-native'
+import { BACKGROUND, GREEN } from '@utils/colors'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
+import { ArrowLeftIcon } from '@icons'
+import { useNavigation } from '@react-navigation/core'
+
+const { width: windowWidth } = Dimensions.get('window')
 
 const Container: React.FC<ContainerProps> = ({
   children,
@@ -19,8 +23,11 @@ const Container: React.FC<ContainerProps> = ({
   safeAreaTop = false,
   safeAreaBottom = false,
   alignItems = 'flex-start',
+  useNavBar = false,
+  scrollable = false,
 }) => {
   const { top: insetTop, bottom: insetBottom } = useSafeAreaInsets()
+  const { goBack, canGoBack } = useNavigation()
 
   const defaultStyles: ViewStyle = {
     width,
@@ -37,7 +44,31 @@ const Container: React.FC<ContainerProps> = ({
     ...(fullView && { flex: 1 }),
   }
 
-  return <View style={[defaultStyles, style]}>{children}</View>
+  return (
+    <>
+      <ScrollView
+        scrollEnabled={scrollable}
+        style={{ backgroundColor: BACKGROUND }}
+        contentContainerStyle={{
+          paddingBottom: scrollable ? 30 : 0,
+          width: scrollable ? windowWidth : '100%',
+        }}
+        showsHorizontalScrollIndicator={false}
+        showsVerticalScrollIndicator={false}
+      >
+        <View style={[defaultStyles, style]}>
+          {canGoBack() && useNavBar && (
+            <Container ph>
+              <TouchableOpacity style={{ paddingVertical: 5, paddingRight: 5 }} onPress={goBack}>
+                <ArrowLeftIcon size={34} color={GREEN} />
+              </TouchableOpacity>
+            </Container>
+          )}
+          {children}
+        </View>
+      </ScrollView>
+    </>
+  )
 }
 
 export interface ContainerProps {
@@ -56,6 +87,8 @@ export interface ContainerProps {
   fullView?: boolean
   safeAreaTop?: boolean
   safeAreaBottom?: boolean
+  useNavBar?: boolean
+  scrollable?: boolean
 }
 
 export default Container
