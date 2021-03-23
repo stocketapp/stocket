@@ -15,7 +15,7 @@ export const WatchlistList = ({ data }: { data: WatchlistIexQuote[] }) => {
       type: 'SET_SELECTED_STOCK',
       selectedStock: quote?.symbol,
     })
-    navigate('Stock')
+    navigate('Stock', { symbol: quote?.symbol })
   }
 
   return (
