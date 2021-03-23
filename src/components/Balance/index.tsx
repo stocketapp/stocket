@@ -7,7 +7,7 @@ import { ChangeContainer, BalanceContaienr, valueStyle } from './styles'
 const Balance = ({ value, change, changePct }: PortfolioQueryType): JSX.Element => {
   const color = changePct > 0 ? GREEN : changePct < 0 ? RED : 'white'
   const upOrDown = changePct > 0 ? 'up' : 'down'
-  const formattedChange = change?.toLocaleString('en-US', {
+  const formattedChange = (change ?? 0).toLocaleString('en-US', {
     style: 'currency',
     currency: 'USD',
   })

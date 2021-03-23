@@ -5,7 +5,7 @@ import iapProductsList from './iapProductsList'
 import type { ProductValue } from 'types'
 
 export function formatCurrency(num: number): string {
-  return Number(num).toLocaleString('en-US', {
+  return Number(num ?? 0).toLocaleString('en-US', {
     style: 'currency',
     currency: 'USD',
   })
