@@ -2,10 +2,10 @@ import { VictoryLine, VictoryCursorContainer, LineSegment } from 'victory-native
 import { GREEN } from '@utils/colors'
 
 export default function StockChart({ data }: { data: StockPriceChartItemType[] }) {
-  console.log(data)
   return (
     <VictoryLine
-      padding={{ left: 0, top: 15, bottom: -10 }}
+      padding={{ left: 2, top: 20, bottom: 0, right: 2 }}
+      height={320}
       domainPadding={{ x: 0, y: 25 }}
       interpolation="natural"
       x="label"
