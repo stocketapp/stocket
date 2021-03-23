@@ -1,8 +1,8 @@
-import { Image } from 'react-native'
 import { Container, Text } from '@components'
 import { useTheme } from '@emotion/react'
 import { formatCurrency } from '@utils/functions'
 import { IEXQuote } from 'types'
+import { LogoImage } from './styles'
 
 const StockHeader = (props: IEXQuote) => {
   const { colors, p } = useTheme()
@@ -13,7 +13,7 @@ const StockHeader = (props: IEXQuote) => {
   return (
     <Container>
       <Container horizontal alignItems="center">
-        <Image source={{ uri: logo }} style={{ width: 50, height: 50, borderRadius: 50 }} />
+        <LogoImage source={{ uri: logo }} />
         <Container>
           <Text type="heading" weight="Black" pl={p.lg}>
             {companyName}

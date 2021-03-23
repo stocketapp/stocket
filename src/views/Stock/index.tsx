@@ -27,7 +27,7 @@ export default function Stock() {
   }
 
   return (
-    <Container fullView safeAreaTop useNavBar scrollable>
+    <Container fullView useNavBar scrollable>
       <Container ph top={15}>
         <StockHeader {...quote?.data} />
       </Container>
