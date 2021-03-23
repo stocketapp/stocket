@@ -12,8 +12,8 @@ export default function Stock() {
   }
 
   return (
-    <Container fullView safeAreaTop>
-      <Container ph>
+    <Container fullView safeAreaTop useNavBar scrollable>
+      <Container ph top={15}>
         <StockHeader {...quote?.data} />
       </Container>
       {chart?.data?.length > 0 && <StockChart data={chart?.data} />}
