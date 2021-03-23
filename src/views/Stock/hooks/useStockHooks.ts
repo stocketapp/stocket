@@ -7,19 +7,23 @@ import { StockPriceChartItemType } from '../StockChart'
 
 export default function useStockHook(): StockViewData {
   const {
-    data: { quote },
+    data: quoteData,
     refetch: refecthQuote,
     loading: loadingQuote,
+    error: quoteError,
   } = useQuery(SYMBOL_QUOTE_QUERY, {
     variables: { symbol: 'AAPL' },
   })
+  const quote = quoteData?.quote
   const {
-    data: { chart },
+    data: chartData,
     refetch: refetchChart,
     loading: loadingChart,
+    error: chartError,
   } = useQuery(SYMBOL_CHART_QUERY, {
     variables: { symbol: 'AAPL' },
   })
+  const chart = chartData?.chart
 
   useFocusEffect(
     useCallback(() => {
@@ -35,10 +39,12 @@ export default function useStockHook(): StockViewData {
     quote: {
       data: quote,
       loading: loadingQuote,
+      error: quoteError,
     },
     chart: {
       data: chart,
       loading: loadingChart,
+      error: chartError,
     },
   }
 }
@@ -47,9 +53,11 @@ export interface StockViewData {
   quote: {
     data: IEXQuote
     loading: boolean
+    error: any
   }
   chart: {
     data: StockPriceChartItemType[]
     loading: boolean
+    error: any
   }
 }
