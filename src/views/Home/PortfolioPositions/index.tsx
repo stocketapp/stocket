@@ -21,7 +21,7 @@ const PortfolioPositions = ({ positions }: { positions: [PortfolioPositionType] 
       type: 'SET_SELECTED_STOCK',
       selectedStock: selectedStock?.symbol,
     })
-    navigate('Stock')
+    navigate('Stock', { symbol: selectedStock?.symbol })
   }
 
   return (

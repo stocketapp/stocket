@@ -5,14 +5,15 @@ import { SYMBOL_QUOTE_QUERY, SYMBOL_CHART_QUERY } from '../queries'
 import { IEXQuote } from 'types'
 import { StockPriceChartItemType } from '../StockChart'
 
-export default function useStockHook(): StockViewData {
+export default function useStockHook(symbol: string): StockViewData {
   const {
     data: quoteData,
     refetch: refecthQuote,
     loading: loadingQuote,
     error: quoteError,
   } = useQuery(SYMBOL_QUOTE_QUERY, {
-    variables: { symbol: 'AAPL' },
+    variables: { symbol },
+    nextFetchPolicy: 'network-only',
   })
   const quote = quoteData?.quote
   const {
@@ -21,7 +22,8 @@ export default function useStockHook(): StockViewData {
     loading: loadingChart,
     error: chartError,
   } = useQuery(SYMBOL_CHART_QUERY, {
-    variables: { symbol: 'AAPL' },
+    variables: { symbol },
+    nextFetchPolicy: 'network-only',
   })
   const chart = chartData?.chart
 

@@ -11,6 +11,10 @@ export default function StockChart({ data }: { data: StockPriceChartItemType[] }
       x="label"
       y="close"
       data={data}
+      animate={{
+        duration: 800,
+        onLoad: { duration: 1500 },
+      }}
       containerComponent={
         <VictoryCursorContainer
           cursorDimension="x"
