@@ -1,22 +1,22 @@
-import {} from 'react-native'
 import { Container } from '@components'
-// import StockContentLoader from './StockContentLoader'
-import { useQuery } from '@apollo/client'
-import { SYMBOL_QUOTE_QUERY, SYMBOL_CHART_QUERY } from './queries'
-import { IEXQuote } from 'types'
+import StockContentLoader from './StockContentLoader'
 import StockHeader from './StockHeader'
-import StockChart, { StockPriceChartItemType } from './StockChart'
+import StockChart from './StockChart'
+import useStockHook from './hooks/useStockHooks'
 
 export default function Stock() {
-  const { data } = useQuery(SYMBOL_QUOTE_QUERY, { variables: { symbol: 'AAPL' } })
-  const { data: chartData } = useQuery(SYMBOL_CHART_QUERY, { variables: { symbol: 'AAPL' } })
+  const { quote, chart } = useStockHook()
 
-  const quote: IEXQuote = data?.quote
-  const chart: StockPriceChartItemType[] = chartData?.chart
+  if (quote?.loading && chart?.loading && chart?.data?.length > 0) {
+    return <StockContentLoader />
+  }
+
   return (
-    <Container fullView safeAreaTop ph>
-      <StockHeader {...quote} />
-      <StockChart data={chart} />
+    <Container fullView safeAreaTop>
+      <Container ph>
+        <StockHeader {...quote?.data} />
+      </Container>
+      {chart?.data?.length > 0 && <StockChart data={chart?.data} />}
     </Container>
   )
 }
