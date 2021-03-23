@@ -1,8 +1,8 @@
-import { View, TouchableOpacity } from 'react-native'
-import { Text } from '@components'
+import { TouchableOpacity } from 'react-native'
+import { Text, Container } from '@components'
 import { GRAY_DARKER, GREEN } from '@utils/colors'
 import { FavoriteIcon } from '@icons'
-import styles from './styles'
+import { useTheme } from '@emotion/react'
 
 interface SearchResultProps {
   item: {
@@ -16,23 +16,29 @@ interface SearchResultProps {
 
 export default function SearchResult({ item, onPress, setStock, isFaved }: SearchResultProps) {
   const isFav = isFaved(item?.symbol)
-  return (
-    <TouchableOpacity style={styles.resultItem} onPress={setStock}>
-      <View style={{ flex: 1 }}>
-        <Text weight="Medium" type="label">
-          {item?.securityName}
-        </Text>
-        <Text color={GRAY_DARKER} type="subtext" style={{ paddingTop: 5 }}>
-          {item?.symbol}
-        </Text>
-      </View>
+  const { p } = useTheme()
 
-      <TouchableOpacity
-        style={{ padding: 6 }}
-        onPress={() => onPress(item?.symbol, isFaved(item?.symbol))}
-      >
-        <FavoriteIcon size={26} color={GREEN} filled={isFav} />
+  return (
+    <Container>
+      <TouchableOpacity onPress={setStock}>
+        <Container separate horizontal top={p.md} bottom={p.md}>
+          <Container>
+            <Text weight="Black" type="label">
+              {item?.symbol}
+            </Text>
+            <Text color={GRAY_DARKER} style={{ paddingTop: p.sm }} weight="Medium">
+              {item?.securityName}
+            </Text>
+          </Container>
+
+          <TouchableOpacity
+            style={{ padding: p.sm }}
+            onPress={() => onPress(item?.symbol, isFaved(item?.symbol))}
+          >
+            <FavoriteIcon size={26} color={GREEN} filled={isFav} />
+          </TouchableOpacity>
+        </Container>
       </TouchableOpacity>
-    </TouchableOpacity>
+    </Container>
   )
 }
