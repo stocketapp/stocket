@@ -6,8 +6,8 @@ export const ChangeContainer = styled.View(({ theme }) => ({
   flexWrap: 'wrap',
 }))
 
-export const BalanceContaienr = styled.View(({ theme }) => ({
-  paddingBottom: theme.p.xlg,
+export const BalanceContaienr = styled.View(() => ({
+  // paddingBottom: theme.p.xlg,
 }))
 
 export const valueStyle = css({

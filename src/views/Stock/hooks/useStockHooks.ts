@@ -13,7 +13,6 @@ export default function useStockHook(symbol: string): StockViewData {
     error: quoteError,
   } = useQuery(SYMBOL_QUOTE_QUERY, {
     variables: { symbol },
-    nextFetchPolicy: 'network-only',
   })
   const quote = quoteData?.quote
   const {
@@ -23,7 +22,6 @@ export default function useStockHook(symbol: string): StockViewData {
     error: chartError,
   } = useQuery(SYMBOL_CHART_QUERY, {
     variables: { symbol },
-    nextFetchPolicy: 'network-only',
   })
   const chart = chartData?.chart
 
