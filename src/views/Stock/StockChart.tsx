@@ -1,7 +1,9 @@
 import { VictoryLine, VictoryCursorContainer, LineSegment } from 'victory-native'
 import { GREEN } from '@utils/colors'
+import { minBy } from 'lodash'
 
 export default function StockChart({ data }: { data: StockPriceChartItemType[] }) {
+  const minY = minBy(data, 'close')?.close as number
   return (
     <VictoryLine
       padding={{ left: 2, top: 20, bottom: 0, right: 2 }}
@@ -14,6 +16,7 @@ export default function StockChart({ data }: { data: StockPriceChartItemType[] }
       animate={{
         duration: 600,
       }}
+      minDomain={{ y: minY - 2 }}
       containerComponent={
         <VictoryCursorContainer
           cursorDimension="x"

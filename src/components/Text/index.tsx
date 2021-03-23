@@ -26,7 +26,7 @@ const Text = ({
       case 'subtext':
         return 12
       case 'big':
-        return 30
+        return 28
       default:
         return 15
     }

@@ -50,7 +50,7 @@ const Container: React.FC<ContainerProps> = ({
         scrollEnabled={scrollable}
         style={{ backgroundColor: BACKGROUND }}
         contentContainerStyle={{
-          paddingBottom: scrollable ? 30 : 0,
+          paddingBottom: scrollable ? 20 : 0,
           width: scrollable ? windowWidth : '100%',
         }}
         showsHorizontalScrollIndicator={false}

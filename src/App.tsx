@@ -18,6 +18,7 @@ import crashlytics from '@react-native-firebase/crashlytics'
 import Shake from '@shakebugs/react-native-shake'
 import { useReactiveVar } from '@apollo/client'
 import { isWatchlistLoadingVar, isPortfolioLoadingVar } from './Cache'
+import { useSafeAreaInsets } from 'react-native-safe-area-context'
 
 messaging().setBackgroundMessageHandler(async remoteMessage => {
   console.log('Message handled in the background!', remoteMessage)
@@ -32,6 +33,7 @@ export default function App(): ReactNode {
   useSubscribeMarketHours()
   const isWatchlistLoading = useReactiveVar(isWatchlistLoadingVar)
   const isPortfolioLoading = useReactiveVar(isPortfolioLoadingVar)
+  const { top: insetTop } = useSafeAreaInsets()
 
   useEffect(() => {
     crashlytics().log('App Mounted')
@@ -71,7 +73,7 @@ export default function App(): ReactNode {
   }
 
   return (
-    <View style={container}>
+    <View style={[container, { paddingTop: insetTop }]}>
       <StatusBar barStyle="light-content" />
       <MainStack />
       <TradeView ref={tradeViewRef} />

@@ -9,7 +9,7 @@ export default function Home() {
 
   return (
     <Container fullView scrollable>
-      <Container safeAreaTop ph>
+      <Container ph>
         <HeaderContainer>
           <StatusContainer>
             <MarketStatus />
