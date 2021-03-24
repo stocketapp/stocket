@@ -9,13 +9,12 @@ interface SearchResultProps {
     securityName: string
     symbol: string
   }
-  onPress: (symbol: string, isFav: boolean) => void
+  onPress: (symbol: string) => void
   setStock: () => void
-  isFaved: (symbol: string) => boolean
+  isFaved: boolean
 }
 
 export default function SearchResult({ item, onPress, setStock, isFaved }: SearchResultProps) {
-  const isFav = isFaved(item?.symbol)
   const { p } = useTheme()
 
   return (
@@ -31,11 +30,8 @@ export default function SearchResult({ item, onPress, setStock, isFaved }: Searc
             </Text>
           </Container>
 
-          <TouchableOpacity
-            style={{ padding: p.sm }}
-            onPress={() => onPress(item?.symbol, isFaved(item?.symbol))}
-          >
-            <FavoriteIcon size={26} color={GREEN} filled={isFav} />
+          <TouchableOpacity style={{ padding: p.sm }} onPress={() => onPress(item?.symbol)}>
+            <FavoriteIcon size={26} color={GREEN} filled={isFaved} />
           </TouchableOpacity>
         </Container>
       </TouchableOpacity>

@@ -22,13 +22,13 @@ const Text = ({
       case 'title':
         return 20
       case 'label':
-        return 18
+        return 16
       case 'subtext':
         return 12
       case 'big':
         return 28
       default:
-        return 15
+        return 14
     }
   }
 

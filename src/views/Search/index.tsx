@@ -1,5 +1,4 @@
 import { useState, useEffect, useCallback, ReactElement } from 'react'
-import { FlatList } from 'react-native'
 import { Container, SearchSymbols } from '@components'
 import { useDebounce, useStocketMutation } from '@hooks'
 import { searchTerm } from '@api'
@@ -15,13 +14,14 @@ import { remove } from 'lodash'
 
 export default function Search(): ReactElement {
   const [search, setSearch] = useState('')
-  const [results, setResults] = useState(null)
+  const [results, setResults] = useState([])
   const debounced = useDebounce(search)
   const { navigate } = useNavigation()
   const dispatch = useDispatch()
   const addToWatchlistMutate = useStocketMutation(ADD_TO_WATCHLIST)
   const removeFromWatchlistMutate = useStocketMutation(REMOVE_FROM_WATCHLIST)
   const watchlistSymbols = useReactiveVar(watchlistSymbolsVar)
+  const watchlistQuotes = useReactiveVar(watchlistQuotesVar)
 
   useEffect(() => {
     const getResults = async () => {
@@ -29,7 +29,7 @@ export default function Search(): ReactElement {
         const res = await searchTerm(debounced)
         setResults(res)
       } catch (err) {
-        setResults(null)
+        setResults([])
         console.log('search', err)
       }
     }
@@ -44,7 +44,7 @@ export default function Search(): ReactElement {
       type: 'SET_SELECTED_STOCK',
       selectedStock: symbol,
     })
-    navigate('Stock')
+    navigate('Stock', { symbol })
   }
 
   const isFaved = useCallback((symbol: string): boolean => includes(watchlistSymbols, symbol), [
@@ -57,14 +57,17 @@ export default function Search(): ReactElement {
 
   const removeFromWatchlistCache = (symbol: string) => {
     watchlistSymbolsVar(remove(watchlistSymbols, el => el !== symbol))
+    watchlistQuotesVar(remove(watchlistQuotes, el => el.symbol !== symbol))
   }
 
-  const toggleFromWatchlist = async (symbol: string, isFav: boolean) => {
-    if (!isFav) {
-      const { data } = await addToWatchlistMutate({ symbol }, addToWatchlistSymbolsCache(symbol))
+  const toggleFromWatchlist = async (symbol: string) => {
+    if (!isFaved(symbol)) {
+      const { data } = await addToWatchlistMutate({ symbol }, () =>
+        addToWatchlistSymbolsCache(symbol),
+      )
       watchlistQuotesVar([...(watchlistQuotesVar() ?? []), data?.addToWatchlist])
     } else {
-      removeFromWatchlistMutate({ symbol }, removeFromWatchlistCache(symbol))
+      await removeFromWatchlistMutate({ symbol }, () => removeFromWatchlistCache(symbol))
     }
   }
 
@@ -72,19 +75,18 @@ export default function Search(): ReactElement {
     <Container fullView ph safeAreaTop safeAreaBottom>
       <SearchSymbols value={search} setValue={setSearch} />
 
-      <FlatList
-        data={results ?? []}
-        renderItem={({ item }: { item: SearchResultType }) => (
-          <SearchResult
-            item={item}
-            onPress={toggleFromWatchlist}
-            setStock={() => goToStock(item?.symbol)}
-            isFaved={isFaved}
-          />
-        )}
-        keyExtractor={(i, key) => key.toString()}
-        contentContainerStyle={{ paddingVertical: 12 }}
-      />
+      {results?.map(
+        (item: SearchResultType, i: number) =>
+          item && (
+            <SearchResult
+              item={item}
+              onPress={toggleFromWatchlist}
+              setStock={() => goToStock(item?.symbol)}
+              isFaved={isFaved(item?.symbol)}
+              key={i}
+            />
+          ),
+      )}
     </Container>
   )
 }

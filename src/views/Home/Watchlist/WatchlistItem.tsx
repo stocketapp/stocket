@@ -1,15 +1,8 @@
 import { TouchableOpacity } from 'react-native'
-import { Text } from '@components'
+import { Text, Container } from '@components'
 import { GREEN, RED, LABEL } from '@utils/colors'
-import {
-  Image,
-  ImageContainer,
-  ItemLeftContainer,
-  ItemRightContainer,
-  WatchlistItemContainer,
-  SymbolAndName,
-  Change,
-} from './styles'
+import { Image, ImageContainer, Change } from './styles'
+import { useTheme } from '@emotion/react'
 
 type WatchlistItemProps = {
   item: WatchlistIexQuote
@@ -17,38 +10,41 @@ type WatchlistItemProps = {
 }
 
 const WatchlistItem = ({ item, onPress }: WatchlistItemProps) => {
-  const { symbol, change, latestPrice, companyName, logo } = item
-  const changeBg = { backgroundColor: change >= 0 ? GREEN : RED }
+  const changeBg = { backgroundColor: item?.change >= 0 ? GREEN : RED }
+  const { p } = useTheme()
 
   return (
     <TouchableOpacity onPress={() => onPress(item)}>
-      <WatchlistItemContainer>
-        <ItemLeftContainer>
+      <Container pv={p.lg}>
+        <Container horizontal>
           <ImageContainer>
-            <Image source={{ uri: logo }} />
+            <Image source={{ uri: item?.logo }} />
           </ImageContainer>
-          <SymbolAndName>
-            <Text weight="Black" type="label">
-              {symbol}
-            </Text>
-            <Text color={LABEL} weight="Medium" type="label">
-              {companyName}
-            </Text>
-          </SymbolAndName>
-        </ItemLeftContainer>
 
-        <ItemRightContainer>
-          <Text style={{ textAlign: 'right' }} weight="Semibold" type="label">
-            {latestPrice.toFixed(2)}
-          </Text>
-          <Change style={changeBg}>
-            <Text style={{ textAlign: 'right' }} weight="Semibold">
-              {change > 0 && '+'}
-              {change.toFixed(2)}
-            </Text>
-          </Change>
-        </ItemRightContainer>
-      </WatchlistItemContainer>
+          <Container>
+            <Container horizontal separate alignItems="center">
+              <Text weight="Black" type="label">
+                {item?.symbol}
+              </Text>
+              <Text style={{ textAlign: 'right' }} weight="Semibold" type="label">
+                {item?.latestPrice?.toFixed(2)}
+              </Text>
+            </Container>
+
+            <Container horizontal separate alignItems="flex-end">
+              <Text color={LABEL} weight="Medium" type="label">
+                {item?.companyName}
+              </Text>
+              <Change style={changeBg}>
+                <Text style={{ textAlign: 'right' }} weight="Semibold">
+                  {item?.change > 0 && '+'}
+                  {item?.change?.toFixed(2)}
+                </Text>
+              </Change>
+            </Container>
+          </Container>
+        </Container>
+      </Container>
     </TouchableOpacity>
   )
 }
