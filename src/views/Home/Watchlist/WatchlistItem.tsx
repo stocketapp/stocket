@@ -2,7 +2,7 @@ import { TouchableOpacity } from 'react-native'
 import { Text, Container } from '@components'
 import { GREEN, RED, LABEL } from '@utils/colors'
 import { Image, ImageContainer, Change } from './styles'
-import { useTheme } from '@emotion/react'
+import { WatchlistItemContainer } from './styles'
 
 type WatchlistItemProps = {
   item: WatchlistIexQuote
@@ -11,11 +11,10 @@ type WatchlistItemProps = {
 
 const WatchlistItem = ({ item, onPress }: WatchlistItemProps) => {
   const changeBg = { backgroundColor: item?.change >= 0 ? GREEN : RED }
-  const { p } = useTheme()
 
   return (
     <TouchableOpacity onPress={() => onPress(item)}>
-      <Container pv={p.lg}>
+      <WatchlistItemContainer>
         <Container horizontal>
           <ImageContainer>
             <Image source={{ uri: item?.logo }} />
@@ -44,7 +43,7 @@ const WatchlistItem = ({ item, onPress }: WatchlistItemProps) => {
             </Container>
           </Container>
         </Container>
-      </Container>
+      </WatchlistItemContainer>
     </TouchableOpacity>
   )
 }
