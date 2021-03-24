@@ -1,4 +1,4 @@
-import { useMutation } from '@apollo/client'
+import { MutationUpdaterFn, useMutation } from '@apollo/client'
 import type { DocumentNode, TypedDocumentNode, MutationHookOptions } from '@apollo/client'
 import { useCallback } from 'react'
 
@@ -10,7 +10,7 @@ export default function useStocketMutation(mutation: mutationType, options?: mut
   const [mutate] = useMutation(mutation, options)
 
   const callback = useCallback(
-    (input: variablesType, update?) => mutate({ variables: { input }, update }),
+    (input: variablesType, update?: MutationUpdaterFn) => mutate({ variables: { input }, update }),
     [mutate],
   )
 

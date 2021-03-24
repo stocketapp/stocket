@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback } from 'react'
 import { View, TouchableWithoutFeedback } from 'react-native'
 import { useSubscribeMarketHours } from '@hooks'
 import { GREEN, LABEL } from '@utils/colors'

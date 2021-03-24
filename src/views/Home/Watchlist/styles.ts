@@ -7,7 +7,7 @@ export const Image = styled.Image({
 })
 
 export const ImageContainer = styled.View(({ theme }) => ({
-  paddingHorizontal: theme.p.xsm,
+  paddingRight: theme.p.md,
 }))
 
 export const ItemLeftContainer = styled.View({
@@ -34,7 +34,7 @@ export const SymbolAndName = styled.View(({ theme }) => ({
 }))
 
 export const Change = styled.View(({ theme }) => ({
-  paddingVertical: theme.p.xsm,
+  paddingVertical: 1,
   paddingHorizontal: theme.p.sm,
   width: 72,
   borderRadius: 4,
