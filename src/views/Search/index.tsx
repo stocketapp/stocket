@@ -1,27 +1,21 @@
-import { useState, useEffect, useCallback, ReactElement } from 'react'
-import { Container, SearchSymbols } from '@components'
-import { useDebounce, useStocketMutation } from '@hooks'
 import { searchTerm } from '@api'
-import { useNavigation } from '@react-navigation/native'
-import { useDispatch } from 'react-redux'
-import { includes } from 'lodash'
 import type { SearchResultType } from 'types'
-import SearchResult from './SearchResult'
-import { ADD_TO_WATCHLIST, REMOVE_FROM_WATCHLIST } from '@mutations'
-import { useReactiveVar } from '@apollo/client'
-import { watchlistSymbolsVar, watchlistQuotesVar } from '@cache'
-import { remove } from 'lodash'
+import type { ReactElement } from 'react'
 
 export default function Search(): ReactElement {
+  const { useState, useEffect } = require('react')
+  const { Container, SearchSymbols } = require('@components')
+  const { useDebounce } = require('@hooks')
+  const { useNavigation } = require('@react-navigation/native')
+  const { useDispatch } = require('react-redux')
+
+  const SearchResult = require('./SearchResult').default
+
   const [search, setSearch] = useState('')
   const [results, setResults] = useState([])
   const debounced = useDebounce(search)
   const { navigate } = useNavigation()
   const dispatch = useDispatch()
-  const addToWatchlistMutate = useStocketMutation(ADD_TO_WATCHLIST)
-  const removeFromWatchlistMutate = useStocketMutation(REMOVE_FROM_WATCHLIST)
-  const watchlistSymbols = useReactiveVar(watchlistSymbolsVar)
-  const watchlistQuotes = useReactiveVar(watchlistQuotesVar)
 
   useEffect(() => {
     const getResults = async () => {
@@ -47,46 +41,13 @@ export default function Search(): ReactElement {
     navigate('Stock', { symbol })
   }
 
-  const isFaved = useCallback((symbol: string): boolean => includes(watchlistSymbols, symbol), [
-    watchlistSymbols,
-  ])
-
-  const addToWatchlistSymbolsCache = (newValue: string) => {
-    watchlistSymbolsVar([...(watchlistSymbols ?? []), newValue])
-  }
-
-  const removeFromWatchlistCache = (symbol: string) => {
-    watchlistSymbolsVar(remove(watchlistSymbols, el => el !== symbol))
-    watchlistQuotesVar(remove(watchlistQuotes, el => el.symbol !== symbol))
-  }
-
-  const toggleFromWatchlist = async (symbol: string) => {
-    if (!isFaved(symbol)) {
-      const { data } = await addToWatchlistMutate({ symbol }, () =>
-        addToWatchlistSymbolsCache(symbol),
-      )
-      watchlistQuotesVar([...(watchlistQuotesVar() ?? []), data?.addToWatchlist])
-    } else {
-      await removeFromWatchlistMutate({ symbol }, () => removeFromWatchlistCache(symbol))
-    }
-  }
-
   return (
     <Container fullView ph safeAreaTop safeAreaBottom>
       <SearchSymbols value={search} setValue={setSearch} />
 
-      {results?.map(
-        (item: SearchResultType, i: number) =>
-          item && (
-            <SearchResult
-              item={item}
-              onPress={toggleFromWatchlist}
-              setStock={() => goToStock(item?.symbol)}
-              isFaved={isFaved(item?.symbol)}
-              key={i}
-            />
-          ),
-      )}
+      {results?.map((item: SearchResultType, i: number) => (
+        <SearchResult item={item} setStock={() => goToStock(item?.symbol)} key={i} />
+      ))}
     </Container>
   )
 }

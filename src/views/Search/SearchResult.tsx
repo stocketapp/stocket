@@ -1,7 +1,6 @@
 import { TouchableOpacity } from 'react-native'
-import { Text, Container } from '@components'
-import { GRAY_DARKER, GREEN } from '@utils/colors'
-import { FavoriteIcon } from '@icons'
+import { Text, Container, AddToWatchlistButton } from '@components'
+import { GRAY_DARKER } from '@utils/colors'
 import { useTheme } from '@emotion/react'
 
 interface SearchResultProps {
@@ -9,12 +8,10 @@ interface SearchResultProps {
     securityName: string
     symbol: string
   }
-  onPress: (symbol: string) => void
   setStock: () => void
-  isFaved: boolean
 }
 
-export default function SearchResult({ item, onPress, setStock, isFaved }: SearchResultProps) {
+export default function SearchResult({ item, setStock }: SearchResultProps) {
   const { p } = useTheme()
 
   return (
@@ -30,9 +27,7 @@ export default function SearchResult({ item, onPress, setStock, isFaved }: Searc
             </Text>
           </Container>
 
-          <TouchableOpacity style={{ padding: p.sm }} onPress={() => onPress(item?.symbol)}>
-            <FavoriteIcon size={26} color={GREEN} filled={isFaved} />
-          </TouchableOpacity>
+          <AddToWatchlistButton symbol={item?.symbol} />
         </Container>
       </TouchableOpacity>
     </Container>
