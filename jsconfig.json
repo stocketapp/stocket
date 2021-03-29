@@ -52,7 +52,11 @@
       ],
       "@products-assets": [
         "src/assets/products"
-      ]
+      ],
+      "@svg": [
+        "src/assets/svg",
+        "src/assets/svg*"
+      ],
     }
   }
 }

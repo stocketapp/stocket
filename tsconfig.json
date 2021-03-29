@@ -31,8 +31,13 @@
       "@theme": ["./src/theme.ts"],
       "@cache": ["./src/Cache.ts"],
       "@styledComponents": ["./src/components/StyledComponents", "./src/components/StyledComponents*"],
-      "@svg": ["./src/assets/svg", "./src/assets/svg*"],
+      "@svg": ["src/assets/svg", "src/assets/svg*"],
     }
   },
-  "exclude": ["node_modules", "babel.config.js", "metro.config.js", "jest.config.js"]
+  "exclude": ["node_modules", "babel.config.js", "metro.config.js", "jest.config.js"],
+  "include": [
+    "src",
+    "src/declarations.d.ts",
+    "**/*.svg"
+  ]
 }
