@@ -13,9 +13,6 @@ export default function StockChart({ data }: { data: StockPriceChartItemType[] }
       x="label"
       y="close"
       data={data}
-      animate={{
-        duration: 600,
-      }}
       minDomain={{ y: minY - 2 }}
       containerComponent={
         <VictoryCursorContainer

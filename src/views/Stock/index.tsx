@@ -1,40 +1,28 @@
 export default function Stock() {
-  const { useEffect, useState } = require('react')
   const { Container } = require('@components')
   const { useRoute } = require('@react-navigation/core')
-  const StockContentLoader = require('./StockContentLoader')
+  const StockContentLoader = require('./StockContentLoader').default
   const StockHeader = require('./StockHeader').default
   const StockChart = require('./StockChart').default
   const useStockHook = require('./hooks/useStockHook').default
   const StockNavHeader = require('./StockNavHeader').default
 
   const { params }: any = useRoute()
-  const { quote, chart } = useStockHook(params && params?.symbol)
-  const [renderChart, setRenderChart] = useState(false)
+  const { quote: quoteData, chart } = useStockHook(params && params?.symbol)
+  const quote = quoteData?.data
 
-  useEffect(() => {
-    const timeout = setTimeout(() => {
-      setRenderChart(true)
-    }, 300)
-
-    return () => {
-      clearTimeout(timeout)
-      setRenderChart(false)
-    }
-  }, [])
-
-  if (quote?.loading && chart?.loading && chart?.data?.length > 0) {
+  if (quote?.loading || chart?.loading) {
     return <StockContentLoader />
   }
 
   return (
     <Container fullView scrollable>
-      <StockNavHeader symbol={params?.symbol} companyName={quote?.data?.companyName} />
+      <StockNavHeader symbol={params?.symbol} companyName={quote?.companyName} />
 
       <Container ph top={15}>
-        <StockHeader {...quote?.data} />
+        <StockHeader {...quote} />
       </Container>
-      {chart?.data?.length > 0 && renderChart && <StockChart data={chart?.data} />}
+      {chart?.data?.length > 0 && <StockChart data={chart?.data} />}
     </Container>
   )
 }
