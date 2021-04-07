@@ -7,7 +7,6 @@ export default function Search(): ReactElement {
   const { Container, SearchSymbols } = require('@components')
   const { useDebounce } = require('@hooks')
   const { useNavigation } = require('@react-navigation/native')
-  const { useDispatch } = require('react-redux')
 
   const SearchResult = require('./SearchResult').default
 
@@ -15,7 +14,6 @@ export default function Search(): ReactElement {
   const [results, setResults] = useState([])
   const debounced = useDebounce(search)
   const { navigate } = useNavigation()
-  const dispatch = useDispatch()
 
   useEffect(() => {
     const getResults = async () => {
@@ -33,20 +31,16 @@ export default function Search(): ReactElement {
     }
   }, [debounced])
 
-  const goToStock = (symbol: string) => {
-    dispatch({
-      type: 'SET_SELECTED_STOCK',
-      selectedStock: symbol,
-    })
-    navigate('Stock', { symbol })
-  }
-
   return (
     <Container fullView ph safeAreaTop safeAreaBottom>
       <SearchSymbols value={search} setValue={setSearch} />
 
       {results?.map((item: SearchResultType, i: number) => (
-        <SearchResult item={item} setStock={() => goToStock(item?.symbol)} key={i} />
+        <SearchResult
+          item={item}
+          setStock={() => navigate('Stock', { symbol: item?.symbol })}
+          key={i}
+        />
       ))}
     </Container>
   )

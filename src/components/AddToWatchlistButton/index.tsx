@@ -22,8 +22,6 @@ const AddToWatchlistButton = ({ symbol = '' }: SearchResultProps) => {
     watchlistSymbols,
   ])
 
-  console.log('IS_FAVED', isFaved(), watchlistSymbols)
-
   const addToWatchlistSymbolsCache = useCallback(
     (newValue: string) => {
       watchlistSymbolsVar([...(watchlistSymbols ?? []), newValue])

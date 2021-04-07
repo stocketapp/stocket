@@ -7,7 +7,7 @@ export default function StockChart({ data }: { data: StockPriceChartItemType[] }
   return (
     <VictoryLine
       padding={{ left: 2, top: 20, bottom: 0, right: 2 }}
-      height={320}
+      height={400}
       domainPadding={{ x: 0, y: 25 }}
       interpolation="natural"
       x="label"
