@@ -15,7 +15,7 @@ const StockHeader = (props: IEXQuote) => {
       <Container horizontal alignItems="center">
         <Container>
           <Text type="big" weight="Black" pt={p.xlg}>
-            {formatCurrency(Number(latestPrice?.toFixed(2)))}
+            {formatCurrency(Number(latestPrice))}
           </Text>
           <Container horizontal top={p.sm}>
             <Text type="label" weight="Bold" color={color}>

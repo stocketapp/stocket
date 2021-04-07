@@ -14,7 +14,7 @@ const theme: CustomTheme = {
     xsm: 2,
     sm: 5,
     md: 10,
-    lg: 15,
+    lg: 16,
     xlg: 20,
     xxlg: 28,
     huge: 35,
@@ -23,7 +23,7 @@ const theme: CustomTheme = {
     xsm: 2,
     sm: 5,
     md: 10,
-    lg: 15,
+    lg: 16,
     xlg: 20,
     xxlg: 28,
     huge: 35,
@@ -47,7 +47,7 @@ export interface CustomTheme {
     xsm: 2
     sm: 5
     md: 10
-    lg: 15
+    lg: 16
     xlg: 20
     xxlg: 28
     huge: 35
@@ -56,7 +56,7 @@ export interface CustomTheme {
     xsm: 2
     sm: 5
     md: 10
-    lg: 15
+    lg: 16
     xlg: 20
     xxlg: 28
     huge: 35
