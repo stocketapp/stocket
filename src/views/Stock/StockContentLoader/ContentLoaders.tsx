@@ -1,7 +1,9 @@
 export const StockHeaderLoader = () => {
   const { SUB_BACKGROUND, GRAY_DARKER } = require('@utils/colors')
-  const ContentLoader = require('react-content-loader/native').default
-  const { Circle, Rect } = require('react-content-loader/native')
+  const { Rect, default: ContentLoader } = require('react-content-loader/native')
+  const { Dimensions } = require('react-native')
+
+  const { width } = Dimensions.get('screen')
 
   return (
     <ContentLoader
@@ -11,9 +13,10 @@ export const StockHeaderLoader = () => {
       backgroundColor={SUB_BACKGROUND}
       foregroundColor={GRAY_DARKER}
     >
-      {/* <Circle cx="40" cy="40" r="40" /> */}
-      <Rect x="0" y="0" rx="4" ry="4" width="200" height="30" />
-      <Rect x="0" y="40" rx="4" ry="4" width="100" height="40" />
+      <Rect x="0" y="80" rx="4" ry="4" width="200" height="42" />
+      <Rect x="0" y="130" rx="4" ry="4" width="100" height="36" />
+
+      <Rect x="0" y="190" rx="4" ry="4" width={width + 56} height="320" />
     </ContentLoader>
   )
 }
