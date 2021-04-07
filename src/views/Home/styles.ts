@@ -10,4 +10,5 @@ export const StatusContainer = styled.View(({ theme }) => ({
   flexDirection: 'row',
   justifyContent: 'flex-end',
   paddingBottom: theme.p.md,
+  width: '100%',
 }))
