@@ -9,7 +9,7 @@ import configureStore from './src/redux/configureStore'
 import '@react-native-firebase/crashlytics'
 import RNAsyncStorageFlipper from 'rn-async-storage-flipper'
 import AsyncStorage from '@react-native-community/async-storage'
-import codePush from 'react-native-code-push'
+// import codePush from 'react-native-code-push'
 import { ApolloProvider } from '@apollo/client'
 import client from './src/ApolloClient'
 import Reactotron from 'reactotron-react-native'
@@ -36,11 +36,11 @@ const AppRoot = () => (
   </ApolloProvider>
 )
 
-const codePushOptions = {
-  checkFrequency: codePush.CheckFrequency.ON_APP_RESUME,
-  installMode: codePush.InstallMode.ON_NEXT_RESUME,
-}
+// const codePushOptions = {
+//   checkFrequency: codePush.CheckFrequency.ON_APP_RESUME,
+//   installMode: codePush.InstallMode.ON_NEXT_RESUME,
+// }
 
-const Root = __DEV__ ? AppRoot : codePush(codePushOptions)(AppRoot)
+// const Root = __DEV__ ? AppRoot : codePush(codePushOptions)(AppRoot)
 
-AppRegistry.registerComponent(appName, () => Root)
+AppRegistry.registerComponent(appName, () => AppRoot)
