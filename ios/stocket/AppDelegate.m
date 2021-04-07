@@ -7,7 +7,7 @@
 #import <AppCenterReactNative.h>
 #import <AppCenterReactNativeAnalytics.h>
 #import <AppCenterReactNativeCrashes.h>
-#import <CodePush/CodePush.h>
+// #import <CodePush/CodePush.h>
 #import "RNBootSplash.h"
 #import <RNGoogleSignin/RNGoogleSignin.h>
 
@@ -75,7 +75,8 @@ static void InitializeFlipper(UIApplication *application) {
   [[UIApplication sharedApplication] setIdleTimerDisabled: YES];
   return [[RCTBundleURLProvider sharedSettings] jsBundleURLForBundleRoot:@"index" fallbackResource:nil];
 #else
-  return [CodePush bundleURL];
+  // return [CodePush bundleURL];
+  return [[NSBundle mainBundle] URLForResource:@"main" withExtension:@"jsbundle"];
 #endif
 }
 
