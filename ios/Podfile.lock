@@ -217,14 +217,14 @@ PODS:
     - AppAuth/ExternalUserAgent (= 1.4.0)
   - AppAuth/Core (1.4.0)
   - AppAuth/ExternalUserAgent (1.4.0)
-  - appcenter-analytics (4.0.2):
+  - appcenter-analytics (4.1.0):
     - AppCenter/Analytics (~> 4.0)
     - AppCenterReactNativeShared (~> 4.0)
     - React-Core
-  - appcenter-core (4.0.2):
+  - appcenter-core (4.1.0):
     - AppCenterReactNativeShared (~> 4.0)
     - React-Core
-  - appcenter-crashes (4.0.2):
+  - appcenter-crashes (4.1.0):
     - AppCenter/Crashes (~> 4.0)
     - AppCenterReactNativeShared (~> 4.0)
     - React-Core
@@ -776,7 +776,7 @@ PODS:
   - RNGoogleSignin (5.0.0):
     - GoogleSignIn (~> 5.0.0)
     - React-Core
-  - RNIap (5.2.14):
+  - RNIap (6.0.2):
     - React-Core
   - RNReanimated (2.1.0):
     - DoubleConversion
@@ -807,7 +807,7 @@ PODS:
     - React-RCTVibration
     - ReactCommon/turbomodule/core
     - Yoga
-  - RNScreens (2.18.1):
+  - RNScreens (3.1.0):
     - React-Core
   - RNSVG (12.1.0):
     - React
@@ -1059,9 +1059,9 @@ SPEC CHECKSUMS:
   abseil: 6c8eb7892aefa08d929b39f9bb108e5367e3228f
   AppAuth: 31bcec809a638d7bd2f86ea8a52bd45f6e81e7c7
   AppCenter: cd53e3ed3563cc720bcb806c9731a12389b40d44
-  appcenter-analytics: f1bcf80219acb97acdabeda751a1591869f83dfd
-  appcenter-core: 92618da8986eef80bae39d1bb2b4c9fa0fc873bd
-  appcenter-crashes: 6fe933bbc9a1d2b64e451b348169640a9fea8729
+  appcenter-analytics: aa074250b2cb182d6f7d67d9c236dd4606673ab5
+  appcenter-core: c97920e79eba2321a262d3733cb2a6f1097db539
+  appcenter-crashes: 804ae51c5d1742ce20fdb6a68b3d06208a404ad5
   AppCenterReactNativeShared: 2d5a53b6cbd2fe7f63f0033e9f0a40757a4eacf5
   Base64: cecfb41a004124895a7bcee567a89bae5a89d49b
   boost-for-react-native: 39c7adb57c4e60d6c5479dd8623128eb5b3f0f2c
@@ -1148,9 +1148,9 @@ SPEC CHECKSUMS:
   RNFBPerf: 7a3ce7f7fc6b1e614606f114db9d744f4efeb77b
   RNGestureHandler: a479ebd5ed4221a810967000735517df0d2db211
   RNGoogleSignin: ad866d4c4af2651e36801dd3b7771d7715353499
-  RNIap: f00befe6581a5953191108cb97d9b3872473337b
+  RNIap: 1189e94ec4cb30a449f3f182c8d4a7d8ece8028d
   RNReanimated: b8c8004b43446e3c2709fe64b2b41072f87428ad
-  RNScreens: f7ad633b2e0190b77b6a7aab7f914fad6f198d8d
+  RNScreens: 3ba2198ca3179f77f6158425fc31ba3c90a0d49f
   RNSVG: ce9d996113475209013317e48b05c21ee988d42e
   Shake: 5dbd59e3e3363cea29bef608cc14aa13b09f96fc
   SSZipArchive: 62d4947b08730e4cda640473b0066d209ff033c9
