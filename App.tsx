@@ -1,6 +1,5 @@
 import { useEffect, useRef, ReactNode } from 'react'
-import { StatusBar, View, AppState } from 'react-native'
-import AsyncStorage from '@react-native-community/async-storage'
+import { StatusBar, View } from 'react-native'
 import messaging from '@react-native-firebase/messaging'
 import RNBootSplash from 'react-native-bootsplash'
 import {
@@ -15,7 +14,6 @@ import TradeView from './src/views/TradeView'
 import MainStack from './src/navigation/AppStack'
 import AuthStack from './src/navigation/AuthenticationStack'
 import crashlytics from '@react-native-firebase/crashlytics'
-import Shake from '@shakebugs/react-native-shake'
 import { useReactiveVar } from '@apollo/client'
 import { isWatchlistLoadingVar, isPortfolioLoadingVar } from './src/Cache'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
@@ -37,7 +35,6 @@ export default function App(): ReactNode {
 
   useEffect(() => {
     crashlytics().log('App Mounted')
-    Shake.start()
     if (
       (!loading && !isWatchlistLoading && !isPortfolioLoading && isAuth) ||
       (!isAuth && !isWatchlistLoading && !isPortfolioLoading)
@@ -51,21 +48,6 @@ export default function App(): ReactNode {
       await messaging().requestPermission()
     }
     requestNotificationPermission()
-  }, [])
-
-  useEffect(() => {
-    const deleteCache = async (state: string) => {
-      try {
-        if (state === 'background') {
-          await AsyncStorage.clear()
-        }
-      } catch (err) {
-        console.log(err)
-      }
-    }
-    AppState.addEventListener('change', deleteCache)
-
-    return () => AppState.removeEventListener('change', deleteCache)
   }, [])
 
   if (!isAuth && !isWatchlistLoading) {
