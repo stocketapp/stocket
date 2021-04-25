@@ -1,5 +1,5 @@
 // @flow
-import { useRef, useState } from 'react';
+import { useRef, useState } from 'react'
 import { View, StyleSheet, TouchableOpacity } from 'react-native'
 import { Container, Text } from '@components'
 import { LABEL, CARD_BACKGROUND } from '@utils/colors'
@@ -12,7 +12,6 @@ import LogoutButton from './LogoutButton'
 import pckg from '../../../package.json'
 import Products from '../Products'
 import { useUserSelector } from '@selectors'
-import Shake from '@shakebugs/react-native-shake'
 
 export default function Profile() {
   const { userInfo } = useUserSelector()
@@ -58,16 +57,16 @@ export default function Profile() {
       </View>
 
       <View style={{ width: '100%', alignItems: 'center', paddingBottom: 20 }}>
-        <TouchableOpacity
+        {/* <TouchableOpacity
           style={styles.reportBugBtn}
           activeOpacity={0.5}
           onPress={() => Shake.show()}
         >
-          <BugIcon height={18} width={18} color="blue" style={{ marginRight: 5 }} />
+          <BugIcon height={18} width={18} stroke="#a0a0a0" style={{ marginRight: 5 }} />
           <Text style={styles.reportBug} weight="Medium">
             Report a bug
           </Text>
-        </TouchableOpacity>
+        </TouchableOpacity> */}
         <LogoutButton />
         <Text style={{ paddingTop: 10 }} type="subtext" color={LABEL}>
           {pckg.version}

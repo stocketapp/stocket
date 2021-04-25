@@ -386,7 +386,6 @@
 				13B07F8C1A680F5B00A75B9A /* Frameworks */,
 				13B07F8E1A680F5B00A75B9A /* Resources */,
 				00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */,
-				2FCEF96786CFA9B156A0D06E /* [CP] Embed Pods Frameworks */,
 				8D2C2AE715AA6F92620CD1D8 /* [CP] Copy Pods Resources */,
 				83C6340E42DBD4043E96CA3A /* [CP-User] [RNFB] Core Configuration */,
 				C1E3257F70D0EEEE9CB25398 /* [CP-User] [RNFB] Crashlytics Configuration */,
@@ -471,7 +470,6 @@
 				BA9A7DFD23E67A1A0062EEB4 /* Frameworks */,
 				BA9A7DFF23E67A1A0062EEB4 /* Resources */,
 				734407397CBED734421A1274 /* Bundle React Native Code And Images */,
-				72D0FA042463CAD22C2E0803 /* [CP] Embed Pods Frameworks */,
 				AB601A94D672F7A20D05395F /* [CP] Copy Pods Resources */,
 				06B5F0191C2F231824DC678E /* [CP-User] [RNFB] Core Configuration */,
 				FEB3ECE48ADDFB940B692235 /* [CP-User] [RNFB] Crashlytics Configuration */,
@@ -727,24 +725,6 @@
 			shellPath = /bin/sh;
 			shellScript = "export NODE_BINARY=node\n../node_modules/react-native/scripts/react-native-xcode.sh";
 		};
-		2FCEF96786CFA9B156A0D06E /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Production/Pods-Production-frameworks.sh",
-				"${PODS_ROOT}/Shake/Shake.framework",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Shake.framework",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Production/Pods-Production-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		366B0EFE53CE1CFF1D9F7622 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -774,35 +754,15 @@
 			);
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-Development/Pods-Development-frameworks.sh",
-				"${PODS_ROOT}/Shake/Shake.framework",
 				"${PODS_XCFRAMEWORKS_BUILD_DIR}/OpenSSL/OpenSSL.framework/OpenSSL",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Shake.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/OpenSSL.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Development/Pods-Development-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		72D0FA042463CAD22C2E0803 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Staging/Pods-Staging-frameworks.sh",
-				"${PODS_ROOT}/Shake/Shake.framework",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Shake.framework",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Staging/Pods-Staging-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		734407397CBED734421A1274 /* Bundle React Native Code And Images */ = {

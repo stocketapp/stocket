@@ -244,7 +244,7 @@ PODS:
     - BoringSSL-GRPC/Interface (= 0.0.7)
   - BoringSSL-GRPC/Interface (0.0.7)
   - CocoaAsyncSocket (7.6.5)
-  - CodePush (7.0.0):
+  - CodePush (7.0.1):
     - Base64 (~> 1.1)
     - JWT (~> 3.0.0-beta.12)
     - React-Core
@@ -663,14 +663,11 @@ PODS:
     - React-jsi (= 0.64.0)
     - React-perflogger (= 0.64.0)
   - React-jsinspector (0.64.0)
-  - react-native-flipper (0.80.0):
+  - react-native-flipper (0.86.0):
     - React-Core
   - react-native-safe-area-context (3.2.0):
     - React-Core
-  - react-native-shake (10.0.4):
-    - React
-    - Shake (~> 10.0.0)
-  - react-native-webview (11.3.2):
+  - react-native-webview (11.4.2):
     - React-Core
   - React-perflogger (0.64.0)
   - React-RCTActionSheet (0.64.0):
@@ -736,9 +733,9 @@ PODS:
     - React-cxxreact (= 0.64.0)
     - React-jsi (= 0.64.0)
     - React-perflogger (= 0.64.0)
-  - RNAppleAuthentication (2.1.1):
+  - RNAppleAuthentication (2.1.2):
     - React-Core
-  - RNBootSplash (3.2.0):
+  - RNBootSplash (3.2.1):
     - React-Core
   - RNCAsyncStorage (1.12.1):
     - React-Core
@@ -776,7 +773,7 @@ PODS:
   - RNGoogleSignin (5.0.0):
     - GoogleSignIn (~> 5.0.0)
     - React-Core
-  - RNIap (6.0.2):
+  - RNIap (6.0.3):
     - React-Core
   - RNReanimated (2.1.0):
     - DoubleConversion
@@ -807,11 +804,10 @@ PODS:
     - React-RCTVibration
     - ReactCommon/turbomodule/core
     - Yoga
-  - RNScreens (3.1.0):
+  - RNScreens (3.1.1):
     - React-Core
-  - RNSVG (12.1.0):
+  - RNSVG (12.1.1):
     - React
-  - Shake (10.0.7)
   - SSZipArchive (2.2.3)
   - Yoga (1.14.0)
   - YogaKit (1.18.1):
@@ -862,7 +858,6 @@ DEPENDENCIES:
   - React-jsinspector (from `../node_modules/react-native/ReactCommon/jsinspector`)
   - react-native-flipper (from `../node_modules/react-native-flipper`)
   - react-native-safe-area-context (from `../node_modules/react-native-safe-area-context`)
-  - "react-native-shake (from `../node_modules/@shakebugs/react-native-shake`)"
   - react-native-webview (from `../node_modules/react-native-webview`)
   - React-perflogger (from `../node_modules/react-native/ReactCommon/reactperflogger`)
   - React-RCTActionSheet (from `../node_modules/react-native/Libraries/ActionSheetIOS`)
@@ -939,7 +934,6 @@ SPEC REPOS:
     - OpenSSL-Universal
     - PromisesObjC
     - Protobuf
-    - Shake
     - SSZipArchive
     - YogaKit
 
@@ -990,8 +984,6 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native-flipper"
   react-native-safe-area-context:
     :path: "../node_modules/react-native-safe-area-context"
-  react-native-shake:
-    :path: "../node_modules/@shakebugs/react-native-shake"
   react-native-webview:
     :path: "../node_modules/react-native-webview"
   React-perflogger:
@@ -1067,7 +1059,7 @@ SPEC CHECKSUMS:
   boost-for-react-native: 39c7adb57c4e60d6c5479dd8623128eb5b3f0f2c
   BoringSSL-GRPC: 8edf627ee524575e2f8d19d56f068b448eea3879
   CocoaAsyncSocket: 065fd1e645c7abab64f7a6a2007a48038fdc6a99
-  CodePush: 4e72e70067c1442ddfe25e3e53b23a6fa573f5c6
+  CodePush: 9bb93f52a44ee80b72739d89dead9c7e86c3bd3a
   DoubleConversion: cf9b38bf0b2d048436d9a82ad2abe1404f11e7de
   FBLazyVector: 49cbe4b43e445b06bf29199b6ad2057649e4c8f5
   FBReactNativeSpec: 00f1cccada4c67614baa783a028cf06b24d8f5ad
@@ -1119,10 +1111,9 @@ SPEC CHECKSUMS:
   React-jsi: 74341196d9547cbcbcfa4b3bbbf03af56431d5a1
   React-jsiexecutor: 06a9c77b56902ae7ffcdd7a4905f664adc5d237b
   React-jsinspector: 0ae35a37b20d5e031eb020a69cc5afdbd6406301
-  react-native-flipper: 5a9d5959364fca6a8a9658d941343774cb197857
+  react-native-flipper: d3d2f95926f5059ec268d59921c218adaa821eb5
   react-native-safe-area-context: f0906bf8bc9835ac9a9d3f97e8bde2a997d8da79
-  react-native-shake: 168b18d4656c9c90a787ecf41822f88be7b532ec
-  react-native-webview: 71567b6bf3d4e55914e580d720cc8f7df64af817
+  react-native-webview: 4c85a3e5de574ee8c2c0985b4bebbdd240f49304
   React-perflogger: 9c547d8f06b9bf00cb447f2b75e8d7f19b7e02af
   React-RCTActionSheet: 3080b6e12e0e1a5b313c8c0050699b5c794a1b11
   React-RCTAnimation: 3f96f21a497ae7dabf4d2f150ee43f906aaf516f
@@ -1135,8 +1126,8 @@ SPEC CHECKSUMS:
   React-RCTVibration: 0fd6b21751a33cb72fce1a4a33ab9678416d307a
   React-runtimeexecutor: cad74a1eaa53ee6e7a3620231939d8fe2c6afcf0
   ReactCommon: cfe2b7fd20e0dbd2d1185cd7d8f99633fbc5ff05
-  RNAppleAuthentication: f4cc93d710f1337f66550d04d84bf47553bc0eae
-  RNBootSplash: 24175aa28fe203b10c48dc34e78d946fd33c77af
+  RNAppleAuthentication: e95bcfbd044013667f35c5ca20ae17d39500c009
+  RNBootSplash: a7750857d7c7c51fb37ba453cd506b5950e62f74
   RNCAsyncStorage: b03032fdbdb725bea0bd9e5ec5a7272865ae7398
   RNCMaskedView: 5a8ec07677aa885546a0d98da336457e2bea557f
   RNFBApp: 02bde3edecf2e9694b908a5d3504e03449980f20
@@ -1148,11 +1139,10 @@ SPEC CHECKSUMS:
   RNFBPerf: 7a3ce7f7fc6b1e614606f114db9d744f4efeb77b
   RNGestureHandler: a479ebd5ed4221a810967000735517df0d2db211
   RNGoogleSignin: ad866d4c4af2651e36801dd3b7771d7715353499
-  RNIap: 1189e94ec4cb30a449f3f182c8d4a7d8ece8028d
+  RNIap: 766e9b9393fc7630d6dfae371fa998c573b99dec
   RNReanimated: b8c8004b43446e3c2709fe64b2b41072f87428ad
-  RNScreens: 3ba2198ca3179f77f6158425fc31ba3c90a0d49f
-  RNSVG: ce9d996113475209013317e48b05c21ee988d42e
-  Shake: 5dbd59e3e3363cea29bef608cc14aa13b09f96fc
+  RNScreens: bd1523c3bde7069b8e958e5a16e1fc7722ad0bdd
+  RNSVG: 551acb6562324b1d52a4e0758f7ca0ec234e278f
   SSZipArchive: 62d4947b08730e4cda640473b0066d209ff033c9
   Yoga: 8c8436d4171c87504c648ae23b1d81242bdf3bbf
   YogaKit: f782866e155069a2cca2517aafea43200b01fd5a
