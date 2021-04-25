@@ -1,15 +1,39 @@
-export default function Stock() {
-  const { Container } = require('@components')
-  const { useRoute } = require('@react-navigation/core')
-  const StockContentLoader = require('./StockContentLoader').default
-  const StockHeader = require('./StockHeader').default
-  const StockChart = require('./StockChart').default
-  const useStockHook = require('./hooks/useStockHook').default
-  const StockNavHeader = require('./StockNavHeader').default
+import { useMemo } from 'react'
+import {
+  ChartPathProvider,
+  ChartYLabel,
+  monotoneCubicInterpolation,
+  // @ts-ignore
+} from '@rainbow-me/animated-charts'
+import { Dimensions } from 'react-native'
+import { map } from 'lodash'
+import moment from 'moment'
+import { Container } from '@components'
+import { useRoute } from '@react-navigation/core'
+import StockContentLoader from './StockContentLoader'
+import useStockHook from './hooks/useStockHook'
+import StockNavHeader from './StockNavHeader'
+import StockChart from './StockChart'
 
+export const { width: SIZE } = Dimensions.get('window')
+
+export default function Stock() {
   const { params }: any = useRoute()
-  const { quote: quoteData, chart } = useStockHook(params && params?.symbol)
-  const quote = quoteData?.data
+  const { quote, chart } = useStockHook(params && params?.symbol)
+  const quoteData = quote?.data
+
+  const formatGraph = useMemo(
+    () =>
+      map(chart?.data, (el: any) => ({
+        x: moment(`${el.date} ${el.label}`, 'YYYY-MM-DD LT').valueOf(),
+        y: el.close as number,
+      })),
+    [chart?.data],
+  )
+
+  const points = useMemo(() => monotoneCubicInterpolation({ data: formatGraph, range: 40 }), [
+    formatGraph,
+  ])
 
   if (quote?.loading || chart?.loading) {
     return <StockContentLoader />
@@ -17,12 +41,11 @@ export default function Stock() {
 
   return (
     <Container fullView scrollable>
-      <StockNavHeader symbol={params?.symbol} companyName={quote?.companyName} />
+      <StockNavHeader symbol={params?.symbol} companyName={quoteData?.companyName} />
 
-      <Container ph top={15}>
-        <StockHeader {...quote} />
-      </Container>
-      {chart?.data?.length > 0 && <StockChart data={chart?.data} />}
+      {chart?.data?.length > 0 && (
+        <StockChart data={points} quote={quoteData} originalData={formatGraph} />
+      )}
     </Container>
   )
 }

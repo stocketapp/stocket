@@ -7,7 +7,6 @@ export default function Search(): ReactElement {
   const { Container, SearchSymbols } = require('@components')
   const { useDebounce } = require('@hooks')
   const { useNavigation } = require('@react-navigation/native')
-
   const SearchResult = require('./SearchResult').default
 
   const [search, setSearch] = useState('')

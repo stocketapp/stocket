@@ -28,6 +28,8 @@ export const SYMBOL_CHART_QUERY = gql`
       close
       label
       date
+      changeOverTime
+      changeOverTimeS
     }
   }
 `
