@@ -806,7 +806,7 @@ PODS:
     - Yoga
   - RNScreens (3.1.1):
     - React-Core
-  - RNSVG (12.1.1):
+  - RNSVG (12.1.0):
     - React
   - SSZipArchive (2.2.3)
   - Yoga (1.14.0)
@@ -1142,7 +1142,7 @@ SPEC CHECKSUMS:
   RNIap: 766e9b9393fc7630d6dfae371fa998c573b99dec
   RNReanimated: b8c8004b43446e3c2709fe64b2b41072f87428ad
   RNScreens: bd1523c3bde7069b8e958e5a16e1fc7722ad0bdd
-  RNSVG: 551acb6562324b1d52a4e0758f7ca0ec234e278f
+  RNSVG: ce9d996113475209013317e48b05c21ee988d42e
   SSZipArchive: 62d4947b08730e4cda640473b0066d209ff033c9
   Yoga: 8c8436d4171c87504c648ae23b1d81242bdf3bbf
   YogaKit: f782866e155069a2cca2517aafea43200b01fd5a
