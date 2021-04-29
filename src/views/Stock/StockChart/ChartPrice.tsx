@@ -5,13 +5,6 @@ import { useTheme } from '@emotion/react'
 import { ChartYLabel } from '@rainbow-me/animated-charts'
 import { chartLabel } from './styles'
 
-function formatUSD(number: number) {
-  return Number(number).toLocaleString('en-US', {
-    style: 'currency',
-    currency: 'USD',
-  })
-}
-
 export default function ChartPrice(props: IEXQuote) {
   const { latestPrice, changePercent, change } = props
   const { colors, p } = useTheme()
@@ -20,7 +13,16 @@ export default function ChartPrice(props: IEXQuote) {
 
   const formatUsd = (value: any) => {
     'worklet'
-    return formatUSD(value)
+    if (value === '') {
+      return Number(latestPrice).toLocaleString('en-US', {
+        style: 'currency',
+        currency: 'USD',
+      })
+    }
+    return Number(value).toLocaleString('en-US', {
+      style: 'currency',
+      currency: 'USD',
+    })
   }
 
   return (
