@@ -1,11 +1,10 @@
-import { forwardRef, useEffect, useState, useMemo, useCallback } from 'react';
+import { forwardRef, useEffect, useState, useMemo, useCallback } from 'react'
 import { Dimensions, View, StyleSheet, FlatList } from 'react-native'
 import { Text, SuccessScreen } from '@components'
 import Sheet from 'react-native-raw-bottom-sheet'
-import firestore from '@react-native-firebase/firestore'
 import * as RNIap from 'react-native-iap'
 import { sortBy } from 'lodash'
-import { useIapProductsSelector, useUserSelector } from '@selectors'
+import { useIapProductsSelector } from '@selectors'
 import { useFocusEffect } from '@react-navigation/native'
 import { SUB_BACKGROUND, GREEN } from '@utils/colors'
 import { getProductValue, formatCurrency } from '@utils/functions'
@@ -21,7 +20,6 @@ type Props = {
 
 function Products({ onClose, forwardedRef, isOpen }: Props) {
   const { products } = useIapProductsSelector()
-  const { currentUser } = useUserSelector()
   const [purchaseLoading, setPurchaseLoading] = useState(false)
   const [success, setSuccess] = useState(false)
   const [purchasedProduct, setPurchasedProduct] = useState<string | null>(null)
@@ -36,7 +34,7 @@ function Products({ onClose, forwardedRef, isOpen }: Props) {
 
   useFocusEffect(
     useCallback(() => {
-      const userRef = firestore().collection('Users').doc(currentUser?.uid)
+      // const userRef = firestore().collection('Users').doc(currentUser?.uid)
       const purchaseListener = RNIap.purchaseUpdatedListener(async purchase => {
         const receipt = purchase?.transactionReceipt
         const sku = purchase?.productId
@@ -48,12 +46,12 @@ function Products({ onClose, forwardedRef, isOpen }: Props) {
               password: APPSTORE_APP_SECRET,
             }
             await RNIap.validateReceiptIos(obj, __DEV__)
-            const product = getProductValue(sku)
+            // const product = getProductValue(sku)
             setPurchasedProduct(sku)
             setSuccess(true)
-            await userRef.update({
-              cash: firestore.FieldValue.increment(product?.value ?? 0),
-            })
+            // await userRef.update({
+            //   cash: firestore.FieldValue.increment(product?.value ?? 0),
+            // })
             await RNIap.finishTransaction(purchase, true)
           } catch (err) {
             console.error('[ERROR] RNIap.purchaseUpdatedListener()', err)
@@ -62,7 +60,7 @@ function Products({ onClose, forwardedRef, isOpen }: Props) {
       })
 
       return () => purchaseListener.remove()
-    }, [currentUser?.uid]),
+    }, []),
   )
 
   const requestBuy = async (sku: string) => {

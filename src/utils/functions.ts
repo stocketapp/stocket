@@ -1,5 +1,3 @@
-import AsyncStorage from '@react-native-community/async-storage'
-import messaging from '@react-native-firebase/messaging'
 import { find } from 'lodash'
 import iapProductsList from './iapProductsList'
 import type { ProductValue } from 'types'
@@ -9,25 +7,6 @@ export function formatCurrency(num: number): string {
     style: 'currency',
     currency: 'USD',
   })
-}
-
-export async function getFcmToken() {
-  let fcmToken = await AsyncStorage.getItem('fcmToken')
-  if (!fcmToken) {
-    fcmToken = await messaging().getToken()
-    if (fcmToken) {
-      await AsyncStorage.setItem('fcmToken', fcmToken)
-    }
-  }
-}
-
-export async function requestNotificationPermission() {
-  try {
-    await messaging().requestPermission()
-    getFcmToken()
-  } catch (error) {
-    console.log('permission rejected')
-  }
 }
 
 export function getProductValue(productId: string | null): ProductValue | null {

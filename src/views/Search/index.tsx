@@ -1,4 +1,3 @@
-import { searchTerm } from '@api'
 import type { SearchResultType } from 'types'
 import type { ReactElement } from 'react'
 
@@ -17,8 +16,8 @@ export default function Search(): ReactElement {
   useEffect(() => {
     const getResults = async () => {
       try {
-        const res = await searchTerm(debounced)
-        setResults(res)
+        // const res = await searchTerm(debounced)
+        // setResults(res)
       } catch (err) {
         setResults([])
         console.log('search', err)

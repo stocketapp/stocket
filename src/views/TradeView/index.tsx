@@ -1,10 +1,9 @@
-import { forwardRef, useEffect, useMemo, useState } from 'react';
+import { forwardRef, useEffect, useMemo, useState } from 'react'
 import { View, Dimensions, TouchableOpacity, StyleSheet } from 'react-native'
 import Sheet from 'react-native-raw-bottom-sheet'
 import { useDispatch } from 'react-redux'
 import { SUB_BACKGROUND, DARK_TEXT, GREEN } from '@utils/colors'
 import { VirtualNumPad, Text, SuccessScreen } from '@components'
-import { createTrade } from '@api'
 import TradeHeader from './TradeHeader'
 import TradeDetails from './TradeDetails'
 import TradeTotal from './TradeTotal'
@@ -110,7 +109,7 @@ function TradeView({ forwardedRef }: Props) {
       date: Date.now(),
     }
     if (currentUser?.uid && obj) {
-      await createTrade({ uid: currentUser?.uid, data: obj }, () => setIsLoading(false))
+      // await createTrade({ uid: currentUser?.uid, data: obj }, () => setIsLoading(false))
     }
   }
 
