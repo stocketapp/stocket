@@ -19,7 +19,12 @@ export default function StockChart({ data, quote }: StockChartProps) {
   )
 }
 
+export type ChartPointObject = {
+  x: number
+  y: number
+}
+
 interface StockChartProps {
-  data: [{ x: number; y: number }]
+  data: [ChartPointObject]
   quote: IEXQuote
 }

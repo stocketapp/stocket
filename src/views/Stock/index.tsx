@@ -1,10 +1,6 @@
 import { useMemo } from 'react'
-import {
-  ChartPathProvider,
-  ChartYLabel,
-  monotoneCubicInterpolation,
-  // @ts-ignore
-} from '@rainbow-me/animated-charts'
+// @ts-ignore
+import { monotoneCubicInterpolation } from '@rainbow-me/animated-charts'
 import { Dimensions } from 'react-native'
 import { map } from 'lodash'
 import moment from 'moment'
@@ -43,9 +39,7 @@ export default function Stock() {
     <Container fullView scrollable>
       <StockNavHeader symbol={params?.symbol} companyName={quoteData?.companyName} />
 
-      {chart?.data?.length > 0 && (
-        <StockChart data={points} quote={quoteData} originalData={formatGraph} />
-      )}
+      {chart?.data?.length > 0 && <StockChart data={points} quote={quoteData} />}
     </Container>
   )
 }

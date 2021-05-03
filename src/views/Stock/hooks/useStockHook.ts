@@ -3,7 +3,7 @@ import { useQuery } from '@apollo/client'
 import { useFocusEffect } from '@react-navigation/core'
 import { SYMBOL_QUOTE_QUERY, SYMBOL_CHART_QUERY } from '../queries'
 import { IEXQuote } from 'types'
-import { StockPriceChartItemType } from '../StockChart'
+import { ChartPointObject } from '../StockChart'
 
 export default function useStockHook(symbol: string): StockViewData {
   const {
@@ -56,7 +56,7 @@ export interface StockViewData {
     error: any
   }
   chart: {
-    data: StockPriceChartItemType[]
+    data: [ChartPointObject]
     loading: boolean
     error: any
   }
