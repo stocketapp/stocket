@@ -1,7 +1,7 @@
 import { useMemo } from 'react'
 // @ts-ignore
 import { monotoneCubicInterpolation } from '@rainbow-me/animated-charts'
-import { Dimensions } from 'react-native'
+import { Dimensions, View } from 'react-native'
 import { map } from 'lodash'
 import moment from 'moment'
 import { Container } from '@components'
@@ -10,6 +10,7 @@ import StockContentLoader from './StockContentLoader'
 import useStockHook from './hooks/useStockHook'
 import StockNavHeader from './StockNavHeader'
 import StockChart from './StockChart'
+import StockTabView from './StockTabView'
 
 export const { width: SIZE } = Dimensions.get('window')
 
@@ -36,10 +37,15 @@ export default function Stock() {
   }
 
   return (
-    <Container fullView scrollable>
+    <View style={{ flex: 1 }}>
       <StockNavHeader symbol={params?.symbol} companyName={quoteData?.companyName} />
+      <StockTabView />
+    </View>
+    // <Container fullView scrollable>
+    //   <StockNavHeader symbol={params?.symbol} companyName={quoteData?.companyName} />
 
-      {chart?.data?.length > 0 && <StockChart data={points} quote={quoteData} />}
-    </Container>
+    //   {/* {chart?.data?.length > 0 && <StockChart data={points} quote={quoteData} />} */}
+    //   <StockTabView />
+    // </Container>
   )
 }
