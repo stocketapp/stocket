@@ -1,6 +1,5 @@
 import { FlatList, View } from 'react-native'
 import { useNavigation } from '@react-navigation/native'
-import { useDispatch } from 'react-redux'
 import { Text, Container } from '@components'
 import PositionItem from './PortfolioPositionItem'
 import PortfolioPositionsEmpty from './PortfolioPositionsEmpty'
@@ -9,19 +8,10 @@ import { useTheme } from '@emotion/react'
 
 const PortfolioPositions = ({ positions }: { positions: [PortfolioPositionType] }) => {
   const { navigate } = useNavigation()
-  const dispatch = useDispatch()
   const { p } = useTheme()
 
   const goToStock = (selectedStock: PortfolioPositionType) => {
-    dispatch({
-      type: 'SELECTED_STOCK_POSITION',
-      selectedStockPosition: selectedStock,
-    })
-    dispatch({
-      type: 'SET_SELECTED_STOCK',
-      selectedStock: selectedStock?.symbol,
-    })
-    navigate('Stock', { symbol: selectedStock?.symbol })
+    navigate('Stock', { symbol: selectedStock?.symbol, companyName: selectedStock?.companyName })
   }
 
   return (
@@ -57,4 +47,5 @@ export interface PortfolioPositionType {
   change: number
   changePct: number
   symbol: string
+  companyName: string
 }

@@ -9,7 +9,7 @@ export const WatchlistList = ({ data }: { data: WatchlistIexQuote[] }) => {
   const { p } = useTheme()
 
   const onItemPress = (quote: WatchlistIexQuote) => {
-    navigate('Stock', { symbol: quote?.symbol })
+    navigate('Stock', { symbol: quote?.symbol, companyname: quote?.companyName })
   }
 
   return (

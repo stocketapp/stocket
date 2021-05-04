@@ -17,7 +17,7 @@ export default function useStockHook(symbol: string): StockViewData {
   const quote = quoteData?.quote
   const {
     data: chartData,
-    refetch: refetchChart,
+    // refetch: refetchChart,
     loading: loadingChart,
     error: chartError,
   } = useQuery(SYMBOL_CHART_QUERY, {
@@ -27,14 +27,14 @@ export default function useStockHook(symbol: string): StockViewData {
 
   useFocusEffect(
     useCallback(() => {
-      let refetchInterval = setInterval(async () => {
-        await refetchChart()
+      const refetchInterval = setInterval(async () => {
         await refecthQuote()
       }, 15000)
 
       return () => clearInterval(refetchInterval)
-    }, [refecthQuote, refetchChart]),
+    }, [refecthQuote]),
   )
+
   return {
     quote: {
       data: quote,

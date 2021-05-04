@@ -1,24 +1,23 @@
 import { View, useWindowDimensions } from 'react-native'
 import { TabView, SceneMap } from 'react-native-tab-view'
 import { useState } from 'react'
-
-const FirstRoute = () => <View style={{ flex: 1, backgroundColor: '#ff4081' }} />
+import StockTradeTab from './StockTradeTab'
 
 const SecondRoute = () => <View style={{ flex: 1, backgroundColor: '#673ab7' }} />
 
-const renderScene = SceneMap({
-  first: FirstRoute,
-  second: SecondRoute,
-})
-
-export default function StockTabView() {
+export default function StockTabView({ routeParams }: StockTabViewProps) {
   const layout = useWindowDimensions()
 
   const [index, setIndex] = useState(0)
   const [routes] = useState([
-    { key: 'first', title: 'First' },
-    { key: 'second', title: 'Second' },
+    { key: 'trade', title: 'Trade' },
+    { key: 'overview', title: 'Overview' },
   ])
+
+  const renderScene = SceneMap({
+    trade: () => <StockTradeTab routeParams={routeParams} activeTab={index} />,
+    overview: SecondRoute,
+  })
   return (
     <TabView
       navigationState={{ index, routes }}
@@ -27,4 +26,8 @@ export default function StockTabView() {
       initialLayout={{ width: layout.width }}
     />
   )
+}
+
+interface StockTabViewProps {
+  routeParams: any
 }
