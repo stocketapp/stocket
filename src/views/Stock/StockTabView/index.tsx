@@ -1,9 +1,32 @@
-import { View, useWindowDimensions } from 'react-native'
-import { TabView, SceneMap } from 'react-native-tab-view'
 import { useState } from 'react'
+import { View, useWindowDimensions } from 'react-native'
+import {
+  TabView,
+  SceneMap,
+  TabBar,
+  SceneRendererProps,
+  NavigationState,
+} from 'react-native-tab-view'
+import { BACKGROUND, GREEN } from '@utils/colors'
 import StockTradeTab from './StockTradeTab'
 
 const SecondRoute = () => <View style={{ flex: 1, backgroundColor: '#673ab7' }} />
+const renderCustomTab = (
+  props: SceneRendererProps & {
+    navigationState: NavigationState<{
+      key: string
+      title: string
+    }>
+  },
+) => (
+  <TabBar
+    {...props}
+    style={{ backgroundColor: BACKGROUND }}
+    indicatorStyle={{ backgroundColor: GREEN }}
+    getLabelText={({ route }) => route.title}
+    labelStyle={{ textTransform: 'capitalize' }}
+  />
+)
 
 export default function StockTabView({ routeParams }: StockTabViewProps) {
   const layout = useWindowDimensions()
@@ -18,12 +41,14 @@ export default function StockTabView({ routeParams }: StockTabViewProps) {
     trade: () => <StockTradeTab routeParams={routeParams} activeTab={index} />,
     overview: SecondRoute,
   })
+
   return (
     <TabView
       navigationState={{ index, routes }}
       renderScene={renderScene}
       onIndexChange={setIndex}
       initialLayout={{ width: layout.width }}
+      renderTabBar={renderCustomTab}
     />
   )
 }
