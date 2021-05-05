@@ -22,7 +22,7 @@ const renderCustomTab = (
   <TabBar
     {...props}
     style={{ backgroundColor: BACKGROUND }}
-    indicatorStyle={{ backgroundColor: GREEN }}
+    indicatorStyle={{ backgroundColor: GREEN, borderRadius: 50 }}
     getLabelText={({ route }) => route.title}
     labelStyle={{ textTransform: 'capitalize' }}
   />
