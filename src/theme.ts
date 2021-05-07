@@ -51,6 +51,7 @@ export interface CustomTheme {
     xlg: 20
     xxlg: 28
     huge: 35
+    screen: 18
   }
   m: {
     xsm: 2

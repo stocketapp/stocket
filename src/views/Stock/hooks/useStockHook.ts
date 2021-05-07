@@ -5,7 +5,7 @@ import { SYMBOL_QUOTE_QUERY, SYMBOL_CHART_QUERY } from '../queries'
 import { IEXQuote } from 'types'
 import { ChartPointObject } from '../StockChart'
 
-export default function useStockHook(symbol: string): StockViewData {
+export default function useStockHook(symbol: string, activeTab: number): StockViewData {
   const {
     data: quoteData,
     refetch: refecthQuote,
@@ -28,11 +28,13 @@ export default function useStockHook(symbol: string): StockViewData {
   useFocusEffect(
     useCallback(() => {
       const refetchInterval = setInterval(async () => {
-        await refecthQuote()
+        if (activeTab === 0) {
+          await refecthQuote()
+        }
       }, 15000)
 
       return () => clearInterval(refetchInterval)
-    }, [refecthQuote]),
+    }, [refecthQuote, activeTab]),
   )
 
   return {
