@@ -6,10 +6,11 @@ import useStockHook from '../hooks/useStockHook'
 import { useMemo } from 'react'
 import { map } from 'lodash'
 import StockContentLoader from '../StockContentLoader'
+import moment from 'moment'
+import StockTradeButtons from './StockTradeButtons'
 
-export default function StockTradeTab({ routeParams }: StockTradeTabProps) {
-  const moment = require('moment')
-  const { quote, chart } = useStockHook(routeParams && routeParams?.symbol)
+export default function StockTradeTab({ routeParams, activeTab }: StockTradeTabProps) {
+  const { quote, chart } = useStockHook(routeParams && routeParams?.symbol, activeTab)
   const quoteData = quote?.data
 
   const formatGraph = useMemo(
@@ -18,7 +19,7 @@ export default function StockTradeTab({ routeParams }: StockTradeTabProps) {
         x: moment(`${el.date} ${el.label}`, 'YYYY-MM-DD LT').valueOf(),
         y: el.close as number,
       })),
-    [chart?.data, moment],
+    [chart?.data],
   )
 
   const points = useMemo(() => monotoneCubicInterpolation({ data: formatGraph, range: 40 }), [
@@ -32,6 +33,7 @@ export default function StockTradeTab({ routeParams }: StockTradeTabProps) {
   return (
     <Container fullView>
       {chart?.data?.length > 0 && <StockChart data={points} quote={quoteData} />}
+      <StockTradeButtons />
     </Container>
   )
 }
