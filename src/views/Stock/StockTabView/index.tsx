@@ -11,6 +11,8 @@ import { BACKGROUND, GREEN } from '@utils/colors'
 import StockTradeTab from './StockTradeTab'
 
 const SecondRoute = () => <View style={{ flex: 1, backgroundColor: '#673ab7' }} />
+const ThirdRoute = () => <View style={{ flex: 1, backgroundColor: '#486ab1' }} />
+
 const renderCustomTab = (
   props: SceneRendererProps & {
     navigationState: NavigationState<{
@@ -35,11 +37,13 @@ export default function StockTabView({ routeParams }: StockTabViewProps) {
   const [routes] = useState([
     { key: 'trade', title: 'Trade' },
     { key: 'overview', title: 'Overview' },
+    { key: 'third', title: 'Third' },
   ])
 
   const renderScene = SceneMap({
     trade: () => <StockTradeTab routeParams={routeParams} activeTab={index} />,
     overview: SecondRoute,
+    third: ThirdRoute,
   })
 
   return (
