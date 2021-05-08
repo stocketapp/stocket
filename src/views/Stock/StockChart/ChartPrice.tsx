@@ -26,21 +26,18 @@ export default function ChartPrice(props: IEXQuote) {
   }
 
   return (
-    <>
-      <Container>
-        <ChartYLabel style={[chartLabel]} format={formatUsd} />
+    <Container pv={p.md}>
+      <ChartYLabel style={[chartLabel]} format={formatUsd} />
 
-        <Container horizontal top={p.sm}>
-          {/* <Text type="label" weight="Bold" color={color}>
-            {change > 0 && '+'}
-            {change?.toFixed(2)}{' '}
-          </Text> */}
-          <Text type="label" weight="Bold" color={color}>
-            {/* {change > 0 && '+'} */}
-            {changePercent?.toFixed(2)}%
-          </Text>
-        </Container>
+      <Container horizontal top={p.sm}>
+        <Text type="label" weight="Bold" color={color}>
+          {change > 0 && '+'}
+          {change?.toFixed(2)}{' '}
+        </Text>
+        <Text type="label" weight="Bold" color={color}>
+          ({changePercent?.toFixed(2)}%)
+        </Text>
       </Container>
-    </>
+    </Container>
   )
 }

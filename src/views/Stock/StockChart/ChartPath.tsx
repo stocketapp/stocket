@@ -8,7 +8,7 @@ export default ({ setCurrentValues }: Props) => (
   <View>
     <ChartPath
       setCurrentValues={setCurrentValues}
-      height={300}
+      height={340}
       stroke={GREEN}
       strokeWidth={2}
       selectedStrokeWidth={2}
