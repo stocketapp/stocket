@@ -17,7 +17,7 @@ export default function useStockHook(symbol: string, activeTab: number): StockVi
   const quote = quoteData?.quote
   const {
     data: chartData,
-    // refetch: refetchChart,
+    refetch: refetchChart,
     loading: loadingChart,
     error: chartError,
   } = useQuery(SYMBOL_CHART_QUERY, {
@@ -30,11 +30,12 @@ export default function useStockHook(symbol: string, activeTab: number): StockVi
       const refetchInterval = setInterval(async () => {
         if (activeTab === 0) {
           await refecthQuote()
+          await refetchChart()
         }
       }, 15000)
 
       return () => clearInterval(refetchInterval)
-    }, [refecthQuote, activeTab]),
+    }, [refecthQuote, activeTab, refetchChart]),
   )
 
   return {
