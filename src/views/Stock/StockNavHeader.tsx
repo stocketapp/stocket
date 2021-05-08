@@ -16,10 +16,10 @@ const StockNavHeader = ({ companyName, symbol }: StockNavHeaderProps) => {
       </TouchableOpacity>
       <StockNavHeaderInner>
         <Text type="title" weight="Black">
-          {companyName}
-        </Text>
-        <Text weight="Bold" color={colors.GRAY}>
           {symbol}
+        </Text>
+        <Text weight="Medium" color={colors.GRAY}>
+          {companyName}
         </Text>
       </StockNavHeaderInner>
       <AddToWatchlistButton symbol={symbol} />
