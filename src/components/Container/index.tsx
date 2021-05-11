@@ -64,7 +64,10 @@ const Container: React.FC<ContainerProps> = ({
         <View style={[defaultStyles, style]}>
           {canGoBack() && useNavBar && (
             <Container ph>
-              <TouchableOpacity style={{ paddingVertical: 5, paddingRight: 5 }} onPress={goBack}>
+              <TouchableOpacity
+                style={{ paddingVertical: 5, paddingRight: 5 }}
+                onPress={goBack}
+              >
                 <ArrowLeftIcon size={34} color={GREEN} />
               </TouchableOpacity>
             </Container>

@@ -1,5 +1,4 @@
 import { ViewStyle } from 'react-native'
-import { FirebaseFirestoreTypes } from '@react-native-firebase/firestore'
 import { Dispatch, ReactNode, SetStateAction } from 'react'
 
 export interface SvgProps {
@@ -82,9 +81,6 @@ export interface ProductValue {
   value: number
   price: number
 }
-
-export type DocReference = FirebaseFirestoreTypes.DocumentReference
-export type DocumentSnapshot = FirebaseFirestoreTypes.DocumentSnapshot<FirebaseFirestoreTypes.DocumentData>
 
 export interface CurrentUser {
   uid: string
