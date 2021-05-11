@@ -22,9 +22,10 @@ export default function StockTradeTab({ routeParams, activeTab }: StockTradeTabP
     [chart?.data],
   )
 
-  const points = useMemo(() => monotoneCubicInterpolation({ data: formatGraph, range: 40 }), [
-    formatGraph,
-  ])
+  const points = useMemo(
+    () => monotoneCubicInterpolation({ data: formatGraph, range: 40 }),
+    [formatGraph],
+  )
 
   if (quote?.loading || chart?.loading) {
     return <StockContentLoader />
