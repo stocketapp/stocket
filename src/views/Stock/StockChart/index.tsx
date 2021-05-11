@@ -4,17 +4,19 @@ import ChartPath from './ChartPath'
 import ChartPrice from './ChartPrice'
 import { Container } from '@components'
 import { IEXQuote } from 'types'
+import StockChartRangeTabs, { GraphRange } from './StockChartRangeTabs'
+import { useState } from 'react'
 
 export default function StockChart({ data, quote }: StockChartProps) {
+  const [range, setRange] = useState<GraphRange>('now')
   return (
-    <>
-      <ChartPathProvider data={{ points: data, smoothingStrategy: 'bezier' }}>
-        <Container ph pv={15}>
-          <ChartPrice {...quote} />
-        </Container>
-        <ChartPath />
-      </ChartPathProvider>
-    </>
+    <ChartPathProvider data={{ points: data, smoothingStrategy: 'bezier' }}>
+      <Container ph pv={15}>
+        <ChartPrice {...quote} />
+      </Container>
+      <ChartPath />
+      <StockChartRangeTabs activeRangeTab={range} onTabPress={setRange} />
+    </ChartPathProvider>
   )
 }
 
