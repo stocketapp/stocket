@@ -1,12 +1,12 @@
 // @ts-ignore
 import { ChartDot, ChartPath } from '@rainbow-me/animated-charts'
-import { Dimensions } from 'react-native'
+import { Dimensions, View } from 'react-native'
 import { GREEN } from '@utils/colors'
 
 const { width: SIZE } = Dimensions.get('window')
 
 export default ({ setCurrentValues }: Props) => (
-  <>
+  <View>
     <ChartPath
       setCurrentValues={setCurrentValues}
       height={320}
@@ -16,7 +16,7 @@ export default ({ setCurrentValues }: Props) => (
       width={SIZE}
     />
     <ChartDot style={{ backgroundColor: GREEN }} />
-  </>
+  </View>
 )
 
 type Props = {

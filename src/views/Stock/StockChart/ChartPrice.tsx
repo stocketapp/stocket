@@ -6,7 +6,7 @@ import { ChartYLabel } from '@rainbow-me/animated-charts'
 import { chartLabel } from './styles'
 
 export default function ChartPrice(props: IEXQuote) {
-  const { latestPrice, changePercent, change } = props
+  const { latestPrice, changePercentS, change } = props
   const { colors, p } = useTheme()
   const isPositive = change > 0
   const color = isPositive ? colors?.GREEN : change < 0 ? colors?.RED : 'white'
@@ -35,7 +35,7 @@ export default function ChartPrice(props: IEXQuote) {
           {change?.toFixed(2)}{' '}
         </Text>
         <Text type="label" weight="Bold" color={color}>
-          ({changePercent?.toFixed(2)}%)
+          ({changePercentS})
         </Text>
       </Container>
     </Container>
