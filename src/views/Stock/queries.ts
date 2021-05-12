@@ -15,6 +15,7 @@ export const SYMBOL_QUOTE_QUERY = gql`
       week52High
       week52Low
       changePercent
+      changePercentS
       change
       latestPrice
       logo
