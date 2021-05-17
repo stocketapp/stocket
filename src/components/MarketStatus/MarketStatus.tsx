@@ -2,7 +2,11 @@ import { useState, useEffect, useCallback } from 'react'
 import { View, TouchableWithoutFeedback } from 'react-native'
 import { GREEN, LABEL } from '@utils/colors'
 import { dotStyles, containerStyles } from './styles'
-import Animated, { useAnimatedStyle, useSharedValue, withTiming } from 'react-native-reanimated'
+import Animated, {
+  useAnimatedStyle,
+  useSharedValue,
+  withTiming,
+} from 'react-native-reanimated'
 
 interface Props {
   label?: string
@@ -50,7 +54,10 @@ const MarketStatus = ({ label }: Props) => {
       <Animated.View style={[containerStyles, expandedStyles]}>
         <Animated.Text
           numberOfLines={1}
-          style={[{ fontSize: 12, marginRight: isExpanded ? 5 : 0, color: 'white' }, textStyles]}
+          style={[
+            { fontSize: 12, marginRight: isExpanded ? 5 : 0, color: 'white' },
+            textStyles,
+          ]}
         >
           {statusLabel}
         </Animated.Text>
