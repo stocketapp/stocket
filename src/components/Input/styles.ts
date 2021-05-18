@@ -14,6 +14,7 @@ export const CustomInput = styled.TextInput(({ theme }) => ({
   fontFamily: 'SFProText-Medium',
   fontSize: 20,
   paddingVertical: theme.p.sm,
+  color: 'white',
 }))
 
 export const animatedLineStyles = css({
@@ -21,5 +22,5 @@ export const animatedLineStyles = css({
   height: 1.5,
   borderRadius: 12,
   width: '100%',
-  marginTop: 4,
+  marginTop: 2,
 })
