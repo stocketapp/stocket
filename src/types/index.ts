@@ -111,6 +111,7 @@ export interface IEXQuote {
   latestPrice: number
   logo: string
   changePercent: number
+  changePercentS: string
 }
 
 export * from './ChartTypes'
