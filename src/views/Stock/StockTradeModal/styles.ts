@@ -13,12 +13,12 @@ export const TradeContentContainer = styled.View(({ theme }) => ({
   paddingTop: theme.p.xxlg,
 }))
 
-export const TradedStockHContainer = styled.View({
+export const HStack = styled.View({
   width: '100%',
   flexDirection: 'row',
 })
 
-export const TradedStockVContainer = styled.View({
+export const VStack = styled.View({
   width: '100%',
   flexDirection: 'column',
   justifyContent: 'space-between',
@@ -33,3 +33,25 @@ export const StockLogo = styled.Image({
 export const purchaseDetails = css({
   paddingTop: leTheme.m.huge,
 })
+
+export const totalContainerStyles = css({
+  paddingTop: leTheme.m.xxlg,
+})
+
+const buttonStyle = css({
+  justifyContent: 'center',
+  alignItems: 'center',
+  paddingVertical: leTheme.p.lg,
+  borderRadius: 12,
+  marginVertical: leTheme.m.huge,
+})
+
+export const ButtonBuy = styled.TouchableOpacity(({ theme }) => ({
+  backgroundColor: theme.colors.GREEN,
+  ...buttonStyle,
+}))
+
+export const ButtonSell = styled.TouchableOpacity(({ theme }) => ({
+  backgroundColor: theme.colors.RED,
+  ...buttonStyle,
+}))
