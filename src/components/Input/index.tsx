@@ -5,9 +5,9 @@ import Animated, {
   useAnimatedStyle,
   withTiming,
 } from 'react-native-reanimated'
-import { LayoutChangeEvent, TextInputProps } from 'react-native'
+import { LayoutChangeEvent, StyleProp, TextInputProps, ViewStyle } from 'react-native'
 
-export default function Input({ value, setValue, ...props }: InputProps) {
+export default function Input({ value, setValue, containerStyle, ...props }: InputProps) {
   const [lineWidth, setLineWidth] = useState<number>(0)
   const animatedWidth = useSharedValue(0)
   const moveLeft = useSharedValue(150)
@@ -28,7 +28,7 @@ export default function Input({ value, setValue, ...props }: InputProps) {
   }))
 
   return (
-    <InputContainer>
+    <InputContainer style={containerStyle}>
       <CustomInput
         value={value}
         onChangeText={setValue}
@@ -46,4 +46,5 @@ export default function Input({ value, setValue, ...props }: InputProps) {
 interface InputProps extends TextInputProps {
   value: string
   setValue: Dispatch<SetStateAction<string>>
+  containerStyle?: StyleProp<ViewStyle>
 }

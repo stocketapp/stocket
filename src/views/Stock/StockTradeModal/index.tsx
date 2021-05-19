@@ -1,17 +1,27 @@
-import { forwardRef, MutableRefObject } from 'react'
+import { forwardRef, MutableRefObject, useMemo } from 'react'
 import RBSheet from 'react-native-raw-bottom-sheet'
 import { Dimensions } from 'react-native'
-import { tradeViewcContainerStyles, TradeContentContainer } from './styles'
+import {
+  tradeViewcContainerStyles,
+  TradeContentContainer,
+  totalContainerStyles,
+  ButtonBuy,
+} from './styles'
 import { IEXQuote } from 'types'
-import { TradedStockVContainer, purchaseDetails } from './styles'
+import { VStack, purchaseDetails } from './styles'
 import { Text, Input } from '@components'
 import { useState } from 'react'
 import { useTheme } from '@emotion/react'
 import Company from './Company'
+import { formatCurrency } from '@utils/functions'
 
 function StockTradeModal({ forwardedRef, quote }: StockTradeModalProps) {
   const [quantity, setQuantity] = useState('')
-  const { colors } = useTheme()
+  const { colors, p } = useTheme()
+  const total = useMemo(() => Number(quantity) * quote?.latestPrice, [
+    quantity,
+    quote?.latestPrice,
+  ])
 
   return (
     <RBSheet
@@ -27,20 +37,38 @@ function StockTradeModal({ forwardedRef, quote }: StockTradeModalProps) {
           price={quote?.latestPrice}
         />
 
-        <TradedStockVContainer style={purchaseDetails}>
-          <Text type="label" color={colors.GRAY}>
-            Balance
+        <VStack style={purchaseDetails}>
+          <Text type="title" color={colors.GRAY}>
+            Buying Power
           </Text>
-          <Text type="heading" weight="Bold">
+          <Text type="heading" weight="Bold" style={{ paddingTop: p.md }}>
             $2,428.78
           </Text>
           <Input
             value={quantity}
             setValue={setQuantity}
-            placeholder="Quantity"
-            keyboardType="numbers-and-punctuation"
+            placeholder="Shares"
+            keyboardType="decimal-pad"
+            containerStyle={{ marginVertical: p.huge }}
           />
-        </TradedStockVContainer>
+          <Text color={colors.GRAY} type="subtext" weight="Medium">
+            Max 14
+          </Text>
+
+          <VStack style={totalContainerStyles}>
+            <Text type="title" color={colors.GRAY}>
+              Total
+            </Text>
+            <Text style={{ paddingTop: p.md }} type="heading" weight="Bold">
+              {formatCurrency(total)}
+            </Text>
+          </VStack>
+          <ButtonBuy>
+            <Text type="heading" weight="Bold">
+              Buy
+            </Text>
+          </ButtonBuy>
+        </VStack>
       </TradeContentContainer>
     </RBSheet>
   )
