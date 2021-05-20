@@ -12,12 +12,16 @@ import {
 import { WatchlistIexQuote } from '../Watchlist/WatchlistItem'
 
 export default function useHomeHook() {
-  const { data: balanceData, loading: portfolioLoading, refetch: refetchPortfolio } = useQuery(
-    USER_BALANCE_QUERY,
-  )
-  const { data: watchlistData, loading: watchlistLoading, refetch: refetchWatchlist } = useQuery(
-    WATCHLIST_QUERY,
-  )
+  const {
+    data: balanceData,
+    loading: portfolioLoading,
+    refetch: refetchPortfolio,
+  } = useQuery(USER_BALANCE_QUERY)
+  const {
+    data: watchlistData,
+    loading: watchlistLoading,
+    refetch: refetchWatchlist,
+  } = useQuery(WATCHLIST_QUERY)
   const portfolio = balanceData?.portfolio
   const watchlistQuotes = useReactiveVar(watchlistQuotesVar)
 

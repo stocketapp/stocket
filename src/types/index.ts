@@ -1,6 +1,15 @@
 import { ViewStyle } from 'react-native'
 import { Dispatch, ReactNode, SetStateAction } from 'react'
 
+export interface UserType {
+  id: number
+  uid: string
+  displayName: string
+  email: string
+  cash: number
+  portfolioValue?: number
+}
+
 export interface SvgProps {
   size?: number
   children?: ReactNode

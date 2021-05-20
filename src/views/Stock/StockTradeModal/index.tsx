@@ -14,12 +14,20 @@ import { useState } from 'react'
 import { useTheme } from '@emotion/react'
 import Company from './Company'
 import { formatCurrency } from '@utils/functions'
+import { userVar } from '@cache'
+import { useReactiveVar } from '@apollo/client'
 
 function StockTradeModal({ forwardedRef, quote }: StockTradeModalProps) {
   const [quantity, setQuantity] = useState('')
   const { colors, p } = useTheme()
+  const user = useReactiveVar(userVar)
   const total = useMemo(() => Number(quantity) * quote?.latestPrice, [
     quantity,
+    quote?.latestPrice,
+  ])
+  const cash = user?.cash || 0
+  const maxShares = useMemo(() => (cash / quote?.latestPrice).toFixed(2), [
+    cash,
     quote?.latestPrice,
   ])
 
@@ -39,10 +47,10 @@ function StockTradeModal({ forwardedRef, quote }: StockTradeModalProps) {
 
         <VStack style={purchaseDetails}>
           <Text type="title" color={colors.GRAY}>
-            Buying Power
+            Account Balance
           </Text>
           <Text type="heading" weight="Bold" style={{ paddingTop: p.md }}>
-            $2,428.78
+            {formatCurrency(cash)}
           </Text>
           <Input
             value={quantity}
@@ -52,7 +60,7 @@ function StockTradeModal({ forwardedRef, quote }: StockTradeModalProps) {
             containerStyle={{ marginVertical: p.huge }}
           />
           <Text color={colors.GRAY} type="subtext" weight="Medium">
-            Max 14
+            Max {maxShares}
           </Text>
 
           <VStack style={totalContainerStyles}>
