@@ -9,9 +9,9 @@ export const tradeViewcContainerStyles = css({
 
 export const TradeContentContainer = styled.View(({ theme }) => ({
   flex: 1,
-  paddingHorizontal: theme.p.screen,
-  paddingTop: theme.p.xxlg,
+  paddingTop: theme.p.lg,
   backgroundColor: theme.colors.BG_DARK_CARD,
+  // paddingBottom: theme.p.md,
 }))
 
 export const HStack = styled.View({
@@ -26,17 +26,19 @@ export const VStack = styled.View({
 })
 
 export const StockLogo = styled.Image({
-  height: 58,
-  width: 58,
-  borderRadius: 35,
+  height: 80,
+  width: 80,
+  borderRadius: 50,
 })
 
 export const purchaseDetails = css({
   paddingTop: leTheme.m.huge,
+  paddingHorizontal: leTheme.p.screen,
 })
 
 export const totalContainerStyles = css({
-  paddingTop: leTheme.m.xxlg,
+  paddingTop: leTheme.m.huge,
+  justifyContent: 'space-between',
 })
 
 const buttonStyle = css({
@@ -44,15 +46,38 @@ const buttonStyle = css({
   alignItems: 'center',
   paddingVertical: leTheme.p.lg,
   borderRadius: 12,
-  marginVertical: leTheme.m.huge,
+  marginBottom: leTheme.m.xxlg,
+  marginTop: leTheme.m.lg,
 })
 
-export const ButtonBuy = styled.TouchableOpacity(({ theme }) => ({
-  backgroundColor: theme.colors.GREEN,
-  ...buttonStyle,
+export const ButtonTrade = styled.TouchableOpacity(({ theme }) => ({
+  justifyContent: 'center',
+  alignItems: 'center',
+  paddingVertical: theme.p.lg,
+  borderRadius: 12,
+  marginBottom: theme.m.xxlg,
+  marginTop: theme.m.lg,
 }))
 
 export const ButtonSell = styled.TouchableOpacity(({ theme }) => ({
   backgroundColor: theme.colors.RED,
   ...buttonStyle,
 }))
+
+export const companyVStackExtraStyles = css({
+  paddingHorizontal: leTheme.p.screen,
+  alignItems: 'center',
+})
+
+export const companyHStackExtraStyles = css({
+  justifyContent: 'center',
+  alignItems: 'center',
+})
+
+export const quantityContainer = css({
+  justifyContent: 'center',
+})
+
+export const hStackSeparate = css({
+  justifyContent: 'space-between',
+})
