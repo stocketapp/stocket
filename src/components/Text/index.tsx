@@ -29,6 +29,10 @@ const Text = ({
         return 12
       case 'big':
         return 28
+      case 'bigger':
+        return 34
+      case 'huge':
+        return 42
       default:
         return 14
     }
@@ -67,7 +71,7 @@ const Text = ({
 }
 
 export interface CustomTextProps extends TextProps {
-  type?: 'heading' | 'title' | 'label' | 'subtext' | 'big'
+  type?: 'heading' | 'title' | 'label' | 'subtext' | 'big' | 'bigger' | 'huge'
   cap?: boolean
   color?: TextColors
   children?: any
@@ -99,5 +103,6 @@ type TextColors =
   | 'GRAY'
   | 'RED'
   | 'WHITE'
+  | 'LIGHT_GRAY'
 
 export default Text
