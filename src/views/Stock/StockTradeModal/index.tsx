@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction, useMemo } from 'react'
+import { Dispatch, SetStateAction, useMemo, useEffect } from 'react'
 import { Modal, TouchableWithoutFeedback } from 'react-native'
 import {
   TradeContentContainer,
@@ -31,10 +31,11 @@ function StockTradeModal({ quote, visible, setVisible }: StockTradeModalProps) {
     quote?.latestPrice,
   ])
 
+  useEffect(() => {
+    quantity === '' && setQuantity('0')
+  }, [quantity])
+
   const numPadRemove = () => {
-    if (quantity === '') {
-      setQuantity(() => quantity.concat(''))
-    }
     setQuantity(() => quantity.slice(0, -1))
   }
 
@@ -45,9 +46,8 @@ function StockTradeModal({ quote, visible, setVisible }: StockTradeModalProps) {
       setQuantity(() => {
         if (str === '.' && quantity.includes('.')) {
           return quantity
-        } else {
-          return quantity.concat(str).replace(/^0/g, '')
         }
+        return quantity.concat(str).replace(/^0/g, '')
       })
     }
   }
