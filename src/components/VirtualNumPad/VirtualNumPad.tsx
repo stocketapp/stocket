@@ -1,6 +1,6 @@
-import { View, TouchableOpacity, GestureResponderEvent } from 'react-native'
+import { GestureResponderEvent } from 'react-native'
 import Text from '../Text'
-import styles from './styles'
+import { PadBtn, Row } from './styles'
 
 interface PadButtonProps {
   value: string
@@ -11,31 +11,29 @@ interface PadButtonProps {
 const PadButton = ({ value, onPress, onDelete }: PadButtonProps) => {
   const isDelete = value === 'delete'
   return (
-    <TouchableOpacity onPress={isDelete ? onDelete : onPress}>
-      <View style={styles.padBtn}>
-        {!isDelete ? (
-          <Text style={styles.numText} status="positive">
-            {value}
-          </Text>
-        ) : (
-          <Text style={styles.numText} status="positive">
-            X
-          </Text>
-        )}
-      </View>
-    </TouchableOpacity>
+    <PadBtn onPress={isDelete ? onDelete : onPress}>
+      {!isDelete ? (
+        <Text type="bigger" color="GREEN" weight="Light">
+          {value}
+        </Text>
+      ) : (
+        <Text type="bigger" color="GREEN" weight="Light">
+          X
+        </Text>
+      )}
+    </PadBtn>
   )
 }
 
 interface VirtualNumPad {
-  onKeyPress: (number: string) => void
+  onKeyPress: (string: string) => void
   onDelete: () => void
 }
 const VirtualNumPad = ({ onKeyPress, onDelete }: VirtualNumPad) => {
   return (
-    <View>
+    <>
       {pad.map((row, i) => (
-        <View style={styles.row} key={i}>
+        <Row key={i}>
           {row.map(num => (
             <PadButton
               value={num}
@@ -44,9 +42,9 @@ const VirtualNumPad = ({ onKeyPress, onDelete }: VirtualNumPad) => {
               onDelete={onDelete}
             />
           ))}
-        </View>
+        </Row>
       ))}
-    </View>
+    </>
   )
 }
 
@@ -54,7 +52,7 @@ const pad = [
   ['1', '2', '3'],
   ['4', '5', '6'],
   ['7', '8', '9'],
-  ['  ', '0', 'delete'],
+  ['.', '0', 'delete'],
 ]
 
 export default VirtualNumPad
