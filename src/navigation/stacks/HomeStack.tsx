@@ -1,5 +1,5 @@
 import { createStackNavigator } from '@react-navigation/stack'
-import { Stock, Home } from '@views'
+import { Home, Stock } from '@views'
 
 const { Screen, Navigator } = createStackNavigator()
 

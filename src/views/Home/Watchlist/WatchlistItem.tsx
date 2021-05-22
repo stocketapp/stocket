@@ -1,6 +1,6 @@
 import { TouchableOpacity } from 'react-native'
 import { Text, Container } from '@components'
-import { GREEN, RED, LABEL } from '@utils/colors'
+import { GREEN, RED } from '@utils/colors'
 import { Image, ImageContainer, Change } from './styles'
 import { WatchlistItemContainer } from './styles'
 
@@ -31,7 +31,7 @@ const WatchlistItem = ({ item, onPress }: WatchlistItemProps) => {
             </Container>
 
             <Container horizontal separate alignItems="flex-end">
-              <Text color={LABEL} weight="Medium" type="label">
+              <Text color="GRAY" weight="Medium" type="label">
                 {item?.companyName}
               </Text>
               <Change style={changeBg}>

@@ -20,7 +20,7 @@ const StockHeader = (props: IEXQuote) => {
           {change > 0 && '+'}
           {change?.toFixed(2)}{' '}
         </Text>
-        <Text type="label" weight="Medium" color={colors.GRAY}>
+        <Text type="label" weight="Medium" color="GRAY">
           ({change > 0 && '+'}
           {changePercent?.toFixed(2)}%)
         </Text>
