@@ -6,9 +6,10 @@ const theme: CustomTheme = {
     TEXT_DARK: '#020607',
     GREEN_STOCKET: '#8cd782',
     GREEN: '#71DB77',
-    GRAY: '#a0a0a0',
+    GRAY: '#a4a4a4',
     RED: '#eb455a',
     WHITE: '#FFFFFF',
+    LIGHT_GRAY: '#a4a4a46f',
   },
   p: {
     xsm: 2,
@@ -64,8 +65,9 @@ export interface ThemeColors {
   TEXT_DARK: '#020607'
   GREEN_STOCKET: '#8cd782'
   GREEN: '#71DB77'
-  GRAY: '#a0a0a0'
+  GRAY: '#a4a4a4'
   RED: '#eb455a'
   WHITE: '#FFFFFF'
+  LIGHT_GRAY: '#a4a4a46f'
   [key: string]: string
 }
