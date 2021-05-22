@@ -1,12 +1,6 @@
-import { forwardRef, MutableRefObject, useMemo } from 'react'
-import RBSheet from 'react-native-raw-bottom-sheet'
-import { Dimensions } from 'react-native'
-import {
-  tradeViewcContainerStyles,
-  TradeContentContainer,
-  totalContainerStyles,
-  ButtonBuy,
-} from './styles'
+import { Dispatch, SetStateAction, useMemo } from 'react'
+import { Modal, TouchableWithoutFeedback } from 'react-native'
+import { TradeContentContainer, totalContainerStyles, ButtonBuy } from './styles'
 import { IEXQuote } from 'types'
 import { VStack, purchaseDetails } from './styles'
 import { Text, Input } from '@components'
@@ -16,10 +10,11 @@ import Company from './Company'
 import { formatCurrency } from '@utils/functions'
 import { userVar } from '@cache'
 import { useReactiveVar } from '@apollo/client'
+import AccountBalance from './AccountBalance'
 
-function StockTradeModal({ forwardedRef, quote }: StockTradeModalProps) {
+function StockTradeModal({ quote, visible, setVisible }: StockTradeModalProps) {
   const [quantity, setQuantity] = useState('')
-  const { colors, p } = useTheme()
+  const theme = useTheme()
   const user = useReactiveVar(userVar)
   const total = useMemo(() => Number(quantity) * quote?.latestPrice, [
     quantity,
@@ -32,62 +27,58 @@ function StockTradeModal({ forwardedRef, quote }: StockTradeModalProps) {
   ])
 
   return (
-    <RBSheet
-      height={Dimensions.get('window').height - 80}
-      customStyles={{ container: tradeViewcContainerStyles }}
-      ref={forwardedRef}
-      closeOnDragDown
+    <Modal
+      visible={visible}
+      presentationStyle="formSheet"
+      onDismiss={() => setVisible(false)}
+      onRequestClose={() => setVisible(false)}
+      animationType="slide"
     >
-      <TradeContentContainer>
-        <Company
-          name={quote?.companyName}
-          logo={quote?.logo}
-          price={quote?.latestPrice}
-        />
-
-        <VStack style={purchaseDetails}>
-          <Text type="title" color={colors.GRAY}>
-            Account Balance
-          </Text>
-          <Text type="heading" weight="Bold" style={{ paddingTop: p.md }}>
-            {formatCurrency(cash)}
-          </Text>
-          <Input
-            value={quantity}
-            setValue={setQuantity}
-            placeholder="Shares"
-            keyboardType="decimal-pad"
-            containerStyle={{ marginVertical: p.huge }}
+      <TouchableWithoutFeedback onPressOut={() => setVisible(false)}>
+        <TradeContentContainer>
+          <Company
+            name={quote?.companyName}
+            logo={quote?.logo}
+            price={quote?.latestPrice}
           />
-          <Text color={colors.GRAY} type="subtext" weight="Medium">
-            Max {maxShares}
-          </Text>
 
-          <VStack style={totalContainerStyles}>
-            <Text type="title" color={colors.GRAY}>
-              Total
+          <VStack style={purchaseDetails}>
+            <AccountBalance balance={cash} theme={theme} />
+            <Input
+              value={quantity}
+              setValue={setQuantity}
+              placeholder="Shares"
+              keyboardType="decimal-pad"
+              containerStyle={{ marginVertical: theme.p.huge }}
+            />
+            <Text color="GRAY" type="subtext" weight="Medium">
+              Max {maxShares}
             </Text>
-            <Text style={{ paddingTop: p.md }} type="heading" weight="Bold">
-              {formatCurrency(total)}
-            </Text>
+
+            <VStack style={totalContainerStyles}>
+              <Text type="title" color="GRAY">
+                Total
+              </Text>
+              <Text style={{ paddingTop: theme.p.md }} type="heading" weight="Bold">
+                {formatCurrency(total)}
+              </Text>
+            </VStack>
+            <ButtonBuy>
+              <Text type="heading" weight="Bold">
+                Buy
+              </Text>
+            </ButtonBuy>
           </VStack>
-          <ButtonBuy>
-            <Text type="heading" weight="Bold">
-              Buy
-            </Text>
-          </ButtonBuy>
-        </VStack>
-      </TradeContentContainer>
-    </RBSheet>
+        </TradeContentContainer>
+      </TouchableWithoutFeedback>
+    </Modal>
   )
 }
 
 interface StockTradeModalProps {
-  forwardedRef: any
-  ref: MutableRefObject<RBSheet | undefined>
   quote: IEXQuote
+  visible: boolean
+  setVisible: Dispatch<SetStateAction<boolean>>
 }
 
-export default forwardRef((props: any, forwardedRef: any) =>
-  StockTradeModal({ forwardedRef, ...props }),
-)
+export default StockTradeModal
