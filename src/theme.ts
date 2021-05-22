@@ -34,17 +34,7 @@ const theme: CustomTheme = {
 export default theme
 
 export interface CustomTheme {
-  colors: {
-    BG_DARK: string
-    BG_DARK_SECONDARY: string
-    BG_DARK_CARD: string
-    TEXT_DARK: string
-    GREEN_STOCKET: string
-    GREEN: string
-    GRAY: string
-    RED: string
-    WHITE: string
-  }
+  colors: ThemeColors
   p: {
     xsm: 2
     sm: 5
@@ -65,4 +55,17 @@ export interface CustomTheme {
     huge: 35
     screen: 18
   }
+}
+
+export interface ThemeColors {
+  BG_DARK: '#020808'
+  BG_DARK_SECONDARY: '#131818'
+  BG_DARK_CARD: '#091111'
+  TEXT_DARK: '#020607'
+  GREEN_STOCKET: '#8cd782'
+  GREEN: '#71DB77'
+  GRAY: '#a0a0a0'
+  RED: '#eb455a'
+  WHITE: '#FFFFFF'
+  [key: string]: string
 }

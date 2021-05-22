@@ -11,6 +11,7 @@ export const TradeContentContainer = styled.View(({ theme }) => ({
   flex: 1,
   paddingHorizontal: theme.p.screen,
   paddingTop: theme.p.xxlg,
+  backgroundColor: theme.colors.BG_DARK_CARD,
 }))
 
 export const HStack = styled.View({

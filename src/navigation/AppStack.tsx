@@ -5,7 +5,6 @@ import { GREEN } from '@utils/colors'
 
 import { Search, Profile } from '@views'
 import HomeStack from './stacks/HomeStack'
-// import HomeOld from '../views/HomeOld/HomeView'
 
 const { Navigator, Screen } = createBottomTabNavigator()
 

@@ -1,9 +1,10 @@
 import { Text as RNText, TextStyle, TextProps } from 'react-native'
 import { GREEN, RED } from '@utils/colors'
+import { useTheme } from '@emotion/react'
 
 const Text = ({
   type,
-  color = '#fff',
+  color = 'WHITE',
   cap = false,
   status,
   children,
@@ -15,6 +16,7 @@ const Text = ({
   pl,
   ...props
 }: CustomTextProps) => {
+  const theme = useTheme()
   const selectFontSize = () => {
     switch (type) {
       case 'heading':
@@ -48,7 +50,7 @@ const Text = ({
       textTransform: 'capitalize',
       letterSpacing: 1,
     }),
-    color: !status ? color : setStatus(),
+    color: !status ? theme.colors[color] : setStatus(),
     fontFamily: `SFProText-${weight}`,
     ...(pt && { paddingTop: pt }),
     ...(pb && { paddingBottom: pb }),
@@ -67,7 +69,7 @@ const Text = ({
 export interface CustomTextProps extends TextProps {
   type?: 'heading' | 'title' | 'label' | 'subtext' | 'big'
   cap?: boolean
-  color?: string
+  color?: TextColors
   children?: any
   style?: TextStyle
   status?: 'negative' | 'positive'
@@ -86,5 +88,16 @@ export interface CustomTextProps extends TextProps {
     | 'Thin'
     | 'Ultralight'
 }
+
+type TextColors =
+  | 'BG_DARK'
+  | 'BG_DARK_SECONDARY'
+  | 'BG_DARK_CARD'
+  | 'TEXT_DARK'
+  | 'GREEN_STOCKET'
+  | 'GREEN'
+  | 'GRAY'
+  | 'RED'
+  | 'WHITE'
 
 export default Text

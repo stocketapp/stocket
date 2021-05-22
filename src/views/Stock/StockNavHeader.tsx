@@ -18,7 +18,7 @@ const StockNavHeader = ({ companyName, symbol }: StockNavHeaderProps) => {
         <Text type="title" weight="Black">
           {symbol}
         </Text>
-        <Text weight="Medium" color={colors.GRAY}>
+        <Text weight="Medium" color="GRAY">
           {companyName}
         </Text>
       </StockNavHeaderInner>

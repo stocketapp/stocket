@@ -1,24 +1,25 @@
 import { useState, Dispatch, SetStateAction } from 'react'
 import { Text } from '@components'
-import { GREEN, LABEL, SUB_BACKGROUND } from '@utils/colors'
 import { StockChartRangeTabsContainer, Tab, TabPressable } from './styles'
+import { useTheme } from '@emotion/react'
 
 const ChartRangeTab = ({ label, onPress, activeTab }: ChartRangeTabProps) => {
   const [opacity, setOpacity] = useState(1)
+  const { colors } = useTheme()
   const isActive = activeTab === label
   return (
     <TabPressable
       onPress={onPress}
       onPressIn={() => setOpacity(0.6)}
       onPressOut={() => setOpacity(1)}
-      style={{ backgroundColor: isActive ? SUB_BACKGROUND : 'transparent' }}
+      style={{ backgroundColor: isActive ? colors.BG_DARK_SECONDARY : 'transparent' }}
     >
       <Tab style={{ opacity }}>
         <Text
           style={{ textTransform: 'capitalize' }}
           type="subtext"
           weight={isActive ? 'Black' : 'Bold'}
-          color={isActive ? GREEN : LABEL}
+          color={isActive ? 'GREEN' : 'GRAY'}
         >
           {label}
         </Text>
