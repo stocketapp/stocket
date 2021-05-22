@@ -1,19 +1,24 @@
 import { Dispatch, SetStateAction, useMemo } from 'react'
 import { Modal, TouchableWithoutFeedback } from 'react-native'
-import { TradeContentContainer, totalContainerStyles, ButtonBuy } from './styles'
+import {
+  TradeContentContainer,
+  ButtonTrade,
+  quantityContainer,
+  HStack,
+  totalContainerStyles,
+} from './styles'
 import { IEXQuote } from 'types'
 import { VStack, purchaseDetails } from './styles'
-import { Text, Input } from '@components'
+import { Text, VirtualNumPad } from '@components'
 import { useState } from 'react'
 import { useTheme } from '@emotion/react'
 import Company from './Company'
 import { formatCurrency } from '@utils/functions'
 import { userVar } from '@cache'
 import { useReactiveVar } from '@apollo/client'
-import AccountBalance from './AccountBalance'
 
 function StockTradeModal({ quote, visible, setVisible }: StockTradeModalProps) {
-  const [quantity, setQuantity] = useState('')
+  const [quantity, setQuantity] = useState('0')
   const theme = useTheme()
   const user = useReactiveVar(userVar)
   const total = useMemo(() => Number(quantity) * quote?.latestPrice, [
@@ -25,6 +30,27 @@ function StockTradeModal({ quote, visible, setVisible }: StockTradeModalProps) {
     cash,
     quote?.latestPrice,
   ])
+
+  const numPadRemove = () => {
+    if (quantity === '') {
+      setQuantity(() => quantity.concat(''))
+    }
+    setQuantity(() => quantity.slice(0, -1))
+  }
+
+  const onNumPadPress = (str: string) => {
+    if (quantity === '' && str === '.') {
+      setQuantity('0.')
+    } else {
+      setQuantity(() => {
+        if (str === '.' && quantity.includes('.')) {
+          return quantity
+        } else {
+          return quantity.concat(str).replace(/^0/g, '')
+        }
+      })
+    }
+  }
 
   return (
     <Modal
@@ -43,32 +69,30 @@ function StockTradeModal({ quote, visible, setVisible }: StockTradeModalProps) {
           />
 
           <VStack style={purchaseDetails}>
-            <AccountBalance balance={cash} theme={theme} />
-            <Input
-              value={quantity}
-              setValue={setQuantity}
-              placeholder="Shares"
-              keyboardType="decimal-pad"
-              containerStyle={{ marginVertical: theme.p.huge }}
-            />
-            <Text color="GRAY" type="subtext" weight="Medium">
-              Max {maxShares}
-            </Text>
+            <HStack style={quantityContainer}>
+              <Text type="huge">{quantity}</Text>
+            </HStack>
+            <HStack style={quantityContainer}>
+              <Text type="subtext" color="LIGHT_GRAY" weight="Semibold">
+                Max: {maxShares}
+              </Text>
+            </HStack>
 
-            <VStack style={totalContainerStyles}>
-              <Text type="title" color="GRAY">
+            <HStack style={totalContainerStyles}>
+              <Text type="title" weight="Medium" color="LIGHT_GRAY">
                 Total
               </Text>
-              <Text style={{ paddingTop: theme.p.md }} type="heading" weight="Bold">
-                {formatCurrency(total)}
+              <Text type="heading" weight="Bold">
+                {formatCurrency(total || 0)}
               </Text>
-            </VStack>
-            <ButtonBuy>
+            </HStack>
+            <ButtonTrade style={{ backgroundColor: theme.colors.GREEN }}>
               <Text type="heading" weight="Bold">
                 Buy
               </Text>
-            </ButtonBuy>
+            </ButtonTrade>
           </VStack>
+          <VirtualNumPad onKeyPress={onNumPadPress} onDelete={numPadRemove} />
         </TradeContentContainer>
       </TouchableWithoutFeedback>
     </Modal>

@@ -1,18 +1,16 @@
-import { HStack, VStack, StockLogo } from './styles'
+import { VStack, StockLogo, companyVStackExtraStyles } from './styles'
 import { Text } from '@components'
 
 const Company = ({ name, price, logo }: CompanyProps) => (
-  <HStack>
+  <VStack style={companyVStackExtraStyles}>
+    <Text type="title" weight="Bold" pb={5} pt={5}>
+      {name}
+    </Text>
+    <Text type="title" weight="Medium" color="GRAY" pb={20}>
+      ${price}
+    </Text>
     <StockLogo source={{ uri: logo }} />
-    <VStack style={{ paddingLeft: 16 }}>
-      <Text type="heading" weight="Bold">
-        {name}
-      </Text>
-      <Text type="title" weight="Medium">
-        ${price}
-      </Text>
-    </VStack>
-  </HStack>
+  </VStack>
 )
 
 interface CompanyProps {
