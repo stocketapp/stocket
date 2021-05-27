@@ -20,25 +20,33 @@ const MarketStatus = ({ label }: Props) => {
   const textWidth = useSharedValue(0)
   const opacity = useSharedValue(0)
   const expandedStyles = useAnimatedStyle(() => ({
-    width: withTiming(expanded.value, { duration: 450 }),
+    width: expanded.value,
   }))
   const textStyles = useAnimatedStyle(() => ({
-    opacity: withTiming(opacity.value, { duration: 800 }),
-    width: withTiming(textWidth.value, { duration: 450 }),
+    opacity: opacity.value,
+    width: textWidth.value,
   }))
 
   const expand = useCallback(() => {
     setIsExpanded(!isExpanded)
     if (isExpanded) {
-      expanded.value = 32
-      opacity.value = 0
-      textWidth.value = 0
+      expanded.value = widthWithTiming(32)
+      opacity.value = opacityWithTiming(0)
+      textWidth.value = widthWithTiming(0)
     } else {
-      expanded.value = 120
-      opacity.value = 0.8
-      textWidth.value = 71
+      expanded.value = widthWithTiming(122)
+      opacity.value = opacityWithTiming(0.8)
+      textWidth.value = widthWithTiming(75)
     }
-  }, [expanded, opacity, textWidth, isExpanded])
+  }, [isExpanded, expanded, opacity, textWidth])
+
+  const opacityWithTiming = (value: number) => {
+    return withTiming(value, { duration: 800 })
+  }
+
+  const widthWithTiming = (value: number) => {
+    return withTiming(value, { duration: 450 })
+  }
 
   useEffect(() => {
     let timeout: NodeJS.Timeout
