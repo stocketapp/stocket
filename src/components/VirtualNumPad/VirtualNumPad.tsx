@@ -1,6 +1,7 @@
-import { GestureResponderEvent } from 'react-native'
+import { GestureResponderEvent, View } from 'react-native'
 import Text from '../Text'
 import { PadBtn, Row } from './styles'
+import { useState, useEffect } from 'react'
 
 interface PadButtonProps {
   value: string
@@ -25,26 +26,50 @@ const PadButton = ({ value, onPress, onDelete }: PadButtonProps) => {
   )
 }
 
-interface VirtualNumPad {
-  onKeyPress: (string: string) => void
-  onDelete: () => void
+export interface VirtualNumPadProps {
+  onKeyPress: (value: string) => void
 }
-const VirtualNumPad = ({ onKeyPress, onDelete }: VirtualNumPad) => {
+const VirtualNumPad = ({ onKeyPress }: VirtualNumPadProps) => {
+  const [value, setValue] = useState('0')
+
+  useEffect(() => {
+    value === '' && setValue('0')
+
+    onKeyPress(value)
+  }, [value, onKeyPress])
+
+  const numPadRemove = () => {
+    setValue(() => value.slice(0, -1))
+  }
+
+  const press = (str: string) => {
+    if (value === '' && str === '.') {
+      setValue('0.')
+    } else {
+      setValue(() => {
+        if (str === '.' && value.includes('.')) {
+          return value
+        }
+        return value.concat(str).replace(/^0/g, '')
+      })
+    }
+  }
+
   return (
-    <>
+    <View>
       {pad.map((row, i) => (
         <Row key={i}>
           {row.map(num => (
             <PadButton
               value={num}
               key={num}
-              onPress={() => onKeyPress(num)}
-              onDelete={onDelete}
+              onPress={() => press(num)}
+              onDelete={numPadRemove}
             />
           ))}
         </Row>
       ))}
-    </>
+    </View>
   )
 }
 

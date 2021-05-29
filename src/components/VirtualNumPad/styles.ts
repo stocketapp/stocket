@@ -11,5 +11,5 @@ export const PadBtn = styled.TouchableOpacity({
   width: width / 3,
   justifyContent: 'center',
   alignItems: 'center',
-  paddingVertical: '4%',
+  paddingVertical: 18,
 })
