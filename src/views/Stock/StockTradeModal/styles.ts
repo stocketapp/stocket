@@ -9,9 +9,8 @@ export const tradeViewcContainerStyles = css({
 
 export const TradeContentContainer = styled.View(({ theme }) => ({
   flex: 1,
-  paddingTop: theme.p.lg,
   backgroundColor: theme.colors.BG_DARK_CARD,
-  // paddingBottom: theme.p.md,
+  justifyContent: 'space-between',
 }))
 
 export const HStack = styled.View({
@@ -26,13 +25,13 @@ export const VStack = styled.View({
 })
 
 export const StockLogo = styled.Image({
-  height: 80,
-  width: 80,
-  borderRadius: 50,
+  height: 86,
+  width: 86,
+  borderRadius: 100,
 })
 
 export const purchaseDetails = css({
-  paddingTop: leTheme.m.huge,
+  paddingTop: leTheme.p.huge,
   paddingHorizontal: leTheme.p.screen,
 })
 
@@ -57,6 +56,7 @@ export const ButtonTrade = styled.TouchableOpacity(({ theme }) => ({
   borderRadius: 12,
   marginBottom: theme.m.xxlg,
   marginTop: theme.m.lg,
+  marginHorizontal: theme.p.huge,
 }))
 
 export const ButtonSell = styled.TouchableOpacity(({ theme }) => ({
@@ -65,7 +65,11 @@ export const ButtonSell = styled.TouchableOpacity(({ theme }) => ({
 }))
 
 export const companyVStackExtraStyles = css({
-  paddingHorizontal: leTheme.p.screen,
+  alignItems: 'center',
+})
+
+export const companyTitle = css({
+  justifyContent: 'center',
   alignItems: 'center',
 })
 
@@ -81,3 +85,26 @@ export const quantityContainer = css({
 export const hStackSeparate = css({
   justifyContent: 'space-between',
 })
+
+export const TradeModalTitleContainer = styled.View({
+  flexDirection: 'column',
+  alignItems: 'center',
+})
+
+export const TradeModalTop = styled.View(({ theme }) => ({
+  flexDirection: 'row',
+  justifyContent: 'center',
+  width: '100%',
+  paddingHorizontal: theme.p.screen,
+  paddingTop: theme.p.lg,
+  paddingBottom: theme.p.sm,
+}))
+export const TradeModalNameAndPrice = styled.View({
+  flexDirection: 'column',
+  alignItems: 'center',
+})
+
+export const TradeModalKeyboardContainer = styled.View(({ theme }) => ({
+  justifyContent: 'space-between',
+  paddingBottom: theme.p.lg,
+}))

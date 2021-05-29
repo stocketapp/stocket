@@ -34,3 +34,15 @@ export const SYMBOL_CHART_QUERY = gql`
     }
   }
 `
+
+export const CREATE_TRADE_MUTATION = gql`
+  mutation($input: CreateTradeInput!) {
+    createTrade(input: $input) {
+      symbol
+      price
+      size
+      orderType
+      total
+    }
+  }
+`
