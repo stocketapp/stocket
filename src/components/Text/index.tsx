@@ -32,7 +32,7 @@ const Text = ({
       case 'bigger':
         return 34
       case 'huge':
-        return 42
+        return 52
       default:
         return 14
     }
