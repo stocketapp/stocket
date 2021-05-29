@@ -5,20 +5,22 @@ import { GREEN } from '@utils/colors'
 
 const { width: SIZE } = Dimensions.get('window')
 
-export default ({ setCurrentValues }: Props) => (
+const ChartPathWithDot = ({ setCurrentValues }: ChartProps) => (
   <View>
     <ChartPath
       setCurrentValues={setCurrentValues}
-      height={320}
       stroke={GREEN}
       strokeWidth={2}
       selectedStrokeWidth={2}
       width={SIZE}
+      height={320}
     />
     <ChartDot style={{ backgroundColor: GREEN }} />
   </View>
 )
 
-type Props = {
+export default ChartPathWithDot
+
+type ChartProps = {
   setCurrentValues?: (values: { x: string; y: string }) => void
 }
