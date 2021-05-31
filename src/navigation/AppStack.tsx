@@ -1,40 +1,26 @@
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
-import TabBarComponent from './TabBarComponent'
-import { TrendingUpIcon, SearchIcon, ProfileIcon } from '@icons'
-import { GREEN } from '@utils/colors'
+// import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
+// import TabBarComponent from './TabBarComponent'
+// import { TrendingUpIcon, SearchIcon, ProfileIcon } from '@icons'
+// import { GREEN } from '@utils/colors'
+import { createStackNavigator } from '@react-navigation/stack'
+import StockStack from './stacks/StockStack'
 
-import { Search, Profile } from '@views'
-import MainStack from './stacks/MainStack'
+// import { Search, Profile } from '@views'
+// import MainStack from './stacks/MainStack'
+import TabStack from './stacks/TabStack'
 
-const { Navigator, Screen } = createBottomTabNavigator()
+const { Navigator, Screen } = createStackNavigator()
 
 export default () => {
   return (
     <Navigator
-      tabBar={props => <TabBarComponent {...props} />}
-      tabBarOptions={{ activeTintColor: GREEN, inactiveTintColor: '#4a5a5a' }}
+      // tabBar={props => <TabBarComponent {...props} />}
+      // tabBarOptions={{ activeTintColor: GREEN, inactiveTintColor: '#4a5a5a' }}
+      initialRouteName="TabStack"
+      headerMode="none"
     >
-      <Screen
-        name="MainStack"
-        component={MainStack}
-        options={{
-          tabBarIcon: ({ color }) => <TrendingUpIcon size={40} color={color} />,
-        }}
-      />
-      <Screen
-        name="Search"
-        component={Search}
-        options={{
-          tabBarIcon: ({ color }) => <SearchIcon size={35} color={color} />,
-        }}
-      />
-      <Screen
-        name="Profile"
-        component={Profile}
-        options={{
-          tabBarIcon: ({ color }) => <ProfileIcon size={36} color={color} />,
-        }}
-      />
+      <Screen name="TabStack" component={TabStack} />
+      <Screen name="StockStack" component={StockStack} />
     </Navigator>
   )
 }
