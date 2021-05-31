@@ -9,7 +9,6 @@ import AuthStack from './src/navigation/AuthenticationStack'
 import crashlytics from '@react-native-firebase/crashlytics'
 import { useReactiveVar } from '@apollo/client'
 import { isWatchlistLoadingVar, isPortfolioLoadingVar } from './src/Cache'
-import { useSafeAreaInsets } from 'react-native-safe-area-context'
 
 export default function App(): ReactNode {
   const { isAuth, currentUser } = useAuthState()
@@ -17,7 +16,6 @@ export default function App(): ReactNode {
   useIapProducts(currentUser?.uid)
   const isWatchlistLoading = useReactiveVar(isWatchlistLoadingVar)
   const isPortfolioLoading = useReactiveVar(isPortfolioLoadingVar)
-  const { top: insetTop } = useSafeAreaInsets()
 
   useEffect(() => {
     crashlytics().log('App Mounted')
@@ -34,7 +32,7 @@ export default function App(): ReactNode {
   }
 
   return (
-    <View style={[container, { paddingTop: insetTop }]}>
+    <View style={[container]}>
       <StatusBar barStyle="light-content" />
       <MainStack />
       <TradeView ref={tradeViewRef} />

@@ -23,7 +23,7 @@ export default function useStockHook(symbol: string, activeTab: number): StockVi
   } = useQuery(SYMBOL_CHART_QUERY, {
     variables: { symbol },
   })
-  const chart = chartData?.chart
+  const chart = chartData?.intraday
 
   useFocusEffect(
     useCallback(() => {

@@ -1,13 +1,14 @@
 import { createStackNavigator } from '@react-navigation/stack'
-import { Home, Stock } from '@views'
+import { Home } from '@views'
+import StockStack from './StockStack'
 
 const { Screen, Navigator } = createStackNavigator()
 
-export default function HomeStack() {
+export default function MainStack() {
   return (
     <Navigator headerMode="none">
       <Screen name="Home" component={Home} />
-      <Screen name="Stock" component={Stock} />
+      <Screen name="StockStack" component={StockStack} />
     </Navigator>
   )
 }
