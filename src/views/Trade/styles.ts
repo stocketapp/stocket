@@ -1,6 +1,6 @@
 import styled, { css } from '@emotion/native'
 import { CARD_BACKGROUND } from '@utils/colors'
-import leTheme from '../../../theme'
+import leTheme from '../../theme'
 
 export const tradeViewcContainerStyles = css({
   borderRadius: 30,

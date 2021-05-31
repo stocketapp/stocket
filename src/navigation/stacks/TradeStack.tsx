@@ -1,6 +1,6 @@
 import { createStackNavigator } from '@react-navigation/stack'
-import StockTradeModal from '../../views/Stock/StockTradeModal'
-import TradeModalReview from '../../views/Stock/StockTradeModal/StockTradeModalReview'
+import StockTradeModal from '../../views/Trade'
+import TradeModalReview from '../../views/TradeReview'
 
 const { Screen, Navigator } = createStackNavigator()
 

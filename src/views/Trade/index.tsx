@@ -8,12 +8,12 @@ import TradeModalHeader from './TradeModalHeader'
 import { userVar } from '@cache'
 import { useReactiveVar } from '@apollo/client'
 import TradeModalKeyboard from './TradeModalKeyboard'
-import { useRoute } from '@react-navigation/native'
+// import { useRoute } from '@react-navigation/native'
 
 function StockTradeModal({ quote }: StockTradeModalProps) {
   const [quantity, setQuantity] = useState('0')
   const user = useReactiveVar(userVar)
-  const route = useRoute()
+  // const route = useRoute()
 
   const cash = user?.cash || 0
   const maxShares = useMemo(() => (cash / quote?.latestPrice).toFixed(2), [
