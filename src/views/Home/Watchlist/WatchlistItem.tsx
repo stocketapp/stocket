@@ -1,6 +1,6 @@
 import { TouchableOpacity } from 'react-native'
 import { Text, Container } from '@components'
-import { GREEN, RED } from '@utils/colors'
+import { GREEN, RED, SUB_BACKGROUND } from '@utils/colors'
 import { Image, ImageContainer, Change } from './styles'
 import { WatchlistItemContainer } from './styles'
 
@@ -10,7 +10,11 @@ type WatchlistItemProps = {
 }
 
 const WatchlistItem = ({ item, onPress }: WatchlistItemProps) => {
-  const changeBg = { backgroundColor: item?.change >= 0 ? GREEN : RED }
+  // const changeBg = { backgroundColor: item?.change >= 0 ? GREEN : RED }
+  const changeBg = {
+    backgroundColor:
+      item?.change === 0.0 ? SUB_BACKGROUND : item?.change > 0 ? GREEN : RED,
+  }
 
   return (
     <TouchableOpacity onPress={() => onPress(item)}>
