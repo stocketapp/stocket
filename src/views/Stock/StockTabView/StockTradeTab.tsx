@@ -1,4 +1,3 @@
-import { useState } from 'react'
 // @ts-ignore
 import { monotoneCubicInterpolation } from '@rainbow-me/animated-charts'
 import { Container } from '@components'
@@ -9,24 +8,24 @@ import { map } from 'lodash'
 import StockContentLoader from '../StockContentLoader'
 import moment from 'moment'
 import StockTradeButtons from './StockTradeButtons'
-import StockTradeModal from '../StockTradeModal'
+import { useNavigation } from '@react-navigation/native'
 
 export default function StockTradeTab({ routeParams, activeTab }: StockTradeTabProps) {
   const { quote, chart } = useStockHook(routeParams && routeParams?.symbol, activeTab)
   const quoteData = quote?.data
-  const [tradeModalVisible, setModalVisible] = useState(false)
+  const { navigate } = useNavigation()
 
   const formatGraph = useMemo(
     () =>
       map(chart?.data, (el: any) => ({
-        x: moment(`${el.date} ${el.label}`, 'YYYY-MM-DD LT').valueOf(),
+        x: moment(`${el.date}`, 'YYYY-MM-DD LT').valueOf(),
         y: el.close as number,
       })),
     [chart?.data],
   )
 
   const points = useMemo(
-    () => monotoneCubicInterpolation({ data: formatGraph, range: 40 }),
+    () => monotoneCubicInterpolation({ data: formatGraph, range: 100 }),
     [formatGraph],
   )
 
@@ -36,12 +35,11 @@ export default function StockTradeTab({ routeParams, activeTab }: StockTradeTabP
 
   return (
     <Container fullView>
-      {chart?.data?.length > 0 && <StockChart data={points} quote={quoteData} />}
-      <StockTradeButtons onPress={() => setModalVisible(true)} />
-      <StockTradeModal
-        quote={quoteData}
-        visible={tradeModalVisible}
-        setVisible={setModalVisible}
+      {chart?.data && <StockChart data={points} quote={quoteData} />}
+      <StockTradeButtons
+        onPress={() =>
+          navigate('TradeStack', { screen: 'TradeModal', params: routeParams })
+        }
       />
     </Container>
   )
