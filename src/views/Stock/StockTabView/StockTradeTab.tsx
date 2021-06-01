@@ -33,14 +33,17 @@ export default function StockTradeTab({ routeParams, activeTab }: StockTradeTabP
     return <StockContentLoader />
   }
 
+  const openTradeModal = () => {
+    navigate('TradeStack', {
+      screen: 'TradeModal',
+      params: { price: quoteData?.latestPrice, ...routeParams },
+    })
+  }
+
   return (
     <Container fullView>
       {chart?.data && <StockChart data={points} quote={quoteData} />}
-      <StockTradeButtons
-        onPress={() =>
-          navigate('TradeStack', { screen: 'TradeModal', params: routeParams })
-        }
-      />
+      <StockTradeButtons onPress={openTradeModal} />
     </Container>
   )
 }

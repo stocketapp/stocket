@@ -7,6 +7,7 @@ export type TradeStackParamList = {
     companyName: string
     symbol: string
     logo: string
+    price: number
   }
   TradeModalReview: undefined
 }
