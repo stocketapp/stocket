@@ -26,7 +26,7 @@ const Container: React.FC<ContainerProps> = ({
   useNavBar = false,
   scrollable = false,
   pv = null,
-  scrollViewContentStyles,
+  bgColor = BACKGROUND,
 }) => {
   const { top: insetTop, bottom: insetBottom } = useSafeAreaInsets()
   const { goBack, canGoBack } = useNavigation()
@@ -40,7 +40,7 @@ const Container: React.FC<ContainerProps> = ({
     paddingRight: ph ? 18 : right,
     paddingLeft: ph ? 18 : left,
     ...(ph ? { paddingHorizontal: 18 } : { paddingRight: right, paddingLeft: left }),
-    backgroundColor: BACKGROUND,
+    backgroundColor: bgColor,
     ...(fullView && { flex: 1 }),
     ...(pv
       ? { paddingVertical: pv }
@@ -70,11 +70,11 @@ const Container: React.FC<ContainerProps> = ({
     return (
       <ScrollView
         scrollEnabled={scrollable}
-        style={{ backgroundColor: BACKGROUND }}
+        style={{ backgroundColor: bgColor }}
         contentContainerStyle={{
           paddingBottom: scrollable ? 20 : 0,
           width: scrollable ? windowWidth : '100%',
-          ...scrollViewContentStyles,
+          backgroundColor: bgColor,
         }}
         showsHorizontalScrollIndicator={false}
         showsVerticalScrollIndicator={false}
@@ -106,7 +106,7 @@ export interface ContainerProps {
   useNavBar?: boolean
   scrollable?: boolean
   pv?: number
-  scrollViewContentStyles?: ViewStyle
+  bgColor?: string
 }
 
 export default Container

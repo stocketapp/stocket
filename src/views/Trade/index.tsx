@@ -1,20 +1,23 @@
 import { useMemo, useState } from 'react'
-import { TradeContentContainer, quantityContainer, HStack } from './styles'
-import { Text } from '@components'
-import TradeModalHeader from './TradeModalHeader'
+import { Text, Container } from '@components'
 import { userVar } from '@cache'
 import { useReactiveVar } from '@apollo/client'
-import TradeModalKeyboard from './TradeModalKeyboard'
-import { RouteProp, useRoute } from '@react-navigation/native'
+import { RouteProp, useRoute, useNavigation } from '@react-navigation/native'
 import { TradeStackParamList } from 'navigation/stacks/TradeStack'
 import { usePriceOnly } from '@hooks'
+import TradeModalHeader from './TradeModalHeader'
+import TradeModalKeyboard from './TradeModalKeyboard'
 import TradeAccountBalance from './TradeAccountBalance'
+import { quantityContainer, HStack } from './styles'
+import { useTheme } from '@emotion/react'
 
 export default function Trade() {
   const [quantity, setQuantity] = useState('0')
   const user = useReactiveVar(userVar)
   const { params } = useRoute<RouteProp<TradeStackParamList, 'TradeModal'>>()
   const { price } = usePriceOnly(params?.symbol, 15000)
+  const { navigate } = useNavigation()
+  const { colors, p } = useTheme()
 
   const cash = user?.cash || 0
   const maxShares = useMemo(() => (cash / price || params?.price).toFixed(2), [
@@ -22,13 +25,27 @@ export default function Trade() {
     params?.price,
     price,
   ])
+  const total = useMemo(() => price * Number(quantity), [price, quantity])
 
   const onKeyPress = (value: string) => {
     setQuantity(value)
   }
 
+  const goToReview = () => {
+    navigate('TradeStack', {
+      screen: 'TradeModalReview',
+      params: { total, size: quantity, ...params },
+    })
+  }
+
   return (
-    <TradeContentContainer>
+    <Container
+      fullView
+      separate
+      bgColor={colors.BG_DARK_CARD}
+      safeAreaBottom
+      top={p.xxlg}
+    >
       <TradeModalHeader
         name={params?.companyName}
         logo={params?.logo}
@@ -41,7 +58,11 @@ export default function Trade() {
 
       <TradeAccountBalance balance={user?.cash} maxShares={maxShares} />
 
-      <TradeModalKeyboard onKeyPress={onKeyPress} />
-    </TradeContentContainer>
+      <TradeModalKeyboard
+        onKeyPress={onKeyPress}
+        orderType={params?.orderType}
+        onBtnPress={goToReview}
+      />
+    </Container>
   )
 }
