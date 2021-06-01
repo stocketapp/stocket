@@ -4,12 +4,12 @@ import { GREEN, RED } from '@utils/colors'
 
 const StockTradeButtons = ({ onPress }: StockTradeButtonsProps) => (
   <TradeButtonsContainer>
-    <TradeButton style={{ backgroundColor: GREEN }} onPress={onPress}>
+    <TradeButton style={{ backgroundColor: GREEN }} onPress={() => onPress('BUY')}>
       <Text type="title" weight="Bold">
         Buy
       </Text>
     </TradeButton>
-    <TradeButton style={{ backgroundColor: RED }} onPress={onPress}>
+    <TradeButton style={{ backgroundColor: RED }} onPress={() => onPress('SELL')}>
       <Text type="title" weight="Bold">
         Sell
       </Text>
@@ -18,7 +18,7 @@ const StockTradeButtons = ({ onPress }: StockTradeButtonsProps) => (
 )
 
 interface StockTradeButtonsProps {
-  onPress?: () => void
+  onPress: (orderType: 'BUY' | 'SELL') => void
 }
 
 export default StockTradeButtons

@@ -63,7 +63,6 @@ export const TradeModalTop = styled.View(({ theme }) => ({
   justifyContent: 'center',
   width: '100%',
   paddingHorizontal: theme.p.screen,
-  paddingTop: theme.p.lg,
   paddingBottom: theme.p.sm,
 }))
 export const TradeModalNameAndPrice = styled.View({
