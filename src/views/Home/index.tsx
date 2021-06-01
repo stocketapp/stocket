@@ -8,7 +8,7 @@ export default function Home() {
   const { portfolio, watchlist } = useHomeHook()
 
   return (
-    <Container fullView scrollable>
+    <Container fullView scrollable safeAreaTop>
       <Container ph>
         <HeaderContainer>
           <StatusContainer>
