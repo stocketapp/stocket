@@ -1,6 +1,5 @@
 import { useMemo, useState } from 'react'
 import { TradeContentContainer, quantityContainer, HStack } from './styles'
-import { VStack, purchaseDetails } from './styles'
 import { Text } from '@components'
 import TradeModalHeader from './TradeModalHeader'
 import { userVar } from '@cache'
@@ -9,6 +8,7 @@ import TradeModalKeyboard from './TradeModalKeyboard'
 import { RouteProp, useRoute } from '@react-navigation/native'
 import { TradeStackParamList } from 'navigation/stacks/TradeStack'
 import { usePriceOnly } from '@hooks'
+import TradeAccountBalance from './TradeAccountBalance'
 
 export default function Trade() {
   const [quantity, setQuantity] = useState('0')
@@ -27,16 +27,11 @@ export default function Trade() {
     <TradeContentContainer>
       <TradeModalHeader name={params?.companyName} logo={params?.logo} price={price} />
 
-      <VStack style={purchaseDetails}>
-        <HStack style={quantityContainer}>
-          <Text type="huge">{(Number(quantity) || 0).toLocaleString('en-US')}</Text>
-        </HStack>
-        <HStack style={quantityContainer}>
-          <Text type="subtext" color="LIGHT_GRAY" weight="Semibold">
-            Max {maxShares}
-          </Text>
-        </HStack>
-      </VStack>
+      <HStack style={quantityContainer}>
+        <Text type="huge">{(Number(quantity) || 0).toLocaleString('en-US')}</Text>
+      </HStack>
+
+      <TradeAccountBalance balance={user?.cash} maxShares={maxShares} />
 
       <TradeModalKeyboard onKeyPress={onKeyPress} />
     </TradeContentContainer>

@@ -1,11 +1,5 @@
 import styled, { css } from '@emotion/native'
-import { CARD_BACKGROUND } from '@utils/colors'
 import leTheme from '../../theme'
-
-export const tradeViewcContainerStyles = css({
-  borderRadius: 30,
-  backgroundColor: CARD_BACKGROUND,
-})
 
 export const TradeContentContainer = styled.View(({ theme }) => ({
   flex: 1,
@@ -24,21 +18,12 @@ export const VStack = styled.View({
   justifyContent: 'space-between',
 })
 
-export const StockLogo = styled.Image({
-  height: 86,
-  width: 86,
+export const StockLogo = styled.Image(({ theme }) => ({
+  height: 48,
+  width: 48,
   borderRadius: 100,
-})
-
-export const purchaseDetails = css({
-  paddingTop: leTheme.p.huge,
-  paddingHorizontal: leTheme.p.screen,
-})
-
-export const totalContainerStyles = css({
-  paddingTop: leTheme.m.huge,
-  justifyContent: 'space-between',
-})
+  marginRight: theme.p.lg,
+}))
 
 const buttonStyle = css({
   justifyContent: 'center',
@@ -64,26 +49,8 @@ export const ButtonSell = styled.TouchableOpacity(({ theme }) => ({
   ...buttonStyle,
 }))
 
-export const companyVStackExtraStyles = css({
-  alignItems: 'center',
-})
-
-export const companyTitle = css({
-  justifyContent: 'center',
-  alignItems: 'center',
-})
-
-export const companyHStackExtraStyles = css({
-  justifyContent: 'center',
-  alignItems: 'center',
-})
-
 export const quantityContainer = css({
   justifyContent: 'center',
-})
-
-export const hStackSeparate = css({
-  justifyContent: 'space-between',
 })
 
 export const TradeModalTitleContainer = styled.View({
@@ -101,10 +68,31 @@ export const TradeModalTop = styled.View(({ theme }) => ({
 }))
 export const TradeModalNameAndPrice = styled.View({
   flexDirection: 'column',
-  alignItems: 'center',
 })
 
 export const TradeModalKeyboardContainer = styled.View(({ theme }) => ({
   justifyContent: 'space-between',
   paddingBottom: theme.p.lg,
 }))
+
+export const TradeAccountBalanceContainer = styled.View(({ theme }) => ({
+  paddingHorizontal: theme.p.huge,
+  width: '100%',
+  top: theme.p.xxlg,
+}))
+
+export const TradeAccountBalanceInner = styled.View(({ theme }) => ({
+  paddingHorizontal: theme.p.lg,
+  paddingVertical: theme.p.xlg,
+  borderWidth: 1,
+  borderRadius: 12,
+  borderColor: theme.colors.BG_DARK_SECONDARY,
+  width: '100%',
+  flexDirection: 'row',
+  alignItems: 'center',
+  justifyContent: 'space-between',
+}))
+
+export const TradeAccountBalanceLabels = styled.View({
+  flexDirection: 'column',
+})
