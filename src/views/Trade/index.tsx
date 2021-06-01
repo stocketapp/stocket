@@ -1,26 +1,23 @@
-import { useMemo } from 'react'
+import { useMemo, useState } from 'react'
 import { TradeContentContainer, quantityContainer, HStack } from './styles'
-import { IEXQuote } from 'types'
 import { VStack, purchaseDetails } from './styles'
 import { Text } from '@components'
-import { useState } from 'react'
 import TradeModalHeader from './TradeModalHeader'
 import { userVar } from '@cache'
 import { useReactiveVar } from '@apollo/client'
 import TradeModalKeyboard from './TradeModalKeyboard'
 import { RouteProp, useRoute } from '@react-navigation/native'
 import { TradeStackParamList } from 'navigation/stacks/TradeStack'
+import { usePriceOnly } from '@hooks'
 
-export default function Trade({ quote }: StockTradeModalProps) {
+export default function Trade() {
   const [quantity, setQuantity] = useState('0')
   const user = useReactiveVar(userVar)
   const { params } = useRoute<RouteProp<TradeStackParamList, 'TradeModal'>>()
+  const { price } = usePriceOnly(params?.symbol, 15000)
 
   const cash = user?.cash || 0
-  const maxShares = useMemo(() => (cash / quote?.latestPrice).toFixed(2), [
-    cash,
-    quote?.latestPrice,
-  ])
+  const maxShares = useMemo(() => (cash / price).toFixed(2), [cash, price])
 
   const onKeyPress = (value: string) => {
     setQuantity(value)
@@ -28,7 +25,7 @@ export default function Trade({ quote }: StockTradeModalProps) {
 
   return (
     <TradeContentContainer>
-      <TradeModalHeader name={params?.companyName} logo={params?.logo} price={0} />
+      <TradeModalHeader name={params?.companyName} logo={params?.logo} price={price} />
 
       <VStack style={purchaseDetails}>
         <HStack style={quantityContainer}>
@@ -36,7 +33,7 @@ export default function Trade({ quote }: StockTradeModalProps) {
         </HStack>
         <HStack style={quantityContainer}>
           <Text type="subtext" color="LIGHT_GRAY" weight="Semibold">
-            Max: {maxShares}
+            Max {maxShares}
           </Text>
         </HStack>
       </VStack>
@@ -44,9 +41,4 @@ export default function Trade({ quote }: StockTradeModalProps) {
       <TradeModalKeyboard onKeyPress={onKeyPress} />
     </TradeContentContainer>
   )
-}
-
-type StockTradeModalProps = {
-  quote: IEXQuote
-  route: RouteProp<TradeStackParamList, 'TradeModal'>
 }
