@@ -11,7 +11,9 @@ export default function StockChart({ data, quote }: StockChartProps) {
   const [range, setRange] = useState<GraphRange>('now')
 
   return (
-    <ChartPathProvider data={{ points: data, smoothingStrategy: 'bezier' }}>
+    <ChartPathProvider
+      data={{ points: data, smoothingStrategy: 'bezier', smoothingFactor: 1 }}
+    >
       <Container ph pv={15}>
         <ChartPrice {...quote} />
       </Container>
