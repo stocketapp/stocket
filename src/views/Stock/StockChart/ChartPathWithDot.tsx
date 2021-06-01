@@ -14,6 +14,8 @@ const ChartPathWithDot = ({ setCurrentValues }: ChartProps) => (
       selectedStrokeWidth={2}
       width={WINDOW_WIDTH}
       height={WINDOW_HEIGHT - WINDOW_HEIGHT / 1.8}
+      selectedOpacity={0.6}
+      hapticsEnabled
     />
     <ChartDot style={{ backgroundColor: GREEN }} />
   </View>
