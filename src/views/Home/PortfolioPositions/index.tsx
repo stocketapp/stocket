@@ -3,15 +3,26 @@ import { useNavigation } from '@react-navigation/native'
 import { Text, Container } from '@components'
 import PositionItem from './PortfolioPositionItem'
 import PortfolioPositionsEmpty from './PortfolioPositionsEmpty'
-import { portfolioListStyle, portfolioListContentStyle, portfolioListEmptyStyle } from './styles'
+import {
+  portfolioListStyle,
+  portfolioListContentStyle,
+  portfolioListEmptyStyle,
+} from './styles'
 import { useTheme } from '@emotion/react'
 
 const PortfolioPositions = ({ positions }: { positions: [PortfolioPositionType] }) => {
   const { navigate } = useNavigation()
   const { p } = useTheme()
 
-  const goToStock = (selectedStock: PortfolioPositionType) => {
-    navigate('Stock', { symbol: selectedStock?.symbol, companyName: selectedStock?.companyName })
+  const goToStock = (quote: PortfolioPositionType) => {
+    navigate('StockStack', {
+      screen: 'Stock',
+      params: {
+        symbol: quote?.symbol,
+        companyName: quote?.companyName,
+        logo: quote?.logo,
+      },
+    })
   }
 
   return (
@@ -24,7 +35,9 @@ const PortfolioPositions = ({ positions }: { positions: [PortfolioPositionType] 
 
       <FlatList
         data={positions}
-        renderItem={({ item }) => <PositionItem item={item} onPress={() => goToStock(item)} />}
+        renderItem={({ item }) => (
+          <PositionItem item={item} onPress={() => goToStock(item)} />
+        )}
         keyExtractor={(index, key) => key.toString()}
         style={portfolioListStyle}
         horizontal

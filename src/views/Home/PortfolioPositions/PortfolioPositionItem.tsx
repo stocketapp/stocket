@@ -16,7 +16,7 @@ interface PositionItemProps {
 
 const PositionItem = ({ item, onPress }: PositionItemProps) => {
   const { changePct, symbol, logo } = item
-  const color = changePct > 0 ? GREEN : changePct < 0 ? RED : 'white'
+  const color = changePct > 0 ? GREEN : changePct < 0 ? RED : 'WHITE'
   const bgColor = changePct > 0 ? '#71DB772A' : '#EB455A2A'
   const positiveOrNegative = changePct > 0 ? '+' : ''
 
@@ -30,7 +30,7 @@ const PositionItem = ({ item, onPress }: PositionItemProps) => {
           {symbol}
         </Text>
         <ChangePctContainer style={{ backgroundColor: bgColor }}>
-          <Text weight="Medium" color={color}>
+          <Text weight="Medium" style={{ color }}>
             {positiveOrNegative}
             {changePct.toFixed(2)}%
           </Text>
