@@ -17,7 +17,11 @@ export default function Trade() {
   const { price } = usePriceOnly(params?.symbol, 15000)
 
   const cash = user?.cash || 0
-  const maxShares = useMemo(() => (cash / price).toFixed(2), [cash, price])
+  const maxShares = useMemo(() => (cash / price || params?.price).toFixed(2), [
+    cash,
+    params?.price,
+    price,
+  ])
 
   const onKeyPress = (value: string) => {
     setQuantity(value)
@@ -25,7 +29,11 @@ export default function Trade() {
 
   return (
     <TradeContentContainer>
-      <TradeModalHeader name={params?.companyName} logo={params?.logo} price={price} />
+      <TradeModalHeader
+        name={params?.companyName}
+        logo={params?.logo}
+        price={price || params?.price}
+      />
 
       <HStack style={quantityContainer}>
         <Text type="huge">{(Number(quantity) || 0).toLocaleString('en-US')}</Text>

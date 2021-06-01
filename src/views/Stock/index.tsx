@@ -1,10 +1,9 @@
-import { Dimensions, View } from 'react-native'
+import { View } from 'react-native'
 import { useRoute } from '@react-navigation/core'
 import StockNavHeader from './StockNavHeader'
 import StockTabView from './StockTabView'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
 import { useTheme } from '@emotion/react'
-export const { width: SIZE } = Dimensions.get('window')
 
 export default function Stock() {
   const { params }: any = useRoute()
@@ -16,11 +15,5 @@ export default function Stock() {
       <StockNavHeader symbol={params?.symbol} companyName={params?.companyName} />
       <StockTabView routeParams={params} />
     </View>
-    // <Container fullView scrollable>
-    //   <StockNavHeader symbol={params?.symbol} companyName={quoteData?.companyName} />
-
-    //   {/* {chart?.data?.length > 0 && <StockChart data={points} quote={quoteData} />} */}
-    //   <StockTabView />
-    // </Container>
   )
 }
