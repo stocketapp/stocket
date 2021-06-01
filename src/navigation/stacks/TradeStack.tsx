@@ -2,7 +2,16 @@ import { createStackNavigator } from '@react-navigation/stack'
 import StockTradeModal from '../../views/Trade'
 import TradeModalReview from '../../views/TradeReview'
 
-const { Screen, Navigator } = createStackNavigator()
+export type TradeStackParamList = {
+  TradeModal: {
+    companyName: string
+    symbol: string
+    logo: string
+  }
+  TradeModalReview: undefined
+}
+
+const { Screen, Navigator } = createStackNavigator<TradeStackParamList>()
 
 export default function TradeStack() {
   return (

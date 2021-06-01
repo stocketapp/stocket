@@ -11,7 +11,11 @@ export const WatchlistList = ({ data }: { data: WatchlistIexQuote[] }) => {
   const onItemPress = (quote: WatchlistIexQuote) => {
     navigate('StockStack', {
       screen: 'Stock',
-      params: { symbol: quote?.symbol, companyName: quote?.companyName },
+      params: {
+        symbol: quote?.symbol,
+        companyName: quote?.companyName,
+        logo: quote?.logo,
+      },
     })
   }
 

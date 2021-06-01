@@ -10,7 +10,6 @@ type WatchlistItemProps = {
 }
 
 const WatchlistItem = ({ item, onPress }: WatchlistItemProps) => {
-  // const changeBg = { backgroundColor: item?.change >= 0 ? GREEN : RED }
   const changeBg = {
     backgroundColor:
       item?.change === 0.0 ? SUB_BACKGROUND : item?.change > 0 ? GREEN : RED,
