@@ -8,12 +8,13 @@ import TradeModalHeader from './TradeModalHeader'
 import { userVar } from '@cache'
 import { useReactiveVar } from '@apollo/client'
 import TradeModalKeyboard from './TradeModalKeyboard'
-// import { useRoute } from '@react-navigation/native'
+import { RouteProp, useRoute } from '@react-navigation/native'
+import { TradeStackParamList } from 'navigation/stacks/TradeStack'
 
-function StockTradeModal({ quote }: StockTradeModalProps) {
+export default function Trade({ quote }: StockTradeModalProps) {
   const [quantity, setQuantity] = useState('0')
   const user = useReactiveVar(userVar)
-  // const route = useRoute()
+  const { params } = useRoute<RouteProp<TradeStackParamList, 'TradeModal'>>()
 
   const cash = user?.cash || 0
   const maxShares = useMemo(() => (cash / quote?.latestPrice).toFixed(2), [
@@ -27,11 +28,7 @@ function StockTradeModal({ quote }: StockTradeModalProps) {
 
   return (
     <TradeContentContainer>
-      <TradeModalHeader
-        name={quote?.companyName}
-        logo={quote?.logo}
-        price={quote?.latestPrice}
-      />
+      <TradeModalHeader name={params?.companyName} logo={params?.logo} price={0} />
 
       <VStack style={purchaseDetails}>
         <HStack style={quantityContainer}>
@@ -49,8 +46,7 @@ function StockTradeModal({ quote }: StockTradeModalProps) {
   )
 }
 
-interface StockTradeModalProps {
+type StockTradeModalProps = {
   quote: IEXQuote
+  route: RouteProp<TradeStackParamList, 'TradeModal'>
 }
-
-export default StockTradeModal
