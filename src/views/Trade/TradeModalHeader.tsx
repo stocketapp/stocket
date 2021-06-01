@@ -1,5 +1,5 @@
 import {
-  StockLogo,
+  // StockLogo,
   TradeModalTitleContainer,
   TradeModalTop,
   TradeModalNameAndPrice,
@@ -10,22 +10,22 @@ const TradeModalHeader = ({ name, price, logo }: CompanyProps) => (
   <TradeModalTitleContainer>
     <TradeModalTop>
       <TradeModalNameAndPrice>
-        <Text type="label" weight="Bold" pb={5}>
-          {name}
+        <Text type="title" weight="Bold" pb={5}>
+          Buy {name}
         </Text>
-        <Text type="label" weight="Medium" color="GRAY" pb={8}>
+        <Text type="label" weight="Semibold" color="GRAY" pb={8}>
           ${price}
         </Text>
       </TradeModalNameAndPrice>
     </TradeModalTop>
-    <StockLogo source={{ uri: logo }} />
+    {/* <StockLogo source={{ uri: logo }} /> */}
   </TradeModalTitleContainer>
 )
 
 interface CompanyProps {
   name: string
   price: number
-  logo: string
+  logo?: string
 }
 
 export default TradeModalHeader

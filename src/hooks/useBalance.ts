@@ -1,10 +1,18 @@
-import { gql } from '@apollo/client'
-import { useRefetchQuery } from '@hooks'
+import { gql, useQuery } from '@apollo/client'
+import { useCallback } from 'react'
+import { useFocusEffect } from '@react-navigation/native'
 
-export default function useBalance() {
-  const { data, error, loading } = useRefetchQuery(GET_BALANCE_QUERY)
+export default function useBalance(interval = 0) {
+  const { data, startPolling, stopPolling, ...result } = useQuery(GET_BALANCE_QUERY)
 
-  return { data: data?.user, error, loading }
+  useFocusEffect(
+    useCallback(() => {
+      startPolling(interval)
+      return () => stopPolling()
+    }, [interval, startPolling, stopPolling]),
+  )
+
+  return { data: data?.user, ...result }
 }
 
 const GET_BALANCE_QUERY = gql`
