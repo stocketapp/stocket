@@ -107,5 +107,8 @@
     "setupFiles": [
       "./jestSetup.js"
     ]
+  },
+  "resolutions": {
+    "react-devtools-core": "4.13.0"
   }
 }
