@@ -23,3 +23,7 @@ export function sumCurrency(a: string, b: string): string {
   const sum = currencyToNumber(a) + currencyToNumber(b)
   return formatCurrency(sum)
 }
+
+export function formatNumber(num: number): string {
+  return (num ?? 0).toLocaleString('en-US')
+}
