@@ -1,5 +1,10 @@
 import { useCallback } from 'react'
-import { DocumentNode, useQuery, QueryHookOptions, TypedDocumentNode } from '@apollo/client'
+import {
+  DocumentNode,
+  useQuery,
+  QueryHookOptions,
+  TypedDocumentNode,
+} from '@apollo/client'
 import { useFocusEffect } from '@react-navigation/native'
 
 type Query = DocumentNode | TypedDocumentNode<any, Record<string, any>>
