@@ -8,15 +8,23 @@ export type TradeStackParamList = {
     symbol: string
     logo: string
     price: number
+    orderType: 'BUY' | 'SELL'
   }
-  TradeModalReview: undefined
+  TradeModalReview: {
+    symbol: string
+    total: number
+    size: number
+    orderType: 'BUY' | 'SELL'
+    price: number
+    companyName: string
+  }
 }
 
 const { Screen, Navigator } = createStackNavigator<TradeStackParamList>()
 
 export default function TradeStack() {
   return (
-    <Navigator headerMode="none" mode="modal">
+    <Navigator headerMode="none">
       <Screen name="TradeModal" component={StockTradeModal} />
       <Screen name="TradeModalReview" component={TradeModalReview} />
     </Navigator>

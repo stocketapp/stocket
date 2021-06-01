@@ -8,10 +8,12 @@ import { map } from 'lodash'
 import StockContentLoader from '../StockContentLoader'
 import moment from 'moment'
 import StockTradeButtons from './StockTradeButtons'
-import { useNavigation } from '@react-navigation/native'
+import { RouteProp, useNavigation, useRoute } from '@react-navigation/native'
+import { StockStackParamList } from 'navigation/stacks/StockStack'
 
-export default function StockTradeTab({ routeParams, activeTab }: StockTradeTabProps) {
-  const { quote, chart } = useStockHook(routeParams && routeParams?.symbol, activeTab)
+export default function StockTradeTab({ activeTab }: StockTradeTabProps) {
+  const { params } = useRoute<RouteProp<StockStackParamList, 'Stock'>>()
+  const { quote, chart } = useStockHook(params?.symbol, activeTab)
   const quoteData = quote?.data
   const { navigate } = useNavigation()
 
@@ -33,10 +35,10 @@ export default function StockTradeTab({ routeParams, activeTab }: StockTradeTabP
     return <StockContentLoader />
   }
 
-  const openTradeModal = () => {
+  const openTradeModal = (orderType: 'BUY' | 'SELL') => {
     navigate('TradeStack', {
       screen: 'TradeModal',
-      params: { price: quoteData?.latestPrice, ...routeParams },
+      params: { price: quoteData?.latestPrice, orderType, ...params },
     })
   }
 
@@ -49,6 +51,5 @@ export default function StockTradeTab({ routeParams, activeTab }: StockTradeTabP
 }
 
 interface StockTradeTabProps {
-  routeParams: any
   activeTab: number
 }

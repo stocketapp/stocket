@@ -1,12 +1,13 @@
 import { View } from 'react-native'
-import { useRoute } from '@react-navigation/core'
+import { RouteProp, useRoute } from '@react-navigation/core'
 import StockNavHeader from './StockNavHeader'
 import StockTabView from './StockTabView'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
 import { useTheme } from '@emotion/react'
+import { StockStackParamList } from 'navigation/stacks/StockStack'
 
 export default function Stock() {
-  const { params }: any = useRoute()
+  const { params } = useRoute<RouteProp<StockStackParamList, 'Stock'>>()
   const { top: insetTop } = useSafeAreaInsets()
   const { colors } = useTheme()
 
