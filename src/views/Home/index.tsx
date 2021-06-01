@@ -8,17 +8,15 @@ export default function Home() {
   const { portfolio, watchlist } = useHomeHook()
 
   return (
-    <Container fullView scrollable safeAreaTop>
-      <Container ph>
-        <HeaderContainer>
-          <StatusContainer>
-            <MarketStatus />
-          </StatusContainer>
-          <Balance {...portfolio} />
-        </HeaderContainer>
-        <PortfolioPositions positions={portfolio?.positions} />
-        <WatchlistList data={watchlist} />
-      </Container>
+    <Container fullView scrollable safeAreaTop ph>
+      <HeaderContainer>
+        <StatusContainer>
+          <MarketStatus />
+        </StatusContainer>
+        <Balance {...portfolio} />
+      </HeaderContainer>
+      <PortfolioPositions positions={portfolio?.positions} />
+      <WatchlistList data={watchlist} />
     </Container>
   )
 }
