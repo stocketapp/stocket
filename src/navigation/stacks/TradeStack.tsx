@@ -24,7 +24,7 @@ const { Screen, Navigator } = createStackNavigator<TradeStackParamList>()
 
 export default function TradeStack() {
   return (
-    <Navigator headerMode="none">
+    <Navigator screenOptions={{ headerShown: false }}>
       <Screen name="TradeModal" component={StockTradeModal} />
       <Screen name="TradeModalReview" component={TradeModalReview} />
     </Navigator>

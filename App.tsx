@@ -1,9 +1,8 @@
-import { useEffect, useRef, ReactNode } from 'react'
+import { useEffect, ReactNode } from 'react'
 import { StatusBar, View } from 'react-native'
 import RNBootSplash from 'react-native-bootsplash'
 import { useAuthState, useIapProducts } from './src/hooks'
 import { BACKGROUND } from './src/utils/colors'
-import TradeView from './src/views/TradeView'
 import MainStack from './src/navigation/AppStack'
 import AuthStack from './src/navigation/AuthenticationStack'
 import crashlytics from '@react-native-firebase/crashlytics'
@@ -12,7 +11,6 @@ import { isWatchlistLoadingVar, isPortfolioLoadingVar } from './src/Cache'
 
 export default function App(): ReactNode {
   const { isAuth, currentUser } = useAuthState()
-  const tradeViewRef = useRef()
   useIapProducts(currentUser?.uid)
   const isWatchlistLoading = useReactiveVar(isWatchlistLoadingVar)
   const isPortfolioLoading = useReactiveVar(isPortfolioLoadingVar)
@@ -32,10 +30,9 @@ export default function App(): ReactNode {
   }
 
   return (
-    <View style={[container]}>
+    <View style={container}>
       <StatusBar barStyle="light-content" />
       <MainStack />
-      <TradeView ref={tradeViewRef} />
     </View>
   )
 }
