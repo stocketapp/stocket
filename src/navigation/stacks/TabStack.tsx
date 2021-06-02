@@ -12,7 +12,11 @@ export default () => {
   return (
     <Navigator
       tabBar={props => <TabBar {...props} />}
-      tabBarOptions={{ activeTintColor: GREEN, inactiveTintColor: '#4a5a5a' }}
+      screenOptions={{
+        tabBarActiveTintColor: GREEN,
+        tabBarInactiveTintColor: '#4a5a5a',
+        headerShown: false,
+      }}
     >
       <Screen
         name="MainStack"

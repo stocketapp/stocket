@@ -1,11 +1,11 @@
-import { createStackNavigator } from '@react-navigation/stack'
+import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import { Home } from '@views'
 
-const { Screen, Navigator } = createStackNavigator()
+const { Screen, Navigator } = createNativeStackNavigator()
 
 export default function MainStack() {
   return (
-    <Navigator headerMode="none">
+    <Navigator screenOptions={{ headerShown: false }}>
       <Screen name="Home" component={Home} />
     </Navigator>
   )

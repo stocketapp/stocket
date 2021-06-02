@@ -1,5 +1,5 @@
-import { AppRegistry } from 'react-native'
 import 'react-native-gesture-handler'
+import { AppRegistry } from 'react-native'
 import { NavigationContainer } from '@react-navigation/native'
 import { SafeAreaProvider } from 'react-native-safe-area-context'
 import App from './App'
@@ -23,17 +23,17 @@ if (__DEV__) {
 }
 
 const AppRoot = () => (
-  <ApolloProvider client={client}>
-    <Provider store={store}>
-      <SafeAreaProvider>
-        <NavigationContainer>
+  <NavigationContainer>
+    <ApolloProvider client={client}>
+      <Provider store={store}>
+        <SafeAreaProvider>
           <ThemeProvider theme={theme}>
             <App />
           </ThemeProvider>
-        </NavigationContainer>
-      </SafeAreaProvider>
-    </Provider>
-  </ApolloProvider>
+        </SafeAreaProvider>
+      </Provider>
+    </ApolloProvider>
+  </NavigationContainer>
 )
 
 // const codePushOptions = {

@@ -1,4 +1,4 @@
-import { createStackNavigator, TransitionPresets } from '@react-navigation/stack'
+import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import { Stock } from '@views'
 import TradeStack from './TradeStack'
 
@@ -13,20 +13,19 @@ export type StockStackParamList = {
   Stock: CompanyParams
 }
 
-const { Screen, Navigator } = createStackNavigator<StockStackParamList>()
+const { Screen, Navigator, Group } = createNativeStackNavigator<StockStackParamList>()
 
 export default function StockStack() {
   return (
     <Navigator
-      headerMode="none"
-      mode="modal"
       screenOptions={{
-        ...TransitionPresets.ModalPresentationIOS,
-        cardOverlayEnabled: true,
+        headerShown: false,
       }}
     >
       <Screen name="Stock" component={Stock} />
-      <Screen name="TradeStack" component={TradeStack} />
+      <Group screenOptions={{ presentation: 'modal' }}>
+        <Screen name="TradeStack" component={TradeStack} />
+      </Group>
     </Navigator>
   )
 }
