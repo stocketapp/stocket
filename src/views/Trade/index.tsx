@@ -62,6 +62,7 @@ export default function Trade() {
         onKeyPress={onKeyPress}
         orderType={params?.orderType}
         onBtnPress={goToReview}
+        btnDisabled={quantity === '0'}
       />
     </Container>
   )
