@@ -71,7 +71,9 @@ export const TradeModalNameAndPrice = styled.View({
 
 export const TradeModalKeyboardContainer = styled.View(({ theme }) => ({
   justifyContent: 'space-between',
-  paddingBottom: theme.p.lg,
+  alignItems: 'center',
+  width: '100%',
+  paddingBottom: theme.p.md,
 }))
 
 export const TradeAccountBalanceContainer = styled.View(({ theme }) => ({

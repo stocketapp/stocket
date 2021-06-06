@@ -8,17 +8,6 @@ export const DetailContainer = styled.View(({ theme }) => ({
   width: '100%',
 }))
 
-export const ButtonTrade = styled.TouchableOpacity(({ theme }) => ({
-  justifyContent: 'center',
-  alignItems: 'center',
-  paddingVertical: theme.p.lg,
-  borderRadius: 12,
-  marginBottom: theme.m.xxlg,
-  marginTop: theme.m.lg,
-  marginHorizontal: theme.p.huge,
-  width: '100%',
-}))
-
 export const StockLogo = styled.Image(({ theme }) => ({
   height: 48,
   width: 48,

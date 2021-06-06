@@ -1,8 +1,8 @@
 import { useRoute, useNavigation, RouteProp } from '@react-navigation/native'
-import { Text, Container } from '@components'
+import { Text, Container, Button } from '@components'
 import { TradeStackParamList } from 'navigation/stacks/TradeStack'
 import { useTheme } from '@emotion/react'
-import { DetailContainer, ButtonTrade } from './styles'
+import { DetailContainer } from './styles'
 import { formatNumber, formatCurrency } from '@utils/functions'
 import { ArrowLeftIcon } from '@icons'
 import { TouchableOpacity } from 'react-native'
@@ -30,14 +30,19 @@ export default function StockTradeModalReview() {
       bgColor={colors.BG_DARK_CARD}
       safeAreaBottom
       top={p.lg}
-      ph
       separate
     >
-      <Container horizontal bgColor={colors.BG_DARK_CARD} items="center" content="center">
+      <Container
+        horizontal
+        bgColor={colors.BG_DARK_CARD}
+        items="center"
+        content="center"
+        ph
+      >
         <TouchableOpacity
           style={{
             position: 'absolute',
-            left: p.sm,
+            left: p.xlg,
             paddingVertical: p.sm,
           }}
           onPress={goBack}
@@ -48,17 +53,13 @@ export default function StockTradeModalReview() {
           Buy {params?.symbol}
         </Text>
       </Container>
-      <Container bgColor={colors.BG_DARK_CARD} bottom={200}>
+      <Container bgColor={colors.BG_DARK_CARD} bottom={200} ph>
         <Detail label="Quantity" value={formatNumber(params?.size)} />
         <Detail label="Price" value={formatCurrency(params?.price)} />
         <Detail label="Total" value={formatCurrency(params?.total)} />
       </Container>
 
-      <ButtonTrade style={{ backgroundColor: colors?.GREEN }}>
-        <Text type="heading" weight="Bold">
-          {params?.orderType}
-        </Text>
-      </ButtonTrade>
+      <Button label={params?.orderType} />
     </Container>
   )
 }

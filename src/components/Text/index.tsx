@@ -73,7 +73,7 @@ const Text = ({
 export interface CustomTextProps extends TextProps {
   type?: 'heading' | 'title' | 'label' | 'subtext' | 'big' | 'bigger' | 'huge'
   cap?: boolean
-  color?: TextColors
+  color?: ThemeColorStrings
   children?: any
   style?: TextStyle
   status?: 'negative' | 'positive'
@@ -93,7 +93,7 @@ export interface CustomTextProps extends TextProps {
     | 'Ultralight'
 }
 
-type TextColors =
+export type ThemeColorStrings =
   | 'BG_DARK'
   | 'BG_DARK_SECONDARY'
   | 'BG_DARK_CARD'

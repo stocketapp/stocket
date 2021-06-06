@@ -1,7 +1,6 @@
-import { Text, VirtualNumPad } from '@components'
+import { VirtualNumPad, Button } from '@components'
 import { VirtualNumPadProps } from 'components/VirtualNumPad/VirtualNumPad'
-import { TradeModalKeyboardContainer, ButtonTrade } from './styles'
-import theme from '@theme'
+import { TradeModalKeyboardContainer } from './styles'
 
 const TradeModalKeyboard = ({
   onKeyPress,
@@ -10,14 +9,7 @@ const TradeModalKeyboard = ({
 }: TradeModalKeyboardProps) => (
   <TradeModalKeyboardContainer>
     <VirtualNumPad onKeyPress={onKeyPress} />
-    <ButtonTrade
-      style={{ backgroundColor: theme.colors.GREEN }}
-      onPress={() => onBtnPress(orderType)}
-    >
-      <Text type="heading" weight="Bold">
-        {orderType}
-      </Text>
-    </ButtonTrade>
+    <Button label={orderType} onPress={() => onBtnPress(orderType)} />
   </TradeModalKeyboardContainer>
 )
 
