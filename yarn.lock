@@ -877,6 +877,14 @@
   dependencies:
     tslib "^2.1.0"
 
+"@formatjs/intl-datetimeformat@^4.1.5":
+  version "4.1.5"
+  resolved "https://registry.yarnpkg.com/@formatjs/intl-datetimeformat/-/intl-datetimeformat-4.1.5.tgz#c2a1972f2044dc6e95a6f4be99a3f19785cd22e5"
+  integrity sha512-qVs1yK5TLoM+j9izkDArPxgMqavMsD6vUYu6lFMo1p9m1lA6V+e92Qe0HYZ2E+QevwWnfoF3DmIw03XuUp564w==
+  dependencies:
+    "@formatjs/ecma402-abstract" "1.9.3"
+    tslib "^2.1.0"
+
 "@formatjs/intl-getcanonicallocales@1.7.0", "@formatjs/intl-getcanonicallocales@^1.7.0":
   version "1.7.0"
   resolved "https://registry.yarnpkg.com/@formatjs/intl-getcanonicallocales/-/intl-getcanonicallocales-1.7.0.tgz#f864cc8228976599719d0a8212a1e6d7c846b38d"

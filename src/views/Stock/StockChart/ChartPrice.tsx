@@ -7,9 +7,9 @@ import { chartLabel } from './styles'
 
 export default function ChartPrice(props: IEXQuote) {
   const { latestPrice, changePercentS, change } = props
-  const { colors, p } = useTheme()
+  const { p } = useTheme()
   const isPositive = change > 0
-  const color = isPositive ? colors?.GREEN : change < 0 ? colors?.RED : 'white'
+  const color = isPositive ? 'GREEN' : change < 0 ? 'RED' : 'WHITE'
 
   const formatUsd = (value: any) => {
     'worklet'
