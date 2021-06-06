@@ -1,6 +1,6 @@
 import 'react-native-gesture-handler'
 import { AppRegistry } from 'react-native'
-import { NavigationContainer } from '@react-navigation/native'
+import { NavigationContainer, useNavigationContainerRef } from '@react-navigation/native'
 import { SafeAreaProvider } from 'react-native-safe-area-context'
 import App from './App'
 import { name as appName } from './app.json'
@@ -16,25 +16,31 @@ import Reactotron from 'reactotron-react-native'
 import { ThemeProvider } from '@emotion/react'
 import theme from './src/theme'
 const store = configureStore()
+import { useFlipper } from '@react-navigation/devtools'
 
 if (__DEV__) {
   RNAsyncStorageFlipper(AsyncStorage)
   Reactotron.setAsyncStorageHandler(AsyncStorage).configure().useReactNative().connect()
 }
 
-const AppRoot = () => (
-  <NavigationContainer>
-    <ApolloProvider client={client}>
-      <Provider store={store}>
-        <SafeAreaProvider>
-          <ThemeProvider theme={theme}>
-            <App />
-          </ThemeProvider>
-        </SafeAreaProvider>
-      </Provider>
-    </ApolloProvider>
-  </NavigationContainer>
-)
+const AppRoot = () => {
+  const navigationRef = useNavigationContainerRef()
+  useFlipper(navigationRef)
+
+  return (
+    <NavigationContainer ref={navigationRef}>
+      <ApolloProvider client={client}>
+        <Provider store={store}>
+          <SafeAreaProvider>
+            <ThemeProvider theme={theme}>
+              <App />
+            </ThemeProvider>
+          </SafeAreaProvider>
+        </Provider>
+      </ApolloProvider>
+    </NavigationContainer>
+  )
+}
 
 // const codePushOptions = {
 //   checkFrequency: codePush.CheckFrequency.ON_APP_RESUME,
