@@ -5,7 +5,14 @@ import { useTheme } from '@emotion/react'
 import { DetailContainer } from './styles'
 import { formatNumber, formatCurrency } from '@utils/functions'
 import { ArrowLeftIcon } from '@icons'
-import { TouchableOpacity } from 'react-native'
+import { TouchableOpacity, useWindowDimensions } from 'react-native'
+import { useState } from 'react'
+import Animated, {
+  useAnimatedStyle,
+  useSharedValue,
+  withTiming,
+} from 'react-native-reanimated'
+import LottieView from 'lottie-react-native'
 
 const Detail = ({ label, value }: { label: string; value: string }) => (
   <DetailContainer>
@@ -22,6 +29,34 @@ export default function StockTradeModalReview() {
   const { colors, p } = useTheme()
   const { params } = useRoute<RouteProp<TradeStackParamList, 'TradeModalReview'>>()
   const { goBack } = useNavigation()
+  const [loading, setLoading] = useState<boolean>(false)
+  const [finalized, setFinalized] = useState<boolean>(false)
+  const [mountAnimation, setMountAnimation] = useState(false)
+  const { width: WINDOW_WIDTH } = useWindowDimensions()
+  const opacity = useSharedValue(1)
+  const offset = useSharedValue(0)
+  const doneOffset = useSharedValue(-WINDOW_WIDTH)
+
+  const animatedStyle = useAnimatedStyle(() => ({
+    opacity: withTiming(opacity.value),
+    transform: [
+      {
+        translateX: withTiming(offset.value, { duration: 500 }),
+      },
+    ],
+  }))
+
+  const doneAnimateStyle = useAnimatedStyle(() => ({
+    transform: [{ translateX: withTiming(doneOffset.value, { duration: 500 }) }],
+  }))
+
+  const finalizeTrade = () => {
+    setLoading(true)
+    opacity.value = 0
+    offset.value = 500
+    doneOffset.value = 0
+    setMountAnimation(true)
+  }
 
   return (
     <Container
@@ -32,34 +67,78 @@ export default function StockTradeModalReview() {
       top={p.lg}
       separate
     >
-      <Container
-        horizontal
-        bgColor={colors.BG_DARK_CARD}
-        items="center"
-        content="center"
-        ph
-      >
-        <TouchableOpacity
-          style={{
-            position: 'absolute',
-            left: p.xlg,
-            paddingVertical: p.sm,
-          }}
-          onPress={goBack}
+      {!loading && !finalized && (
+        <Container
+          horizontal
+          bgColor={colors.BG_DARK_CARD}
+          items="center"
+          content="center"
+          ph
         >
-          <ArrowLeftIcon size={34} color={colors.GREEN} />
-        </TouchableOpacity>
-        <Text weight="Black" type="heading">
-          Buy {params?.symbol}
-        </Text>
-      </Container>
-      <Container bgColor={colors.BG_DARK_CARD} bottom={200} ph>
-        <Detail label="Quantity" value={formatNumber(params?.size)} />
-        <Detail label="Price" value={formatCurrency(params?.price)} />
-        <Detail label="Total" value={formatCurrency(params?.total)} />
-      </Container>
+          <TouchableOpacity
+            style={{
+              position: 'absolute',
+              left: p.xlg,
+              paddingVertical: p.sm,
+            }}
+            onPress={goBack}
+          >
+            <ArrowLeftIcon size={34} color={colors.GREEN} />
+          </TouchableOpacity>
+          <Text weight="Black" type="heading">
+            Buy {params?.symbol}
+          </Text>
+        </Container>
+      )}
+      <Animated.View
+        style={[
+          {
+            width: '100%',
+            flex: 1,
+            height: '100%',
+          },
+          animatedStyle,
+        ]}
+      >
+        <Container bgColor={colors.BG_DARK_CARD} ph top={80}>
+          <Detail label="Quantity" value={formatNumber(params?.size)} />
+          <Detail label="Price" value={formatCurrency(params?.price)} />
+          <Detail label="Total" value={formatCurrency(params?.total)} />
+        </Container>
+      </Animated.View>
 
-      <Button label={params?.orderType} />
+      <Animated.View
+        style={[
+          {
+            width: '100%',
+            alignItems: 'center',
+            marginBottom: '60%',
+            paddingHorizontal: '15%',
+          },
+          doneAnimateStyle,
+        ]}
+      >
+        {mountAnimation && (
+          <LottieView
+            source={require('@assets/lottie/loading-checkmark2.json')}
+            style={{ height: 170, width: 170 }}
+            autoPlay
+            loop={false}
+          />
+        )}
+        <Text type="title" numberOfLines={2} style={{ textAlign: 'center' }}>
+          Succesfully purchased{' '}
+          <Text type="title" weight="Black">
+            {params?.size}
+          </Text>{' '}
+          shares of{' '}
+          <Text type="title" weight="Black">
+            {params?.symbol}
+          </Text>
+        </Text>
+      </Animated.View>
+
+      <Button label={params?.orderType} onPress={finalizeTrade} />
     </Container>
   )
 }

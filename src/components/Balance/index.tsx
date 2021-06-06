@@ -8,10 +8,6 @@ const Balance = ({ value, change, changePct }: PortfolioQueryType): JSX.Element 
   const isPositive = changePct > 0
   const color = isPositive ? 'GREEN' : changePct < 0 ? 'RED' : 'WHITE'
   const Arrow = isPositive ? ArrowUpIcon : ArrowDownIcon
-  const formattedChange = (change ?? 0).toLocaleString('en-US', {
-    style: 'currency',
-    currency: 'USD',
-  })
 
   return (
     <BalanceContaienr>
@@ -22,7 +18,7 @@ const Balance = ({ value, change, changePct }: PortfolioQueryType): JSX.Element 
         <Arrow size={20} color={color.toLocaleLowerCase()} />
         <Text weight="Medium" type="label" color="GRAY">
           <Text weight="Bold" color={color} type="label">
-            {formattedChange} ({(changePct ?? 0)?.toFixed(2)}% )
+            {formatCurrency(change)} ({(changePct ?? 0)?.toFixed(2)}% )
           </Text>
         </Text>
       </ChangeContainer>

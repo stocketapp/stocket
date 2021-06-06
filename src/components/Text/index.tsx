@@ -14,6 +14,7 @@ const Text = ({
   pb,
   pr,
   pl,
+  numberOfLines = 1,
   ...props
 }: CustomTextProps) => {
   const theme = useTheme()
@@ -64,7 +65,12 @@ const Text = ({
   }
 
   return (
-    <RNText style={customStyle} {...props} numberOfLines={1} ellipsizeMode="tail">
+    <RNText
+      style={customStyle}
+      {...props}
+      numberOfLines={numberOfLines}
+      ellipsizeMode="tail"
+    >
       {children}
     </RNText>
   )

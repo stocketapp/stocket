@@ -1,8 +1,6 @@
 import { find } from 'lodash'
 import iapProductsList from './iapProductsList'
 import type { ProductValue } from 'types'
-import '@formatjs/intl-numberformat/polyfill'
-import '@formatjs/intl-numberformat/locale-data/en'
 
 export function formatCurrency(num: number): string {
   return (num ?? 0).toLocaleString('en-US', {
