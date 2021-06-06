@@ -6,16 +6,18 @@ const TradeModalKeyboard = ({
   onKeyPress,
   orderType,
   onBtnPress,
+  btnDisabled,
 }: TradeModalKeyboardProps) => (
   <TradeModalKeyboardContainer>
     <VirtualNumPad onKeyPress={onKeyPress} />
-    <Button label={orderType} onPress={() => onBtnPress(orderType)} />
+    <Button label="Review" onPress={() => onBtnPress(orderType)} disabled={btnDisabled} />
   </TradeModalKeyboardContainer>
 )
 
 interface TradeModalKeyboardProps extends VirtualNumPadProps {
   orderType: 'BUY' | 'SELL'
   onBtnPress: (orderType: 'BUY' | 'SELL') => void
+  btnDisabled: boolean
 }
 
 export default TradeModalKeyboard

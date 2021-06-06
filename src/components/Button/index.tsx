@@ -10,7 +10,14 @@ const Button = ({
   width = '85%',
   ...props
 }: ButtonProps) => (
-  <CustomButton style={{ backgroundColor: theme.colors[bgColor], width }} {...props}>
+  <CustomButton
+    style={{
+      backgroundColor: theme.colors[bgColor],
+      width,
+      opacity: props.disabled ? 0.6 : 1,
+    }}
+    {...props}
+  >
     <Text type="heading" weight="Bold" color={textColor}>
       {label}
     </Text>
