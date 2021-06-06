@@ -17,6 +17,9 @@ import { ThemeProvider } from '@emotion/react'
 import theme from './src/theme'
 const store = configureStore()
 import { useFlipper } from '@react-navigation/devtools'
+import '@formatjs/intl-getcanonicallocales'
+import '@formatjs/intl-locale'
+import '@formatjs/intl-pluralrules'
 
 if (__DEV__) {
   RNAsyncStorageFlipper(AsyncStorage)
