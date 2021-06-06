@@ -1,19 +1,25 @@
-import { createNativeStackNavigator } from '@react-navigation/native-stack'
+import {
+  createNativeStackNavigator,
+  NativeStackNavigationProp,
+} from '@react-navigation/native-stack'
 import { Stock } from '@views'
-import TradeStack from './TradeStack'
+import TradeStack, { TradeStackParamList } from './TradeStack'
+import { NavigatorScreenParams } from '@react-navigation/native'
 
-type CompanyParams = {
+export type CompanyParams = {
   companyName: string
   symbol: string
   logo: string
 }
 
-export type StockStackParamList = {
-  TradeStack: CompanyParams
+export type StockStackParamsList = {
+  TradeStack: NavigatorScreenParams<TradeStackParamList>
   Stock: CompanyParams
 }
 
-const { Screen, Navigator, Group } = createNativeStackNavigator<StockStackParamList>()
+export type StockNavigationProps = NativeStackNavigationProp<StockStackParamsList>
+
+const { Screen, Navigator, Group } = createNativeStackNavigator<StockStackParamsList>()
 
 export default function StockStack() {
   return (

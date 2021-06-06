@@ -1,4 +1,7 @@
-import { createStackNavigator } from '@react-navigation/stack'
+import {
+  createNativeStackNavigator,
+  NativeStackNavigationProp,
+} from '@react-navigation/native-stack'
 import StockTradeModal from '../../views/Trade'
 import TradeModalReview from '../../views/TradeReview'
 
@@ -20,7 +23,9 @@ export type TradeStackParamList = {
   }
 }
 
-const { Screen, Navigator } = createStackNavigator<TradeStackParamList>()
+export type TradeStackNavigationProp = NativeStackNavigationProp<TradeStackParamList>
+
+const { Screen, Navigator } = createNativeStackNavigator<TradeStackParamList>()
 
 export default function TradeStack() {
   return (
