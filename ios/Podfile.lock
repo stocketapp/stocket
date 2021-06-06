@@ -385,7 +385,7 @@ PODS:
     - React-jsi (= 0.64.1)
     - React-perflogger (= 0.64.1)
   - React-jsinspector (0.64.1)
-  - react-native-flipper (0.91.2):
+  - react-native-flipper (0.92.0):
     - React-Core
   - react-native-pager-view (5.1.10):
     - React-Core
@@ -809,7 +809,7 @@ SPEC CHECKSUMS:
   React-jsi: 5de8204706bd872b78ea646aee5d2561ca1214b6
   React-jsiexecutor: 124e8f99992490d0d13e0649d950d3e1aae06fe9
   React-jsinspector: 500a59626037be5b3b3d89c5151bc3baa9abf1a9
-  react-native-flipper: d4e19fb1ffc5b69481efd46ab1fca275395bd569
+  react-native-flipper: 51d058827cc04d89cd23cc4b1aa2d724c3d820bf
   react-native-pager-view: 967d50ce0f1b72e434a2d9f3b739ddbf7d5bbf83
   react-native-safe-area-context: f0906bf8bc9835ac9a9d3f97e8bde2a997d8da79
   react-native-webview: 193d233c29eacce1f42ca2637dab7ba79c25a6de
