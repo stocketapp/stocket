@@ -3,9 +3,10 @@ import { Container, Text } from '@components'
 import { useNavigation } from '@react-navigation/native'
 import WatchlistItem from './WatchlistItem'
 import { WatchlistIexQuote } from './WatchlistItem'
+import { AppStackNavigationProp } from 'navigation/AppStack'
 
 export const WatchlistList = ({ data }: { data: WatchlistIexQuote[] }) => {
-  const { navigate } = useNavigation()
+  const { navigate } = useNavigation<AppStackNavigationProp>()
   const { p } = useTheme()
 
   const onItemPress = (quote: WatchlistIexQuote) => {

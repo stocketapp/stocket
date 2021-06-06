@@ -9,9 +9,10 @@ import {
   portfolioListEmptyStyle,
 } from './styles'
 import { useTheme } from '@emotion/react'
+import { AppStackNavigationProps } from 'navigation/AppStack'
 
 const PortfolioPositions = ({ positions }: { positions: [PortfolioPositionType] }) => {
-  const { navigate } = useNavigation()
+  const { navigate } = useNavigation<AppStackNavigationProps>()
   const { p } = useTheme()
 
   const goToStock = (quote: PortfolioPositionType) => {

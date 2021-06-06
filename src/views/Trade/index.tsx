@@ -10,21 +10,21 @@ import TradeModalKeyboard from './TradeModalKeyboard'
 import TradeAccountBalance from './TradeAccountBalance'
 import { quantityContainer, HStack } from './styles'
 import { useTheme } from '@emotion/react'
+import { StockNavigationProps } from 'navigation/stacks/StockStack'
 
 export default function Trade() {
   const [quantity, setQuantity] = useState('0')
   const user = useReactiveVar(userVar)
   const { params } = useRoute<RouteProp<TradeStackParamList, 'TradeModal'>>()
   const { price } = usePriceOnly(params?.symbol, 15000)
-  const { navigate } = useNavigation()
+  const { navigate } = useNavigation<StockNavigationProps>()
   const { colors, p } = useTheme()
 
   const cash = user?.cash || 0
-  const maxShares = useMemo(() => (cash / price || params?.price).toFixed(2), [
-    cash,
-    params?.price,
-    price,
-  ])
+  const maxShares = useMemo(
+    () => (cash / price || params?.price).toFixed(2),
+    [cash, params?.price, price],
+  )
   const total = useMemo(() => price * Number(quantity), [price, quantity])
 
   const onKeyPress = (value: string) => {
@@ -34,7 +34,7 @@ export default function Trade() {
   const goToReview = () => {
     navigate('TradeStack', {
       screen: 'TradeModalReview',
-      params: { total, size: quantity, ...params },
+      params: { total, size: Number(quantity), ...params },
     })
   }
 

@@ -9,13 +9,13 @@ import StockContentLoader from '../StockContentLoader'
 import moment from 'moment'
 import StockTradeButtons from './StockTradeButtons'
 import { RouteProp, useNavigation, useRoute } from '@react-navigation/native'
-import { StockStackParamList } from 'navigation/stacks/StockStack'
+import { StockNavigationProps, StockStackParamsList } from 'navigation/stacks/StockStack'
 
 export default function StockTradeTab({ activeTab }: StockTradeTabProps) {
-  const { params } = useRoute<RouteProp<StockStackParamList, 'Stock'>>()
+  const { params } = useRoute<RouteProp<StockStackParamsList, 'Stock'>>()
   const { quote, chart } = useStockHook(params?.symbol, activeTab)
   const quoteData = quote?.data
-  const { navigate } = useNavigation()
+  const { navigate } = useNavigation<StockNavigationProps>()
 
   const formatGraph = useMemo(
     () =>

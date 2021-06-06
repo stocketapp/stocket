@@ -1,8 +1,18 @@
-import { createNativeStackNavigator } from '@react-navigation/native-stack'
-import StockStack from './stacks/StockStack'
+import {
+  createNativeStackNavigator,
+  NativeStackNavigationProp,
+} from '@react-navigation/native-stack'
+import { NavigatorScreenParams } from '@react-navigation/native'
+import StockStack, { StockStackParamsList } from './stacks/StockStack'
 import TabStack from './stacks/TabStack'
 
-const { Navigator, Screen } = createNativeStackNavigator()
+export type AppStackParamsList = {
+  TabStack: {}
+  StockStack: NavigatorScreenParams<StockStackParamsList>
+}
+
+export type AppStackNavigationProps = NativeStackNavigationProp<AppStackParamsList>
+const { Navigator, Screen } = createNativeStackNavigator<AppStackParamsList>()
 
 export default function AppStack() {
   return (
