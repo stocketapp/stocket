@@ -3,9 +3,9 @@ import { SUB_BACKGROUND } from '@utils/colors'
 
 export default StyleSheet.create({
   searchContainer: {
-    paddingVertical: 3,
-    paddingLeft: 16,
-    paddingRight: 8,
+    paddingVertical: 8,
+    paddingLeft: 20,
+    paddingRight: 12,
     backgroundColor: SUB_BACKGROUND, // '#3F3F3F',
     width: '100%',
     borderRadius: 1000,
@@ -14,13 +14,13 @@ export default StyleSheet.create({
   },
   searchInput: {
     color: '#fff',
-    fontSize: 16,
+    fontSize: 20,
     flex: 1,
     letterSpacing: 0.5,
-    fontWeight: '500',
+    fontFamily: 'SFProText-Semibold',
   },
   searchBtn: {
-    paddingVertical: 3,
-    paddingHorizontal: 1,
+    paddingVertical: 4,
+    paddingHorizontal: 2,
   },
 })
