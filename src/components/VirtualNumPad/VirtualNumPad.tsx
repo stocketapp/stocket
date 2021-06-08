@@ -1,7 +1,9 @@
 import { GestureResponderEvent, View } from 'react-native'
+import { useState, useEffect } from 'react'
 import Text from '../Text'
 import { PadBtn, Row } from './styles'
-import { useState, useEffect } from 'react'
+import DeleteSVG from '@svg/delete.svg'
+import theme from '@theme'
 
 interface PadButtonProps {
   value: string
@@ -18,9 +20,7 @@ const PadButton = ({ value, onPress, onDelete }: PadButtonProps) => {
           {value}
         </Text>
       ) : (
-        <Text type="bigger" color="GREEN" weight="Light">
-          X
-        </Text>
+        <DeleteSVG stroke={theme.colors.GREEN} height={34} width={34} />
       )}
     </PadBtn>
   )

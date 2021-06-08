@@ -1,6 +1,6 @@
 import { View, StyleSheet, TouchableOpacity, Image } from 'react-native'
 import { Text } from '@components'
-import { CARD_BACKGROUND, GREEN, DARK_TEXT } from '@utils/colors'
+import { CARD_BACKGROUND, GREEN } from '@utils/colors'
 import productImgs from '@products-assets'
 import type { ProductValue } from 'types'
 
@@ -22,7 +22,12 @@ export default ({ product, onPurchase }: Props) => (
         </View>
 
         <View style={styles.textContainer}>
-          <Text weight="Black" color={DARK_TEXT} style={{ textAlign: 'center' }} type="label">
+          <Text
+            weight="Black"
+            color="TEXT_DARK"
+            style={{ textAlign: 'center' }}
+            type="label"
+          >
             {product?.localizedPrice}
           </Text>
         </View>
