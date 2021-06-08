@@ -1,4 +1,4 @@
-import * as React from 'react';
+import * as React from 'react'
 import { View, TextInput, TouchableOpacity } from 'react-native'
 import Container from '../Container'
 import { SearchIcon } from '@icons'
@@ -13,14 +13,14 @@ const SearchSymbol: React.FC<Props> = ({ value, setValue, onSearch }) => (
         value={value ?? ''}
         onChangeText={text => setValue(text)}
         style={styles.searchInput}
-        placeholder="Search company symbol or name"
+        placeholder="Symbol or company name"
         placeholderTextColor={GRAY_DARKER}
-        autoCapitalize="words"
+        autoCapitalize="characters"
         returnKeyType="search"
       />
 
       <TouchableOpacity style={styles.searchBtn} onPress={onSearch} disabled>
-        <SearchIcon size={28} />
+        <SearchIcon size={32} color={GRAY_DARKER} />
       </TouchableOpacity>
     </View>
   </Container>
