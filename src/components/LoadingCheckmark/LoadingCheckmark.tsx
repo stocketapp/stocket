@@ -10,7 +10,7 @@ interface Props {
 
 const LoadingCheckmark: React.FC<Props> = ({ size = 50, forwardedRef, loop }) => (
   <LottieView
-    source={require('../../assets/lottie/loading_checkmark.json')}
+    source={require('../../assets/lottie/loading-checkmark.json')}
     style={{ height: size, width: size }}
     loop={loop}
     ref={forwardedRef}
