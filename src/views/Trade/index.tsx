@@ -3,7 +3,7 @@ import { Text, Container } from '@components'
 import { userVar } from '@cache'
 import { useReactiveVar } from '@apollo/client'
 import { RouteProp, useRoute, useNavigation } from '@react-navigation/native'
-import { TradeStackParamList } from 'navigation/stacks/TradeStack'
+import { TradeStackParamsList } from 'navigation/stacks/TradeStack'
 import { usePriceOnly } from '@hooks'
 import TradeModalHeader from './TradeModalHeader'
 import TradeModalKeyboard from './TradeModalKeyboard'
@@ -15,7 +15,7 @@ import { StockNavigationProps } from 'navigation/stacks/StockStack'
 export default function Trade() {
   const [quantity, setQuantity] = useState('0')
   const user = useReactiveVar(userVar)
-  const { params } = useRoute<RouteProp<TradeStackParamList, 'TradeModal'>>()
+  const { params } = useRoute<RouteProp<TradeStackParamsList, 'TradeModal'>>()
   const { price } = usePriceOnly(params?.symbol, 15000)
   const { navigate } = useNavigation<StockNavigationProps>()
   const { colors, p } = useTheme()
@@ -53,7 +53,7 @@ export default function Trade() {
       />
 
       <HStack style={quantityContainer}>
-        <Text type="huge">{(Number(quantity) || 0).toLocaleString('en-US')}</Text>
+        <Text type="huge">{quantity}</Text>
       </HStack>
 
       <TradeAccountBalance balance={user?.cash} maxShares={maxShares} />
@@ -62,7 +62,7 @@ export default function Trade() {
         onKeyPress={onKeyPress}
         orderType={params?.orderType}
         onBtnPress={goToReview}
-        btnDisabled={quantity === '0'}
+        btnDisabled={Number(quantity) <= 0}
       />
     </Container>
   )

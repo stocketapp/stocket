@@ -43,15 +43,10 @@ const VirtualNumPad = ({ onKeyPress }: VirtualNumPadProps) => {
   }
 
   const press = (str: string) => {
-    if (value === '' && str === '.') {
+    if (value === '' || str === '.') {
       setValue('0.')
     } else {
-      setValue(() => {
-        if (str === '.' && value.includes('.')) {
-          return value
-        }
-        return value.concat(str).replace(/^0/g, '')
-      })
+      setValue(state => state.concat(str).replace(/^0/g, ''))
     }
   }
 
