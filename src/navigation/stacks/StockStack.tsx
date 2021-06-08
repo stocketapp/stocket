@@ -3,7 +3,7 @@ import {
   NativeStackNavigationProp,
 } from '@react-navigation/native-stack'
 import { Stock } from '@views'
-import TradeStack, { TradeStackParamList } from './TradeStack'
+import TradeStack, { TradeStackParamsList } from './TradeStack'
 import { NavigatorScreenParams } from '@react-navigation/native'
 
 export type CompanyParams = {
@@ -13,7 +13,7 @@ export type CompanyParams = {
 }
 
 export type StockStackParamsList = {
-  TradeStack: NavigatorScreenParams<TradeStackParamList>
+  TradeStack: NavigatorScreenParams<TradeStackParamsList>
   Stock: CompanyParams
 }
 

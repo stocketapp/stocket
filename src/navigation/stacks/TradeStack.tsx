@@ -5,7 +5,7 @@ import {
 import StockTradeModal from '../../views/Trade'
 import TradeModalReview from '../../views/TradeReview'
 
-export type TradeStackParamList = {
+export type TradeStackParamsList = {
   TradeModal: {
     companyName: string
     symbol: string
@@ -23,9 +23,9 @@ export type TradeStackParamList = {
   }
 }
 
-export type TradeStackNavigationProp = NativeStackNavigationProp<TradeStackParamList>
+export type TradeStackNavigationProp = NativeStackNavigationProp<TradeStackParamsList>
 
-const { Screen, Navigator } = createNativeStackNavigator<TradeStackParamList>()
+const { Screen, Navigator } = createNativeStackNavigator<TradeStackParamsList>()
 
 export default function TradeStack() {
   return (
