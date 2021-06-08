@@ -36,6 +36,7 @@ export default function StockTradeModalReview() {
   const opacity = useSharedValue(1)
   const offset = useSharedValue(0)
   const doneOffset = useSharedValue(-WINDOW_WIDTH)
+  const doneOpacity = useSharedValue(0)
 
   const animatedStyle = useAnimatedStyle(() => ({
     opacity: withTiming(opacity.value),
@@ -46,8 +47,9 @@ export default function StockTradeModalReview() {
     ],
   }))
 
-  const doneAnimateStyle = useAnimatedStyle(() => ({
-    transform: [{ translateX: withTiming(doneOffset.value, { duration: 500 }) }],
+  const doneAnimatedStyle = useAnimatedStyle(() => ({
+    transform: [{ translateX: withTiming(doneOffset.value, { duration: 300 }) }],
+    opacity: withTiming(doneOpacity.value, { duration: 800 }),
   }))
 
   const finalizeTrade = () => {
@@ -55,7 +57,9 @@ export default function StockTradeModalReview() {
     opacity.value = 0
     offset.value = 500
     doneOffset.value = 0
+    doneOpacity.value = 1
     setMountAnimation(true)
+    setFinalized(true)
   }
 
   return (
@@ -113,9 +117,9 @@ export default function StockTradeModalReview() {
             width: '100%',
             alignItems: 'center',
             marginBottom: '60%',
-            paddingHorizontal: '15%',
+            paddingHorizontal: '10%',
           },
-          doneAnimateStyle,
+          doneAnimatedStyle,
         ]}
       >
         {mountAnimation && (
@@ -126,19 +130,23 @@ export default function StockTradeModalReview() {
             loop={false}
           />
         )}
-        <Text type="title" numberOfLines={2} style={{ textAlign: 'center' }}>
+        <Text type="title" numberOfLines={3} style={{ textAlign: 'center' }}>
           Succesfully purchased{' '}
-          <Text type="title" weight="Black">
+          <Text type="title" weight="Bold">
             {params?.size}
           </Text>{' '}
           shares of{' '}
-          <Text type="title" weight="Black">
-            {params?.symbol}
+          <Text type="title" weight="Bold">
+            {params?.symbol}{' '}
+          </Text>
+          for{' '}
+          <Text type="title" weight="Bold">
+            {formatCurrency(params?.total)}
           </Text>
         </Text>
       </Animated.View>
 
-      <Button label={params?.orderType} onPress={finalizeTrade} />
+      <Button label={finalized ? 'Done' : params?.orderType} onPress={finalizeTrade} />
     </Container>
   )
 }
