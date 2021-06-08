@@ -3,7 +3,7 @@ import { SUB_BACKGROUND } from '@utils/colors'
 
 export default StyleSheet.create({
   searchContainer: {
-    paddingVertical: 8,
+    paddingVertical: 6,
     paddingLeft: 20,
     paddingRight: 12,
     backgroundColor: SUB_BACKGROUND, // '#3F3F3F',
@@ -17,7 +17,7 @@ export default StyleSheet.create({
     fontSize: 20,
     flex: 1,
     letterSpacing: 0.5,
-    fontFamily: 'SFProText-Semibold',
+    fontFamily: 'SFProText-Bold',
   },
   searchBtn: {
     paddingVertical: 4,
