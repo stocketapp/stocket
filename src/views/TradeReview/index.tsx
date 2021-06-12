@@ -2,15 +2,17 @@ import { useRoute, useNavigation, RouteProp } from '@react-navigation/native'
 import { Container, Button } from '@components'
 import { TradeStackParamsList } from 'navigation/stacks/TradeStack'
 import { useTheme } from '@emotion/react'
-import { useState } from 'react'
+import { useState, useCallback } from 'react'
+import { useMutation, useQuery } from '@apollo/client'
+import { StockNavigationProps } from 'navigation/stacks/StockStack'
+import { userVar } from '@cache'
 import ReviewDetails from './ReviewDetails'
 import ReviewHeader from './ReviewHeader'
 import ReviewDone from './ReviewDone'
+import { USER_QUERY } from '../../hooks/useAuthState'
 import { CREATE_TRADE } from './queries'
-import { useMutation } from '@apollo/client'
-import { StockNavigationProps } from 'navigation/stacks/StockStack'
 
-export default function StockTradeModalReview() {
+export default function TradeReview() {
   const { colors, p } = useTheme()
   const { params } = useRoute<RouteProp<TradeStackParamsList, 'TradeModalReview'>>()
   const { symbol, size, price, orderType } = params
@@ -18,13 +20,16 @@ export default function StockTradeModalReview() {
   const [finalized, setFinalized] = useState<boolean>(false)
   const [mountDoneAnimation, setMountDoneAnimation] = useState(false)
   const [mutate, { loading }] = useMutation(CREATE_TRADE)
+  const { refetch } = useQuery(USER_QUERY)
 
-  const finalizeTrade = async () => {
+  const finalizeTrade = useCallback(async () => {
     const variables = {
       input: { symbol, size, price, orderType },
     }
     try {
       await mutate({ variables })
+      const { data: userData } = await refetch()
+      userVar(userData)
       setFinalized(true)
       setMountDoneAnimation(true)
     } catch (error) {
@@ -32,7 +37,7 @@ export default function StockTradeModalReview() {
       setMountDoneAnimation(false)
       console.error(error)
     }
-  }
+  }, [mutate, orderType, price, refetch, size, symbol])
 
   const close = () => {
     reset({
