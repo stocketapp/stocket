@@ -43,7 +43,7 @@ export default function useAuthState() {
   return { isAuth, currentUser }
 }
 
-const USER_QUERY = gql`
+export const USER_QUERY = gql`
   query {
     user {
       displayName

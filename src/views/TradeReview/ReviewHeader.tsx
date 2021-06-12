@@ -3,7 +3,7 @@ import { TouchableOpacity } from 'react-native'
 import { ArrowLeftIcon } from '@icons'
 import theme from '@theme'
 
-const ReviewHeader = ({ goBack, symbol }: ReviewHeaderProps) => (
+const ReviewHeader = ({ goBack, symbol, orderType }: ReviewHeaderProps) => (
   <Container
     horizontal
     bgColor={theme.colors.BG_DARK_CARD}
@@ -22,7 +22,7 @@ const ReviewHeader = ({ goBack, symbol }: ReviewHeaderProps) => (
       <ArrowLeftIcon size={34} color={theme.colors.GREEN} />
     </TouchableOpacity>
     <Text weight="Black" type="heading">
-      Buy {symbol}
+      {orderType} {symbol}
     </Text>
   </Container>
 )
@@ -32,4 +32,5 @@ export default ReviewHeader
 export interface ReviewHeaderProps {
   symbol: string
   goBack: () => void
+  orderType: string
 }

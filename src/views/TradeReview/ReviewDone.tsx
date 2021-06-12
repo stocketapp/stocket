@@ -72,6 +72,5 @@ export interface ReviewDoneProps {
   size: number
   orderType: 'BUY' | 'SELL'
   price: number
-  companyName: string
   animate: boolean
 }

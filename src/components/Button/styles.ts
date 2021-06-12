@@ -7,4 +7,6 @@ export const CustomButton = styled.TouchableOpacity(({ theme }) => ({
   paddingHorizontal: theme.p.xxlg,
   borderRadius: 12,
   marginVertical: theme.m.md,
+  maxHeight: 60,
+  minHeight: 60,
 }))
