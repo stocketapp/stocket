@@ -1,4 +1,4 @@
-import { GREEN, RED } from '@utils/colors'
+import { CARD_BACKGROUND } from '@utils/colors'
 import { Text, Container } from '@components'
 import {
   Image,
@@ -16,8 +16,9 @@ interface PositionItemProps {
 
 const PositionItem = ({ item, onPress }: PositionItemProps) => {
   const { changePct, symbol, logo } = item
-  const color = changePct > 0 ? GREEN : changePct < 0 ? RED : 'WHITE'
-  const bgColor = changePct > 0 ? '#71DB772A' : '#EB455A2A'
+  const color = changePct > 0 ? 'GREEN' : changePct < 0 ? 'RED' : 'WHITE'
+  const bgColor =
+    changePct > 0 ? '#71DB772A' : changePct < 0 ? '#EB455A2A' : CARD_BACKGROUND
   const positiveOrNegative = changePct > 0 ? '+' : ''
 
   return (
@@ -30,7 +31,7 @@ const PositionItem = ({ item, onPress }: PositionItemProps) => {
           {symbol}
         </Text>
         <ChangePctContainer style={{ backgroundColor: bgColor }}>
-          <Text weight="Medium" style={{ color }}>
+          <Text weight="Medium" color={color}>
             {positiveOrNegative}
             {changePct.toFixed(2)}%
           </Text>
