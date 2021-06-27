@@ -22,6 +22,7 @@ const PortfolioPositions = ({ positions }: { positions: [PortfolioPositionType] 
         symbol: quote?.symbol,
         companyName: quote?.companyName,
         logo: quote?.logo,
+        size: quote?.size,
       },
     })
   }
@@ -62,4 +63,5 @@ export interface PortfolioPositionType {
   changePct: number
   symbol: string
   companyName: string
+  size: number
 }

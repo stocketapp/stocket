@@ -28,6 +28,7 @@ export const USER_BALANCE_QUERY = gql`
         changePct
         symbol
         logo
+        size
         companyName
       }
     }

@@ -55,6 +55,8 @@ export default function TradeReview() {
     })
   }
 
+  // TODO: SHOW REMINDER TEXT THAT THE PURCHASE IS A SIMULATION, NOT ACTUAL STOCKS
+
   return (
     <Container
       fullView
