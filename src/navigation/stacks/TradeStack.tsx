@@ -10,6 +10,7 @@ export type TradeStackParamsList = {
     companyName: string
     symbol: string
     logo: string
+    ownedShares: number
     price: number
     orderType: 'BUY' | 'SELL'
   }
