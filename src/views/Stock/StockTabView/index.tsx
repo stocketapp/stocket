@@ -38,10 +38,10 @@ const CustomTabBar = (
 export default function StockTabView() {
   const layout = useWindowDimensions()
   const { params } = useRoute<RouteProp<StockStackParamsList, 'Stock'>>()
-  const { data, refetch } = useQuery(GET_POSITION, {
+  const { data: positionData, refetch } = useQuery(GET_POSITION, {
     variables: { symbol: params?.symbol },
   })
-  const position = data?.position
+  const position = positionData?.position
 
   const [index, setIndex] = useState(0)
   const [routes] = useState([
@@ -54,7 +54,15 @@ export default function StockTabView() {
   useFocusEffect(
     useCallback(() => {
       refetch()
-    }, [refetch]),
+
+      if (index === 1) {
+        const refetchInterval = setInterval(async () => {
+          await refetch()
+        }, 15000)
+
+        return () => clearInterval(refetchInterval)
+      }
+    }, [index, refetch]),
   )
 
   const renderScene = SceneMap({
