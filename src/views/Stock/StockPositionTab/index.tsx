@@ -5,6 +5,7 @@ import { RouteProp, useRoute } from '@react-navigation/native'
 import { StockStackParamsList } from 'navigation/stacks/StockStack'
 import { useFocusEffect } from '@react-navigation/core'
 import { useCallback } from 'react'
+import { PositionType } from 'types'
 
 export default function StockPositionTab({ activeTab }: StockPositionTabProps) {
   const { params } = useRoute<RouteProp<StockStackParamsList, 'Stock'>>()
@@ -34,4 +35,5 @@ export default function StockPositionTab({ activeTab }: StockPositionTabProps) {
 
 interface StockPositionTabProps {
   activeTab: number
+  position: PositionType
 }

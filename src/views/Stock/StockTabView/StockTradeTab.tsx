@@ -10,8 +10,9 @@ import moment from 'moment'
 import StockTradeButtons from './StockTradeButtons'
 import { RouteProp, useNavigation, useRoute } from '@react-navigation/native'
 import { StockNavigationProps, StockStackParamsList } from 'navigation/stacks/StockStack'
+import { PositionType } from 'types'
 
-export default function StockTradeTab({ activeTab }: StockTradeTabProps) {
+export default function StockTradeTab({ activeTab, position }: StockTradeTabProps) {
   const { params } = useRoute<RouteProp<StockStackParamsList, 'Stock'>>()
   const { quote, chart } = useStockHook(params?.symbol, activeTab)
   const quoteData = quote?.data
@@ -38,7 +39,12 @@ export default function StockTradeTab({ activeTab }: StockTradeTabProps) {
   const openTradeModal = (orderType: 'BUY' | 'SELL') => {
     navigate('TradeStack', {
       screen: 'TradeModal',
-      params: { price: quoteData?.latestPrice, orderType, ...params },
+      params: {
+        price: quoteData?.latestPrice,
+        orderType,
+        ownedShares: position?.positionSize,
+        ...params,
+      },
     })
   }
 
@@ -52,4 +58,5 @@ export default function StockTradeTab({ activeTab }: StockTradeTabProps) {
 
 interface StockTradeTabProps {
   activeTab: number
+  position?: PositionType
 }
