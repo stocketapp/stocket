@@ -26,6 +26,12 @@ export default function Trade() {
     [cash, params?.price, price],
   )
   const total = useMemo(() => price * Number(quantity), [price, quantity])
+  const totalOwned = useMemo(
+    () => price * (params?.ownedShares ?? 0),
+    [params?.ownedShares, price],
+  )
+  const orderType = params?.orderType
+  const isOrderTypeSell = useMemo(() => orderType === 'SELL', [orderType])
 
   const onKeyPress = (value: string) => {
     setQuantity(value)
@@ -56,11 +62,15 @@ export default function Trade() {
         <Text type="huge">{quantity}</Text>
       </HStack>
 
-      <TradeAccountBalance balance={user?.cash} maxShares={maxShares} />
+      <TradeAccountBalance
+        balance={isOrderTypeSell ? totalOwned : user?.cash}
+        maxShares={isOrderTypeSell ? params?.ownedShares : maxShares}
+        isOrderTypeSell={isOrderTypeSell}
+      />
 
       <TradeModalKeyboard
         onKeyPress={onKeyPress}
-        orderType={params?.orderType}
+        orderType={orderType}
         onBtnPress={goToReview}
         btnDisabled={Number(quantity) <= 0}
       />

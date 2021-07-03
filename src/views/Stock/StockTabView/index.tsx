@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useCallback } from 'react'
 import { View, useWindowDimensions } from 'react-native'
 import {
   TabView,
@@ -10,6 +10,10 @@ import {
 import { BACKGROUND, GREEN } from '@utils/colors'
 import StockTradeTab from './StockTradeTab'
 import StockPositionTab from '../StockPositionTab'
+import { useQuery } from '@apollo/client'
+import { RouteProp, useRoute, useFocusEffect } from '@react-navigation/native'
+import { StockStackParamsList } from 'navigation/stacks/StockStack'
+import { GET_POSITION } from '../queries'
 
 const Overview = () => <View style={{ flex: 1, backgroundColor: '#673ab7' }} />
 const News = () => <View style={{ flex: 1, backgroundColor: '#486ab1' }} />
@@ -33,6 +37,11 @@ const CustomTabBar = (
 
 export default function StockTabView() {
   const layout = useWindowDimensions()
+  const { params } = useRoute<RouteProp<StockStackParamsList, 'Stock'>>()
+  const { data, refetch } = useQuery(GET_POSITION, {
+    variables: { symbol: params?.symbol },
+  })
+  const position = data?.position
 
   const [index, setIndex] = useState(0)
   const [routes] = useState([
@@ -42,9 +51,15 @@ export default function StockTabView() {
     { key: 'news', title: 'News' },
   ])
 
+  useFocusEffect(
+    useCallback(() => {
+      refetch()
+    }, [refetch]),
+  )
+
   const renderScene = SceneMap({
-    trade: () => <StockTradeTab activeTab={index} />,
-    position: () => <StockPositionTab activeTab={index} />,
+    trade: () => <StockTradeTab activeTab={index} position={position} />,
+    position: () => <StockPositionTab activeTab={index} position={position} />,
     overview: Overview,
     news: News,
   })

@@ -6,15 +6,19 @@ import {
   TradeAccountBalanceLabels,
 } from './styles'
 
-const TradeAccountBalance = ({ balance, maxShares }: TradeAccountBalanceProps) => (
+const TradeAccountBalance = ({
+  balance,
+  maxShares,
+  isOrderTypeSell,
+}: TradeAccountBalanceProps) => (
   <TradeAccountBalanceContainer>
     <TradeAccountBalanceInner>
       <TradeAccountBalanceLabels>
         <Text type="label" weight="Semibold" color="GRAY">
-          Available Cash
+          {isOrderTypeSell ? 'Position Total' : 'Available Cash'}
         </Text>
         <Text type="subtext" color="GRAY">
-          Max {maxShares} shares
+          {isOrderTypeSell ? `${maxShares} shares owned` : `Max ${maxShares} shares`}
         </Text>
       </TradeAccountBalanceLabels>
       <Text type="title" weight="Bold">
@@ -26,7 +30,8 @@ const TradeAccountBalance = ({ balance, maxShares }: TradeAccountBalanceProps) =
 
 type TradeAccountBalanceProps = {
   balance: number | undefined
-  maxShares: string | undefined
+  maxShares: string | number | undefined
+  isOrderTypeSell: boolean
 }
 
 export default TradeAccountBalance

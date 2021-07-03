@@ -55,16 +55,13 @@ export interface LabelProps {
 }
 
 export interface PositionType {
-  gains: number
-  name: string
-  gainsPercentage: number
   symbol: string
-  uid: string
-  value: number
-  todayGainsPct: number
-  todayGains: number
-  shares: Array<any>
-  previousDayPrice: number
+  avgPrice: number
+  totalGains: number
+  totalValue: number
+  change: number
+  changePct: number
+  positionSize: number
 }
 
 export interface TradeDataType {

@@ -9,7 +9,7 @@ import { useEffect } from 'react'
 import { useWindowDimensions } from 'react-native'
 import LottieView from 'lottie-react-native'
 
-const ReviewDone = ({ size, symbol, total, animate }: ReviewDoneProps) => {
+const ReviewDone = ({ size, symbol, total, animate, orderType }: ReviewDoneProps) => {
   const { width: WINDOW_WIDTH } = useWindowDimensions()
   const offset = useSharedValue(-WINDOW_WIDTH)
   const opacity = useSharedValue(0)
@@ -47,7 +47,7 @@ const ReviewDone = ({ size, symbol, total, animate }: ReviewDoneProps) => {
         />
       )}
       <Text type="title" numberOfLines={3} style={{ textAlign: 'center' }}>
-        Succesfully purchased{' '}
+        Succesfully {orderType === 'SELL' ? 'sold ' : 'purchased '}
         <Text type="title" weight="Bold">
           {size}
         </Text>{' '}

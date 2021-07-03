@@ -2,7 +2,7 @@ import {
   createNativeStackNavigator,
   NativeStackNavigationProp,
 } from '@react-navigation/native-stack'
-import StockTradeModal from '../../views/Trade'
+import TradeModal from '../../views/Trade'
 import TradeModalReview from '../../views/TradeReview'
 
 export type TradeStackParamsList = {
@@ -10,7 +10,7 @@ export type TradeStackParamsList = {
     companyName: string
     symbol: string
     logo: string
-    ownedShares: number
+    ownedShares?: number
     price: number
     orderType: 'BUY' | 'SELL'
   }
@@ -32,7 +32,7 @@ const { Screen, Navigator } = createNativeStackNavigator<TradeStackParamsList>()
 export default function TradeStack() {
   return (
     <Navigator screenOptions={{ headerShown: false }}>
-      <Screen name="TradeModal" component={StockTradeModal} />
+      <Screen name="TradeModal" component={TradeModal} />
       <Screen name="TradeModalReview" component={TradeModalReview} />
     </Navigator>
   )
