@@ -505,7 +505,7 @@ PODS:
   - RNGoogleSignin (5.0.0):
     - GoogleSignIn (~> 5.0.0)
     - React-Core
-  - RNIap (7.0.0):
+  - RNIap (7.0.1):
     - React-Core
   - RNReanimated (2.2.0):
     - DoubleConversion
@@ -857,7 +857,7 @@ SPEC CHECKSUMS:
   RNFBPerf: 27e85a7451cb366b75bd6ade8a2b912749d0a165
   RNGestureHandler: a479ebd5ed4221a810967000735517df0d2db211
   RNGoogleSignin: ad866d4c4af2651e36801dd3b7771d7715353499
-  RNIap: 1311c9df8213691cf5ca8988f3313e4d459a19e9
+  RNIap: 45aafacce952d52ed4f35ef7c786d007114f5737
   RNReanimated: 9c13c86454bfd54dab7505c1a054470bfecd2563
   RNScreens: 21b73c94c9117e1110a79ee0ee80c93ccefed8ce
   RNSVG: 551acb6562324b1d52a4e0758f7ca0ec234e278f

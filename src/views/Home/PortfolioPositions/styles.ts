@@ -3,13 +3,15 @@ import { SUB_BACKGROUND } from '@utils/colors'
 import cssTheme from '../../../theme'
 
 export const Image = styled.Image({
-  height: 46,
-  width: 46,
-  borderRadius: 22,
+  height: 50,
+  width: 50,
+  borderRadius: 25,
+  overflow: 'hidden',
 })
 
 export const ImageContainer = styled.View(({ theme }) => ({
   paddingHorizontal: theme.p.xsm,
+  backgroundColor: theme.colors.BG_DARK_SECONDARY,
 }))
 
 export const PositionButton = styled.TouchableOpacity(({ theme }) => ({

@@ -25,7 +25,7 @@ const PositionItem = ({ item, onPress }: PositionItemProps) => {
     <PositionButton onPress={onPress}>
       <Container style={positionItemContainer}>
         <ImageContainer>
-          <Image source={{ uri: logo }} />
+          <Image source={{ uri: logo }} resizeMode="contain" />
         </ImageContainer>
         <Text type="title" weight="Black">
           {symbol}
