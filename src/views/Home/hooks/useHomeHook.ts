@@ -10,6 +10,7 @@ import {
   watchlistQuotesVar,
 } from '@cache'
 import { WatchlistIexQuote } from '../Watchlist/WatchlistItem'
+import { PositionType } from 'types'
 
 export default function useHomeHook() {
   const {
@@ -22,7 +23,7 @@ export default function useHomeHook() {
     loading: watchlistLoading,
     refetch: refetchWatchlist,
   } = useQuery(WATCHLIST_QUERY)
-  const portfolio = balanceData?.portfolio
+  const portfolio: PortfolioType = balanceData?.portfolio
   const watchlistQuotes = useReactiveVar(watchlistQuotesVar)
 
   useEffect(() => {
@@ -63,4 +64,11 @@ export interface PortfolioQueryType {
   change: number
   changePct: number
   symbols: [String]
+}
+
+export interface PortfolioType {
+  value: number
+  change: number
+  changePct: number
+  positions: PositionType[]
 }

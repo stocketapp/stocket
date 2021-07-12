@@ -18,9 +18,10 @@ const AddToWatchlistButton = ({ symbol = '' }: SearchResultProps) => {
   const watchlistSymbols = useReactiveVar(watchlistSymbolsVar)
   const watchlistQuotes = useReactiveVar(watchlistQuotesVar)
 
-  const isFaved = useCallback((sym: string): boolean => includes(watchlistSymbols, sym), [
-    watchlistSymbols,
-  ])
+  const isFaved = useCallback(
+    (sym: string): boolean => includes(watchlistSymbols, sym),
+    [watchlistSymbols],
+  )
 
   const addToWatchlistSymbolsCache = useCallback(
     (newValue: string) => {

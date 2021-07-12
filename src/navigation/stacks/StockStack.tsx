@@ -10,7 +10,7 @@ export type CompanyParams = {
   companyName: string
   symbol: string
   logo: string
-  size: number
+  size?: number
 }
 
 export type StockStackParamsList = {
