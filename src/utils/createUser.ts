@@ -1,6 +1,5 @@
 import auth from '@react-native-firebase/auth'
 import { AppleRequestResponseFullName } from '@invertase/react-native-apple-authentication'
-import crashlytics from '@react-native-firebase/crashlytics'
 
 type CreateUserName =
   | {
@@ -21,8 +20,6 @@ export default async function createUser(name: CreateUserName) {
   try {
     if (currentUser) {
       await currentUser?.updateProfile({ displayName })
-      crashlytics().log('Created user')
-      crashlytics().setUserId(currentUser?.uid ?? '')
     }
   } catch (err) {
     console.log(err)

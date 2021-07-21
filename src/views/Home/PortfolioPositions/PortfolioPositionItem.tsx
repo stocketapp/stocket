@@ -15,11 +15,11 @@ interface PositionItemProps {
 }
 
 const PositionItem = ({ item, onPress }: PositionItemProps) => {
-  const { changePct, symbol, logo } = item
-  const color = changePct > 0 ? 'GREEN' : changePct < 0 ? 'RED' : 'WHITE'
+  const { change24hPct, symbol, logo } = item
+  const color = change24hPct > 0 ? 'GREEN' : change24hPct < 0 ? 'RED' : 'WHITE'
   const bgColor =
-    changePct > 0 ? '#71DB772A' : changePct < 0 ? '#EB455A2A' : CARD_BACKGROUND
-  const positiveOrNegative = changePct > 0 ? '+' : ''
+    change24hPct > 0 ? '#71DB772A' : change24hPct < 0 ? '#EB455A2A' : CARD_BACKGROUND
+  const positiveOrNegative = change24hPct > 0 ? '+' : ''
 
   return (
     <PositionButton onPress={onPress}>
@@ -33,7 +33,7 @@ const PositionItem = ({ item, onPress }: PositionItemProps) => {
         <ChangePctContainer style={{ backgroundColor: bgColor }}>
           <Text weight="Medium" color={color}>
             {positiveOrNegative}
-            {changePct.toFixed(2)}%
+            {change24hPct.toFixed(2)}%
           </Text>
         </ChangePctContainer>
       </Container>

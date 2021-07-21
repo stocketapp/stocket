@@ -7,7 +7,7 @@
     "start": "react-native start",
     "test": "jest",
     "lint": "eslint .",
-    "ios": "npx react-native run-ios --simulator 'iPhone 11 Pro' --scheme Development",
+    "ios": "npx react-native run-ios --simulator 'iPhone 12' --scheme Development",
     "ios-device": "npx react-native run-ios --device \"Henry’s iPhone 11 Pro\" --scheme Development",
     "cp-staging": "cd ios && sh ../env/staging-env.sh && cd .. && npx appcenter codepush release-react -a Stocket/StocketRN -d Staging",
     "cp-prod": "cd ios && sh ../env/prod-env.sh && cd .. && npx appcenter codepush release-react -a Stocket/StocketRN -d Production",

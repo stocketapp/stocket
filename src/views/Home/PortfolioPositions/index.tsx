@@ -59,8 +59,8 @@ export default PortfolioPositions
 
 export interface PortfolioPositionType {
   logo: string
-  change: number
-  changePct: number
+  change24h: number
+  change24hPct: number
   symbol: string
   companyName: string
   size: number

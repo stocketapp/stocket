@@ -5,7 +5,6 @@ import { useAuthState, useIapProducts } from './src/hooks'
 import { BACKGROUND } from './src/utils/colors'
 import MainStack from './src/navigation/AppStack'
 import AuthStack from './src/navigation/AuthenticationStack'
-import crashlytics from '@react-native-firebase/crashlytics'
 import { useReactiveVar } from '@apollo/client'
 import { isWatchlistLoadingVar, isPortfolioLoadingVar } from './src/Cache'
 
@@ -16,7 +15,6 @@ export default function App(): ReactNode {
   const isPortfolioLoading = useReactiveVar(isPortfolioLoadingVar)
 
   useEffect(() => {
-    crashlytics().log('App Mounted')
     if (
       (!isWatchlistLoading && !isPortfolioLoading && isAuth) ||
       (!isAuth && !isWatchlistLoading && !isPortfolioLoading)
