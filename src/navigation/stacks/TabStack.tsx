@@ -1,5 +1,5 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
-import { TabBar } from '@components'
+import TabBar from '../TabBar'
 import { TrendingUpIcon, SearchIcon, ProfileIcon } from '@icons'
 import { GREEN } from '@utils/colors'
 
@@ -14,7 +14,6 @@ export default () => {
       tabBar={props => <TabBar {...props} />}
       screenOptions={{
         tabBarActiveTintColor: GREEN,
-        tabBarInactiveTintColor: '#4a5a5a',
         headerShown: false,
       }}
     >
