@@ -76,12 +76,8 @@ export default function StockTabView() {
   )
 
   const sceneMap = {
-    trade: () => (
-      <StockTradeTab activeTab={index} position={position ?? cachedPosition} />
-    ),
-    position: () => (
-      <StockPositionTab activeTab={index} position={position ?? cachedPosition} />
-    ),
+    trade: () => <StockTradeTab activeTab={index} position={position} />,
+    position: () => <StockPositionTab activeTab={index} position={position} />,
     overview: Overview,
     news: News,
   }

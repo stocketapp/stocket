@@ -59,9 +59,13 @@ export interface PositionType {
   avgPrice: number
   totalGains: number
   totalValue: number
-  change: number
-  changePct: number
-  positionSize: number
+  change24h: number
+  change24hPct: number
+  size: number
+  totalInvested: number
+  totalGainsPct: number
+  logo: string
+  companyName: string
 }
 
 export interface TradeDataType {

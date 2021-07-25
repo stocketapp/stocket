@@ -49,15 +49,15 @@ export const CREATE_TRADE_MUTATION = gql`
 `
 
 export const GET_POSITION = gql`
-  query ($symbol: String!, $price: Float) {
-    position(symbol: $symbol, price: $price) {
+  query ($symbol: String!) {
+    position(symbol: $symbol) {
       symbol
       avgPrice
       totalGains
       totalValue
-      change
-      changePct
-      positionSize
+      change24h
+      change24hPct
+      size
     }
   }
 `

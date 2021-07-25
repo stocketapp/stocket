@@ -16,8 +16,9 @@ export default function TabBarComponent(props: BottomTabBarProps): ReactElement 
       {state.routes.map((route: any, routeIndex: number) => {
         const focused: boolean = activeRoute === routeIndex
         const { options } = descriptors[route.key]
-        const { tabBarIcon, tabBarActiveTintColor } = options
-        const tintColor = (focused ? tabBarActiveTintColor : '#4a5a5a') ?? '#4a5a5a'
+        const { tabBarIcon, tabBarActiveTintColor, tabBarInactiveTintColor } = options
+        const tintColor =
+          (focused ? tabBarActiveTintColor : tabBarInactiveTintColor) ?? '#ffffff'
 
         return (
           <TouchableOpacity

@@ -23,12 +23,12 @@ export default function StockPositionTab({ position }: StockPositionTabProps) {
   return (
     <Container fullView ph items="center">
       <Container content="center" horizontal>
-        <PositionDetail label="Shares" value={position?.positionSize} />
+        <PositionDetail label="Shares" value={position?.size} />
         <PositionDetail label="Total" value={formatCurrency(position?.totalValue)} />
       </Container>
       <Container content="center" horizontal>
-        <PositionDetail label="Change" value={formatCurrency(position?.change)} />
-        <PositionDetail label="Change %" value={position?.changePct} />
+        <PositionDetail label="Change" value={formatCurrency(position?.change24h)} />
+        <PositionDetail label="Change %" value={position?.change24hPct} />
       </Container>
     </Container>
   )
