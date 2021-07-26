@@ -18,3 +18,8 @@ export const NoImage = styled.View(({ theme }) => ({
   ...imgStyles,
   backgroundColor: theme.colors.GRAY,
 }))
+
+export const ArticleContainer = styled.View(({ theme }) => ({
+  paddingVertical: theme.p.md,
+  flexDirection: 'row',
+}))

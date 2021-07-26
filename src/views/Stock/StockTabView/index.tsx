@@ -17,9 +17,9 @@ import { GET_POSITION } from '../queries'
 import { portfolioValueVar } from '@cache'
 import { useReactiveVar } from '@apollo/client'
 import { isEmpty } from 'lodash'
+import StockNewsTab from '../StockNewsTab'
 
 const Overview = () => <View style={{ flex: 1, backgroundColor: '#673ab7' }} />
-const News = () => <View style={{ flex: 1, backgroundColor: '#486ab1' }} />
 
 const CustomTabBar = (
   props: SceneRendererProps & {
@@ -79,7 +79,7 @@ export default function StockTabView() {
     trade: () => <StockTradeTab activeTab={index} position={position} />,
     position: () => <StockPositionTab activeTab={index} position={position} />,
     overview: Overview,
-    news: News,
+    news: () => <StockNewsTab activeTab={index} symbol={params?.symbol} />,
   }
   const renderScene = SceneMap(sceneMap)
 
