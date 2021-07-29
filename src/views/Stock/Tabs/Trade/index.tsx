@@ -1,18 +1,18 @@
 // @ts-ignore
 import { monotoneCubicInterpolation } from '@rainbow-me/animated-charts'
 import { Container } from '@components'
-import StockChart from '../StockChart'
-import useStockHook from '../hooks/useStockHook'
+import StockChart from '../../StockChart'
+import useStockHook from '../../hooks/useStockHook'
 import { useMemo } from 'react'
 import { map } from 'lodash'
-import StockContentLoader from '../StockContentLoader'
+import StockContentLoader from '../../StockContentLoader'
 import moment from 'moment'
-import StockTradeButtons from './StockTradeButtons'
+import StockTradeButtons from './TradeButtons'
 import { RouteProp, useNavigation, useRoute } from '@react-navigation/native'
 import { StockNavigationProps, StockStackParamsList } from 'navigation/stacks/StockStack'
 import { PositionType } from 'types'
 
-export default function StockTradeTab({ activeTab, position }: StockTradeTabProps) {
+export default function TradeTab({ activeTab, position }: TradeTabProps) {
   const { params } = useRoute<RouteProp<StockStackParamsList, 'Stock'>>()
   const { quote, chart } = useStockHook(params?.symbol, activeTab)
   const quoteData = quote?.data
@@ -42,7 +42,7 @@ export default function StockTradeTab({ activeTab, position }: StockTradeTabProp
       params: {
         price: quoteData?.latestPrice,
         orderType,
-        ownedShares: position?.positionSize,
+        ownedShares: position?.size,
         ...params,
       },
     })
@@ -56,7 +56,7 @@ export default function StockTradeTab({ activeTab, position }: StockTradeTabProp
   )
 }
 
-interface StockTradeTabProps {
+interface TradeTabProps {
   activeTab: number
   position?: PositionType
 }
