@@ -3,7 +3,7 @@ import { useNews } from '@hooks'
 import { ArticleListItem, Text } from '@components'
 import { useTheme } from '@emotion/react'
 
-export default function StockNewsTab({ symbol }: StockNewsTabProps) {
+export default function NewsTab({ symbol }: StockNewsTabProps) {
   const { data } = useNews(symbol)
   const { p } = useTheme()
 

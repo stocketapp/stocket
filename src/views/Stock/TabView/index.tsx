@@ -8,7 +8,7 @@ import {
   NavigationState,
 } from 'react-native-tab-view'
 import { BACKGROUND, GREEN } from '@utils/colors'
-import { TradeTab } from '../Tabs'
+import { TradeTab, NewsTab } from '../Tabs'
 import StockPositionTab from '../StockPositionTab'
 import { useQuery } from '@apollo/client'
 import { RouteProp, useRoute, useFocusEffect } from '@react-navigation/native'
@@ -17,7 +17,6 @@ import { GET_POSITION } from '../queries'
 import { portfolioValueVar } from '@cache'
 import { useReactiveVar } from '@apollo/client'
 import { isEmpty } from 'lodash'
-import StockNewsTab from '../StockNewsTab'
 
 const Overview = () => <View style={{ flex: 1, backgroundColor: '#673ab7' }} />
 
@@ -79,7 +78,7 @@ export default function StockTabView() {
     trade: () => <TradeTab activeTab={index} position={position} />,
     position: () => <StockPositionTab activeTab={index} position={position} />,
     overview: Overview,
-    news: () => <StockNewsTab activeTab={index} symbol={params?.symbol} />,
+    news: () => <NewsTab activeTab={index} symbol={params?.symbol} />,
   }
   const renderScene = SceneMap(sceneMap)
 
