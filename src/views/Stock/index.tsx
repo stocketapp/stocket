@@ -1,7 +1,7 @@
 import { View } from 'react-native'
 import { RouteProp, useRoute } from '@react-navigation/core'
 import StockNavHeader from './StockNavHeader'
-import StockTabView from './StockTabView'
+import StockTabView from './TabView'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
 import { useTheme } from '@emotion/react'
 import { StockStackParamsList } from 'navigation/stacks/StockStack'
