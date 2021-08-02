@@ -14,7 +14,7 @@ export default function StockChart({ data, quote }: StockChartProps) {
     <ChartPathProvider
       data={{ points: data, smoothingStrategy: 'bezier', smoothingFactor: 1 }}
     >
-      <Container ph pv={15}>
+      <Container ph>
         <ChartPrice {...quote} />
       </Container>
       <ChartPathWithDot />

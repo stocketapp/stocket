@@ -61,3 +61,16 @@ export const GET_POSITION = gql`
     }
   }
 `
+
+export const GET_COMPANY = gql`
+  query ($symbol: String!) {
+    company(symbol: $symbol) {
+      symbol
+      companyName
+      description
+      website
+      ceo
+      logo
+    }
+  }
+`

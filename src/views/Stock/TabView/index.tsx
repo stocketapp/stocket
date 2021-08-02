@@ -1,5 +1,5 @@
 import { useState, useCallback, useEffect, useMemo } from 'react'
-import { View, useWindowDimensions } from 'react-native'
+import { useWindowDimensions } from 'react-native'
 import {
   TabView,
   SceneMap,
@@ -8,7 +8,7 @@ import {
   NavigationState,
 } from 'react-native-tab-view'
 import { BACKGROUND, GREEN } from '@utils/colors'
-import { TradeTab, NewsTab, PositionTab } from '../Tabs'
+import { TradeTab, NewsTab, PositionTab, OverviewTab } from '../Tabs'
 import { useQuery } from '@apollo/client'
 import { RouteProp, useRoute, useFocusEffect } from '@react-navigation/native'
 import { StockStackParamsList } from 'navigation/stacks/StockStack'
@@ -16,8 +16,6 @@ import { GET_POSITION } from '../queries'
 import { portfolioValueVar } from '@cache'
 import { useReactiveVar } from '@apollo/client'
 import { isEmpty } from 'lodash'
-
-const Overview = () => <View style={{ flex: 1, backgroundColor: '#673ab7' }} />
 
 const CustomTabBar = (
   props: SceneRendererProps & {
@@ -76,7 +74,7 @@ export default function StockTabView() {
   const sceneMap = {
     trade: () => <TradeTab activeTab={index} position={position} />,
     position: () => <PositionTab activeTab={index} position={position} />,
-    overview: Overview,
+    overview: () => <OverviewTab symbol={params?.symbol} />,
     news: () => <NewsTab activeTab={index} symbol={params?.symbol} />,
   }
   const renderScene = SceneMap(sceneMap)
@@ -89,6 +87,7 @@ export default function StockTabView() {
       initialLayout={{ width: layout.width }}
       renderTabBar={CustomTabBar}
       lazy
+      sceneContainerStyle={{ paddingTop: 16 }}
     />
   )
 }

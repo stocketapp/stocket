@@ -26,7 +26,7 @@ export default function ChartPrice(props: IEXQuote) {
   }
 
   return (
-    <Container pv={p.md}>
+    <Container>
       <ChartYLabel style={[chartLabel]} format={formatUsd} />
 
       <Container horizontal top={p.sm}>
