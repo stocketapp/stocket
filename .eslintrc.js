@@ -16,5 +16,6 @@ module.exports = {
     'react-native/no-inline-styles': 'off',
     'react/react-in-jsx-scope': 'off',
     'react/jsx-uses-react': 'off',
+    '@typescript-eslint/no-unused-vars': 'warn',
   },
 }
