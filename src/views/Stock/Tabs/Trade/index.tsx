@@ -2,7 +2,7 @@
 import { monotoneCubicInterpolation } from '@rainbow-me/animated-charts'
 import { Container } from '@components'
 import StockChart from '../../StockChart'
-import useStockHook from '../../hooks/useStockHook'
+import { StockViewData } from '../../hooks/useStockHook'
 import { useMemo } from 'react'
 import { map } from 'lodash'
 import StockContentLoader from '../../StockContentLoader'
@@ -12,10 +12,10 @@ import { RouteProp, useNavigation, useRoute } from '@react-navigation/native'
 import { StockNavigationProps, StockStackParamsList } from 'navigation/stacks/StockStack'
 import { PositionType } from 'types'
 
-export default function TradeTab({ activeTab, position }: TradeTabProps) {
+export default function TradeTab({ position, data }: TradeTabProps) {
   const { params } = useRoute<RouteProp<StockStackParamsList, 'Stock'>>()
-  const { quote, chart } = useStockHook(params?.symbol, activeTab)
-  const quoteData = quote?.data
+  const quote = data?.quote
+  const chart = data?.chart
   const { navigate } = useNavigation<StockNavigationProps>()
 
   const formatGraph = useMemo(
@@ -40,7 +40,7 @@ export default function TradeTab({ activeTab, position }: TradeTabProps) {
     navigate('TradeStack', {
       screen: 'TradeModal',
       params: {
-        price: quoteData?.latestPrice,
+        price: quote?.data.latestPrice,
         orderType,
         ownedShares: position?.size,
         ...params,
@@ -50,7 +50,7 @@ export default function TradeTab({ activeTab, position }: TradeTabProps) {
 
   return (
     <Container fullView>
-      {chart?.data && <StockChart data={points} quote={quoteData} />}
+      {chart?.data && <StockChart data={points} quote={quote?.data} />}
       <StockTradeButtons onPress={openTradeModal} />
     </Container>
   )
@@ -59,4 +59,5 @@ export default function TradeTab({ activeTab, position }: TradeTabProps) {
 interface TradeTabProps {
   activeTab: number
   position?: PositionType
+  data: StockViewData
 }
