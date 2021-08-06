@@ -74,3 +74,22 @@ export const GET_COMPANY = gql`
     }
   }
 `
+export const GET_KEY_STATS = gql`
+  query ($symbol: String!) {
+    stats(symbol: $symbol) {
+      companyName
+      marketCap
+      week52Low
+      week52High
+      week52Change
+      avg10Volume
+      ttmEps
+      peRatio
+      dividendYield
+      ttmDividendRate
+      ytdChangePercent
+      nextDividendDate
+      nextEarningsDate
+    }
+  }
+`
