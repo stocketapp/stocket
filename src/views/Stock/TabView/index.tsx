@@ -1,7 +1,7 @@
 import { useState, useCallback, useEffect, useMemo } from 'react'
 import { useWindowDimensions } from 'react-native'
 import { TabView, SceneMap } from 'react-native-tab-view'
-import { TradeTab, NewsTab, PositionTab, OverviewTab } from '../Tabs'
+import { TradeTab, NewsTab, OverviewTab } from '../Tabs'
 import { useQuery } from '@apollo/client'
 import { RouteProp, useRoute, useFocusEffect } from '@react-navigation/native'
 import { StockStackParamsList } from 'navigation/stacks/StockStack'
@@ -17,7 +17,6 @@ export default function StockTabView() {
   const [index, setIndex] = useState(0)
   const [routes, setRoutes] = useState([
     { key: 'trade', title: 'Trade' },
-    { key: 'position', title: 'Position' },
     { key: 'overview', title: 'Overview' },
     { key: 'news', title: 'News' },
   ])
@@ -52,8 +51,7 @@ export default function StockTabView() {
 
   const sceneMap = {
     trade: () => <TradeTab activeTab={index} position={position} data={quoteData} />,
-    position: () => <PositionTab activeTab={index} position={position} />,
-    overview: () => <OverviewTab symbol={params?.symbol} />,
+    overview: () => <OverviewTab symbol={params?.symbol} position={position} />,
     news: () => <NewsTab activeTab={index} symbol={params?.symbol} />,
   }
   const renderScene = SceneMap(sceneMap)
@@ -67,6 +65,7 @@ export default function StockTabView() {
       renderTabBar={StockTabBar}
       lazy
       sceneContainerStyle={{ paddingTop: 16 }}
+      swipeEnabled={false}
     />
   )
 }

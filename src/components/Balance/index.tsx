@@ -4,7 +4,7 @@ import { PortfolioQueryType } from 'views/Home/hooks/useHomeHook'
 import { ChangeContainer, BalanceContaienr, valueStyle } from './styles'
 import { ArrowUpIcon, ArrowDownIcon } from '@icons'
 
-const Balance = ({ value, change, changePct }: PortfolioQueryType): JSX.Element => {
+const Balance = ({ value, change, changePct }: PortfolioQueryType) => {
   const isPositive = changePct > 0
   const color = isPositive ? 'GREEN' : changePct < 0 ? 'RED' : 'WHITE'
   const Arrow = isPositive ? ArrowUpIcon : ArrowDownIcon
@@ -18,7 +18,7 @@ const Balance = ({ value, change, changePct }: PortfolioQueryType): JSX.Element 
         <Arrow size={20} color={color.toLocaleLowerCase()} />
         <Text weight="Medium" type="label" color="GRAY">
           <Text weight="Bold" color={color} type="label">
-            {formatCurrency(change)} ({(changePct ?? 0)?.toFixed(2)}% )
+            {formatCurrency(change)} ({(changePct ?? 0)?.toFixed(2)}%)
           </Text>
         </Text>
       </ChangeContainer>
