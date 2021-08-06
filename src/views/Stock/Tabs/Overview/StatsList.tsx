@@ -38,9 +38,9 @@ export default function StatsList({ data }: StatsListProps) {
       </StatsListItemContainer>
       <StatsListItemContainer>
         <StatLine label="Dividend Yield" value={dividendYield} />
-        <StatLine label="Divident Rate" value={ttmDividendRate} />
+        <StatLine label="Dividend Rate" value={ttmDividendRate} />
         <StatLine
-          label="Divident Date"
+          label="Dividend Date"
           value={nextDividendDate === '' ? 'N/A' : formatDate(nextDividendDate)}
         />
         <StatLine label="Earnings Date" value={formatDate(nextEarningsDate)} />
