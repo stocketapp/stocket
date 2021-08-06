@@ -1,5 +1,5 @@
-import { CustomTheme } from './theme'
+import { StocketTheme } from './theme'
 
 declare module '@emotion/react' {
-  export interface Theme extends CustomTheme {}
+  export interface Theme extends StocketTheme {}
 }
