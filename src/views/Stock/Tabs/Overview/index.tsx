@@ -49,7 +49,7 @@ export default function OverviewTab({ symbol, position }: OverviewTabProps) {
         )}
       </Container>
       {stats && <StatList data={stats} />}
-      <Position position={position} />
+      {position && <Position position={position} />}
     </Container>
   )
 }
