@@ -9,21 +9,21 @@ import { useReactiveVar } from '@apollo/client'
 import { isWatchlistLoadingVar, isPortfolioLoadingVar } from './src/Cache'
 
 export default function App(): ReactNode {
-  const { isAuth, currentUser } = useAuthState()
-  useIapProducts(currentUser?.uid)
+  const { isAuthed, user } = useAuthState()
+  useIapProducts(user?.uid)
   const isWatchlistLoading = useReactiveVar(isWatchlistLoadingVar)
   const isPortfolioLoading = useReactiveVar(isPortfolioLoadingVar)
 
   useEffect(() => {
     if (
-      (!isWatchlistLoading && !isPortfolioLoading && isAuth) ||
-      (!isAuth && !isWatchlistLoading && !isPortfolioLoading)
+      (!isWatchlistLoading && !isPortfolioLoading && isAuthed) ||
+      (!isAuthed && !isWatchlistLoading && !isPortfolioLoading)
     ) {
       RNBootSplash.hide({ fade: true })
     }
-  }, [isWatchlistLoading, isAuth, isPortfolioLoading])
+  }, [isWatchlistLoading, isAuthed, isPortfolioLoading])
 
-  if (!isAuth && !isWatchlistLoading) {
+  if (!isAuthed && !isWatchlistLoading) {
     return <AuthStack />
   }
 

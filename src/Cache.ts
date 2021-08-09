@@ -9,6 +9,7 @@ export const watchlistQuotesVar = makeVar<WatchlistIexQuote[] | null>(null)
 export const portfolioValueVar = makeVar<PortfolioType | null>(null)
 export const isPortfolioLoadingVar: ReactiveVar<any> = makeVar<any>(null)
 export const userVar = makeVar<UserType | null>(null)
+export const isAuthenticatedVar = makeVar<boolean>(false)
 
 const cache = new InMemoryCache({
   typePolicies: {
@@ -37,6 +38,16 @@ const cache = new InMemoryCache({
         portfolioValueLoading: {
           read() {
             return isPortfolioLoadingVar()
+          },
+        },
+        user: {
+          read() {
+            return userVar()
+          },
+        },
+        isAuthenticated: {
+          read() {
+            return isAuthenticatedVar()
           },
         },
       },

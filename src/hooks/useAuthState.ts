@@ -2,45 +2,40 @@ import { useEffect } from 'react'
 import auth from '@react-native-firebase/auth'
 import useStocketMutation from '@mutations'
 import { gql } from '@apollo/client'
-import useUser from './useUser'
-import { useQuery } from '@apollo/client'
-import { userVar } from '@cache'
-import { useBatchDispatch, useDispatchAction } from '@hooks'
+import { useReactiveVar } from '@apollo/client'
+import { userVar, isAuthenticatedVar } from '@cache'
+import { UserType } from 'types'
 
-export default function useAuthState() {
-  const { isAuth, currentUser } = useUser()
+export default function useAuthState(): AuthState {
   const StocketMutations = useStocketMutation()
-  const { data } = useQuery(USER_QUERY)
-  const userData = data?.user
-  const batchDispatch = useBatchDispatch()
-  const dispatch = useDispatchAction()
+  const isAuthed = useReactiveVar(isAuthenticatedVar)
+  const user = useReactiveVar(userVar)
 
   useEffect(() => {
-    const authSubscription = auth().onAuthStateChanged(async user => {
-      if (user) {
+    const authSubscription = auth().onAuthStateChanged(async currentUser => {
+      if (currentUser) {
         try {
-          batchDispatch([
-            { type: 'SET_USER', payload: user },
-            { type: 'IS_AUTHENTICATED', payload: true },
-          ])
-          await StocketMutations.createUser(user)
+          const res = await StocketMutations.createUser(currentUser)
+          userVar(res?.data?.createUser?.user)
+          isAuthenticatedVar(true)
         } catch (err) {
           console.log('authSubscription', err)
         }
       } else {
-        // TODO: LOG OUT with Apollo cache
-        dispatch('USER_LOGOUT', false)
+        isAuthenticatedVar(false)
+        userVar(null)
       }
     })
 
     return () => authSubscription()
-  }, [])
+  }, []) // eslint-disable-line react-hooks/exhaustive-deps
 
-  useEffect(() => {
-    isAuth && userVar(userData)
-  }, [userData, isAuth])
+  return { isAuthed, user }
+}
 
-  return { isAuth, currentUser }
+interface AuthState {
+  isAuthed: boolean
+  user: UserType | null
 }
 
 export const USER_QUERY = gql`
