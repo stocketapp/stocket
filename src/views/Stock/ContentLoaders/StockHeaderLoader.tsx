@@ -2,7 +2,6 @@ export const StockHeaderLoader = () => {
   const { SUB_BACKGROUND, GRAY_DARKER } = require('@utils/colors')
   const { Rect, default: ContentLoader } = require('react-content-loader/native')
   const { Dimensions } = require('react-native')
-
   const { width } = Dimensions.get('screen')
 
   return (
