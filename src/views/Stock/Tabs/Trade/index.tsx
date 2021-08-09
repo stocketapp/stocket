@@ -5,7 +5,7 @@ import StockChart from '../../StockChart'
 import { StockViewData } from '../../hooks/useStockHook'
 import { useMemo } from 'react'
 import { map } from 'lodash'
-import StockContentLoader from '../../StockContentLoader'
+// import StockContentLoader from '../../StockContentLoader'
 import moment from 'moment'
 import StockTradeButtons from './TradeButtons'
 import { RouteProp, useNavigation, useRoute } from '@react-navigation/native'
@@ -32,9 +32,9 @@ export default function TradeTab({ position, data }: TradeTabProps) {
     [formatGraph],
   )
 
-  if (quote?.loading || chart?.loading) {
-    return <StockContentLoader />
-  }
+  // if (quote?.loading || chart?.loading) {
+  //   return <StockContentLoader />
+  // }
 
   const openTradeModal = (orderType: 'BUY' | 'SELL') => {
     navigate('TradeStack', {
