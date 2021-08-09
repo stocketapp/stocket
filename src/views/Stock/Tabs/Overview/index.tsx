@@ -5,9 +5,10 @@ import { PositionType } from 'types'
 import { GET_COMPANY, GET_KEY_STATS } from '../../queries'
 import StatList from './StatsList'
 import Position from './Position'
+import OverviewLoader from '../../ContentLoaders/OverviewLoader'
 
 export default function OverviewTab({ symbol, position }: OverviewTabProps) {
-  const { data } = useQuery<{ company: CompanyType }>(GET_COMPANY, {
+  const { data, loading } = useQuery<{ company: CompanyType }>(GET_COMPANY, {
     variables: { symbol },
   })
   const company = data?.company
@@ -26,6 +27,10 @@ export default function OverviewTab({ symbol, position }: OverviewTabProps) {
       Less
     </Text>
   )
+
+  if (loading) {
+    return <OverviewLoader withPosition={!!position} />
+  }
 
   return (
     <Container ph fullView scrollable>
