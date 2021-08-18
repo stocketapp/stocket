@@ -1,19 +1,19 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import TabBar from '../TabBar'
 import { TrendingUpIcon, SearchIcon, ProfileIcon } from '@icons'
-import { GREEN } from '@utils/colors'
-
+import { useTheme } from '@emotion/react'
 import { Search, Profile } from '@views'
 import MainStack from './MainStack'
 
 const { Navigator, Screen } = createBottomTabNavigator()
 
-export default () => {
+const TabStack = () => {
+  const { colors } = useTheme()
   return (
     <Navigator
       tabBar={props => <TabBar {...props} />}
       screenOptions={{
-        tabBarActiveTintColor: GREEN,
+        tabBarActiveTintColor: colors.GREEN,
         headerShown: false,
       }}
     >
@@ -41,3 +41,5 @@ export default () => {
     </Navigator>
   )
 }
+
+export default TabStack
