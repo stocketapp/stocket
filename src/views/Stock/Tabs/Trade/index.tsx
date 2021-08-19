@@ -1,7 +1,6 @@
 // @ts-ignore
 import { monotoneCubicInterpolation } from '@rainbow-me/animated-charts'
 import { Container, LineChart } from '@components'
-import StockChart from '../../StockChart'
 import { StockViewData } from '../../hooks/useStockHook'
 import { useMemo } from 'react'
 import { map } from 'lodash'
@@ -27,11 +26,6 @@ export default function TradeTab({ position, data }: TradeTabProps) {
     [chart?.data],
   )
 
-  const points = useMemo(
-    () => monotoneCubicInterpolation({ data: formatGraph, range: 100 }),
-    [formatGraph],
-  )
-
   // if (quote?.loading || chart?.loading) {
   //   return <StockContentLoader />
   // }
@@ -50,8 +44,7 @@ export default function TradeTab({ position, data }: TradeTabProps) {
 
   return (
     <Container fullView>
-      {/* {chart?.data && <StockChart data={points} quote={quote?.data} />} */}
-      <LineChart data={formatGraph} />
+      {chart?.data && <LineChart data={formatGraph} />}
       <StockTradeButtons onPress={openTradeModal} />
     </Container>
   )
