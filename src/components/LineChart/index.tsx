@@ -3,7 +3,7 @@ import { Svg, Path } from 'react-native-svg'
 import { scaleLinear, scaleTime } from 'd3-scale'
 import * as shape from 'd3-shape'
 import ChartCursor from './ChartCursor'
-import Animated, { useSharedValue } from 'react-native-reanimated'
+import { useSharedValue } from 'react-native-reanimated'
 import ChartHeader from './ChartHeader'
 import theme from '@theme'
 
