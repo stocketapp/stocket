@@ -1,6 +1,5 @@
 import { PanGestureHandler } from 'react-native-gesture-handler'
 import Animated, {
-  useSharedValue,
   useAnimatedStyle,
   useAnimatedGestureHandler,
   withTiming,
@@ -8,9 +7,8 @@ import Animated, {
 import { StyleSheet, View } from 'react-native'
 import { getYForX, parse, Vector } from 'react-native-redash'
 
-export default function ChartCursor({ d, translation }: CursorProps) {
+export default function ChartCursor({ d, translation, active }: CursorProps) {
   const path = parse(d)
-  const active = useSharedValue(false)
   const onGestureEvent = useAnimatedGestureHandler({
     onStart: () => {
       active.value = true
@@ -62,4 +60,5 @@ const styles = StyleSheet.create({
 interface CursorProps {
   d: string
   translation: Vector<Animated.SharedValue<number>>
+  active: Animated.SharedValue<boolean>
 }

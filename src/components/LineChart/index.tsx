@@ -6,8 +6,9 @@ import ChartCursor from './ChartCursor'
 import ChartHeader from './ChartHeader'
 import theme from '@theme'
 import { useVector } from 'react-native-redash'
+import { useSharedValue } from 'react-native-reanimated'
 
-const n = (1 + Math.sqrt(10)) / 2
+const n = (1 + Math.sqrt(9)) / 2
 const { width, height: wHeight } = Dimensions.get('window')
 const height = (1 - 1 / n) * wHeight
 const strokeWidth = 4
@@ -32,13 +33,14 @@ const fakeData = [
   { date: new Date(2021, 8, 11).getTime(), values: { price: 1978.01, change: 2.07 } },
 ]
 
-export default function LineChart({ data = fakeData }: GraphProps) {
+export default function LineChart({ data = fakeData, defaultValues }: GraphProps) {
   const translation = useVector()
+  const active = useSharedValue(false)
   const domainX = getDomain(data.map(d => d.date))
   const domainY = getDomain(data.map(d => d.values.price))
-  const domainY2 = getDomain(data.map(d => d.values.change))
+  // const domainY2 = getDomain(data.map(d => d.values.change))
   const scaleX = scaleTime().domain(domainX).range([0, width])
-  const scaleY = scaleLinear().domain(domainY).range([500, padding])
+  const scaleY = scaleLinear().domain(domainY).range([height, padding])
   const d = shape
     .line<DataPoint>()
     .x(p => scaleX(p.date))
@@ -46,13 +48,19 @@ export default function LineChart({ data = fakeData }: GraphProps) {
     .curve(shape.curveBasis)(data) as string
   return (
     <View style={{ flex: 1 }}>
-      <ChartHeader data={{ domainX, domainY, domainY2 }} translation={translation} />
+      <ChartHeader
+        // data={{ domainX, domainY, domainY2 }}
+        data={{ domainX, domainY }}
+        translation={translation}
+        active={active}
+        defaultValues={defaultValues}
+      />
       <View>
         <Svg width={width} height={height}>
           <Path d={`${d}L ${width} ${height} L 0 ${height}`} fill="url(#gradient)" />
           <Path fill="transparent" stroke={theme.colors.GREEN} {...{ d, strokeWidth }} />
         </Svg>
-        <ChartCursor d={d} translation={translation} />
+        <ChartCursor d={d} translation={translation} active={active} />
       </View>
     </View>
   )
@@ -64,4 +72,8 @@ interface DataPoint {
 
 interface GraphProps {
   data?: DataPoint[]
+  defaultValues: {
+    price: number
+    change: number
+  }
 }

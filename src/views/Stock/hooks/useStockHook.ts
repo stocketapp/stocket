@@ -1,7 +1,7 @@
 import { useCallback } from 'react'
 import { useQuery } from '@apollo/client'
 import { useFocusEffect } from '@react-navigation/core'
-import { SYMBOL_QUOTE_QUERY, SYMBOL_CHART_QUERY } from '../queries'
+import { SYMBOL_QUOTE_QUERY, SYMBOL_CHART_QUERY_ONE_DAY } from '../queries'
 import { IEXChartQuote, IEXQuote } from 'types'
 
 export default function useStockHook(symbol: string, activeTab: number): StockViewData {
@@ -18,7 +18,7 @@ export default function useStockHook(symbol: string, activeTab: number): StockVi
     data: chartData,
     loading: loadingChart,
     error: chartError,
-  } = useQuery(SYMBOL_CHART_QUERY, {
+  } = useQuery(SYMBOL_CHART_QUERY_ONE_DAY, {
     variables: { symbol },
   })
   const chart = chartData?.intraday
@@ -34,9 +34,6 @@ export default function useStockHook(symbol: string, activeTab: number): StockVi
       return () => clearInterval(refetchInterval)
     }, [refecthQuote, activeTab]),
   )
-
-  // TODO: Fetch position on navigate to stock screen
-  // and refetch if positions tab is active
 
   return {
     quote: {
