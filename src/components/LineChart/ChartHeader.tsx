@@ -58,7 +58,8 @@ export default function ChartHeader({
       <ReText text={price} style={priceStyles} />
       {/* <ReText text={change} style={style} /> */}
       <Text color={color} type="title" weight="Medium" pb={10}>
-        {change}
+        {Number(change) > 0 ? '+' : ''}
+        {change}%
       </Text>
     </View>
   )
