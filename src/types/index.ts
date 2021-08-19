@@ -123,5 +123,13 @@ export interface IEXQuote {
   changePercentS: string
 }
 
+export interface IEXChartQuote {
+  symbol: string
+  close: number
+  changePercent: number
+  label: string
+  date: string
+}
+
 export * from './ChartTypes'
 export * from './StateTypes'
