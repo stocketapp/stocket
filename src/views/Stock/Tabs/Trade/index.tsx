@@ -13,7 +13,6 @@ export default function TradeTab({ position, data }: TradeTabProps) {
   const quote = data?.quote
   const chart = data?.chart
   const { navigate } = useNavigation<StockNavigationProps>()
-  console.log(chart)
 
   const formatGraph = useMemo(
     () =>
@@ -21,7 +20,7 @@ export default function TradeTab({ position, data }: TradeTabProps) {
         // date: moment(`${el.date}`, 'YYYY-MM-DD LT').valueOf(),
         date: moment(`${el.minute}`, 'hh:mm').valueOf(),
         values: { price: el?.close as number, change: el?.changeOverTime },
-      })),
+      })).filter(el => el.values.price !== null),
     [chart?.data],
   )
 
