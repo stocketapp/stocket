@@ -13,12 +13,14 @@ export default function TradeTab({ position, data }: TradeTabProps) {
   const quote = data?.quote
   const chart = data?.chart
   const { navigate } = useNavigation<StockNavigationProps>()
+  console.log(chart)
 
   const formatGraph = useMemo(
     () =>
       map(chart?.data, (el: IEXChartQuote) => ({
-        date: moment(`${el.date}`, 'YYYY-MM-DD LT').valueOf(),
-        values: { price: el?.close as number, change: el?.changePercent },
+        // date: moment(`${el.date}`, 'YYYY-MM-DD LT').valueOf(),
+        date: moment(`${el.minute}`, 'hh:mm').valueOf(),
+        values: { price: el?.close as number, change: el?.changeOverTime },
       })),
     [chart?.data],
   )
@@ -40,8 +42,16 @@ export default function TradeTab({ position, data }: TradeTabProps) {
   }
 
   return (
-    <Container fullView>
-      {chart?.data && <LineChart data={formatGraph} />}
+    <Container fullView bottom={50}>
+      {chart?.data && (
+        <LineChart
+          data={formatGraph}
+          defaultValues={{
+            price: quote?.data?.latestPrice,
+            change: quote?.data?.changePercent,
+          }}
+        />
+      )}
       <StockTradeButtons onPress={openTradeModal} />
     </Container>
   )

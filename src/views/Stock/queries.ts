@@ -23,15 +23,13 @@ export const SYMBOL_QUOTE_QUERY = gql`
   }
 `
 
-export const SYMBOL_CHART_QUERY = gql`
+export const SYMBOL_CHART_QUERY_ONE_DAY = gql`
   query ($symbol: String!) {
     intraday(symbol: $symbol) {
       label
       close
       date
-      changePercent
-      changeOverTime
-      changePercentS
+      minute
     }
   }
 `

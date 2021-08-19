@@ -129,6 +129,8 @@ export interface IEXChartQuote {
   changePercent: number
   label: string
   date: string
+  minute: string
+  changeOverTime: number
 }
 
 export * from './ChartTypes'
