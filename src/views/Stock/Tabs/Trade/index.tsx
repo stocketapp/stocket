@@ -1,10 +1,7 @@
-// @ts-ignore
-import { monotoneCubicInterpolation } from '@rainbow-me/animated-charts'
 import { Container, LineChart } from '@components'
 import { StockViewData } from '../../hooks/useStockHook'
 import { useMemo } from 'react'
 import { map } from 'lodash'
-// import StockContentLoader from '../../StockContentLoader'
 import moment from 'moment'
 import StockTradeButtons from './TradeButtons'
 import { RouteProp, useNavigation, useRoute } from '@react-navigation/native'
