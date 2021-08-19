@@ -6,7 +6,7 @@ import moment from 'moment'
 import StockTradeButtons from './TradeButtons'
 import { RouteProp, useNavigation, useRoute } from '@react-navigation/native'
 import { StockNavigationProps, StockStackParamsList } from 'navigation/stacks/StockStack'
-import { PositionType } from 'types'
+import { IEXChartQuote, PositionType } from 'types'
 
 export default function TradeTab({ position, data }: TradeTabProps) {
   const { params } = useRoute<RouteProp<StockStackParamsList, 'Stock'>>()
@@ -16,9 +16,9 @@ export default function TradeTab({ position, data }: TradeTabProps) {
 
   const formatGraph = useMemo(
     () =>
-      map(chart?.data, (el: any) => ({
+      map(chart?.data, (el: IEXChartQuote) => ({
         date: moment(`${el.date}`, 'YYYY-MM-DD LT').valueOf(),
-        value: el.close as number,
+        values: { price: el?.close as number, change: el?.changePercent },
       })),
     [chart?.data],
   )

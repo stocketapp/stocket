@@ -6,28 +6,27 @@ import Animated, {
   withTiming,
 } from 'react-native-reanimated'
 import { StyleSheet, View } from 'react-native'
-import { getYForX, parse } from 'react-native-redash'
+import { getYForX, parse, Vector } from 'react-native-redash'
 
-export default function ChartCursor({ d, y }: CursorProps) {
+export default function ChartCursor({ d, translation }: CursorProps) {
   const path = parse(d)
-  const x = useSharedValue(0)
   const active = useSharedValue(false)
   const onGestureEvent = useAnimatedGestureHandler({
     onStart: () => {
       active.value = true
     },
     onActive: event => {
-      x.value = event.x
-      y.value = getYForX(path, x.value) ?? 0
+      translation.x.value = event.x
+      translation.y.value = getYForX(path, translation.x.value) ?? 0
     },
     onEnd: () => {
       active.value = false
     },
   })
   const style = useAnimatedStyle(() => {
-    const translateX = x.value - 50 / 2
+    const translateX = translation.x.value - 50 / 2
     // @ts-ignore
-    const translateY = y.value - 50 / 2
+    const translateY = translation.y.value - 50 / 2
     return {
       transform: [{ translateX }, { translateY }],
       opacity: withTiming(active.value ? 1 : 0),
@@ -62,5 +61,5 @@ const styles = StyleSheet.create({
 
 interface CursorProps {
   d: string
-  y: Animated.SharedValue<number>
+  translation: Vector<Animated.SharedValue<number>>
 }

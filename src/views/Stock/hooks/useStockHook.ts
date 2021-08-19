@@ -2,8 +2,7 @@ import { useCallback } from 'react'
 import { useQuery } from '@apollo/client'
 import { useFocusEffect } from '@react-navigation/core'
 import { SYMBOL_QUOTE_QUERY, SYMBOL_CHART_QUERY } from '../queries'
-import { IEXQuote } from 'types'
-import { ChartPointObject } from '../StockChart'
+import { IEXChartQuote, IEXQuote } from 'types'
 
 export default function useStockHook(symbol: string, activeTab: number): StockViewData {
   const {
@@ -17,7 +16,6 @@ export default function useStockHook(symbol: string, activeTab: number): StockVi
   const quote = quoteData?.quote
   const {
     data: chartData,
-    // refetch: refetchChart,
     loading: loadingChart,
     error: chartError,
   } = useQuery(SYMBOL_CHART_QUERY, {
@@ -27,7 +25,6 @@ export default function useStockHook(symbol: string, activeTab: number): StockVi
 
   useFocusEffect(
     useCallback(() => {
-      // refetchChart()
       const refetchInterval = setInterval(async () => {
         if (activeTab === 0) {
           await refecthQuote()
@@ -62,7 +59,7 @@ export interface StockViewData {
     error: any
   }
   chart: {
-    data: [ChartPointObject]
+    data: IEXChartQuote[]
     loading: boolean
     error: any
   }
