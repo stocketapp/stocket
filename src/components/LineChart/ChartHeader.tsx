@@ -2,13 +2,11 @@ import { View, useWindowDimensions } from 'react-native'
 import Animated, {
   useDerivedValue,
   interpolate,
-  // useAnimatedStyle,
+  useAnimatedStyle,
 } from 'react-native-reanimated'
 import { ReText, round, Vector } from 'react-native-redash'
 import { css } from '@emotion/native'
 import theme from '@theme'
-import Text from '../Text'
-import { useMemo } from 'react'
 
 export default function ChartHeader({
   data,
@@ -27,40 +25,29 @@ export default function ChartHeader({
       currency: 'USD',
     })}`
   })
-  // const change = useDerivedValue(() => {
-  //   const theChange = !active.value
-  //     ? defaultValues.change
-  //     : interpolate(y.value, [width, 0], [data.domainY2[0], data.domainY2[1]])
-  //   const value = round(theChange * 100, 2)
-  //   const plus = value > 0 ? '+' : ''
-  //   return `${plus}${value}%`
-  // })
-  // const color = useDerivedValue(() => {
-  //   const num = Number(change.value.replace(/[+%]/g, ''))
-  //   return num > 0 ? theme.colors.GREEN : num < 0 ? theme.colors.RED : theme.colors.GRAY
-  // })
-  const isPositive = defaultValues.change > 0
-  const color = isPositive ? 'GREEN' : defaultValues.change < 0 ? 'RED' : 'WHITE'
+  const change = useDerivedValue(() => {
+    const theChange = !active.value
+      ? defaultValues.change
+      : interpolate(y.value, [width, 0], [data.domainY2[0], data.domainY2[1]])
+    const value = round(theChange * 100, 2)
+    const plus = value > 0 ? '+' : ''
+    return `${plus}${value}%`
+  })
+  const color = useDerivedValue(() => {
+    const num = Number(change.value.replace(/[+%]/g, ''))
+    return num > 0 ? theme.colors.GREEN : num < 0 ? theme.colors.RED : theme.colors.GRAY
+  })
 
-  const change = useMemo(
-    () => (defaultValues.change * 100).toFixed(2),
-    [defaultValues.change],
-  )
-
-  // const style = useAnimatedStyle(() => ({
-  //   fontFamily: 'SFProText-Medium',
-  //   fontSize: 20,
-  //   color: color.value,
-  // }))
+  const style = useAnimatedStyle(() => ({
+    fontFamily: 'SFProText-Medium',
+    fontSize: 20,
+    color: color.value,
+  }))
 
   return (
     <View style={{ paddingHorizontal: theme.spacing.screen }}>
       <ReText text={price} style={priceStyles} />
-      {/* <ReText text={change} style={style} /> */}
-      <Text color={color} type="title" weight="Medium" pb={10}>
-        {Number(change) > 0 ? '+' : ''}
-        {change}%
-      </Text>
+      <ReText text={change} style={style} />
     </View>
   )
 }
@@ -75,7 +62,7 @@ interface ChartHeaderProps {
   data: {
     domainX: number[]
     domainY: number[]
-    domainY2?: number[]
+    domainY2: number[]
   }
   translation: Vector<Animated.SharedValue<number>>
   active: Animated.SharedValue<boolean>

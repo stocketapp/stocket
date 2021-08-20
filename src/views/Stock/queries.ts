@@ -30,6 +30,7 @@ export const SYMBOL_CHART_QUERY_ONE_DAY = gql`
       close
       date
       minute
+      changeOverTime
     }
   }
 `

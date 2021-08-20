@@ -17,7 +17,6 @@ export default function TradeTab({ position, data }: TradeTabProps) {
   const formatGraph = useMemo(
     () =>
       map(chart?.data, (el: IEXChartQuote) => ({
-        // date: moment(`${el.date}`, 'YYYY-MM-DD LT').valueOf(),
         date: moment(`${el.minute}`, 'hh:mm').valueOf(),
         values: { price: el?.close as number, change: el?.changeOverTime },
       })).filter(el => el.values.price !== null),

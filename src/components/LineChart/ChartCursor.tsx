@@ -23,7 +23,6 @@ export default function ChartCursor({ d, translation, active }: CursorProps) {
   })
   const style = useAnimatedStyle(() => {
     const translateX = translation.x.value - 50 / 2
-    // @ts-ignore
     const translateY = translation.y.value - 50 / 2
     return {
       transform: [{ translateX }, { translateY }],
