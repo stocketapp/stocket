@@ -20,7 +20,7 @@ export default function LineChart({ data, defaultValues }: GraphProps) {
   const active = useSharedValue(false)
   const domainX = getDomain(data.map(d => d.date))
   const domainY = getDomain(data.map(d => d.values.price))
-  // const domainY2 = getDomain(data.map(d => d.values.change))
+  const domainY2 = getDomain(data.map(d => d.values.change))
   const scaleX = scaleTime().domain(domainX).range([0, width])
   const scaleY = scaleLinear().domain(domainY).range([height, padding])
   const d = shape
@@ -28,11 +28,11 @@ export default function LineChart({ data, defaultValues }: GraphProps) {
     .x(p => scaleX(p.date))
     .y(p => scaleY(p.values.price))
     .curve(shape.curveBasis)(data) as string
+
   return (
     <View style={{ flex: 1 }}>
       <ChartHeader
-        // data={{ domainX, domainY, domainY2 }}
-        data={{ domainX, domainY }}
+        data={{ domainX, domainY, domainY2 }}
         translation={translation}
         active={active}
         defaultValues={defaultValues}
