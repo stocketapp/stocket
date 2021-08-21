@@ -39,7 +39,7 @@ export default function LineChart({ data, defaultValues }: GraphProps) {
       />
       <View>
         <Svg width={width} height={height}>
-          <Path d={`${d}L ${width} ${height} L 0 ${height}`} fill="url(#gradient)" />
+          <Path d={`${d}L ${width} ${height} L 0 ${height}`} />
           <Path fill="transparent" stroke={theme.colors.GREEN} {...{ d, strokeWidth }} />
         </Svg>
         <ChartCursor d={d} translation={translation} active={active} />

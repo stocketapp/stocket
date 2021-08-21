@@ -9,7 +9,9 @@ export const TradeButtonsContainer = styled.View(({ theme }) => ({
 }))
 
 export const TradeButton = styled.TouchableOpacity(({ theme }) => ({
-  paddingHorizontal: '18%',
   paddingVertical: theme.p.lg,
   borderRadius: 12,
+  width: '45%',
+  justifyContent: 'center',
+  alignItems: 'center',
 }))
