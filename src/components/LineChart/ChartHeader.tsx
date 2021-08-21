@@ -26,7 +26,7 @@ export default function ChartHeader({
     const theChange = !active.value
       ? defaultValues.change
       : interpolate(y.value, [width, 0], [data.domainY2[0], data.domainY2[1]])
-    const value = round(theChange * 100, 2)
+    const value = round(theChange * 100, 3)
     const plus = value > 0 ? '+' : ''
     return `${plus}${value}%`
   })
