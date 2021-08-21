@@ -22,8 +22,8 @@ export default function ChartCursor({ d, translation, active }: CursorProps) {
     },
   })
   const style = useAnimatedStyle(() => {
-    const translateX = translation.x.value - 50 / 2
-    const translateY = translation.y.value - 50 / 2
+    const translateX = translation.x.value - 40 / 2
+    const translateY = translation.y.value - 40 / 2
     return {
       transform: [{ translateX }, { translateY }],
       opacity: withTiming(active.value ? 1 : 0),
@@ -48,11 +48,12 @@ const styles = StyleSheet.create({
     borderRadius: 7.5,
   },
   cursor: {
-    height: 50,
-    width: 50,
+    height: 40,
+    width: 40,
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: 25,
+    backgroundColor: '#898a8a33',
   },
 })
 
