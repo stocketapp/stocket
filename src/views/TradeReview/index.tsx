@@ -15,7 +15,7 @@ import { CREATE_TRADE } from './queries'
 export default function TradeReview() {
   const { colors, p } = useTheme()
   const { params } = useRoute<RouteProp<TradeStackParamsList, 'TradeModalReview'>>()
-  const { symbol, size, price, orderType } = params
+  const { symbol, quantity, price, orderType } = params
   const { goBack, reset } = useNavigation<StockNavigationProps>()
   const [finalized, setFinalized] = useState<boolean>(false)
   const [mountDoneAnimation, setMountDoneAnimation] = useState(false)
@@ -24,12 +24,12 @@ export default function TradeReview() {
 
   const finalizeTrade = useCallback(async () => {
     const variables = {
-      input: { symbol, size, price, orderType },
+      input: { symbol, size: quantity, price, orderType },
     }
     try {
       await mutate({ variables })
       const { data: userData } = await refetch()
-      userVar(userData)
+      userVar(userData?.user)
       setFinalized(true)
       setMountDoneAnimation(true)
     } catch (error) {
@@ -37,7 +37,7 @@ export default function TradeReview() {
       setMountDoneAnimation(false)
       console.error(error)
     }
-  }, [mutate, orderType, price, refetch, size, symbol])
+  }, [mutate, orderType, price, refetch, quantity, symbol])
 
   const close = () => {
     reset({

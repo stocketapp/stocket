@@ -22,7 +22,7 @@ const TradeAccountBalance = ({
         </Text>
       </TradeAccountBalanceLabels>
       <Text type="title" weight="Bold">
-        {formatCurrency(balance || 0)}
+        {formatCurrency(balance ?? 0)}
       </Text>
     </TradeAccountBalanceInner>
   </TradeAccountBalanceContainer>

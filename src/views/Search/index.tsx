@@ -13,7 +13,7 @@ export default function Search(): ReactElement {
   const results = useSearch(search)
 
   return (
-    <Container fullView ph safeAreaTop safeAreaBottom>
+    <Container fullView ph safeAreaTop safeAreaBottom scrollable>
       <SearchSymbols value={search} setValue={setSearch} />
 
       {results?.map((item: SearchResultType, i: number) => (

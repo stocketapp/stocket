@@ -20,7 +20,7 @@ const Detail = ({ label, value }: { label: string; value: string }) => (
   </DetailContainer>
 )
 
-const ReviewDetails = ({ size, price, total, animate }: ReviewDetailsProps) => {
+const ReviewDetails = ({ quantity, price, total, animate }: ReviewDetailsProps) => {
   const opacity = useSharedValue(1)
   const offset = useSharedValue(0)
   const { colors } = useTheme()
@@ -53,7 +53,7 @@ const ReviewDetails = ({ size, price, total, animate }: ReviewDetailsProps) => {
       ]}
     >
       <Container bgColor={colors.BG_DARK_CARD} ph top={80}>
-        <Detail label="Quantity" value={formatNumber(size)} />
+        <Detail label="Quantity" value={formatNumber(quantity)} />
         <Detail label="Price" value={formatCurrency(price)} />
         <Detail label="Total" value={formatCurrency(total)} />
       </Container>
@@ -66,7 +66,7 @@ export default ReviewDetails
 export interface ReviewDetailsProps {
   symbol: string
   total: number
-  size: number
+  quantity: number
   orderType: 'BUY' | 'SELL'
   price: number
   companyName: string

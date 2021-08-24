@@ -17,7 +17,7 @@ export type TradeStackParamsList = {
   TradeModalReview: {
     symbol: string
     total: number
-    size: number
+    quantity: number
     orderType: 'BUY' | 'SELL'
     price: number
     companyName: string

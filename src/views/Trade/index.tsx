@@ -40,7 +40,7 @@ export default function Trade() {
   const goToReview = () => {
     navigate('TradeStack', {
       screen: 'TradeModalReview',
-      params: { total, size: Number(quantity), ...params },
+      params: { total, quantity: Number(quantity), ...params },
     })
   }
 
@@ -63,7 +63,7 @@ export default function Trade() {
       </HStack>
 
       <TradeAccountBalance
-        balance={isOrderTypeSell ? totalOwned : user?.cash}
+        balance={isOrderTypeSell ? totalOwned : cash}
         maxShares={isOrderTypeSell ? params?.ownedShares : maxShares}
         isOrderTypeSell={isOrderTypeSell}
       />

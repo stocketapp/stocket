@@ -9,7 +9,7 @@ const StockTradeButtons = ({ onPress }: StockTradeButtonsProps) => (
       onPress={() => onPress('BUY')}
     >
       <Text type="title" weight="Bold">
-        Trade
+        Buy
       </Text>
     </TradeButton>
     <TradeButton
