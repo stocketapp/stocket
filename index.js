@@ -49,6 +49,8 @@ if (!__DEV__) {
           'localhost',
           'api.stocketapp.com',
           'api.stocketapp.com/graphql',
+          'https://cloud.iexapis.com',
+          'https://sandbox.iexapis.com',
           /^\//,
         ],
         routingInstrumentation,
@@ -100,5 +102,7 @@ const AppRoot = () => {
 // }
 
 // const Root = __DEV__ ? AppRoot : codePush(codePushOptions)(AppRoot)
+
+LogBox.ignoreLogs(['Require cycle'])
 
 AppRegistry.registerComponent(appName, () => AppRoot)
