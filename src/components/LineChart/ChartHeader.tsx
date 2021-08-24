@@ -37,7 +37,7 @@ export default function ChartHeader({
 
   const label = useDerivedValue(() => {
     const value = interpolate(x.value, [0, width], [data.domainX[0], data.domainX[1]])
-    const time = new Date(60000 * 60 + value)
+    const time = new Date(value)
     return !active.value
       ? 'Now'
       : time.toLocaleTimeString('en-US', {
