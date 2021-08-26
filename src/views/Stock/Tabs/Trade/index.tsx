@@ -24,10 +24,6 @@ export default function TradeTab({ position, data }: TradeTabProps) {
     [chart?.data],
   )
 
-  // if (quote?.loading || chart?.loading) {
-  //   return <StockContentLoader />
-  // }
-
   const openTradeModal = (orderType: 'BUY' | 'SELL') => {
     navigate('TradeStack', {
       screen: 'TradeModal',
