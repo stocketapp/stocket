@@ -7,6 +7,7 @@ import StockTradeButtons from './TradeButtons'
 import { RouteProp, useNavigation, useRoute } from '@react-navigation/native'
 import { StockNavigationProps, StockStackParamsList } from 'navigation/stacks/StockStack'
 import { IEXChartQuote, PositionType } from 'types'
+import TradeTabLoader from '../../ContentLoaders/TradeTabLoader'
 
 export default function TradeTab({ position, data }: TradeTabProps) {
   const { params } = useRoute<RouteProp<StockStackParamsList, 'Stock'>>()
@@ -41,16 +42,20 @@ export default function TradeTab({ position, data }: TradeTabProps) {
 
   return (
     <Container fullView bottom={50}>
-      {chart?.data && (
-        <LineChart
-          data={formatGraph}
-          defaultValues={{
-            price: quote?.data?.latestPrice,
-            change: quote?.data?.changePercent,
-          }}
-        />
+      {chart?.data ? (
+        <>
+          <LineChart
+            data={formatGraph}
+            defaultValues={{
+              price: quote?.data?.latestPrice,
+              change: quote?.data?.changePercent,
+            }}
+          />
+          <StockTradeButtons onPress={openTradeModal} />
+        </>
+      ) : (
+        <TradeTabLoader />
       )}
-      <StockTradeButtons onPress={openTradeModal} />
     </Container>
   )
 }
