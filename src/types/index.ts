@@ -133,5 +133,10 @@ export interface IEXChartQuote {
   changeOverTime: number
 }
 
+export interface UserBalance {
+  cash: number
+  portfolioValue: number
+}
+
 export * from './ChartTypes'
 export * from './StateTypes'

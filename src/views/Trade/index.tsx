@@ -1,10 +1,8 @@
 import { useMemo, useState } from 'react'
 import { Text, Container } from '@components'
-import { userVar } from '@cache'
-import { useReactiveVar } from '@apollo/client'
 import { RouteProp, useRoute, useNavigation } from '@react-navigation/native'
 import { TradeStackParamsList } from 'navigation/stacks/TradeStack'
-import { usePriceOnly } from '@hooks'
+import { useAvailableCash, usePriceOnly } from '@hooks'
 import TradeModalHeader from './TradeModalHeader'
 import TradeModalKeyboard from './TradeModalKeyboard'
 import TradeAccountBalance from './TradeAccountBalance'
@@ -14,13 +12,12 @@ import { StockNavigationProps } from 'navigation/stacks/StockStack'
 
 export default function Trade() {
   const [quantity, setQuantity] = useState('0')
-  const user = useReactiveVar(userVar)
   const { params } = useRoute<RouteProp<TradeStackParamsList, 'TradeModal'>>()
   const { price } = usePriceOnly(params?.symbol, 15000)
   const { navigate } = useNavigation<StockNavigationProps>()
   const { colors, p } = useTheme()
+  const { cash } = useAvailableCash()
 
-  const cash = user?.cash || 0
   const maxShares = useMemo(
     () => (cash / price || params?.price).toFixed(2),
     [cash, params?.price, price],

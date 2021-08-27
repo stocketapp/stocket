@@ -18,7 +18,7 @@ export default function usePriceOnly(symbol: string, interval = 0) {
 }
 
 const GET_PRICE_QUERY = gql`
-  query($symbol: String!) {
+  query ($symbol: String!) {
     price(symbol: $symbol)
   }
 `
