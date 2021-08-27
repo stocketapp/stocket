@@ -16,13 +16,14 @@ export default function Search(): ReactElement {
     <Container fullView ph safeAreaTop safeAreaBottom scrollable>
       <SearchSymbols value={search} setValue={setSearch} />
 
-      {results?.map((item: SearchResultType, i: number) => (
-        <SearchResult
-          item={item}
-          setStock={() => navigate('Stock', { symbol: item?.symbol })}
-          key={i}
-        />
-      ))}
+      {search === '' ||
+        results?.map((item: SearchResultType, i: number) => (
+          <SearchResult
+            item={item}
+            setStock={() => navigate('Stock', { symbol: item?.symbol })}
+            key={i}
+          />
+        ))}
     </Container>
   )
 }
