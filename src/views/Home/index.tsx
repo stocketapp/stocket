@@ -14,7 +14,7 @@ export default function Home() {
         </StatusContainer>
         <Balance {...portfolio} />
       </HeaderContainer>
-      <HorizontalList title="Positions" data={portfolio?.positions} />
+      <HorizontalList title="Positions" data={portfolio?.positions} isPosition />
       <WatchlistList data={watchlist} />
     </Container>
   )
