@@ -25,7 +25,7 @@ export default function SearchResult({ data, active }: SearchResultProps) {
     overflow: 'scroll',
     paddingTop: withSpring(padding.value, { damping: 10, mass: 0.5, stiffness: 50 }),
     top: -30,
-    zIndex: -10,
+    zIndex: 5,
     borderBottomEndRadius: 20,
     borderBottomStartRadius: 20,
     paddingHorizontal: spacing.lg,

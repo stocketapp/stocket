@@ -73,7 +73,7 @@ const SearchSymbol = ({ value, setValue }: SearchSymbolsProps) => {
   }, [isFocused, open, value])
 
   return (
-    <View style={{ width: '100%', height: 50, alignItems: 'flex-end' }}>
+    <View style={{ width: '100%', height: 50, alignItems: 'flex-end', zIndex: 10 }}>
       <Animated.View style={[containerStyle, searchInputContainerStyle]}>
         <Animated.View style={inputStyle}>
           <TextInput
