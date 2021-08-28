@@ -1,6 +1,6 @@
 import styled, { css } from '@emotion/native'
 import { SUB_BACKGROUND } from '@utils/colors'
-import cssTheme from '../../../theme'
+import cssTheme from '../../theme'
 
 export const Image = styled.Image({
   height: 50,
@@ -14,7 +14,7 @@ export const ImageContainer = styled.View(({ theme }) => ({
   backgroundColor: theme.colors.BG_DARK_SECONDARY,
 }))
 
-export const PositionButton = styled.TouchableOpacity(({ theme }) => ({
+export const Button = styled.TouchableOpacity(({ theme }) => ({
   marginRight: theme.m.sm,
 }))
 
@@ -24,20 +24,20 @@ export const ChangePctContainer = styled.View(({ theme }) => ({
   borderRadius: 150,
 }))
 
-export const portfolioListStyle = css({
+export const listStyle = css({
   minHeight: 100,
 })
 
-export const portfolioListContentStyle = css({
+export const listContentStyle = css({
   paddingTop: cssTheme.p.lg,
 })
 
-export const portfolioListEmptyStyle = css({
+export const listEmptyStyle = css({
   width: '100%',
   alignItems: 'center',
 })
 
-export const positionItemContainer = css({
+export const itemContainer = css({
   width: 130,
   minHeight: 155,
   flexDirection: 'column',
@@ -48,4 +48,11 @@ export const positionItemContainer = css({
   backgroundColor: SUB_BACKGROUND,
   borderRadius: 12,
   marginRight: cssTheme.m.md,
+})
+
+export const EmptyContainer = styled.View({
+  justifyContent: 'center',
+  alignItems: 'center',
+  height: 150,
+  width: '100%',
 })

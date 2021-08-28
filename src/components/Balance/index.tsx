@@ -1,10 +1,9 @@
 import Text from '../Text'
 import { formatCurrency } from '@utils/functions'
-import { PortfolioQueryType } from 'views/Home/hooks/useHomeHook'
 import { ChangeContainer, BalanceContaienr, valueStyle } from './styles'
 import { ArrowUpIcon, ArrowDownIcon } from '@icons'
 
-const Balance = ({ value, change, changePct }: PortfolioQueryType) => {
+const Balance = ({ value, change, changePct }: BalanceProps) => {
   const isPositive = changePct > 0
   const color = isPositive ? 'GREEN' : changePct < 0 ? 'RED' : 'WHITE'
   const Arrow = isPositive ? ArrowUpIcon : ArrowDownIcon
@@ -24,6 +23,12 @@ const Balance = ({ value, change, changePct }: PortfolioQueryType) => {
       </ChangeContainer>
     </BalanceContaienr>
   )
+}
+
+interface BalanceProps {
+  value: number
+  change: number
+  changePct: number
 }
 
 export default Balance
