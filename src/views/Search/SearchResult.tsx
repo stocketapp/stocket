@@ -7,12 +7,12 @@ import Animated, {
   withSpring,
 } from 'react-native-reanimated'
 import { useNavigation } from '@react-navigation/native'
-import { StockNavigationProps } from 'navigation/stacks/StockStack'
 import { useEffect, useCallback } from 'react'
+import { AppStackNavigationProps } from 'navigation/AppStack'
 
 export default function SearchResult({ data, active }: SearchResultProps) {
   const { colors, spacing } = useTheme()
-  const { navigate } = useNavigation<StockNavigationProps>()
+  const { navigate } = useNavigation<AppStackNavigationProps>()
   const height = useSharedValue(0)
   const padding = useSharedValue(0)
   const style = useAnimatedStyle(() => ({
@@ -64,10 +64,13 @@ export default function SearchResult({ data, active }: SearchResultProps) {
           <ResultItem
             item={item}
             setStock={() =>
-              navigate('Stock', {
-                symbol: item?.symbol,
-                companyName: item?.securityName,
-                logo: '',
+              navigate('StockStack', {
+                screen: 'Stock',
+                params: {
+                  symbol: item?.symbol,
+                  companyName: item?.securityName,
+                  logo: '',
+                },
               })
             }
             key={i}
