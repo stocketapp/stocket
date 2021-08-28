@@ -1,22 +1,94 @@
-import { TouchableOpacity } from 'react-native'
+import { ScrollView, TouchableOpacity } from 'react-native'
 import { Text, Container, AddToWatchlistButton } from '@components'
 import { useTheme } from '@emotion/react'
+import Animated, {
+  useAnimatedStyle,
+  useSharedValue,
+  withSpring,
+} from 'react-native-reanimated'
+import { useNavigation } from '@react-navigation/native'
+import { StockNavigationProps } from 'navigation/stacks/StockStack'
+import { useEffect, useCallback } from 'react'
 
-interface SearchResultProps {
-  item: {
-    securityName: string
-    symbol: string
-  }
-  setStock: () => void
-}
+export default function SearchResult({ data, active }: SearchResultProps) {
+  const { colors, spacing } = useTheme()
+  const { navigate } = useNavigation<StockNavigationProps>()
+  const height = useSharedValue(0)
+  const padding = useSharedValue(0)
+  const style = useAnimatedStyle(() => ({
+    height: height.value,
+    width: '100%',
+    backgroundColor: colors.BG_DARK_CARD,
+    overflow: 'scroll',
+    paddingTop: withSpring(padding.value, { damping: 10, mass: 0.5, stiffness: 50 }),
+    top: -30,
+    zIndex: -10,
+    borderBottomEndRadius: 20,
+    borderBottomStartRadius: 20,
+    paddingHorizontal: spacing.lg,
+  }))
 
-export default function SearchResult({ item, setStock }: SearchResultProps) {
-  const { p } = useTheme()
+  const close = useCallback(() => {
+    height.value = withSpring(0, { damping: 10, mass: 0.7, stiffness: 60 })
+    padding.value = 0
+  }, [height, padding])
+
+  const open = useCallback(() => {
+    height.value = withSpring(data?.length * 60, {
+      damping: 10,
+      mass: 0.7,
+      stiffness: 50,
+    })
+    padding.value = 20
+  }, [data?.length, height, padding])
+
+  useEffect(() => {
+    if (active && data?.length > 0) {
+      open()
+    }
+  }, [data, open, active])
+
+  useEffect(() => {
+    if (!active) {
+      close()
+    }
+  }, [active, close])
 
   return (
+    <Animated.View style={style}>
+      <ScrollView
+        showsVerticalScrollIndicator={false}
+        contentContainerStyle={{ paddingBottom: 20 }}
+      >
+        {data?.map((item: ResultObj, i: number) => (
+          <ResultItem
+            item={item}
+            setStock={() =>
+              navigate('Stock', {
+                symbol: item?.symbol,
+                companyName: item?.securityName,
+                logo: '',
+              })
+            }
+            key={i}
+          />
+        ))}
+      </ScrollView>
+    </Animated.View>
+  )
+}
+
+const ResultItem = ({ item, setStock }: ResultItemProps) => {
+  const { p, colors } = useTheme()
+  return (
     <TouchableOpacity onPress={setStock} style={{ width: '100%' }}>
-      <Container separate horizontal pv={p.lg}>
-        <Container style={{ width: '50%' }}>
+      <Container
+        separate
+        horizontal
+        pv={p.lg}
+        style={{ backgroundColor: colors.BG_DARK_CARD }}
+      >
+        <Container style={{ width: '50%', backgroundColor: colors.BG_DARK_CARD }}>
           <Text weight="Black" type="label">
             {item?.symbol}
           </Text>
@@ -29,4 +101,19 @@ export default function SearchResult({ item, setStock }: SearchResultProps) {
       </Container>
     </TouchableOpacity>
   )
+}
+
+interface SearchResultProps {
+  data: ResultObj[]
+  active: boolean
+}
+
+interface ResultItemProps {
+  setStock: () => void
+  item: ResultObj
+}
+
+interface ResultObj {
+  securityName: string
+  symbol: string
 }

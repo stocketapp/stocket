@@ -15,7 +15,7 @@ async function iexGet(endpoint: string, query: string = '') {
 }
 
 export default function useSearch(term: string): SearchResultType[] | undefined {
-  const [results, setResult] = useState<SearchResultType[]>()
+  const [results, setResult] = useState<SearchResultType[]>([])
   const debounced = useDebounce(term)
 
   const search = useCallback(async () => {
@@ -32,6 +32,12 @@ export default function useSearch(term: string): SearchResultType[] | undefined 
       search()
     }
   }, [debounced, term, search])
+
+  useEffect(() => {
+    if (term === '') {
+      setResult([])
+    }
+  }, [term])
 
   return results
 }
