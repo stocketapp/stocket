@@ -4,7 +4,7 @@ type DebouncedString = string | null
 
 export default function useDebounce(
   value: string | null,
-  delay: number = 1000,
+  delay: number = 800,
 ): DebouncedString {
   const [debounced, setDebounced] = useState(value)
 
