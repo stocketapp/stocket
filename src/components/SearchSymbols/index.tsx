@@ -9,6 +9,8 @@ import Animated, {
 } from 'react-native-reanimated'
 import { searchInputStyles, searchInputContainerStyle } from './styles'
 import { useTheme } from '@emotion/react'
+import { useIsFocused } from '@react-navigation/native'
+import { useEffect, useCallback } from 'react'
 
 const SearchSymbol = ({ value, setValue }: SearchSymbolsProps) => {
   const window = useWindowDimensions()
@@ -19,6 +21,7 @@ const SearchSymbol = ({ value, setValue }: SearchSymbolsProps) => {
   const containerPadding = useSharedValue(10)
   const justifyContent = useSharedValue('flex-end')
   const inputDisplay = useSharedValue<'flex' | 'none'>('none')
+  const isFocused = useIsFocused()
 
   const containerStyle = useAnimatedStyle(() => ({
     width: withSpring(width.value, { damping: 10, mass: 0.5, stiffness: 50 }),
@@ -30,22 +33,30 @@ const SearchSymbol = ({ value, setValue }: SearchSymbolsProps) => {
     width: withTiming(inputWidth.value, { duration: 400 }),
   }))
 
-  const close = () => {
+  const close = useCallback(() => {
     active.value = false
     width.value = 50
     inputWidth.value = '0%'
     containerPadding.value = 10
     justifyContent.value = 'flex-end'
     inputDisplay.value = 'none'
-  }
-  const open = () => {
+  }, [active, containerPadding, inputDisplay, inputWidth, justifyContent, width])
+  const open = useCallback(() => {
     active.value = true
     width.value = window.width - 36
     inputWidth.value = '90%'
-    containerPadding.value = theme.spacing.lg
+    containerPadding.value = 16
     justifyContent.value = 'space-between'
     inputDisplay.value = 'flex'
-  }
+  }, [
+    active,
+    containerPadding,
+    inputDisplay,
+    inputWidth,
+    justifyContent,
+    width,
+    window.width,
+  ])
 
   const toggleActive = () => {
     if (width.value !== 50) {
@@ -54,6 +65,12 @@ const SearchSymbol = ({ value, setValue }: SearchSymbolsProps) => {
       open()
     }
   }
+
+  useEffect(() => {
+    if (value && isFocused) {
+      open()
+    }
+  }, [isFocused, open, value])
 
   return (
     <View style={{ width: '100%', height: 50, alignItems: 'flex-end' }}>

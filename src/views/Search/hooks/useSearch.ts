@@ -1,5 +1,5 @@
-import { IEX_CLOUD_KEY, IEX_URL } from '../../../../config'
 import { useEffect, useState, useCallback } from 'react'
+import { IEX_CLOUD_KEY, IEX_URL } from '../../../../config'
 import useDebounce from './useDebounce'
 import { SearchResultType } from 'types'
 

@@ -9,12 +9,15 @@ import Animated, {
 import { useNavigation } from '@react-navigation/native'
 import { useEffect, useCallback } from 'react'
 import { AppStackNavigationProps } from 'navigation/AppStack'
+import { useIsFocused } from '@react-navigation/native'
 
 export default function SearchResult({ data, active }: SearchResultProps) {
   const { colors, spacing } = useTheme()
   const { navigate } = useNavigation<AppStackNavigationProps>()
   const height = useSharedValue(0)
   const padding = useSharedValue(0)
+  const isFocused = useIsFocused()
+
   const style = useAnimatedStyle(() => ({
     height: height.value,
     width: '100%',
@@ -49,10 +52,12 @@ export default function SearchResult({ data, active }: SearchResultProps) {
   }, [data, open, active])
 
   useEffect(() => {
-    if (!active) {
+    if (!active || !isFocused) {
       close()
+    } else if (isFocused || active) {
+      open()
     }
-  }, [active, close])
+  }, [active, close, isFocused, open])
 
   return (
     <Animated.View style={style}>
