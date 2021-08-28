@@ -1,14 +1,15 @@
 import { FlatList, View } from 'react-native'
 import { useNavigation } from '@react-navigation/native'
 import { Text, Container } from '@components'
-import ListItem from './ListItem'
 import EmptyPlaceholder from './EmptyPlaceholder'
 import { listStyle, listContentStyle, listEmptyStyle } from './styles'
 import { useTheme } from '@emotion/react'
 import { AppStackNavigationProps } from 'navigation/AppStack'
 import { IEXQuote, PositionType } from 'types'
+import ListItem from './ListItem'
+import PositionItem from './PositionItem'
 
-const HorizontalList = ({ data, title }: HorizontalListProps) => {
+const HorizontalList = ({ data, title, isPosition = false }: HorizontalListProps) => {
   const { navigate } = useNavigation<AppStackNavigationProps>()
   const { p } = useTheme()
 
@@ -34,7 +35,13 @@ const HorizontalList = ({ data, title }: HorizontalListProps) => {
       <FlatList
         data={data}
         renderItem={({ item }) => (
-          <ListItem item={item} onPress={() => goToStock(item)} />
+          <>
+            {isPosition ? (
+              <PositionItem item={item as PositionType} onPress={() => goToStock(item)} />
+            ) : (
+              <ListItem item={item as IEXQuote} onPress={() => goToStock(item)} />
+            )}
+          </>
         )}
         keyExtractor={(_, key) => key.toString()}
         style={listStyle}
@@ -56,4 +63,5 @@ export default HorizontalList
 export interface HorizontalListProps {
   data: (IEXQuote | PositionType)[]
   title: string
+  isPosition?: boolean
 }
