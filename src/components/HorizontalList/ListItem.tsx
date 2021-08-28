@@ -3,27 +3,27 @@ import { Text, Container } from '@components'
 import {
   Image,
   ImageContainer,
-  PositionButton,
+  Button,
   ChangePctContainer,
-  positionItemContainer,
+  itemContainer,
 } from './styles'
-import { PortfolioPositionType } from '.'
+import { IEXQuote, PositionType } from 'types'
 
-interface PositionItemProps {
-  item: PortfolioPositionType
+interface ListItemProps {
+  item: IEXQuote | PositionType
   onPress: () => void
 }
 
-const PositionItem = ({ item, onPress }: PositionItemProps) => {
-  const { change24hPct, symbol, logo } = item
+const ListItem = ({ item, onPress }: ListItemProps) => {
+  const { change24hPct, symbol, logo } = item as IEXQuote & PositionType
   const color = change24hPct > 0 ? 'GREEN' : change24hPct < 0 ? 'RED' : 'WHITE'
   const bgColor =
     change24hPct > 0 ? '#71DB772A' : change24hPct < 0 ? '#EB455A2A' : CARD_BACKGROUND
   const positiveOrNegative = change24hPct > 0 ? '+' : ''
 
   return (
-    <PositionButton onPress={onPress}>
-      <Container style={positionItemContainer}>
+    <Button onPress={onPress}>
+      <Container style={itemContainer}>
         <ImageContainer>
           <Image source={{ uri: logo }} resizeMode="contain" />
         </ImageContainer>
@@ -37,8 +37,8 @@ const PositionItem = ({ item, onPress }: PositionItemProps) => {
           </Text>
         </ChangePctContainer>
       </Container>
-    </PositionButton>
+    </Button>
   )
 }
 
-export default PositionItem
+export default ListItem

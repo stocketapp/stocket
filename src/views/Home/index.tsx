@@ -1,8 +1,7 @@
-import { Container, MarketStatus, Balance } from '@components'
+import { Container, MarketStatus, Balance, HorizontalList } from '@components'
 import { WatchlistList } from './Watchlist'
 import { HeaderContainer, StatusContainer } from './styles'
 import useHomeHook from './hooks/useHomeHook'
-import PortfolioPositions from './PortfolioPositions'
 
 export default function Home() {
   const { portfolio, watchlist } = useHomeHook()
@@ -15,7 +14,7 @@ export default function Home() {
         </StatusContainer>
         <Balance {...portfolio} />
       </HeaderContainer>
-      <PortfolioPositions positions={portfolio?.positions} />
+      <HorizontalList title="Positions" data={portfolio?.positions} />
       <WatchlistList data={watchlist} />
     </Container>
   )
