@@ -14,7 +14,7 @@ async function iexGet(endpoint: string, query: string = '') {
   return data
 }
 
-export default function useSearch(term: string): SearchResultType[] | undefined {
+export default function useSearch(term: string): SearchHook {
   const [results, setResult] = useState<SearchResultType[]>([])
   const debounced = useDebounce(term)
 
@@ -39,5 +39,10 @@ export default function useSearch(term: string): SearchResultType[] | undefined 
     }
   }, [term])
 
-  return results
+  return { results, onSearch: search }
+}
+
+interface SearchHook {
+  results: SearchResultType[]
+  onSearch: () => Promise<void>
 }

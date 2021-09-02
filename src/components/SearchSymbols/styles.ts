@@ -6,7 +6,7 @@ export const searchInputStyles = css({
   fontSize: 20,
   flex: 1,
   letterSpacing: 0.5,
-  fontFamily: 'SFProText-Semibold',
+  fontFamily: 'SFProText-Medium',
 })
 
 export const searchInputContainerStyle = css({
@@ -15,4 +15,20 @@ export const searchInputContainerStyle = css({
   borderRadius: 25,
   alignItems: 'center',
   flexDirection: 'row',
+  zIndex: 2,
+  width: '100%',
+  justifyContent: 'space-between',
+  paddingHorizontal: 16,
+})
+
+export const searchResultContainerStyle = css({
+  width: '100%',
+  overflow: 'scroll',
+  zIndex: 0,
+  borderBottomEndRadius: 20,
+  borderBottomStartRadius: 20,
+  position: 'absolute',
+  top: 20,
+  left: 0,
+  right: 0,
 })

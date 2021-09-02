@@ -1,81 +1,45 @@
-import { View, TextInput, TouchableOpacity, useWindowDimensions } from 'react-native'
+import { View, TextInput, TouchableOpacity } from 'react-native'
 import { SearchIcon } from '@icons'
-import type { SearchSymbolsProps } from 'types'
-import Animated, {
-  useSharedValue,
-  useAnimatedStyle,
-  withSpring,
-  withTiming,
-} from 'react-native-reanimated'
+import Animated, { useSharedValue, withDelay, withTiming } from 'react-native-reanimated'
 import { searchInputStyles, searchInputContainerStyle } from './styles'
 import { useTheme } from '@emotion/react'
-import { useIsFocused } from '@react-navigation/native'
-import { useEffect, useCallback } from 'react'
+import { useCallback, Dispatch, SetStateAction, useEffect, useState } from 'react'
+import SearchResults from './SearchResults'
+import { SearchResultType } from 'types'
 
-const SearchSymbol = ({ value, setValue }: SearchSymbolsProps) => {
-  const window = useWindowDimensions()
-  const width = useSharedValue(50)
+const SearchSymbol = ({ value, setValue, data }: SearchSymbolsProps) => {
   const theme = useTheme()
-  const active = useSharedValue(false)
-  const inputWidth = useSharedValue('0%')
-  const containerPadding = useSharedValue(10)
-  const justifyContent = useSharedValue('flex-end')
-  const inputDisplay = useSharedValue<'flex' | 'none'>('none')
-  const isFocused = useIsFocused()
+  const resultsHeight = useSharedValue(0)
+  const resultsPadding = useSharedValue(0)
+  const [isFocused, setIsFocused] = useState(false)
+  const display = useSharedValue(0)
 
-  const containerStyle = useAnimatedStyle(() => ({
-    width: withSpring(width.value, { damping: 10, mass: 0.5, stiffness: 50 }),
-    justifyContent: withTiming(justifyContent.value, { duration: 400 }),
-    paddingHorizontal: withTiming(containerPadding.value, { duration: 400 }),
-  }))
-  const inputStyle = useAnimatedStyle(() => ({
-    display: inputDisplay.value,
-    width: withTiming(inputWidth.value, { duration: 400 }),
-  }))
-
-  const close = useCallback(() => {
-    active.value = false
-    width.value = 50
-    inputWidth.value = '0%'
-    containerPadding.value = 10
-    justifyContent.value = 'flex-end'
-    inputDisplay.value = 'none'
-  }, [active, containerPadding, inputDisplay, inputWidth, justifyContent, width])
-  const open = useCallback(() => {
-    active.value = true
-    width.value = window.width - 36
-    inputWidth.value = '90%'
-    containerPadding.value = 16
-    justifyContent.value = 'space-between'
-    inputDisplay.value = 'flex'
-  }, [
-    active,
-    containerPadding,
-    inputDisplay,
-    inputWidth,
-    justifyContent,
-    width,
-    window.width,
-  ])
-
-  const toggleActive = () => {
-    if (width.value !== 50) {
-      close()
-    } else {
-      open()
-    }
-  }
+  const toggle = useCallback((toggleValue: boolean) => {
+    setIsFocused(toggleValue)
+  }, [])
 
   useEffect(() => {
-    if (value && isFocused) {
-      open()
+    if (!isFocused) {
+      resultsPadding.value = 0
+      resultsHeight.value = 0
+      display.value = withDelay(100, withTiming(0))
+    } else if (data.length > 0 && isFocused) {
+      resultsPadding.value = 20
+      resultsHeight.value = 400
+      display.value = 1
     }
-  }, [isFocused, open, value])
+  }, [resultsPadding, isFocused, resultsHeight, display, data.length])
 
   return (
-    <View style={{ width: '100%', height: 50, alignItems: 'flex-end', zIndex: 10 }}>
-      <Animated.View style={[containerStyle, searchInputContainerStyle]}>
-        <Animated.View style={inputStyle}>
+    <View
+      style={{
+        width: '100%',
+        alignItems: 'flex-end',
+        zIndex: 1,
+      }}
+    >
+      <View style={searchInputContainerStyle}>
+        <Animated.View style={{ flex: 3 }}>
           <TextInput
             value={value ?? ''}
             onChangeText={text => setValue(text)}
@@ -84,16 +48,31 @@ const SearchSymbol = ({ value, setValue }: SearchSymbolsProps) => {
             placeholderTextColor={theme.colors.GRAY}
             autoCapitalize="characters"
             returnKeyType="search"
-            onBlur={close}
+            onBlur={() => toggle(false)}
+            onFocus={() => toggle(true)}
           />
         </Animated.View>
 
-        <TouchableOpacity onPress={toggleActive}>
+        <TouchableOpacity>
           <SearchIcon size={28} color={theme.colors.WHITE} />
         </TouchableOpacity>
-      </Animated.View>
+      </View>
+
+      <SearchResults
+        data={data}
+        height={resultsHeight}
+        padding={resultsPadding}
+        display={display}
+      />
     </View>
   )
 }
 
 export default SearchSymbol
+
+export interface SearchSymbolsProps {
+  value: string | null
+  setValue: Dispatch<SetStateAction<string>>
+  onSearch?: () => void
+  data: SearchResultType[]
+}
