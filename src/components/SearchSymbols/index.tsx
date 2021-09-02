@@ -18,17 +18,21 @@ const SearchSymbol = ({ value, setValue, data }: SearchSymbolsProps) => {
     setIsFocused(toggleValue)
   }, [])
 
+  const close = useCallback(() => {
+    resultsPadding.value = 0
+    resultsHeight.value = 0
+    display.value = withDelay(100, withTiming(0))
+  }, [display, resultsHeight, resultsPadding])
+
   useEffect(() => {
-    if (!isFocused) {
-      resultsPadding.value = 0
-      resultsHeight.value = 0
-      display.value = withDelay(100, withTiming(0))
+    if (!isFocused || value === '') {
+      close()
     } else if (data.length > 0 && isFocused) {
       resultsPadding.value = 20
       resultsHeight.value = 400
       display.value = 1
     }
-  }, [resultsPadding, isFocused, resultsHeight, display, data.length])
+  }, [resultsPadding, isFocused, resultsHeight, display, data.length, close, value])
 
   return (
     <View
