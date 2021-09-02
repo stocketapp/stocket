@@ -20,8 +20,10 @@ export default function useSearch(term: string): SearchHook {
 
   const search = useCallback(async () => {
     try {
-      const res = await iexGet(`search/${term}`)
-      setResult(res)
+      if (term !== '') {
+        const res = await iexGet(`search/${term}`)
+        setResult(res)
+      }
     } catch (err) {
       console.trace('[useSearch]', err)
     }
