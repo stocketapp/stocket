@@ -8,8 +8,14 @@ import { AppStackNavigationProps } from 'navigation/AppStack'
 import { IEXQuote, PositionType } from 'types'
 import ListItem from './ListItem'
 import PositionItem from './PositionItem'
+import HorizontalListLoader from './HorizontalListLoader'
 
-const HorizontalList = ({ data, title, isPosition = false }: HorizontalListProps) => {
+const HorizontalList = ({
+  data,
+  title,
+  isPosition = false,
+  loading,
+}: HorizontalListProps) => {
   const { navigate } = useNavigation<AppStackNavigationProps>()
   const { p } = useTheme()
 
@@ -32,28 +38,35 @@ const HorizontalList = ({ data, title, isPosition = false }: HorizontalListProps
         </Text>
       </Container>
 
-      <FlatList
-        data={data}
-        renderItem={({ item }) => (
-          <>
-            {isPosition ? (
-              <PositionItem item={item as PositionType} onPress={() => goToStock(item)} />
-            ) : (
-              <ListItem item={item as IEXQuote} onPress={() => goToStock(item)} />
-            )}
-          </>
-        )}
-        keyExtractor={(_, key) => key.toString()}
-        style={listStyle}
-        horizontal
-        contentContainerStyle={listContentStyle}
-        ListEmptyComponent={() => (
-          <View style={listEmptyStyle}>
-            <EmptyPlaceholder />
-          </View>
-        )}
-        showsHorizontalScrollIndicator={false}
-      />
+      {!loading ? (
+        <FlatList
+          data={data}
+          renderItem={({ item }) => (
+            <>
+              {isPosition ? (
+                <PositionItem
+                  item={item as PositionType}
+                  onPress={() => goToStock(item)}
+                />
+              ) : (
+                <ListItem item={item as IEXQuote} onPress={() => goToStock(item)} />
+              )}
+            </>
+          )}
+          keyExtractor={(_, key) => key.toString()}
+          style={listStyle}
+          horizontal
+          contentContainerStyle={listContentStyle}
+          ListEmptyComponent={() => (
+            <View style={listEmptyStyle}>
+              <EmptyPlaceholder />
+            </View>
+          )}
+          showsHorizontalScrollIndicator={false}
+        />
+      ) : (
+        <HorizontalListLoader />
+      )}
     </Container>
   )
 }
@@ -64,4 +77,5 @@ export interface HorizontalListProps {
   data: (IEXQuote | PositionType)[]
   title: string
   isPosition?: boolean
+  loading?: boolean
 }
