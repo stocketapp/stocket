@@ -35,12 +35,6 @@ export interface TradeInfoProps {
   loading?: boolean
 }
 
-export interface SearchSymbolsProps {
-  value: string | null
-  setValue: Dispatch<SetStateAction<string>>
-  onSearch?: () => void
-}
-
 export interface SearchResultType {
   symbol: string
   securityName: string
