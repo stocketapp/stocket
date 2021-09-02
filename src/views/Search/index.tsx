@@ -23,8 +23,16 @@ export default function Search(): ReactElement {
           onSearch={onSearch}
         />
 
-        <HorizontalList title="Gainers" data={gainers.data?.list} />
-        <HorizontalList title="Losers" data={losers.data?.list} />
+        <HorizontalList
+          title="Gainers"
+          data={gainers.data?.list}
+          loading={gainers.loading}
+        />
+        <HorizontalList
+          title="Losers"
+          data={losers.data?.list}
+          loading={losers.loading}
+        />
       </Container>
     </ScrollView>
   )
