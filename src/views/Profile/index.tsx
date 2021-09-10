@@ -11,10 +11,13 @@ import pckg from '../../../package.json'
 import { useReactiveVar } from '@apollo/client'
 import { userVar } from '@cache'
 import { Content, Row } from './styles'
+import { useNavigation } from '@react-navigation/native'
+import { ProfileNavigationProps } from 'navigation/stacks/ProfileStack'
 
 export default function Profile() {
   const { balance } = useBalance()
   const user = useReactiveVar(userVar)
+  const { navigate } = useNavigation<ProfileNavigationProps>()
   // const { userInfo } = useUserSelector()
   // const iapRef = useRef(null)
   // const [isIapOpen, setIsIapOpen] = useState(false)
@@ -45,7 +48,7 @@ export default function Profile() {
             </View>
 
             <View>
-              <AddCash onPress={() => console.info('pressed')} />
+              <AddCash onPress={() => navigate('AddCash')} />
             </View>
           </Row>
         </Container>
@@ -59,8 +62,6 @@ export default function Profile() {
             label="Account Value"
             value={formatCurrency(balance?.total ?? 0)}
           />
-          {/* <ProfileItem label="Portfolio Gains" value={`${totalGains}`} />
-          <ProfileItem label="Account Value" value={accountValue ?? '$0.00'} /> */}
         </Content>
       </Container>
       <View
