@@ -1,24 +1,25 @@
 import { gql, useQuery } from '@apollo/client'
-import { useCallback, useEffect } from 'react'
+import { useCallback } from 'react'
 import { useFocusEffect } from '@react-navigation/native'
 import { balanceVar } from '@cache'
+import { BalanceType } from './useBalance'
 
 export default function useAvailableCash() {
-  const { data, refetch, ...result } = useQuery(GET_BALANCE_QUERY, {
-    fetchPolicy: 'network-only',
-  })
+  const { data, refetch, ...result } = useQuery<{ balance: BalanceType }>(
+    GET_BALANCE_QUERY,
+    {
+      fetchPolicy: 'network-only',
+      onCompleted: (res: { balance: BalanceType }) => {
+        balanceVar(res?.balance)
+      },
+    },
+  )
 
   useFocusEffect(
     useCallback(() => {
       refetch()
     }, [refetch]),
   )
-
-  useEffect(() => {
-    if (!result?.error) {
-      balanceVar(data?.balance?.cash)
-    }
-  }, [data?.balance?.cash, result?.error])
 
   return { cash: data?.balance?.cash, ...result }
 }

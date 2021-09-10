@@ -1,16 +1,17 @@
 import { InMemoryCache, makeVar, ReactiveVar } from '@apollo/client'
 import { WatchlistIexQuote } from 'views/Home/Watchlist/WatchlistItem'
-import { UserBalance, UserType } from 'types'
+import { UserType } from 'types'
 import { PortfolioType } from 'views/Home/hooks/useHomeHook'
+import { BalanceType } from 'hooks/useBalance'
 
 export const watchlistSymbolsVar: ReactiveVar<string[]> = makeVar<string[]>([])
 export const isWatchlistLoadingVar = makeVar(true)
 export const watchlistQuotesVar = makeVar<WatchlistIexQuote[] | null>(null)
 export const portfolioValueVar = makeVar<PortfolioType | null>(null)
-export const isPortfolioLoadingVar: ReactiveVar<any> = makeVar<any>(null)
+export const isPortfolioLoadingVar = makeVar<boolean>(true)
 export const userVar = makeVar<UserType | null>(null)
 export const isAuthenticatedVar = makeVar<boolean>(false)
-export const balanceVar = makeVar<UserBalance | null>(null)
+export const balanceVar = makeVar<BalanceType | object>({})
 
 const cache = new InMemoryCache({
   typePolicies: {
