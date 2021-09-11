@@ -24,7 +24,10 @@ function Products({ onClose, forwardedRef, isOpen }: Props) {
   const [success, setSuccess] = useState(false)
   const [purchasedProduct, setPurchasedProduct] = useState<string | null>(null)
 
-  const productValues = useMemo(() => getProductValue(purchasedProduct), [purchasedProduct])
+  const productValues = useMemo(
+    () => getProductValue(purchasedProduct),
+    [purchasedProduct],
+  )
 
   useEffect(() => {
     if (isOpen) {
@@ -118,7 +121,9 @@ function Products({ onClose, forwardedRef, isOpen }: Props) {
             <View style={styles.products}>
               <FlatList
                 data={sortBy(products, 'price')}
-                renderItem={({ item }) => <ProductItem product={item} onPurchase={requestBuy} />}
+                renderItem={({ item }) => (
+                  <ProductItem product={item} onPurchase={requestBuy} />
+                )}
                 keyExtractor={(el, key) => key.toString()}
                 numColumns={2}
                 contentContainerStyle={{ alignItems: 'center' }}

@@ -33,7 +33,7 @@ const TabStack = () => {
         }}
       />
       <Screen
-        name="Profile"
+        name="ProfileStack"
         component={ProfileStack}
         options={{
           tabBarIcon: ({ color }) => <ProfileIcon size={36} color={color} />,
