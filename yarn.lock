@@ -4812,6 +4812,11 @@ fd-slicer@~1.1.0:
   dependencies:
     pend "~1.2.0"
 
+fetch-retry@4.1.0:
+  version "4.1.0"
+  resolved "https://registry.yarnpkg.com/fetch-retry/-/fetch-retry-4.1.0.tgz#853ce17e3b23383bfeb3d34a1aa3dfb96a480d11"
+  integrity sha512-FUc9XZuhyE3ka3m53lec29PXVhdRf59QG01nE+OZdfl0M/R0E7Pk6k6qeWzHhX1pHl/f2JPA97sjjbHRgSg/9A==
+
 figures@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/figures/-/figures-2.0.0.tgz#3ab1a2d2a62c8bfb431a0c94cb797a2fce27c962"
@@ -8459,6 +8464,11 @@ react-native-event-source@^1.1.0:
   resolved "https://registry.yarnpkg.com/react-native-event-source/-/react-native-event-source-1.1.0.tgz#75a085df49d17ffd6ff31ffeb269dd64e21b841a"
   integrity sha512-CAs76IW8kTrdy0okfV2KPopm7E9TL0uNAR+SRrN7iZ/ii0zBeHWuhD4Q2F8gRKvmkrEtCZ6uwnfYL2TFmK0QZg==
 
+react-native-fetch-polyfill@1.1.3:
+  version "1.1.3"
+  resolved "https://registry.yarnpkg.com/react-native-fetch-polyfill/-/react-native-fetch-polyfill-1.1.3.tgz#a02d9069a2f7108ca0b70b8469085c67cc02949c"
+  integrity sha512-zr5yXQftuGq+ABGa3n4ZE+vkL1lBsMSePkRINm3/6vlpbwnLXYoijwazTO/W8GjsV4LAgGmzuieZxKO/NxW19A==
+
 react-native-flipper@^0.103.0:
   version "0.103.0"
   resolved "https://registry.yarnpkg.com/react-native-flipper/-/react-native-flipper-0.103.0.tgz#32cc1d9afd5c04a56b4f54b8aad08c07ea854fdf"
@@ -8485,12 +8495,20 @@ react-native-haptic-feedback@^1.10.0:
   resolved "https://registry.yarnpkg.com/react-native-haptic-feedback/-/react-native-haptic-feedback-1.11.0.tgz#adfd841f3b67046532f912c6ec827aea0037d8ad"
   integrity sha512-KTIy7lExwMtB6pOpCARyUzFj5EzYTh+A1GN/FB5Eb0LrW5C6hbb1kdj9K2/RHyZC+wyAJD1M823ZaDCU6n6cLA==
 
-react-native-iap@^7.3.0:
-  version "7.3.0"
-  resolved "https://registry.yarnpkg.com/react-native-iap/-/react-native-iap-7.3.0.tgz#133bec2037780c8047e3db651d837d7aa7166ed3"
-  integrity sha512-DQAeyw2l3Hc8KXgXvdauK3cNZUS9kopkJCB/Nxm56zQ9/SMCunv2X7kHWXQQ2Z9MLX1ZvepMAIlxt3D44KAWrw==
+react-native-iap@^7.4.1:
+  version "7.4.1"
+  resolved "https://registry.yarnpkg.com/react-native-iap/-/react-native-iap-7.4.1.tgz#0edb760ef0b8295b6b46c4ad2690e5f851990844"
+  integrity sha512-iYmbqs2fn8SD4p6uBXiHNY16SnPDorO6/XNiga8K056vhfdAde7S1o/sYRorISmXksVRQbwLFa+ivpk6eGg7OA==
   dependencies:
     dooboolab-welcome "1.3.2"
+
+react-native-iaphub@^6.2.6:
+  version "6.2.6"
+  resolved "https://registry.yarnpkg.com/react-native-iaphub/-/react-native-iaphub-6.2.6.tgz#887521d15f7129d80fdfaa099c6098c8d4b4d62e"
+  integrity sha512-kHoZ6OgGkMdYNvHf7sqTuuLw2LmOXlNqLprWXJqiZnNN9DfwuhUosr3BqqA/6jTvAwBkaD+bCR3D+kDTbWc3jQ==
+  dependencies:
+    fetch-retry "4.1.0"
+    react-native-fetch-polyfill "1.1.3"
 
 react-native-pager-view@^5.4.0:
   version "5.4.0"
