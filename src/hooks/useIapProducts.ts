@@ -1,44 +1,44 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-import { useEffect } from 'react'
-import { useDispatch } from 'react-redux'
-import * as RNIap from 'react-native-iap'
-import iapProductsList from '@utils/iapProductsList'
+import { useEffect, useCallback, useState } from 'react'
+import IapHub from 'react-native-iaphub'
+import { productsVar } from '@cache'
+import { IAPHUB_API_KEY, IAPHUB_APPID, IAPHUB_ENV } from '../../config'
 
 export default function useIapProducts(uid: string) {
-  const dispatch = useDispatch()
+  const [isInit, setIsInit] = useState(false)
 
-  useEffect(() => {
-    const initIAP = async () => {
-      try {
-        await RNIap.initConnection()
-      } catch (err) {
-        console.log('initIAP', err)
-      }
+  const initIap = useCallback(async () => {
+    try {
+      await IapHub.init({
+        appId: IAPHUB_APPID,
+        apiKey: IAPHUB_API_KEY,
+        environment: IAPHUB_ENV,
+      })
+      setIsInit(true)
+    } catch (err) {
+      setIsInit(false)
+      console.error('Something went wrong initializing IAP', err)
+      console.info('[FUNCTION] initIap -> useIapProducts.ts')
     }
-    initIAP()
   }, [])
 
-  useEffect(() => {
-    const iapProducts = async () => {
-      const products: Array<RNIap.Product> = []
-      try {
-        const result = await RNIap.getProducts(iapProductsList.map(el => el.productId))
-        result.map(el => {
-          let prod = { productPrice: 0, ...el }
-          prod.productPrice = Number(el.price)
-          products.push(el)
-        })
-        dispatch({
-          type: 'SET_IAP_PRODUCTS',
-          products,
-        })
-      } catch (err) {
-        console.log('fetch iapProducts', err)
-      }
-    }
-
-    if (uid) {
-      iapProducts()
+  const iapProducts = useCallback(async () => {
+    try {
+      await IapHub.setUserId(uid)
+      const products = await IapHub.getProductsForSale()
+      productsVar(products)
+    } catch (err) {
+      console.error('Something went wrong while fetching IAP prodcuts', err)
+      console.info('[FUNCTION] iapProducts -> useIapProducts.ts')
     }
   }, [uid])
+
+  useEffect(() => {
+    initIap()
+  }, [initIap])
+
+  useEffect(() => {
+    if (isInit && uid) {
+      iapProducts()
+    }
+  }, [iapProducts, isInit, uid])
 }
