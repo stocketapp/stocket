@@ -11,3 +11,10 @@ export const Row = styled.View(({ theme }) => ({
   alignItems: 'center',
   paddingTop: theme.spacing.xlg,
 }))
+
+export const AddCashButtonContainer = styled.TouchableOpacity(({ theme }) => ({
+  paddingVertical: 8,
+  paddingHorizontal: 10,
+  borderRadius: 1000,
+  backgroundColor: theme.colors.GREEN,
+}))

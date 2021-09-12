@@ -5,7 +5,7 @@ import { formatCurrency } from '@utils/functions'
 import { useBalance } from '@hooks'
 // import BugIcon from '@assets/svg/bug.svg'
 import ProfileItem from './ProfileItem'
-import AddCash from './AddCash'
+import AddCashButton from './AddCashButton'
 import LogoutButton from './LogoutButton'
 import pckg from '../../../package.json'
 import { useReactiveVar } from '@apollo/client'
@@ -18,14 +18,6 @@ export default function Profile() {
   const { balance } = useBalance()
   const user = useReactiveVar(userVar)
   const { navigate } = useNavigation<ProfileNavigationProps>()
-  // const { userInfo } = useUserSelector()
-  // const iapRef = useRef(null)
-  // const [isIapOpen, setIsIapOpen] = useState(false)
-  // const portfolioValue = userInfo?.portfolioValue ?? '$0.00'
-  // const cash = formatCurrency(userInfo?.cash ?? 0)
-  // const { totalGains } = useTotalGains(portfolioValue ?? '$0.00')
-  // const accountValue = formatCurrency(currencyToNumber(portfolioValue) + currencyToNumber(cash))
-
   return (
     <>
       <Container fullView ph safeAreaTop>
@@ -48,7 +40,7 @@ export default function Profile() {
             </View>
 
             <View>
-              <AddCash onPress={() => navigate('AddCash')} />
+              <AddCashButton onPress={() => navigate('AddCash')} />
             </View>
           </Row>
         </Container>
@@ -88,7 +80,6 @@ export default function Profile() {
           {pckg.version}
         </Text>
       </View>
-      {/* <Products ref={iapRef} isOpen={isIapOpen} onClose={() => setIsIapOpen(false)} /> */}
     </>
   )
 }
