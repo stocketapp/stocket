@@ -8,7 +8,7 @@ export default ({ product, onPurchase }: Props) => (
   <TouchableOpacity
     style={styles.btnContainer}
     activeOpacity={0.6}
-    onPress={() => onPurchase(product?.id)}
+    onPress={() => onPurchase(product?.sku)}
   >
     {product?.sku && (
       <View style={styles.container}>
