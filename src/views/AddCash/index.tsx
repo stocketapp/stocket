@@ -1,7 +1,7 @@
 import { FlatList } from 'react-native'
-import { useReactiveVar } from '@apollo/client'
+import { useReactiveVar, useMutation } from '@apollo/client'
 import { sortBy } from 'lodash'
-import { productsVar } from '@cache'
+import { productsVar, balanceVar } from '@cache'
 import { Text } from '@components'
 import ProductItem from './ProductItem'
 import ProductsIllustration from './ProductsIllustration'
@@ -9,9 +9,15 @@ import { Container, columnWrapperStyle, contentContainerStyle } from './styles'
 import IapHub from 'react-native-iaphub'
 import Analytics from 'appcenter-analytics'
 import { IAPHUB_ENV as environment } from '../../../config'
+import { ADD_CASH } from './queries'
+
+const onCompleted = (data: { addCash: AddCashType }) => {
+  balanceVar({ cash: data?.addCash?.cash })
+}
 
 export default function AddCash() {
   const products = useReactiveVar(productsVar)
+  const [mutate] = useMutation<{ addCash: AddCashType }>(ADD_CASH, { onCompleted })
 
   const purchaseEvent = (product: string, status: string) =>
     Analytics.trackEvent('Purchase', { product, status, environment })
@@ -19,7 +25,10 @@ export default function AddCash() {
   const onPurchase = async (sku: string) => {
     try {
       purchaseEvent(sku, 'START')
-      await IapHub.buy(sku)
+      const transaction = await IapHub.buy(sku)
+      await mutate({
+        variables: { input: { sku, purchaseId: transaction?.id } },
+      })
       purchaseEvent(sku, 'SUCCESS')
     } catch (err) {
       if (err.code) {
@@ -45,4 +54,8 @@ export default function AddCash() {
       />
     </Container>
   )
+}
+
+interface AddCashType {
+  cash: number
 }
