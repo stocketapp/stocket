@@ -11,10 +11,10 @@ export default function ({ onPress, label, value }: Props) {
   return (
     <TouchableOpacity onPress={onPress} disabled={!onPress}>
       <View style={styles.item}>
-        <Text color="GRAY" style={{ fontSize: 16 }} weight="Regular">
+        <Text type="label" weight="Regular" color="GRAY">
           {label}
         </Text>
-        <Text type="label" weight="Regular">
+        <Text type="label" weight="Semibold">
           {value}
         </Text>
       </View>
