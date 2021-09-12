@@ -27,7 +27,7 @@ export default function AddCash() {
       purchaseEvent(sku, 'START')
       const transaction = await IapHub.buy(sku)
       await mutate({
-        variables: { input: { sku, purchaseId: transaction?.id } },
+        variables: { input: { sku, purchaseId: transaction?.purchase } },
       })
       purchaseEvent(sku, 'SUCCESS')
     } catch (err) {
