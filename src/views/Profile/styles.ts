@@ -18,3 +18,18 @@ export const AddCashButtonContainer = styled.TouchableOpacity(({ theme }) => ({
   borderRadius: 1000,
   backgroundColor: theme.colors.GREEN,
 }))
+
+export const ProfileButtonItemContainer = styled.TouchableOpacity(({ theme }) => ({
+  width: '100%',
+  paddingVertical: theme.spacing.lg,
+  alignItems: 'center',
+  borderBottomWidth: 1,
+  borderBottomColor: theme.colors.BG_DARK_CARD,
+}))
+
+export const ProfileButtonItemInner = styled.View({
+  width: '100%',
+  flexDirection: 'row',
+  justifyContent: 'space-between',
+  alignItems: 'center',
+})
