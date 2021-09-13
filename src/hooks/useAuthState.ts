@@ -1,35 +1,51 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect } from 'react'
 import auth from '@react-native-firebase/auth'
 import useStocketMutation from '@mutations'
-import { useBatchDispatch, useDispatchAction } from '@hooks'
-import useUser from './useUser'
+import { gql } from '@apollo/client'
+import { useReactiveVar } from '@apollo/client'
+import { userVar, isAuthenticatedVar } from '@cache'
+import { UserType } from 'types'
 
-export default function useAuthState() {
-  const batchDispatch = useBatchDispatch()
-  const dispatch = useDispatchAction()
-  const { isAuth, currentUser } = useUser()
+export default function useAuthState(): AuthState {
   const StocketMutations = useStocketMutation()
+  const isAuthed = useReactiveVar(isAuthenticatedVar)
+  const user = useReactiveVar(userVar)
 
   useEffect(() => {
-    const authSubscription = auth().onAuthStateChanged(async user => {
-      if (user) {
+    const authSubscription = auth().onAuthStateChanged(async currentUser => {
+      if (currentUser) {
         try {
-          batchDispatch([
-            { type: 'SET_USER', payload: user },
-            { type: 'IS_AUTHENTICATED', payload: true },
-          ])
-          await StocketMutations.createUser(user)
+          const res = await StocketMutations.createUser(currentUser)
+          userVar(res?.data?.createUser?.user)
+          isAuthenticatedVar(true)
         } catch (err) {
           console.log('authSubscription', err)
         }
       } else {
-        dispatch('USER_LOGOUT', false)
+        isAuthenticatedVar(false)
+        userVar(null)
       }
     })
 
     return () => authSubscription()
-  }, [])
+  }, []) // eslint-disable-line react-hooks/exhaustive-deps
 
-  return { isAuth, currentUser }
+  return { isAuthed, user }
 }
+
+interface AuthState {
+  isAuthed: boolean
+  user: UserType | null
+}
+
+export const USER_QUERY = gql`
+  query {
+    user {
+      displayName
+      uid
+      id
+      email
+      cash
+    }
+  }
+`

@@ -1,26 +1,34 @@
-import { StyleSheet } from 'react-native'
-import { SUB_BACKGROUND } from '@utils/colors'
+import { css } from '@emotion/native'
+import theme from '../../theme'
 
-export default StyleSheet.create({
-  searchContainer: {
-    paddingVertical: 3,
-    paddingLeft: 16,
-    paddingRight: 8,
-    backgroundColor: SUB_BACKGROUND, // '#3F3F3F',
-    width: '100%',
-    borderRadius: 1000,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-  },
-  searchInput: {
-    color: '#fff',
-    fontSize: 16,
-    flex: 1,
-    letterSpacing: 0.5,
-    fontWeight: '500',
-  },
-  searchBtn: {
-    paddingVertical: 3,
-    paddingHorizontal: 1,
-  },
+export const searchInputStyles = css({
+  color: '#fff',
+  fontSize: 20,
+  flex: 1,
+  letterSpacing: 0.5,
+  fontFamily: 'SFProText-Medium',
+})
+
+export const searchInputContainerStyle = css({
+  height: 50,
+  backgroundColor: theme.colors.BG_DARK_CARD,
+  borderRadius: 25,
+  alignItems: 'center',
+  flexDirection: 'row',
+  zIndex: 2,
+  width: '100%',
+  justifyContent: 'space-between',
+  paddingHorizontal: 16,
+})
+
+export const searchResultContainerStyle = css({
+  width: '100%',
+  overflow: 'scroll',
+  zIndex: 0,
+  borderBottomEndRadius: 20,
+  borderBottomStartRadius: 20,
+  position: 'absolute',
+  top: 20,
+  left: 0,
+  right: 0,
 })

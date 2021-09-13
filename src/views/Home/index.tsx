@@ -1,15 +1,29 @@
-import React from 'react'
-import { createStackNavigator } from '@react-navigation/stack'
-import Stock from '../Stock'
-import HomeView from './HomeView'
+import { Container, MarketStatus, Balance, HorizontalList } from '@components'
+import { WatchlistList } from './Watchlist'
+import { HeaderContainer, StatusContainer } from './styles'
+import useHomeHook from './hooks/useHomeHook'
 
-const { Screen, Navigator } = createStackNavigator()
-
+import { isPortfolioLoadingVar } from '@cache'
+import { useReactiveVar } from '@apollo/client'
 export default function Home() {
+  const { portfolio, watchlist } = useHomeHook()
+  const isPortfolioLoading = useReactiveVar(isPortfolioLoadingVar)
+
   return (
-    <Navigator headerMode="none">
-      <Screen name="Home" component={HomeView} />
-      <Screen name="Stock" component={Stock} />
-    </Navigator>
+    <Container fullView scrollable safeAreaTop ph>
+      <HeaderContainer>
+        <StatusContainer>
+          <MarketStatus />
+        </StatusContainer>
+        <Balance {...portfolio} />
+      </HeaderContainer>
+      <HorizontalList
+        title="Positions"
+        data={portfolio?.positions}
+        isPosition
+        loading={isPortfolioLoading}
+      />
+      <WatchlistList data={watchlist} />
+    </Container>
   )
 }

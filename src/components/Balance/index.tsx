@@ -1,40 +1,34 @@
-import React from 'react'
-import { View } from 'react-native'
-import { LABEL, GREEN, RED } from '@utils/colors'
 import Text from '../Text'
 import { formatCurrency } from '@utils/functions'
-import styles from './styles'
+import { ChangeContainer, BalanceContaienr, valueStyle } from './styles'
+import { ArrowUpIcon, ArrowDownIcon } from '@icons'
 
-interface Props {
-  dayChange: {
-    change: number
-    changePct: number
-    value: string | number
-    date: string
-  }
-}
-
-const Balance = ({ dayChange }: Props): JSX.Element => {
-  const { change, changePct, value, date } = dayChange
-  const color = changePct > 0 ? GREEN : changePct < 0 ? RED : 'white'
+const Balance = ({ value, change, changePct }: BalanceProps) => {
+  const isPositive = changePct > 0
+  const color = isPositive ? 'GREEN' : changePct < 0 ? 'RED' : 'WHITE'
+  const Arrow = isPositive ? ArrowUpIcon : ArrowDownIcon
 
   return (
-    <>
-      <Text weight="Black" style={styles.value}>
-        {typeof value !== 'number' ? value : formatCurrency(value)}
+    <BalanceContaienr>
+      <Text weight="Black" style={valueStyle}>
+        {formatCurrency(value)}{' '}
       </Text>
-      <View style={styles.changeContainer}>
-        <Text weight="Medium" color={color}>
-          {changePct > 0 && '+'}
-          {`${formatCurrency(change)} (${(changePct ?? 0)?.toFixed(2)}%)`}
+      <ChangeContainer>
+        <Arrow size={20} color={color.toLocaleLowerCase()} />
+        <Text weight="Medium" type="label" color="GRAY">
+          <Text weight="Bold" color={color} type="label">
+            {formatCurrency(change)} ({(changePct ?? 0)?.toFixed(2)}%)
+          </Text>
         </Text>
-        <Text weight="Light" color={LABEL}>
-          {' '}
-          {date}
-        </Text>
-      </View>
-    </>
+      </ChangeContainer>
+    </BalanceContaienr>
   )
+}
+
+interface BalanceProps {
+  value: number
+  change: number
+  changePct: number
 }
 
 export default Balance

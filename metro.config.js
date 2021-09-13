@@ -18,7 +18,6 @@ module.exports = (async () => {
         transform: {
           experimentalImportSupport: false,
           inlineRequires: true,
-          resetCache: true,
         },
       }),
     },

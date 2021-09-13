@@ -1,6 +1,5 @@
-declare module '*.svg' {
-  import React from 'react'
-  import { SvgProps } from 'react-native-svg'
-  const content: React.FC<SvgProps>
-  export default content
+import { StocketTheme } from './theme'
+
+declare module '@emotion/react' {
+  export interface Theme extends StocketTheme {}
 }

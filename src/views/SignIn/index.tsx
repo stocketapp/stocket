@@ -1,4 +1,3 @@
-import React from 'react'
 import { View, StyleSheet, Image } from 'react-native'
 import { AppleButton } from '@invertase/react-native-apple-authentication'
 import { BACKGROUND } from '@utils/colors'

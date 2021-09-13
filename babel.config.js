@@ -1,6 +1,17 @@
 module.exports = {
-  presets: ['module:metro-react-native-babel-preset'],
+  presets: [
+    [
+      'module:metro-react-native-babel-preset',
+      { useTransformReactJSXExperimental: true },
+    ],
+  ],
   plugins: [
+    [
+      '@babel/plugin-transform-react-jsx',
+      {
+        runtime: 'automatic',
+      },
+    ],
     [
       'module-resolver',
       {
@@ -23,8 +34,12 @@ module.exports = {
           '@queries': './src/graphql/queries',
           '@mutations': './src/graphql/mutations',
           '@svg': './src/assets/svg',
+          '@styledComponents': './src/components/StyledComponents',
+          '@theme': './src/theme.ts',
+          '@cache': './src/Cache.ts',
         },
       },
     ],
+    'react-native-reanimated/plugin',
   ],
 }

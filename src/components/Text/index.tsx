@@ -1,18 +1,23 @@
-import React from 'react'
-import { Text as RNText, TextStyle } from 'react-native'
+import { Text as RNText, TextStyle, TextProps } from 'react-native'
 import { GREEN, RED } from '@utils/colors'
-import type { CustomTextProps } from 'types'
+import { useTheme } from '@emotion/react'
 
 const Text = ({
   type,
-  color = '#fff',
+  color = 'WHITE',
   cap = false,
   status,
   children,
   style,
   weight = 'Regular',
+  pt,
+  pb,
+  pr,
+  pl,
+  numberOfLines = 1,
   ...props
 }: CustomTextProps) => {
+  const theme = useTheme()
   const selectFontSize = () => {
     switch (type) {
       case 'heading':
@@ -20,13 +25,17 @@ const Text = ({
       case 'title':
         return 20
       case 'label':
-        return 18
+        return 16
       case 'subtext':
         return 12
       case 'big':
-        return 26
+        return 28
+      case 'bigger':
+        return 34
+      case 'huge':
+        return 52
       default:
-        return 15
+        return 14
     }
   }
 
@@ -46,16 +55,60 @@ const Text = ({
       textTransform: 'capitalize',
       letterSpacing: 1,
     }),
-    color: !status ? color : setStatus(),
+    color: !status ? theme.colors[color] : setStatus(),
     fontFamily: `SFProText-${weight}`,
+    ...(pt && { paddingTop: pt }),
+    ...(pb && { paddingBottom: pb }),
+    ...(pr && { paddingRight: pr }),
+    ...(pl && { paddingLeft: pl }),
     ...style,
   }
 
   return (
-    <RNText style={customStyle} {...props}>
+    <RNText
+      style={customStyle}
+      {...props}
+      numberOfLines={numberOfLines}
+      ellipsizeMode="tail"
+    >
       {children}
     </RNText>
   )
 }
+
+export interface CustomTextProps extends TextProps {
+  type?: 'heading' | 'title' | 'label' | 'subtext' | 'big' | 'bigger' | 'huge'
+  cap?: boolean
+  color?: ThemeColorStrings
+  children?: any
+  style?: TextStyle
+  status?: 'negative' | 'positive'
+  pt?: number
+  pb?: number
+  pr?: number
+  pl?: number
+  weight?:
+    | 'Black'
+    | 'Heavy'
+    | 'Bold'
+    | 'Semibold'
+    | 'Medium'
+    | 'Regular'
+    | 'Light'
+    | 'Thin'
+    | 'Ultralight'
+}
+
+export type ThemeColorStrings =
+  | 'BG_DARK'
+  | 'BG_DARK_SECONDARY'
+  | 'BG_DARK_CARD'
+  | 'TEXT_DARK'
+  | 'GREEN_STOCKET'
+  | 'GREEN'
+  | 'GRAY'
+  | 'RED'
+  | 'WHITE'
+  | 'LIGHT_GRAY'
 
 export default Text

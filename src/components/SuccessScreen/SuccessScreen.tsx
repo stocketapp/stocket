@@ -1,9 +1,8 @@
-import React, { useRef, useEffect } from 'react'
+import { useRef, useEffect } from 'react'
 import { View, TouchableOpacity } from 'react-native'
-import { DARK_TEXT } from '@utils/colors'
-import LoadingCheckmark from '../LoadingCheckmark/LoadingCheckmark'
 import Text from '../Text'
 import styles from './styles'
+import LottieView from 'lottie-react-native'
 
 interface Props {
   loading: boolean
@@ -12,43 +11,54 @@ interface Props {
   bigText?: string
 }
 
-interface RefCurrent {
-  current:
-    | {
-        play: (a: number, b: number) => void | undefined
-      }
-    | undefined
-}
-
-export default ({ loading, onFinished, successText, bigText }: Props) => {
-  const ref: RefCurrent = useRef()
+export default function SuccessScreen({
+  loading,
+  onFinished,
+  successText,
+  bigText,
+}: Props) {
+  const ref = useRef<any>()
 
   useEffect(() => {
-    if (ref?.current) {
-      ref?.current?.play(0, 90)
+    if (!loading) {
+      ref?.current?.play(120, 200)
     }
   }, [loading, ref])
 
   return (
     <View style={styles.container}>
       <View style={{ paddingTop: '10%' }}>
-        <LoadingCheckmark size={150} forwardedRef={ref} loop={false} />
+        <LottieView
+          source={require('../../assets/lottie/loading-checkmark.json')}
+          style={{ height: 120, width: 120 }}
+          loop={false}
+          ref={ref}
+        />
       </View>
-      <>
-        <Text style={{ textAlign: 'center' }}>{successText}</Text>
+      <Text
+        style={{ textAlign: 'center' }}
+        pt={20}
+        weight="Medium"
+        type="title"
+        numberOfLines={2}
+      >
+        {successText}
+      </Text>
 
-        <Text weight="Bold" style={{ paddingTop: 30, fontSize: 28 }}>
-          {bigText}
-        </Text>
+      <Text weight="Black" pt={30} type="big">
+        {bigText}
+      </Text>
+      <Text weight="Medium" color="GRAY">
+        Price
+      </Text>
 
-        <TouchableOpacity style={{ marginTop: '18%' }} onPress={onFinished}>
-          <View style={styles.btn}>
-            <Text weight="Heavy" color={DARK_TEXT}>
-              DONE
-            </Text>
-          </View>
-        </TouchableOpacity>
-      </>
+      <TouchableOpacity style={{ marginTop: '18%' }} onPress={onFinished}>
+        <View style={styles.btn}>
+          <Text weight="Black" color="TEXT_DARK">
+            DONE
+          </Text>
+        </View>
+      </TouchableOpacity>
     </View>
   )
 }

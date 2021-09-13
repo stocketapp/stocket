@@ -1,8 +1,7 @@
-import React from 'react'
 import { SignIn } from '@views'
-import { createStackNavigator } from '@react-navigation/stack'
+import { createNativeStackNavigator } from '@react-navigation/native-stack'
 
-const { Screen, Navigator } = createStackNavigator()
+const { Screen, Navigator } = createNativeStackNavigator()
 
 export default () => (
   <Navigator>

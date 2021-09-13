@@ -1,33 +1,33 @@
-import React from 'react'
-import { StyleSheet, View } from 'react-native'
-import { Text } from '@components'
+import { useTheme } from '@emotion/react'
+import { Container, Text } from '@components'
+import { useNavigation } from '@react-navigation/native'
 import WatchlistItem from './WatchlistItem'
-import type { SelectedStockData } from 'types'
+import { WatchlistIexQuote } from './WatchlistItem'
+import { AppStackNavigationProps } from '@navigation/AppStack'
 
-type Props = {
-  data: Array<SelectedStockData>
-  onItemPress: (item: SelectedStockData) => void
+export const WatchlistList = ({ data }: { data: WatchlistIexQuote[] | null }) => {
+  const { navigate } = useNavigation<AppStackNavigationProps>()
+  const { p } = useTheme()
+
+  const onItemPress = (quote: WatchlistIexQuote) => {
+    navigate('StockStack', {
+      screen: 'Stock',
+      params: {
+        symbol: quote?.symbol,
+        companyName: quote?.companyName,
+        logo: quote?.logo,
+      },
+    })
+  }
+
+  return (
+    <Container top={p.xxlg}>
+      <Text type="heading" weight="Black">
+        Watchlist
+      </Text>
+      {data?.map((el: WatchlistIexQuote, i: number) => (
+        <WatchlistItem item={el} onPress={onItemPress} key={i} />
+      ))}
+    </Container>
+  )
 }
-
-const Watchlist = ({ data, onItemPress }: Props) => (
-  <View style={styles.container}>
-    <Text type="title" weight="Heavy" style={styles.title}>
-      Watchlist
-    </Text>
-    {data.map((item, i) => (
-      <WatchlistItem item={item} key={i} onPress={() => onItemPress(item)} />
-    ))}
-  </View>
-)
-
-const styles = StyleSheet.create({
-  container: {
-    paddingHorizontal: 18,
-    paddingTop: 25,
-  },
-  title: {
-    paddingBottom: 10,
-  },
-})
-
-export default Watchlist

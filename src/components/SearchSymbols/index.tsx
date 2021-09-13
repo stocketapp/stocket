@@ -1,29 +1,82 @@
-import React from 'react'
 import { View, TextInput, TouchableOpacity } from 'react-native'
-import Container from '../Container'
 import { SearchIcon } from '@icons'
-import type { SearchSymbolsProps as Props } from 'types'
-import { GRAY_DARKER } from '@utils/colors'
-import styles from './styles'
+import Animated, { useSharedValue, withDelay, withTiming } from 'react-native-reanimated'
+import { searchInputStyles, searchInputContainerStyle } from './styles'
+import { useTheme } from '@emotion/react'
+import { useCallback, Dispatch, SetStateAction, useEffect, useState } from 'react'
+import SearchResults from './SearchResults'
+import { SearchResultType } from 'types'
 
-const SearchSymbol: React.FC<Props> = ({ value, setValue, onSearch }) => (
-  <Container top={20} bottom={10}>
-    <View style={styles.searchContainer}>
-      <TextInput
-        value={value ?? ''}
-        onChangeText={text => setValue(text)}
-        style={styles.searchInput}
-        placeholder="Search company symbol or name"
-        placeholderTextColor={GRAY_DARKER}
-        autoCapitalize="words"
-        returnKeyType="search"
+const SearchSymbol = ({ value, setValue, data }: SearchSymbolsProps) => {
+  const theme = useTheme()
+  const resultsHeight = useSharedValue(0)
+  const resultsPadding = useSharedValue(0)
+  const [isFocused, setIsFocused] = useState(false)
+  const display = useSharedValue(0)
+
+  const toggle = useCallback((toggleValue: boolean) => {
+    setIsFocused(toggleValue)
+  }, [])
+
+  const close = useCallback(() => {
+    resultsPadding.value = 0
+    resultsHeight.value = 0
+    display.value = withDelay(100, withTiming(0))
+  }, [display, resultsHeight, resultsPadding])
+
+  useEffect(() => {
+    if (!isFocused || value === '') {
+      close()
+    } else if (data.length > 0 && isFocused) {
+      resultsPadding.value = 20
+      resultsHeight.value = 400
+      display.value = 1
+    }
+  }, [resultsPadding, isFocused, resultsHeight, display, data.length, close, value])
+
+  return (
+    <View
+      style={{
+        width: '100%',
+        alignItems: 'flex-end',
+        zIndex: 1,
+      }}
+    >
+      <View style={searchInputContainerStyle}>
+        <Animated.View style={{ flex: 3 }}>
+          <TextInput
+            value={value ?? ''}
+            onChangeText={text => setValue(text)}
+            style={searchInputStyles}
+            placeholder="Symbol or company name"
+            placeholderTextColor={theme.colors.GRAY}
+            autoCapitalize="characters"
+            returnKeyType="search"
+            onBlur={() => toggle(false)}
+            onFocus={() => toggle(true)}
+          />
+        </Animated.View>
+
+        <TouchableOpacity>
+          <SearchIcon size={28} color={theme.colors.WHITE} />
+        </TouchableOpacity>
+      </View>
+
+      <SearchResults
+        data={data}
+        height={resultsHeight}
+        padding={resultsPadding}
+        display={display}
       />
-
-      <TouchableOpacity style={styles.searchBtn} onPress={onSearch} disabled>
-        <SearchIcon size={28} />
-      </TouchableOpacity>
     </View>
-  </Container>
-)
+  )
+}
 
 export default SearchSymbol
+
+export interface SearchSymbolsProps {
+  value: string | null
+  setValue: Dispatch<SetStateAction<string>>
+  onSearch?: () => void
+  data: SearchResultType[]
+}
