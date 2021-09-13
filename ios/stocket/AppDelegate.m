@@ -11,7 +11,7 @@
 #import <AppCenterReactNative.h>
 #import <AppCenterReactNativeAnalytics.h>
 #import <AppCenterReactNativeCrashes.h>
-// #import <CodePush/CodePush.h>
+ #import <CodePush/CodePush.h>
 #import "RNBootSplash.h"
 #import <RNGoogleSignin/RNGoogleSignin.h>
 
