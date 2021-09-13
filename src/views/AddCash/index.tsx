@@ -1,18 +1,20 @@
+import { useMemo, useState } from 'react'
 import { FlatList } from 'react-native'
 import { useReactiveVar, useMutation } from '@apollo/client'
 import { sortBy } from 'lodash'
-import { productsVar, balanceVar } from '@cache'
+import { balanceVar, userVar } from '@cache'
 import { Text, SuccessScreen } from '@components'
-import ProductItem from './ProductItem'
-import ProductsIllustration from './ProductsIllustration'
-import { Container, columnWrapperStyle, contentContainerStyle } from './styles'
 import IapHub from 'react-native-iaphub'
 import Analytics from 'appcenter-analytics'
-import { IAPHUB_ENV as environment } from '../../../config'
-import { ADD_CASH } from './queries'
-import { useMemo, useState } from 'react'
 import { getProductValue, formatCurrency } from '@utils/functions'
 import { useNavigation } from '@react-navigation/core'
+import ProductsIllustration from './ProductsIllustration'
+import { ADD_CASH } from './queries'
+import ProductItem from './ProductItem'
+import { Container, columnWrapperStyle, contentContainerStyle } from './styles'
+import { IAPHUB_ENV as environment } from '../../../config'
+import { useIapProducts } from '@hooks'
+import LottieView from 'lottie-react-native'
 
 const onCompleted = (data: { addCash: AddCashType }) => {
   balanceVar({ cash: data?.addCash?.cash })
@@ -20,14 +22,14 @@ const onCompleted = (data: { addCash: AddCashType }) => {
 
 export default function AddCash() {
   const { goBack } = useNavigation()
-  const products = useReactiveVar(productsVar)
   const [selectedProduct, setSelectedProduct] = useState<string>('')
-  const [success, setSuccess] = useState(true)
+  const [success, setSuccess] = useState(false)
+  const productValue = useMemo(() => getProductValue(selectedProduct), [selectedProduct])
   const [mutate, { loading }] = useMutation<{ addCash: AddCashType }>(ADD_CASH, {
     onCompleted,
   })
-
-  const productValue = useMemo(() => getProductValue(selectedProduct), [selectedProduct])
+  const user = useReactiveVar(userVar)
+  const products = useIapProducts(user?.uid ?? '')
 
   const purchaseEvent = (product: string, status: string) =>
     Analytics.trackEvent('Purchase', { product, status, environment })
@@ -54,6 +56,19 @@ export default function AddCash() {
     setSelectedProduct('')
     setSuccess(false)
     goBack()
+  }
+
+  if (products.length === 0) {
+    return (
+      <Container>
+        <LottieView
+          source={require('../../assets/lottie/loading.json')}
+          style={{ height: 120, width: 120 }}
+          autoPlay
+          loop
+        />
+      </Container>
+    )
   }
 
   return (
