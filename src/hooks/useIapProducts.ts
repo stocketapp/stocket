@@ -1,31 +1,16 @@
-import { useEffect, useCallback, useState } from 'react'
+import { useEffect, useCallback } from 'react'
 import IapHub from 'react-native-iaphub'
 import { productsVar } from '@cache'
-import { IAPHUB_API_KEY, IAPHUB_APPID, IAPHUB_ENV } from '../../config'
+import { useReactiveVar } from '@apollo/client'
 
 export default function useIapProducts(uid: string) {
-  const [isInit, setIsInit] = useState(false)
-
-  const initIap = useCallback(async () => {
-    try {
-      await IapHub.init({
-        appId: IAPHUB_APPID,
-        apiKey: IAPHUB_API_KEY,
-        environment: IAPHUB_ENV,
-      })
-      setIsInit(true)
-    } catch (err) {
-      setIsInit(false)
-      console.error('Something went wrong initializing IAP', err)
-      console.info('[FUNCTION] initIap -> useIapProducts.ts')
-    }
-  }, [])
+  const products = useReactiveVar(productsVar)
 
   const iapProducts = useCallback(async () => {
     try {
       await IapHub.setUserId(uid)
-      const products = await IapHub.getProductsForSale()
-      productsVar(products)
+      const res = await IapHub.getProductsForSale()
+      productsVar(res)
     } catch (err) {
       console.error('Something went wrong while fetching IAP prodcuts', err)
       console.info('[FUNCTION] iapProducts -> useIapProducts.ts')
@@ -33,12 +18,10 @@ export default function useIapProducts(uid: string) {
   }, [uid])
 
   useEffect(() => {
-    initIap()
-  }, [initIap])
-
-  useEffect(() => {
-    if (isInit && uid) {
+    if (products.length === 0) {
       iapProducts()
     }
-  }, [iapProducts, isInit, uid])
+  }, [iapProducts, products])
+
+  return products
 }
