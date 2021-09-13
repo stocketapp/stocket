@@ -80,7 +80,7 @@ export interface BalanceItem {
 }
 
 export interface ProductValue {
-  productId: string
+  sku: string
   value: number
   price: number
 }

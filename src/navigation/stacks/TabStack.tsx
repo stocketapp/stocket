@@ -1,9 +1,10 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
-import TabBar from '../TabBar'
-import { TrendingUpIcon, SearchIcon, ProfileIcon } from '@icons'
 import { useTheme } from '@emotion/react'
-import { Search, Profile } from '@views'
+import { TrendingUpIcon, SearchIcon, ProfileIcon } from '@icons'
+import { Search } from '@views'
+import TabBar from '../TabBar'
 import MainStack from './MainStack'
+import ProfileStack from './ProfileStack'
 
 const { Navigator, Screen } = createBottomTabNavigator()
 
@@ -32,8 +33,8 @@ const TabStack = () => {
         }}
       />
       <Screen
-        name="Profile"
-        component={Profile}
+        name="ProfileStack"
+        component={ProfileStack}
         options={{
           tabBarIcon: ({ color }) => <ProfileIcon size={36} color={color} />,
         }}

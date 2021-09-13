@@ -1,7 +1,7 @@
 import { useEffect, ReactNode } from 'react'
 import { StatusBar, View } from 'react-native'
 import RNBootSplash from 'react-native-bootsplash'
-import { useAuthState, useIapProducts } from './src/hooks'
+import { useAuthState, useIapInit } from './src/hooks'
 import { BACKGROUND } from './src/utils/colors'
 import MainStack from './src/navigation/AppStack'
 import AuthStack from './src/navigation/AuthenticationStack'
@@ -10,7 +10,7 @@ import { isWatchlistLoadingVar, isPortfolioLoadingVar } from './src/Cache'
 
 export default function App(): ReactNode {
   const { isAuthed, user } = useAuthState()
-  useIapProducts(user?.uid)
+  useIapInit(user?.uid)
   const isWatchlistLoading = useReactiveVar(isWatchlistLoadingVar)
   const isPortfolioLoading = useReactiveVar(isPortfolioLoadingVar)
 

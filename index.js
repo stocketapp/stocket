@@ -5,7 +5,7 @@ import { SafeAreaProvider } from 'react-native-safe-area-context'
 import { Provider } from 'react-redux'
 import RNAsyncStorageFlipper from 'rn-async-storage-flipper'
 import AsyncStorage from '@react-native-community/async-storage'
-// import codePush from 'react-native-code-push'
+import codePush from 'react-native-code-push'
 import { ApolloProvider } from '@apollo/client'
 import Reactotron from 'reactotron-react-native'
 import { ThemeProvider } from '@emotion/react'
@@ -96,13 +96,13 @@ const AppRoot = () => {
   )
 }
 
-// const codePushOptions = {
-//   checkFrequency: codePush.CheckFrequency.ON_APP_RESUME,
-//   installMode: codePush.InstallMode.ON_NEXT_RESUME,
-// }
+const codePushOptions = {
+  checkFrequency: codePush.CheckFrequency.ON_APP_RESUME,
+  installMode: codePush.InstallMode.ON_NEXT_RESUME,
+}
 
-// const Root = __DEV__ ? AppRoot : codePush(codePushOptions)(AppRoot)
+const Root = __DEV__ ? AppRoot : codePush(codePushOptions)(AppRoot)
 
 LogBox.ignoreLogs(['Require cycle'])
 
-AppRegistry.registerComponent(appName, () => AppRoot)
+AppRegistry.registerComponent(appName, () => Root)

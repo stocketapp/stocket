@@ -2,23 +2,18 @@ import { View, StyleSheet, TouchableOpacity, Image } from 'react-native'
 import { Text } from '@components'
 import { CARD_BACKGROUND, GREEN } from '@utils/colors'
 import productImgs from '@products-assets'
-import type { ProductValue } from 'types'
-
-type Props = {
-  product: ProductValue & { localizedPrice: string }
-  onPurchase: (product: string) => void
-}
+import { IapHubProductInformation } from 'react-native-iaphub'
 
 export default ({ product, onPurchase }: Props) => (
   <TouchableOpacity
     style={styles.btnContainer}
     activeOpacity={0.6}
-    onPress={() => onPurchase(product?.productId)}
+    onPress={() => onPurchase(product?.sku)}
   >
-    {product?.productId && (
+    {product?.sku && (
       <View style={styles.container}>
         <View style={styles.imgContainer}>
-          <Image source={productImgs[product?.productId]} style={styles.productImg} />
+          <Image source={productImgs[product?.sku]} style={styles.productImg} />
         </View>
 
         <View style={styles.textContainer}>
@@ -28,13 +23,18 @@ export default ({ product, onPurchase }: Props) => (
             style={{ textAlign: 'center' }}
             type="label"
           >
-            {product?.localizedPrice}
+            {product?.price}
           </Text>
         </View>
       </View>
     )}
   </TouchableOpacity>
 )
+
+interface Props {
+  product: IapHubProductInformation
+  onPurchase: (id: string) => void
+}
 
 const styles = StyleSheet.create({
   container: {
@@ -55,7 +55,7 @@ const styles = StyleSheet.create({
     alignContent: 'center',
     borderBottomLeftRadius: 12,
     borderBottomRightRadius: 12,
-    paddingVertical: 4,
+    paddingVertical: 5,
   },
   productImg: {
     height: '85%',
@@ -72,7 +72,7 @@ const styles = StyleSheet.create({
   },
   btnContainer: {
     padding: 10,
-    width: '45%',
+    width: '46%',
     justifyContent: 'center',
     alignItems: 'center',
   },

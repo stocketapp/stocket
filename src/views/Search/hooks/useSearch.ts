@@ -1,10 +1,10 @@
 import { useEffect, useState, useCallback } from 'react'
-import { IEX_CLOUD_KEY, IEX_URL } from '../../../../config'
+import { IEX_CLOUD_KEY, IEX_CLOUD_URL } from '../../../../config'
 import useDebounce from './useDebounce'
 import { SearchResultType } from 'types'
 
 async function iexGet(endpoint: string, query: string = '') {
-  const iexUrl = IEX_URL
+  const iexUrl = IEX_CLOUD_URL
   const q = query !== '' ? `&${query}` : ''
   const url = `${iexUrl}/${endpoint}?token=${IEX_CLOUD_KEY}${q}`
   const res = await fetch(url, {
