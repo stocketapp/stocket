@@ -1,28 +1,39 @@
-import type { SearchResultType } from 'types'
-import type { ReactElement } from 'react'
+import { ReactElement, useState } from 'react'
+import { ScrollView } from 'react-native'
+import { HorizontalList, Container, SearchSymbols } from '@components'
+import useList from './hooks/useList'
+import useSearch from './hooks/useSearch'
+import theme from '@theme'
 
 export default function Search(): ReactElement {
-  const { useState } = require('react')
-  const { Container, SearchSymbols } = require('@components')
-  const { useNavigation } = require('@react-navigation/native')
-  const SearchResult = require('./SearchResult').default
-  const useSearch = require('./hooks/useSearch').default
-
   const [search, setSearch] = useState('')
-  const { navigate } = useNavigation()
-  const results = useSearch(search)
+  const { results, onSearch } = useSearch(search)
+  const { gainers, losers } = useList()
 
   return (
-    <Container fullView ph safeAreaTop safeAreaBottom>
-      <SearchSymbols value={search} setValue={setSearch} />
-
-      {results?.map((item: SearchResultType, i: number) => (
-        <SearchResult
-          item={item}
-          setStock={() => navigate('Stock', { symbol: item?.symbol })}
-          key={i}
+    <ScrollView
+      contentContainerStyle={{ flex: 1 }}
+      style={{ backgroundColor: theme.colors.BG_DARK }}
+    >
+      <Container fullView ph safeAreaTop safeAreaBottom>
+        <SearchSymbols
+          value={search}
+          setValue={setSearch}
+          data={results}
+          onSearch={onSearch}
         />
-      ))}
-    </Container>
+
+        <HorizontalList
+          title="Gainers"
+          data={gainers.data?.list}
+          loading={gainers.loading}
+        />
+        <HorizontalList
+          title="Losers"
+          data={losers.data?.list}
+          loading={losers.loading}
+        />
+      </Container>
+    </ScrollView>
   )
 }

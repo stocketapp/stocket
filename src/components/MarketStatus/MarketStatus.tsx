@@ -15,7 +15,7 @@ interface Props {
 const MarketStatus = ({ label }: Props) => {
   const [isExpanded, setIsExpanded] = useState(false)
   // TODO: use dynamic market status
-  const statusLabel = `Market ${true ? 'open' : 'closed'}` ?? label
+  const statusLabel = `Market is ${true ? 'open' : 'closed'}` ?? label
   const expanded = useSharedValue(32)
   const textWidth = useSharedValue(0)
   const opacity = useSharedValue(0)
@@ -36,7 +36,7 @@ const MarketStatus = ({ label }: Props) => {
     } else {
       expanded.value = widthWithTiming(122)
       opacity.value = opacityWithTiming(0.8)
-      textWidth.value = widthWithTiming(75)
+      textWidth.value = widthWithTiming(85)
     }
   }, [isExpanded, expanded, opacity, textWidth])
 
@@ -49,7 +49,7 @@ const MarketStatus = ({ label }: Props) => {
   }
 
   useEffect(() => {
-    let timeout: NodeJS.Timeout
+    let timeout: NodeJS.Timeout // eslint-disable-line no-undef
     if (isExpanded) {
       timeout = setTimeout(() => expand(), 2500)
     }

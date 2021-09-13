@@ -1,5 +1,8 @@
 import { IEXQuote } from 'types'
 import { remove, includes } from 'lodash'
+import { WatchlistIexQuote } from 'views/Home/Watchlist/WatchlistItem'
+import { useStocketMutation } from '@hooks'
+import { gql } from '@apollo/client'
 
 const AddToWatchlistButton = ({ symbol = '' }: SearchResultProps) => {
   const { useCallback } = require('react')
@@ -7,20 +10,19 @@ const AddToWatchlistButton = ({ symbol = '' }: SearchResultProps) => {
   const FavoriteIcon = require('../Icons/FavoriteIcon').default
   const { GREEN } = require('@utils/colors')
   const { useTheme } = require('@emotion/react')
-  const { ADD_TO_WATCHLIST, REMOVE_FROM_WATCHLIST } = require('@mutations')
   const { useReactiveVar } = require('@apollo/client')
   const { watchlistSymbolsVar, watchlistQuotesVar } = require('@cache')
-  const { useStocketMutation } = require('@hooks')
 
   const { p } = useTheme()
-  const addToWatchlistMutate = useStocketMutation(ADD_TO_WATCHLIST)
-  const removeFromWatchlistMutate = useStocketMutation(REMOVE_FROM_WATCHLIST)
+  const addToWatchlistMutate = useStocketMutation<AddToWatchlistType>(ADD)
+  const removeFromWatchlistMutate = useStocketMutation<RemoveFromWatchlistType>(REMOVE)
   const watchlistSymbols = useReactiveVar(watchlistSymbolsVar)
   const watchlistQuotes = useReactiveVar(watchlistQuotesVar)
 
-  const isFaved = useCallback((sym: string): boolean => includes(watchlistSymbols, sym), [
-    watchlistSymbols,
-  ])
+  const isFaved = useCallback(
+    (sym: string): boolean => includes(watchlistSymbols, sym),
+    [watchlistSymbols],
+  )
 
   const addToWatchlistSymbolsCache = useCallback(
     (newValue: string) => {
@@ -55,5 +57,38 @@ const AddToWatchlistButton = ({ symbol = '' }: SearchResultProps) => {
 interface SearchResultProps {
   symbol: string
 }
+
+interface AddToWatchlistType {
+  addToWatchlist: WatchlistIexQuote
+}
+
+interface RemoveFromWatchlistType {
+  removeFromWatchlist: {
+    symbol: string
+  }
+}
+
+export const ADD = gql`
+  mutation ($input: AddToWatchlistInput!) {
+    addToWatchlist(input: $input) {
+      symbol
+      symbol
+      change
+      changePercent
+      companyName
+      latestPrice
+      id
+      logo
+    }
+  }
+`
+
+export const REMOVE = gql`
+  mutation ($input: RemoveFromWatchlistInput!) {
+    removeFromWatchlist(input: $input) {
+      symbol
+    }
+  }
+`
 
 export default AddToWatchlistButton

@@ -9,8 +9,8 @@ export function formatCurrency(num: number): string {
   })
 }
 
-export function getProductValue(productId: string | null): ProductValue | null {
-  const result = find(iapProductsList, el => el.productId === productId) ?? null
+export function getProductValue(sku: string | null): ProductValue | null {
+  const result = find(iapProductsList, el => el.sku === sku) ?? null
   return result
 }
 

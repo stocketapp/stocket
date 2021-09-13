@@ -1,25 +1,38 @@
 import { gql, useQuery } from '@apollo/client'
-import { useCallback } from 'react'
 import { useFocusEffect } from '@react-navigation/native'
+import { useCallback } from 'react'
+import { balanceVar } from '@cache'
 
-export default function useBalance(interval = 0) {
-  const { data, startPolling, stopPolling, ...result } = useQuery(GET_BALANCE_QUERY)
+export default function useBalance() {
+  const res = useQuery<{ balance: BalanceType }>(BALANCE_QUERY, {
+    onCompleted: (data: { balance: BalanceType }) => {
+      balanceVar(data?.balance)
+    },
+  })
 
   useFocusEffect(
     useCallback(() => {
-      startPolling(interval)
-      return () => stopPolling()
-    }, [interval, startPolling, stopPolling]),
+      const interval = setInterval(() => res.refetch(), 15000)
+
+      return () => clearInterval(interval)
+    }, [res]),
   )
 
-  return { data: data?.user, ...result }
+  return { balance: res.data?.balance, ...res }
 }
 
-const GET_BALANCE_QUERY = gql`
+export interface BalanceType {
+  cash: number
+  portfolio: number
+  total: number
+}
+
+const BALANCE_QUERY = gql`
   query {
-    user {
-      portfolioValue
+    balance {
       cash
+      portfolio
+      total
     }
   }
 `

@@ -1,4 +1,4 @@
-const theme: CustomTheme = {
+const theme: StocketTheme = {
   colors: {
     BG_DARK: '#020808',
     BG_DARK_SECONDARY: '#131818',
@@ -10,6 +10,16 @@ const theme: CustomTheme = {
     RED: '#eb455a',
     WHITE: '#FFFFFF',
     LIGHT_GRAY: '#a4a4a46f',
+  },
+  spacing: {
+    xsm: 2,
+    sm: 5,
+    md: 10,
+    lg: 16,
+    xlg: 20,
+    xxlg: 28,
+    huge: 35,
+    screen: 18,
   },
   p: {
     xsm: 2,
@@ -34,28 +44,11 @@ const theme: CustomTheme = {
 }
 export default theme
 
-export interface CustomTheme {
+export interface StocketTheme {
   colors: ThemeColors
-  p: {
-    xsm: 2
-    sm: 5
-    md: 10
-    lg: 16
-    xlg: 20
-    xxlg: 28
-    huge: 35
-    screen: 18
-  }
-  m: {
-    xsm: 2
-    sm: 5
-    md: 10
-    lg: 16
-    xlg: 20
-    xxlg: 28
-    huge: 35
-    screen: 18
-  }
+  p: Spacing
+  m: Spacing
+  spacing: Spacing
 }
 
 export interface ThemeColors {
@@ -70,4 +63,15 @@ export interface ThemeColors {
   WHITE: '#FFFFFF'
   LIGHT_GRAY: '#a4a4a46f'
   [key: string]: string
+}
+
+export interface Spacing {
+  xsm: 2
+  sm: 5
+  md: 10
+  lg: 16
+  xlg: 20
+  xxlg: 28
+  huge: 35
+  screen: 18
 }

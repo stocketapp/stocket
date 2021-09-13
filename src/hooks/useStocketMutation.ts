@@ -6,11 +6,15 @@ type mutationType = DocumentNode | TypedDocumentNode<any, Record<string, any>>
 type mutationOptions = MutationHookOptions<any, Record<string, any>> | undefined
 type variablesType = Record<string, any> | undefined
 
-export default function useStocketMutation(mutation: mutationType, options?: mutationOptions) {
-  const [mutate] = useMutation(mutation, options)
+export default function useStocketMutation<StocketDataType>(
+  mutation: mutationType,
+  options?: mutationOptions,
+) {
+  const [mutate] = useMutation<StocketDataType>(mutation, options)
 
   const callback = useCallback(
-    (input: variablesType, update?: MutationUpdaterFn) => mutate({ variables: { input }, update }),
+    (input: variablesType, update?: MutationUpdaterFn) =>
+      mutate({ variables: { input }, update }),
     [mutate],
   )
 

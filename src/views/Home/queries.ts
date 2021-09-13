@@ -24,8 +24,8 @@ export const USER_BALANCE_QUERY = gql`
       change
       changePct
       positions {
-        change
-        changePct
+        change24h
+        change24hPct
         symbol
         logo
         size

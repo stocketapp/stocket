@@ -21,7 +21,7 @@ const WatchlistItem = ({ item, onPress }: WatchlistItemProps) => {
       <Container horizontal separate pv={p.lg}>
         <View style={{ flexDirection: 'row' }}>
           <ImageContainer>
-            <Image source={{ uri: item?.logo }} />
+            <Image source={{ uri: item?.logo }} resizeMode="contain" />
           </ImageContainer>
           <View>
             <Text weight="Black" type="label">

@@ -2,12 +2,11 @@ import { ViewStyle } from 'react-native'
 import { Dispatch, ReactNode, SetStateAction } from 'react'
 
 export interface UserType {
-  id: number
+  id: string
   uid: string
   displayName: string
   email: string
   cash: number
-  portfolioValue?: number
 }
 
 export interface SvgProps {
@@ -36,12 +35,6 @@ export interface TradeInfoProps {
   loading?: boolean
 }
 
-export interface SearchSymbolsProps {
-  value: string | null
-  setValue: Dispatch<SetStateAction<string>>
-  onSearch?: () => void
-}
-
 export interface SearchResultType {
   symbol: string
   securityName: string
@@ -59,9 +52,13 @@ export interface PositionType {
   avgPrice: number
   totalGains: number
   totalValue: number
-  change: number
-  changePct: number
-  positionSize: number
+  change24h: number
+  change24hPct: number
+  size: number
+  totalInvested: number
+  totalGainsPct: number
+  logo: string
+  companyName: string
 }
 
 export interface TradeDataType {
@@ -83,7 +80,7 @@ export interface BalanceItem {
 }
 
 export interface ProductValue {
-  productId: string
+  sku: string
   value: number
   price: number
 }
@@ -118,6 +115,21 @@ export interface IEXQuote {
   logo: string
   changePercent: number
   changePercentS: string
+}
+
+export interface IEXChartQuote {
+  symbol: string
+  close: number
+  changePercent: number
+  label: string
+  date: string
+  minute: string
+  changeOverTime: number
+}
+
+export interface UserBalance {
+  cash: number
+  portfolioValue: number
 }
 
 export * from './ChartTypes'

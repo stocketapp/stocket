@@ -43,7 +43,7 @@ const VirtualNumPad = ({ onKeyPress }: VirtualNumPadProps) => {
   }
 
   const press = (str: string) => {
-    if (value === '' || str === '.') {
+    if (value === '' && str === '.') {
       setValue('0.')
     } else {
       setValue(state => state.concat(str).replace(/^0/g, ''))
