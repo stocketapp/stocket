@@ -1,22 +1,24 @@
 import { Container, Text } from '@components'
 import { useQuery } from '@apollo/client'
 import { FlatList, useWindowDimensions } from 'react-native'
-import { PURCHASE_HISTORY } from './queries'
+import { TRADE_HISTORY } from './queries'
 import { Item } from './styles'
-import { getProductValue, formatCurrency } from '@utils/functions'
+import { formatCurrency } from '@utils/functions'
 import theme from '@theme'
 import moment from 'moment'
 
-export default function PurchasesHistory() {
-  const { data } = useQuery<{ purchases: PurchaseType[] }>(PURCHASE_HISTORY)
+export default function TradesHistory() {
+  const { data } = useQuery<{ trades: PurchaseType[] }>(TRADE_HISTORY)
   const { width } = useWindowDimensions()
 
-  const renderItem = ({ sku, price, createdAt }: PurchaseType) => (
+  const renderItem = ({ symbol, price, createdAt, size }: PurchaseType) => (
     <Item>
-      <Text weight="Semibold" style={{ width: 140 }}>
-        {formatCurrency(getProductValue(sku)?.value ?? 0)}
+      <Text weight="Semibold" style={{ width: 80 }}>
+        {symbol}
       </Text>
-      <Text weight="Semibold">{formatCurrency(price)}</Text>
+      <Text weight="Semibold">
+        {size} x {formatCurrency(price)}
+      </Text>
       <Text color="GRAY" weight="Regular">
         {moment(createdAt).format('L')}
       </Text>
@@ -26,7 +28,7 @@ export default function PurchasesHistory() {
   return (
     <Container fullView>
       <FlatList
-        data={data?.purchases}
+        data={data?.trades}
         renderItem={({ item }) => renderItem(item)}
         keyExtractor={item => item.id.toString()}
         contentContainerStyle={{
@@ -41,9 +43,10 @@ export default function PurchasesHistory() {
 }
 
 interface PurchaseType {
-  sku: string
-  purchaseId: string
-  price: number
-  id: string
   createdAt: string
+  symbol: string
+  id: string
+  total: number
+  size: number
+  price: number
 }
