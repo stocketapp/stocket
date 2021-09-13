@@ -13,10 +13,12 @@ import { userVar } from '@cache'
 import { Content, Row } from './styles'
 import { useNavigation } from '@react-navigation/native'
 import { ProfileNavigationProps } from 'navigation/stacks/ProfileStack'
+import ProfileButtonItem from './ProfileButtonItem'
+import theme from '@theme'
 
 export default function Profile() {
-  const { balance } = useBalance()
   const user = useReactiveVar(userVar)
+  const { balance } = useBalance()
   const { navigate } = useNavigation<ProfileNavigationProps>()
   return (
     <>
@@ -54,6 +56,17 @@ export default function Profile() {
             label="Account Value"
             value={formatCurrency(balance?.total ?? 0)}
           />
+        </Content>
+
+        <Content style={{ paddingTop: theme.spacing.xlg }}>
+          <Text color="LIGHT_GRAY" weight="Light" type="title">
+            History
+          </Text>
+          <ProfileButtonItem
+            label="Purchases"
+            onPress={() => navigate('PurchasesHistory')}
+          />
+          <ProfileButtonItem label="Trades" onPress={() => navigate('TradesHistory')} />
         </Content>
       </Container>
       <View
