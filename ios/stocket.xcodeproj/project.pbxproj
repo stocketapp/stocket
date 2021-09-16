@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 46;
+	objectVersion = 54;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -62,13 +62,13 @@
 		BA9A7DFB23E67A1A0062EEB4 /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA21948D23BB77F600A77A16 /* File.swift */; };
 		BA9A7E0023E67A1A0062EEB4 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		BA9A7E0123E67A1A0062EEB4 /* AppCenter-Config.plist in Resources */ = {isa = PBXBuildFile; fileRef = BA11394223B0F1090076AE78 /* AppCenter-Config.plist */; };
-		BAA7FDA5248FEC42000C9456 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = BA9A7E1923E693350062EEB4 /* GoogleService-Info.plist */; };
 		BAB356ED24BFBA4000D18438 /* BootSplash.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BAB356EC24BFBA4000D18438 /* BootSplash.storyboard */; };
 		BAB356EE24BFBA4000D18438 /* BootSplash.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BAB356EC24BFBA4000D18438 /* BootSplash.storyboard */; };
 		BAB356EF24BFBA4000D18438 /* BootSplash.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BAB356EC24BFBA4000D18438 /* BootSplash.storyboard */; };
 		BAC96236248D478400F78E5C /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BAC96235248D478400F78E5C /* StoreKit.framework */; };
 		BAC96237248D478900F78E5C /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BAC96235248D478400F78E5C /* StoreKit.framework */; };
 		BAC96238248D478B00F78E5C /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BAC96235248D478400F78E5C /* StoreKit.framework */; };
+		BAD3381926F18FB30088846B /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = BA9A7E1523E692F60062EEB4 /* GoogleService-Info.plist */; };
 		C791F52673BE49E4A4A31D3F /* SF-Pro-Text-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = 78FB8C2F23FB4379AFD4706F /* SF-Pro-Text-Light.otf */; };
 		E884A15E1F054A5E842BB46C /* SF-Pro-Text-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = B3A1ACFEB8FC4FD3B555279C /* SF-Pro-Text-Bold.otf */; };
 		F08FBACD86704F02A0E5B2A6 /* SF-Pro-Text-Black.otf in Resources */ = {isa = PBXBuildFile; fileRef = EA9879C046B64717BF8C63E7 /* SF-Pro-Text-Black.otf */; };
@@ -130,7 +130,6 @@
 		BA9A7DF423E67A0E0062EEB4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = "Resources-iPad/stocket/Base.lproj/LaunchScreen.xib"; sourceTree = "<group>"; };
 		BA9A7E0B23E67A1A0062EEB4 /* Stocket.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Stocket.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BA9A7E1523E692F60062EEB4 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		BA9A7E1923E693350062EEB4 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		BAB356EC24BFBA4000D18438 /* BootSplash.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = BootSplash.storyboard; path = stocket/BootSplash.storyboard; sourceTree = "<group>"; };
 		BABC5FA423AA5130002A831D /* stocket.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = stocket.entitlements; path = stocket/stocket.entitlements; sourceTree = "<group>"; };
 		BAC96235248D478400F78E5C /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
@@ -316,7 +315,6 @@
 		BA3D548C23AA4419006651B4 /* FirebaseConfig */ = {
 			isa = PBXGroup;
 			children = (
-				BA9A7DDA23E679CE0062EEB4 /* Staging */,
 				BA3D548E23AA4432006651B4 /* Prod */,
 				BA3D548D23AA442A006651B4 /* Dev */,
 			);
@@ -337,14 +335,6 @@
 				BA3D549123AA4466006651B4 /* GoogleService-Info.plist */,
 			);
 			path = Prod;
-			sourceTree = "<group>";
-		};
-		BA9A7DDA23E679CE0062EEB4 /* Staging */ = {
-			isa = PBXGroup;
-			children = (
-				BA9A7E1923E693350062EEB4 /* GoogleService-Info.plist */,
-			);
-			path = Staging;
 			sourceTree = "<group>";
 		};
 		BA9A7DF123E67A090062EEB4 /* Resources-iPad */ = {
@@ -387,7 +377,6 @@
 				13B07F8E1A680F5B00A75B9A /* Resources */,
 				00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */,
 				81B8DF5D1F2140ADA5311AD3 /* Upload Debug Symbols to Sentry */,
-				31AFF0D38CF51CB9CFBD1CFD /* [CP] Embed Pods Frameworks */,
 				4948867D28910778206D875D /* [CP] Copy Pods Resources */,
 				C38CA238193CDFFFF6C60A7A /* [CP-User] [RNFB] Core Configuration */,
 			);
@@ -470,7 +459,6 @@
 				BA9A7DFD23E67A1A0062EEB4 /* Frameworks */,
 				BA9A7DFF23E67A1A0062EEB4 /* Resources */,
 				734407397CBED734421A1274 /* Bundle React Native code and Images */,
-				2A6544A239D1C7CC4ED8EB0D /* [CP] Embed Pods Frameworks */,
 				6B147DED1EDB031037EB29EB /* [CP] Copy Pods Resources */,
 				0A7EB91F5AA6FAA6603432DC /* [CP-User] [RNFB] Core Configuration */,
 			);
@@ -490,7 +478,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastUpgradeCheck = 1130;
-				ORGANIZATIONNAME = Facebook;
+				ORGANIZATIONNAME = "Henry Paulino";
 				TargetAttributes = {
 					00E356ED1AD99517003FC87E = {
 						CreatedOnToolsVersion = 6.2;
@@ -522,7 +510,7 @@
 				};
 			};
 			buildConfigurationList = 83CBB9FA1A601CBA00E9B192 /* Build configuration list for PBXProject "stocket" */;
-			compatibilityVersion = "Xcode 3.2";
+			compatibilityVersion = "Xcode 12.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -592,9 +580,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BA94072624BFE5360000A64D /* main.jsbundle in Resources */,
-				BAA7FDA5248FEC42000C9456 /* GoogleService-Info.plist in Resources */,
 				BA3D54AE23AA45B1006651B4 /* Images.xcassets in Resources */,
+				BAD3381926F18FB30088846B /* GoogleService-Info.plist in Resources */,
 				BA11394423B0F1090076AE78 /* AppCenter-Config.plist in Resources */,
 				BAB356EE24BFBA4000D18438 /* BootSplash.storyboard in Resources */,
 				BA530A22253B008100A0FC07 /* SF-Pro-Text-Black.otf in Resources */,
@@ -606,6 +593,7 @@
 				BA530A28253B008100A0FC07 /* SF-Pro-Text-Semibold.otf in Resources */,
 				BA530A29253B008100A0FC07 /* SF-Pro-Text-Thin.otf in Resources */,
 				BA530A2A253B008100A0FC07 /* SF-Pro-Text-Ultralight.otf in Resources */,
+				BA94072624BFE5360000A64D /* main.jsbundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -667,13 +655,11 @@
 			);
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-Development/Pods-Development-frameworks.sh",
-				"${PODS_XCFRAMEWORKS_BUILD_DIR}/hermes-engine/hermes.framework/hermes",
 				"${PODS_XCFRAMEWORKS_BUILD_DIR}/Flipper-DoubleConversion/double-conversion.framework/double-conversion",
 				"${PODS_XCFRAMEWORKS_BUILD_DIR}/OpenSSL-Universal/OpenSSL.framework/OpenSSL",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/hermes.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/double-conversion.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/OpenSSL.framework",
 			);
@@ -704,24 +690,6 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		2A6544A239D1C7CC4ED8EB0D /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Staging/Pods-Staging-frameworks.sh",
-				"${PODS_XCFRAMEWORKS_BUILD_DIR}/hermes-engine/hermes.framework/hermes",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/hermes.framework",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Staging/Pods-Staging-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		2D02E4CB1E0B4B27006451C7 /* Bundle React Native Code And Images */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -735,24 +703,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "export SENTRY_PROPERTIES=sentry.properties\nexport EXTRA_PACKAGER_ARGS=\"--sourcemap-output $DERIVED_FILE_DIR/main.jsbundle.map\"\nexport NODE_BINARY=node\n../node_modules/@sentry/cli/bin/sentry-cli react-native xcode ../node_modules/react-native/scripts/react-native-xcode.sh";
-		};
-		31AFF0D38CF51CB9CFBD1CFD /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Production/Pods-Production-frameworks.sh",
-				"${PODS_XCFRAMEWORKS_BUILD_DIR}/hermes-engine/hermes.framework/hermes",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/hermes.framework",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Production/Pods-Production-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
 		};
 		3A1D3E0FDC72F5E4CC5C1D7B /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -1102,7 +1052,11 @@
 				);
 				INFOPLIST_FILE = stocketTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				OTHER_LDFLAGS = (
 					"-ObjC",
 					"-lc++",
@@ -1122,7 +1076,11 @@
 				COPY_PHASE_STRIP = NO;
 				INFOPLIST_FILE = stocketTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				OTHER_LDFLAGS = (
 					"-ObjC",
 					"-lc++",
@@ -1143,17 +1101,20 @@
 				CODE_SIGN_ENTITLEMENTS = stocket/stocket.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_TEAM = M52W2L8ZQV;
 				ENABLE_BITCODE = NO;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"$(inherited)",
 					"FB_SONARKIT_ENABLED=1",
 				);
-				GOOGLE_REVERSED_CLIENT_ID = "com.googleusercontent.apps.1072088358272-mt4tu8f479b53nbm28ab702oc4v1tkig";
+				GOOGLE_REVERSED_CLIENT_ID = "com.googleusercontent.apps.883607112422-djgp4om0motfv2jgjbrrscdabfdjojoc";
 				INFOPLIST_FILE = stocket/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				MARKETING_VERSION = 2.0;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
@@ -1180,12 +1141,15 @@
 				CODE_SIGN_ENTITLEMENTS = stocket/stocket.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_TEAM = M52W2L8ZQV;
 				GOOGLE_REVERSED_CLIENT_ID = "com.googleusercontent.apps.883607112422-djgp4om0motfv2jgjbrrscdabfdjojoc";
 				INFOPLIST_FILE = stocket/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				MARKETING_VERSION = 2.0;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
@@ -1216,7 +1180,10 @@
 				ENABLE_TESTABILITY = YES;
 				GCC_NO_COMMON_BLOCKS = YES;
 				INFOPLIST_FILE = "stocket-tvOS/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
@@ -1243,7 +1210,10 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				GCC_NO_COMMON_BLOCKS = YES;
 				INFOPLIST_FILE = "stocket-tvOS/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
@@ -1269,7 +1239,11 @@
 				ENABLE_TESTABILITY = YES;
 				GCC_NO_COMMON_BLOCKS = YES;
 				INFOPLIST_FILE = "stocket-tvOSTests/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
@@ -1295,7 +1269,11 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				GCC_NO_COMMON_BLOCKS = YES;
 				INFOPLIST_FILE = "stocket-tvOSTests/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
@@ -1342,7 +1320,7 @@
 				COPY_PHASE_STRIP = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
-				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = "arm64 i386";
+				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = "arm64 ";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -1404,7 +1382,7 @@
 				COPY_PHASE_STRIP = YES;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = "arm64 i386";
+				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = "arm64 ";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -1435,7 +1413,7 @@
 				CODE_SIGN_ENTITLEMENTS = stocket/stocket.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_TEAM = "";
 				ENABLE_BITCODE = NO;
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -1445,7 +1423,10 @@
 				GOOGLE_REVERSED_CLIENT_ID = "com.googleusercontent.apps.1072088358272-mt4tu8f479b53nbm28ab702oc4v1tkig";
 				INFOPLIST_FILE = stocket/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				MARKETING_VERSION = 2.0;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
@@ -1472,12 +1453,15 @@
 				CODE_SIGN_ENTITLEMENTS = stocket/stocket.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_TEAM = "";
-				GOOGLE_REVERSED_CLIENT_ID = "com.googleusercontent.apps.883607112422-djgp4om0motfv2jgjbrrscdabfdjojoc";
+				GOOGLE_REVERSED_CLIENT_ID = "com.googleusercontent.apps.1072088358272-mt4tu8f479b53nbm28ab702oc4v1tkig";
 				INFOPLIST_FILE = stocket/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				MARKETING_VERSION = 2.0;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
@@ -1527,7 +1511,7 @@
 				COPY_PHASE_STRIP = YES;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = "arm64 i386";
+				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = "arm64 ";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -1559,12 +1543,15 @@
 				CODE_SIGN_ENTITLEMENTS = stocket/stocket.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_TEAM = M52W2L8ZQV;
-				GOOGLE_REVERSED_CLIENT_ID = "com.googleusercontent.apps.1072088358272-mt4tu8f479b53nbm28ab702oc4v1tkig";
+				GOOGLE_REVERSED_CLIENT_ID = "com.googleusercontent.apps.883607112422-djgp4om0motfv2jgjbrrscdabfdjojoc";
 				INFOPLIST_FILE = stocket/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				MARKETING_VERSION = 2.0;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
@@ -1590,12 +1577,15 @@
 				CODE_SIGN_ENTITLEMENTS = stocket/stocket.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_TEAM = "";
 				GOOGLE_REVERSED_CLIENT_ID = "com.googleusercontent.apps.1072088358272-mt4tu8f479b53nbm28ab702oc4v1tkig";
 				INFOPLIST_FILE = stocket/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				MARKETING_VERSION = 2.0;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
@@ -1622,11 +1612,15 @@
 				CODE_SIGN_ENTITLEMENTS = stocket/stocket.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_TEAM = M52W2L8ZQV;
+				GOOGLE_REVERSED_CLIENT_ID = "com.googleusercontent.apps.883607112422-djgp4om0motfv2jgjbrrscdabfdjojoc";
 				INFOPLIST_FILE = stocket/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				MARKETING_VERSION = 2.0;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
@@ -1652,7 +1646,11 @@
 				COPY_PHASE_STRIP = NO;
 				INFOPLIST_FILE = stocketTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				OTHER_LDFLAGS = (
 					"-ObjC",
 					"-lc++",
@@ -1677,7 +1675,10 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				GCC_NO_COMMON_BLOCKS = YES;
 				INFOPLIST_FILE = "stocket-tvOS/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
@@ -1703,7 +1704,11 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				GCC_NO_COMMON_BLOCKS = YES;
 				INFOPLIST_FILE = "stocket-tvOSTests/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
@@ -1726,16 +1731,20 @@
 				CODE_SIGN_ENTITLEMENTS = stocket/stocket.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_TEAM = M52W2L8ZQV;
 				ENABLE_BITCODE = NO;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"$(inherited)",
 					"FB_SONARKIT_ENABLED=1",
 				);
+				GOOGLE_REVERSED_CLIENT_ID = "com.googleusercontent.apps.883607112422-djgp4om0motfv2jgjbrrscdabfdjojoc";
 				INFOPLIST_FILE = stocket/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				MARKETING_VERSION = 2.0;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
@@ -1764,11 +1773,15 @@
 				CODE_SIGN_ENTITLEMENTS = stocket/stocket.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_TEAM = M52W2L8ZQV;
+				GOOGLE_REVERSED_CLIENT_ID = "com.googleusercontent.apps.883607112422-djgp4om0motfv2jgjbrrscdabfdjojoc";
 				INFOPLIST_FILE = stocket/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				MARKETING_VERSION = 2.0;
 				OTHER_LDFLAGS = (
 					"$(inherited)",

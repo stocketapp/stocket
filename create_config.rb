@@ -14,9 +14,9 @@ STOCKET_APPSTORE_APP_SECRET = ENV['STOCKET_APPSTORE_APP_SECRET']
 open("./config.js", 'w') { |output_file|
   output_file.puts "export const IEX_CLOUD_KEY = '#{IEX_CLOUD_KEY}'"
   puts "\nAdded IEX_CLOUD_KEY"
-  output_file.puts "export const IAPHUB_API_KEY = '#{IAPHUB_STOCKET_API_KEY}'"
+  output_file.puts "export const IAPHUB_STOCKET_API_KEY = '#{IAPHUB_STOCKET_API_KEY}'"
   puts "Added IAPHUB_STOCKET_API_KEY"
-  output_file.puts "export const IAPHUB_APPID = '#{IAPHUB_STOCKET_APP_ID}'"
+  output_file.puts "export const IAPHUB_STOCKET_APP_ID = '#{IAPHUB_STOCKET_APP_ID}'"
   puts "Added IAPHUB_STOCKET_APP_ID"
   output_file.puts "export const IEX_CLOUD_URL = '#{IEX_CLOUD_URL}'"
   puts "Added IEX_CLOUD_URL"
