@@ -15,15 +15,12 @@ export default function App(): ReactNode {
   const isPortfolioLoading = useReactiveVar(isPortfolioLoadingVar)
 
   useEffect(() => {
-    if (
-      (!isWatchlistLoading && !isPortfolioLoading && isAuthed) ||
-      (!isAuthed && !isWatchlistLoading && !isPortfolioLoading)
-    ) {
+    if ((isAuthed && !isWatchlistLoading && !isPortfolioLoading) || !isAuthed) {
       RNBootSplash.hide({ fade: true })
     }
   }, [isWatchlistLoading, isAuthed, isPortfolioLoading])
 
-  if (!isAuthed && !isWatchlistLoading) {
+  if (!isAuthed) {
     return <AuthStack />
   }
 

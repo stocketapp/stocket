@@ -13,6 +13,8 @@ end
 
 target 'Production' do
   install_pods
+
+  use_flipper!()
 end
 
 target 'Staging' do
@@ -21,10 +23,6 @@ end
 
 target 'Development' do
   install_pods
-
-  # Enables Flipper.
-  # Note that if you have use_frameworks! enabled, Flipper will not work and
-  # you should disable the next line.
 
   use_flipper!()
   post_install do |installer|

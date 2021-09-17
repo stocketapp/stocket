@@ -1,5 +1,5 @@
 import { ViewStyle } from 'react-native'
-import { Dispatch, ReactNode, SetStateAction } from 'react'
+import { ReactNode } from 'react'
 
 export interface UserType {
   id: string
