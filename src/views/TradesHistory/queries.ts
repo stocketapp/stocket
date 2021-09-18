@@ -1,7 +1,7 @@
 import { gql } from '@apollo/client'
 
 export const TRADE_HISTORY = gql`
-  query {
+  query Trades {
     trades {
       createdAt
       symbol

@@ -1,7 +1,7 @@
 import { gql } from '@apollo/client'
 
 export const CREATE_TRADE = gql`
-  mutation ($input: CreateTradeInput!) {
+  mutation CreateTrade($input: CreateTradeInput!) {
     createTrade(input: $input) {
       symbol
       total

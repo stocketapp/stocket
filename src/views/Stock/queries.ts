@@ -1,7 +1,7 @@
 import { gql } from '@apollo/client'
 
 export const SYMBOL_QUOTE_QUERY = gql`
-  query ($symbol: String!) {
+  query SymbolQuoteQuery($symbol: String!) {
     quote(symbol: $symbol) {
       symbol
       close
@@ -24,7 +24,7 @@ export const SYMBOL_QUOTE_QUERY = gql`
 `
 
 export const SYMBOL_CHART_QUERY_ONE_DAY = gql`
-  query ($symbol: String!) {
+  query SymbolChartQuery($symbol: String!) {
     intraday(symbol: $symbol) {
       label
       close
@@ -35,20 +35,8 @@ export const SYMBOL_CHART_QUERY_ONE_DAY = gql`
   }
 `
 
-export const CREATE_TRADE_MUTATION = gql`
-  mutation ($input: CreateTradeInput!) {
-    createTrade(input: $input) {
-      symbol
-      price
-      size
-      orderType
-      total
-    }
-  }
-`
-
 export const GET_POSITION = gql`
-  query ($symbol: String!) {
+  query Position($symbol: String!) {
     position(symbol: $symbol) {
       symbol
       avgPrice
@@ -62,7 +50,7 @@ export const GET_POSITION = gql`
 `
 
 export const GET_COMPANY = gql`
-  query ($symbol: String!) {
+  query Company($symbol: String!) {
     company(symbol: $symbol) {
       symbol
       companyName
@@ -74,7 +62,7 @@ export const GET_COMPANY = gql`
   }
 `
 export const GET_KEY_STATS = gql`
-  query ($symbol: String!) {
+  query Stats($symbol: String!) {
     stats(symbol: $symbol) {
       companyName
       marketCap

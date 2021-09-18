@@ -1,7 +1,7 @@
 import { gql } from '@apollo/client'
 
 export const WATCHLIST_QUERY = gql`
-  query {
+  query Watchlist {
     watchlist {
       quotes {
         symbol
@@ -18,7 +18,7 @@ export const WATCHLIST_QUERY = gql`
 `
 
 export const USER_BALANCE_QUERY = gql`
-  query {
+  query Portfolio {
     portfolio {
       value
       change
