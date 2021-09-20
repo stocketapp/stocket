@@ -20,6 +20,7 @@ export default function Profile() {
   const user = useReactiveVar(userVar)
   const { balance } = useBalance()
   const { navigate } = useNavigation<ProfileNavigationProps>()
+
   return (
     <>
       <Container fullView ph safeAreaTop>
