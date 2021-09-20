@@ -15,6 +15,9 @@ const HorizontalList = ({
   title,
   isPosition = false,
   loading,
+  emptySvg,
+  emptyText,
+  emptyOnPress,
 }: HorizontalListProps) => {
   const { navigate } = useNavigation<AppStackNavigationProps>()
   const { p } = useTheme()
@@ -32,11 +35,13 @@ const HorizontalList = ({
 
   return (
     <Container top={p.xxlg}>
-      <Container horizontal separate>
-        <Text type="heading" weight="Black">
-          {title}
-        </Text>
-      </Container>
+      {data?.length > 0 && (
+        <Container horizontal separate>
+          <Text type="heading" weight="Black">
+            {title}
+          </Text>
+        </Container>
+      )}
 
       {!loading ? (
         <FlatList
@@ -59,7 +64,7 @@ const HorizontalList = ({
           contentContainerStyle={listContentStyle}
           ListEmptyComponent={() => (
             <View style={listEmptyStyle}>
-              <EmptyPlaceholder />
+              <EmptyPlaceholder text={emptyText} svg={emptySvg} onPress={emptyOnPress} />
             </View>
           )}
           showsHorizontalScrollIndicator={false}
@@ -78,4 +83,7 @@ export interface HorizontalListProps {
   title: string
   isPosition?: boolean
   loading?: boolean
+  emptySvg?: any
+  emptyText?: string
+  emptyOnPress?: () => void
 }

@@ -36,6 +36,7 @@ export const listStyle = css({
 
 export const listContentStyle = css({
   paddingTop: cssTheme.p.lg,
+  width: '100%',
 })
 
 export const listEmptyStyle = css({

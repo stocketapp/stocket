@@ -503,9 +503,6 @@
 						LastSwiftMigration = 1130;
 						ProvisioningStyle = Automatic;
 					};
-					BA9A7DF623E67A1A0062EEB4 = {
-						DevelopmentTeam = M52W2L8ZQV;
-					};
 				};
 			};
 			buildConfigurationList = 83CBB9FA1A601CBA00E9B192 /* Build configuration list for PBXProject "stocket" */;
@@ -1741,7 +1738,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 6;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = M52W2L8ZQV;
 				ENABLE_BITCODE = NO;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"$(inherited)",
