@@ -61,7 +61,10 @@ const HorizontalList = ({
           keyExtractor={(_, key) => key.toString()}
           style={listStyle}
           horizontal
-          contentContainerStyle={listContentStyle}
+          contentContainerStyle={[
+            listContentStyle,
+            (!data || data?.length === 0) && { width: '100%' },
+          ]}
           ListEmptyComponent={() => (
             <View style={listEmptyStyle}>
               <EmptyPlaceholder text={emptyText} svg={emptySvg} onPress={emptyOnPress} />

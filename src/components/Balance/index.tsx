@@ -13,14 +13,16 @@ const Balance = ({ value, change, changePct }: BalanceProps) => {
       <Text weight="Black" style={valueStyle}>
         {formatCurrency(value)}{' '}
       </Text>
-      <ChangeContainer>
-        <Arrow size={20} color={color.toLocaleLowerCase()} />
-        <Text weight="Medium" type="label" color="GRAY">
-          <Text weight="Bold" color={color} type="label">
-            {formatCurrency(change)} ({(changePct ?? 0)?.toFixed(2)}%)
+      {changePct < 0 ? (
+        <ChangeContainer>
+          <Arrow size={20} color={color.toLocaleLowerCase()} />
+          <Text weight="Medium" type="label" color="GRAY">
+            <Text weight="Bold" color={color} type="label">
+              {formatCurrency(change)} ({(changePct ?? 0)?.toFixed(2)}%)
+            </Text>
           </Text>
-        </Text>
-      </ChangeContainer>
+        </ChangeContainer>
+      ) : null}
     </BalanceContaienr>
   )
 }
