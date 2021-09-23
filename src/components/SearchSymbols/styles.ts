@@ -15,7 +15,7 @@ export const searchInputContainerStyle = css({
   borderRadius: 25,
   alignItems: 'center',
   flexDirection: 'row',
-  zIndex: 2,
+  zIndex: 10,
   width: '100%',
   justifyContent: 'space-between',
   paddingHorizontal: 16,

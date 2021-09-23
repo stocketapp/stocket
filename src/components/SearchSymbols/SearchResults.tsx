@@ -30,6 +30,7 @@ export default function SearchResult({
       <ScrollView
         showsVerticalScrollIndicator={false}
         contentContainerStyle={{ paddingBottom: 20 }}
+        keyboardShouldPersistTaps="always"
       >
         {data?.map((item: SearchResultType, i: number) => (
           <ResultItem

@@ -14,6 +14,8 @@ export default function Search(): ReactElement {
     <ScrollView
       contentContainerStyle={{ flex: 1 }}
       style={{ backgroundColor: theme.colors.BG_DARK }}
+      keyboardDismissMode="on-drag"
+      keyboardShouldPersistTaps="always"
     >
       <Container fullView ph safeAreaTop safeAreaBottom>
         <SearchSymbols
