@@ -6,10 +6,18 @@ import { Item } from './styles'
 import { formatCurrency } from '@utils/functions'
 import theme from '@theme'
 import moment from 'moment'
+import { useFocusEffect } from '@react-navigation/core'
+import { useCallback } from 'react'
 
 export default function TradesHistory() {
-  const { data } = useQuery<{ trades: PurchaseType[] }>(TRADE_HISTORY)
+  const { data, refetch } = useQuery<{ trades: PurchaseType[] }>(TRADE_HISTORY)
   const { width } = useWindowDimensions()
+
+  useFocusEffect(
+    useCallback(() => {
+      refetch()
+    }, [refetch]),
+  )
 
   const renderItem = ({ symbol, price, createdAt, size }: PurchaseType) => (
     <Item>

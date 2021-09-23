@@ -1,6 +1,8 @@
-import { Container, Text } from '@components'
+import { useFocusEffect } from '@react-navigation/core'
+import { useCallback } from 'react'
 import { useQuery } from '@apollo/client'
 import { FlatList, useWindowDimensions } from 'react-native'
+import { Container, Text } from '@components'
 import { PURCHASE_HISTORY } from './queries'
 import { Item } from './styles'
 import { getProductValue, formatCurrency } from '@utils/functions'
@@ -8,8 +10,14 @@ import theme from '@theme'
 import moment from 'moment'
 
 export default function PurchasesHistory() {
-  const { data } = useQuery<{ purchases: PurchaseType[] }>(PURCHASE_HISTORY)
+  const { data, refetch } = useQuery<{ purchases: PurchaseType[] }>(PURCHASE_HISTORY)
   const { width } = useWindowDimensions()
+
+  useFocusEffect(
+    useCallback(() => {
+      refetch()
+    }, [refetch]),
+  )
 
   const renderItem = ({ sku, price, createdAt }: PurchaseType) => (
     <Item>
