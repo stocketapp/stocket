@@ -30,6 +30,8 @@ export const USER_BALANCE_QUERY = gql`
         logo
         size
         companyName
+        totalGains
+        totalGainsPct
       }
     }
   }
