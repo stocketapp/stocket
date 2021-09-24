@@ -25,13 +25,13 @@ export default function useStockHook(symbol: string, activeTab: number): StockVi
 
   useFocusEffect(
     useCallback(() => {
-      const refetchInterval = setInterval(async () => {
-        if (activeTab === 0) {
-          await refecthQuote()
-        }
-      }, 15000)
-
-      return () => clearInterval(refetchInterval)
+      if (activeTab === 0) {
+        refecthQuote()
+        const refetchInterval = setInterval(async () => {
+          refecthQuote()
+        }, 15000)
+        return () => clearInterval(refetchInterval)
+      }
     }, [refecthQuote, activeTab]),
   )
 

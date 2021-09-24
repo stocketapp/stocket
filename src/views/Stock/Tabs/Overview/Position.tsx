@@ -5,7 +5,7 @@ import { StatLineContainer } from './styles'
 
 export default function Position({ position }: StockPositionTabProps) {
   return (
-    <Container>
+    <Container top={24}>
       <Text type="title" weight="Black" pb={10}>
         Position
       </Text>

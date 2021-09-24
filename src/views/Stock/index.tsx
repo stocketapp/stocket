@@ -57,7 +57,8 @@ export default function Stock() {
   useFocusEffect(
     useCallback(() => {
       if (index === 1) {
-        const refetchInterval = setInterval(async () => await refetch(), 15000)
+        refetch()
+        const refetchInterval = setInterval(() => refetch(), 15000)
         return () => clearInterval(refetchInterval)
       }
     }, [index, refetch]),
