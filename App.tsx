@@ -5,14 +5,17 @@ import { useAuthState, useIapInit } from './src/hooks'
 import { BACKGROUND } from './src/utils/colors'
 import MainStack from './src/navigation/AppStack'
 import AuthStack from './src/navigation/AuthenticationStack'
-import { useReactiveVar } from '@apollo/client'
+import { useReactiveVar, useQuery } from '@apollo/client'
 import { isWatchlistLoadingVar, isPortfolioLoadingVar } from './src/Cache'
+import { MarketHoursContext } from './src/utils/context'
+import { gql } from '@apollo/client'
 
 export default function App(): ReactNode {
   const { isAuthed, user } = useAuthState()
   useIapInit(user?.uid)
   const isWatchlistLoading = useReactiveVar(isWatchlistLoadingVar)
   const isPortfolioLoading = useReactiveVar(isPortfolioLoadingVar)
+  const { data, refetch } = useQuery(MARKET_HOURS)
 
   useEffect(() => {
     if ((isAuthed && !isWatchlistLoading && !isPortfolioLoading) || !isAuthed) {
@@ -20,18 +23,31 @@ export default function App(): ReactNode {
     }
   }, [isWatchlistLoading, isAuthed, isPortfolioLoading])
 
+  useEffect(() => {
+    const interval = setInterval(() => refetch(), 30000)
+
+    return () => clearInterval(interval)
+  }, [refetch])
+
   if (!isAuthed) {
     return <AuthStack />
   }
 
   return (
-    <View style={container}>
-      <StatusBar barStyle="light-content" />
-      <MainStack />
-    </View>
+    <MarketHoursContext.Provider value={data}>
+      <View style={container}>
+        <StatusBar barStyle="light-content" />
+        <MainStack />
+      </View>
+    </MarketHoursContext.Provider>
   )
 }
 
+const MARKET_HOURS = gql`
+  query MarketHours {
+    marketHours
+  }
+`
 const container = {
   flex: 1,
   backgroundColor: BACKGROUND,

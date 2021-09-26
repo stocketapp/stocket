@@ -7,6 +7,7 @@ import Animated, {
   useSharedValue,
   withTiming,
 } from 'react-native-reanimated'
+import { useMarketHours } from '@utils/context'
 
 interface Props {
   label?: string
@@ -14,8 +15,8 @@ interface Props {
 
 const MarketStatus = ({ label }: Props) => {
   const [isExpanded, setIsExpanded] = useState(false)
-  // TODO: use dynamic market status
-  const statusLabel = `Market is ${true ? 'open' : 'closed'}` ?? label
+  const status = useMarketHours()
+  const statusLabel = `Market is ${status ? 'open' : 'closed'}` ?? label
   const expanded = useSharedValue(32)
   const textWidth = useSharedValue(0)
   const opacity = useSharedValue(0)
@@ -69,7 +70,7 @@ const MarketStatus = ({ label }: Props) => {
         >
           {statusLabel}
         </Animated.Text>
-        <View style={{ ...dotStyles, backgroundColor: true ? GREEN : LABEL }} />
+        <View style={{ ...dotStyles, backgroundColor: status ? GREEN : LABEL }} />
       </Animated.View>
     </TouchableWithoutFeedback>
   )

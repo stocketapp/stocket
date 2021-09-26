@@ -8,12 +8,14 @@ import { RouteProp, useNavigation, useRoute } from '@react-navigation/native'
 import { StockNavigationProps, StockStackParamsList } from 'navigation/stacks/StockStack'
 import { IEXChartQuote, PositionType } from 'types'
 import TradeTabLoader from '../../ContentLoaders/TradeTabLoader'
+import { useMarketHours } from '@utils/context'
 
 export default function TradeTab({ position, data }: TradeTabProps) {
   const { params } = useRoute<RouteProp<StockStackParamsList, 'Stock'>>()
   const quote = data?.quote
   const chart = data?.chart
   const { navigate } = useNavigation<StockNavigationProps>()
+  const marketHours = useMarketHours()
 
   const formatGraph = useMemo(
     () =>
@@ -47,7 +49,7 @@ export default function TradeTab({ position, data }: TradeTabProps) {
               change: quote?.data?.changePercent,
             }}
           />
-          <StockTradeButtons onPress={openTradeModal} />
+          <StockTradeButtons onPress={openTradeModal} marketHours={marketHours} />
         </>
       ) : (
         <TradeTabLoader />
