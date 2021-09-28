@@ -13,7 +13,7 @@ const Balance = ({ value, change, changePct }: BalanceProps) => {
       <Text weight="Black" style={valueStyle}>
         {formatCurrency(value)}{' '}
       </Text>
-      {changePct > 0 ? (
+      {changePct !== 0 ? (
         <ChangeContainer>
           <Arrow size={20} color={color.toLocaleLowerCase()} />
           <Text weight="Medium" type="label" color="GRAY">
