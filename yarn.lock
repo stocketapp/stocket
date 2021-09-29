@@ -8470,6 +8470,11 @@ react-native-bootsplash@^3.2.5:
     fs-extra "^10.0.0"
     jimp "^0.16.1"
 
+react-native-bugbattle-sdk@^5.0.3:
+  version "5.0.3"
+  resolved "https://registry.yarnpkg.com/react-native-bugbattle-sdk/-/react-native-bugbattle-sdk-5.0.3.tgz#bef59227fa89a59d78a61cbeac9040b0f49de4d4"
+  integrity sha512-pY08AlLzdJoGaWULnlk76BsuDlsQI23F6WVyMcZcJVPAp7lN7KabKMwxtGujDeZYIR26P6YgiFcanBmVELuFeg==
+
 react-native-code-push@^7.0.2:
   version "7.0.2"
   resolved "https://registry.yarnpkg.com/react-native-code-push/-/react-native-code-push-7.0.2.tgz#da3d29bb4e286507ceb35973c94ed27db4bbcf6c"
