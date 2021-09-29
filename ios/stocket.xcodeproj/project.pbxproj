@@ -1102,7 +1102,7 @@
 				CODE_SIGN_ENTITLEMENTS = stocket/stocket.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 9;
+				CURRENT_PROJECT_VERSION = 10;
 				DEVELOPMENT_TEAM = "";
 				ENABLE_BITCODE = NO;
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -1143,7 +1143,7 @@
 				CODE_SIGN_ENTITLEMENTS = stocket/stocket.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 9;
+				CURRENT_PROJECT_VERSION = 10;
 				DEVELOPMENT_TEAM = "";
 				GOOGLE_REVERSED_CLIENT_ID = "com.googleusercontent.apps.883607112422-djgp4om0motfv2jgjbrrscdabfdjojoc";
 				INFOPLIST_FILE = stocket/Info.plist;
@@ -1418,7 +1418,7 @@
 				CODE_SIGN_ENTITLEMENTS = stocket/stocket.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 9;
+				CURRENT_PROJECT_VERSION = 10;
 				DEVELOPMENT_TEAM = "";
 				ENABLE_BITCODE = NO;
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -1458,7 +1458,7 @@
 				CODE_SIGN_ENTITLEMENTS = stocket/stocket.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 9;
+				CURRENT_PROJECT_VERSION = 10;
 				DEVELOPMENT_TEAM = "";
 				GOOGLE_REVERSED_CLIENT_ID = "com.googleusercontent.apps.1072088358272-mt4tu8f479b53nbm28ab702oc4v1tkig";
 				INFOPLIST_FILE = stocket/Info.plist;
@@ -1549,7 +1549,7 @@
 				CODE_SIGN_ENTITLEMENTS = stocket/stocket.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 9;
+				CURRENT_PROJECT_VERSION = 10;
 				DEVELOPMENT_TEAM = "";
 				GOOGLE_REVERSED_CLIENT_ID = "com.googleusercontent.apps.883607112422-djgp4om0motfv2jgjbrrscdabfdjojoc";
 				INFOPLIST_FILE = stocket/Info.plist;
@@ -1583,7 +1583,7 @@
 				CODE_SIGN_ENTITLEMENTS = stocket/stocket.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 9;
+				CURRENT_PROJECT_VERSION = 10;
 				DEVELOPMENT_TEAM = "";
 				GOOGLE_REVERSED_CLIENT_ID = "com.googleusercontent.apps.1072088358272-mt4tu8f479b53nbm28ab702oc4v1tkig";
 				INFOPLIST_FILE = stocket/Info.plist;
@@ -1618,7 +1618,7 @@
 				CODE_SIGN_ENTITLEMENTS = stocket/stocket.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 9;
+				CURRENT_PROJECT_VERSION = 10;
 				DEVELOPMENT_TEAM = "";
 				GOOGLE_REVERSED_CLIENT_ID = "com.googleusercontent.apps.883607112422-djgp4om0motfv2jgjbrrscdabfdjojoc";
 				INFOPLIST_FILE = stocket/Info.plist;
@@ -1737,7 +1737,7 @@
 				CODE_SIGN_ENTITLEMENTS = stocket/stocket.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 9;
+				CURRENT_PROJECT_VERSION = 10;
 				DEVELOPMENT_TEAM = M52W2L8ZQV;
 				ENABLE_BITCODE = NO;
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -1779,7 +1779,7 @@
 				CODE_SIGN_ENTITLEMENTS = stocket/stocket.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 9;
+				CURRENT_PROJECT_VERSION = 10;
 				DEVELOPMENT_TEAM = "";
 				GOOGLE_REVERSED_CLIENT_ID = "com.googleusercontent.apps.883607112422-djgp4om0motfv2jgjbrrscdabfdjojoc";
 				INFOPLIST_FILE = stocket/Info.plist;
