@@ -33,7 +33,7 @@ export default function useAuthState(): AuthState {
   return { isAuthed, user }
 }
 
-interface AuthState {
+export interface AuthState {
   isAuthed: boolean
   user: UserType | null
 }

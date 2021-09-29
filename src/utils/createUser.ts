@@ -15,7 +15,7 @@ type CreateUserName =
 
 export default async function createUser(name: CreateUserName) {
   const currentUser = auth().currentUser
-  const displayName = `${name?.givenName} ${name?.familyName}`
+  const displayName = `${name?.givenName} ${name?.familyName ?? ''}`
 
   try {
     if (currentUser) {

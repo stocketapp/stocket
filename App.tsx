@@ -9,6 +9,7 @@ import { useReactiveVar, useQuery } from '@apollo/client'
 import { isWatchlistLoadingVar, isPortfolioLoadingVar } from './src/Cache'
 import { MarketHoursContext } from './src/utils/context'
 import { gql } from '@apollo/client'
+import BugBattle from 'react-native-bugbattle-sdk'
 
 export default function App(): ReactNode {
   const { isAuthed, user } = useAuthState()
@@ -28,6 +29,13 @@ export default function App(): ReactNode {
 
     return () => clearInterval(interval)
   }, [refetch])
+
+  useEffect(() => {
+    if (user?.uid) {
+      BugBattle.setCustomerEmail(user?.email)
+      BugBattle.setCustomerName(user?.displayName)
+    }
+  }, [user])
 
   if (!isAuthed) {
     return <AuthStack />
