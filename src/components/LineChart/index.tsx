@@ -10,7 +10,7 @@ import { useSharedValue } from 'react-native-reanimated'
 
 const n = (1 + Math.sqrt(8)) / 2
 const { width, height: wHeight } = Dimensions.get('window')
-const height = (1 - 1 / n) * wHeight
+const height = (1 - 1.2 / n) * wHeight
 const strokeWidth = 3
 const padding = strokeWidth / 2
 const getDomain = (domain: number[]) => [Math.min(...domain), Math.max(...domain)]

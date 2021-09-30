@@ -14,10 +14,12 @@ export const ButtonText = styled.Text({
   color: 'black',
   fontFamily: 'SFProText-SemiBold',
   fontSize: 16,
+  paddingLeft: 5,
 })
 
 export const Container = styled.View({
   flexDirection: 'row',
-  justifyContent: 'space-between',
+  justifyContent: 'center',
+  alignItems: 'center',
   width: '66%',
 })

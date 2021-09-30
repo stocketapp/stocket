@@ -39,7 +39,7 @@ export default function TradeTab({ position, data }: TradeTabProps) {
   }
 
   return (
-    <Container fullView bottom={50}>
+    <Container fullView bottom={50} separate>
       {chart?.data ? (
         <>
           <LineChart
