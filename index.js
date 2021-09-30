@@ -44,7 +44,7 @@ const AppRoot = () => {
   useFlipper(navigationRef)
 
   useEffect(() => {
-    BugBattle.autoConfigure(BUGBATTLE_KEY)
+    BugBattle.autoConfigure(BUGBATTLE_KEY, [BugBattle.SCREENSHOT, BugBattle.SHAKE])
   }, [])
 
   return (
