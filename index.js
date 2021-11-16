@@ -3,7 +3,6 @@ import { useEffect } from 'react'
 import { AppRegistry, LogBox } from 'react-native'
 import { NavigationContainer, useNavigationContainerRef } from '@react-navigation/native'
 import { SafeAreaProvider } from 'react-native-safe-area-context'
-import { Provider } from 'react-redux'
 import RNAsyncStorageFlipper from 'rn-async-storage-flipper'
 import AsyncStorage from '@react-native-community/async-storage'
 import codePush from 'react-native-code-push'
@@ -14,12 +13,10 @@ import { useFlipper } from '@react-navigation/devtools'
 import BugBattle from 'react-native-bugbattle-sdk'
 import App from './App'
 import { name as appName } from './app.json'
-import configureStore from './src/redux/configureStore'
 import client from './src/ApolloClient'
 import theme from './src/theme'
 import { BUGBATTLE_KEY } from './config'
 
-const store = configureStore()
 if (global.HermesInternal) {
   // Hide timers warning (Android only)
   LogBox.ignoreLogs(['Setting a timer'])
@@ -50,13 +47,11 @@ const AppRoot = () => {
   return (
     <NavigationContainer ref={navigationRef}>
       <ApolloProvider client={client}>
-        <Provider store={store}>
-          <SafeAreaProvider>
-            <ThemeProvider theme={theme}>
-              <App />
-            </ThemeProvider>
-          </SafeAreaProvider>
-        </Provider>
+        <SafeAreaProvider>
+          <ThemeProvider theme={theme}>
+            <App />
+          </ThemeProvider>
+        </SafeAreaProvider>
       </ApolloProvider>
     </NavigationContainer>
   )
