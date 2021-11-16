@@ -1,11 +1,11 @@
-import { View, TextInput, TouchableOpacity } from 'react-native'
-import { SearchIcon } from '@icons'
-import Animated, { useSharedValue, withDelay, withTiming } from 'react-native-reanimated'
-import { searchInputStyles, searchInputContainerStyle } from './styles'
-import { useTheme } from '@emotion/react'
 import { useCallback, Dispatch, SetStateAction, useEffect, useState } from 'react'
+import { View, TextInput, TouchableOpacity } from 'react-native'
+import Animated, { useSharedValue, withDelay, withTiming } from 'react-native-reanimated'
+import { useTheme } from '@emotion/react'
+import { SearchIcon } from '@icons'
 import SearchResults from './SearchResults'
 import { SearchResultType } from 'types'
+import { searchInputStyles, searchInputContainerStyle } from './styles'
 
 const SearchSymbol = ({ value, setValue, data }: SearchSymbolsProps) => {
   const theme = useTheme()

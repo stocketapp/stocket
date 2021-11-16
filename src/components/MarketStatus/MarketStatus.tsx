@@ -1,13 +1,13 @@
 import { useState, useEffect, useCallback } from 'react'
 import { View, TouchableWithoutFeedback } from 'react-native'
-import { dotStyles, containerStyles } from './styles'
 import Animated, {
   useAnimatedStyle,
   useSharedValue,
   withTiming,
 } from 'react-native-reanimated'
-import { useMarketHours } from '@utils/context'
 import { useTheme } from '@emotion/react'
+import { useMarketHours } from '@utils/context'
+import { dotStyles, containerStyles } from './styles'
 
 interface Props {
   label?: string

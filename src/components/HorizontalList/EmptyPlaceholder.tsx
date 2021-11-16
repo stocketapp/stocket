@@ -1,8 +1,8 @@
 import React from 'react'
 import { TouchableOpacity } from 'react-native'
+import { SvgProps } from 'react-native-svg'
 import { Text } from '@components'
 import { EmptyContainer } from './styles'
-import { SvgProps } from 'react-native-svg'
 
 const EmptyPlaceholder = ({
   text = 'Nothing to see here',

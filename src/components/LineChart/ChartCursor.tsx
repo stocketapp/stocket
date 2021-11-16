@@ -1,10 +1,10 @@
+import { StyleSheet, View } from 'react-native'
 import { PanGestureHandler } from 'react-native-gesture-handler'
 import Animated, {
   useAnimatedStyle,
   useAnimatedGestureHandler,
   withTiming,
 } from 'react-native-reanimated'
-import { StyleSheet, View } from 'react-native'
 import { getYForX, parse, Vector } from 'react-native-redash'
 
 export default function ChartCursor({ d, translation, active }: CursorProps) {

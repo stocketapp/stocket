@@ -1,8 +1,8 @@
-import { CustomButton } from './styles'
-import theme from '@theme'
-import Text, { ThemeColorStrings } from '../Text'
 import { TouchableOpacityProps } from 'react-native'
 import LottieView from 'lottie-react-native'
+import theme from '@theme'
+import { CustomButton } from './styles'
+import Text, { ThemeColorStrings } from '../Text'
 
 const Button = ({
   bgColor = 'GREEN',

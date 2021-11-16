@@ -1,9 +1,9 @@
 import { useTheme } from '@emotion/react'
 import { Container, Text } from '@components'
 import { useNavigation } from '@react-navigation/native'
+import { AppStackNavigationProps } from 'navigation/AppStack'
 import WatchlistItem from './WatchlistItem'
 import { WatchlistIexQuote } from './WatchlistItem'
-import { AppStackNavigationProps } from '@navigation/AppStack'
 
 export const WatchlistList = ({ data }: { data: WatchlistIexQuote[] | null }) => {
   const { navigate } = useNavigation<AppStackNavigationProps>()

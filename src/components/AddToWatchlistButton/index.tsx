@@ -1,11 +1,11 @@
-import { remove, includes } from 'lodash'
-import { WatchlistIexQuote } from 'views/Home/Watchlist/WatchlistItem'
-import { useStocketMutation } from '@hooks'
-import { gql, useReactiveVar } from '@apollo/client'
 import { useCallback } from 'react'
 import { TouchableOpacity } from 'react-native'
+import { gql, useReactiveVar } from '@apollo/client'
 import { useTheme } from '@emotion/react'
+import { remove, includes } from 'lodash'
+import { useStocketMutation } from '@hooks'
 import { watchlistSymbolsVar, watchlistQuotesVar } from '@cache'
+import { WatchlistIexQuote } from 'views/Home/Watchlist/WatchlistItem'
 import FavoriteIcon from '../Icons/FavoriteIcon'
 
 const AddToWatchlistButton = ({ symbol = '' }: SearchResultProps) => {

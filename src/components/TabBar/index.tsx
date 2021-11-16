@@ -1,8 +1,8 @@
 import { ReactElement } from 'react'
 import { TouchableOpacity, Dimensions, StyleSheet, View } from 'react-native'
-import theme from '@theme'
-import { BottomTabBarProps } from '@react-navigation/bottom-tabs/lib/typescript/src/types'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
+import { BottomTabBarProps } from '@react-navigation/bottom-tabs/lib/typescript/src/types'
+import theme from '@theme'
 
 export default function TabBarComponent(props: BottomTabBarProps): ReactElement {
   const { navigation, state, descriptors } = props

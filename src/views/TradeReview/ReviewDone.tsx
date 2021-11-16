@@ -4,10 +4,10 @@ import Animated, {
   withTiming,
 } from 'react-native-reanimated'
 import { Text } from '@components'
-import { formatCurrency } from '@utils/functions'
 import { useEffect } from 'react'
 import { useWindowDimensions } from 'react-native'
 import LottieView from 'lottie-react-native'
+import { formatCurrency } from '@utils/functions'
 
 const ReviewDone = ({ quantity, symbol, total, animate, orderType }: ReviewDoneProps) => {
   const { width: WINDOW_WIDTH } = useWindowDimensions()

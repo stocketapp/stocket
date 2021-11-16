@@ -1,9 +1,9 @@
 import { InMemoryCache, makeVar, ReactiveVar } from '@apollo/client'
-import { WatchlistIexQuote } from 'views/Home/Watchlist/WatchlistItem'
-import { UserType } from 'types'
-import { PortfolioType } from 'views/Home/hooks/useHomeHook'
-import { BalanceType } from 'hooks/useBalance'
 import { IapHubProductInformation } from 'react-native-iaphub'
+import { BalanceType } from 'hooks/useBalance'
+import { WatchlistIexQuote } from 'views/Home/Watchlist/WatchlistItem'
+import { PortfolioType } from 'views/Home/hooks/useHomeHook'
+import { UserType } from 'types'
 
 export const watchlistSymbolsVar: ReactiveVar<string[]> = makeVar<string[]>([])
 export const isWatchlistLoadingVar = makeVar(true)

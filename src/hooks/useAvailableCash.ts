@@ -21,7 +21,7 @@ export default function useAvailableCash() {
     }, [refetch]),
   )
 
-  return { cash: data?.balance?.cash, ...result }
+  return { cash: data?.balance?.cash ?? 0, ...result }
 }
 
 const GET_BALANCE_QUERY = gql`

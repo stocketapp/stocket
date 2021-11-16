@@ -1,12 +1,12 @@
 import { View, Dimensions } from 'react-native'
 import { Svg, Path } from 'react-native-svg'
-import { scaleLinear, scaleTime } from 'd3-scale'
-import * as shape from 'd3-shape'
-import ChartCursor from './ChartCursor'
-import ChartHeader from './ChartHeader'
-import theme from '@theme'
 import { useVector } from 'react-native-redash'
 import { useSharedValue } from 'react-native-reanimated'
+import { scaleLinear, scaleTime } from 'd3-scale'
+import * as shape from 'd3-shape'
+import theme from '@theme'
+import ChartCursor from './ChartCursor'
+import ChartHeader from './ChartHeader'
 
 const n = (1 + Math.sqrt(8)) / 2
 const { width, height: wHeight } = Dimensions.get('window')

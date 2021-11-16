@@ -3,9 +3,9 @@ import { useTheme } from '@emotion/react'
 import Animated, { useAnimatedStyle, withSpring } from 'react-native-reanimated'
 import { useNavigation } from '@react-navigation/native'
 import { AppStackNavigationProps } from 'navigation/AppStack'
+import { SearchResultType } from 'types'
 import ResultItem from './ResultItem'
 import { searchResultContainerStyle } from './styles'
-import { SearchResultType } from 'types'
 
 export default function SearchResult({
   data,

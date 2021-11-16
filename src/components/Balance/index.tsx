@@ -1,7 +1,7 @@
-import Text from '../Text'
 import { formatCurrency } from '@utils/functions'
-import { ChangeContainer, BalanceContaienr, valueStyle } from './styles'
 import { ArrowUpIcon, ArrowDownIcon } from '@icons'
+import { ChangeContainer, BalanceContaienr, valueStyle } from './styles'
+import Text from '../Text'
 
 const Balance = ({ value, change, changePct }: BalanceProps) => {
   const isPositive = changePct > 0

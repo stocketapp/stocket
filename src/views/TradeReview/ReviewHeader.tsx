@@ -1,5 +1,5 @@
-import { Text, Container } from '@components'
 import { TouchableOpacity } from 'react-native'
+import { Text, Container } from '@components'
 import { ArrowLeftIcon } from '@icons'
 import theme from '@theme'
 

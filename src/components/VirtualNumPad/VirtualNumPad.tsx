@@ -1,9 +1,9 @@
-import { GestureResponderEvent, View } from 'react-native'
 import { useState, useEffect } from 'react'
-import Text from '../Text'
-import { PadBtn, Row } from './styles'
+import { GestureResponderEvent, View } from 'react-native'
 import DeleteSVG from '@svg/delete.svg'
 import theme from '@theme'
+import Text from '../Text'
+import { PadBtn, Row } from './styles'
 
 interface PadButtonProps {
   value: string

@@ -1,8 +1,8 @@
 import { useRef, useEffect } from 'react'
 import { View, TouchableOpacity } from 'react-native'
-import Text from '../Text'
-import { SuccessScreenContainer, SucessBtn } from './styles'
 import LottieView from 'lottie-react-native'
+import { SuccessScreenContainer, SucessBtn } from './styles'
+import Text from '../Text'
 
 interface Props {
   loading: boolean

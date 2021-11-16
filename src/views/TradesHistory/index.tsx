@@ -1,13 +1,13 @@
 import { Container, Text } from '@components'
 import { useQuery } from '@apollo/client'
 import { FlatList, useWindowDimensions } from 'react-native'
-import { TRADE_HISTORY } from './queries'
-import { Item } from './styles'
 import { formatCurrency } from '@utils/functions'
 import theme from '@theme'
 import moment from 'moment'
 import { useFocusEffect } from '@react-navigation/core'
 import { useCallback } from 'react'
+import { TRADE_HISTORY } from './queries'
+import { Item } from './styles'
 
 export default function TradesHistory() {
   const { data, refetch } = useQuery<{ trades: PurchaseType[] }>(TRADE_HISTORY)

@@ -1,11 +1,11 @@
 import { Dispatch, SetStateAction, useState } from 'react'
-import { InputContainer, CustomInput, animatedLineStyles } from './styles'
+import { LayoutChangeEvent, StyleProp, TextInputProps, ViewStyle } from 'react-native'
 import Animated, {
   useSharedValue,
   useAnimatedStyle,
   withTiming,
 } from 'react-native-reanimated'
-import { LayoutChangeEvent, StyleProp, TextInputProps, ViewStyle } from 'react-native'
+import { InputContainer, CustomInput, animatedLineStyles } from './styles'
 
 export default function Input({ value, setValue, containerStyle, ...props }: InputProps) {
   const [lineWidth, setLineWidth] = useState<number>(0)

@@ -3,11 +3,11 @@ import Animated, {
   useSharedValue,
   withTiming,
 } from 'react-native-reanimated'
-import { DetailContainer } from './styles'
 import { Text, Container } from '@components'
 import { formatNumber, formatCurrency } from '@utils/functions'
 import { useTheme } from '@emotion/react'
 import { useEffect } from 'react'
+import { DetailContainer } from './styles'
 
 const Detail = ({ label, value }: { label: string; value: string }) => (
   <DetailContainer>
