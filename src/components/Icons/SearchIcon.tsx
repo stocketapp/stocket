@@ -1,6 +1,5 @@
 // @Flow
-import React from 'react'
-import { Path } from 'react-native-svg'
+import { Path } from 'react-native-svg';
 import Icon from './Icon'
 import type { IconProps } from 'types'
 

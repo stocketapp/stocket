@@ -1,24 +1,19 @@
-import { StyleSheet } from 'react-native'
-import { SUB_BACKGROUND, GREEN } from '@utils/colors'
+import theme from '@theme'
+import { css } from '@emotion/native'
 
-export default StyleSheet.create({
-  dot: {
-    height: 8,
-    width: 8,
-    borderRadius: 6,
-    backgroundColor: GREEN,
-    marginLeft: 4,
-  },
-  container: {
-    paddingVertical: 8,
-    paddingHorizontal: 15,
-    flexDirection: 'row',
-    backgroundColor: SUB_BACKGROUND,
-    alignItems: 'center',
-    justifyContent: 'center',
-    borderRadius: 20,
-    opacity: 0.7,
-    maxHeight: 38,
-    marginBottom: 2,
-  },
+export const containerStyles = css({
+  flexDirection: 'row',
+  backgroundColor: theme.colors.BG_DARK_SECONDARY,
+  alignItems: 'center',
+  justifyContent: 'center',
+  borderRadius: 20,
+  overflow: 'hidden',
+  height: 32,
+  paddingHorizontal: 16,
+})
+
+export const dotStyles = css({
+  height: 10,
+  width: 10,
+  borderRadius: 6,
 })

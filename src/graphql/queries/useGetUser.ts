@@ -2,7 +2,7 @@ import { gql } from '@apollo/client'
 import { useQuery } from '@apollo/client'
 
 const GET_USER_QUERY = gql`
-  query {
+  query GetUser {
     getUser {
       userInfo {
         cash

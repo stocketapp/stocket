@@ -1,116 +1,105 @@
-// @flow
-import React, { useRef, useState } from 'react'
-import { View, StyleSheet, TouchableOpacity } from 'react-native'
+import { View, TouchableOpacity } from 'react-native'
+import { useNavigation } from '@react-navigation/native'
 import { Container, Text } from '@components'
-import { LABEL, CARD_BACKGROUND } from '@utils/colors'
-import { formatCurrency, currencyToNumber } from '@utils/functions'
-import { useTotalGains } from '@hooks'
+import { useReactiveVar } from '@apollo/client'
+import { formatCurrency } from '@utils/functions'
+import { useBalance } from '@hooks'
 import BugIcon from '@assets/svg/bug.svg'
+import { userVar } from '@cache'
+import { ProfileNavigationProps } from 'navigation/stacks/ProfileStack'
+import BugBattle from 'react-native-bugbattle-sdk'
 import ProfileItem from './ProfileItem'
-import AddCash from './AddCash'
+import ProfileButtonItem from './ProfileButtonItem'
+import AddCashButton from './AddCashButton'
 import LogoutButton from './LogoutButton'
+import { Content, Row, reportBugButton } from './styles'
 import pckg from '../../../package.json'
-import Products from '../Products'
-import { useUserSelector } from '@selectors'
-import Shake from '@shakebugs/react-native-shake'
+import { useTheme } from '@emotion/react'
 
 export default function Profile() {
-  const { userInfo } = useUserSelector()
-  const iapRef = useRef(null)
-  const [isIapOpen, setIsIapOpen] = useState(false)
-  const portfolioValue = userInfo?.portfolioValue ?? '$0.00'
-  const cash = formatCurrency(userInfo?.cash ?? 0)
-  const { totalGains } = useTotalGains(portfolioValue ?? '$0.00')
-  const accountValue = formatCurrency(currencyToNumber(portfolioValue) + currencyToNumber(cash))
+  const user = useReactiveVar(userVar)
+  const { balance } = useBalance()
+  const { navigate } = useNavigation<ProfileNavigationProps>()
+  const { spacing } = useTheme()
 
   return (
-    <Container fullView ph style={{ flex: 1, justifyContent: 'space-between' }}>
-      <View style={{ flex: 1 }}>
-        <Container style={styles.topBlock} ph safeAreaTop bottom={26}>
+    <>
+      <Container fullView ph safeAreaTop>
+        <Container bottom={26}>
           <View>
-            {/* <Text type="heading" style={styles.name} weight="Bold">
-              {userInfo?.name}
-            </Text> */}
-            <Text type="subtext" color={LABEL} style={{ paddingTop: 15 }}>
-              {userInfo?.email}
+            <Text type="heading" weight="Bold" pt={spacing.lg}>
+              {user?.displayName}
+            </Text>
+            <Text type="label" color="GRAY" pt={spacing.sm}>
+              {user?.email}
             </Text>
           </View>
 
-          <View style={styles.cashContainer}>
+          <Row>
             <View>
-              <Text style={styles.value}>Cash</Text>
-              <Text style={styles.cash} weight="Bold" type="title">
-                {cash}
+              <Text color="GRAY">Available Cash</Text>
+              <Text weight="Bold" type="title" pt={spacing.sm}>
+                {formatCurrency(balance?.cash ?? 0)}
               </Text>
             </View>
 
             <View>
-              <AddCash onPress={() => setIsIapOpen(true)} />
+              <AddCashButton onPress={() => navigate('AddCash')} />
             </View>
-          </View>
+          </Row>
         </Container>
 
-        <Container top={40}>
-          <ProfileItem label="Portfolio Value" value={portfolioValue} />
-          <ProfileItem label="Portfolio Gains" value={`${totalGains}`} />
-          <ProfileItem label="Account Value" value={accountValue ?? '$0.00'} />
-        </Container>
-      </View>
+        <Content>
+          <ProfileItem
+            label="Portfolio Value"
+            value={formatCurrency(balance?.portfolio ?? 0)}
+          />
+          <ProfileItem
+            label="Account Value"
+            value={formatCurrency(balance?.total ?? 0)}
+          />
+        </Content>
 
-      <View style={{ width: '100%', alignItems: 'center', paddingBottom: 20 }}>
+        <Content style={{ paddingTop: spacing.xlg }}>
+          <Text color="LIGHT_GRAY" weight="Light" type="title">
+            History
+          </Text>
+          <ProfileButtonItem
+            label="Purchases"
+            onPress={() => navigate('PurchasesHistory')}
+          />
+          <ProfileButtonItem label="Trades" onPress={() => navigate('TradesHistory')} />
+        </Content>
+      </Container>
+      <View
+        style={{
+          width: '100%',
+          alignItems: 'center',
+          paddingBottom: 20,
+          bottom: 0,
+          position: 'absolute',
+        }}
+      >
         <TouchableOpacity
-          style={styles.reportBugBtn}
+          style={reportBugButton}
           activeOpacity={0.5}
-          onPress={() => Shake.show()}
+          onPress={() => BugBattle.startBugReporting()}
         >
-          <BugIcon height={18} width={18} color="blue" style={{ marginRight: 5 }} />
-          <Text style={styles.reportBug} weight="Medium">
+          <BugIcon
+            height={18}
+            width={18}
+            stroke="#a0a0a0"
+            style={{ marginRight: spacing.sm }}
+          />
+          <Text weight="Medium" color="GRAY">
             Report a bug
           </Text>
         </TouchableOpacity>
         <LogoutButton />
-        <Text style={{ paddingTop: 10 }} type="subtext" color={LABEL}>
+        <Text style={{ paddingTop: spacing.md }} type="subtext" color="GRAY">
           {pckg.version}
         </Text>
       </View>
-      <Products ref={iapRef} isOpen={isIapOpen} onClose={() => setIsIapOpen(false)} />
-    </Container>
+    </>
   )
 }
-
-const styles = StyleSheet.create({
-  topBlock: {
-    width: '100%',
-    height: '32%',
-    backgroundColor: CARD_BACKGROUND,
-    borderBottomRightRadius: 12,
-    borderBottomLeftRadius: 12,
-    justifyContent: 'space-between',
-    paddingHorizontal: 24,
-  },
-  name: {
-    paddingTop: 15,
-  },
-  value: {
-    fontSize: 15,
-    color: LABEL,
-  },
-  cash: {
-    paddingTop: 5,
-  },
-  cashContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'flex-end',
-  },
-  reportBug: {
-    color: LABEL,
-  },
-  reportBugBtn: {
-    paddingVertical: 10,
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginBottom: 10,
-    marginRight: 18,
-  },
-})

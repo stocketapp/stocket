@@ -1,6 +1,13 @@
-import { TextProps, TextStyle, ViewStyle } from 'react-native'
-import { FirebaseFirestoreTypes } from '@react-native-firebase/firestore'
-import { Dispatch, ReactNode, SetStateAction } from 'react'
+import { ViewStyle } from 'react-native'
+import { ReactNode } from 'react'
+
+export interface UserType {
+  id: string
+  uid: string
+  displayName: string
+  email: string
+  cash: number
+}
 
 export interface SvgProps {
   size?: number
@@ -12,41 +19,7 @@ export interface SvgProps {
 export interface IconProps {
   size?: number
   color?: string
-}
-
-export interface ContainerProps {
-  children: ReactNode
-  justifyContent?: 'center' | 'flex-start' | 'flex-end' | 'space-between'
-  alignItems?: 'center' | 'flex-start' | 'flex-end'
-  horizontal?: boolean
-  separate?: boolean
-  ph?: boolean
-  top?: number
-  bottom?: number
-  width?: string | number
-  style?: ViewStyle | {}
-  fullView?: boolean
-  safeAreaTop?: boolean
-  safeAreaBottom?: boolean
-}
-
-export interface CustomTextProps extends TextProps {
-  type?: 'heading' | 'title' | 'label' | 'subtext' | 'big'
-  cap?: boolean
-  color?: string
-  children?: any
-  style?: TextStyle
-  status?: 'negative' | 'positive'
-  weight?:
-    | 'Black'
-    | 'Heavy'
-    | 'Bold'
-    | 'Semibold'
-    | 'Medium'
-    | 'Regular'
-    | 'Light'
-    | 'Thin'
-    | 'Ultralight'
+  filled?: boolean
 }
 
 export interface TradeInfoProps {
@@ -62,12 +35,6 @@ export interface TradeInfoProps {
   loading?: boolean
 }
 
-export interface SearchSymbolsProps {
-  value: string | null
-  setValue: Dispatch<SetStateAction<string>>
-  onSearch?: () => void
-}
-
 export interface SearchResultType {
   symbol: string
   securityName: string
@@ -81,16 +48,17 @@ export interface LabelProps {
 }
 
 export interface PositionType {
-  gains: number
-  name: string
-  gainsPercentage: number
   symbol: string
-  uid: string
-  value: number
-  todayGainsPct: number
-  todayGains: number
-  shares: Array<any>
-  previousDayPrice: number
+  avgPrice: number
+  totalGains: number
+  totalValue: number
+  change24h: number
+  change24hPct: number
+  size: number
+  totalInvested: number
+  totalGainsPct: number
+  logo: string
+  companyName: string
 }
 
 export interface TradeDataType {
@@ -112,15 +80,10 @@ export interface BalanceItem {
 }
 
 export interface ProductValue {
-  productId: string
+  sku: string
   value: number
   price: number
 }
-
-export type DocReference = FirebaseFirestoreTypes.DocumentReference
-export type DocumentSnapshot = FirebaseFirestoreTypes.DocumentSnapshot<
-  FirebaseFirestoreTypes.DocumentData
->
 
 export interface CurrentUser {
   uid: string
@@ -131,6 +94,42 @@ export interface ArticleType {
   headline: string
   source: string
   url: string
+}
+
+// v2.x.x Types that matches GraphQL API Types
+
+export interface IEXQuote {
+  symbol: string
+  close: number
+  companyName: string
+  open: string
+  high: string
+  low: string
+  iexVolume: string
+  marketCap: string
+  peRatio: string
+  week52High: string
+  week52Low: string
+  change: number
+  latestPrice: number
+  logo: string
+  changePercent: number
+  changePercentS: string
+}
+
+export interface IEXChartQuote {
+  symbol: string
+  close: number
+  changePercent: number
+  label: string
+  date: string
+  minute: string
+  changeOverTime: number
+}
+
+export interface UserBalance {
+  cash: number
+  portfolioValue: number
 }
 
 export * from './ChartTypes'

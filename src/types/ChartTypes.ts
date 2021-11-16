@@ -4,7 +4,12 @@ export interface CursorLineProps {
   x?: number
   scale?: any
   datum?: any
-  onEvent: (item: { change: number; changePct: number; value: number; date: string }) => void
+  onEvent: (item: {
+    change: number
+    changePct: number
+    value: number
+    date: string
+  }) => void
   labelText: string | number
   leftOffset: number
   rightOffset: number

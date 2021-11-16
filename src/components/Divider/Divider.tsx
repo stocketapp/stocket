@@ -1,6 +1,6 @@
-import React from 'react'
+import * as React from 'react'
 import { View } from 'react-native'
-import { GRAY_DARKER } from '@utils/colors'
+import theme from '@theme'
 
 interface DividerPropTypes {
   vertical?: boolean
@@ -11,7 +11,7 @@ const Divider: React.FC<DividerPropTypes> = ({ vertical = false, width = 0.5 }) 
   const styles = {
     width: vertical ? width : '100%',
     height: vertical ? '100%' : width,
-    backgroundColor: GRAY_DARKER,
+    backgroundColor: theme.colors.GRAY,
     ...(vertical ? { marginHorizontal: '3%' } : { marginVertical: '2%' }),
   }
 

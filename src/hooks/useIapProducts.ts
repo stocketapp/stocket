@@ -1,44 +1,27 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-import { useEffect } from 'react'
-import { useDispatch } from 'react-redux'
-import * as RNIap from 'react-native-iap'
-import iapProductsList from '@utils/iapProductsList'
+import { useEffect, useCallback } from 'react'
+import IapHub from 'react-native-iaphub'
+import { productsVar } from '@cache'
+import { useReactiveVar } from '@apollo/client'
 
 export default function useIapProducts(uid: string) {
-  const dispatch = useDispatch()
+  const products = useReactiveVar(productsVar)
 
-  useEffect(() => {
-    const initIAP = async () => {
-      try {
-        await RNIap.initConnection()
-      } catch (err) {
-        console.log('initIAP', err)
-      }
-    }
-    initIAP()
-  }, [])
-
-  useEffect(() => {
-    const iapProducts = async () => {
-      const products: Array<RNIap.Product> = []
-      try {
-        const result = await RNIap.getProducts(iapProductsList.map(el => el.productId))
-        result.map(el => {
-          let prod = { productPrice: 0, ...el }
-          prod.productPrice = Number(el.price)
-          products.push(el)
-        })
-        dispatch({
-          type: 'SET_IAP_PRODUCTS',
-          products,
-        })
-      } catch (err) {
-        console.log('fetch iapProducts', err)
-      }
-    }
-
-    if (uid) {
-      iapProducts()
+  const iapProducts = useCallback(async () => {
+    try {
+      await IapHub.setUserId(uid)
+      const res = await IapHub.getProductsForSale()
+      productsVar(res)
+    } catch (err) {
+      console.error('Something went wrong while fetching IAP prodcuts', err)
+      console.info('[FUNCTION] iapProducts -> useIapProducts.ts')
     }
   }, [uid])
+
+  useEffect(() => {
+    if (products.length === 0) {
+      iapProducts()
+    }
+  }, [iapProducts, products])
+
+  return products
 }

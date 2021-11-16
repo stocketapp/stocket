@@ -1,5 +1,9 @@
 #import "AppDelegate.h"
 
+#if RCT_DEV
+#import <React/RCTDevLoadingView.h>
+#endif
+
 #import <React/RCTBridge.h>
 #import <React/RCTBundleURLProvider.h>
 #import <React/RCTRootView.h>
@@ -7,7 +11,7 @@
 #import <AppCenterReactNative.h>
 #import <AppCenterReactNativeAnalytics.h>
 #import <AppCenterReactNativeCrashes.h>
-#import <CodePush/CodePush.h>
+ #import <CodePush/CodePush.h>
 #import "RNBootSplash.h"
 #import <RNGoogleSignin/RNGoogleSignin.h>
 
@@ -42,6 +46,11 @@ static void InitializeFlipper(UIApplication *application) {
 	#endif
 	
   RCTBridge *bridge = [[RCTBridge alloc] initWithDelegate:self launchOptions:launchOptions];
+
+  #if RCT_DEV
+    [bridge moduleForClass:[RCTDevLoadingView class]];
+  #endif
+
   RCTRootView *rootView = [[RCTRootView alloc] initWithBridge:bridge
                                                    moduleName:@"stocket"
                                             initialProperties:nil];
@@ -76,6 +85,7 @@ static void InitializeFlipper(UIApplication *application) {
   return [[RCTBundleURLProvider sharedSettings] jsBundleURLForBundleRoot:@"index" fallbackResource:nil];
 #else
   return [CodePush bundleURL];
+  // return [[NSBundle mainBundle] URLForResource:@"main" withExtension:@"jsbundle"];
 #endif
 }
 
