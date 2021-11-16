@@ -1,6 +1,5 @@
 import { TouchableOpacity, View } from 'react-native'
 import { Text, Container } from '@components'
-import { GREEN, RED, SUB_BACKGROUND } from '@utils/colors'
 import { Image, ImageContainer, Change } from './styles'
 import { useTheme } from '@emotion/react'
 
@@ -10,10 +9,14 @@ type WatchlistItemProps = {
 }
 
 const WatchlistItem = ({ item, onPress }: WatchlistItemProps) => {
-  const { p } = useTheme()
+  const { p, colors } = useTheme()
   const changeBg = {
     backgroundColor:
-      item?.change === 0.0 ? SUB_BACKGROUND : item?.change > 0 ? GREEN : RED,
+      item?.change === 0.0
+        ? colors.BG_DARK_SECONDARY
+        : item?.change > 0
+        ? colors.GREEN
+        : colors.RED,
   }
 
   return (

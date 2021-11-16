@@ -2,7 +2,7 @@ import { useEffect, ReactNode } from 'react'
 import { StatusBar, View } from 'react-native'
 import RNBootSplash from 'react-native-bootsplash'
 import { useAuthState, useIapInit } from './src/hooks'
-import { BACKGROUND } from './src/utils/colors'
+import theme from './src/theme'
 import MainStack from './src/navigation/AppStack'
 import AuthStack from './src/navigation/AuthenticationStack'
 import { useReactiveVar, useQuery } from '@apollo/client'
@@ -58,5 +58,5 @@ const MARKET_HOURS = gql`
 `
 const container = {
   flex: 1,
-  backgroundColor: BACKGROUND,
+  backgroundColor: theme.colors.BG_DARK,
 }

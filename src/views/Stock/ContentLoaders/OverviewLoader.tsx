@@ -1,5 +1,5 @@
 export default function OverviewLoader({ withPosition }: { withPosition?: boolean }) {
-  const { SUB_BACKGROUND, GRAY_DARKER } = require('@utils/colors')
+  const theme = require('@theme')
   const { Rect, default: ContentLoader } = require('react-content-loader/native')
   const { Dimensions } = require('react-native')
   const { width } = Dimensions.get('screen')
@@ -10,8 +10,8 @@ export default function OverviewLoader({ withPosition }: { withPosition?: boolea
       viewBox="0 0 430 800"
       speed={1}
       animate
-      backgroundColor={SUB_BACKGROUND}
-      foregroundColor={GRAY_DARKER}
+      backgroundColor={theme.colors.BG_DARK_SECONDARY}
+      foregroundColor={theme.colors.GRAY}
     >
       <G x="0">
         <Rect y="10" rx="12" ry="12" width="200" height="40" />

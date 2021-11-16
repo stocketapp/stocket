@@ -1,5 +1,5 @@
 export default function TradeTabLoader() {
-  const { SUB_BACKGROUND, GRAY_DARKER } = require('@utils/colors')
+  const theme = require('@theme')
   const { Rect, default: ContentLoader } = require('react-content-loader/native')
 
   return (
@@ -7,8 +7,8 @@ export default function TradeTabLoader() {
       viewBox="0 0 495 800"
       speed={1.1}
       animate
-      backgroundColor={SUB_BACKGROUND}
-      foregroundColor={GRAY_DARKER}
+      backgroundColor={theme.colors.BG_DARK_SECONDARY}
+      foregroundColor={theme.colors.GRAY}
     >
       {/* First */}
       <Rect x="24" y="00" rx="4" ry="4" width="180" height="52" />

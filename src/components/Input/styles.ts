@@ -1,5 +1,5 @@
 import styled, { css } from '@emotion/native'
-import { GREEN } from '@utils/colors'
+import customTheme from '@theme'
 
 export const InputContainer = styled.View(({ theme }) => ({
   backgroundColor: theme.colors.BG_DARK_SECONDARY,
@@ -18,7 +18,7 @@ export const CustomInput = styled.TextInput(({ theme }) => ({
 }))
 
 export const animatedLineStyles = css({
-  backgroundColor: GREEN,
+  backgroundColor: customTheme.colors.GREEN,
   height: 1.5,
   borderRadius: 12,
   width: '100%',

@@ -1,5 +1,5 @@
 export default function NewsLoader() {
-  const { SUB_BACKGROUND, GRAY_DARKER } = require('@utils/colors')
+  const theme = require('@theme')
   const { Rect, default: ContentLoader } = require('react-content-loader/native')
 
   return (
@@ -8,8 +8,8 @@ export default function NewsLoader() {
         viewBox="0 0 430 800"
         speed={1}
         animate
-        backgroundColor={SUB_BACKGROUND}
-        foregroundColor={GRAY_DARKER}
+        backgroundColor={theme.colors.BG_DARK_SECONDARY}
+        foregroundColor={theme.colors.GRAY}
       >
         {/* First */}
         <Rect x="10" y="60" rx="4" ry="4" width="160" height="125" />

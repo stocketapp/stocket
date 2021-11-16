@@ -1,6 +1,6 @@
 import { View, StyleSheet, TouchableOpacity, Image } from 'react-native'
 import { Text } from '@components'
-import { CARD_BACKGROUND, GREEN } from '@utils/colors'
+import theme from '@theme'
 import productImgs from '@products-assets'
 import { IapHubProductInformation } from 'react-native-iaphub'
 
@@ -40,7 +40,7 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: '#222222',
     borderRadius: 12,
-    shadowColor: CARD_BACKGROUND,
+    shadowColor: theme.colors.BG_DARK_CARD,
     shadowOffset: { height: 0, width: 1 },
     shadowOpacity: 0.7,
     shadowRadius: 6,
@@ -48,7 +48,7 @@ const styles = StyleSheet.create({
     paddingTop: 5,
   },
   textContainer: {
-    backgroundColor: GREEN,
+    backgroundColor: theme.colors.GREEN,
     opacity: 0.9,
     width: '100%',
     justifyContent: 'center',

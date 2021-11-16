@@ -1,5 +1,5 @@
-import { CARD_BACKGROUND } from '@utils/colors'
 import { Text, Container } from '@components'
+import theme from '@theme'
 import {
   Image,
   ImageContainer,
@@ -10,7 +10,8 @@ import {
 
 const Item = ({ onPress, change, symbol, logo }: ItemProps) => {
   const color = change > 0 ? 'GREEN' : change < 0 ? 'RED' : 'WHITE'
-  const bgColor = change > 0 ? '#71DB772A' : change < 0 ? '#EB455A2A' : CARD_BACKGROUND
+  const bgColor =
+    change > 0 ? '#71DB772A' : change < 0 ? '#EB455A2A' : theme.colors.BG_DARK_CARD
   const positiveOrNegative = change > 0 ? '+' : ''
 
   return (

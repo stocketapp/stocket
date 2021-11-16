@@ -1,7 +1,7 @@
 import { useRef, useEffect } from 'react'
 import { View, TouchableOpacity } from 'react-native'
 import Text from '../Text'
-import styles from './styles'
+import { SuccessScreenContainer, SucessBtn } from './styles'
 import LottieView from 'lottie-react-native'
 
 interface Props {
@@ -26,7 +26,7 @@ export default function SuccessScreen({
   }, [loading, ref])
 
   return (
-    <View style={styles.container}>
+    <SuccessScreenContainer>
       <View style={{ paddingTop: '10%' }}>
         <LottieView
           source={require('../../assets/lottie/loading-checkmark.json')}
@@ -53,12 +53,12 @@ export default function SuccessScreen({
       </Text>
 
       <TouchableOpacity style={{ marginTop: '18%' }} onPress={onFinished}>
-        <View style={styles.btn}>
+        <SucessBtn>
           <Text weight="Black" color="TEXT_DARK">
             DONE
           </Text>
-        </View>
+        </SucessBtn>
       </TouchableOpacity>
-    </View>
+    </SuccessScreenContainer>
   )
 }

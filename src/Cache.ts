@@ -7,7 +7,7 @@ import { IapHubProductInformation } from 'react-native-iaphub'
 
 export const watchlistSymbolsVar: ReactiveVar<string[]> = makeVar<string[]>([])
 export const isWatchlistLoadingVar = makeVar(true)
-export const watchlistQuotesVar = makeVar<WatchlistIexQuote[] | null>(null)
+export const watchlistQuotesVar = makeVar<WatchlistIexQuote[] | any[]>([])
 export const portfolioValueVar = makeVar<PortfolioType | null>(null)
 export const isPortfolioLoadingVar = makeVar<boolean>(true)
 export const userVar = makeVar<UserType | null>(null)

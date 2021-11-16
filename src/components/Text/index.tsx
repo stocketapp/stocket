@@ -1,5 +1,4 @@
 import { Text as RNText, TextStyle, TextProps } from 'react-native'
-import { GREEN, RED } from '@utils/colors'
 import { useTheme } from '@emotion/react'
 
 const Text = ({
@@ -41,9 +40,9 @@ const Text = ({
 
   const setStatus = () => {
     if (status === 'positive') {
-      return GREEN
+      return theme.colors.GREEN
     } else if (status === 'negative') {
-      return RED
+      return theme.colors.RED
     } else {
       return '#fff'
     }

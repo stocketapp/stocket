@@ -1,19 +1,15 @@
-import { IEXQuote } from 'types'
 import { remove, includes } from 'lodash'
 import { WatchlistIexQuote } from 'views/Home/Watchlist/WatchlistItem'
 import { useStocketMutation } from '@hooks'
-import { gql } from '@apollo/client'
+import { gql, useReactiveVar } from '@apollo/client'
+import { useCallback } from 'react'
+import { TouchableOpacity } from 'react-native'
+import { useTheme } from '@emotion/react'
+import { watchlistSymbolsVar, watchlistQuotesVar } from '@cache'
+import FavoriteIcon from '../Icons/FavoriteIcon'
 
 const AddToWatchlistButton = ({ symbol = '' }: SearchResultProps) => {
-  const { useCallback } = require('react')
-  const { TouchableOpacity } = require('react-native')
-  const FavoriteIcon = require('../Icons/FavoriteIcon').default
-  const { GREEN } = require('@utils/colors')
-  const { useTheme } = require('@emotion/react')
-  const { useReactiveVar } = require('@apollo/client')
-  const { watchlistSymbolsVar, watchlistQuotesVar } = require('@cache')
-
-  const { p } = useTheme()
+  const { p, colors } = useTheme()
   const addToWatchlistMutate = useStocketMutation<AddToWatchlistType>(ADD)
   const removeFromWatchlistMutate = useStocketMutation<RemoveFromWatchlistType>(REMOVE)
   const watchlistSymbols = useReactiveVar(watchlistSymbolsVar)
@@ -28,12 +24,14 @@ const AddToWatchlistButton = ({ symbol = '' }: SearchResultProps) => {
     (newValue: string) => {
       watchlistSymbolsVar([...(watchlistSymbols ?? []), newValue])
     },
-    [watchlistSymbols, watchlistSymbolsVar],
+    [watchlistSymbols],
   )
 
   const removeFromWatchlistCache = () => {
     watchlistSymbolsVar(remove(watchlistSymbols, (el: string) => el !== symbol))
-    watchlistQuotesVar(remove(watchlistQuotes, (el: IEXQuote) => el.symbol !== symbol))
+    watchlistQuotesVar(
+      remove(watchlistQuotes, (el: WatchlistIexQuote) => el.symbol !== symbol),
+    )
   }
 
   const toggleFromWatchlist = async () => {
@@ -41,7 +39,7 @@ const AddToWatchlistButton = ({ symbol = '' }: SearchResultProps) => {
       const { data } = await addToWatchlistMutate({ symbol }, () =>
         addToWatchlistSymbolsCache(symbol),
       )
-      watchlistQuotesVar([...(watchlistQuotesVar() ?? []), data?.addToWatchlist])
+      watchlistQuotesVar([...watchlistQuotesVar(), data?.addToWatchlist])
     } else {
       await removeFromWatchlistMutate({ symbol }, () => removeFromWatchlistCache())
     }
@@ -49,7 +47,7 @@ const AddToWatchlistButton = ({ symbol = '' }: SearchResultProps) => {
 
   return (
     <TouchableOpacity style={{ padding: p.sm }} onPress={toggleFromWatchlist}>
-      <FavoriteIcon size={26} color={GREEN} filled={isFaved(symbol)} />
+      <FavoriteIcon size={26} color={colors.GREEN} filled={isFaved(symbol)} />
     </TouchableOpacity>
   )
 }

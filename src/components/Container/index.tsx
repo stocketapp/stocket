@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { View, ViewStyle, TouchableOpacity, ScrollView, Dimensions } from 'react-native'
-import { BACKGROUND, GREEN } from '@utils/colors'
+import theme from '@theme'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
 import { ArrowLeftIcon } from '@icons'
 import { useNavigation } from '@react-navigation/core'
@@ -26,20 +26,21 @@ const Container: React.FC<ContainerProps> = ({
   useNavBar = false,
   scrollable = false,
   pv = null,
-  bgColor = BACKGROUND,
+  bgColor = theme.colors.BG_DARK,
 }) => {
   const { top: insetTop, bottom: insetBottom } = useSafeAreaInsets()
   const { goBack, canGoBack } = useNavigation()
+  const { colors } = theme
 
   const defaultStyles: ViewStyle = {
     width,
     justifyContent: separate ? 'space-between' : content,
     alignItems: items,
     flexDirection: horizontal ? 'row' : 'column',
-    paddingHorizontal: ph ? 18 : 0,
     paddingRight: ph ? 18 : right,
     paddingLeft: ph ? 18 : left,
     ...(ph ? { paddingHorizontal: 18 } : { paddingRight: right, paddingLeft: left }),
+    paddingHorizontal: ph ? 18 : 0,
     backgroundColor: bgColor,
     ...(fullView && { flex: 1 }),
     ...(pv
@@ -58,7 +59,7 @@ const Container: React.FC<ContainerProps> = ({
             style={{ paddingVertical: 5, paddingRight: 5 }}
             onPress={goBack}
           >
-            <ArrowLeftIcon size={34} color={GREEN} />
+            <ArrowLeftIcon size={34} color={colors.GREEN} />
           </TouchableOpacity>
         </Container>
       )}

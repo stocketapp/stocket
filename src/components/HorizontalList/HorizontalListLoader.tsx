@@ -1,7 +1,8 @@
-import ContentLoader, { Rect } from 'react-content-loader/native'
 import { useWindowDimensions } from 'react-native'
+import ContentLoader, { Rect } from 'react-content-loader/native'
+import theme from '@theme'
+
 export default function HorizontalListLoader() {
-  const { SUB_BACKGROUND, GRAY_DARKER } = require('@utils/colors')
   const { width } = useWindowDimensions()
 
   return (
@@ -10,8 +11,8 @@ export default function HorizontalListLoader() {
         viewBox={`0 0 ${width} 165`}
         speed={1}
         animate
-        backgroundColor={SUB_BACKGROUND}
-        foregroundColor={GRAY_DARKER}
+        backgroundColor={theme.colors.BG_DARK_SECONDARY}
+        foregroundColor={theme.colors.GRAY}
         width={width}
         height={185}
       >

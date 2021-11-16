@@ -1,6 +1,6 @@
 import { ReactElement } from 'react'
 import { TouchableOpacity, Dimensions, StyleSheet, View } from 'react-native'
-import { BACKGROUND } from '@utils/colors'
+import theme from '@theme'
 import { BottomTabBarProps } from '@react-navigation/bottom-tabs/lib/typescript/src/types'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
 
@@ -40,7 +40,7 @@ export default function TabBarComponent(props: BottomTabBarProps): ReactElement 
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: BACKGROUND,
+    backgroundColor: theme.colors.BG_DARK,
     flexDirection: 'row',
   },
 })

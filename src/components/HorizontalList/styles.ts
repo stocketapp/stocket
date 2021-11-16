@@ -1,5 +1,5 @@
 import styled, { css } from '@emotion/native'
-import { SUB_BACKGROUND } from '@utils/colors'
+import customTheme from '@theme'
 import cssTheme from '../../theme'
 
 export const Image = styled.Image({
@@ -51,7 +51,7 @@ export const itemContainer = css({
   alignItems: 'center',
   paddingTop: cssTheme.p.xlg,
   paddingBottom: cssTheme.p.xlg,
-  backgroundColor: SUB_BACKGROUND,
+  backgroundColor: customTheme.colors.BG_DARK_SECONDARY,
   borderRadius: 12,
   marginRight: cssTheme.m.md,
 })

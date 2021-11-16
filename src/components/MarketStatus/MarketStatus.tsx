@@ -1,6 +1,5 @@
 import { useState, useEffect, useCallback } from 'react'
 import { View, TouchableWithoutFeedback } from 'react-native'
-import { GREEN, LABEL } from '@utils/colors'
 import { dotStyles, containerStyles } from './styles'
 import Animated, {
   useAnimatedStyle,
@@ -8,12 +7,14 @@ import Animated, {
   withTiming,
 } from 'react-native-reanimated'
 import { useMarketHours } from '@utils/context'
+import { useTheme } from '@emotion/react'
 
 interface Props {
   label?: string
 }
 
 const MarketStatus = ({ label }: Props) => {
+  const { colors } = useTheme()
   const [isExpanded, setIsExpanded] = useState(false)
   const status = useMarketHours()
   const statusLabel = `Market is ${status ? 'open' : 'closed'}` ?? label
@@ -70,7 +71,12 @@ const MarketStatus = ({ label }: Props) => {
         >
           {statusLabel}
         </Animated.Text>
-        <View style={{ ...dotStyles, backgroundColor: status ? GREEN : LABEL }} />
+        <View
+          style={{
+            ...dotStyles,
+            backgroundColor: status ? colors.GREEN : colors.LIGHT_GRAY,
+          }}
+        />
       </Animated.View>
     </TouchableWithoutFeedback>
   )

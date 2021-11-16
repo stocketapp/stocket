@@ -1,4 +1,5 @@
-import styled from '@emotion/native'
+import styled, { css } from '@emotion/native'
+import customTheme from '@theme'
 
 export const Content = styled.View({
   width: '100%',
@@ -32,4 +33,12 @@ export const ProfileButtonItemInner = styled.View({
   flexDirection: 'row',
   justifyContent: 'space-between',
   alignItems: 'center',
+})
+
+export const reportBugButton = css({
+  paddingVertical: customTheme.spacing.md,
+  flexDirection: 'row',
+  alignItems: 'center',
+  marginBottom: customTheme.spacing.md,
+  marginRight: customTheme.spacing.screen,
 })

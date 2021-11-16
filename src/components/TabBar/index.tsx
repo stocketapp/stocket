@@ -1,15 +1,10 @@
 import { ReactElement } from 'react'
 import { TouchableOpacity, Dimensions, StyleSheet, View } from 'react-native'
-import { BACKGROUND } from '@utils/colors'
-import {
-  BottomTabBarOptions,
-  BottomTabBarProps,
-} from '@react-navigation/bottom-tabs/lib/typescript/src/types'
+import theme from '@theme'
+import { BottomTabBarProps } from '@react-navigation/bottom-tabs/lib/typescript/src/types'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
 
-export default function TabBarComponent(
-  props: BottomTabBarProps<BottomTabBarOptions>,
-): ReactElement {
+export default function TabBarComponent(props: BottomTabBarProps): ReactElement {
   const { navigation, state, descriptors } = props
   const routesLength: number = state.routes.length
   const tabWidth: number = Dimensions.get('screen').width / routesLength
@@ -22,7 +17,7 @@ export default function TabBarComponent(
         const focused: boolean = activeRoute === routeIndex
         const { options } = descriptors[route.key]
         const { tabBarIcon } = options
-        const tintColor: string = focused
+        const tintColor: string | undefined = focused
           ? options?.tabBarActiveTintColor
           : options?.tabBarInactiveTintColor
 
@@ -36,7 +31,7 @@ export default function TabBarComponent(
               paddingVertical: '2%',
             }}
           >
-            {tabBarIcon && tabBarIcon({ color: tintColor, focused, size: 30 })}
+            {tabBarIcon && tabBarIcon({ color: tintColor ?? '#fff', focused, size: 30 })}
           </TouchableOpacity>
         )
       })}
@@ -46,7 +41,7 @@ export default function TabBarComponent(
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: BACKGROUND,
+    backgroundColor: theme.colors.BG_DARK,
     flexDirection: 'row',
   },
 })

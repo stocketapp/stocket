@@ -1,9 +1,9 @@
-import { SUB_BACKGROUND } from '@utils/colors'
+import theme from '@theme'
 import { css } from '@emotion/native'
 
 export const containerStyles = css({
   flexDirection: 'row',
-  backgroundColor: SUB_BACKGROUND,
+  backgroundColor: theme.colors.BG_DARK_SECONDARY,
   alignItems: 'center',
   justifyContent: 'center',
   borderRadius: 20,

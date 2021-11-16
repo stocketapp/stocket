@@ -1,44 +1,44 @@
-import { View, StyleSheet, TouchableOpacity } from 'react-native'
+import { View, TouchableOpacity } from 'react-native'
 import { useNavigation } from '@react-navigation/native'
 import { Container, Text } from '@components'
 import { useReactiveVar } from '@apollo/client'
-import { LABEL } from '@utils/colors'
 import { formatCurrency } from '@utils/functions'
 import { useBalance } from '@hooks'
 import BugIcon from '@assets/svg/bug.svg'
 import { userVar } from '@cache'
 import { ProfileNavigationProps } from 'navigation/stacks/ProfileStack'
-import theme from '@theme'
 import BugBattle from 'react-native-bugbattle-sdk'
 import ProfileItem from './ProfileItem'
 import ProfileButtonItem from './ProfileButtonItem'
 import AddCashButton from './AddCashButton'
 import LogoutButton from './LogoutButton'
-import { Content, Row } from './styles'
+import { Content, Row, reportBugButton } from './styles'
 import pckg from '../../../package.json'
+import { useTheme } from '@emotion/react'
 
 export default function Profile() {
   const user = useReactiveVar(userVar)
   const { balance } = useBalance()
   const { navigate } = useNavigation<ProfileNavigationProps>()
+  const { spacing } = useTheme()
 
   return (
     <>
       <Container fullView ph safeAreaTop>
         <Container bottom={26}>
           <View>
-            <Text type="heading" style={styles.name} weight="Bold">
+            <Text type="heading" weight="Bold" pt={spacing.lg}>
               {user?.displayName}
             </Text>
-            <Text type="label" color="GRAY" style={{ paddingTop: 5 }}>
+            <Text type="label" color="GRAY" pt={spacing.sm}>
               {user?.email}
             </Text>
           </View>
 
           <Row>
             <View>
-              <Text style={styles.value}>Available Cash</Text>
-              <Text style={styles.cash} weight="Bold" type="title">
+              <Text color="GRAY">Available Cash</Text>
+              <Text weight="Bold" type="title" pt={spacing.sm}>
                 {formatCurrency(balance?.cash ?? 0)}
               </Text>
             </View>
@@ -60,7 +60,7 @@ export default function Profile() {
           />
         </Content>
 
-        <Content style={{ paddingTop: theme.spacing.xlg }}>
+        <Content style={{ paddingTop: spacing.xlg }}>
           <Text color="LIGHT_GRAY" weight="Light" type="title">
             History
           </Text>
@@ -81,49 +81,25 @@ export default function Profile() {
         }}
       >
         <TouchableOpacity
-          style={styles.reportBugBtn}
+          style={reportBugButton}
           activeOpacity={0.5}
           onPress={() => BugBattle.startBugReporting()}
         >
-          <BugIcon height={18} width={18} stroke="#a0a0a0" style={{ marginRight: 5 }} />
-          <Text style={styles.reportBug} weight="Medium">
+          <BugIcon
+            height={18}
+            width={18}
+            stroke="#a0a0a0"
+            style={{ marginRight: spacing.sm }}
+          />
+          <Text weight="Medium" color="GRAY">
             Report a bug
           </Text>
         </TouchableOpacity>
         <LogoutButton />
-        <Text style={{ paddingTop: 10 }} type="subtext" color="GRAY">
+        <Text style={{ paddingTop: spacing.md }} type="subtext" color="GRAY">
           {pckg.version}
         </Text>
       </View>
     </>
   )
 }
-
-const styles = StyleSheet.create({
-  name: {
-    paddingTop: 15,
-  },
-  value: {
-    fontSize: 15,
-    color: LABEL,
-  },
-  cash: {
-    paddingTop: 5,
-  },
-  cashContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'flex-end',
-    paddingTop: 20,
-  },
-  reportBug: {
-    color: LABEL,
-  },
-  reportBugBtn: {
-    paddingVertical: 10,
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginBottom: 10,
-    marginRight: 18,
-  },
-})
