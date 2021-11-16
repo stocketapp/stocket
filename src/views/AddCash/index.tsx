@@ -45,8 +45,8 @@ export default function AddCash() {
       setSuccess(true)
       purchaseEvent(sku, 'SUCCESS')
     } catch (err) {
-      if (err.code) {
-        purchaseEvent(sku, `FAILED - ${err.code}`)
+      if (err) {
+        purchaseEvent(sku, `FAILED - ${err}`)
       }
       console.error('Something went wrong while making a purchase', err)
     }
