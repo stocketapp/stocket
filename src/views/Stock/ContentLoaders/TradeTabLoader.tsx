@@ -1,5 +1,6 @@
+import theme from '@theme'
+
 export default function TradeTabLoader() {
-  const theme = require('@theme')
   const { Rect, default: ContentLoader } = require('react-content-loader/native')
 
   return (

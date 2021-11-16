@@ -1,5 +1,6 @@
+import theme from '@theme'
+
 export default function OverviewLoader({ withPosition }: { withPosition?: boolean }) {
-  const theme = require('@theme')
   const { Rect, default: ContentLoader } = require('react-content-loader/native')
   const { Dimensions } = require('react-native')
   const { width } = Dimensions.get('screen')

@@ -1,5 +1,6 @@
+import theme from '@theme'
+
 export const StockHeaderLoader = () => {
-  const theme = require('@theme')
   const { Rect, default: ContentLoader } = require('react-content-loader/native')
   const { Dimensions } = require('react-native')
   const { width } = Dimensions.get('screen')
