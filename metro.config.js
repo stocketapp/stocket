@@ -5,10 +5,11 @@
  * @format
  */
 const { getDefaultConfig } = require('metro-config')
+const { resolver: defaultResolver } = getDefaultConfig.getDefaultValues()
 
 module.exports = (async () => {
   const {
-    resolver: { sourceExts, assetExts },
+    resolver: { assetExts },
   } = await getDefaultConfig()
 
   return {
@@ -23,7 +24,7 @@ module.exports = (async () => {
     },
     resolver: {
       assetExts: assetExts.filter(ext => ext !== 'svg'),
-      sourceExts: [...sourceExts, 'svg'],
+      sourceExts: [...defaultResolver.sourceExts, 'cjs', 'svg'],
     },
   }
 })()
