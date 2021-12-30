@@ -1,13 +1,13 @@
 import { useEffect, useCallback } from 'react'
 import IapHub from 'react-native-iaphub'
-import { IAPHUB_API_KEY, IAPHUB_APPID, IAPHUB_ENV } from '../../config'
+import { IAPHUB_STOCKET_API_KEY, IAPHUB_STOCKET_APP_ID, IAPHUB_ENV } from '../../config'
 
 export default function useIapProducts(uid: string) {
   const initIap = useCallback(async () => {
     try {
       await IapHub.init({
-        appId: IAPHUB_APPID,
-        apiKey: IAPHUB_API_KEY,
+        appId: IAPHUB_STOCKET_APP_ID,
+        apiKey: IAPHUB_STOCKET_API_KEY,
         environment: IAPHUB_ENV,
       })
     } catch (err) {
