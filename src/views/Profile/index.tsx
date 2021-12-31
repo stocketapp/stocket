@@ -27,7 +27,7 @@ export default function Profile() {
         <Container bottom={26}>
           <View>
             <Text type="heading" style={styles.name} weight="Bold">
-              {user?.displayName}
+              {user?.displayName.replace('null', '')}
             </Text>
             <Text type="label" color="GRAY" style={{ paddingTop: 5 }}>
               {user?.email}

@@ -19,7 +19,6 @@ export default function App(): ReactNode {
   const isPortfolioLoading = useReactiveVar(isPortfolioLoadingVar)
 
   useEffect(() => {
-    Gleap.logEvent('User signed in', { userId: 1242, name: 'Isabella' })
     if (
       (!isWatchlistLoading && !isPortfolioLoading && isAuthed) ||
       (!isAuthed && !isWatchlistLoading && !isPortfolioLoading)

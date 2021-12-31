@@ -5,6 +5,7 @@ import { gql } from '@apollo/client'
 import { useReactiveVar } from '@apollo/client'
 import { userVar, isAuthenticatedVar } from '@cache'
 import { UserType } from 'types'
+import Gleap from 'react-native-gleapsdk'
 
 export default function useAuthState(): AuthState {
   const StocketMutations = useStocketMutation()
@@ -15,6 +16,10 @@ export default function useAuthState(): AuthState {
     const authSubscription = auth().onAuthStateChanged(async currentUser => {
       if (currentUser) {
         try {
+          Gleap.identify(currentUser?.uid, {
+            email: currentUser?.email as string,
+            name: currentUser?.displayName?.replace('null', '') as string,
+          })
           const res = await StocketMutations.createUser(currentUser)
           userVar(res?.data?.createUser?.user)
           isAuthenticatedVar(true)
@@ -24,6 +29,7 @@ export default function useAuthState(): AuthState {
       } else {
         isAuthenticatedVar(false)
         userVar(null)
+        Gleap.clearIdentity()
       }
     })
 
