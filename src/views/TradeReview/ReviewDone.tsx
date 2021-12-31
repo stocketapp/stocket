@@ -5,7 +5,7 @@ import Animated, {
 } from 'react-native-reanimated'
 import { Text } from '@components'
 import { formatCurrency } from '@utils/functions'
-import { useEffect } from 'react'
+import { useEffect, useRef } from 'react'
 import { useWindowDimensions } from 'react-native'
 import LottieView from 'lottie-react-native'
 
@@ -13,6 +13,7 @@ const ReviewDone = ({ quantity, symbol, total, animate, orderType }: ReviewDoneP
   const { width: WINDOW_WIDTH } = useWindowDimensions()
   const offset = useSharedValue(-WINDOW_WIDTH)
   const opacity = useSharedValue(0)
+  const loadingRef = useRef<any>()
 
   const doneAnimatedStyle = useAnimatedStyle(() => ({
     transform: [{ translateX: withTiming(offset.value, { duration: 400 }) }],
@@ -20,10 +21,14 @@ const ReviewDone = ({ quantity, symbol, total, animate, orderType }: ReviewDoneP
   }))
 
   useEffect(() => {
+    let timeout: ReturnType<typeof setTimeout>
     if (animate) {
+      timeout = setTimeout(() => loadingRef.current.play(), 500)
       opacity.value = 1
       offset.value = 0
     }
+
+    return () => clearTimeout(timeout)
   }, [animate, offset, opacity])
 
   return (
@@ -38,14 +43,13 @@ const ReviewDone = ({ quantity, symbol, total, animate, orderType }: ReviewDoneP
         doneAnimatedStyle,
       ]}
     >
-      {animate && (
-        <LottieView
-          source={require('@assets/lottie/loading-checkmark2.json')}
-          style={{ height: 170, width: 170 }}
-          autoPlay
-          loop={false}
-        />
-      )}
+      <LottieView
+        source={require('../../assets/lottie/loading-checkmark2.json')}
+        style={{ height: 170, width: 170 }}
+        autoPlay
+        loop={false}
+        ref={loadingRef}
+      />
       <Text type="title" numberOfLines={3} style={{ textAlign: 'center' }}>
         Succesfully {orderType === 'SELL' ? 'sold ' : 'purchased '}
         <Text type="title" weight="Bold">
