@@ -8459,6 +8459,11 @@ react-native-gesture-handler@^2.1.0:
     lodash "^4.17.21"
     prop-types "^15.7.2"
 
+react-native-gleapsdk@^6.3.4:
+  version "6.3.4"
+  resolved "https://registry.yarnpkg.com/react-native-gleapsdk/-/react-native-gleapsdk-6.3.4.tgz#52f328a6cc3c4dc17754b239d25cc1dd78523d6b"
+  integrity sha512-Vaj5mTkKIDPrlStAlyykwd5fkBHAgC3vPTfdSqxzl3gKP7m/mIBiXT3YUZPbNs4uwKKnBeCzHDtjPyfBYYWeww==
+
 react-native-iap@^7.5.3:
   version "7.5.3"
   resolved "https://registry.yarnpkg.com/react-native-iap/-/react-native-iap-7.5.3.tgz#b9aa86ac23ddca266347c002b70d0613467974e9"

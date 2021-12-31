@@ -7,6 +7,10 @@ import MainStack from './src/navigation/AppStack'
 import AuthStack from './src/navigation/AuthenticationStack'
 import { useReactiveVar } from '@apollo/client'
 import { isWatchlistLoadingVar, isPortfolioLoadingVar } from './src/Cache'
+import Gleap from 'react-native-gleapsdk'
+import { GLEAP_KEY } from './config'
+
+Gleap.initialize(GLEAP_KEY)
 
 export default function App(): ReactNode {
   const { isAuthed, user } = useAuthState()
@@ -15,6 +19,7 @@ export default function App(): ReactNode {
   const isPortfolioLoading = useReactiveVar(isPortfolioLoadingVar)
 
   useEffect(() => {
+    Gleap.logEvent('User signed in', { userId: 1242, name: 'Isabella' })
     if (
       (!isWatchlistLoading && !isPortfolioLoading && isAuthed) ||
       (!isAuthed && !isWatchlistLoading && !isPortfolioLoading)

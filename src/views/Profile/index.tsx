@@ -1,9 +1,9 @@
-import { View, StyleSheet } from 'react-native'
+import { View, StyleSheet, TouchableOpacity } from 'react-native'
 import { Container, Text } from '@components'
 import { LABEL } from '@utils/colors'
 import { formatCurrency } from '@utils/functions'
 import { useBalance } from '@hooks'
-// import BugIcon from '@assets/svg/bug.svg'
+import BugIcon from '@assets/svg/bug.svg'
 import ProfileItem from './ProfileItem'
 import AddCashButton from './AddCashButton'
 import LogoutButton from './LogoutButton'
@@ -15,6 +15,7 @@ import { useNavigation } from '@react-navigation/native'
 import { ProfileNavigationProps } from 'navigation/stacks/ProfileStack'
 import ProfileButtonItem from './ProfileButtonItem'
 import theme from '@theme'
+import Gleap from 'react-native-gleapsdk'
 
 export default function Profile() {
   const user = useReactiveVar(userVar)
@@ -78,16 +79,16 @@ export default function Profile() {
           position: 'absolute',
         }}
       >
-        {/* <TouchableOpacity
+        <TouchableOpacity
           style={styles.reportBugBtn}
           activeOpacity={0.5}
-          onPress={() => Shake.show()}
+          onPress={() => Gleap.startFeedbackFlow('bug')}
         >
           <BugIcon height={18} width={18} stroke="#a0a0a0" style={{ marginRight: 5 }} />
           <Text style={styles.reportBug} weight="Medium">
             Report a bug
           </Text>
-        </TouchableOpacity> */}
+        </TouchableOpacity>
         <LogoutButton />
         <Text style={{ paddingTop: 10 }} type="subtext" color="GRAY">
           {pckg.version}
