@@ -47,7 +47,7 @@
     "lodash": "^4.17.21",
     "lottie-ios": "3.2.3",
     "lottie-react-native": "5.0.1",
-    "moment": "^2.29.1",
+    "moment": "^2.29.2",
     "numeral": "^2.0.6",
     "react": "17.0.2",
     "react-content-loader": "^6.1.0",
